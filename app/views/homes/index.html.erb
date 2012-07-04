@@ -1,0 +1,92 @@
+<div id="home" align="center">
+	<div id="home-top-banners">
+		<div id="home-top-banner">
+			<%= image_tag("#{I18n.locale}/banner/sample_banner02.gif") %>
+			<!-- description div -->
+			<div class='description'>
+				<!-- description content -->
+				<p class='description_content'>
+					This is an advertisement...
+				</p>
+				<!-- end description content -->
+			</div>
+			<a class='abutton' href='#'>More</a>
+		</div>
+		<div id="home-top-banner">
+			<%= image_tag("#{I18n.locale}/banner/sample_pop_upche.gif") %>
+			<!-- description div -->
+			<div class='description'>
+				<!-- description content -->
+				<p class='description_content'>
+					This is an advertisement...
+				</p>
+				<!-- end description content -->
+			</div>
+			<a class='abutton' href='#'>More</a>
+		</div>
+		<div id="home-top-banner">
+			<%= image_tag("#{I18n.locale}/banner/title_customer01b.gif") %>
+			<!-- description div -->
+			<div class='description'>
+				<!-- description content -->
+				<p class='description_content'>
+					This is an advertisement...
+				</p>
+				<!-- end description content -->
+			</div>
+			<a class='abutton' href='#'>More</a>
+		</div>
+	</div>
+	<div id="top-right-banner">
+		<div class='description' id='top-right-banner-description'>
+				<!-- description content -->
+				<p class='description_content'>
+					Call us now!
+				</p>
+				<!-- end description content -->
+			</div>
+	</div>
+	<div id="top-right-navi">
+		<div id="head">
+			<%= image_tag("#{I18n.locale}/main/mtitle_job.gif")%> <div id="head-left"></div>
+		</div>
+
+		<table class="">
+			<tr></tr>
+			<% @jobs.each do |job| %>
+			<tr>
+				<td><%= image_tag("#{I18n.locale}/main/ic_arrow.gif")%></td>
+				<td class="small" height="18"><%= job.category_base.title %></td>
+				<td class="small_n" align="right"><%= job.category_base.postedOn %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+
+	<div id="second-banner">
+		<%= image_tag("#{I18n.locale}/banner/sample_banner01.gif") %>
+		<%= image_tag("#{I18n.locale}/banner/westpac_180.jpg") %>
+		<%= image_tag("#{I18n.locale}/banner/sample_banner03.gif") %>
+		<%= image_tag("#{I18n.locale}/banner/sample_banner04.gif") %>
+		<%= image_tag("#{I18n.locale}/banner/sample_board_movie.gif") %>
+		<%= image_tag("#{I18n.locale}/banner/sample_board_photo.gif") %>
+	</div>
+</div>
+<br />
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('#home-top-banners').cycle({
+			fx : 'fade',
+			speed : 1000,
+			timeout : 3000
+		});
+		setInterval(toggleBanner, 1000);
+		var width= $('#top-right-banner').css("width");
+		var height = $('#top-right-banner').css("height");
+		$("#top-right-banner-description").html("Banner " + width + ":" + height);
+	}); 
+	function toggleBanner() {
+		console.log('hello');
+		$('#top-right-banner-description').toggle();
+	}
+</script>

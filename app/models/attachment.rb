@@ -1,0 +1,2 @@
+class Attachment < Attachable
+end

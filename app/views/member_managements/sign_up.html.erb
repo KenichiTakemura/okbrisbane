@@ -1,0 +1,50 @@
+<%= render :partial => "devise/shared/header" %>
+
+<div id="accept">
+	<%= image_tag("#{I18n.locale}/login/bg_title.jpg")%>
+	<%= image_tag("#{I18n.locale}/login/tit_611.gif", :class => 'name')%>
+	<div id="_term">
+		</br>
+		<%= image_tag("#{I18n.locale}/login/img_process01_on.gif")%>
+		<span class="stitle"><%= t("stitle_head")%></span></br>
+		<%= t("stitle_body")%>
+		</br>
+		<p class="termofservice">
+			<%= t("termofservice")%>
+		</p>
+		<textarea name="" cols="100" rows="10" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termsofservice%>
+      </textarea>		                           
+      </br>
+
+
+		<p class="termofservice">
+			<%= t("termofpersonalinfomation")%>
+		</p>
+		<textarea name="" cols="100" rows="10" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termofpersonalinfomation%>
+      </textarea>
+		<p class="agree">
+			<%= check_box_tag :_agree %><%= label_tag :_agree, t("agree")  %>
+
+		</p>
+		<!--%= link_to image_tag("#{I18n.locale}/login/btn_next.gif"), new_user_registration_path, :id => '_next'%-->
+		<%= form_for(@member_management) do |f| %>
+			<div class="actions">
+				    <%= f.submit t("agreed"), :id => '_next' %>
+		  </div>
+		<% end %>
+	</div>
+
+</div>
+<%= render :partial => "devise/shared/footer" %>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('#_signup').attr("style", "background: #6A8FE7");
+		$('#_next').click(function() {
+			if ($('#_agree').attr('checked')) {
+			} else {
+				return false;
+			}
+		});
+	}); 
+</script>
+

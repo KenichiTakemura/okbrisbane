@@ -1,0 +1,114 @@
+/* Override here any style defined by web-app-theme */
+body { overflow-x:hidden; }
+
+html, body {
+    height: 100%;
+    margin:0; padding:0;
+}
+
+.clear {
+    clear: both;
+    display: block;
+    float: none;
+    font-size: 0 !important;
+    height: 0;
+    line-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 0 !important;
+    width: 100%;
+}
+
+#container {
+    height: 100%;
+    width: auto;
+}
+
+#mainContainer {
+    min-height: 100%;    
+    width: 920px;
+    margin-left: -460px;
+    position:absolute;	
+	left: 50%;
+}
+
+#contentContainer {float:left; width:920px;}
+
+#headerContainer {
+width:920px;height:92px;margin:19px 0 0 0;
+}
+
+#headerContainer #top-left {
+  position: absolute;
+  top: 2px;
+  left: 0%;  
+  color: #000000;
+  text-decoration: none;
+}
+
+#headerContainer #top-right {
+  position: absolute;
+  top: 2px;
+  right: 0%;  
+  color: #000000;
+  text-decoration: none;
+}
+
+#headerContainer  #middle {
+  position: absolute;
+  top: 20px;
+  height:   110px;  
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#headerContainer  #middle #top-banner {  
+   position: absolute;
+   padding: 0;  
+   margin:  0;
+   display: inline;
+   margin-left: auto;
+   margin-right: auto;
+} 
+ 
+#headerContainer  #middle  #top-banner img {  
+    padding: 5px;
+    margin-left: 10px;
+    width:  730px; 
+    height: 110px; 
+} 
+
+#home-left-top-banner {
+  position: absolute;
+  top: 250px;
+  left: 0px;
+}
+
+
+
+#headerContainer #bottom #navigation {
+  position: absolute;
+  padding: 0px;
+  margin-left: 265px;
+  margin-top: 0px;
+  width:  730px; 
+  height: 50px; 
+  background-color: #f0f0f0;
+}
+
+#headerContainer #bottom #navigation ul {
+  margin-top: 10px;
+  padding: 20;
+  list-style-type: none;
+}
+
+#headerContainer #bottom #navigation ul li {
+  float: left;
+}
+
+#user_signin {
+  position: absolute;
+  top: 200px;
+  font-size: 15px;
+}
+

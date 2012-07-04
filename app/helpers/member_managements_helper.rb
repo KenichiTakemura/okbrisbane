@@ -1,0 +1,2 @@
+module MemberManagementsHelper
+end

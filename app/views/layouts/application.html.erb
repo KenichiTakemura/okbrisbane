@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>OKBRISBANE</title>
+		<!-- %= stylesheet_link_tag "web-app-theme/base", "web-app-theme/themes/default/style", "web-app-theme/override", :cache => false % -->
+		<%= stylesheet_link_tag "application" %>
+		<%= stylesheet_link_tag "jquery-ui-1.8.21.custom" %>
+		<%= csrf_meta_tag %>
+		<%= javascript_include_tag 'jquery-1.7.2.js' %>
+		<%= javascript_include_tag 'jquery.cycle.all.js' %>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#top-banner').cycle({
+					fx : 'scrollRight',
+					random:  1 
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="fb-root"></div>
+		<script>
+			// ( function(d, s, id) {
+					// var js, fjs = d.getElementsByTagName(s)[0];
+					// if (d.getElementById(id))
+						// return;
+					// js = d.createElement(s);
+					// js.id = id;
+					// js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+					// fjs.parentNode.insertBefore(js, fjs);
+				// }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<div id="header">
+			<p class="fl">
+				<%= t("select_language", :default => 'Choose your language')%>
+				<%= image_tag ("common/bul_util.gif")%>
+				<%= link_to t("english", :default => 'English'), root_path(:locale => 'en') %> |
+				<%= link_to t("korean", :default => 'Korean'), root_path(:locale => 'ko') %>
+			</p>
+			<p class="fr">
+				<%= t("welcome_message", :default => 'Welcome! ')%>
+				<% if current_user %>
+				<%= current_user.email %>
+				<% else %>
+				<%= link_to t("signin"), user_sign_in_path %>
+				<%= t("or") %>
+				<%= link_to t("signup"), member_managements_sign_up_path %>
+				<%= t("please") %>
+				<% end %>
+			</p>
+			<div id="logo">
+				<%= link_to image_tag("common/logo.gif"), root_path(:locale => 'ko' ) %>
+			</div>
+			<div id="top-banner">
+				<%= image_tag("#{I18n.locale}/banner/sample_flash_banner.gif") %>
+				<%= image_tag("#{I18n.locale}/banner/sample_pick_upche1.gif") %>
+				<%= image_tag("#{I18n.locale}/banner/event_1.jpg") %>
+				<%= image_tag("#{I18n.locale}/banner/event_2.jpg") %>
+				<%= image_tag("#{I18n.locale}/banner/event_3.jpg") %>
+			</div>
+			<div id="devise">
+				<div id="account">
+					<% if user_signed_in? %>
+					<%= link_to image_tag("#{I18n.locale}/login/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
+					<% else %>
+					<%= link_to image_tag("#{I18n.locale}/login/btn_login.gif"), user_sign_in_path %>
+					<% end %>
+					<%= image_tag("#{I18n.locale}/login/bar.gif") %>
+					<% if user_signed_in? %>
+					<%= link_to image_tag("#{I18n.locale}/login/btn_modify.gif"), edit_user_registration_path %>
+					<% else %>
+					<!-- %= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), new_user_registration_path % -->
+					<%= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), member_managements_sign_up_path %>
+					<% end %>
+				</div>
+			</div>
+			<div id="navigation">
+				<ul class="wat-cf">
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi01.gif", :mouseover => "#{I18n.locale}/navi/btn_navi01_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi02.gif", :mouseover => "#{I18n.locale}/navi/btn_navi02_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi03.gif", :mouseover => "#{I18n.locale}/navi/btn_navi03_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi04.gif", :mouseover => "#{I18n.locale}/navi/btn_navi04_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi05.gif", :mouseover => "#{I18n.locale}/navi/btn_navi05_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi06.gif", :mouseover => "#{I18n.locale}/navi/btn_navi06_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi07.gif", :mouseover => "#{I18n.locale}/navi/btn_navi07_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi08.gif", :mouseover => "#{I18n.locale}/navi/btn_navi08_ov.gif")%>
+					</li>
+					<li>
+						<%= image_tag("#{I18n.locale}/navi/btn_navi09.gif", :mouseover => "#{I18n.locale}/navi/btn_navi09_ov.gif")%>
+					</li>
+				</ul>
+			</div>
+			<div id="follows">
+				<ul class="wat-cf">
+					<li>
+						<%= image_tag("common/icon_facebook.png") %>
+					</li>
+					<li>
+						<%= image_tag("common/icon_twitter.png") %>
+					</li>
+					<li>
+						<%= image_tag("common/icon_me2day.png") %>
+					</li>
+					<li>
+						<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="wrapper" class="wat-cf">
+			<!--
+			<div class="flash">
+			<% if notice %>
+			<p class="message notice">
+			<%= notice %>
+			</p>
+			<% end %>
+			<% if alert %>
+			<p class="message alert">
+			<%= alert %>
+			</p>
+			<% end %>
+			</div>
+			-->
+			<div id="main">
+				<%= yield %>
+			</div>
+			<div id="sidebar">
+				<%= yield :sidebar %>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div id="footer" align="center">
+			<p>
+				<%= image_tag("#{I18n.locale}/footer/footer.gif") %>
+			</p>
+		</div>
+	</body>
+</html>
+

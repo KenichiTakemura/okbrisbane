@@ -1,0 +1,22 @@
+<%= render :partial => "devise/shared/header" %>
+
+   <div id="termsofservice">
+      <%= image_tag("#{I18n.locale}/login/bg_title.jpg")%>
+      <%= image_tag("#{I18n.locale}/login/tit_631.gif", :class => 'name')%>
+      <div id="_term">
+        </br>
+        <p class="termofservice">
+          <%= t("termofservice")%>
+        </p>
+        <textarea name="" cols="100" rows="30" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termsofservice%>
+      </textarea>                           
+      </br>
+
+  </div>
+<%= render :partial => "devise/shared/footer" %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+    	$('#_service').attr("style", "background: #6A8FE7");
+  });
+</script>
+

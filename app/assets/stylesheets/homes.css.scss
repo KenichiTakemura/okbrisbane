@@ -1,0 +1,62 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#home {
+  height: 800px; 
+  background: #ffffff;
+}
+
+#home #top-right-navi {
+  position: absolute;
+  float: left;
+  margin-right:20px;
+  margin-top: 250px;
+  width:300px;
+  right: 0px;
+}
+
+#home #top-right-navi #head {
+  background: #642c78;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+  //-moz-border-radius: 5px;
+  //-webkit-border-radius: 5px;
+  //border-radius: 5px;
+  width:  300px; 
+  height: 40px; 
+} 
+
+#home #top-right-navi #head-left {
+  position: absolute;
+  background: #ffffff;
+  width:  200px; 
+  height: 38px;
+  top: 0px;
+  left: 100px;
+  right: 0%;
+}
+
+#home #top-right-navi #head img {
+    position: absolute;
+    top:  10px; 
+    left: 10px;   
+}
+
+#home #second-banner {
+  position: absolute;
+  width:  660px; 
+  height: 300px;
+  margin-top: 390px;
+}
+
+#home #second-banner img {  
+    padding: 0px;  
+    border:  1px solid #ccc;  
+    background-color: #eee;  
+    width:  210px; 
+    height: 120px; 
+    margin-top:  10px; 
+    left: 0px;   
+}

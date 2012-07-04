@@ -1,0 +1,17 @@
+<%= form_for(@member_management) do |f| %>
+  <% if @member_management.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member_management.errors.count, "error") %> prohibited this member_management from being saved:</h2>
+
+      <ul>
+      <% @member_management.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

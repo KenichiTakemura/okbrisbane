@@ -1,0 +1,48 @@
+<div id="usermanagement">
+
+	<div id="left-menu">
+		<div id="menu">
+			<%= image_tag("#{I18n.locale}/login/bg_snb.gif")%>
+			<%= image_tag("#{I18n.locale}/login/stit_06.gif")%>
+			<%= image_tag("#{I18n.locale}/login/bg_snb.gif")%>
+			<div class="items">
+				<div class="item" id="_signin">
+					<p class="menu-item">
+						<%= link_to t("signin"), new_user_session_path %>
+					</p>
+				</div>
+
+				<div class="item"  id="_signup">
+					<p class="menu-item">
+						<%= link_to t("signup"), member_managements_sign_up_path %>
+					</p>
+				</div>
+
+				<div class="item" id='_findid'>
+					<p class="menu-item">
+						<%= link_to t("forgot_your_password"), '#' %>
+					</p>
+				</div>
+
+				<div class="item" id='_service'>
+					<p class="menu-item">
+						<%= link_to t("termsofservice"), termsofservice_path %>
+					</p>
+				</div>
+				<div class="item" id='_personal'>
+					<p class="menu-item">
+						<%= link_to t("termsofpersonalinfo"), termsofpersonal_path %>
+					</p>
+				</div>
+				
+			</div>
+			<div id="banners">
+				<div id="banner">
+					<%= image_tag("#{I18n.locale}/banner/banner_sample01.gif")%>
+				</div>
+				<div id="banner">
+					<%= image_tag("#{I18n.locale}/banner/banner_sample02.gif")%>
+				</div>
+			</div>
+		</div>
+		<div id="main">

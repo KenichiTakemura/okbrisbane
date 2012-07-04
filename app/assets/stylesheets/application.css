@@ -1,0 +1,293 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+/*
+ html, body {
+ height: 100%;
+ margin: 0;
+ padding: 0;
+ }
+
+ html {
+ overflow: hidden;
+ height: 100%;
+ background: #ffffff;
+ }
+ body {
+ overflow: auto;
+ height: 100%;
+ width: 1000px;
+ margin: 0 auto;
+ padding: 0 20px;
+ border: 0px solid black;
+ border-width: 0 1px;
+ background: #eee;
+ font-size: 12px;
+ font-family: '굴림';
+ }
+ */
+html {
+	height: 100%;
+	width: 1000px;
+	margin: 0 auto;
+	padding: 0px 0 100px 0;
+	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #DAADFF;
+}
+
+body {
+	overflow: auto;
+	position: relative;
+	min-height: 100%;
+	padding: 5px;
+	/*border: 1px solid white;*/
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	/* Safari 4 does not support an inset shadow
+	 -webkit-box-shadow: 5px 5px 25px rgba(0,0,0,.5);
+	 Chrome 5 does, Safari 4 will ignore this declaration/
+	 -webkit-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
+	 -moz-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
+	box-shadow: inset 5px 5px 25px rgba(0,0,0,.1);*/
+	font-size: 12px;
+	font-family: '굴림';
+	color: #333;
+	background-color: #eee;
+}
+
+#header {
+	height: 250px;
+	margin: 0px 0 0 0;
+}
+
+#wrapper {
+	margin: 0px 0 0 0;
+}
+
+#header #logo {
+	position: absolute;
+	top: 45px;
+	padding: 0;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header #top-banner {
+	position: absolute;
+	top: 45px;
+	display: inline;
+}
+
+#header  #top-banner img {
+	padding: 0px;
+	margin-left: 10px;
+	width: 700px;
+	height: 110px;
+}
+
+#footer {
+	padding-bottom: 20px;
+}
+
+#footer img {
+	height: 110px;
+}
+
+#header #devise {
+	position: absolute;
+	background-color: #642c78;
+	top: 165px;
+	height: 50px;
+	width: 250px;
+	left: 5px;
+}
+
+#header #devise #account {
+	margin-left: 60px;
+	margin-top: 20px;
+}
+
+#header #navigation {
+  position: absolute;
+  top: 165px;
+  padding: 0px;
+  margin-left: 260px;
+  margin-top: 0px;
+  width:  700px; 
+  height: 50px; 
+  background-color: #f0f0f0;
+}
+
+#header #navigation ul {
+  margin-top: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+#header #navigation ul li {
+  float: left;
+}
+
+#header #follows {
+  position: absolute;
+  top: 215px;
+  float: right;
+  padding: 0px;
+  margin-top: 0px;
+}
+
+#header #follows ul {
+  margin-top: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+#header #follows ul li {
+  float: left;
+}
+
+/* Flash */
+
+.flash .message {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+  margin: 10 auto 15px;
+  color: black;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  width: 300px;
+}
+.flash .message p {
+  margin: 0px;
+}
+.flash .error, .flash .error-list {
+  border: 1px solid #993624;
+  background: #cc4831 url("messages/error.png") no-repeat 10px center;
+}
+.flash .alert {
+  border: 1px solid #bb9004;
+  background: #f9c006 url("messages/warning.png") no-repeat 10px center;
+}
+.flash .notice {
+  color: #28485e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid #8a9daa;
+  background: #b8d1e2 url("messages/notice.png") no-repeat 10px center;
+}
+.flash .error-list {
+  text-align: left;
+}
+.flash .error-list h2 {
+  font-size: 16px;
+  text-align: center;
+}
+.flash .error-list ul {
+  padding-left: 22px;
+  line-height: 18px;
+  list-style-type: square;
+  margin-bottom: 15px;
+}
+
+
+/* Global */
+
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+
+.small {
+	font-size: 11px;
+	font-family: inherit;
+	color: #666666;
+	line-height: 15px;
+}
+.small_n {
+	font-size: 11px;
+	font-family: verdana;
+	color: #888888;
+	line-height: 16px;
+}
+.small01 {
+	font-size: 11px;
+	font-family: inherit;
+	color: #888888;
+	line-height: 16px;
+}
+.small_m01 {
+	font-size: 11px;
+	font-family: inherit;
+	color: #666666;
+	line-height: 13px;
+}
+.clear {
+    clear: both;
+    display: block;
+    float: none;
+    font-size: 0 !important;
+    height: 0;
+    line-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 0 !important;
+    width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;  
+  margin-bottom: 15px;
+}
+
+.table th {
+  padding: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.table th.first {
+  width: 30px;
+}
+
+.table th.last {
+  width: 200px;  
+}
+
+.table .checkbox {
+  margin-left: 10px;
+}
+
+.table td {
+  padding: 10px;
+}
+
+.table td.last {
+  text-align: right;
+}
+
+textarea {
+	border-color: black;
+	border-style: solid;
+	border-width: thin;
+	padding: 3px;
+}
+
+a {text-decoration: none}

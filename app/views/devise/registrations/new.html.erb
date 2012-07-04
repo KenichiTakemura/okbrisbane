@@ -1,0 +1,41 @@
+<%= render :partial => "devise/shared/header" %>
+
+<div id="_devise_registrations_new">
+				<%= image_tag("#{I18n.locale}/login/img_process02_on.gif")%>
+								<span class="stitle"><%= t("stitle_head")%></span></br>
+				<%= t("stitle_body")%>
+				</br>
+				</br>
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages! %>
+
+	<div>
+		<%= f.label :email, "#{t(:signin_email)}" %>
+		<br />
+		<%= f.email_field :email %>
+	</div>
+
+	<div>
+		<%= f.label :password, "#{t(:signin_password)}" %>
+		<br />
+		<%= f.password_field :password %>
+	</div>
+
+	<div>
+		<%= f.label :password_confirmation, t("password_confirmation") %>
+		<br />
+		<%= f.password_field :password_confirmation %>
+	</div>
+
+	<div>
+		<%= f.submit "#{t(:signup)}", :class => "ui-button"%>
+	</div>
+	<% end %>
+</div>
+<%= render :partial => "devise/shared/footer" %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+		$('#_signup').attr("style", "background: #6A8FE7");
+  });
+</script>
+

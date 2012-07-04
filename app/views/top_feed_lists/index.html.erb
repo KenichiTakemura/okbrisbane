@@ -1,0 +1,21 @@
+<h1>Listing top_feed_lists</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @top_feed_lists.each do |top_feed_list| %>
+  <tr>
+    <td><%= link_to 'Show', top_feed_list %></td>
+    <td><%= link_to 'Edit', edit_top_feed_list_path(top_feed_list) %></td>
+    <td><%= link_to 'Destroy', top_feed_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Top feed list', new_top_feed_list_path %>

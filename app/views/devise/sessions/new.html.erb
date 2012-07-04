@@ -1,0 +1,48 @@
+<%= render :partial => "devise/shared/header" %>
+<%= image_tag("common/logo_w.gif")%>
+<div class="flash">
+				<% if notice %>
+				<p class="message notice">
+					<%= notice %>
+				</p>
+				<% end %>
+				<% if alert %>
+				<p class="message alert">
+					<%= alert %>
+				</p>
+				<% end %>
+			</div>
+<div id="signin">
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <%= f.label :email, "#{t(:signin_email)}" %>
+    </br>
+  <%= f.email_field :email %>
+  </br>
+  <%= f.label :password, "#{t(:signin_password)}" %>
+    </br>
+  <%= f.password_field :password %>
+  </br>
+  <% if devise_mapping.rememberable? -%>
+    <%= f.check_box :remember_me%> <%= f.label :remember_me, "#{t(:remember_me)}"  %>
+  <% end -%>
+    </br>
+    </br>
+  <%= f.submit t("signin") , :class => "ui-button" %>
+<% end %>
+</div>
+<!-- %= render :partial => "devise/shared/links" % -->
+
+<!-- banner -->
+<div id="signin_banner">
+</div>
+
+
+<%= render :partial => "devise/shared/footer" %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+		$('#_signin').attr("style", "background: #6A8FE7");
+		var width= $('#signin_banner').css("width");
+		var height = $('#signin_banner').css("height");
+		$("#signin_banner").html("Banner " + width + ":" + height);
+  });
+</script>
