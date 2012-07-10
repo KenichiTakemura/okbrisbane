@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :postedOn, :subject, :valid_until, :views, :likes, :is_deleted
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted
 
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
@@ -19,13 +19,12 @@ class Post < ActiveRecord::Base
   has_one :top_feed_list, :as => :feeded_to, :dependent => :destroy
 
   # validator
-  validates_presence_of :category, :locale, :postedOn, :subject, :valid_days, :message => 'Invalid number of parameters'
+  validates_presence_of :category, :locale, :subject, :valid_days, :message => 'Invalid number of parameters'
   validates_numericality_of :valid_days, :only_integer => true, :greater_than => 0, :message => 'Invalid valid_days'
   validates_inclusion_of :locale, :in => [ApplicationController::LOCALE_EN,ApplicationController::LOCALE_KO,ApplicationController::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
-    #"type: #{type} category: #{category} locale: #{locale} subject: #{subject} postedOn: #{postedOn} valid_days: #{valid_days} valid_until: #{valid_until}"
-    "category: #{category} locale: #{locale} subject: #{subject} postedOn: #{postedOn} valid_days: #{valid_days} valid_until: #{valid_until}"
+    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until}"
 
   end
 
@@ -38,20 +37,18 @@ class Post < ActiveRecord::Base
   # public functions
   def add_top_feed_list
     top_feed = TopFeedList.new
-    #top_feed.update_attribute(:category, self)
     top_feed.update_attribute(:feeded_to, self)
     top_feed.save
   end
 
   def set_default
     self.locale ||= ApplicationController::DEFAULT_LOCALE
-    self.postedOn ||= Time.now.utc
     self.valid_days = ApplicationController::VALID_DAYS if self.valid_days == 0
     self.category ||= ApplicationController::DEFAULT_CATEGORY
   end
 
   def set_valid_until
-    self.valid_until = self.valid_days.days.since self.postedOn
+    self.valid_until = self.valid_days.days.since Time.now
   end
 
   def viewed
@@ -71,7 +68,11 @@ class Post < ActiveRecord::Base
   def logging_post
     to_s
   end
-
+  
+  def postedDate
+   Common.date_format(created_at)
+  end
+  
   def set_user(user)
     update_attribute(:posted_by, user)
     save

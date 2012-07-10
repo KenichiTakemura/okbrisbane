@@ -48,3 +48,7 @@ gem 'rb-readline'
 gem 'gretel'
 # Theme
 #gem 'web-app-theme'
+# Paperclip
+gem "paperclip", "~> 3.0"
+# Kaminari
+gem 'kaminari'

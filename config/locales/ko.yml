@@ -208,6 +208,12 @@ ko:
       
 # OKBRISBANE
 
+  views:
+    pagination:
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."
+      
   welcome_message: '환영합니다!'
   select_language: '다른 언어로 사이트 보기'
   english: '영어'

@@ -2,11 +2,12 @@ class HomesController < ApplicationController
   # GET /homes
   # GET /homes.json
   def index
-   @jobs = TopFeedList.all(:conditions => ["category = '#{CATEGORY_JOB}'"], :order => 'id DESC', :limit => 10)
-
+   @job_feed_lists = TopFeedList.job_feed
+   @buy_and_sell_feed_lists = TopFeedList.buy_and_sell_feed
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jobs }
+      format.json { render json: @job_feed_lists}
+      format.json { render json: @buy_and_sell_feed_lists}
     end
   end
 

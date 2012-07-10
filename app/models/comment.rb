@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :is_deleted, :locale, :postedOn
+  attr_accessible :body, :is_deleted, :locale
 
   belongs_to :commented_by, :polymorphic => true
 
@@ -9,7 +9,6 @@ class Comment < ActiveRecord::Base
   
   def set_default
     self.locale ||= ApplicationController::DEFAULT_LOCALE
-    self.postedOn ||= Time.now.utc
   end
     
   # validator

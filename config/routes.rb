@@ -12,11 +12,11 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sign_up', :via => :get
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
-  resources :member_managements
+  resources :member_managements #, :only => ["index","sign_in","sign_up","term","personal"]
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
-  resources :homes
+  resources :homes, :only => ["index"]
   
 
 

@@ -26,7 +26,6 @@ class CreatePosts < ActiveRecord::Migration
       t.references :posted_by, :polymorphic => true
       t.string :category, :null => false
       t.string :subject, :null => false
-      t.datetime :postedOn, :null => false
       t.integer  :valid_days, :default => 0
       t.datetime :valid_until, :null => false
       t.integer :views, :default => 0
@@ -35,6 +34,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :rank, :default => 0
       t.boolean :abuse, :default => false
       t.boolean :is_deleted, :default => false
+      t.timestamps
     end    
   end
 end

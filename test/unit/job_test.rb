@@ -71,7 +71,7 @@ class JobTest < ActiveSupport::TestCase
     job.valid_days = 60;
     assert job.save
     assert_equal(job.valid_days, 60)
-    due = 60.days.since job.postedOn
+    due = 60.days.since job.postedDate
     assert_equal(job.valid_until.strftime("%x"), due.strftime("%x"))
   end
 

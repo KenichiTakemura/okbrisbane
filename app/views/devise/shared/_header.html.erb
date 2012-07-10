@@ -34,15 +34,12 @@
 						<%= link_to t("termsofpersonalinfo"), termsofpersonal_path %>
 					</p>
 				</div>
-				
+
 			</div>
-			<div id="banners">
-				<div id="banner">
-					<%= image_tag("#{I18n.locale}/banner/banner_sample01.gif")%>
-				</div>
-				<div id="banner">
-					<%= image_tag("#{I18n.locale}/banner/banner_sample02.gif")%>
-				</div>
+			<div id="<%= Style.create_banner_div(:signin,:main_content,:left) %>">
+				<%= image_tag("http://placehold.it/200x150")%>
+				<%= image_tag("http://placehold.it/200x150")%>
+				<%= image_tag("http://placehold.it/200x150")%>
 			</div>
 		</div>
 		<div id="main">

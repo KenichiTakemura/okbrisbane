@@ -8,8 +8,8 @@ module DeviseHelper
                       :count => resource.errors.count,
                       :resource => resource.class.model_name.human.downcase)
 
-    messages.sub!('Email',I18n.t("email"));
-    messages.sub!('Password',I18n.t("password"));
+    messages.sub!('Email',I18n.t("email"))
+    messages.sub!('Password',I18n.t("password"))
 
     html = <<-HTML
     <div id="error_explanation">

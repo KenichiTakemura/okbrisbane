@@ -11,18 +11,66 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703121819) do
+ActiveRecord::Schema.define(:version => 20120709224514) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "alignments", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "attachments", :force => true do |t|
-    t.boolean  "is_deleted"
-    t.string   "filename"
-    t.string   "content_type"
-    t.integer  "size"
-    t.datetime "postedOn"
+    t.boolean  "is_deleted",          :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "banners", :force => true do |t|
+    t.integer "page_id"
+    t.integer "section_id"
+    t.integer "alignment_id"
+    t.integer "width"
+    t.integer "height"
+    t.string  "style"
+    t.integer "attached_id"
+    t.string  "attached_type"
+  end
+
+  create_table "business_clients", :force => true do |t|
+    t.string   "business_name",    :null => false
+    t.string   "business_abn"
+    t.string   "business_address"
+    t.string   "business_url"
+    t.string   "business_phone"
+    t.string   "business_fax"
+    t.string   "business_email"
+    t.string   "contact_name"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -33,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
     t.string   "posted_by_type"
     t.string   "category",                          :null => false
     t.string   "subject",                           :null => false
-    t.datetime "postedOn",                          :null => false
     t.integer  "valid_days",     :default => 0
     t.datetime "valid_until",                       :null => false
     t.integer  "views",          :default => 0
@@ -42,14 +89,34 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
     t.integer  "rank",           :default => 0
     t.boolean  "abuse",          :default => false
     t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.float    "price"
+  end
+
+  create_table "client_images", :force => true do |t|
+    t.boolean  "is_deleted",          :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "attached_by_id"
+    t.string   "attached_by_type"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "clicked",             :default => 0
+    t.datetime "last_clicked"
+    t.string   "link_to_url"
+    t.string   "resolution"
+    t.integer  "business_client_id"
   end
 
   create_table "comments", :force => true do |t|
     t.boolean  "is_deleted",        :default => false
     t.string   "locale"
     t.text     "body"
-    t.datetime "postedOn"
     t.boolean  "abuse",             :default => false
     t.integer  "commented_id"
     t.string   "commented_type"
@@ -73,17 +140,17 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
   end
 
   create_table "images", :force => true do |t|
-    t.boolean  "is_deleted"
-    t.string   "filename"
-    t.string   "content_type"
-    t.integer  "size"
-    t.datetime "postedOn"
+    t.boolean  "is_deleted",          :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "zindex"
   end
 
@@ -93,7 +160,6 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
     t.string   "posted_by_type"
     t.string   "category",                          :null => false
     t.string   "subject",                           :null => false
-    t.datetime "postedOn",                          :null => false
     t.integer  "valid_days",     :default => 0
     t.datetime "valid_until",                       :null => false
     t.integer  "views",          :default => 0
@@ -102,6 +168,8 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
     t.integer  "rank",           :default => 0
     t.boolean  "abuse",          :default => false
     t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "member_managements", :force => true do |t|
@@ -120,6 +188,26 @@ ActiveRecord::Schema.define(:version => 20120703121819) do
     t.boolean  "nologin",        :default => false
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sections", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "system_settings", :force => true do |t|
+    t.string   "image_thumbnail_size"
+    t.string   "image_max_size_in_kb"
+    t.string   "attach_acceptable_extention"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "top_feed_lists", :force => true do |t|

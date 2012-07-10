@@ -7,28 +7,44 @@
   background: #ffffff;
 }
 
-#home #top-right-navi {
+#top_feed_list_job {
   position: absolute;
   float: left;
   margin-right:20px;
-  margin-top: 250px;
+  margin-top: 220px;
   width:300px;
   right: 0px;
 }
 
-#home #top-right-navi #head {
+#top_feed_list_buyandsell {
+  position: absolute;
+  float: left;
+  margin-right:20px;
+  margin-top: 550px;
+  width:300px;
+  right: 0px;
+}
+
+#feed_head {
+  position: relative;
   background: #642c78;
-  -moz-box-shadow: 5px 5px 5px #888;
-  -webkit-box-shadow: 5px 5px 5px #888;
-  box-shadow: 5px 5px 5px #888;
+  // -moz-box-shadow: 5px 5px 5px #888;
+  // -webkit-box-shadow: 5px 5px 5px #888;
+  // box-shadow: 5px 5px 5px #888;
   //-moz-border-radius: 5px;
   //-webkit-border-radius: 5px;
   //border-radius: 5px;
-  width:  300px; 
+  width: 300px; 
   height: 40px; 
 } 
 
-#home #top-right-navi #head-left {
+#feed_body {
+  position: relative;
+  width: 300px;
+  margin-top: 10px;
+}
+
+#feed_head_left {
   position: absolute;
   background: #ffffff;
   width:  200px; 
@@ -38,25 +54,18 @@
   right: 0%;
 }
 
-#home #top-right-navi #head img {
-    position: absolute;
-    top:  10px; 
-    left: 10px;   
-}
-
-#home #second-banner {
+#feed_fead_more {
   position: absolute;
-  width:  660px; 
-  height: 300px;
-  margin-top: 390px;
+  background: #ffffff;
+  width:  50px; 
+  height: 20px;
+  bottom: 10px;
+  right: 10px;
 }
 
-#home #second-banner img {  
-    padding: 0px;  
-    border:  1px solid #ccc;  
-    background-color: #eee;  
-    width:  210px; 
-    height: 120px; 
-    margin-top:  10px; 
-    left: 0px;   
+#feed_head img {
+    position: absolute;
+    top: 10px; 
+    left: 20px;   
 }
+

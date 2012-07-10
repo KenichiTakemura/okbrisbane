@@ -40,12 +40,12 @@ html {
 	height: 100%;
 	width: 1000px;
 	margin: 0 auto;
-	padding: 0px 0 100px 0;
+	padding: 0px 0 10px 0;
 	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background: #DAADFF;
+	background: #98AFC7;
 }
 
 body {
@@ -74,6 +74,29 @@ body {
 	margin: 0px 0 0 0;
 }
 
+#change_html_background {
+	position: absolute;
+	background: #CCCDFF;
+	width: 25px;
+	top: 10px;
+	left: 300px;
+	height: 25px;
+	-moz-border-radius: 3px;
+  	-webkit-border-radius: 3px;
+  	border-radius: 3px;
+  	/* Safari 4 does not support an inset shadow */
+	-webkit-box-shadow: 5px 5px 25px rgba(0,0,0,.5);
+	/* Chrome 5 does, Safari 4 will ignore this declaration */
+	-webkit-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
+	-moz-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
+	box-shadow: inset 5px 5px 25px rgba(0,0,0,.1);
+}
+
+#header #top {
+	height: 50px;
+	margin: 0px 0 0 0;
+}
+
 #wrapper {
 	margin: 0px 0 0 0;
 }
@@ -87,18 +110,8 @@ body {
 	margin-right: auto;
 }
 
-#header #top-banner {
-	position: absolute;
-	top: 45px;
-	display: inline;
-}
 
-#header  #top-banner img {
-	padding: 0px;
-	margin-left: 10px;
-	width: 700px;
-	height: 110px;
-}
+
 
 #footer {
 	padding-bottom: 20px;

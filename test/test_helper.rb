@@ -22,6 +22,10 @@ class ActiveSupport::TestCase
     body = "carindale 부근지역 저녁에 은행청소 하실분 모십니다.";
   end
   
+  def client
+    client = "부근지역 저녁에 은행청소 하실분 모십니다.";
+  end
+  
   def test_char
     "년"
   end

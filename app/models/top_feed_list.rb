@@ -10,7 +10,8 @@ class TopFeedList < ActiveRecord::Base
   belongs_to :feeded_to, :polymorphic => true
 
   scope :job_feed, where(:feeded_to_type => 'Job').limit(TOP_FEED_LIMIT)
-  
+  scope :buy_and_sell_feed, where(:feeded_to_type => 'BuyAndSell').limit(TOP_FEED_LIMIT)
+    
   scope :category_feed, lambda { |cate| where('feeded_to_type = ?', cate)}
 
   after_save :clean_oldest_feed

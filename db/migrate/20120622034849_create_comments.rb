@@ -4,7 +4,6 @@ class CreateComments < ActiveRecord::Migration
       t.boolean :is_deleted, :default => false
       t.string :locale
       t.text :body
-      t.datetime :postedOn
       t.boolean :abuse, :default => false
       t.references :commented, :polymorphic => true
       t.references :commented_by, :polymorphic => true
