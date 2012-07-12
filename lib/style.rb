@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Style
     
   PAGES = Hash.new
@@ -6,11 +7,11 @@ module Style
   
   # div id rule is banner_#{page}_#{section}_#{alignment}
   
-  PAGES[:home] = "home"
-  PAGES[:signin] = "signin"
-  PAGES[:signup] = "signup"
-  PAGES[:job] = "job"
-  PAGES[:buy_and_sell] = "buyandsell"
+  PAGES[:home] = "메인"
+  PAGES[:signin] = "회원로그인"
+  PAGES[:signup] = "회원가입"
+  PAGES[:job] = "구인구직"
+  PAGES[:buy_and_sell] = "벼룩시장"
   
   SECTIONS[:header] = "header"
   SECTIONS[:background] = "background"

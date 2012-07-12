@@ -6,7 +6,6 @@ class CreateClientImages < CreateAttachables
     add_column :client_images, :last_clicked, :timestamp, :null => true
     # if not set link to business profile
     add_column :client_images, :link_to_url, :string
-    add_column :client_images, :resolution, :string
     add_column :client_images, :business_client_id, :integer, :references => "business_client"
   end
 end

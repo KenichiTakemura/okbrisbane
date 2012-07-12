@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -52,14 +55,16 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
   end
 
   create_table "banners", :force => true do |t|
-    t.integer "page_id"
-    t.integer "section_id"
-    t.integer "alignment_id"
-    t.integer "width"
-    t.integer "height"
-    t.string  "style"
-    t.integer "attached_id"
-    t.string  "attached_type"
+    t.integer  "page_id"
+    t.integer  "section_id"
+    t.integer  "alignment_id"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "style"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "business_clients", :force => true do |t|
@@ -100,6 +105,9 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -109,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.integer  "clicked",             :default => 0
     t.datetime "last_clicked"
     t.string   "link_to_url"
-    t.string   "resolution"
     t.integer  "business_client_id"
   end
 
@@ -145,6 +152,9 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -206,8 +216,10 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.string   "image_thumbnail_size"
     t.string   "image_max_size_in_kb"
     t.string   "attach_acceptable_extention"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.string   "attach_storage_path"
+    t.string   "business_profile_picture_size"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "top_feed_lists", :force => true do |t|

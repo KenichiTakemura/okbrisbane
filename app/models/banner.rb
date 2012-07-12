@@ -7,4 +7,16 @@ class Banner < ActiveRecord::Base
   belongs_to :section
   belongs_to :alignment
 
+  # pagination
+  default_scope :order => 'created_at DESC'
+  paginates_per 10
+  
+  def to_s
+    "page_id: #{page_id} section_id: #{section_id} alignment_id: #{alignment_id}"
+  end
+  
+  def name
+    page.name + " >> " + section.name + " >> " + alignment.name
+  end
+  
 end

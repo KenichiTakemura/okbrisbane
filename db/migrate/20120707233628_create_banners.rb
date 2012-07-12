@@ -7,7 +7,7 @@ class CreateBanners < ActiveRecord::Migration
       t.integer :width
       t.integer :height
       t.string :style
-      t.references :attached, :polymorphic => true
+      t.timestamps
     end
   end
 end

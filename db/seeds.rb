@@ -35,6 +35,14 @@ end
 Style::ALIGNMENTS.each do |key, value|
   Alignment.create(:name => value)
 end
+# SystemSetting
+ss = SystemSetting.new
+ss.image_thumbnail_size = "100x100>"
+ss.image_max_size_in_kb = "50000"
+ss.attach_acceptable_extention = 'image/jpeg,image/png,image/gif'
+ss.attach_storage_path = ''
+ss.business_profile_picture_size = "500x400>"
+ss.save
 
 # Banner
 # Home
@@ -87,6 +95,9 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
 :alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_right]).id,
 :width => 700, :height => 110, :style => '')
+
+# OKBRISBANE 
+BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
 
 ##### SAMPLE
 

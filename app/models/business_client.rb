@@ -7,8 +7,8 @@ class BusinessClient < ActiveRecord::Base
   validates_presence_of :business_name
   validates_presence_of :contact_name
   
+  # pagination
   default_scope :order => 'created_at DESC'
-  
   paginates_per 10
   
   def to_s

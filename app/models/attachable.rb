@@ -2,7 +2,7 @@ class Attachable < ActiveRecord::Base
   # Make it abstract
   self.abstract_class = true
   
-  attr_accessible :is_deleted, :avatar
+  attr_accessible :is_deleted, :avatar, :medium_size, :thumb_size, :accept_content_type, :attached_id
   
   belongs_to :attached, :polymorphic => true
   
@@ -13,10 +13,11 @@ class Attachable < ActiveRecord::Base
     update_attribute(:attached_by, user)
   end
   
-  # https://github.com/thoughtbot/paperclip
-
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  def attached_to(post)
+    update_attribute(:attached, post)
+  end
   
+  # https://github.com/thoughtbot/paperclip
   validates :avatar, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :avatar
 
