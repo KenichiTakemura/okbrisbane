@@ -30,6 +30,18 @@ class ActiveSupport::TestCase
     "년"
   end
   
+  def contact_name
+    contact_name = "부근지역 저녁에 은행청소 하실분 모십니다";
+  end
+  
+  def business_name
+    business_name = "부근지역 저녁에 은행청소 하실분 모십니다";
+  end
+  
+  def image_file_name
+    image_file_name = "부근지역.png"
+  end
+  
   def locale
     ApplicationController::LOCALE_KO  
   end

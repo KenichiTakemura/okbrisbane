@@ -19,4 +19,8 @@ class Banner < ActiveRecord::Base
     page.name + " >> " + section.name + " >> " + alignment.name
   end
   
+  def resolution
+     width.to_s << "x" << height.to_s
+  end
+  
 end

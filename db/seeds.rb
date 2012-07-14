@@ -14,8 +14,12 @@ Page.delete_all
 Section.delete_all
 Alignment.delete_all
 BusinessClient.delete_all
+BusinessProfile.delete_all
+BusinessProfileImage.delete_all
 ClientImage.delete_all
 Banner.delete_all
+
+
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123')
 anonymous = User.new(:email => "anonymous@okbrisbane.com")
@@ -97,8 +101,9 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :width => 700, :height => 110, :style => '')
 
 # OKBRISBANE 
-BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
-
+ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
+ok.build_business_profile(:body => 'OKBRISBANE rocks!')
+ok.save
 ##### SAMPLE
 
 
@@ -112,7 +117,11 @@ end
   bas.save
 end
 
-"A".upto("Z") do |x|
-  BusinessClient.create(:business_name => "#{x} Company Pty Ltd.", :business_abn => "12 3456 7890", :business_address => 'Shop123 456 ABC Hills QLD 1234', :business_url => 'http://www.abc.com.au', :business_phone => '07-1234-5678', :business_fax => '07-1234-5678', :business_email => 'abc@abc.com.au', :contact_name => '쉬운일입니다')
-end
+client = BusinessClient.create(:business_name => "AAA Company Pty Ltd.", :business_abn => "12 3456 7890", :business_address => 'Shop123 456 ABC Hills QLD 1234', :business_url => 'http://www.abc.com.au', :business_phone => '07-1234-5678', :business_fax => '07-1234-5678', :business_email => 'abc@abc.com.au', :contact_name => '쉬운일입니다')
+client.build_business_profile(:body => 'AAA rocks!')
+client.save
+client = BusinessClient.create(:business_name => "BBB Company Pty Ltd.", :business_abn => "12 3456 7890", :business_address => 'Shop123 456 ABC Hills QLD 1234', :business_url => 'http://www.abc.com.au', :business_phone => '07-1234-5678', :business_fax => '07-1234-5678', :business_email => 'abc@abc.com.au', :contact_name => '쉬운일입니다')
+client.build_business_profile(:body => 'BBB rocks!')
+client.save
+
 #    {category: Job::SEEK, user_id: u.id, subject: '#{x}년 브리즈번 한글학교 교사모집합니다. ', description: '안녕하세요\n\ncarindale 부근지역 저녁에 은행청소 하실분 모십니다.\n\n일은 key job 입니다 저랑 우선은 둘이 3시간정도 합니다 나중에는 혼자서 하셔두 되구요.\n\n은행청소 라 쉬운일입니다,\n\njinyoungkkim@gmail.com 으로 레주메 보내주세요^^\n\n학생분도 환영입니다.'},

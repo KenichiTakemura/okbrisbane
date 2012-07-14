@@ -3,9 +3,16 @@ class ClientImage < Attachable
 
   belongs_to :business_client
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-  #after_initialize :set_default
-  
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "120x120>" }
+
+  after_initialize :set_default
+    
+  def set_default
+    self.thumb_size ||= "120x120>"
+    self.medium_size ||= "300x300>"
+  end
+
+
   #before_validation :set_size
   
   # This does not work
@@ -16,14 +23,10 @@ class ClientImage < Attachable
     logger.debug("avatar.convert_options: #{avatar.convert_options}")
     logger.debug("avatar.styles: #{avatar.styles}")
   end
-  # This does not work
-  def set_default
-    self.thumb_size = "120x120>"
-    avatar.styles[:thumb] = self.thumb_size
-  end
+
 
   def to_s
-    "business_client_id: #{business_client_id} medium_size: #{medium_size} link_to_url: #{link_to_url} attached_id: #{attached_id} attached_type: #{attached_type}"
+    super.to_s + " business_client_id: #{business_client_id} link_to_url: #{link_to_url}"
   end
-
+  
 end

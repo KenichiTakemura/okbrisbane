@@ -17,6 +17,10 @@ class Attachable < ActiveRecord::Base
     update_attribute(:attached, post)
   end
   
+  def to_s
+    "a_file_name: #{avatar_file_name} a_content_type #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
+  end
+  
   # https://github.com/thoughtbot/paperclip
   validates :avatar, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :avatar

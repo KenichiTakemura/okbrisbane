@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709224514) do
+ActiveRecord::Schema.define(:version => 20120713192114) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -61,10 +61,8 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.integer  "width"
     t.integer  "height"
     t.string   "style"
-    t.integer  "attached_id"
-    t.string   "attached_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "business_clients", :force => true do |t|
@@ -78,6 +76,32 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.string   "contact_name"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "business_profile_images", :force => true do |t|
+    t.boolean  "is_deleted",          :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "medium_size"
+    t.string   "thumb_size"
+    t.string   "accept_content_type"
+    t.integer  "attached_by_id"
+    t.string   "attached_by_type"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "business_client_id"
+  end
+
+  create_table "business_profiles", :force => true do |t|
+    t.text     "body"
+    t.integer  "business_client_id"
+    t.string   "business_client_type"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "buy_and_sells", :force => true do |t|
@@ -98,6 +122,22 @@ ActiveRecord::Schema.define(:version => 20120709224514) do
     t.datetime "updated_at",                        :null => false
     t.float    "price"
   end
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "client_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
