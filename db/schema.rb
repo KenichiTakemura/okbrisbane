@@ -93,10 +93,11 @@ ActiveRecord::Schema.define(:version => 20120713192114) do
     t.string   "attached_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "business_client_id"
+    t.boolean  "is_main",             :default => false
   end
 
   create_table "business_profiles", :force => true do |t|
+    t.string   "head"
     t.text     "body"
     t.integer  "business_client_id"
     t.string   "business_client_type"

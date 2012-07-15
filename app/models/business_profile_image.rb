@@ -1,9 +1,11 @@
 class BusinessProfileImage < Attachable
-  attr_accessible :business_client_id
-
-  belongs_to :business_client
+  attr_accessible :is_main
 
   has_attached_file :avatar, :styles => { :medium => "500x400>", :thumb => "150x150>" }
+  
+  def main
+    where('is_main = true').first
+  end
   
   after_initialize :set_default
     
@@ -13,7 +15,7 @@ class BusinessProfileImage < Attachable
   end
 
   def to_s
-    super.to_s + " business_client_id: #{business_client_id}"
+    super.to_s + " is_main: #{is_main}"
   end
-
+  
 end

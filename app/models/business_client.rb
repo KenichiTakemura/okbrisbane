@@ -23,12 +23,19 @@ class BusinessClient < ActiveRecord::Base
   # pagination
   default_scope :order => 'created_at DESC'
   paginates_per 10
+  
   def to_s
-    "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile}"
+    "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} image: #{business_profile_image}"
   end
 
   def set_profile(body)
     self.build_business_profile(:body => body)
+  end
+  
+  def main_profile_image
+    self.business_profile_image.each do |profile_image|
+       return profile_image if profile_image.is_main
+    end
   end
 
 end
