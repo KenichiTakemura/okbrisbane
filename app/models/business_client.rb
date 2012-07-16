@@ -12,6 +12,8 @@ class BusinessClient < ActiveRecord::Base
   has_many :business_profile_image, :as => :attached, :dependent => :destroy
   has_one :business_profile, :dependent => :destroy
   
+  belongs_to :business_category
+  
   accepts_nested_attributes_for :business_profile, :allow_destroy => true
   attr_accessible :business_profile, :business_profile_attributes
   alias_method :business_profile=, :business_profile_attributes=

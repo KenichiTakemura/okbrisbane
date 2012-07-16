@@ -9,6 +9,8 @@ class CreateBusinessClients < ActiveRecord::Migration
       t.string :business_fax
       t.string :business_email
       t.string :contact_name
+      t.string :search_keyword
+      t.references :business_category
       t.timestamps
     end
   end
