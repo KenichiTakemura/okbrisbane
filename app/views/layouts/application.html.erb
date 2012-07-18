@@ -6,7 +6,7 @@
 		<%= stylesheet_link_tag "application" %>
 		<%= stylesheet_link_tag "jquery-ui-1.8.21.custom" %>
 		<%= csrf_meta_tag %>
-		<%= javascript_include_tag 'jquery-1.7.2.js' %>
+		<%= javascript_include_tag 'application' %>
 		<%= javascript_include_tag 'jquery.cycle.all.js' %>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
@@ -31,18 +31,7 @@
 			// }(document, 'script', 'facebook-jssdk'));
 		</script>
 		<div id="header">
-			<!--
-			<p class="fl">
-			<%= t("select_language", :default => 'Choose your language')%>
-			<%= image_tag ("common/bul_util.gif")%>
-			<%= link_to t("english", :default => 'English'), root_path(:locale => 'en') %> |
-			<%= link_to t("korean", :default => 'Korean'), root_path(:locale => 'ko') %>
-			</p>
-			-->
-				<div id="banner_header_top_left">
-					<%= image_tag("http://placehold.it/250x35") %>
-				</div>
-				<div style="position:absolute;float:right;right:0px;top:10px">
+				<div style="float: left">
 					<%= t("welcome_message", :default => 'Welcome! ')%>
 					<% if current_user %>
 					<%= current_user.email %>
@@ -53,12 +42,11 @@
 					<%= t("please") %>
 					<% end %>
 					</div>
+			<%= banner(:home, :header, :top_left) %>
 			<div id="logo">
 				<%= link_to image_tag("common/logo.gif"), root_path(:locale => 'ko' ) %>
 			</div>
-			<div id="banner_header_middle_right">
-				<%= image_tag("http://placehold.it/700x110") %>
-			</div>
+			<%= banner(:home, :header, :top_right) %>
 			<div id="devise">
 				<div id="account">
 					<% if user_signed_in? %>

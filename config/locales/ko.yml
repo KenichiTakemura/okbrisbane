@@ -205,9 +205,14 @@ ko:
       <<: *errors
     models:
       <<: *models
+# Devise
+  devise:
+    sessions:
+      admin:
+        signed_in: '성공적으로 로그인 하셨습니다.'
+        signed_out: '성공적으로 로그아웃 하셨습니다.'
       
 # OKBRISBANE
-
   views:
     pagination:
       previous: "« 前ページ"
@@ -228,6 +233,8 @@ ko:
   signin_password: '비밀번호'
   remember_me: '자동 로그인 (공용 PC인 경우 체크하지 마세요.) '
   signup: '회원가입'
+  signout: '로그아웃'
+  are_you_sure_to_singout: '로그아웃 합니까?'
   termsofservice: '서비스이용약관'
   termsofpersonalinfo: '개인정보취급방침' 
   forgot_your_password: '비밀번호 찾기'
@@ -239,5 +246,84 @@ ko:
   termofpersonalinfomation: '[개인정보취급방침] 아래의 개인정보취급방침을 모두 확인 후 가입하여 주시기 바랍니다.'
   agree: '위 이용약관 및 개인정보취급방침에 동의합니다.'
   agreed: '동의'
+  create: 등록
+  delete: '삭제'
+  add: '추가'
+  pages: '페이지'
+  size: '크기'
+  item: '항목 '
+  content: '내용'
+  Back: '뒤로'
+  Edit: '편집'
+  
+  p_home: "메인"
+  p_signin: "회원로그인"
+  p_signup: "회원가입"
+  P_job: "구인구직"
+  p_buy_and_sell : "벼룩시장"
+  s_header: "header"
+  s_background: "background"
+  s_main_content: "main_content"
+  s_secondary_content: "secondary_content"
+  s_third_content: "third_content"
+  s_fourth_content: "fourth_content"
+  s_fifth_content: "fifth_content"
+  s_side_bar: "side_bar"
+  a_top_left: "top_left"
+  a_top_right: "top_right"
+  a_left: "left"
+  a_right: "right"
+  a_center: "center"
 
-
+  client_management: '고객 관리'
+  banner_management: '광고란 관리'
+  member_management: '멤버 관리'
+  site_statistics: '사이트 통계'
+  issue_management: '문제 관리'
+  system_management: "사이트 관리"
+  
+  listing_business_clients: '고객 일람'
+  listing_banners: '광고란 일람'
+  
+  
+  add_business_banner_image: '광고 이미지를 추가'
+  business_banner_image_all_delete: '광고 이미지를 전부 삭제'
+  business_client_delete: '고객 삭제'
+  
+  confirm_delete: '삭제 하시겠습니까?'
+  confirm_all_delete: '전부 삭제 하시겠습니까?'
+  not_present: '없습니다'
+  must_be_filled: '꼭 입력하십시오'
+  must_be_selected: '꼭 선택하십시오'
+  optional: '옵션 입력'
+  linked_from_banner: '광고 링크'
+  not_listed: '일람안에 없습니다'
+  acceptable_extention: ''
+  
+  business_client: '고객'
+  new_business_client: '고객 추가하기'
+  new_banner_image: '광고 이미지를 추가하기'
+  new_business_profile_image: '프로필 이미지를 추가하기'
+  
+  business_name:  '고객(회사) 이름'
+  contact_name:   '담당자 이름 '
+  business_abn: 'ABN'
+  business_url: '고객(회사) 웹 사이트'
+  business_phone: '고객(회사) 전화'
+  business_fax: '고객(회사) FAX '
+  business_email: '이메일 주소'
+  business_profile: '프로필'
+  business_profile_head: '프로필 head'
+  business_profile_image: '프로필 이미지'
+  
+  banner_page: '광고란 페이지'
+  
+  client_banner_image: '광고 이미지'
+  client_image_link_to_url: '링크'
+  client_image_clicked: '클릭'
+  successfully_created: '성공적으로 추가 되었습니다.'
+  successfully_updated: '성공적으로 갱신 되었습니다.'
+  banner_attach_images: '광고에 추가하기'
+  banner_upload_images: '이미지를 추가하기'
+  client_image_remove_from_banner:  '광고에서 삭제하기'
+  confirm_remove_from_banner:  '광고에서 삭제겠습니까? 다시 추가 할수 있습니다.'

@@ -36,6 +36,41 @@
  font-family: '굴림';
  }
  */
+@font-face {
+  font-family: "gulim";
+  src: url("fonts/gulim.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumBrush";
+  src: url("fonts/NanumBrush.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumGothic";
+  src: url("fonts/NanumGothic.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumGothicBold";
+  src: url("fonts/NanumGothicBold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumGothicExtraBold";
+  src: url("fonts/NanumGothicExtraBold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
 html {
 	height: 100%;
 	width: 1000px;
@@ -45,7 +80,7 @@ html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background: #98AFC7;
+	background: #348037;
 }
 
 body {
@@ -64,12 +99,13 @@ body {
 	 -moz-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
 	box-shadow: inset 5px 5px 25px rgba(0,0,0,.1);*/
 	font-size: 12px;
-	font-family: '굴림';
+	font-family: 'NanumGothic'; 
 	color: #333;
-	background-color: #eee;
+	background-color: #ffffff;
 }
 
 #header {
+	position:relative;
 	height: 250px;
 	margin: 0px 0 0 0;
 }
@@ -102,16 +138,9 @@ body {
 }
 
 #header #logo {
-	position: absolute;
-	top: 45px;
-	padding: 0;
-	margin: 0;
-	margin-left: auto;
-	margin-right: auto;
+	position:absolute;
+	margin-top: 45px;
 }
-
-
-
 
 #footer {
 	padding-bottom: 20px;
@@ -122,33 +151,33 @@ body {
 }
 
 #header #devise {
-	position: absolute;
+	position: relative;
 	background-color: #642c78;
-	top: 165px;
-	height: 50px;
+	top: 35px;
+	height: 30px;
 	width: 250px;
-	left: 5px;
+	left: 0px;
 }
 
 #header #devise #account {
+	position: relative;
 	margin-left: 60px;
 	margin-top: 20px;
+	padding: 5px;
 }
 
 #header #navigation {
-  position: absolute;
-  top: 165px;
   padding: 0px;
-  margin-left: 260px;
-  margin-top: 0px;
-  width:  700px; 
-  height: 50px; 
+  margin-left: 00px;
+  margin-top: 40px;
+  width:  850px; 
+  height: 30px; 
   background-color: #f0f0f0;
 }
 
 #header #navigation ul {
   margin-top: 10px;
-  padding: 0;
+  padding: 10;
   list-style-type: none;
 }
 
@@ -157,11 +186,11 @@ body {
 }
 
 #header #follows {
-  position: absolute;
-  top: 215px;
+  position: relative;
+  top: -35px;
   float: right;
   padding: 0px;
-  margin-top: 0px;
+  margin-right: 10px;
 }
 
 #header #follows ul {

@@ -1,22 +1,23 @@
 /* Header */
-#banner_header_top_left {
-	float:left;
+#banner_p_home_s_header_a_top_left {
+	float: left;
 	width: 250px;
+	margin-left: 15px;
 }
 
-#banner_header_middle_right {
-	float:left;
-	position:relative;
-	top: 40px;
+#banner_p_home_s_header_a_top_right {
 	width: 700px;
 	height: 110px;
-	margin-left: 10px;
+	position: relative;
+	margin-left: 260px;
+	top: 30px;
 }
 
 /* Home */
-#banner_home_main_content_left {
+#banner_p_home_s_main_content_a_top_left {
 	width: 640px;
 	height: 500px;
+	top: 0px;
 	float: left; /* important */
 	margin:0px;
 }
@@ -29,7 +30,7 @@
 	color: #9933FF;
 }
 
-#banner_home_main_content_right {
+#banner_p_home_s_main_content_a_top_right {
 	position: absolute;
 	float: left;
 	margin-top: 0px;

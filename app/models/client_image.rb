@@ -3,7 +3,9 @@ class ClientImage < Attachable
 
   belongs_to :business_client
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "120x120>" }
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "120x120>" },
+   :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
+   :path => ':rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename'
 
   after_initialize :set_default
     

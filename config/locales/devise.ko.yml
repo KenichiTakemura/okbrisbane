@@ -24,6 +24,9 @@ ko:
     sessions:
       signed_in: '성공적으로 로그인 하셨습니다.'
       signed_out: '성공적으로 로그아웃 하셨습니다.'
+      admin:
+        signed_in: '성공적으로 로그인 하셨습니다.'
+        signed_out: '성공적으로 로그아웃 하셨습니다.'
     passwords:
       send_instructions: '어떻게 비밀번호를 재설정하는지 안내하는 메일을 발송하였습니다. 잠시후 확인해 보세요.'
       updated: '비밀번호를 성공적으로 변경했습니다. 이제 로그인된 상태입니다.'
@@ -55,3 +58,4 @@ ko:
         subject: '비밀번호 변경 확인 메일'
       unlock_instructions:
         subject: '계정 Unlock 메일'
+       

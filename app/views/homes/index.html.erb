@@ -1,37 +1,22 @@
 <div id="home">
-	<div id="<%= Style.create_banner_div(:home,:main_content,:left) %>">
+	<%= banner(:home, :main_content, :top_left) %>
 <!-- 			<div class='description'>
 				<p class='description_content'>
 				</p>
 			</div>
 			<a class='abutton' href='#'>More</a> -->
-			<%= image_tag("http://placehold.it/640x400") %>
 <!-- 			<%= link_to("<", "#", :id => "featured") %> -->
 			<div style="margin-left: 10px">
-			<%= image_tag("http://placehold.it/120x100") %>
-			<%= image_tag("http://placehold.it/120x100") %>
-			<%= image_tag("http://placehold.it/120x100") %>
-			<%= image_tag("http://placehold.it/120x100") %>
-			<%= image_tag("http://placehold.it/120x100") %>
 			</div>
 <!-- 			<%= link_to(">", "#", :id => "featured") %> -->
-	</div>
-	<div id="<%= Style.create_banner_div(:home,:main_content,:right) %>">
-		<!-- <div class='description' id='top-right-banner-description'>
+	<%= banner(:home, :main_content, :top_right) %>	
+	<!-- <div class='description' id='top-right-banner-description'>
 				<p class='description_content'>
 					Call us now!
 				</p>
 			</div> -->
-			<%= image_tag("http://placehold.it/300x200") %>
-	</div>
 	<%= generateTopFeed("job", @job_feed_lists) %>
 	<div id="<%= Style.create_banner_div(:home,:secondary_content,:left) %>">
-		<%= image_tag("http://placehold.it/200x150") %>
-		<%= image_tag("http://placehold.it/200x150") %>
-		<%= image_tag("http://placehold.it/200x150") %>
-		<%= image_tag("http://placehold.it/200x150") %>
-		<%= image_tag("http://placehold.it/200x150") %>
-		<%= image_tag("http://placehold.it/200x150") %>
 	</div>
 	<%= generateTopFeed("buyandsell", @buy_and_sell_feed_lists) %>
 </div>

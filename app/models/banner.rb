@@ -8,15 +8,15 @@ class Banner < ActiveRecord::Base
   belongs_to :alignment
 
   # pagination
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'id ASC'
   paginates_per 10
   
   def to_s
-    "page_id: #{page_id} section_id: #{section_id} alignment_id: #{alignment_id}"
+    "p_id: #{page_id} s_id: #{section_id} a_id: #{alignment_id} w: #{width} h: #{height} s: #{style} i: #{client_image}"
   end
   
   def name
-    page.name + " >> " + section.name + " >> " + alignment.name
+    I18n.t(page.name) + " >> " + I18n.t(section.name) + " >> " + I18n.t(alignment.name)
   end
   
   def resolution
