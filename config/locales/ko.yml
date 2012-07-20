@@ -215,9 +215,11 @@ ko:
 # OKBRISBANE
   views:
     pagination:
-      previous: "« 前ページ"
-      next: "次ページ »"
+      previous: "« Prev"
+      next: "Next »"
       truncate: "..."
+      first: 'First'
+      last: 'Last'
       
   welcome_message: '환영합니다!'
   select_language: '다른 언어로 사이트 보기'
@@ -255,12 +257,23 @@ ko:
   content: '내용'
   Back: '뒤로'
   Edit: '편집'
-  
+  Show: '표시'
+  more: '더보기'
+  write_new: '새로 쓰기'
+  change_size: '크기 편집'
+
   p_home: "메인"
   p_signin: "회원로그인"
   p_signup: "회원가입"
-  P_job: "구인구직"
+  p_job: "구인구직"
   p_buy_and_sell : "벼룩시장"
+  p_lifeinfo: '생활정보'
+  p_study: '유학/어학연수'
+  p_immig: '이민'
+  p_estate: '부동산매매'
+  p_living: '생활벌률'
+  p_law: '세무/회계'
+  p_yellowpage: '엘로우페이지'
   s_header: "header"
   s_background: "background"
   s_main_content: "main_content"
@@ -269,11 +282,16 @@ ko:
   s_fourth_content: "fourth_content"
   s_fifth_content: "fifth_content"
   s_side_bar: "side_bar"
-  a_top_left: "top_left"
-  a_top_right: "top_right"
-  a_left: "left"
-  a_right: "right"
-  a_center: "center"
+  
+  a_north: '북'
+  a_north_west: '북서'
+  a_north_east: '북동'
+  a_west: '서'
+  a_center: '중심'
+  a_east: '동'
+  a_south_west: '남서'
+  a_south: '남'
+  a_south_east: '남동'
 
   client_management: '고객 관리'
   banner_management: '광고란 관리'
@@ -305,6 +323,9 @@ ko:
   new_banner_image: '광고 이미지를 추가하기'
   new_business_profile_image: '프로필 이미지를 추가하기'
   
+  edit_banner: '광고정보 편집'
+  edit_business_clients: '고객정보 편집'
+  
   business_name:  '고객(회사) 이름'
   contact_name:   '담당자 이름 '
   business_abn: 'ABN'
@@ -317,6 +338,7 @@ ko:
   business_profile_image: '프로필 이미지'
   
   banner_page: '광고란 페이지'
+  banner_contact :  '광고 문의'
   
   client_banner_image: '광고 이미지'
   client_image_link_to_url: '링크'

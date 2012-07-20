@@ -75,24 +75,18 @@ html {
 	height: 100%;
 	width: 1000px;
 	margin: 0 auto;
-	padding: 0px 0 10px 0;
-	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	background: #348037;
+	background: #F2F2F2;
 }
 
 body {
 	overflow: auto;
-	position: relative;
 	min-height: 100%;
-	padding: 5px;
-	/*border: 1px solid white;*/
+	padding: 2px;
+	/*border: 1px solid white;
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 12px;
 	border-radius: 12px;
-	/* Safari 4 does not support an inset shadow
+	Safari 4 does not support an inset shadow
 	 -webkit-box-shadow: 5px 5px 25px rgba(0,0,0,.5);
 	 Chrome 5 does, Safari 4 will ignore this declaration/
 	 -webkit-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
@@ -101,106 +95,30 @@ body {
 	font-size: 12px;
 	font-family: 'NanumGothic'; 
 	color: #333;
+	position: relative;
 	background-color: #ffffff;
 }
 
 #header {
-	position:relative;
-	height: 250px;
-	margin: 0px 0 0 0;
-}
-
-#change_html_background {
-	position: absolute;
-	background: #CCCDFF;
-	width: 25px;
+	height: 300px;
+	width: 100%;
+	position: relative;
+	left: 0px;
 	top: 10px;
-	left: 300px;
-	height: 25px;
-	-moz-border-radius: 3px;
-  	-webkit-border-radius: 3px;
-  	border-radius: 3px;
-  	/* Safari 4 does not support an inset shadow */
-	-webkit-box-shadow: 5px 5px 25px rgba(0,0,0,.5);
-	/* Chrome 5 does, Safari 4 will ignore this declaration */
-	-webkit-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
-	-moz-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
-	box-shadow: inset 5px 5px 25px rgba(0,0,0,.1);
 }
 
-#header #top {
-	height: 50px;
-	margin: 0px 0 0 0;
+#main {
+	width: 100%;
+	position: relative;
+	left: 0px;
+	top: 0px;
 }
-
-#wrapper {
-	margin: 0px 0 0 0;
-}
-
-#header #logo {
-	position:absolute;
-	margin-top: 45px;
-}
-
 #footer {
 	padding-bottom: 20px;
 }
 
 #footer img {
 	height: 110px;
-}
-
-#header #devise {
-	position: relative;
-	background-color: #642c78;
-	top: 35px;
-	height: 30px;
-	width: 250px;
-	left: 0px;
-}
-
-#header #devise #account {
-	position: relative;
-	margin-left: 60px;
-	margin-top: 20px;
-	padding: 5px;
-}
-
-#header #navigation {
-  padding: 0px;
-  margin-left: 00px;
-  margin-top: 40px;
-  width:  850px; 
-  height: 30px; 
-  background-color: #f0f0f0;
-}
-
-#header #navigation ul {
-  margin-top: 10px;
-  padding: 10;
-  list-style-type: none;
-}
-
-#header #navigation ul li {
-  float: left;
-}
-
-#header #follows {
-  position: relative;
-  top: -35px;
-  float: right;
-  padding: 0px;
-  margin-right: 10px;
-}
-
-#header #follows ul {
-  margin-top: 10px;
-  padding: 0;
-  list-style-type: none;
-}
-
-#header #follows ul li {
-  float: left;
 }
 
 /* Flash */
@@ -245,7 +163,6 @@ body {
   list-style-type: square;
   margin-bottom: 15px;
 }
-
 
 /* Global */
 

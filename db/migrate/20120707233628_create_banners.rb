@@ -3,7 +3,7 @@ class CreateBanners < ActiveRecord::Migration
     create_table(:banners) do |t|
       t.references :page
       t.references :section
-      t.references :alignment
+      t.references :position
       t.integer :width
       t.integer :height
       t.string :style

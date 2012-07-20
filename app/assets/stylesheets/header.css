@@ -1,0 +1,86 @@
+#header #header-left {
+	width: 260px;
+	height: 200px;
+	position: relative;
+	top: 0px;
+	left: 0px;
+}
+
+#header #header-right {
+	width: 720px;
+	height: 200px;
+	top: 0px;
+	left: 260px;
+	position: absolute;
+}
+
+#header #header-bottom {
+	position: absolute;
+	top: 200px;
+	height: 40px;
+	width: 100%;
+}
+
+#header #header-left  #logo {
+	position:relative;
+	width: 250px;
+	height: 120px;
+	top: 30px;	
+}
+
+#header #header-left #devise {
+	background-color: #642c78;
+	position:relative;
+	top: 0px;
+	height:30px;
+	width: 250px;
+}
+
+#header #header-left #devise #account {
+	position: relative;
+	margin-left: 60px;
+	margin-top: 20px;
+	padding: 5px;
+}
+
+#header #header-bottom #navigation {
+  position: absolute;
+  top: 30px;
+  height: 40px;
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
+#header #header-bottom #navigation ul {
+  margin-top: 0px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 16px;
+  font-family: 'NanumGothicExtraBold';   
+}
+
+#header #header-bottom #navigation ul li {
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 95px;
+  height: 40px;
+  text-align: center;
+  float: left;
+  line-height: 35px;
+}
+
+#header #header-bottom #follows {
+  position: absolute;
+  top: -10px;
+  left: 0px;
+}
+
+#header #header-bottom #follows ul {
+  margin-top: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+#header #header-bottom #follows ul li {
+  float: left;
+}

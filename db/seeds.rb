@@ -12,7 +12,7 @@ Job.delete_all
 BuyAndSell.delete_all
 Page.delete_all
 Section.delete_all
-Alignment.delete_all
+Position.delete_all
 BusinessClient.delete_all
 BusinessProfile.delete_all
 BusinessProfileImage.delete_all
@@ -36,8 +36,8 @@ Style::SECTIONS.each do |key, value|
   Section.create(:name => value)
 end
 # Section
-Style::ALIGNMENTS.each do |key, value|
-  Alignment.create(:name => value)
+Style::POSITION.each do |key, value|
+  Position.create(:name => value)
 end
 # SystemSetting
 ss = SystemSetting.new
@@ -52,53 +52,43 @@ ss.save
 # Home
 _page = :home
 ## Header
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_left]).id,
-:width => 250, :height => 35, :style => '')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_right]).id,
-:width => 700, :height => 110, :style => '')
+Style::PAGES.each do |key, value|
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
+  :position_id => Position.find_by_name(Style::POSITION[:north_east]).id,
+  :width => 500, :height => 60, :style => '')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
+  :position_id => Position.find_by_name(Style::POSITION[:east]).id,
+  :width => 710, :height => 120, :style => '')
+end
 ## Background
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:background]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:left]).id,
-:width => 150, :height => 600, :style => '')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:background]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:right]).id,
-:width => 150, :height => 600, :style => '')
+
 ## MainContent
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:main_content]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_left]).id,
-:width => 600, :height => 400, :style => '')
+:position_id => Position.find_by_name(Style::POSITION[:north_west]).id,
+:width => 650, :height => 380, :style => '')
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:main_content]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_right]).id,
+:position_id => Position.find_by_name(Style::POSITION[:north_east]).id,
 :width => 300, :height => 200, :style => '')
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:main_content]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:left]).id,
+:position_id => Position.find_by_name(Style::POSITION[:west]).id,
 :width => 120, :height => 100, :style => '')
 ## SecondaryContent
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:secondary_content]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:left]).id,
-:width => 120, :height => 100, :style => '')
-
+:position_id => Position.find_by_name(Style::POSITION[:north_west]).id,
+:width => 210, :height => 120, :style => '')
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
+:section_id => Section.find_by_name(Style::SECTIONS[:secondary_content]).id,
+:position_id => Position.find_by_name(Style::POSITION[:west]).id,
+:width => 210, :height => 120, :style => '')
 # Signin
 _page = :signin
-## Header
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_left]).id,
-:width => 250, :height => 35, :style => '')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
-:alignment_id => Alignment.find_by_name(Style::ALIGNMENTS[:top_right]).id,
-:width => 700, :height => 110, :style => '')
+
 
 # OKBRISBANE 
 ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
@@ -109,11 +99,11 @@ ok.save
 
 # Data
 2010.upto(2020) do |x|
-  job = Job.new(:category => Job::SEEK, :subject => "#{x}년 브리즈번 한글학교 교사모집합니다. ");
+  job = Job.new(:category => Job::SEEK, :subject => "#{x}년 北김정은, 공항에 불쑥 나타나 女스튜어디스에 말 걸며");
   job.save
 end
 3000.upto(3020) do |x|
-  bas = BuyAndSell.new(:category => BuyAndSell::BUY, :subject => "#{x}  저녁에 은행청소 하실분 모십니다. ", :price => 3000.00);
+  bas = BuyAndSell.new(:category => BuyAndSell::BUY, :subject => "김연아, #{x}년 만에 '록산느의 탱고' 연기한다", :price => 3000.00);
   bas.save
 end
 

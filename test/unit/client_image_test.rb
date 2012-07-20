@@ -12,7 +12,7 @@ class ClientImageTest < ActiveSupport::TestCase
     assert ci.save, "Client Image not saved"
     ci.business_client = c
     assert ci.save, "Client Image with Client not saved"
-    banner = Banner.create(:page => Style::PAGES[:home], :section => Style::SECTIONS[:header], :alignment => Style::ALIGNMENTS[:top_left])
+    banner = Banner.create(:page => Style::PAGES[:home], :section => Style::SECTIONS[:header], :position => Style::POSITION[:north_west])
     assert banner.save, "Banner not saved"
     assert ci.update_attribute(:attached, banner), "Attached not saved"
   end

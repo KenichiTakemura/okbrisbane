@@ -21,10 +21,13 @@ class BusinessClient < ActiveRecord::Base
   # validator
   validates_presence_of :business_name
   validates_presence_of :contact_name
+  validates_uniqueness_of :business_name
 
   # pagination
   default_scope :order => 'created_at DESC'
   paginates_per 10
+  
+  scope :okbrisbane, where(:business_name => 'OKBRISBANE')
   
   def to_s
     "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} image: #{business_profile_image}"

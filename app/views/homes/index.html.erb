@@ -1,5 +1,5 @@
 <div id="home">
-	<%= banner(:home, :main_content, :top_left) %>
+	<%= single_banner(:home, :main_content, :north_west) %>
 <!-- 			<div class='description'>
 				<p class='description_content'>
 				</p>
@@ -9,15 +9,15 @@
 			<div style="margin-left: 10px">
 			</div>
 <!-- 			<%= link_to(">", "#", :id => "featured") %> -->
-	<%= banner(:home, :main_content, :top_right) %>	
+	<%= single_banner(:home, :main_content, :north_east) %>	
 	<!-- <div class='description' id='top-right-banner-description'>
 				<p class='description_content'>
 					Call us now!
 				</p>
 			</div> -->
 	<%= generateTopFeed("job", @job_feed_lists) %>
-	<div id="<%= Style.create_banner_div(:home,:secondary_content,:left) %>">
-	</div>
+	<%= multi_banner(:home, :secondary_content, :north_west, 650, 130) %>
+	<%= multi_banner(:home, :secondary_content, :west, 650, 130) %>	
 	<%= generateTopFeed("buyandsell", @buy_and_sell_feed_lists) %>
 </div>
 <br />

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715014708) do
+ActiveRecord::Schema.define(:version => 20120720042104) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -30,13 +30,6 @@ ActiveRecord::Schema.define(:version => 20120715014708) do
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
-
-  create_table "alignments", :force => true do |t|
-    t.string   "name"
-    t.string   "display_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
   create_table "attachments", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
@@ -58,12 +51,12 @@ ActiveRecord::Schema.define(:version => 20120715014708) do
   create_table "banners", :force => true do |t|
     t.integer  "page_id"
     t.integer  "section_id"
-    t.integer  "alignment_id"
+    t.integer  "position_id"
     t.integer  "width"
     t.integer  "height"
     t.string   "style"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "business_categories", :force => true do |t|
@@ -253,16 +246,20 @@ ActiveRecord::Schema.define(:version => 20120715014708) do
 
   create_table "pages", :force => true do |t|
     t.string   "name"
-    t.string   "display_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "positions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sections", :force => true do |t|
     t.string   "name"
-    t.string   "display_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "system_settings", :force => true do |t|
