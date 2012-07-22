@@ -72,7 +72,7 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:main_content]).id,
 :position_id => Position.find_by_name(Style::POSITION[:north_east]).id,
-:width => 300, :height => 200, :style => '')
+:width => 320, :height => 200, :style => '')
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:main_content]).id,
 :position_id => Position.find_by_name(Style::POSITION[:west]).id,

@@ -48,7 +48,7 @@ class JobTest < ActiveSupport::TestCase
 
   test "post check default values"   do
     job = new_post
-    assert_equal(job.locale, ApplicationController::DEFAULT_LOCALE)
+    assert_equal(job.locale, Okvalue::DEFAULT_LOCALE)
     assert_equal(job.views,0)
     assert_equal(job.likes,0)
     assert_equal(job.dislikes,0)
@@ -71,8 +71,15 @@ class JobTest < ActiveSupport::TestCase
     job.valid_days = 60;
     assert job.save
     assert_equal(job.valid_days, 60)
-    due = 60.days.since job.postedDate
+    due = 60.days.since job.created_at
     assert_equal(job.valid_until.strftime("%x"), due.strftime("%x"))
+  end
+  
+  test "post with valid_until" do
+    job = Job.new(:subject => subject, :category => Job::SEEK)
+    job.valid_until = Time.now + 60.days
+    job.save
+    assert_equal(job.valid_days, 0)
   end
 
   test "post with user" do

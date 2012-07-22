@@ -37,7 +37,9 @@ module ApplicationHelper
     # When more than two images found
     script = ""
     if images.size >= 2
-      script += %Q|$('\##{div_id}').cycle({fx: 'scrollRight',random: 1});|
+      #script += %Q|$('\##{div_id}').cycle({fx: 'scrollRight',random: 1});|
+      script += %Q|$('\##{div_id}').cycle({fx: 'fade',random: 1,timeout: 100});|
+      
       html += _script_document_ready(script)
     end
     html.strip.html_safe

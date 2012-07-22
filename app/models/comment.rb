@@ -8,12 +8,12 @@ class Comment < ActiveRecord::Base
   after_initialize :set_default
   
   def set_default
-    self.locale ||= ApplicationController::DEFAULT_LOCALE
+    self.locale ||= Okvalue::DEFAULT_LOCALE
   end
     
   # validator
   validates_presence_of :body
-  validates_length_of :body, :maximum => ApplicationController::MAX_COMMENT_LENGTH
+  validates_length_of :body, :maximum => Okvalue::MAX_COMMENT_LENGTH
 
   # Add a comment to a post
   def subscribe_to(post, user)

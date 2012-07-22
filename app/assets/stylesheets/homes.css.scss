@@ -4,39 +4,45 @@
 
 #home {
   position: relative;
-  height: 800px; 
+  height: 1200px; 
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
 }
 
+$feed_start: 200px;
+
 #top_feed_list_job {
   position: absolute;
-  float: left;
-  margin-right:20px;
-  margin-top: 220px;
-  width:300px;
+  top: $feed_start + 10px;
+  width:320px;
+  height: 260px;
   right: 0px;
 }
 
+$exrate_start: $feed_start + 260px;
+
+#_exrate {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  right: 0px;
+  top: $exrate_start + 10px;
+}
+
+$feed_start: $exrate_start + 300px;
+
 #top_feed_list_buyandsell {
   position: absolute;
-  float: left;
-  margin-right:20px;
-  margin-top: 550px;
-  width:300px;
+  top: $feed_start + 10px;
+  width:320px;
+  height: 260px;
   right: 0px;
 }
 
 #feed_head {
   position: relative;
   background: #642c78;
-  // -moz-box-shadow: 5px 5px 5px #888;
-  // -webkit-box-shadow: 5px 5px 5px #888;
-  // box-shadow: 5px 5px 5px #888;
-  //-moz-border-radius: 5px;
-  //-webkit-border-radius: 5px;
-  //border-radius: 5px;
   width: 300px; 
   height: 40px; 
 } 

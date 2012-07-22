@@ -98,7 +98,7 @@ ko:
   errors: &errors
     format: ! '%{attribute} %{message}'
     attributes:
-      email: 을
+      email: 'email 111'
     messages:
       accepted: 을(를) 반드시 확인해야 합니다
       blank: 에 내용을 입력해 주세요
@@ -248,19 +248,32 @@ ko:
   termofpersonalinfomation: '[개인정보취급방침] 아래의 개인정보취급방침을 모두 확인 후 가입하여 주시기 바랍니다.'
   agree: '위 이용약관 및 개인정보취급방침에 동의합니다.'
   agreed: '동의'
-  create: 등록
+  create: '등록'
   delete: '삭제'
   add: '추가'
   pages: '페이지'
   size: '크기'
   item: '항목 '
-  content: '내용'
+  content: '긴 설명글'
   Back: '뒤로'
   Edit: '편집'
   Show: '표시'
   more: '더보기'
-  write_new: '새로 쓰기'
+  write_new: '글쓰기'
   change_size: '크기 편집'
+  subject: '제목'
+  image: '이미지'
+  attachment: '첨부자료'
+  autor: '글쓴이'
+  no_information: '현재 정보가 없읍니다'
+  price: '가격'
+  valid_until: '유효 기한'
+  until: '까지'
+  thumbnail: '썸네일'
+  category: '카테고리'
+  file: '파일'
+  check: '체크'
+  upload: '업로드'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -296,13 +309,30 @@ ko:
   client_management: '고객 관리'
   banner_management: '광고란 관리'
   member_management: '멤버 관리'
+  sales_management: '매매 관리'
+  sales_management.title: '매매 관리'
+  sales_management.description: 'Please select menu from above'
   site_statistics: '사이트 통계'
   issue_management: '문제 관리'
   system_management: "사이트 관리"
   
   listing_business_clients: '고객 일람'
   listing_banners: '광고란 일람'
+  listing_estate: '부동산매매 정보일람'
+  listing_business: '비즈니스매매 정보일람'
+  listing_motor_vehicle: '자동차매매 정보일람'
+  listing_accommodation: '숙박정보 일람'
   
+  new_estate: '부동산매매 추가하기'
+  
+  estate: '부동산'
+  business: '비즈니스'
+  motor_vehicle: '자동차'
+  accommodation: '숙박'
+  
+  for_rent: 'for_rent'
+  for_sale: 'for_sale'
+  for_auction: 'for_autction'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'
@@ -311,18 +341,28 @@ ko:
   confirm_delete: '삭제 하시겠습니까?'
   confirm_all_delete: '전부 삭제 하시겠습니까?'
   not_present: '없습니다'
-  must_be_filled: '꼭 입력하십시오'
-  must_be_selected: '꼭 선택하십시오'
+
   optional: '옵션 입력'
   linked_from_banner: '광고 링크'
   not_listed: '일람안에 없습니다'
-  acceptable_extention: ''
+  acceptable_extention: 'acceptable_extention'
+  
+  # Validation
+  must_be_numbers: '수로 입력하십시오'
+  must_be_filled: '꼭 입력하십시오'
+  must_be_selected: '꼭 선택하십시오'
+  
+  # Upload
+  please_drag_n_drop: "이미지를 Drag'n'Drop 하십시오"
+  max_size: 'max size'
   
   business_client: '고객'
   new_business_client: '고객 추가하기'
   new_banner_image: '광고 이미지를 추가하기'
   new_business_profile_image: '프로필 이미지를 추가하기'
   
+  # Edit
+  edit_estate: '부동산 편집'
   edit_banner: '광고정보 편집'
   edit_business_clients: '고객정보 편집'
   
@@ -343,8 +383,13 @@ ko:
   client_banner_image: '광고 이미지'
   client_image_link_to_url: '링크'
   client_image_clicked: '클릭'
-  successfully_created: '성공적으로 추가 되었습니다.'
-  successfully_updated: '성공적으로 갱신 되었습니다.'
+  
+  successfully_created: '성공적으로 추가 되었습니다'
+  successfully_updated: '성공적으로 갱신 되었습니다'
+  successfully_uploaded: '성공적으로 업로드 되었습니다'
+  failed_to_create: '추가'
+  
+  
   banner_attach_images: '광고에 추가하기'
   banner_upload_images: '이미지를 추가하기'
   client_image_remove_from_banner:  '광고에서 삭제하기'

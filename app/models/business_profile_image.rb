@@ -1,3 +1,4 @@
+# This class represents profile images for a business client
 class BusinessProfileImage < Attachable
   attr_accessible :is_main
 

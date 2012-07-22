@@ -1,5 +1,6 @@
 Okbrisbane::Application.routes.draw do
 
+  match 'css/:action.css', :controller=>'stylesheet', :as => :css
   resources :buy_and_sells
 
   resources :jobs

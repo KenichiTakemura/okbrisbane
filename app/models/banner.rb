@@ -1,11 +1,18 @@
 class Banner < ActiveRecord::Base
   attr_accessible :page_id, :section_id, :position_id, :width, :height, :style, :attached
+  attr_accessible :display_name
   
   has_many :client_image, :as => :attached, :class_name => 'ClientImage'
   
   belongs_to :page
   belongs_to :section
   belongs_to :position
+  
+  before_save :set_display_name
+  
+  def set_display_name
+    self.display_name = name if self.display_name.empty?
+  end
 
   # pagination
   default_scope :order => 'id ASC'

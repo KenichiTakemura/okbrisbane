@@ -43,7 +43,7 @@ class ActiveSupport::TestCase
   end
   
   def locale
-    ApplicationController::LOCALE_KO  
+    Okbrisbane::LOCALE_KO  
   end
 
 

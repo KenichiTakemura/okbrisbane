@@ -34,7 +34,7 @@ class ContentTest < ActiveSupport::TestCase
   test "maximum content" do
     c = Content.new
     body = String.new
-    ApplicationController::MAX_POST_CONTENT_LENGTH.times {
+    Okbrisbane::MAX_POST_CONTENT_LENGTH.times {
       body << test_char
     }
     Rails.logger.info("body : " + body)
@@ -45,7 +45,7 @@ class ContentTest < ActiveSupport::TestCase
   test "over maximum content" do
     c = Content.new
     body = String.new
-    ApplicationController::MAX_POST_CONTENT_LENGTH.times {
+    Okbrisbane::MAX_POST_CONTENT_LENGTH.times {
       body << test_char
     }
     body << test_char

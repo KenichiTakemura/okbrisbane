@@ -4,7 +4,7 @@ class Content < ActiveRecord::Base
 
   # validator
   validates_presence_of :body
-  validates_length_of :body, :maximum => ApplicationController::MAX_POST_CONTENT_LENGTH
+  validates_length_of :body, :maximum => Okvalue::MAX_POST_CONTENT_LENGTH
 
   def to_s
     "id =>#{id} body => #{body}"

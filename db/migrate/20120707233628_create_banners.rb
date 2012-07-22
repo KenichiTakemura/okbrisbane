@@ -4,6 +4,7 @@ class CreateBanners < ActiveRecord::Migration
       t.references :page
       t.references :section
       t.references :position
+      t.string :display_name
       t.integer :width
       t.integer :height
       t.string :style

@@ -33,19 +33,6 @@ class ApplicationController < ActionController::Base
   def anonymous_user
     User.find(session[:anonymous_user_id].nil? ? session[:anonymous_user_id] = create_anonymous_user.id : session[:anonymous_user_id])
   end
-  
-  
-  # Global Variables
-  
-  LOCALE_KO = "ko"
-  LOCALE_EN = "en"
-  LOCALE_ZHCN = "zh-CN"
-  MAX_COMMENT_LENGTH = 1000
-  MAX_POST_CONTENT_LENGTH = 1000
-    
-  DEFAULT_CATEGORY = 'na'
-  DEFAULT_LOCALE = ApplicationController::LOCALE_KO
-  VALID_DAYS = 30
 
   private
 
