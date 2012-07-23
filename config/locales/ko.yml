@@ -276,7 +276,7 @@ ko:
   upload: '업로드'
   Id: 'Id'
   created_at: '작성일'
-  x: 'X'
+  x: 'x'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -313,8 +313,8 @@ ko:
   banner_management: '광고란 관리'
   member_management: '멤버 관리'
   sales_management: '매매 관리'
-  sales_management.title: '매매 관리'
-  sales_management.description: 'Please select menu from above'
+  sales_management_title: '매매 관리'
+  sales_management_description: 'Please select menu from above'
   site_statistics: '사이트 통계'
   issue_management: '문제 관리'
   system_management: "사이트 관리"
@@ -344,9 +344,9 @@ ko:
   
   # member_management menu
   
-  for_rent: 'for_rent'
-  for_sale: 'for_sale'
-  for_auction: 'for_autction'
+  for_rent: 'Rent'
+  for_sale: 'Sale'
+  for_auction: 'Autction'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'
