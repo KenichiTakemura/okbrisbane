@@ -264,7 +264,7 @@ ko:
   subject: '제목'
   image: '이미지'
   attachment: '첨부자료'
-  autor: '글쓴이'
+  author: '글쓴이'
   no_information: '현재 정보가 없읍니다'
   price: '가격'
   valid_until: '유효 기한'

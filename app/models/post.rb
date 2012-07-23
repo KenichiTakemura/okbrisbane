@@ -33,8 +33,11 @@ class Post < ActiveRecord::Base
   #
   def to_s
     "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until}"
-
   end
+  
+  # pagination
+  default_scope :order => 'created_at DESC'
+  paginates_per 10
 
   # callbacks
   after_initialize :set_default
