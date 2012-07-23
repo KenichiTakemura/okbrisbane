@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   has_one :top_feed_list, :as => :feeded_to, :dependent => :destroy
 
   # content
-  accepts_nested_attributes_for :content, :allow_destroy => true
+  accepts_nested_attributes_for :content
   attr_accessible :content, :content_attributes
   alias_method :content=, :content_attributes=
 

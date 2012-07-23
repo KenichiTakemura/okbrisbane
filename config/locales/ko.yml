@@ -274,6 +274,9 @@ ko:
   file: '파일'
   check: '체크'
   upload: '업로드'
+  Id: 'Id'
+  created_at: '작성일'
+  x: 'X'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -322,13 +325,24 @@ ko:
   listing_business: '비즈니스매매 정보일람'
   listing_motor_vehicle: '자동차매매 정보일람'
   listing_accommodation: '숙박정보 일람'
+
+  member_list: '멤버 일람'
   
-  new_estate: '부동산매매 추가하기'
-  
+  # sales_management menu
   estate: '부동산'
   business: '비즈니스'
   motor_vehicle: '자동차'
   accommodation: '숙박'
+  new_estate: '부동산매매 추가하기'
+  new_business: '비즈니스매매 추가하기'
+  new_motor_vehicle: '자동차매매 추가하기'
+  new_accommodation: '숙박정보 추가하기'
+  delete_estate: '부동산 삭제'
+  delete_business: '비즈니스 삭제'
+  delete_motor_vehicle: '자동차 삭제'
+  delete_accommodation: '숙박정보 삭제'
+  
+  # member_management menu
   
   for_rent: 'for_rent'
   for_sale: 'for_sale'
@@ -387,7 +401,7 @@ ko:
   successfully_created: '성공적으로 추가 되었습니다'
   successfully_updated: '성공적으로 갱신 되었습니다'
   successfully_uploaded: '성공적으로 업로드 되었습니다'
-  failed_to_create: '추가'
+  failed_to_create: '실패 되었습니다'
   
   
   banner_attach_images: '광고에 추가하기'
