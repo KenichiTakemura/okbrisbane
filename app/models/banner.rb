@@ -11,7 +11,7 @@ class Banner < ActiveRecord::Base
   before_save :set_display_name
   
   def set_display_name
-    self.display_name = name if self.display_name.empty?
+    self.display_name ||= name
   end
 
   # pagination

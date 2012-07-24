@@ -27,8 +27,8 @@ class Post < ActiveRecord::Base
   validates_presence_of :category, :message => I18n.t('must_be_selected')
   validates_presence_of :locale, :message => I18n.t('must_be_selected')
   validates_presence_of :subject, :message => I18n.t('must_be_filled')
-  validates_presence_of :valid_days, :message => 'Invalid valid_days'
-  validates_numericality_of :valid_days, :only_integer => true, :greater_than => 0, :message => 'Invalid valid_days'
+  #validates_presence_of :valid_days, :message => 'Invalid valid_days'
+  #validates_numericality_of :valid_days, :only_integer => true, :greater_than => 0, :message => 'Invalid valid_days'
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s

@@ -215,11 +215,11 @@ ko:
 # OKBRISBANE
   views:
     pagination:
-      previous: "« Prev"
-      next: "Next »"
+      previous: "« 전"
+      next: "다음 »"
       truncate: "..."
-      first: 'First'
-      last: 'Last'
+      first: '처음 '
+      last: '마지막 '
       
   welcome_message: '환영합니다!'
   select_language: '다른 언어로 사이트 보기'
@@ -253,8 +253,9 @@ ko:
   add: '추가'
   pages: '페이지'
   size: '크기'
-  item: '항목 '
-  content: '긴 설명글'
+  item: '항목'
+  content: '내용'
+  content_body: '긴 설명글'
   Back: '뒤로'
   Edit: '편집'
   Show: '표시'
@@ -321,26 +322,31 @@ ko:
   
   listing_business_clients: '고객 일람'
   listing_banners: '광고란 일람'
-  listing_estate: '부동산매매 정보일람'
-  listing_business: '비즈니스매매 정보일람'
-  listing_motor_vehicle: '자동차매매 정보일람'
-  listing_accommodation: '숙박정보 일람'
 
   member_list: '멤버 일람'
   
   # sales_management menu
-  estate: '부동산'
-  business: '비즈니스'
-  motor_vehicle: '자동차'
-  accommodation: '숙박'
-  new_estate: '부동산매매 추가하기'
-  new_business: '비즈니스매매 추가하기'
-  new_motor_vehicle: '자동차매매 추가하기'
-  new_accommodation: '숙박정보 추가하기'
-  delete_estate: '부동산 삭제'
-  delete_business: '비즈니스 삭제'
-  delete_motor_vehicle: '자동차 삭제'
-  delete_accommodation: '숙박정보 삭제'
+  estates: '부동산'
+  businesses: '비즈니스'
+  motor_vehicles: '자동차'
+  accommodations: '숙박'
+  immigrations: '이민'
+  listing_estates: '부동산매매 정보일람'
+  listing_businesses: '비즈니스매매 정보일람'
+  listing_motor_vehicles: '자동차매매 정보일람'
+  listing_accommodations: '숙박정보 일람'
+  listing_immigrations: '이민정보 일람'
+
+  new_estates: '부동산매매 추가'
+  new_businesses: '비즈니스매매 추가'
+  new_motor_vehicles: '자동차매매 추가'
+  new_accommodations: '숙박정보 추가'
+  new_immigrations: '이민정보 추가'
+  delete_estates: '부동산 삭제'
+  delete_businesses: '비즈니스 삭제'
+  delete_motor_vehicles: '자동차 삭제'
+  delete_accommodations: '숙박정보 삭제'
+  delete_immigrations: '이민정보 삭제'
   
   # member_management menu
   
@@ -374,11 +380,6 @@ ko:
   new_business_client: '고객 추가하기'
   new_banner_image: '광고 이미지를 추가하기'
   new_business_profile_image: '프로필 이미지를 추가하기'
-  
-  # Edit
-  edit_estate: '부동산 편집'
-  edit_banner: '광고정보 편집'
-  edit_business_clients: '고객정보 편집'
   
   business_name:  '고객(회사) 이름'
   contact_name:   '담당자 이름 '

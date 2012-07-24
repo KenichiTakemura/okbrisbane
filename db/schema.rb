@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720084905) do
+ActiveRecord::Schema.define(:version => 20120724031104) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -52,11 +52,12 @@ ActiveRecord::Schema.define(:version => 20120720084905) do
     t.integer  "page_id"
     t.integer  "section_id"
     t.integer  "position_id"
+    t.string   "display_name"
     t.integer  "width"
     t.integer  "height"
     t.string   "style"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "business_categories", :force => true do |t|
@@ -106,6 +107,26 @@ ActiveRecord::Schema.define(:version => 20120720084905) do
     t.string   "business_client_type"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+  end
+
+  create_table "businesses", :force => true do |t|
+    t.string   "locale",                            :null => false
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.string   "category",                          :null => false
+    t.string   "subject",                           :null => false
+    t.integer  "valid_days",     :default => 0
+    t.datetime "valid_until",                       :null => false
+    t.integer  "views",          :default => 0
+    t.integer  "likes",          :default => 0
+    t.integer  "dislikes",       :default => 0
+    t.integer  "rank",           :default => 0
+    t.boolean  "abuse",          :default => false
+    t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.float    "price"
+    t.boolean  "is_sold",        :default => false
   end
 
   create_table "buy_and_sells", :force => true do |t|

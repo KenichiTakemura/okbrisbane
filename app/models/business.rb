@@ -1,6 +1,5 @@
-class Estate < Post
+class Business < Post
 
-  FOR_RENT = "for_rent"
   FOR_SALE = "for_sale"
   FOR_AUCTION = "for_auction"
   
@@ -8,10 +7,9 @@ class Estate < Post
   attr_accessible :price 
   validates_presence_of :price, :message => I18n.t('must_be_filled')
   validates_numericality_of :price, :only_integer => false, :greater_than => 0, :message => I18n.t('must_be_numbers')
-  validates_inclusion_of :category, :in => [FOR_RENT,FOR_SALE,FOR_AUCTION], :message => I18n.t('must_be_selected')
+  validates_inclusion_of :category, :in => [FOR_SALE,FOR_AUCTION], :message => I18n.t('must_be_selected')
 
   def category_list
-    [[I18n.t("#{FOR_RENT}"),FOR_RENT],[I18n.t("#{FOR_SALE}"),FOR_SALE],[I18n.t("#{FOR_AUCTION}"),FOR_AUCTION]]
+    [[I18n.t("#{FOR_SALE}"),FOR_SALE],[I18n.t("#{FOR_AUCTION}"),FOR_AUCTION]]
   end
-  
 end

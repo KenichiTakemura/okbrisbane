@@ -13,4 +13,10 @@ module Okvalue
   DEFAULT_LOCALE = LOCALE_KO
   VALID_DAYS = 30
   
+  ESTATE = "estates"
+  BUSINESS = "businesses"
+  MOTOR_VEHICLE = "motor_vehicles"
+  ACCOMMODATION = "accommodations"
+  IMMIGRATION = "immigrations"
+  
 end
