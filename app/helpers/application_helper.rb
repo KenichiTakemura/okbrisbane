@@ -11,8 +11,6 @@ module ApplicationHelper
     return b, images
   end
   
-  
-  
   def _banner(p, s, a, w, h)
     b,images = _collectImage(p,s,a)
     div_id = Style.create_banner_div(p,s,a)
@@ -50,7 +48,7 @@ module ApplicationHelper
 
   def navigation(over, out)
      logger.debug("navigation")
-     html = %Q|<div id="navigation"><ul class="wat-cf">|
+     html = %Q|<div id="navigation"><ul class="slide">|
      Style::NAVI.each do |key, value|
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
      end

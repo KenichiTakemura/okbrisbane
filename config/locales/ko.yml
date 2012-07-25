@@ -293,6 +293,8 @@ ko:
   p_living: '생활벌률'
   p_law: '세무/회계'
   p_yellowpage: '엘로우페이지'
+  p_business: '비즈니스매매'
+  p_motor_vehicle: "자동차매매"
   p_sponsor: '고객'
   
   s_header: "헤드"

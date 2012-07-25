@@ -4,6 +4,7 @@ class Image < Attachable
   has_attached_file :avatar, :styles => { :medium => "400x400>", :thumb => "120x120>" },
    :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
    :path => ':rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename'
+   
   def to_s
     super.to_s
   end

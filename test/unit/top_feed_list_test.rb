@@ -2,13 +2,13 @@ require 'test_helper'
 
 class TopFeedListTest < ActiveSupport::TestCase
   def add_a_post
-    job = Job.new(:category => Job::SEEK, :subject => subject)
+    job = Job.new(:category => Job::SEEK, :subject => subject, :valid_until => Time.now)
     assert job.save
     job
   end
 
   def add_a_buy_post
-    bas = BuyAndSell.new(:category => BuyAndSell::BUY, :subject => subject, :price => 3000.00);
+    bas = BuyAndSell.new(:category => BuyAndSell::BUY, :subject => subject, :price => 3000.00, :valid_until => Time.now)
     assert bas.save
     bas
   end
@@ -29,7 +29,7 @@ class TopFeedListTest < ActiveSupport::TestCase
   end
 
   test "feed_over_max_posts" do
-    first_post = Job.new(:category => Job::SEEK, :subject => 'first')
+    first_post = Job.new(:category => Job::SEEK, :subject => 'first', :valid_until => Time.now)
     assert first_post.save
     TopFeedList::TOP_FEED_SAVED_LIMIT.times {
       add_a_post
@@ -39,7 +39,7 @@ class TopFeedListTest < ActiveSupport::TestCase
   end
 
   test "delete old post" do
-    first_post = Job.new(:category => Job::SEEK, :subject => 'first')
+    first_post = Job.new(:category => Job::SEEK, :subject => 'first', :valid_until => Time.now)
     assert first_post.save
     TopFeedList::TOP_FEED_SAVED_LIMIT.times {
       add_a_post
@@ -52,14 +52,14 @@ class TopFeedListTest < ActiveSupport::TestCase
     TopFeedList::TOP_FEED_LIMIT.times {
       add_a_post
     }
-    first_post = Job.new(:category => Job::SEEK, :subject => 'first')
-    assert first_post.save
-    first_post.destroy
+    new_post = Job.new(:category => Job::SEEK, :subject => 'new', :valid_until => Time.now)
+    assert new_post.save, 'Not saved'
+    new_post.destroy
     assert_equal(TopFeedList.job_feed.size,TopFeedList::TOP_FEED_LIMIT)
   end
 
   test "add many posts" do
-    1000.times {
+  (TopFeedList::TOP_FEED_SAVED_LIMIT+1).times {
       add_a_post
     }
     assert_equal(TopFeedList.job_feed.size, TopFeedList::TOP_FEED_LIMIT)
@@ -80,4 +80,28 @@ class TopFeedListTest < ActiveSupport::TestCase
     assert_equal(TopFeedList.buy_and_sell_feed.size, TopFeedList::TOP_FEED_LIMIT)
   end
 
+  # Estate
+  test "add_same_post" do
+    post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
+    assert post.save, "Not saved"
+    post.build_content(:body => body)
+    assert post.save, "Not updated"
+    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+  end
+
+  test "update_post" do
+    post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
+    assert post.save, "Not saved"
+    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+    assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, post.id)
+    another_post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
+    assert another_post.save, "Not saved"
+    assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, post.id)
+    assert_equal(TopFeedList.category_feed("Estate").size, 2)
+    post.build_content(:body => body)
+    assert post.save, "Not updated"
+    assert_equal(TopFeedList.category_feed("Estate").size, 2)
+    assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, another_post.id)
+  end
+  
 end

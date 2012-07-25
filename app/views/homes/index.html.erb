@@ -15,19 +15,18 @@
 					Call us now!
 				</p>
 			</div> -->
-	<%= generateTopFeed("p_job", @job_feed_lists, "#642c78") %>
+	<%= generateTopFeed("p_job", @job_feed_lists, nil, "#642c78") %>
 	<%= multi_banner(:home, :body, 3, 650, 130) %>
 	<%= multi_banner(:home, :body, 4, 650, 130) %>
 	<%= multi_banner(:home, :body, 5, 650, 130) %>	
 <!-- 	<div id="_exrate">
 		<iframe src="http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/12776_0.html" border="0" marginwidth="0" frameborder="no" height="300" scrolling="no" width="300"></iframe>
 	</div> -->
-	<%= generateTopFeed("p_buy_and_sell", @buy_and_sell_feed_lists, "#642c78") %>
+	<%= generateTopFeed("p_buy_and_sell", @buy_and_sell_feed_lists, nil, "#642c78") %>
 	<div id="second_section">
-		<div id="section_bar"></div>
-		<div id="section_bar"></div>
-		<div id="section_bar"></div>
-		<%= generateTopFeed("p_estate", @estate_lists, "#41A317") %>
+		<div id="section_left"><div id="second_section_bar"></div><%= generateTopFeed("p_estate", @estate_lists, @estate_image_lists, "#41A317") %></div>
+		<div id="section_center"><div id="second_section_bar"></div><%= generateTopFeed("p_business", @business_lists, @business_image_lists, "#41A317") %></div>
+		<div id="section_right"><div id="second_section_bar"></div><%= generateTopFeed("p_motor_vehicle", @motor_vehicle_lists, @motor_vehicle_image_lists, "#41A317") %></div>
 	</div>
 </div>
 <br />

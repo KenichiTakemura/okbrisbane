@@ -2,13 +2,30 @@ class HomesController < ApplicationController
   # GET /homes
   # GET /homes.json
   def index
-   @job_feed_lists = TopFeedList.job_feed
-   @buy_and_sell_feed_lists = TopFeedList.buy_and_sell_feed
-   @estate_lists = TopFeedList.estate_feed
+    @job_feed_lists = TopFeedList.job_feed
+    @buy_and_sell_feed_lists = TopFeedList.buy_and_sell_feed
+    @estate_lists = TopFeedList.estate_feed
+    @estate_image_lists = Array.new
+    @business_image_lists = Array.new
+    @motor_vehicle_image_lists = Array.new
+    logger.debug("@estate_lists.size: #{@estate_lists.size}")
+    @estate_lists.each_with_index do |feed, i|
+      if !feed.feeded_to.image.empty?
+        @estate_image_lists.push(feed)
+        @estate_lists.slice!(i)
+      end
+    end
+    logger.debug("@estate_lists.size: #{@estate_lists.size}")
+    logger.debug("@estate_image_lists.size: #{@estate_image_lists.size}")
+    @business_lists = TopFeedList.business_feed
+    @motor_vehicle_lists = TopFeedList.motor_vehicle_feed
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @job_feed_lists}
       format.json { render json: @buy_and_sell_feed_lists}
+      format.json { render json: @estate_lists}
+      format.json { render json: @business_lists}
+      format.json { render json: @motor_vehicle_lists}
     end
   end
 

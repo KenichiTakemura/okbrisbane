@@ -48,10 +48,18 @@ class Post < ActiveRecord::Base
 
   # public functions
   def add_top_feed_list
+    logger.debug("add_top_feed_list category: #{self.class}")
+    feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
+    logger.debug("Feed: #{feed}")
+    if feed
+      # Existing in feed
+      logger.debug("Feed exists #{feed}")
+      feed.destroy
+    end
     top_feed = TopFeedList.new
     top_feed.update_attribute(:feeded_to, self)
-    top_feed.save
-  end
+    logger.debug("Feeded_to: #{top_feed.id}")
+   end
 
   def set_default
     self.locale ||= Okvalue::DEFAULT_LOCALE
@@ -91,7 +99,6 @@ class Post < ActiveRecord::Base
 
   def set_user(user)
     update_attribute(:posted_by, user)
-    save
   end
 
 end
