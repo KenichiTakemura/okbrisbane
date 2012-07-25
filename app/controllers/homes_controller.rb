@@ -4,6 +4,7 @@ class HomesController < ApplicationController
   def index
    @job_feed_lists = TopFeedList.job_feed
    @buy_and_sell_feed_lists = TopFeedList.buy_and_sell_feed
+   @estate_lists = TopFeedList.estate_feed
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @job_feed_lists}

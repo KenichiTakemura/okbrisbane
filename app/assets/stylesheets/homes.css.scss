@@ -10,14 +10,19 @@
   margin-right: auto;
 }
 
+#second_feed {
+  position: relative;
+}
+
 $feed_start: 200px;
 
-#top_feed_list_job {
-  position: absolute;
+#top_feed_list_p_job {
+  position: relative;
   top: $feed_start + 10px;
-  width:320px;
+  width: 320px;
   height: 260px;
-  right: 0px;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 $exrate_start: $feed_start + 260px;
@@ -30,9 +35,9 @@ $exrate_start: $feed_start + 260px;
   top: $exrate_start + 10px;
 }
 
-$feed_start: $exrate_start + 300px;
+$feed_start: $feed_start + 300px;
 
-#top_feed_list_buyandsell {
+#top_feed_list_p_buy_and_sell {
   position: absolute;
   top: $feed_start + 10px;
   width:320px;
@@ -40,42 +45,71 @@ $feed_start: $exrate_start + 300px;
   right: 0px;
 }
 
+#top_feed_list_p_estate {
+  position: relative;
+  top: 30px;
+  width: 320px;
+  height: 260px;
+  float: left;
+  margin-left: 10px;
+}
+
+// Styles for feed box
+
 #feed_head {
   position: relative;
-  background: #642c78;
   width: 300px; 
-  height: 40px; 
+  height: 40px;
+  font-family: 'NanumGothicExtraBold';   
+  color: #ffffff;
 } 
 
 #feed_body {
   position: relative;
   width: 300px;
+  margin-left: auto;
   margin-top: 10px;
+  margin-right: 20px;
 }
 
 #feed_head_left {
+  position: relative;
+  font-family: 'NanumGothicExtraBold';   
+  color: #ffffff;
+  top: 20%;
+  left: 5%;
+  font-size: 16px;
+  width: 100px;
+}
+
+#feed_head_right {
   position: absolute;
   background: #ffffff;
   width:  200px; 
   height: 38px;
   top: 0px;
-  left: 100px;
-  right: 0%;
-}
-
-#feed_fead_menu {
-  position: absolute;
-  background: #ffffff;
-  width:  100px; 
-  height: 10px;
-  bottom: 10px;
   right: 0px;
-  text-align: bottom;
+  left: 100px;
 }
 
-#feed_head img {
-    position: absolute;
-    top: 10px; 
-    left: 20px;   
+#feed_head_menu {
+  position: relative;
+  float: right;
+  background: #ffffff;
+  font-size: 11px;
+  font-family: 'NanumGothic';
+  color: #666666;
 }
 
+#second_section {
+  position: relative;
+  float:left;
+  left: 0px;
+  width: 100%;
+  top: 10px;
+  margin-top: 50px;
+}
+
+#second_section #section_bar {
+  position:relative;background:#41A317;width:300px;height:5px;float:left;margin-left: 10px;
+}

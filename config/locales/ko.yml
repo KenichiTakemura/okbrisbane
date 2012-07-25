@@ -252,12 +252,14 @@ ko:
   delete: '삭제'
   add: '추가'
   pages: '페이지'
+  post: '투고'
   size: '크기'
   item: '항목'
   content: '내용'
   content_body: '긴 설명글'
   Back: '뒤로'
   Edit: '편집'
+  List: '일람'
   Show: '표시'
   more: '더보기'
   write_new: '글쓰기'
@@ -291,14 +293,17 @@ ko:
   p_living: '생활벌률'
   p_law: '세무/회계'
   p_yellowpage: '엘로우페이지'
-  s_header: "header"
-  s_background: "background"
+  p_sponsor: '고객'
+  
+  s_header: "헤드"
+  s_background: "배경"
   s_main_content: "main_content"
   s_secondary_content: "secondary_content"
   s_third_content: "third_content"
   s_fourth_content: "fourth_content"
   s_fifth_content: "fifth_content"
   s_side_bar: "side_bar"
+  s_body: '보디'
   
   a_north: '북'
   a_north_west: '북서'
@@ -316,6 +321,7 @@ ko:
   sales_management: '매매 관리'
   sales_management_title: '매매 관리'
   sales_management_description: 'Please select menu from above'
+  post_management: '투고 관리'
   site_statistics: '사이트 통계'
   issue_management: '문제 관리'
   system_management: "사이트 관리"
@@ -405,7 +411,7 @@ ko:
   failed_to_create: '실패 되었습니다'
   
   
-  banner_attach_images: '광고에 추가하기'
+  banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'
   client_image_remove_from_banner:  '광고에서 삭제하기'
   confirm_remove_from_banner:  '광고에서 삭제겠습니까? 다시 추가 할수 있습니다.'

@@ -1,60 +1,6 @@
 // Place all the styles related to the banner controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-//Header
-#banner_p_home_s_header_a_north_east {
-  float: right;
-  top: 0px;
-  right: 10px;
-   position: relative;
-}
-
-#banner_p_home_s_header_a_east {
-  position: relative;
-  float: left;
-  margin-top: 10px;
-}
-
-// Home
-#banner_p_home_s_main_content_a_north_west {
-  top: 0px;
-  float: left;
-  margin: 0px;
-}
-
-#featured {
-  border: 0px solid #c0c0c0;
-  right: 0px;
-  width: 50px;
-  font-size: 80px;
-  color: #9933FF;
-}
-
-#banner_p_home_s_main_content_a_north_east {
-  position: absolute;
-  float: left;
-  top: 0px;
-  margin-top: 0px;
-  right: 0px;
-}
-
-#banner_p_home_s_secondary_content_a_north_west {
-  position: relative;
-  width: 650px;
-  height: 130px;
-  top: 10px;
-  left: 0px;
-  float:left;
-}
-
-#banner_p_home_s_secondary_content_a_west {
-  position: relative;
-  width: 650px;
-  height: 130px;
-  top: 20px;
-  left: 0px;
-  float:left;
-}
 
 div.banner_description {
   position: absolute;
