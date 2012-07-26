@@ -104,4 +104,15 @@ class TopFeedListTest < ActiveSupport::TestCase
     assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, another_post.id)
   end
   
+  test "hide_a_post" do
+    post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
+    assert post.save, "Not saved"
+    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+    post.is_deleted = true
+    assert post.save, 'Noy updated'
+    assert_equal(TopFeedList.category_feed("Estate").size, 0)
+    post.is_deleted = false
+    assert post.save, 'Noy updated'
+    assert_equal(TopFeedList.category_feed("Estate").size, 1)    
+  end
 end

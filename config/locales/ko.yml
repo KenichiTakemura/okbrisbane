@@ -280,6 +280,14 @@ ko:
   Id: 'Id'
   created_at: '작성일'
   x: 'x'
+  "true": '예'
+  "false": '아니오'
+  hide: '비표시'
+  image_size: '이미지 크기'
+  style: '스타일'
+  display_name: '페이지 이름'
+  width: '폭'
+  height: '높이'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -287,7 +295,7 @@ ko:
   p_job: "구인구직"
   p_buy_and_sell : "벼룩시장"
   p_lifeinfo: '생활정보'
-  p_study: '유학/어학연수'
+  p_study: '유학/어학'
   p_immig: '이민'
   p_estate: '부동산매매'
   p_living: '생활벌률'
@@ -296,6 +304,7 @@ ko:
   p_business: '비즈니스매매'
   p_motor_vehicle: "자동차매매"
   p_sponsor: '고객'
+  p_accommodation: '숙박정보'
   
   s_header: "헤드"
   s_background: "배경"

@@ -33,7 +33,7 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
-    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until}"
+    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until} is_deleted: #{is_deleted}"
   end
   
   # pagination
@@ -44,11 +44,11 @@ class Post < ActiveRecord::Base
   after_initialize :set_default
   after_validation :set_valid_until
   before_validation :logging_post
-  after_save :add_top_feed_list
+  after_save :add_top_feed_list, :delete_top_feed_list
 
   # public functions
   def add_top_feed_list
-    logger.debug("add_top_feed_list category: #{self.class}")
+    logger.debug("add_top_feed_list category: #{self}")
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
     logger.debug("Feed: #{feed}")
     if feed
@@ -59,6 +59,13 @@ class Post < ActiveRecord::Base
     top_feed = TopFeedList.new
     top_feed.update_attribute(:feeded_to, self)
     logger.debug("Feeded_to: #{top_feed.id}")
+   end
+   
+   def delete_top_feed_list
+    return if !self.is_deleted
+    logger.debug("delete_from_top_feed_list #{self}")
+    feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
+    feed.destroy    
    end
 
   def set_default

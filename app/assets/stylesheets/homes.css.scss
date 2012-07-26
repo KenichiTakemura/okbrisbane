@@ -4,45 +4,47 @@
 
 #home {
   position: relative;
-  height: 1600px; 
+  height: 2000px; 
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
 }
 
-#second_feed {
+#first_section {
   position: relative;
+  width: 100%;
+  height: 800px; 
 }
 
-$feed_start: 200px;
+#first_section #first_section_left {
+  position: relative;
+  width: 650px;
+  height: 500px;
+  float: left;
+}
+
+#first_section #first_section_right {
+  position: relative;
+  height: 500px;
+  float: right;
+}
 
 #top_feed_list_p_job {
   position: relative;
-  top: $feed_start + 10px;
-  width: 320px;
+  top: 10px;
+  width:100%;
   height: 260px;
   margin-left: auto;
   margin-right: 0;
 }
 
-$exrate_start: $feed_start + 260px;
-
-#_exrate {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  right: 0px;
-  top: $exrate_start + 10px;
-}
-
-$feed_start: $feed_start + 300px;
-
 #top_feed_list_p_buy_and_sell {
-  position: absolute;
-  top: $feed_start + 10px;
-  width:320px;
+  position: relative;
+  width:100%;
+  top: 20px;
   height: 260px;
-  right: 0px;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 #second_section {
@@ -50,6 +52,7 @@ $feed_start: $feed_start + 300px;
   float:left;
   left: 0px;
   width: 100%;
+  height: 460px;
   top: 10px;
   margin-top: 40px;
 }
@@ -64,15 +67,51 @@ $feed_start: $feed_start + 300px;
 }
 
 #second_section_bar {
-  position:relative;background:#41A317;width:100%;height:5px;
+  position:relative;background:#642c78;width:100%;height:5px;
 }
-
 
 #second_section #top_feed_list_p_estate, #top_feed_list_p_business, #top_feed_list_p_motor_vehicle {
   position: relative;
   top: 5px;
   width: 100%;
   height: 430px;
+}
+
+#third_section {
+  position: relative;
+  float:left;
+  left: 0px;
+  width: 100%;
+  height: 500px;  
+}
+
+#third_section_bar {
+  position:relative;background:#642c78;width:100%;height:5px;
+}
+
+#third_section #thrid_section_left {
+  position: relative;
+  width: 300px;
+  height: 310px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#third_section #top_feed_list_p_estate {
+    position: relative;
+  top: 5px;
+  width: 100%;
+  height: 430px;
+}
+
+#third_section #thrid_section_right {
+  position: relative;
+  width: 600px;
+  height: 310px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;  
 }
 
 
@@ -107,3 +146,8 @@ $feed_start: $feed_start + 300px;
   color: #666666;
 }
 
+p.feed_title:hover {
+  padding-left: 5px;
+  font-size: x-large;
+  -webkit-transition: all 0.5s ease-in-out;
+}

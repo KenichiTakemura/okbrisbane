@@ -10,6 +10,10 @@ User.delete_all
 TopFeedList.delete_all
 Job.delete_all
 BuyAndSell.delete_all
+Estate.delete_all
+Business.delete_all
+MotorVehicle.delete_all
+Image.delete_all
 Page.delete_all
 Section.delete_all
 BusinessClient.delete_all
@@ -17,7 +21,7 @@ BusinessProfile.delete_all
 BusinessProfileImage.delete_all
 ClientImage.delete_all
 Banner.delete_all
-
+SystemSetting.delete_all
 
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123')
@@ -55,7 +59,7 @@ Style::PAGES.each do |key, value|
   Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:header]).id,
   :position_id => 2,
-  :width => 710, :height => 120, :style => 'position:relative;float: left;margin-top:10px;')
+  :width => 710, :height => 120, :style => 'position:relative;float:left;margin-top:10px;')
 end
 ## Background
 Style::PAGES.each do |key, value|
@@ -76,7 +80,7 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
 :position_id => 2,
-:width => 320, :height => 200, :style => 'position:absolute;float:right;top:0px;margin-top:0px;right:0px;')
+:width => 320, :height => 200, :style => 'position:relative;top:0px;margin-top:0px;right:0px;')
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
 :position_id => 3,
@@ -89,6 +93,22 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
 :position_id => 5,
 :width => 210, :height => 120, :style => 'position:relative;width:650px;height:130px;top:30px;left:0px;float:left;')
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
+:section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
+:position_id => 6,
+:width => 210, :height => 120, :style => 'position:relative;width:650px;height:130px;top:30px;left:0px;float:left;')
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
+:section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
+:position_id => 7,
+:width => 210, :height => 120, :style => 'position:relative;width:650px;height:130px;top:40px;left:0px;float:left;')
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
+:section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
+:position_id => 8,
+:width => 210, :height => 120, :style => 'position:relative;width:650px;height:130px;top:50px;left:0px;float:left;')
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
+:section_id => Section.find_by_name(Style::SECTIONS[:body]).id,
+:position_id => 9,
+:width => 210, :height => 120, :style => 'position:relative;width:650px;height:130px;top:60px;left:0px;float:left;')
 # Signin
 _page = :signin
 
@@ -97,26 +117,3 @@ _page = :signin
 ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
 ok.build_business_profile(:body => 'OKBRISBANE rocks!')
 ok.save
-##### SAMPLE
-
-
-# Sample Data
-# Not for Production
-2010.upto(2020) do |x|
-  job = Job.new(:category => Job::SEEK, :subject => "#{x}년 北김정은, 공항에 불쑥 나타나 女스튜어디스에 말 걸며");
-  job.valid_until = Time.now
-  job.save
-end
-3000.upto(3020) do |x|
-  bas = BuyAndSell.new(:category => BuyAndSell::BUY, :subject => "김연아, #{x}년 만에 '록산느의 탱고' 연기한다", :price => 3000.00);
-  bas.valid_until = Time.now
-  bas.save
-end
-
- 
-client = BusinessClient.create(:business_name => "AAA Company Pty Ltd.", :business_abn => "12 3456 7890", :business_address => 'Shop123 456 ABC Hills QLD 1234', :business_url => 'http://www.abc.com.au', :business_phone => '07-1234-5678', :business_fax => '07-1234-5678', :business_email => 'abc@abc.com.au', :contact_name => '쉬운일입니다')
-client.build_business_profile(:body => 'AAA rocks!')
-client.save
-client = BusinessClient.create(:business_name => "BBB Company Pty Ltd.", :business_abn => "12 3456 7890", :business_address => 'Shop123 456 ABC Hills QLD 1234', :business_url => 'http://www.abc.com.au', :business_phone => '07-1234-5678', :business_fax => '07-1234-5678', :business_email => 'abc@abc.com.au', :contact_name => '쉬운일입니다')
-client.build_business_profile(:body => 'BBB rocks!')
-client.save

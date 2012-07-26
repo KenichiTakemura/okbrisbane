@@ -1,15 +1,17 @@
 class TopFeedList < ActiveRecord::Base
 
   TOP_FEED_LIMIT = 10
-  TOP_FEED_SAVED_LIMIT = 30
+  TOP_FEED_SAVED_LIMIT = 50
 
   belongs_to :feeded_to, :polymorphic => true
+  
+  scope :feed_order,  order("created_at DESC")
 
-  scope :job_feed, where(:feeded_to_type => 'Job').limit(TOP_FEED_LIMIT)
-  scope :buy_and_sell_feed, where(:feeded_to_type => 'BuyAndSell').limit(TOP_FEED_LIMIT)
-  scope :estate_feed, where(:feeded_to_type => 'Estate').limit(TOP_FEED_LIMIT)
-  scope :business_feed, where(:feeded_to_type => 'Business').limit(TOP_FEED_LIMIT)
-  scope :motor_vehicle_feed, where(:feeded_to_type => 'MotorVehicle').limit(TOP_FEED_LIMIT)  
+  scope :job_feed, where(:feeded_to_type => 'Job').limit(TOP_FEED_LIMIT).feed_order
+  scope :buy_and_sell_feed, where(:feeded_to_type => 'BuyAndSell').limit(TOP_FEED_LIMIT).feed_order
+  scope :estate_feed, where(:feeded_to_type => 'Estate').limit(TOP_FEED_LIMIT).feed_order
+  scope :business_feed, where(:feeded_to_type => 'Business').limit(TOP_FEED_LIMIT).feed_order
+  scope :motor_vehicle_feed, where(:feeded_to_type => 'MotorVehicle').limit(TOP_FEED_LIMIT).feed_order
   scope :category_feed, lambda { |cate| where('feeded_to_type = ?', cate)}
   scope :find_a_feed, lambda { |cate,id| where('feeded_to_type = ? AND feeded_to_id = ?', cate, id)}
   scope :category_oldest_feed, lambda { |cate| where('feeded_to_type = ?', cate).order("id ASC")}
