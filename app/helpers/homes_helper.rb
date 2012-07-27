@@ -7,7 +7,7 @@ module HomesHelper
   end
   
   def generateTopFeed(category, lists, image_list, color)
-    html = %Q|<div class="shadow" id="top_feed_list_#{category}"><div id="feed_head" style="position:relative;width:300px;height:40px;background:#{color}"><div id="feed_head_left"><p class="feed_title" style="line-height: 40px;">#{t("#{category}")}</p></div>|
+    html = %Q|<div class="shadow" id="top_feed_list_#{category}"><div id="feed_head" style="position:relative;width:300px;height:40px;background:#{color}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{category}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p style="line-height: 30px;">#{t('more')} \| #{t('write_new')}</p></div></div>|
     html += %Q|<div id="feed_body"><table class=""><tr></tr>|
     if lists.nil? || lists.empty?

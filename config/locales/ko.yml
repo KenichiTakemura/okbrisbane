@@ -261,6 +261,8 @@ ko:
   Edit: '편집'
   List: '일람'
   Show: '표시'
+  New: '추가'
+  Delete: '삭제'
   more: '더보기'
   write_new: '글쓰기'
   change_size: '크기 편집'
@@ -294,19 +296,23 @@ ko:
   p_home: "메인"
   p_signin: "회원로그인"
   p_signup: "회원가입"
+
   p_job: "구인구직"
   p_buy_and_sell : "벼룩시장"
-  p_lifeinfo: '생활정보'
-  p_study: '유학/어학'
-  p_immig: '이민'
+  p_wellbeing: '생활정보'
+
   p_estate: '부동산매매'
-  p_living: '생활벌률'
-  p_law: '세무/회계'
-  p_yellowpage: '엘로우페이지'
   p_business: '비즈니스매매'
   p_motor_vehicle: "자동차매매"
-  p_sponsor: '고객'
   p_accommodation: '숙박정보'
+
+  p_law: '생활법률'
+  p_study: '유학/어학'
+  p_immig: '이민'
+  p_tax: '세무/회계'
+
+  p_yellowpage: '엘로우페이지'
+  p_sponsor: '고객'
   
   s_header: "헤드"
   s_background: "배경"
@@ -344,30 +350,27 @@ ko:
 
   member_list: '멤버 일람'
   
+  jobs: "구인구직"
+  buy_and_sells: "벼룩시장"
+  wellbeings: '생활정보'
+
+  title_estates: '부동산매매'
+  title_businesses: '비즈니스매매'
+  title_motor_vehicles: '자동차매매'
+  title_accommodations: '숙박정보'
+  title_legal_services: '생활법률'
+  title_studies: '유학/어학'
+  title_immigrations: '이민'
+  title_taxes: '세무/회계'
+
   estates: '부동산'
   businesses: '비즈니스'
   motor_vehicles: '자동차'
-  accommodations: '숙박'
+  accommodations: '숙박정보'
+  legal_services: '생활법률'
+  studies: '유학/어학'
   immigrations: '이민'
-
-
-  listing_estates: '부동산매매 정보일람'
-  listing_businesses: '비즈니스매매 정보일람'
-  listing_motor_vehicles: '자동차매매 정보일람'
-  listing_accommodations: '숙박정보 일람'
-  listing_immigrations: '이민정보 일람'
-
-  new_estates: '부동산매매 추가'
-  new_businesses: '비즈니스매매 추가'
-  new_motor_vehicles: '자동차매매 추가'
-  new_accommodations: '숙박정보 추가'
-  new_immigrations: '이민정보 추가'
-
-  delete_estates: '부동산 삭제'
-  delete_businesses: '비즈니스 삭제'
-  delete_motor_vehicles: '자동차 삭제'
-  delete_accommodations: '숙박정보 삭제'
-  delete_immigrations: '이민정보 삭제'
+  taxes: '세무/회계'
   
   for_rent: 'Rent'
   for_sale: 'Sale'
@@ -392,6 +395,13 @@ ko:
   room_1bed: "room_1bed"
   room_2bed: "room_2bed"
   room_3plusbed: "room_3plusbed"
+
+  # Law type
+  for_criminal_action: '형사소송'
+  for_conveyancing: '상가임대'
+  for_business_buysing_and_selling: '비지니스 매매'
+  for_traffic_accident: '교통사고'
+  for_accident: '인신상해'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'

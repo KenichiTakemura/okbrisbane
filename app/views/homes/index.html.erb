@@ -34,10 +34,12 @@
 	</div>
 	<div id="third_section">
 		<div id="third_section_bar"></div>
-		<div id="thrid_section_left"><%= generateTopFeed("p_accommodation", @estate_lists, @estate_image_lists, "#642c78") %></div>
+		<div id="thrid_section_left">
+			<%= generateTopFeed("p_accommodation", @accommodation_lists, @accommodation_image_lists, "#642c78") %>
+			<%= generateTopFeed("p_law", @legal_service_lists, nil, "#642c78") %>
+			</div>
 		<div id="thrid_section_right"><%= multi_banner(:home, :body, 6, 650, 130) %><%= multi_banner(:home, :body, 7, 650, 130) %><%= multi_banner(:home, :body, 8, 650, 130) %><%= multi_banner(:home, :body, 9, 650, 130) %></div>
 	</div>
-	
 </div>
 <br />
 

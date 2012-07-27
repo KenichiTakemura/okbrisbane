@@ -7,8 +7,6 @@ Okbrisbane::Application.routes.draw do
 
   resources :mypages
 
-  resources :top_feed_lists
-
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
   match 'member_managements/sign_up', :via => :get
   match 'member_managements/term', :via=>:get, :as => :termsofservice
@@ -19,8 +17,6 @@ Okbrisbane::Application.routes.draw do
 
   resources :homes, :only => ["index"]
   
-
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

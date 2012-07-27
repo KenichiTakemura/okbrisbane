@@ -65,6 +65,14 @@ class TopFeedListTest < ActiveSupport::TestCase
     assert_equal(TopFeedList.job_feed.size, TopFeedList::TOP_FEED_LIMIT)
     assert_equal(TopFeedList.category_feed("Job").size,TopFeedList::TOP_FEED_SAVED_LIMIT)
   end
+  
+  test "pull feed by size" do
+    (TopFeedList::TOP_FEED_SAVED_LIMIT+1).times {
+      add_a_post
+    }
+    assert_equal(TopFeedList.job_feed.size, TopFeedList::TOP_FEED_LIMIT)
+    assert_equal(TopFeedList.job_feed_with_limit(5).size, 5)
+  end
 
   # BuyAndSell
   test "feed_a_buy_post" do
@@ -86,33 +94,55 @@ class TopFeedListTest < ActiveSupport::TestCase
     assert post.save, "Not saved"
     post.build_content(:body => body)
     assert post.save, "Not updated"
-    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+    assert_equal(TopFeedList.estate_feed.size, 1)
   end
 
   test "update_post" do
     post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
     assert post.save, "Not saved"
-    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+    assert_equal(TopFeedList.estate_feed.size, 1)
     assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, post.id)
     another_post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
     assert another_post.save, "Not saved"
     assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, post.id)
-    assert_equal(TopFeedList.category_feed("Estate").size, 2)
+    assert_equal(TopFeedList.estate_feed.size, 2)
     post.build_content(:body => body)
     assert post.save, "Not updated"
-    assert_equal(TopFeedList.category_feed("Estate").size, 2)
+    assert_equal(TopFeedList.estate_feed.size, 2)
     assert_equal(TopFeedList.category_oldest_feed("Estate").first.feeded_to.id, another_post.id)
   end
   
   test "hide_a_post" do
     post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Time.now, :price => 99.99)
     assert post.save, "Not saved"
-    assert_equal(TopFeedList.category_feed("Estate").size, 1)
+    assert_equal(TopFeedList.estate_feed.size, 1)
     post.is_deleted = true
     assert post.save, 'Noy updated'
-    assert_equal(TopFeedList.category_feed("Estate").size, 0)
+    assert_equal(TopFeedList.estate_feed.size, 0)
     post.is_deleted = false
     assert post.save, 'Noy updated'
-    assert_equal(TopFeedList.category_feed("Estate").size, 1)    
+    assert_equal(TopFeedList.estate_feed.size, 1)    
+  end
+  
+  # Accommodation feed
+  test "accommodation_feed" do
+    post = Accommodation.new(:category => Accommodation::HOTEL, :room_type => Accommodation::ROOM_HOTEL, :subject => 'new', :valid_until => Time.now, :price => 99.99)
+    post.build_content(:body => body)
+    assert post.save, "Not saved"
+    assert_equal(TopFeedList.accommodation_feed.size, 1)
+    assert_equal(TopFeedList.accommodation_feed_with_limit(5).size, 1)
+  end
+  
+  # Legal Service
+  test "legal_service_feed" do
+    1.upto(7) do |x|
+      post = Law.new(:category => Law::FOR_ACCIDENT, :subject => subject)
+      post.build_content
+      post.content(:body => body)
+      post.valid_until = Time.utc(2012,7,"#{x}")
+      assert post.save, "Not saved"
+    end
+    assert_equal(TopFeedList.legal_service_feed.size, 7)
+    assert_equal(TopFeedList.legal_service_feed_with_limit(5).size, 5)
   end
 end
