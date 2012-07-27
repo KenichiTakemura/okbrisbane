@@ -405,7 +405,6 @@ ko:
   linked_from_banner: '광고 링크'
   not_listed: '일람안에 없습니다'
   acceptable_extention: 'acceptable_extention'
-  if_checked_not_displayed: 'if_checked_not_displayed'
   
   # Validation
   must_be_numbers: '수로 입력하십시오'
