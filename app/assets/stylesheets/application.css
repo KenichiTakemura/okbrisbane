@@ -11,31 +11,6 @@
  *= require_self
  *= require_tree .
  */
-/*
- html, body {
- height: 100%;
- margin: 0;
- padding: 0;
- }
-
- html {
- overflow: hidden;
- height: 100%;
- background: #ffffff;
- }
- body {
- overflow: auto;
- height: 100%;
- width: 1000px;
- margin: 0 auto;
- padding: 0 20px;
- border: 0px solid black;
- border-width: 0 1px;
- background: #eee;
- font-size: 12px;
- font-family: '굴림';
- }
- */
 @font-face {
   font-family: "gulim";
   src: url("fonts/gulim.ttf");
@@ -254,11 +229,6 @@ a {text-decoration: none}
 /* 
  * CSS3
  */
-div.shadow:hover {
-	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
-	box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
 
 ul.slide li {
 	padding-left: 0;

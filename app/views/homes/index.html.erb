@@ -2,9 +2,9 @@
 	<div id="first_section">
 		<div id="first_section_left">
 			<%= single_banner(:home, :body, 1) %>
-			<%= multi_banner(:home, :body, 3, 650, 130) %>
-			<%= multi_banner(:home, :body, 4, 650, 130) %>
-			<%= multi_banner(:home, :body, 5, 650, 130) %>	
+			<%= multi_banner(:home, :body, 3) %>
+			<%= multi_banner(:home, :body, 4) %>
+			<%= multi_banner(:home, :body, 5) %>	
 		</div>
 <!-- 			<div class='description'>
 				<p class='description_content'>
@@ -37,19 +37,8 @@
 		<div id="thrid_section_left">
 			<%= generateTopFeed("p_accommodation", @accommodation_lists, @accommodation_image_lists, "#642c78") %>
 			<%= generateTopFeed("p_law", @legal_service_lists, nil, "#642c78") %>
+			<%= generateTopFeed("p_study", @study_lists, nil, "#642c78") %>
 			</div>
-		<div id="thrid_section_right"><%= multi_banner(:home, :body, 6, 650, 130) %><%= multi_banner(:home, :body, 7, 650, 130) %><%= multi_banner(:home, :body, 8, 650, 130) %><%= multi_banner(:home, :body, 9, 650, 130) %></div>
+		<div id="thrid_section_right"><%= multi_banner(:home, :body, 6) %><%= multi_banner(:home, :body, 7) %><%= multi_banner(:home, :body, 8) %><%= multi_banner(:home, :body, 9) %></div>
 	</div>
 </div>
-<br />
-
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#home-top-banners').cycle({
-			fx : 'fade',
-			speed : 1000,
-			timeout : 3000
-		});
-	}); 
-
-</script>

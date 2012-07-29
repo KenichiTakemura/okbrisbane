@@ -4,7 +4,7 @@
 
 #home {
   position: relative;
-  height: 1750px; 
+  height: 2100px; 
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
@@ -13,38 +13,18 @@
 #first_section {
   position: relative;
   width: 100%;
-  height: 800px; 
+  float:left;
 }
 
 #first_section #first_section_left {
   position: relative;
   width: 650px;
-  height: 500px;
   float: left;
 }
 
 #first_section #first_section_right {
   position: relative;
-  height: 500px;
   float: right;
-}
-
-#top_feed_list_p_job {
-  position: relative;
-  top: 10px;
-  width:100%;
-  height: 260px;
-  margin-left: auto;
-  margin-right: 0;
-}
-
-#top_feed_list_p_buy_and_sell {
-  position: relative;
-  width:100%;
-  top: 20px;
-  height: 260px;
-  margin-left: auto;
-  margin-right: 0;
 }
 
 #second_section {
@@ -52,7 +32,6 @@
   float:left;
   left: 0px;
   width: 100%;
-  //height: 460px;
   top: 10px;
   margin-top: 40px;
 }
@@ -60,14 +39,13 @@
 #second_section #section_left, #section_center, #section_right {
   position: relative;
   width: 300px;
-  //height: 310px;
   float: left;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 #second_section_bar {
-  position:relative;background:#41A317;width:100%;height:5px;
+  position:relative;background:#41A317;width:100%;height:4px;
 }
 
 //#second_section #top_feed_list_p_estate, #top_feed_list_p_business, #top_feed_list_p_motor_vehicle {
@@ -86,37 +64,25 @@
 }
 
 #third_section_bar {
-  position:relative;background:#642c78;width:100%;height:5px;
+  position:relative;background:#642c78;width:100%;height:4px;
 }
 
 #third_section #thrid_section_left {
   position: relative;
   width: 300px;
-  height: 310px;
   float: left;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#third_section #top_feed_list_p_estate {
-    position: relative;
-  top: 5px;
-  width: 100%;
-  height: 430px;
-}
-
 #third_section #thrid_section_right {
   position: relative;
-  width: 600px;
-  height: 310px;
+  width: 650px;
   float: left;
-  margin-left: 10px;
-  margin-right: 10px;  
+
 }
 
-
 // Styles for feed box
-
 #feed_body {
   position: relative;
   width: 300px;
@@ -151,3 +117,21 @@ p.feed_title:hover {
   font-size: x-large;
   -webkit-transition: all 0.5s ease-in-out;
 }
+
+p.price_tag {
+    font-size: 12px;
+    font-family: arial;
+    color: rgb(51, 102, 204);
+    font-weight: bold;
+}
+
+p.price_tag:hover {
+  padding-left: 5px;
+}
+
+div.shadow:hover {
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+

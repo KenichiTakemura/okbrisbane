@@ -2,22 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-div.banner_description {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background-color: black;
-  opacity: 0.6; // transparency
-  filter: alpha(opacity=60); //
-}
 
-div.banner_description p.description_content {
-  padding: 10px;
-  margin: 0px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-}
+
 
 
 #home-top-banner .abutton {

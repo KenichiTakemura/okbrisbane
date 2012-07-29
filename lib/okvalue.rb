@@ -15,7 +15,6 @@ module Okvalue
   
   JOB = "jobs"
   BUY_AND_SELL = "buy_and_sells"
-  WELLBEING = "wellbeings"
   
   # Sales Management
   ESTATE = "estates"

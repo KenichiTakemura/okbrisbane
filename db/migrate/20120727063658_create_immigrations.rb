@@ -1,8 +1,5 @@
-class CreateImmigrations < ActiveRecord::Migration
+class CreateImmigrations < CreatePosts
   def change
-    create_table :immigrations do |t|
-
-      t.timestamps
-    end
+    create_base_table(:immigrations)
   end
 end

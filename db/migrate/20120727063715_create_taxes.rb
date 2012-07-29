@@ -1,8 +1,5 @@
-class CreateTaxes < ActiveRecord::Migration
+class CreateTaxes < CreatePosts
   def change
-    create_table :taxes do |t|
-
-      t.timestamps
-    end
+   create_base_table(:taxes)
   end
 end

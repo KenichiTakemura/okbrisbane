@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727033432) do
+ActiveRecord::Schema.define(:version => 20120727063715) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                            :null => false
@@ -73,9 +73,13 @@ ActiveRecord::Schema.define(:version => 20120727033432) do
     t.integer  "section_id"
     t.integer  "position_id"
     t.string   "display_name"
-    t.integer  "width"
-    t.integer  "height"
+    t.integer  "div_width"
+    t.integer  "div_height"
+    t.integer  "img_width"
+    t.integer  "img_height"
     t.string   "style"
+    t.string   "effect"
+    t.integer  "effect_speed"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -269,6 +273,24 @@ ActiveRecord::Schema.define(:version => 20120727033432) do
     t.integer  "zindex"
   end
 
+  create_table "immigrations", :force => true do |t|
+    t.string   "locale",                            :null => false
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.string   "category",                          :null => false
+    t.string   "subject",                           :null => false
+    t.integer  "valid_days",     :default => 0
+    t.datetime "valid_until",                       :null => false
+    t.integer  "views",          :default => 0
+    t.integer  "likes",          :default => 0
+    t.integer  "dislikes",       :default => 0
+    t.integer  "rank",           :default => 0
+    t.boolean  "abuse",          :default => false
+    t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
   create_table "jobs", :force => true do |t|
     t.string   "locale",                            :null => false
     t.integer  "posted_by_id"
@@ -355,6 +377,24 @@ ActiveRecord::Schema.define(:version => 20120727033432) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "studies", :force => true do |t|
+    t.string   "locale",                            :null => false
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.string   "category",                          :null => false
+    t.string   "subject",                           :null => false
+    t.integer  "valid_days",     :default => 0
+    t.datetime "valid_until",                       :null => false
+    t.integer  "views",          :default => 0
+    t.integer  "likes",          :default => 0
+    t.integer  "dislikes",       :default => 0
+    t.integer  "rank",           :default => 0
+    t.boolean  "abuse",          :default => false
+    t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
   create_table "system_settings", :force => true do |t|
     t.string   "image_thumbnail_size"
     t.string   "image_max_size_in_kb"
@@ -363,6 +403,24 @@ ActiveRecord::Schema.define(:version => 20120727033432) do
     t.string   "business_profile_picture_size"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "taxes", :force => true do |t|
+    t.string   "locale",                            :null => false
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.string   "category",                          :null => false
+    t.string   "subject",                           :null => false
+    t.integer  "valid_days",     :default => 0
+    t.datetime "valid_until",                       :null => false
+    t.integer  "views",          :default => 0
+    t.integer  "likes",          :default => 0
+    t.integer  "dislikes",       :default => 0
+    t.integer  "rank",           :default => 0
+    t.boolean  "abuse",          :default => false
+    t.boolean  "is_deleted",     :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "top_feed_lists", :force => true do |t|

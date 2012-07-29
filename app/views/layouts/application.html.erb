@@ -8,8 +8,11 @@
 		<%= csrf_meta_tag %>
 		<%= javascript_include_tag 'application' %>
 		<%= javascript_include_tag 'jquery.cycle.all.js' %>
+		<%= javascript_include_tag 'slides.min.jquery.js' %>
 	</head>
 	<body>
+		<%= single_banner(:home, :background, 1) %>
+		<%= single_banner(:home, :background, 2) %>
 		<div id="header">
 			<div id="header-left">
 				<%= t("welcome_message", :default => 'Welcome! ')%>

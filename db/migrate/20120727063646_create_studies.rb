@@ -1,8 +1,5 @@
-class CreateStudies < ActiveRecord::Migration
+class CreateStudies < CreatePosts
   def change
-    create_table :studies do |t|
-
-      t.timestamps
-    end
+    create_base_table(:studies)
   end
 end

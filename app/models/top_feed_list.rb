@@ -1,11 +1,11 @@
 class TopFeedList < ActiveRecord::Base
 
   TOP_FEED_LIMIT = 10
+  IMAGE_FEED_LIMIT = 2
   TOP_FEED_SAVED_LIMIT = 50
 
   belongs_to :feeded_to, :polymorphic => true
   
-
   # public scope
   scope :find_a_feed, lambda { |cate,id| where('feeded_to_type = ? AND feeded_to_id = ?', cate, id)}
 
@@ -18,6 +18,7 @@ class TopFeedList < ActiveRecord::Base
   scope :motor_vehicle_feed_with_limit, lambda { |limit| category_feed('MotorVehicle').feed_order.limit(limit) }
   scope :accommodation_feed_with_limit, lambda { |limit| category_feed('Accommodation').feed_order.limit(limit) }
   scope :legal_service_feed_with_limit, lambda { |limit| category_feed('Law').feed_order.limit(limit) }
+  scope :study_feed_with_limit, lambda { |limit| category_feed('Study').feed_order.limit(limit) }
   
   scope :job_feed, job_feed_with_limit(TOP_FEED_LIMIT)
   scope :buy_and_sell_feed, buy_and_sell_feed_with_limit(TOP_FEED_LIMIT)
@@ -26,6 +27,7 @@ class TopFeedList < ActiveRecord::Base
   scope :motor_vehicle_feed, motor_vehicle_feed_with_limit(TOP_FEED_LIMIT)
   scope :accommodation_feed, accommodation_feed_with_limit(TOP_FEED_LIMIT)
   scope :legal_service_feed, legal_service_feed_with_limit(TOP_FEED_LIMIT)
+  scope :study_feed, study_feed_with_limit(TOP_FEED_LIMIT)
 
   after_save :clean_oldest_feed
   

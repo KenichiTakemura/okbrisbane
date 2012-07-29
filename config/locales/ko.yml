@@ -252,8 +252,9 @@ ko:
   delete: '삭제'
   add: '추가'
   pages: '페이지'
+  page: :pages
   post: '투고'
-  size: '크기'
+  size: '사이즈'
   item: '항목'
   content: '내용'
   content_body: '긴 설명글'
@@ -265,7 +266,7 @@ ko:
   Delete: '삭제'
   more: '더보기'
   write_new: '글쓰기'
-  change_size: '크기 편집'
+  change_size: '사이즈 편집'
   subject: '제목'
   image: '이미지'
   attachment: '첨부자료'
@@ -286,11 +287,8 @@ ko:
   "true": '예'
   "false": '아니오'
   hide: '비표시'
-  image_size: '이미지 크기'
   style: '스타일'
   display_name: '페이지 이름'
-  width: '폭'
-  height: '높이'
   banner: '광고란'
 
   p_home: "메인"
@@ -316,30 +314,31 @@ ko:
   
   s_header: "헤드"
   s_background: "배경"
-  s_main_content: "main_content"
-  s_secondary_content: "secondary_content"
-  s_third_content: "third_content"
-  s_fourth_content: "fourth_content"
-  s_fifth_content: "fifth_content"
-  s_side_bar: "side_bar"
   s_body: '보디'
-  
-  a_north: '북'
-  a_north_west: '북서'
-  a_north_east: '북동'
-  a_west: '서'
-  a_center: '중심'
-  a_east: '동'
-  a_south_west: '남서'
-  a_south: '남'
-  a_south_east: '남동'
+ 
+  width: '폭'
+  height: '높이'
+  div_width: 'div 사이즈(폭)'
+  div_height: 'div 사이즈(높이)'
+  img_width: '이미지 사이즈(폭)'
+  img_height: '이미지 사이즈(높이)'
+  image_size: '이미지 사이즈'
+  div_size: 'div 사이즈'
+  effect: 'Effect'
+  effect_speed: 'Effect_Speed'
+  slide_auto: 'slide_auto'
+  slide_w_caption: 'slide_w_caption'
+  no_slide: ' no_slide'
+  unit_second: 'unit_second'
+  more_than_1: 'more_than_1'
 
   client_management: '고객 관리'
   banner_management: '광고란 관리'
   member_management: '멤버 관리'
   sales_management: '매매 관리'
   sales_management_title: '매매 관리'
-  sales_management_description: 'Please select menu from above'
+  sales_management_description: '메뉴를  선택하십시오'
+  banner_management_description: '페이지를  선택하십시오'
   post_management: '투고 관리'
   site_statistics: '사이트 통계'
   issue_management: '문제 관리'
@@ -375,6 +374,17 @@ ko:
   for_rent: 'Rent'
   for_sale: 'Sale'
   for_auction: 'Autction'
+  
+  # Tax Category
+  for_business: '비즈니스 세무'
+  for_tax_return: 'Tax Return'
+
+  # Study Category
+  for_study_overseas: '유학'
+  for_language: '어학'
+
+  # Immigration Category
+  for_immigration: '이민'
 
   # Accommodation Category
   Hotel: '호텔'
@@ -402,6 +412,8 @@ ko:
   for_business_buysing_and_selling: '비지니스 매매'
   for_traffic_accident: '교통사고'
   for_accident: '인신상해'
+
+  select_image: '이미지를 선택'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'

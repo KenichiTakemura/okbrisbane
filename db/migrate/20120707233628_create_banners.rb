@@ -5,9 +5,13 @@ class CreateBanners < ActiveRecord::Migration
       t.references :section
       t.integer :position_id
       t.string :display_name
-      t.integer :width
-      t.integer :height
+      t.integer :div_width
+      t.integer :div_height
+      t.integer :img_width
+      t.integer :img_height
       t.string :style
+      t.string :effect
+      t.integer :effect_speed
       t.timestamps
     end
   end
