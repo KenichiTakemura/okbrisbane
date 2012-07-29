@@ -290,6 +290,7 @@ ko:
   style: '스타일'
   display_name: '페이지 이름'
   banner: '광고란'
+  select: '선택'
 
   p_home: "메인"
   p_signin: "회원로그인"

@@ -77,8 +77,8 @@ module ApplicationHelper
     html.html_safe
   end
   
-  def _script
-    %Q|<script type="text/javascript" charset="utf-8">|.html_safe
+  def _script(script)
+    %Q|<script type="text/javascript" charset="utf-8">#{script}</script>|.html_safe
   end
   
   def multi_banner(p, s, a)
@@ -115,10 +115,17 @@ module ApplicationHelper
   end
   
   def noimage?(item)
-    if item.image.nil? || item.image.empty?
-      noimage
-    end
-  end
+    logger.debug("noimage? item: #{item}")
+    if item.respond_to? :client_image
+      if item.client_image.nil? || item.client_image.empty?
+      return noimage
+      end
+   elsif item.respond_to? :image
+      if item.image.nil? || item.image.empty?
+       return noimage
+      end
+   end
+ end
   
   # Used to show no image
   def noimage

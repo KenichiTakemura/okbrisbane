@@ -30,7 +30,7 @@ class BusinessClient < ActiveRecord::Base
   scope :okbrisbane, where(:business_name => 'OKBRISBANE')
   
   def to_s
-    "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} image: #{business_profile_image}"
+    "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} client_image: #{client_image} profile_image: #{business_profile_image}"
   end
 
   def set_profile(body)
