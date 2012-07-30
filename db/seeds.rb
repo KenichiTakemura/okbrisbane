@@ -7,19 +7,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.delete_all
-TopFeedList.delete_all
-Job.delete_all
-BuyAndSell.delete_all
-Estate.delete_all
-Business.delete_all
-MotorVehicle.delete_all
-Image.delete_all
 Page.delete_all
 Section.delete_all
-BusinessClient.delete_all
-BusinessProfile.delete_all
-BusinessProfileImage.delete_all
-ClientImage.delete_all
 Banner.delete_all
 SystemSetting.delete_all
 
@@ -135,9 +124,3 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 # Signin
 _page = :signin
-
-
-# OKBRISBANE 
-ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
-ok.build_business_profile(:body => 'OKBRISBANE rocks!')
-ok.save

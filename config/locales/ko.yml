@@ -415,6 +415,8 @@ ko:
   for_accident: '인신상해'
 
   select_image: '이미지를 선택'
+  select_all_size: '전사이즈'
+  select_specific_size: '사이즈를 선택'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'
@@ -437,7 +439,9 @@ ko:
   
   # Upload
   please_drag_n_drop: "이미지를 Drag'n'Drop 하십시오"
-  max_size: 'max size'
+  max_size: 'max 사이즈'
+  
+  please_select: '선택하십시오 '
   
   business_client: '고객'
   new_business_client: '고객 추가하기'

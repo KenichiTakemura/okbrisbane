@@ -43,9 +43,9 @@ module ApplicationHelper
     if images.size >= 2
       #script += %Q|$('\##{div_id}').cycle({fx: 'scrollRight',random: 1});|
       case b.effect
-      when Banner.E_SLIDE
-      when Banner.E_SLIDE_W_CAPTION
-      when Banner.NO_SLIDE
+      when Banner::E_SLIDE
+      when Banner::E_SLIDE_W_CAPTION
+      when Banner::E_NO_SLIDE
       end
       script += %Q|$('\##{div_id}').cycle({fx: 'fade',random: 1,timeout: 100});|
       html += _script_document_ready(script)

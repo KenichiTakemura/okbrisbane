@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(:version => 20120727063715) do
     t.datetime "updated_at",                             :null => false
     t.integer  "clicked",             :default => 0
     t.datetime "last_clicked"
+    t.string   "original_size"
     t.string   "link_to_url"
     t.integer  "business_client_id"
   end

@@ -1,6 +1,6 @@
 # This class represents banner images for a business client and/or a banner space
 class ClientImage < Attachable
-  attr_accessible :zindex, :business_client_id, :link_to_url
+  attr_accessible :zindex, :business_client_id, :link_to_url, :original_size
 
   belongs_to :business_client
 
@@ -11,11 +11,12 @@ class ClientImage < Attachable
   after_initialize :set_default
     
   def set_default
-    self.thumb_size ||= "120x120>"
-    self.medium_size ||= "300x300>"
+    self.thumb_size ||= "120x120"
+    self.medium_size ||= "300x300"
   end
 
-
+  validates_presence_of :original_size
+  
   #before_validation :set_size
   
   # This does not work
@@ -29,7 +30,7 @@ class ClientImage < Attachable
 
 
   def to_s
-    super.to_s + " business_client_id: #{business_client_id} link_to_url: #{link_to_url}"
+    super.to_s + " business_client_id: #{business_client_id} link_to_url: #{link_to_url} original_size: #{original_size}"
   end
   
 end
