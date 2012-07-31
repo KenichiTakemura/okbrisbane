@@ -6,12 +6,12 @@ module Style
   
   # div id rule is banner_#{page}_#{section}_#{position}
   
-  PAGES[:home] = "p_home"
-  PAGES[:signin] = "p_signin"
-  PAGES[:signup] = "p_signup"
-  PAGES[:job] = "p_job"
-  PAGES[:buy_and_sell] = "p_buy_and_sell"
-  PAGES[:wellbeing] = "p_wellbeing"
+  PAGES[:p_home] = "p_home"
+  PAGES[:p_signin] = "p_signin"
+  PAGES[:p_signup] = "p_signup"
+  PAGES[:p_job] = "p_job"
+  PAGES[:p_buy_and_sell] = "p_buy_and_sell"
+  PAGES[:p_wellbeing] = "p_wellbeing"
   PAGES[:p_study] = 'p_study'
   PAGES[:p_immig] = 'p_immig'
   PAGES[:p_estate] = 'p_estate'
@@ -23,9 +23,9 @@ module Style
   PAGES[:p_study] = 'p_study'
   PAGES[:p_immig] = 'p_immig'
   PAGES[:p_yellowpage] = 'p_yellowpage'
-  PAGES[:sponsor] = "p_sponsor"
+  PAGES[:p_sponsor] = "p_sponsor"
   
-  NAVI[:job] = "p_job"
+  NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
   NAVI[:p_wellbeing] = "p_wellbeing"
   NAVI[:p_study] = "p_study"
@@ -35,9 +35,9 @@ module Style
   NAVI[:p_tax] = "p_tax"
   NAVI[:p_yellowpage] = "p_yellowpage"
   
-  SECTIONS[:header] = "s_header"
-  SECTIONS[:background] = "s_background"
-  SECTIONS[:body] = "s_body"
+  SECTIONS[:s_header] = "s_header"
+  SECTIONS[:s_background] = "s_background"
+  SECTIONS[:s_body] = "s_body"
 
 
   def Style.create_banner_div(page, section, position)

@@ -1,4 +1,4 @@
-class HomesController < ApplicationController
+class HomesController < OkController
   def collectFeed(category)
     case category
     when Okvalue::JOB
@@ -34,8 +34,6 @@ class HomesController < ApplicationController
     return feed_list, image_list
   end
 
-  # GET /homes
-  # GET /homes.json
   def index
     @job_feed_lists = collectFeed(Okvalue::JOB)
     @buy_and_sell_feed_lists = collectFeed(Okvalue::BUY_AND_SELL)
@@ -45,81 +43,12 @@ class HomesController < ApplicationController
     @accommodation_lists,@accommodation_image_lists = collectFeed(Okvalue::ACCOMMODATION)
     @legal_service_lists = collectFeed(Okvalue::LAW)
     @study_lists = collectFeed(Okvalue::STUDY)
+    @okpage = Style::PAGES[:p_home]
     respond_to do |format|
       format.html # index.html.erb
     end
   end
 
-  # GET /homes/1
-  # GET /homes/1.json
-  def show
-    @home = Home.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @home }
-    end
-  end
-
-  # GET /homes/new
-  # GET /homes/new.json
-  def new
-    @home = Home.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @home }
-    end
-  end
-
-  # GET /homes/1/edit
-  def edit
-    @home = Home.find(params[:id])
-  end
-
-  # POST /homes
-  # POST /homes.json
-  def create
-    @home = Home.new(params[:home])
-
-    respond_to do |format|
-      if @home.save
-        format.html { redirect_to @home, notice: 'Home was successfully created.' }
-        format.json { render json: @home, status: :created, location: @home }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /homes/1
-  # PUT /homes/1.json
-  def update
-    @home = Home.find(params[:id])
-
-    respond_to do |format|
-      if @home.update_attributes(params[:home])
-        format.html { redirect_to @home, notice: 'Home was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /homes/1
-  # DELETE /homes/1.json
-  def destroy
-    @home = Home.find(params[:id])
-    @home.destroy
-
-    respond_to do |format|
-      format.html { redirect_to homes_url }
-      format.json { head :no_content }
-    end
-  end
 
   private
 

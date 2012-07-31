@@ -1,0 +1,2 @@
+class OkController < ApplicationController
+end

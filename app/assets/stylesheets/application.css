@@ -224,12 +224,15 @@ textarea {
 	padding: 3px;
 }
 
-a {text-decoration: none}
+a {
+	text-decoration: none
+	color: #ffffff;
+}
 
 /* 
  * CSS3
  */
-
+/*
 ul.slide li {
 	padding-left: 0;
 	-webkit-transition: all 0.5s ease-in-out;
@@ -241,3 +244,4 @@ ul.slide li:hover {
 	text-align: left;
 	-webkit-transition: all 0.5s ease-in-out;
 }
+*.

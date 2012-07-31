@@ -11,8 +11,8 @@
 		<%= javascript_include_tag 'slides.min.jquery.js' %>
 	</head>
 	<body>
-		<%= single_banner(:home, :background, 1) %>
-		<%= single_banner(:home, :background, 2) %>
+		<%= single_background_banner(1) %>
+		<%= single_background_banner(2) %>
 		<div id="header">
 			<div id="header-left">
 				<%= t("welcome_message", :default => 'Welcome! ')%>
@@ -45,8 +45,8 @@
 				</div>
 			</div>
 			<div id="header-right">
-				<%= single_banner(:home, :header, 1) %>
-				<%= single_banner(:home, :header, 2) %>
+				<%= single_header_banner(1) %>
+				<%= single_header_banner(2) %>
 			</div>
 			<div id="header-bottom">
 				<div id="follows">

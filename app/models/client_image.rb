@@ -1,6 +1,6 @@
 # This class represents banner images for a business client and/or a banner space
 class ClientImage < Attachable
-  attr_accessible :zindex, :business_client_id, :link_to_url, :original_size
+  attr_accessible :zindex, :business_client_id, :link_to_url, :original_size, :caption, :source_url
 
   belongs_to :business_client
 

@@ -9,6 +9,7 @@ class Banner < ActiveRecord::Base
   attr_accessible :style
   attr_accessible :effect
   attr_accessible :effect_speed
+  attr_accessible :enabled
   
   attr_accessible :attached
   attr_accessible :display_name

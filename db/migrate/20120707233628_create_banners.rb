@@ -12,6 +12,7 @@ class CreateBanners < ActiveRecord::Migration
       t.string :style
       t.string :effect
       t.integer :effect_speed
+      t.boolean :enabled, :default => true
       t.timestamps
     end
   end

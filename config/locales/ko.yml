@@ -417,6 +417,7 @@ ko:
   select_image: '이미지를 선택'
   select_all_size: '전사이즈'
   select_specific_size: '사이즈를 선택'
+  selected: '선택 됨'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'

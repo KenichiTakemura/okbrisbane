@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727063715) do
+ActiveRecord::Schema.define(:version => 20120731102559) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                            :null => false
@@ -80,8 +80,9 @@ ActiveRecord::Schema.define(:version => 20120727063715) do
     t.string   "style"
     t.string   "effect"
     t.integer  "effect_speed"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.boolean  "enabled",      :default => true
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "business_categories", :force => true do |t|
@@ -206,6 +207,8 @@ ActiveRecord::Schema.define(:version => 20120727063715) do
     t.integer  "clicked",             :default => 0
     t.datetime "last_clicked"
     t.string   "original_size"
+    t.string   "caption"
+    t.string   "source_url"
     t.string   "link_to_url"
     t.integer  "business_client_id"
   end

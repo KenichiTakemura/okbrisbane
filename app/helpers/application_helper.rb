@@ -20,9 +20,14 @@ module ApplicationHelper
       html += %Q|<style>div.banner_description {position:absolute;top:0px;left:0px;background-color:black;opacity: 0.6;filter: alpha(opacity=60);}|
       html += %Q| div.banner_description p.description_content {padding:10px;margin:0px;font-size:12px;font-weight:bold;color:white;}</style>|
       okbrisbane = BusinessClient.okbrisbane.first
-      html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{t('banner_contact')} #{okbrisbane.business_phone} #{okbrisbane.business_email}</p></div>|
-      script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
-      html += _script_document_ready(script)
+      if !okbrisbane.nil?
+        contact = "#{t('banner_contact')} #{okbrisbane.business_phone} #{okbrisbane.business_email}"
+      else
+        contact = "#{t('banner_contact')}"
+      end
+        html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
+        script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
+        html += _script_document_ready(script)
     elsif
       html += %Q|<div id="effect_#{div_id}"><div class="effect_container_#{div_id}">|
       images.each do |image|
@@ -34,11 +39,36 @@ module ApplicationHelper
     return html.html_safe
   end
   
+  def single_header_banner(a)
+    logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
+    raise "No Page found(single_header_banner a=#{a})" if !@okpage
+    single_banner(@okpage.to_sym, :s_header, a)
+  end
+  
+  def single_body_banner(a)
+    logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
+    raise "No Page found(single_body_banner a=#{a})" if !@okpage
+    single_banner(@okpage.to_sym, :s_body, a)
+  end
+  
+  def single_background_banner(a)
+    logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
+    raise "No Page found(single_background_banner a=#{a})" if !@okpage
+    single_banner(@okpage.to_sym, :s_background, a)
+  end
+  
+  def multi_body_banner(a)
+    logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
+    raise "No Page found(multi_body_banner a=#{a})" if !@okpage
+    multi_banner(@okpage.to_sym, :s_body, a)
+  end
+  
   def single_banner(p, s, a)
     logger.debug("requested single_banner #{p}, #{s}, #{a}")
     div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
-    html = _banner(p,s, a, div_id)
+    return "" if !b.enabled
+    html = _banner(p, s, a, div_id)
     script = ""
     if images.size >= 2
       #script += %Q|$('\##{div_id}').cycle({fx: 'scrollRight',random: 1});|
@@ -59,13 +89,13 @@ module ApplicationHelper
 
   def navigation(over, out)
      logger.debug("navigation")
-     html = %Q|<div id="navigation"><ul class="slide">|
+     html = %Q|<div id="navigation"><ul class="">|
      Style::NAVI.each do |key, value|
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
      end
      script = ""
      Style::NAVI.each do |key, value|
-      script += %Q|$('\#navi_#{value}').mouseover(function() { $(this).attr("style", "background: #{over}");}).mouseout(function(){$(this).attr("style", "background: #{out}");});|
+      script += %Q|$('\#navi_#{value}').click(function() { location.href = "okboards?v=| + value.crypt("okboard") + %Q|"});|
      end
      html += _script_document_ready(script)
      html += "</ul></div>"

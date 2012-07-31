@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MemberManagementTest < ActiveSupport::TestCase
+class OkboardControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

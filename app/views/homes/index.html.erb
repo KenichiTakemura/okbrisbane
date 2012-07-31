@@ -1,10 +1,10 @@
 <div id="home">
 	<div id="first_section">
 		<div id="first_section_left">
-			<%= single_banner(:home, :body, 1) %>
-			<%= multi_banner(:home, :body, 3) %>
-			<%= multi_banner(:home, :body, 4) %>
-			<%= multi_banner(:home, :body, 5) %>	
+			<%= single_body_banner(1) %>
+			<%= multi_body_banner(3) %>
+			<%= multi_body_banner(4) %>
+			<%= multi_body_banner(5) %>	
 		</div>
 <!-- 			<div class='description'>
 				<p class='description_content'>
@@ -19,7 +19,7 @@
 				</p>
 			</div> -->
 			<div id="first_section_right">
-				<%= single_banner(:home, :body, 2) %>	
+				<%= single_body_banner(2) %>	
 				<%= generateTopFeed("p_job", @job_feed_lists, nil, "#642c78") %>
 				<%= generateTopFeed("p_buy_and_sell", @buy_and_sell_feed_lists, nil, "#642c78") %>
 			</div>
@@ -39,6 +39,6 @@
 			<%= generateTopFeed("p_law", @legal_service_lists, nil, "#642c78") %>
 			<%= generateTopFeed("p_study", @study_lists, nil, "#642c78") %>
 			</div>
-		<div id="thrid_section_right"><%= multi_banner(:home, :body, 6) %><%= multi_banner(:home, :body, 7) %><%= multi_banner(:home, :body, 8) %><%= multi_banner(:home, :body, 9) %></div>
+		<div id="thrid_section_right"><%= multi_body_banner(6) %><%= multi_body_banner(7) %><%= multi_body_banner(8) %><%= multi_body_banner(9) %></div>
 	</div>
 </div>

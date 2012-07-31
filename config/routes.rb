@@ -1,9 +1,6 @@
 Okbrisbane::Application.routes.draw do
 
   #match 'css/:action.css', :controller=>'stylesheet', :as => :css
-  resources :buy_and_sells
-
-  resources :jobs
 
   resources :mypages
 
@@ -11,11 +8,13 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sign_up', :via => :get
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
-  resources :member_managements #, :only => ["index","sign_in","sign_up","term","personal"]
+  resources :member_managements, :only => ["index","new"]
 
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   resources :homes, :only => ["index"]
+  
+  resources :okboards
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
