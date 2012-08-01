@@ -30,16 +30,16 @@
 				<div id="devise">
 					<div id="account">
 						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/login/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
+						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
 						<% else %>
-						<%= link_to image_tag("#{I18n.locale}/login/btn_login.gif"), user_sign_in_path %>
+						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_login.gif"), user_sign_in_path %>
 						<% end %>
-						<%= image_tag("#{I18n.locale}/login/bar.gif") %>
+						<%= image_tag("#{I18n.locale}/p_signup/bar.gif") %>
 						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/login/btn_modify.gif"), edit_user_registration_path %>
+						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_modify.gif"), edit_user_registration_path %>
 						<% else %>
 						<!-- %= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), new_user_registration_path % -->
-						<%= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), member_managements_sign_up_path %>
+						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_member.gif"), member_managements_sign_up_path %>
 						<% end %>
 					</div>
 				</div>

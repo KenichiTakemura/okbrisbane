@@ -19,9 +19,13 @@ class Banner < ActiveRecord::Base
   belongs_to :page
   belongs_to :section
   
+  # TODO Is this all?
   E_SLIDE = "slide_auto"
+  E_RANDOM_SLIDE = "random_slide"
   E_SLIDE_W_CAPTION = "slide_w_caption"
+  E_RANDOMSLIDE_W_CAPTION = "random_slide_w_caption"
   E_NO_SLIDE = "no_slide"
+  E_RANDOM_NO_SLIDE = "random_no_slide"
   
   validates_inclusion_of :effect, :in => [E_SLIDE,E_SLIDE_W_CAPTION,E_NO_SLIDE], :message => I18n.t('must_be_selected')
   validates_numericality_of :effect_speed, :greater_than => 0, :message => I18n.t('must_be_numbers')

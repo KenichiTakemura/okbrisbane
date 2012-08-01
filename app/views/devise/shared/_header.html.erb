@@ -1,45 +1,43 @@
 <div id="usermanagement">
-
-	<div id="left-menu">
+	<div id="section_left">
+		<%= image_tag("#{I18n.locale}/p_signup/logo.gif", :class => "logo")%>
 		<div id="menu">
-			<%= image_tag("#{I18n.locale}/login/bg_snb.gif")%>
-			<%= image_tag("#{I18n.locale}/login/stit_06.gif")%>
-			<%= image_tag("#{I18n.locale}/login/bg_snb.gif")%>
 			<div class="items">
 				<div class="item" id="_signin">
 					<p class="menu-item">
-						<%= link_to t("signin"), new_user_session_path %>
+						<%= link_to t("signin"), new_user_session_path, :class => "non_style_link" %>
 					</p>
 				</div>
-
 				<div class="item"  id="_signup">
-					<p class="menu-item">
-						<%= link_to t("signup"), member_managements_sign_up_path %>
+					<p class="menu-item", id="shadow">
+						<%= link_to t("signup"), member_managements_sign_up_path, :class => "non_style_link" %>
 					</p>
 				</div>
 
 				<div class="item" id='_findid'>
 					<p class="menu-item">
-						<%= link_to t("forgot_your_password"), '#' %>
+						<%= link_to t("forgot_your_password"), '#', :class => "non_style_link" %>
 					</p>
 				</div>
 
 				<div class="item" id='_service'>
 					<p class="menu-item">
-						<%= link_to t("termsofservice"), termsofservice_path %>
+						<%= link_to t("termsofservice"), termsofservice_path, :class => "non_style_link" %>
 					</p>
 				</div>
 				<div class="item" id='_personal'>
 					<p class="menu-item">
-						<%= link_to t("termsofpersonalinfo"), termsofpersonal_path %>
+						<%= link_to t("termsofpersonalinfo"), termsofpersonal_path, :class => "non_style_link" %>
 					</p>
 				</div>
-
-			</div>
-			<div id="<%= Style.create_banner_div(:signin,:main_content,:left) %>">
-				<%= image_tag("http://placehold.it/200x150")%>
-				<%= image_tag("http://placehold.it/200x150")%>
-				<%= image_tag("http://placehold.it/200x150")%>
 			</div>
 		</div>
-		<div id="main">
+		<%= single_body_banner(1) %>
+		<%= single_body_banner(2) %>
+		<%= single_body_banner(3) %>
+	</div>
+	<div id="section_right">
+		<div id="content_head">
+			<%= single_body_banner(4) %>
+		</div>
+		<div id="content_body">

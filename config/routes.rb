@@ -8,9 +8,9 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sign_up', :via => :get
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
-  resources :member_managements, :only => ["index","new"]
+  resources :member_managements, :only => ["index","new","create"]
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
 
   resources :homes, :only => ["index"]
   

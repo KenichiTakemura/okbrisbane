@@ -1,11 +1,14 @@
 <%= render :partial => "devise/shared/header" %>
 
-<div id="_devise_registrations_new">
-				<%= image_tag("#{I18n.locale}/login/img_process02_on.gif")%>
-								<span class="stitle"><%= t("stitle_head")%></span></br>
-				<%= t("stitle_body")%>
-				</br>
-				</br>
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/p_signup/tit_611.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/p_signup/title.jpg")%>
+</div>
+<div id="_main">
+	<span class="stitle"><%= t("stitle_head")%></span></br>
+	<%= t("stitle_body")%>
+	</br>
+	</br>
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 	<%= devise_error_messages! %>
 
@@ -33,9 +36,5 @@
 	<% end %>
 </div>
 <%= render :partial => "devise/shared/footer" %>
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-		$('#_signup').attr("style", "background: #6A8FE7");
-  });
-</script>
+<%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
 
