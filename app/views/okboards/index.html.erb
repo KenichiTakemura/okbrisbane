@@ -1,2 +1,27 @@
+<%
+logger.debug("Request for #{@okpage}")
+case @okpage
+when :p_estate
+	links = [Style::PAGES[:p_estate],Style::PAGES[:p_motor_vehicle],Style::PAGES[:p_business],Style::PAGES[:p_accommodation]]
+	paths = [_okboard_link(Style::PAGES[:p_estate]),_okboard_link(Style::PAGES[:p_motor_vehicle]),_okboard_link(Style::PAGES[:p_business]),_okboard_link(Style::PAGES[:p_accommodation])]
+when :p_motor_vehicle
+	links = [Style::PAGES[:p_motor_vehicle],Style::PAGES[:p_estate],Style::PAGES[:p_business],Style::PAGES[:p_accommodation]]
+	paths = [_okboard_link(Style::PAGES[:p_motor_vehicle]),_okboard_link(Style::PAGES[:p_estate]),_okboard_link(Style::PAGES[:p_business]),_okboard_link(Style::PAGES[:p_accommodation])]
+
+else
+	logger.error("Bad Request for #{@okpage}")
+	raise "Bad Request for #{@okpage}"
+end
+%>
 <div id="okboards">
+	<%= _left_menu(nil, links, paths) %>
+	<div id="page_section_right">
+		<div id="content_head">
+			<%= single_body_banner(5) %>
+		</div>
+		<div id="content_body">
+			<%= render :partial => "okboards/#{@okpage}/index" %>
+		</div>
+	</div>
 </div>
+<%= _script_document_ready(%Q|$("#_#{@okpage}").attr("style", "opacity:1;filter:alpha(opacity=100);")|) %>

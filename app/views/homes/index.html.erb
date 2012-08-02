@@ -20,24 +20,24 @@
 			</div> -->
 			<div id="first_section_right">
 				<%= single_body_banner(2) %>	
-				<%= generateTopFeed("p_job", @job_feed_lists, nil, "#642c78") %>
-				<%= generateTopFeed("p_buy_and_sell", @buy_and_sell_feed_lists, nil, "#642c78") %>
+				<%= generateTopFeed(Style::PAGES[:p_job], @job_feed_lists, nil, "#642c78") %>
+				<%= generateTopFeed(Style::PAGES[:p_buy_and_sell], @buy_and_sell_feed_lists, nil, "#642c78") %>
 			</div>
 <!-- 	<div id="_exrate">
 		<iframe src="http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/12776_0.html" border="0" marginwidth="0" frameborder="no" height="300" scrolling="no" width="300"></iframe>
 	</div> -->
 	</div>
 	<div id="second_section">
-		<div id="section_left"><div id="second_section_bar"></div><%= generateTopFeed("p_estate", @estate_lists, @estate_image_lists, "#41A317") %></div>
-		<div id="section_center"><div id="second_section_bar"></div><%= generateTopFeed("p_business", @business_lists, @business_image_lists, "#41A317") %></div>
-		<div id="section_right"><div id="second_section_bar"></div><%= generateTopFeed("p_motor_vehicle", @motor_vehicle_lists, @motor_vehicle_image_lists, "#41A317") %></div>
+		<div id="section_left"><div id="second_section_bar"></div><%= generateTopFeed(Style::PAGES[:p_estate], @estate_lists, @estate_image_lists, "#41A317") %></div>
+		<div id="section_center"><div id="second_section_bar"></div><%= generateTopFeed(Style::PAGES[:p_business], @business_lists, @business_image_lists, "#41A317") %></div>
+		<div id="section_right"><div id="second_section_bar"></div><%= generateTopFeed(Style::PAGES[:p_motor_vehicle], @motor_vehicle_lists, @motor_vehicle_image_lists, "#41A317") %></div>
 	</div>
 	<div id="third_section">
 		<div id="third_section_bar"></div>
 		<div id="thrid_section_left">
-			<%= generateTopFeed("p_accommodation", @accommodation_lists, @accommodation_image_lists, "#642c78") %>
-			<%= generateTopFeed("p_law", @legal_service_lists, nil, "#642c78") %>
-			<%= generateTopFeed("p_study", @study_lists, nil, "#642c78") %>
+			<%= generateTopFeed(Style::PAGES[:p_accommodation], @accommodation_lists, @accommodation_image_lists, "#642c78") %>
+			<%= generateTopFeed(Style::PAGES[:p_law], @legal_service_lists, nil, "#642c78") %>
+			<%= generateTopFeed(Style::PAGES[:p_study], @study_lists, nil, "#642c78") %>
 			</div>
 		<div id="thrid_section_right"><%= multi_body_banner(6) %><%= multi_body_banner(7) %><%= multi_body_banner(8) %><%= multi_body_banner(9) %></div>
 	</div>

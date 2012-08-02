@@ -1,9 +1,10 @@
 <%= render :partial => "devise/shared/header" %>
 
-   <div id="termsofservice">
-      <%= image_tag("#{I18n.locale}/login/bg_title.jpg")%>
-      <%= image_tag("#{I18n.locale}/login/tit_631.gif", :class => 'name')%>
-      <div id="_term">
+<div id="_title">
+<%= image_tag("#{I18n.locale}/p_signup/tit_611.gif", :class => "title_text")%>
+<%= image_tag("#{I18n.locale}/p_signup/title.jpg")%>
+</div>
+<div id="_main">
         </br>
         <p class="termofservice">
           <%= t("termofservice")%>
@@ -14,9 +15,5 @@
 
   </div>
 <%= render :partial => "devise/shared/footer" %>
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-    	$('#_service').attr("style", "background: #6A8FE7");
-  });
-</script>
+<%= _script_document_ready(%Q|$('#_termsofservice').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
 

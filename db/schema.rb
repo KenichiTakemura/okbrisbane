@@ -80,9 +80,10 @@ ActiveRecord::Schema.define(:version => 20120731102559) do
     t.string   "style"
     t.string   "effect"
     t.integer  "effect_speed"
-    t.boolean  "enabled",      :default => true
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.boolean  "is_random",    :default => false
+    t.boolean  "is_disabled",  :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "business_categories", :force => true do |t|

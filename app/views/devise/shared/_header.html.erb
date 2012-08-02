@@ -1,43 +1,9 @@
 <div id="usermanagement">
-	<div id="section_left">
-		<%= image_tag("#{I18n.locale}/p_signup/logo.gif", :class => "logo")%>
-		<div id="menu">
-			<div class="items">
-				<div class="item" id="_signin">
-					<p class="menu-item">
-						<%= link_to t("signin"), new_user_session_path, :class => "non_style_link" %>
-					</p>
-				</div>
-				<div class="item"  id="_signup">
-					<p class="menu-item", id="shadow">
-						<%= link_to t("signup"), member_managements_sign_up_path, :class => "non_style_link" %>
-					</p>
-				</div>
-
-				<div class="item" id='_findid'>
-					<p class="menu-item">
-						<%= link_to t("forgot_your_password"), '#', :class => "non_style_link" %>
-					</p>
-				</div>
-
-				<div class="item" id='_service'>
-					<p class="menu-item">
-						<%= link_to t("termsofservice"), termsofservice_path, :class => "non_style_link" %>
-					</p>
-				</div>
-				<div class="item" id='_personal'>
-					<p class="menu-item">
-						<%= link_to t("termsofpersonalinfo"), termsofpersonal_path, :class => "non_style_link" %>
-					</p>
-				</div>
-			</div>
-		</div>
-		<%= single_body_banner(1) %>
-		<%= single_body_banner(2) %>
-		<%= single_body_banner(3) %>
-	</div>
-	<div id="section_right">
+	<% links = ["signin","signup","findid","termsofservice","termsofpersonalinfo"] %>
+	<% paths = [new_user_session_path,member_managements_sign_up_path,"#",termsofservice_path,termsofpersonal_path] %>
+	<%= _left_menu("#{I18n.locale}/#{@okpage}/logo.gif", links,paths) %>
+	<div id="page_section_right">
 		<div id="content_head">
-			<%= single_body_banner(4) %>
+			<%= single_body_banner(5) %>
 		</div>
 		<div id="content_body">

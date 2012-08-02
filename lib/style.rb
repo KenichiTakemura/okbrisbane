@@ -12,8 +12,6 @@ module Style
   PAGES[:p_job] = "p_job"
   PAGES[:p_buy_and_sell] = "p_buy_and_sell"
   PAGES[:p_wellbeing] = "p_wellbeing"
-  PAGES[:p_study] = 'p_study'
-  PAGES[:p_immig] = 'p_immig'
   PAGES[:p_estate] = 'p_estate'
   PAGES[:p_business] = 'p_business'
   PAGES[:p_motor_vehicle] = 'p_motor_vehicle'
@@ -24,6 +22,7 @@ module Style
   PAGES[:p_immig] = 'p_immig'
   PAGES[:p_yellowpage] = 'p_yellowpage'
   PAGES[:p_sponsor] = "p_sponsor"
+  PAGES[:p_mypage] = "p_mypage"
   
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"

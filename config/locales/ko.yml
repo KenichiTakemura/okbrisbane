@@ -226,6 +226,7 @@ ko:
   english: '영어'
   korean: '한국어'
   chinese_simplified: '중국어'
+  admin: '관리자'
   or: '또는'
   please: '해주세요.'
   navi_joblist: '구인구직'
@@ -251,6 +252,7 @@ ko:
   create: '등록'
   delete: '삭제'
   add: '추가'
+  findid: :forgot_your_password
   pages: '페이지'
   page: :pages
   post: '투고'
@@ -284,13 +286,15 @@ ko:
   Id: 'Id'
   created_at: '작성일'
   x: 'x'
-  "true": '예'
-  "false": '아니오'
-  hide: '비표시'
+  "true": '무효'
+  "false": '유효'
+  hide: '유효/무효'
   style: '스타일'
   display_name: '페이지 이름'
   banner: '광고란'
   select: '선택'
+  drive_away: 'Drive Away'
+  viewed: '조회수'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -329,9 +333,11 @@ ko:
   effect_speed: 'Effect_Speed'
   slide_auto: 'slide_auto'
   slide_w_caption: 'slide_w_caption'
-  no_slide: ' no_slide'
-  unit_second: 'unit_second'
-  more_than_1: 'more_than_1'
+  fix: 'fix'
+  unit_second: '단위 : 초'
+  more_than_1: '1 이상'
+  random: '랜덤 표시'
+  randomly_display: 'if checked 랜덤으로 표시'
 
   client_management: '고객 관리'
   banner_management: '광고란 관리'
@@ -375,6 +381,9 @@ ko:
   for_rent: 'Rent'
   for_sale: 'Sale'
   for_auction: 'Autction'
+  
+  new_car: '새자'
+  userd_car: '중고자ㅅ'
   
   # Tax Category
   for_business: '비즈니스 세무'

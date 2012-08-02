@@ -6,6 +6,17 @@ class Post < ActiveRecord::Base
   # attr_accessible
   attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted
 
+  # Category
+  Category = Hash.new
+
+  def category_list
+    list = Array.new
+    Category.each do |key,value|
+      list.push(I18n.t(value),value)
+    end
+    list
+  end
+
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
 
@@ -39,6 +50,12 @@ class Post < ActiveRecord::Base
   # pagination
   default_scope :order => 'created_at DESC'
   paginates_per 10
+  
+  HOT_BOARD_LIMIT = 5
+  BOARD_LIMIT = 10
+  
+  scope :hot_board, where("is_deleted != ?", false).order.limit(HOT_BOARD_LIMIT)
+  scope :board, where("is_deleted != ?", false).order.limit(BOARD_LIMIT)
 
   # callbacks
   after_initialize :set_default

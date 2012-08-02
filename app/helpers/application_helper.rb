@@ -1,4 +1,27 @@
 module ApplicationHelper
+  
+  # Create left Menu
+  def _left_menu(logo, links, paths)
+    html = %Q|<div id="page_section_left">|
+    if !logo.nil?
+     html += image_tag(logo, :class => "logo")
+    else
+      html += single_body_banner(1)
+    end
+    html += %Q|<div id="menu"><div class="items">|
+    links.each_with_index do |link,i|
+        html += %Q|<div class="item" id="_#{link}"><p class="menu-item">|
+        html += link_to(t(link), paths[i], :class => "non_style_link")
+        html += "</p></div>"
+    end
+    html += "</div></div>"
+    html += single_body_banner(2)
+    html += single_body_banner(3)
+    html += single_body_banner(4)
+    html += "</div>"
+    html.html_safe
+  end
+      
   # Create banner
   def _collectImage(p, s, a)
     page = Page.find_by_name(Style::PAGES[p])
@@ -20,6 +43,7 @@ module ApplicationHelper
       html += %Q|<style>div.banner_description {position:absolute;top:0px;left:0px;background-color:black;opacity: 0.6;filter: alpha(opacity=60);}|
       html += %Q| div.banner_description p.description_content {padding:10px;margin:0px;font-size:12px;font-weight:bold;color:white;}</style>|
       okbrisbane = BusinessClient.okbrisbane.first
+      logger.debug("_banner okbrisbane: #{okbrisbane.nil?}")
       if !okbrisbane.nil?
         contact = "#{t('banner_contact')} #{okbrisbane.business_phone} #{okbrisbane.business_email}"
       else
@@ -67,7 +91,7 @@ module ApplicationHelper
     logger.debug("requested single_banner #{p}, #{s}, #{a}")
     div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
-    return "" if !b.enabled
+    return "" if b.is_disabled
     html = _banner(p, s, a, div_id)
     script = ""
     if images.size >= 2
@@ -75,7 +99,7 @@ module ApplicationHelper
       case b.effect
       when Banner::E_SLIDE
       when Banner::E_SLIDE_W_CAPTION
-      when Banner::E_NO_SLIDE
+      when Banner::E_FIX
       end
       script += %Q|$('\##{div_id}').cycle({fx: 'fade',random: 1,timeout: 100});|
       html += _script_document_ready(script)
@@ -95,11 +119,15 @@ module ApplicationHelper
      end
      script = ""
      Style::NAVI.each do |key, value|
-      script += %Q|$('\#navi_#{value}').click(function() { location.href = "okboards?v=| + value.crypt("okboard") + %Q|"});|
+      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{_okboard_link(value)}| + %Q|"});|
      end
      html += _script_document_ready(script)
      html += "</ul></div>"
      html.strip.html_safe
+  end
+  
+  def _okboard_link(okpage)
+    %Q|/okboards?v=| + okpage.crypt("okboard")
   end
   
   def _script_document_ready(script)

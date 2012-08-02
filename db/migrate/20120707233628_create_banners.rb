@@ -12,7 +12,10 @@ class CreateBanners < ActiveRecord::Migration
       t.string :style
       t.string :effect
       t.integer :effect_speed
-      t.boolean :enabled, :default => true
+      # true random false in order
+      t.boolean :is_random, :default => false
+      # true disabled false enabled
+      t.boolean :is_disabled, :default => false
       t.timestamps
     end
   end

@@ -6,13 +6,13 @@ class HomesController < OkController
     when Okvalue::BUY_AND_SELL
       return TopFeedList.buy_and_sell_feed
     when Okvalue::ESTATE
-      return _makeImageList(TopFeedList.estate_feed)
+      return _makeImageList(TopFeedList.estate_feed, TopFeedList::IMAGE_FEED_LIMIT)
     when Okvalue::BUSINESS
-      return _makeImageList(TopFeedList.business_feed)
+      return _makeImageList(TopFeedList.business_feed, TopFeedList::IMAGE_FEED_LIMIT)
     when Okvalue::MOTOR_VEHICLE
-      return _makeImageList(TopFeedList.motor_vehicle_feed)
+      return _makeImageList(TopFeedList.motor_vehicle_feed, TopFeedList::IMAGE_FEED_LIMIT)
     when Okvalue::ACCOMMODATION
-      return _makeImageList(TopFeedList.accommodation_feed)
+      return _makeImageList(TopFeedList.accommodation_feed, TopFeedList::IMAGE_FEED_LIMIT)
     when Okvalue::LAW
       return TopFeedList.legal_service_feed_with_limit(5)
     when Okvalue::STUDY
@@ -20,18 +20,6 @@ class HomesController < OkController
     else
     raise "Bad Category"
     end
-  end
-
-  def _makeImageList(feed_list)
-    image_list = Array.new
-    feed_list.each_with_index do |feed, i|
-      if !feed.feeded_to.image.empty?
-        image_list.push(feed)
-        feed_list.slice!(i)
-        break if(image_list.size >= TopFeedList::IMAGE_FEED_LIMIT)
-      end
-    end
-    return feed_list, image_list
   end
 
   def index

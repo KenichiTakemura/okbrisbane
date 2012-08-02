@@ -3,7 +3,6 @@ class OkboardsController < OkController
   before_filter :_before_
 
   $okboard_map = Hash.new
- 
   def _before_
     raise "Bad Request" if params[:v].nil?
     v = params[:v]
@@ -18,7 +17,7 @@ class OkboardsController < OkController
           @board = value
           $okboard_map[v.to_sym] = value
           logger.debug("Added: #{@board} v: #{v}")
-          break
+        break
         end
       end
     end
@@ -36,21 +35,28 @@ class OkboardsController < OkController
     when Style::PAGES[:p_study]
       @okpage = :p_study
     when Style::PAGES[:p_immig]
-      @okpage = :p_immig   
+      @okpage = :p_immig
     when Style::PAGES[:p_estate]
-      @okpage = :p_estate   
+      @okpage = :p_estate
+      @board_lists,@board_image_lists  = _makeImageList(TopFeedList.estate_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+    when Style::PAGES[:p_motor_vehicle]
+      @okpage = :p_motor_vehicle
+      @board_lists,@board_image_lists  = _makeImageList(TopFeedList.motor_vehicle_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
     when Style::PAGES[:p_law]
-      @okpage = :p_law  
+      @okpage = :p_law
     when Style::PAGES[:p_tax]
-      @okpage = :p_tax  
+      @okpage = :p_tax
     when Style::PAGES[:p_yellowpage]
-      @okpage = :p_yellowpage        
+      @okpage = :p_yellowpage
+    else
+    raise "Bad Board Request"
     end
+    logger.debug("@board_lists: #{@board_lists.size} @board_image_lists: #{@board_image_lists.size}")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }
     end
-    
+
   end
 
 end

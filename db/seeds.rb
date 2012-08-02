@@ -10,6 +10,9 @@ User.delete_all
 Page.delete_all
 Section.delete_all
 Banner.delete_all
+BusinessClient.delete_all
+BusinessProfile.delete_all
+BusinessProfileImage.delete_all
 SystemSetting.delete_all
 
 # Users
@@ -18,6 +21,12 @@ anonymous = User.new(:email => "anonymous@okbrisbane.com")
 anonymous.save(:validate => false)
 guest = User.new(:email => "guest@okbrisbane.com")
 guest.save(:validate => false)
+
+# OKBRISBANE 
+ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
+ok.build_business_profile(:body => 'OKBRISBANE rocks!')
+ok.save
+
 
 # Page
 Style::PAGES.each do |key, value|
@@ -55,9 +64,9 @@ end
 ## Background
 Style::PAGES.each do |key, value|
   if value.eql? Style::PAGES[:p_home]
-    enabled = true 
+  is_disabled = false
   else
-    enabled = false
+  is_disabled = true
   end
   Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:s_background]).id,
@@ -65,14 +74,14 @@ Style::PAGES.each do |key, value|
   :div_width => 160, :div_height => 750,
   :img_width => 160, :img_height => 750,
   :style => 'position:absolute;top:100px;left:-165px',
-  :enabled => enabled)
+  :is_disabled => is_disabled)
   Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:s_background]).id,
   :position_id => 2,
   :div_width => 160, :div_height => 750,
   :img_width => 160, :img_height => 750,
   :style => 'position:absolute;top:100px;right:-165px',
-  :enabled => enabled)
+  :is_disabled => is_disabled)
 end
 ## Body
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
@@ -129,29 +138,59 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
-# Signin
-_page = :p_signup
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
-:position_id => 1,
-:div_width => 220, :div_height => 150,
-:img_width => 220, :img_height => 150,
-:style => 'position:relative;float:left;top:0px')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
-:position_id => 2,
-:div_width => 220, :div_height => 150,
-:img_width => 220, :img_height => 150,
-:style => 'position:relative;float:left;top:0px')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
-:position_id => 3,
-:div_width => 220, :div_height => 150,
-:img_width => 220, :img_height => 150,
-:style => 'position:relative;float:left;top:0px')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
-:position_id => 4,
-:div_width => 740, :div_height => 150,
-:img_width => 740, :img_height => 150,
-:style => 'position:relative;float:left;top:0px')
+# Body
+[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle].each do |page|
+Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 1,
+  :div_width => 220, :div_height => 130,
+  :img_width => 220, :img_height => 130,
+  :style => 'position:relative;float:left;top:0px')
+end
+[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle].each do |page|
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 2,
+  :div_width => 220, :div_height => 150,
+  :img_width => 220, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 3,
+  :div_width => 220, :div_height => 150,
+  :img_width => 220, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 4,
+  :div_width => 220, :div_height => 150,
+  :img_width => 220, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 5,
+  :div_width => 740, :div_height => 150,
+  :img_width => 740, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px')
+end
+# MotorVehicle
+[:p_motor_vehicle].each do |page|
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 6,
+  :div_width => 230, :div_height => 150,
+  :img_width => 230, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 7,
+  :div_width => 230, :div_height => 150,
+  :img_width => 230, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px;left:5px')
+  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
+  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  :position_id => 8,
+  :div_width => 230, :div_height => 150,
+  :img_width => 230, :img_height => 150,
+  :style => 'position:relative;float:left;top:0px;left:10px')
+end

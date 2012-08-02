@@ -229,6 +229,70 @@ a {
 	color: #ffffff;
 }
 
+#page_section_left {
+  position: relative;
+  width: 220px;
+  margin: 3px;
+  float: left;
+}
+
+
+#page_section_left img.logo {
+  width: 220px;
+  height: 130px;
+}
+#page_section_right {
+  width: 750px;
+  float:right;
+}
+
+#page_section_right #content_head {
+  position: relative;
+  float:left;
+}
+
+#page_section_right #content_body {
+  position: relative;
+  float:left;
+}
+
+#page_section_left #menu {
+  position:relative;
+  float:left;
+  width: 100%;
+  background: url("common/rows_tpl_type11all.gif");
+  background-repeat:repeat-x;
+}
+  
+#page_section_left .items {
+  position:relative;
+  margin-top: 0px;
+  height: 190px;
+  border: 1px solid #c0c0c0;
+}
+
+#page_section_left .item {
+  height: 25px;
+  color: #c0c0c0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+#page_section_left .item .menu-item {
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  padding: 1px;
+  color: #ffffff;
+}
+
+#page_section_left .item .menu-item:hover {
+  background: #41A317;
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
 /* 
  * CSS3
  */

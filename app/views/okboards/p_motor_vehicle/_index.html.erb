@@ -1,0 +1,76 @@
+<div style="position: relative; float: left; width: 100%" id="board_for_<%= @okpage%>">
+	<p class="okboard_title">
+		<%= t(Style::PAGES[:p_motor_vehicle])%>
+	</p>
+	<div id="okboard_for_<%= @okpage%>">
+
+		<% @board_image_lists.each do |feed| %>
+		<div class="okboard_thumbnail">
+			<%= image_tag(feed.feeded_to.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+			<%= section_span(feed.feeded_to) %>
+			<p class="description">
+				<%= feed.feeded_to.subject%>
+			</p>
+			<p class="price_tag">
+				$<%= feed.feeded_to.price%>
+				<br/>
+				<%= t("drive_away") %>
+			</p>
+		</div>
+		<% end %>
+	</div>
+	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
+		<%= single_body_banner(6) %>
+		<%= single_body_banner(7) %>
+		<%= single_body_banner(8) %>
+	</div>
+	<div id="okboard_list_for_<%= @okpage%>" style="position: relative; float: left; width: 100%">
+		<div id="okboard_filter">
+			<%= form_tag('/posts') do -%>
+			<% end -%>
+		</div>
+		<div id="okboard_list_title">
+			<ul class="okboard_list_title">
+				<li>
+					<%= t("category")%>
+				</li>
+				<li>
+					<%= t("price")%>
+				</li>
+				<li>
+					<%= t("author")%>
+				</li>
+				<li>
+					<%= t("created_at")%>
+				</li>
+				<li>
+					<%= t("viewed")%>
+				</li>
+			</ul>
+		</div>
+		<% @board_lists.each do |feed| %>
+		<div id="okboard_list_body">
+			<ul class="okboard_list_body">
+				<li>
+					<%= t("#{feed.feeded_to.category}") %>
+				</li>
+				<li>
+					$ <%= feed.feeded_to.price %>
+				</li>
+				<li>
+					<%= author_name(feed.feeded_to) %>
+				</li>
+				<li>
+					<%= Common.date_format(feed.feeded_to.updated_at) %>
+				</li>
+				<li>
+					<%= feed.feeded_to.views %>
+				</li>
+			</ul>
+			<%= section_span(feed.feeded_to) %>
+		</div>
+		<% end %>
+		<div id="okboard_list_for_<%= @okpage%>_more">
+			<%= link_to t("more"), "#", :class => "ui-button"%>
+		</div>
+	</div>

@@ -1,14 +1,24 @@
 class MemberManagementsController < ApplicationController
+  
+  before_filter :page_p_signup, :only => ["sign_up","term","personal","create"]
+  before_filter :page_p_signin, :only => ["sing_in"]
+  
+  def page_p_signup
+    @okpage = Style::PAGES[:p_signup]
+  end
+  
+  def page_p_signin
+    @okpage = Style::PAGES[:p_signin]
+  end
 
   def sign_in
     session[:signin_menu] = :singin
-    @okpage = Style::PAGES[:p_signin]
-    redirect_to new_user_session_path(:okpage => @okpage)
+    redirect_to new_user_session_path
   end
 
   def sign_up
     @member_management = MemberManagement.new
-    @okpage = Style::PAGES[:p_signup]
+    
     respond_to do |format|
       format.html # sign_up.html.erb
       format.json { render json: @member_management }

@@ -9,7 +9,8 @@ class Banner < ActiveRecord::Base
   attr_accessible :style
   attr_accessible :effect
   attr_accessible :effect_speed
-  attr_accessible :enabled
+  attr_accessible :is_disabled
+  attr_accessible :is_random
   
   attr_accessible :attached
   attr_accessible :display_name
@@ -21,23 +22,20 @@ class Banner < ActiveRecord::Base
   
   # TODO Is this all?
   E_SLIDE = "slide_auto"
-  E_RANDOM_SLIDE = "random_slide"
   E_SLIDE_W_CAPTION = "slide_w_caption"
-  E_RANDOMSLIDE_W_CAPTION = "random_slide_w_caption"
-  E_NO_SLIDE = "no_slide"
-  E_RANDOM_NO_SLIDE = "random_no_slide"
+  E_FIX = "fix"
   
-  validates_inclusion_of :effect, :in => [E_SLIDE,E_SLIDE_W_CAPTION,E_NO_SLIDE], :message => I18n.t('must_be_selected')
+  validates_inclusion_of :effect, :in => [E_SLIDE,E_SLIDE_W_CAPTION,E_FIX], :message => I18n.t('must_be_selected')
   validates_numericality_of :effect_speed, :greater_than => 0, :message => I18n.t('must_be_numbers')
   
   def effect_list
-    [[I18n.t("#{E_SLIDE}"),E_SLIDE],[I18n.t("#{E_SLIDE_W_CAPTION}"),E_SLIDE_W_CAPTION],[I18n.t("#{E_NO_SLIDE}"),E_NO_SLIDE]]
+    [[I18n.t("#{E_SLIDE}"),E_SLIDE],[I18n.t("#{E_SLIDE_W_CAPTION}"),E_SLIDE_W_CAPTION],[I18n.t("#{E_FIX}"),E_FIX]]
   end
   
   after_initialize :set_default
   
   def set_default
-    self.effect = E_NO_SLIDE
+    self.effect = E_FIX
     self.effect_speed = 5
   end
   
@@ -50,7 +48,7 @@ class Banner < ActiveRecord::Base
   paginates_per 10
   
   def to_s
-    "p_id: #{page_id} s_id: #{section_id} a_id: #{position_id} d_w: #{div_width} d_h: #{div_height} i_w: #{img_width} i_h: #{img_height} s: #{style} ef: #{effect}i: #{client_image}"
+    "p_id: #{page_id} s_id: #{section_id} a_id: #{position_id} d_w: #{div_width} d_h: #{div_height} i_w: #{img_width} i_h: #{img_height} s: #{style} ef: #{effect} es: #{:effect_speed} dn: #{is_disabled} ran: #{is_random} i: #{client_image}"
   end
   
   def _name

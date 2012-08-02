@@ -25,6 +25,10 @@ module Okvalue
   LAW = "legal_services"
   STUDY = "studies"
   IMMIGRATION = "immigrations"
-  TAX = "taxes"  
+  TAX = "taxes"
+
+  TOPFEED_IMAGE_SIZE = "120x90"
+  OKBOARD_IMAGE_FEED_LIMIT = 5
+  OKBOARD_IMAGE_SIZE = "138x118"
   
 end
