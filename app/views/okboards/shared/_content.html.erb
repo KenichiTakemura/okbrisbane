@@ -1,17 +1,17 @@
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
 	<p class="okboard_title">
-		<%= t(Style::PAGES[:p_motor_vehicle])%>
+		<%= t(@okpage.to_s)%>
 	</p>
 	<div id="okboard_for_<%= @okpage %>">
-		<% @board_image_lists.each do |feed| %>
+		<% @board_image_lists.each do |post| %>
 		<div class="okboard_thumbnail">
-			<%= image_tag(feed.feeded_to.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
-			<%= section_span(feed.feeded_to) %>
+			<%= image_tag(post.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+			<%= section_span(post) %>
 			<p class="description">
-				<%= feed.feeded_to.subject%>
+				<%= post.subject%>
 			</p>
 			<p class="price_tag">
-				<%= number_to_currency(feed.feeded_to.price, :locale => 'en') %>
+				<%= number_to_currency(post.price, :locale => 'en') %>
 				<% if @okpage.to_s.eql? Style::PAGES[:p_motor_vehicle] %>
 				<br/>
 				<%= t("drive_away") %>
@@ -47,46 +47,25 @@
 		</div>
 		<div id="okboard_list_head">
 			<ul class="okboard_list_title">
-				<li>
+				<li class="first">
 					<%= t("category")%>
 				</li>
-				<li>
+				<li class="normal">
 					<%= t("price")%>
 				</li>
-				<li>
+				<li class="normal">
 					<%= t("subject")%>
 				</li>
-				<li>
+				<li class="normal">
 					<%= t("created_at")%>
 				</li>
-				<li>
+				<li class="last">
 					<%= t("viewed")%>
 				</li>
 			</ul>
 		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
-		<% @board_lists.each do |feed| %>
-		<div id="okboard_list_body">
-			<ul class="okboard_list_body">
-				<li class="first">
-					<%= t("#{feed.feeded_to.category}") %>
-				</li>
-				<li>
-					<%= number_to_currency(feed.feeded_to.price, :locale => 'en') %>
-				</li>
-				<li>
-					<%=  _truncate_no_title(feed.feeded_to.subject) %>
-				</li>
-				<li>
-					<%= Common.date_format(feed.feeded_to.updated_at) %>
-				</li>
-				<li>
-					<%= feed.feeded_to.views %>
-				</li>
-			</ul>
-			<%= section_span(feed.feeded_to) %>
-		</div>
-		<% end %>
+		<%= build_board_list %>
 		<div id="okboard_list_body_more_<%=@lastid%>"></div>
 		<div id="okboard_list_body_more_loading">
 			<%= image_tag ("common/ajax_loading.gif")%>

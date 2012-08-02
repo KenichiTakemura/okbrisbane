@@ -39,4 +39,29 @@ module OkboardsHelper
     html.html_safe
   end
   
+  def build_board_list()
+    html = ""
+    if @board_lists.empty?
+      html = html += %Q|<div id="okboard_list_body">| + t("no_information")
+      html += "</div>"
+    else
+      @board_lists.each do |post|
+        html += %Q|<div id="okboard_list_body"><ul class="okboard_list_body"><li class="first">|
+        html += t("#{post.category}")
+        html += %Q|</li><li class="normal">|
+        html += number_to_currency(post.price, :locale => 'en')
+        html += %Q|</li><li class="normal">|
+        html += _truncate_no_title(post.subject)
+        html += %Q|</li><li class="normal">|
+        html += Common.date_format(post.updated_at)
+        html += %Q|</li><li class="last">|
+        html += post.views.to_s
+        html += "</li></ul>"
+        html += section_span(post)
+        html += "</div>"
+      end
+    end
+    html.html_safe
+  end
+  
 end

@@ -139,7 +139,7 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 # Body
-[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle].each do |page|
+[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
 Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
   :position_id => 1,
@@ -147,7 +147,7 @@ Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
   :img_width => 220, :img_height => 130,
   :style => 'position:relative;float:left;top:0px')
 end
-[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle].each do |page|
+[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
   Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
   :position_id => 2,

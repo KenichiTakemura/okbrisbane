@@ -51,15 +51,13 @@ class Post < ActiveRecord::Base
   end
   
   # pagination
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'updated_at DESC'
   paginates_per 10
   
-  HOT_BOARD_LIMIT = 5
-  BOARD_LIMIT = 10
-  
-  scope :hot_board, where("is_deleted != ?", false).order.limit(HOT_BOARD_LIMIT)
-  scope :board, where("is_deleted != ?", false).order.limit(BOARD_LIMIT)
+  scope :is_valid, where("is_deleted != ?", true)
+  scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
 
+  
   # callbacks
   after_initialize :set_default
   after_validation :set_valid_until

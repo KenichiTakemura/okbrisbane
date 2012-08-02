@@ -7,7 +7,9 @@ when :p_estate
 when :p_motor_vehicle
 	links = [Style::PAGES[:p_motor_vehicle],Style::PAGES[:p_estate],Style::PAGES[:p_business],Style::PAGES[:p_accommodation]]
 	paths = [_okboard_link(Style::PAGES[:p_motor_vehicle]),_okboard_link(Style::PAGES[:p_estate]),_okboard_link(Style::PAGES[:p_business]),_okboard_link(Style::PAGES[:p_accommodation])]
-
+when :p_business
+	links = [Style::PAGES[:p_business],Style::PAGES[:p_estate],Style::PAGES[:p_motor_vehicle],Style::PAGES[:p_accommodation]]
+	paths = [_okboard_link(Style::PAGES[:p_business]),_okboard_link(Style::PAGES[:p_estate]),_okboard_link(Style::PAGES[:p_motor_vehicle]),_okboard_link(Style::PAGES[:p_accommodation])]	
 else
 	logger.error("Bad Request for #{@okpage}")
 	raise "Bad Request for #{@okpage}"

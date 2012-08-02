@@ -34,11 +34,14 @@ class OkboardsController < OkController
     when Style::PAGES[:p_study]
     when Style::PAGES[:p_immig]
     when Style::PAGES[:p_estate]
-      @board_lists,@board_image_lists  = _makeImageList(TopFeedList.estate_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @board_lists,@board_image_lists  = _makePostImageList(Estate.latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
       @post = Estate.new
     when Style::PAGES[:p_motor_vehicle]
-      @board_lists,@board_image_lists  = _makeImageList(TopFeedList.motor_vehicle_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @board_lists,@board_image_lists  = _makePostImageList(MotorVehicle.latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
       @post = MotorVehicle.new
+    when Style::PAGES[:p_business]
+      @board_lists,@board_image_lists  = _makePostImageList(Business.latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @post = Business.new  
     when Style::PAGES[:p_law]
     when Style::PAGES[:p_tax]
     when Style::PAGES[:p_yellowpage]
@@ -60,6 +63,10 @@ class OkboardsController < OkController
     case @board
     when Style::PAGES[:p_motor_vehicle]
       @board_lists = MotorVehicle.where("id < ?", @previd).limit(Okvalue::OKBOARD_MORE_SIZE)
+    when Style::PAGES[:p_estate]
+      @board_lists = MotorVehicle.where("id < ?", @previd).limit(Okvalue::OKBOARD_MORE_SIZE)
+    when Style::PAGES[:p_business]
+      @board_lists = Business.where("id < ?", @previd).limit(Okvalue::OKBOARD_MORE_SIZE)
     else
       raise "Not implemented"
     end
@@ -69,7 +76,8 @@ class OkboardsController < OkController
   end
 
   private
-  
+ 
+  # TODO lastedid should be replaced with last_updated_at
   def _lastid(board_list)
     if !board_list.nil? && !board_list.empty?
       @lastid = board_list.last.id 
@@ -77,6 +85,18 @@ class OkboardsController < OkController
       @lastid = nil
     end
     logger.debug("@lastid: #{@lastid}")
+  end
+  
+  def _makePostImageList(posts, limit)
+    image_list = Array.new
+    posts.each_with_index do |post, i|
+      if !post.image.empty?
+        image_list.push(post)
+        posts.slice!(i)
+        break if(image_list.size >= limit)
+      end
+    end
+    return posts, image_list
   end
 
 end
