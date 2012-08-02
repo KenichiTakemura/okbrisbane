@@ -6,15 +6,18 @@ class Post < ActiveRecord::Base
   # attr_accessible
   attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted
 
-  # Category
-  Category = Hash.new
-
-  def category_list
+  Categories = Hash.new
+  
+  def category_list()
     list = Array.new
-    Category.each do |key,value|
-      list.push(I18n.t(value),value)
+    Categories.each do |key,value|
+      list.push([I18n.t(value),value])
     end
     list
+  end
+  
+  def getCategory(key)
+    Categories[key]
   end
 
   # belongs_to

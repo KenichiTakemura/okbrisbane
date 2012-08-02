@@ -21,42 +21,62 @@ class OkboardsController < OkController
         end
       end
     end
+    @okpage = @board.to_sym
   end
 
   def index
     logger.debug("v: #{@board}")
+    @post_search = PostSearch.new
     case @board
     when Style::PAGES[:p_job]
-      @okpage = :p_job
     when Style::PAGES[:p_buy_and_sell]
-      @okpage = :p_buy_and_sell
     when Style::PAGES[:p_wellbeing]
-      @okpage = :p_wellbeing
     when Style::PAGES[:p_study]
-      @okpage = :p_study
     when Style::PAGES[:p_immig]
-      @okpage = :p_immig
     when Style::PAGES[:p_estate]
-      @okpage = :p_estate
       @board_lists,@board_image_lists  = _makeImageList(TopFeedList.estate_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @post = Estate.new
     when Style::PAGES[:p_motor_vehicle]
-      @okpage = :p_motor_vehicle
       @board_lists,@board_image_lists  = _makeImageList(TopFeedList.motor_vehicle_feed, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @post = MotorVehicle.new
     when Style::PAGES[:p_law]
-      @okpage = :p_law
     when Style::PAGES[:p_tax]
-      @okpage = :p_tax
     when Style::PAGES[:p_yellowpage]
-      @okpage = :p_yellowpage
     else
     raise "Bad Board Request"
     end
-    logger.debug("@board_lists: #{@board_lists.size} @board_image_lists: #{@board_image_lists.size}")
+    _lastid(@board_lists)
+    logger.debug("@board_lists: #{@board_lists.size} @board_image_lists: #{@board_image_lists.size} @lastid: #{@lastid}")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @jobs }
     end
+  end
+  
+  def more
+    sleep 2
+    @previd = params[:lastid]
+    logger.debug("lastid: #{@previd}")
+    case @board
+    when Style::PAGES[:p_motor_vehicle]
+      @board_lists = MotorVehicle.where("id < ?", @previd).limit(Okvalue::OKBOARD_MORE_SIZE)
+    else
+      raise "Not implemented"
+    end
+    _lastid(@board_lists)
+    @lastid ||= @previd
+    logger.debug("@lastid: #{@lastid}")
+  end
 
+  private
+  
+  def _lastid(board_list)
+    if !board_list.nil? && !board_list.empty?
+      @lastid = board_list.last.id 
+    else
+      @lastid = nil
+    end
+    logger.debug("@lastid: #{@lastid}")
   end
 
 end

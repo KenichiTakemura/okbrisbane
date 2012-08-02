@@ -126,8 +126,12 @@ module ApplicationHelper
      html.strip.html_safe
   end
   
+  def _okpage_v(okpage)
+    okpage.to_s.crypt("okboard")
+  end
+  
   def _okboard_link(okpage)
-    %Q|/okboards?v=| + okpage.crypt("okboard")
+    %Q|/okboards?v=| + _okpage_v(okpage)
   end
   
   def _script_document_ready(script)
@@ -172,17 +176,28 @@ module ApplicationHelper
     html.html_safe
   end
   
+  def _truncate_no_title(expression)
+    html = %Q|#{truncate(expression, :length => 26)}|
+    html.html_safe
+  end
+
   def noimage?(item)
     logger.debug("noimage? item: #{item}")
     if item.respond_to? :client_image
       if item.client_image.nil? || item.client_image.empty?
+        logger.debug("noimage")
       return noimage
       end
    elsif item.respond_to? :image
       if item.image.nil? || item.image.empty?
+        logger.debug("noimage")
        return noimage
       end
+      logger.debug("item.image: #{item.image}")
+   else 
+     raise "Internal Error"
    end
+   return ""
  end
   
   # Used to show no image

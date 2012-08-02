@@ -174,7 +174,7 @@ end
   :style => 'position:relative;float:left;top:0px')
 end
 # MotorVehicle
-[:p_motor_vehicle].each do |page|
+[:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
   Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
   :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
   :position_id => 6,

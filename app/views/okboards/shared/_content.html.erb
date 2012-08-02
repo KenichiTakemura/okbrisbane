@@ -1,0 +1,100 @@
+<div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
+	<p class="okboard_title">
+		<%= t(Style::PAGES[:p_motor_vehicle])%>
+	</p>
+	<div id="okboard_for_<%= @okpage %>">
+		<% @board_image_lists.each do |feed| %>
+		<div class="okboard_thumbnail">
+			<%= image_tag(feed.feeded_to.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+			<%= section_span(feed.feeded_to) %>
+			<p class="description">
+				<%= feed.feeded_to.subject%>
+			</p>
+			<p class="price_tag">
+				<%= number_to_currency(feed.feeded_to.price, :locale => 'en') %>
+				<% if @okpage.to_s.eql? Style::PAGES[:p_motor_vehicle] %>
+				<br/>
+				<%= t("drive_away") %>
+				<% end %>
+			</p>
+		</div>
+		<% end %>
+	</div>
+	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
+		<%= single_body_banner(6) %>
+		<%= single_body_banner(7) %>
+		<%= single_body_banner(8) %>
+	</div>
+	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
+		<div id="okboard_filter">
+			<div class="item">
+				<%= label_tag :category, t("category"), :class => "label left" %>&nbsp;
+				<%= select_tag :category, options_for_select(@post.category_list, 0) %>
+			</div>
+			<div class="item">
+				<%= label_tag :price, t("price"), :class => "label left" %>&nbsp;
+				<%= search_field_tag :price %>
+			</div>
+			<div class="item">
+				<%= label_tag :from, t("from"), :class => "label left" %>&nbsp;
+				<%= date_select :from, "", :start_year => 2012%>
+			</div>
+			<div class="item">
+				<%= label_tag :to, t("to"), :class => "label left" %>&nbsp;
+				<%= date_select :to, "", :start_year => 2012%>
+			</div>
+			<%= image_tag("#{I18n.locale}/common/org_search.gif") %>
+		</div>
+		<div id="okboard_list_head">
+			<ul class="okboard_list_title">
+				<li>
+					<%= t("category")%>
+				</li>
+				<li>
+					<%= t("price")%>
+				</li>
+				<li>
+					<%= t("subject")%>
+				</li>
+				<li>
+					<%= t("created_at")%>
+				</li>
+				<li>
+					<%= t("viewed")%>
+				</li>
+			</ul>
+		</div>
+		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
+		<% @board_lists.each do |feed| %>
+		<div id="okboard_list_body">
+			<ul class="okboard_list_body">
+				<li class="first">
+					<%= t("#{feed.feeded_to.category}") %>
+				</li>
+				<li>
+					<%= number_to_currency(feed.feeded_to.price, :locale => 'en') %>
+				</li>
+				<li>
+					<%=  _truncate_no_title(feed.feeded_to.subject) %>
+				</li>
+				<li>
+					<%= Common.date_format(feed.feeded_to.updated_at) %>
+				</li>
+				<li>
+					<%= feed.feeded_to.views %>
+				</li>
+			</ul>
+			<%= section_span(feed.feeded_to) %>
+		</div>
+		<% end %>
+		<div id="okboard_list_body_more_<%=@lastid%>"></div>
+		<div id="okboard_list_body_more_loading">
+			<%= image_tag ("common/ajax_loading.gif")%>
+		</div>
+		<div class="more">
+			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more") %>
+		</div>
+	</div>
+	<%= _script_document_ready(%Q|$('\#_lastid').val("#{@lastid}");$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
+		$.post("| + more_okboards_path + %Q|", {v: "#{_okpage_v(@okpage)}", lastid: $('\#_lastid').val()}); return false;
+		})|) %>

@@ -1,0 +1,2 @@
+class PostSearchController < ApplicationController
+end

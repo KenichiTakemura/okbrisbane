@@ -14,7 +14,13 @@ Okbrisbane::Application.routes.draw do
 
   resources :homes, :only => ["index"]
   
-  resources :okboards
+  resources :okboards, :only => ['index'] do
+    collection do
+      post :more
+    end
+  end
+  
+  resources :post_searches, :only => ["index"]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

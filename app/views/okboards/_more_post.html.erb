@@ -1,0 +1,26 @@
+<% @board_lists.each do |post| %>
+<div id="okboard_list_body">
+	<ul class="okboard_list_body">
+		<li>
+			<%= t("#{post.category}") %>
+		</li>
+		<li>
+			<%= number_to_currency(post.price, :locale => 'en') %>
+		</li>
+		<li>
+			<%= _truncate_no_title(post.subject) %>
+		</li>
+		<li>
+			<%= Common.date_format(post.updated_at) %>
+		</li>
+		<li>
+			<%= post.views %>
+		</li>
+	</ul>
+	<%= section_span(post) %>
+</div>
+<% end %>
+<% if @board_lists.empty? %>
+<%= t("no_information")%>
+<% end %>
+<div id="okboard_list_body_more_<%=@lastid%>"></div>

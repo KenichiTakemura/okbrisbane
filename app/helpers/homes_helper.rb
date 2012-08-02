@@ -10,7 +10,7 @@ module HomesHelper
     else
       if !image_list.nil? && !image_list.empty?
          image_list.each do |feed|
-           html += %Q|<tr><td><div class="shadow">           #{image_tag(feed.feeded_to.image.first.avatar.url(:thumb), :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>
+           html += %Q|<tr><td><div class="shadow">#{image_tag(feed.feeded_to.image.first.avatar.url(:thumb), :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>
            <td align=left valign=top>#{_truncate_with_length(feed.feeded_to.subject, 70)}
            <p class="price_tag">$&nbsp;#{_price(feed.feeded_to.price)}|
            if category.eql? Style::PAGES[:p_motor_vehicle]

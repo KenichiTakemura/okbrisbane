@@ -30,5 +30,8 @@ module Okvalue
   TOPFEED_IMAGE_SIZE = "120x90"
   OKBOARD_IMAGE_FEED_LIMIT = 5
   OKBOARD_IMAGE_SIZE = "138x118"
+  OKBOARD_MORE_SIZE = 10
+  
+  ADMIN_EMAIL = "admin@okbrisbane.com"
   
 end

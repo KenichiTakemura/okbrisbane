@@ -295,6 +295,7 @@ ko:
   select: '선택'
   drive_away: 'Drive Away'
   viewed: '조회수'
+  contact_person: 'Contact'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -383,7 +384,7 @@ ko:
   for_auction: 'Autction'
   
   new_car: '새자'
-  userd_car: '중고자ㅅ'
+  used_car: '중고자'
   
   # Tax Category
   for_business: '비즈니스 세무'
