@@ -9,6 +9,6 @@ class CreateClientImages < CreateAttachables
     add_column :client_images, :caption, :string
     add_column :client_images, :source_url, :string
     add_column :client_images, :link_to_url, :string
-    add_column :client_images, :business_client_id, :integer, :references => "business_client"
+    #add_column :client_images, :business_client_id, :integer, :references => "business_client"
   end
 end

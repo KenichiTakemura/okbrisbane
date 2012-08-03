@@ -8,8 +8,8 @@ class BusinessClient < ActiveRecord::Base
   attr_accessible :business_email
   attr_accessible :contact_name
 
-  has_many :client_image, :dependent => :destroy
-  has_many :business_profile_image, :as => :attached, :dependent => :destroy
+  has_many :client_image, :as => :attached, :dependent => :destroy, :class_name => 'ClientImage'
+  has_many :business_profile_image, :as => :attached, :dependent => :destroy, :class_name => 'BusinessProfileImage'
   has_one :business_profile, :dependent => :destroy
   
   belongs_to :business_category

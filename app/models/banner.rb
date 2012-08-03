@@ -15,7 +15,9 @@ class Banner < ActiveRecord::Base
   attr_accessible :attached
   attr_accessible :display_name
   
-  has_many :client_image, :as => :attached, :class_name => 'ClientImage'
+  # many-to-many
+  has_many :banner_image
+  has_many :client_image, :through => :banner_image
   
   belongs_to :page
   belongs_to :section

@@ -296,6 +296,7 @@ ko:
   drive_away: 'Drive Away'
   viewed: '조회수'
   contact_person: 'Contact'
+  view: '보기'
 
   p_home: "메인"
   p_signin: "회원로그인"

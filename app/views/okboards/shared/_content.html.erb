@@ -6,7 +6,6 @@
 		<% @board_image_lists.each do |post| %>
 		<div class="okboard_thumbnail">
 			<%= image_tag(post.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
-			<%= section_span(post) %>
 			<p class="description">
 				<%= post.subject%>
 			</p>
@@ -16,6 +15,7 @@
 				<br/>
 				<%= t("drive_away") %>
 				<% end %>
+				<div class="okboard_thumbnail_view"><%= t('view') %><%= section_span(post) %></div>
 			</p>
 		</div>
 		<% end %>
@@ -32,8 +32,12 @@
 				<%= select_tag :category, options_for_select(@post.category_list, 0) %>
 			</div>
 			<div class="item">
-				<%= label_tag :price, t("price"), :class => "label left" %>&nbsp;
-				<%= search_field_tag :price %>
+				<%= label_tag :from_price, t("price"), :class => "label left" %>&nbsp;
+				<%= search_field_tag :from_price %>
+			</div>
+			<div class="item">
+				<%= label_tag :to_price, t("price"), :class => "label left" %>&nbsp;
+				<%= search_field_tag :to_price %>
 			</div>
 			<div class="item">
 				<%= label_tag :from, t("from"), :class => "label left" %>&nbsp;

@@ -32,7 +32,7 @@ ok.save
 Style::PAGES.each do |key, value|
   Page.create(:name => value)
 end
-# Section
+# SectionBusinessClient.delete_all
 Style::SECTIONS.each do |key, value|
   Section.create(:name => value)
 end
