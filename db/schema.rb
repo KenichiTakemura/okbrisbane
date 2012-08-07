@@ -376,19 +376,7 @@ ActiveRecord::Schema.define(:version => 20120802230103) do
     t.datetime "updated_at",                        :null => false
   end
 
-  create_table "pages", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "post_searches", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "sections", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

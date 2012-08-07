@@ -17,33 +17,27 @@ class BannerTest < ActiveSupport::TestCase
   end
 
   def create_banner
-    # Page
-    Style::PAGES.each do |key, value|
-      Page.create(:name => value)
-    end
-    # Section
-    Style::SECTIONS.each do |key, value|
-      Section.create(:name => value)
-    end
-    Style::PAGES.each do |key, value|
-      Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-      :section_id => Section.find_by_name(Style::SECTIONS[:s_header]).id,
+    Style.pages.each do |key, value|
+      Banner.create(:page_id => Style.pageid(key),
+      :section_id => Style.sectionid(:s_header),
       :position_id => 1,
       :div_width => 500, :div_height => 60, :img_width => 500,
       :img_height => 60, :style => 'position:relative;float:right;top:0px;')
-      Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-      :section_id => Section.find_by_name(Style::SECTIONS[:s_header]).id,
+      Banner.create(:page_id => Style.pageid(key),
+      :section_id => Style.sectionid(:s_header),
       :position_id => 2,
       :div_width => 710, :div_height => 120, :img_width => 710, :img_height => 120,
       :style => 'position:relative;float:right;right:0px')
     end
   end
-  
+
   def getBanner(p,s,a)
-    page_id = Page.find_by_name(Style::PAGES[p]).id
-    section_id = Section.find_by_name(Style::SECTIONS[s]).id
-    position_id = a
-    Banner.where("page_id = ? AND section_id = ? AND position_id = ?", page_id, section_id, position_id).first
+    Banner.all.each do |banner|
+      if banner.page_id == Style.pageid(p) && banner.section_id == Style.sectionid(s) && banner.position_id.to_i == a.to_i
+        return banner
+      end
+    end
+    raise "No banner space found for #{p} >> #{s} >> #{a}"
   end
 
   test "add images" do
@@ -71,7 +65,7 @@ class BannerTest < ActiveSupport::TestCase
     assert_equal(BannerImage.all.size, 1)
     assert_equal(c.client_image.size, 2)
   end
-  
+
   test "delete image" do
     c = client_with_banners
     create_banner
@@ -91,8 +85,7 @@ class BannerTest < ActiveSupport::TestCase
     assert_equal(banner.client_image.size, 1)
     assert_equal(BusinessClient.first.client_image.size, 1)
   end
-  
-  
+
   test "add images to banners" do
     c = client_with_banners
     create_banner

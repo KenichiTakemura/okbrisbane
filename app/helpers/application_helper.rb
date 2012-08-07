@@ -24,10 +24,10 @@ module ApplicationHelper
       
   # Create banner
   def _collectImage(p, s, a)
-    page = Page.find_by_name(Style::PAGES[p])
-    section = Section.find_by_name(Style::SECTIONS[s])
-    position = a
-    b = Banner.where("page_id = ? AND section_id = ? AND position_id = ?", page, section, position).first
+    page_id = Style.pageid(p)
+    section_id = Style.sectionid(s)
+    position_id = a
+    b = Banner.where("page_id = ? AND section_id = ? AND position_id = ?", page_id, section_id, position_id).first
     raise "Bad Argument #{p} > #{s} > #{a}" if b.nil?
     logger.debug("banner: #{b}")
     images = b.client_image
@@ -53,9 +53,13 @@ module ApplicationHelper
         script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
         html += _script_document_ready(script)
     elsif
-      html += %Q|<div id="effect_#{div_id}"><div class="effect_container_#{div_id}">|
+      html += %Q|<div id="#{div_id}"><div class="#{div_id}_slides_container">|
       images.each do |image|
-        html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.avatar.url(:original)}" width="#{b.img_width}px" height="#{b.img_height}px"/></div>|
+        html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.avatar.url(:original)}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+        if !image.caption.nil? && !image.caption.empty?
+          html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+        end
+        html += "</div>"
       end
       html += "</div></div>"
     end
@@ -95,24 +99,33 @@ module ApplicationHelper
     html = _banner(p, s, a, div_id)
     script = ""
     if images.size >= 2
-      #script += %Q|$('\##{div_id}').cycle({fx: 'scrollRight',random: 1});|
+      container = div_id + "_slides_container"
+      effect_speed = b.effect_speed * 1000
+      effect = Style.getEffect(p,s,a)
+      logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
+      script += %Q|$('\##{div_id}').slides({container:'#{container}',
+        preloadImage:'assets/common/loading.gif',|
+      script += "randomize:true," if b.is_random
       case b.effect
       when Banner::E_SLIDE
-      when Banner::E_SLIDE_W_CAPTION
+        script += %Q|play:#{effect_speed},#{effect}});
+        $("a.prev").text('#{t("effect_prev")}');
+        $("a.next").text('#{t("effect_next")}');|
       when Banner::E_FIX
+        effect_speed = 3600 * 1000 * 3
+        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
       end
-      script += %Q|$('\##{div_id}').cycle({fx: 'fade',random: 1,timeout: 100});|
+      logger.debug("script: #{script}")
       html += _script_document_ready(script)
     end
     html.html_safe
   end
 
   def _price(price)
-   '%.2f' % price
+   number_to_currency(price, :locale => 'en')
   end
 
   def navigation(over, out)
-     logger.debug("navigation")
      html = %Q|<div id="navigation"><ul class="">|
      Style::NAVI.each do |key, value|
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
@@ -127,13 +140,17 @@ module ApplicationHelper
   end
   
   def _okpage_v(okpage)
-    okpage.to_s.crypt("okboard")
+    Common.encrypt_data(okpage.to_s).chop
   end
   
   def _okboard_link(okpage)
     %Q|/okboards?v=| + _okpage_v(okpage)
   end
   
+  def _okboard_link_with_category(okpage,category)
+    _okboard_link(okpage) + "&c=" + Common.encrypt_data(category).html_safe
+  end
+
   def _script_document_ready(script)
     html = %Q|<script type="text/javascript" charset="utf-8">$(document).ready(function() {#{script}});</script>|
     html.html_safe
@@ -178,7 +195,6 @@ module ApplicationHelper
   
   def _truncate_no_title(expression)
     html = %Q|#{truncate(expression, :length => 26)}|
-    html.html_safe
   end
 
   def noimage?(item)
@@ -195,7 +211,7 @@ module ApplicationHelper
       end
       logger.debug("item.image: #{item.image}")
    else 
-     raise "Internal Error"
+     raise "Internal Error #{item.class}"
    end
    return ""
  end

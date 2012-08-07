@@ -297,6 +297,11 @@ ko:
   viewed: '조회수'
   contact_person: 'Contact'
   view: '보기'
+  listing: '일람'
+  hiring: "구직"
+  seeking: '구인'
+  buying: '삽니다'
+  selling: '팝니다'
 
   p_home: "메인"
   p_signin: "회원로그인"
@@ -319,6 +324,8 @@ ko:
   p_yellowpage: '엘로우페이지'
   p_sponsor: '고객'
   
+  p_mypage: '마이페이지'
+  
   s_header: "헤드"
   s_background: "배경"
   s_body: '보디'
@@ -331,15 +338,21 @@ ko:
   img_height: '이미지 사이즈(높이)'
   image_size: '이미지 사이즈'
   div_size: 'div 사이즈'
-  effect: 'Effect'
-  effect_speed: 'Effect_Speed'
-  slide_auto: 'slide_auto'
-  slide_w_caption: 'slide_w_caption'
-  fix: 'fix'
+  effect: '효능(Effect)'
+  effect_speed: '효능(Effect) 속도(초)'
+  slide_auto: '자동적으로 슬라이드'
+  slide_w_caption: '자막랑 같이 자동적으로 슬라이드'
+  fix: '고정(슬라이드 없음)'
   unit_second: '단위 : 초'
   more_than_1: '1 이상'
   random: '랜덤 표시'
   randomly_display: 'if checked 랜덤으로 표시'
+  
+  effect_prev: '＜'
+  effect_next: '＞'
+
+  menu_toggle_show: '⇨'
+  menu_toggle_hide: '⇩'
 
   client_management: '고객 관리'
   banner_management: '광고란 관리'
@@ -352,7 +365,6 @@ ko:
   site_statistics: '사이트 통계'
   issue_management: '문제 관리'
   system_management: "사이트 관리"
-  
   listing_business_clients: '고객 일람'
   listing_banners: '광고란 일람'
 

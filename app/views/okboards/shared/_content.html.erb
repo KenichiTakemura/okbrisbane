@@ -2,6 +2,7 @@
 	<p class="okboard_title">
 		<%= t(@okpage.to_s)%>
 	</p>
+	<% if !@board_image_lists.nil? %>
 	<div id="okboard_for_<%= @okpage %>">
 		<% @board_image_lists.each do |post| %>
 		<div class="okboard_thumbnail">
@@ -20,11 +21,14 @@
 		</div>
 		<% end %>
 	</div>
+	<% end %>
+	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage) %>
 	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
 		<%= single_body_banner(6) %>
 		<%= single_body_banner(7) %>
 		<%= single_body_banner(8) %>
 	</div>
+	<% end %>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<div id="okboard_filter">
 			<div class="item">
@@ -49,35 +53,21 @@
 			</div>
 			<%= image_tag("#{I18n.locale}/common/org_search.gif") %>
 		</div>
-		<div id="okboard_list_head">
-			<ul class="okboard_list_title">
-				<li class="first">
-					<%= t("category")%>
-				</li>
-				<li class="normal">
-					<%= t("price")%>
-				</li>
-				<li class="normal">
-					<%= t("subject")%>
-				</li>
-				<li class="normal">
-					<%= t("created_at")%>
-				</li>
-				<li class="last">
-					<%= t("viewed")%>
-				</li>
-			</ul>
-		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
-		<%= build_board_list %>
-		<div id="okboard_list_body_more_<%=@lastid%>"></div>
+		<div id="okboard_list">
+		<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)%>
+		<%= build_board_list(true,true) %>
+		<% else %>
+		<%= build_board_list(true,false) %>
+		<% end %>
 		<div id="okboard_list_body_more_loading">
 			<%= image_tag ("common/ajax_loading.gif")%>
 		</div>
 		<div class="more">
 			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more") %>
 		</div>
+		</div>
 	</div>
 	<%= _script_document_ready(%Q|$('\#_lastid').val("#{@lastid}");$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
-		$.post("| + more_okboards_path + %Q|", {v: "#{_okpage_v(@okpage)}", lastid: $('\#_lastid').val()}); return false;
+		$.post("| + more_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
 		})|) %>

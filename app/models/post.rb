@@ -6,20 +6,6 @@ class Post < ActiveRecord::Base
   # attr_accessible
   attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted
 
-  Categories = Hash.new
-  
-  def category_list()
-    list = Array.new
-    Categories.each do |key,value|
-      list.push([I18n.t(value),value])
-    end
-    list
-  end
-  
-  def getCategory(key)
-    Categories[key]
-  end
-
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
 
@@ -54,6 +40,7 @@ class Post < ActiveRecord::Base
   default_scope :order => 'updated_at DESC'
   paginates_per 10
   
+  # scope
   scope :is_valid, where("is_deleted != ?", true)
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
 
@@ -125,5 +112,5 @@ class Post < ActiveRecord::Base
   def set_user(user)
     update_attribute(:posted_by, user)
   end
-
+    
 end

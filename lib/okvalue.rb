@@ -35,4 +35,8 @@ module Okvalue
   
   ADMIN_EMAIL = "admin@okbrisbane.com"
   
+  BANNER_EFFECT_PAUSE = 2500
+  BANNER_FADE_SPEED = 800
+  
+  NUMBER_OF_LEFT_MENU = 5
 end

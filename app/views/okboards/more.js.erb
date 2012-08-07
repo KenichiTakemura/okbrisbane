@@ -1,4 +1,4 @@
 $("#okboard_list_body_more_loading").css("display","none")
-$("#okboard_list_body_more_<%=@previd%>").html("<%= escape_javascript(render 'more_post', :posts  => @board_lists) %>")
+$("tbody").append("<%= escape_javascript(render 'more_post', :posts  => @board_lists) %>")
 $('\#_lastid').val("<%=@lastid%>")
-$('\#okboards').height($('\#okboards').height() + 230)
+$('\#okboards').height($('\#okboards').height() + $('tr.okboard_list_body').height() * <%= @board_lists.size %>)

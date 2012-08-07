@@ -7,8 +7,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.delete_all
-Page.delete_all
-Section.delete_all
 Banner.delete_all
 BusinessClient.delete_all
 BusinessProfile.delete_all
@@ -27,15 +25,6 @@ ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", 
 ok.build_business_profile(:body => 'OKBRISBANE rocks!')
 ok.save
 
-
-# Page
-Style::PAGES.each do |key, value|
-  Page.create(:name => value)
-end
-# SectionBusinessClient.delete_all
-Style::SECTIONS.each do |key, value|
-  Section.create(:name => value)
-end
 # SystemSetting
 ss = SystemSetting.new
 ss.image_thumbnail_size = "100x100>"
@@ -46,151 +35,150 @@ ss.business_profile_picture_size = "500x400>"
 ss.save
 
 # Banner
-# Home
-_page = :p_home
-## Header
+
 Style::PAGES.each do |key, value|
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_header]).id,
+  ## Header
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_header),
   :position_id => 1,
   :div_width => 500, :div_height => 60, :img_width => 500,
   :img_height => 60, :style => 'position:relative;float:right;top:0px;')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_header]).id,
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_header),
   :position_id => 2,
   :div_width => 710, :div_height => 120, :img_width => 710, :img_height => 120,
   :style => 'position:relative;float:right;right:0px')
-end
-## Background
-Style::PAGES.each do |key, value|
-  if value.eql? Style::PAGES[:p_home]
-  is_disabled = false
+  if value.eql? Style.page(:p_home)
+    is_disabled = false
   else
-  is_disabled = true
+    is_disabled = true
   end
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_background]).id,
+  ## Background
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
   :position_id => 1,
-  :div_width => 160, :div_height => 750,
-  :img_width => 160, :img_height => 750,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
   :style => 'position:absolute;top:100px;left:-165px',
   :is_disabled => is_disabled)
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[key]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_background]).id,
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
   :position_id => 2,
-  :div_width => 160, :div_height => 750,
-  :img_width => 160, :img_height => 750,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
   :style => 'position:absolute;top:100px;right:-165px',
   :is_disabled => is_disabled)
 end
+# Home
+_page = :p_home
 ## Body
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id =>1,
-:div_width => 650, :div_height => 380,
+:div_width => 650, :div_height => 400,
 :img_width => 650, :img_height => 380,
 :style => 'position:relative;float:left;top:0px')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 2,
 :div_width => 320, :div_height => 200,
 :img_width => 320, :img_height => 200,
 :style => 'position:relative;top:0px;right:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 3,
 :div_width => 650, :div_height => 110,
 :img_width => 120, :img_height => 100,
 :style => 'position:relative;float:left;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 4,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:left;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 5,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:left;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 6,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 7,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 8,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[_page]).id,
-:section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
 :position_id => 9,
 :div_width => 650, :div_height => 130,
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 # Body
 [:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
-Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+Banner.create(:page_id => Style.pageid(page),
+:section_id => Style.sectionid(:s_body),
   :position_id => 1,
   :div_width => 220, :div_height => 130,
   :img_width => 220, :img_height => 130,
   :style => 'position:relative;float:left;top:0px')
 end
 [:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 2,
   :div_width => 220, :div_height => 150,
   :img_width => 220, :img_height => 150,
   :style => 'position:relative;float:left;top:0px')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 3,
   :div_width => 220, :div_height => 150,
   :img_width => 220, :img_height => 150,
   :style => 'position:relative;float:left;top:0px')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 4,
   :div_width => 220, :div_height => 150,
   :img_width => 220, :img_height => 150,
   :style => 'position:relative;float:left;top:0px')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 5,
   :div_width => 740, :div_height => 150,
   :img_width => 740, :img_height => 150,
   :style => 'position:relative;float:left;top:0px')
 end
-# MotorVehicle
+# Buy and Sell Related
 [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 6,
-  :div_width => 230, :div_height => 150,
-  :img_width => 230, :img_height => 150,
+  :div_width => 240, :div_height => 150,
+  :img_width => 240, :img_height => 150,
   :style => 'position:relative;float:left;top:0px')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 7,
-  :div_width => 230, :div_height => 150,
-  :img_width => 230, :img_height => 150,
+  :div_width => 240, :div_height => 150,
+  :img_width => 240, :img_height => 150,
   :style => 'position:relative;float:left;top:0px;left:5px')
-  Banner.create(:page_id => Page.find_by_name(Style::PAGES[page]).id,
-  :section_id => Section.find_by_name(Style::SECTIONS[:s_body]).id,
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
   :position_id => 8,
-  :div_width => 230, :div_height => 150,
-  :img_width => 230, :img_height => 150,
+  :div_width => 240, :div_height => 150,
+  :img_width => 240, :img_height => 150,
   :style => 'position:relative;float:left;top:0px;left:10px')
 end

@@ -1,8 +1,19 @@
 class Job < Post
 
-  SEEK = "seek"
-  HIRE = "hire"
-
-  validates_inclusion_of :category, :in => [SEEK,HIRE], :message => 'Invalid category'
+  Categories = Hash.new
+  Categories[:seek] = "seeking"
+  Categories[:hire] = "hiring"
   
+  def category_list()
+    list = Array.new
+    Categories.each do |key,value|
+      list.push([I18n.t(value),value])
+    end
+    list
+  end
+
+  def getCategory(key)
+    Categories[key]
+  end
+
 end

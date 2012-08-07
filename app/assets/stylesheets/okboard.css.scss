@@ -9,6 +9,51 @@
   position: relative;
 }
 
+#okboard_let_menu {
+  position:relative;
+  float:left;
+  width: 100%;
+    background:#64E464;
+  box-shadow: 5px 5px 5px #888;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+    background: -moz-linear-gradient(top, white 20%, #8b0 80%);
+    background: -webkit-gradient(linear, left top, left bottom, from(#990), to(#066));
+}
+
+ul.okboard_left_menu_items {
+  list-style-type: none;
+  font-size: 13px;
+  font-weight: bold;
+  float:left;
+}
+
+li.okboard_left_menu_item {
+  color: #000;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  margin-left:0px;
+}
+
+a.okboard_left_menu_link:hover {
+  background: #41A317;
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+a.okboard_left_menu_link {
+  margin-left: 10px;  
+}
+
+a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
+  line-height: 0px;
+  color:#000;
+  font-style:normal;
+  text-decoration:none;
+
+}
+
 .okboard_title {
   position: relative;
   font-family: 'NanumGothicExtraBold';   
@@ -31,12 +76,26 @@
   font-weight: bold;
 }
 
+
+.okboard_description {
+}
+
 .okboard_thumbnail {
   position: relative;
   float: left;
   margin-right: 10px;
   z-index: auto;
   width: 140px;
+}
+
+.okboard_feed_thumbnail_view {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right:0px;
+  font-size: 11px;
+  color: #888888;
+  line-height: 0px;
 }
 
 .okboard_thumbnail_view {
@@ -80,84 +139,30 @@
   background: url("common/title_img_detail_srch01b.gif");
 }
 
-#okboard_list_head {
-  width: 100%;
-  height: 30px;
-}
-
-#okboard_list_body {
+#okboard_list {
   position: relative;
-  float: left;
+  margin: auto;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  margin-bottom: 5px;
+  float:left;
 }
 
-ul.okboard_list_title {
-  margin-top: 0px;
-  margin-left: 10px;
-  padding: 0;
-  list-style-type: none;
-  font-size: 13px;
-}
-
-ul.okboard_list_title li.normal {
-  width: 190px;
+.okboard_list_body {
+  text-align:center;
   height: 20px;
-  text-align: center;
-  float: left;
-  line-height: 20px;
-  background: #c0c0c0;
 }
 
-ul.okboard_list_title li.first, ul.okboard_list_title li.last {
-  width: 80px;
-  height: 20px;
-  text-align: center;
-  float: left;
-  line-height: 20px;
-  background: #c0c0c0;
-}
-
-ul.okboard_list_body li.normal {
-  width: 180px;
-  height: 20px;
-  text-align: center;
-  float: left;
-  line-height: 20px;
-}
-
-ul.okboard_list_body li.first, ul.okboard_list_body li.last {
-  width: 80px;
-  height: 20px;
-  text-align: center;
-  float: left;
-  line-height: 20px;
-}
-
-ul.okboard_list_body {
-  margin-top: 0px;
-  padding: 0;
-  list-style-type: none;
-  font-size: 11px;
-}
-
-#okboard_list_body:hover {
+.okboard_list_body:hover {
   -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
   background:#eaebec;
 }
 
-#okboard_list_body:hover span {
+.okboard_list_view:hover span {
   visibility: visible;
-  top: -50%; /* use IF IE6 style to correct IE6 positions of larger image relative to thumb */
-  left: 50%;/*position where enlarged image should offset horizontally */
 }
 
-#okboard_list_body span {
+.okboard_list_view span {
   position: absolute;
   background-color: #e5e5e5;
   padding: 5px;
@@ -166,8 +171,8 @@ ul.okboard_list_body {
   color: black;
   text-decoration: none;
   z-index: 1;
+  width: 300px;
 }
-
 
 #okboard_filter .item {
   position: relative;
@@ -196,3 +201,98 @@ div.more {
   margin-left:auto;margin-right:auto;
   width:10em;
 }
+
+// Effect
+.pagination {
+    margin: 6px 0px 0px;
+    float: right;
+    list-style: none outside none;
+}
+
+.pagination li {
+    float: left;
+    margin: 0px 1px;
+}
+
+.pagination li a {
+    display: block;
+    width: 13px;
+    height: 0px;
+    padding-top: 13px;
+    background-image: url("common/pagination.png");
+    background-position: 0px 0px;
+    float: left;
+    overflow: hidden;
+}
+
+.pagination li.current a, .pagination li.current a:hover { background-position: 0 -13px }
+
+.pagination li a:hover { background-position: 0 -26px }
+
+a.prev {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  font-family: 'NanumGothicExtraBold';
+  font-weight: bold;
+  font-size: 50px;
+  margin-right: 5px;
+  background: #000;
+  color: #fff;
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+a.prev:link, a.prev:visited { color: #fff; text-decoration: none }
+a.prev:hover, a.prev:active { color: #fff; text-decoration: none }
+a.next:link, a.next:visited { color: #fff; text-decoration: none }
+a.next:hover, a.next:active { color: #fff; text-decoration: none }
+a.next {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  font-family: 'NanumGothicExtraBold';
+  font-weight: bold;
+  font-size: 50px;
+  margin-right: 5px;
+  background: #000;
+  color: #fff;
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+div.caption {
+    z-index: 500;
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.5);
+    font-size: 1.3em;
+    line-height: 20px;
+    text-shadow: none;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 255, 255);
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border-top: 1px solid rgb(0, 0, 0);
+     border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+

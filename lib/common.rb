@@ -3,30 +3,24 @@ module Common
     date.strftime("%Y-%m-%d") if date
   end
 
-  require 'openssl'
-  
-  def self.encrypt(data)
-    cipher = OpenSSL::Cipher::Cipher.new("AES-256-CBC")
-    cipher.encrypt
-    cipher.pkcs5_keyivgen("okbrisbane",OpenSSL::Random.random_bytes(8))
-    e_data = cipher.update(data) + cipher.final
-    encrypted = e_data.unpack("H*").to_s
-  rescue => exception
-    puts exception.backtrace
-    false
-  end
-
-  def self.decrypt(bbb, solt = 'solt')
-    dec = OpenSSL::Cipher::Cipher.new('aes256') 
-    dec.decrypt 
-    dec.pkcs5_keyivgen(solt)
-    (dec.update(Array.new([bbb]).pack("H*")) + dec.final)
-  rescue  
-    false 
-  end 
-
   def self.hash(ccc)
     OpenSSL::Digest::SHA1.new(ccc).to_s
   end
 
+  require 'encryptor'
+  
+  def self.decrypt_data(data)
+    key = 'okbrisbane_rocks2012!'
+    Base64.decode64(data.tr('-_','+/')).decrypt(:key => key)
+    rescue  
+      false 
+  end
+  
+  def self.encrypt_data(data)
+    key = 'okbrisbane_rocks2012!'
+    Base64.encode64(Encryptor.encrypt(data, :key => key)).tr('+/','-_')
+    rescue  
+      false 
+  end
+  
 end

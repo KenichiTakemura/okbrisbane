@@ -1,11 +1,12 @@
 module Style
-    
+  
   PAGES = Hash.new
   SECTIONS = Hash.new
   NAVI = Hash.new
+  PAGE_IDS = Hash.new
+  SECTION_IDS = Hash.new
   
   # div id rule is banner_#{page}_#{section}_#{position}
-  
   PAGES[:p_home] = "p_home"
   PAGES[:p_signin] = "p_signin"
   PAGES[:p_signup] = "p_signup"
@@ -24,6 +25,26 @@ module Style
   PAGES[:p_sponsor] = "p_sponsor"
   PAGES[:p_mypage] = "p_mypage"
   
+  
+  
+  PAGE_IDS[:p_home] = 1
+  PAGE_IDS[:p_signin] = 2
+  PAGE_IDS[:p_signup] = 3
+  PAGE_IDS[:p_job] = 4
+  PAGE_IDS[:p_buy_and_sell] = 5
+  PAGE_IDS[:p_wellbeing] = 6
+  PAGE_IDS[:p_estate] = 7
+  PAGE_IDS[:p_business] = 8
+  PAGE_IDS[:p_motor_vehicle] = 9
+  PAGE_IDS[:p_accommodation] = 10
+  PAGE_IDS[:p_law] = 11
+  PAGE_IDS[:p_tax] = 12
+  PAGE_IDS[:p_study] = 13
+  PAGE_IDS[:p_immig] = 14
+  PAGE_IDS[:p_yellowpage] = 15
+  PAGE_IDS[:p_sponsor] = 16
+  PAGE_IDS[:p_mypage] = 17
+    
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
   NAVI[:p_wellbeing] = "p_wellbeing"
@@ -38,9 +59,83 @@ module Style
   SECTIONS[:s_background] = "s_background"
   SECTIONS[:s_body] = "s_body"
 
+  SECTION_IDS[:s_header] = 1
+  SECTION_IDS[:s_background] = 2
+  SECTION_IDS[:s_body] = 3
+  
+  def Style.pages
+    PAGES
+  end
+  
+  def Style.sections
+    SECTIONS
+  end
 
   def Style.create_banner_div(page, section, position)
-    "banner_#{Style::PAGES[page]}_#{Style::SECTIONS[section]}_#{position}"
+    "banner_#{Style.page(page)}_#{Style.section(section)}_#{position}"
+  end
+
+  def Style.pageid(key)
+    PAGE_IDS[key] 
+  end
+  
+  def Style.pagename(id)
+    return nil if id.nil?
+    p = PAGE_IDS.to_a
+    p.rassoc(id.to_i).first.to_s
+  end
+  
+  def Style.pagename_sym(id)
+    return nil if id.nil?
+    p = PAGE_IDS.to_a
+    p.rassoc(id.to_i).first
+  end
+  
+  def Style.sectionid(key)
+    SECTION_IDS[key]
+  end
+  
+  def Style.sectionname(id)
+    return nil if id.nil?
+    s = SECTION_IDS.to_a
+    s.rassoc(id.to_i).first.to_s
+  end
+  
+  def Style.sectionname_sym(id)
+    return nil if id.nil?
+    s = SECTION_IDS.to_a
+    s.rassoc(id.to_i).first
+  end
+  
+  def Style.page(key)
+    Style::PAGES[key]
+  end
+  
+  def Style.section(key)
+    Style::SECTIONS[key]
+  end
+
+  
+  Effect = Hash.new
+  # Rule page _ section _ postion
+  # if _ section _ position => any page
+  Effect[:any] = ""
+  Effect[:_s_header_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},generatePagination:false,hoverPause:true|
+  Effect[:_s_header_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},generatePagination:false,hoverPause:true|
+  Effect[:p_home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:true,effect:'fade',crossfade: true,generateNextPrev:true|
+
+  def Style.getEffect(page, section, position)
+    key = "#{page}_#{section}_#{position}"
+    Rails.logger.debug("getEffect key: #{key}")
+    effect = Effect[key.to_sym]
+    return effect if !effect.nil?
+    key = "_#{section}_#{position}"
+    effect = Effect[key.to_sym]
+    return effect if !effect.nil?
+    key = "_#{position}"
+    effect = Effect[key.to_sym]
+    return effect if !effect.nil?
+    Effect[:any]
   end
 
 end

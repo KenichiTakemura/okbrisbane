@@ -53,3 +53,4 @@ gem "paperclip", "~> 3.0"
 # Kaminari
 gem 'kaminari'
 gem 'uuidtools'
+gem 'encryptor'
