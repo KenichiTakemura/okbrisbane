@@ -9,7 +9,7 @@ class Attachable < ActiveRecord::Base
   belongs_to :attached, :polymorphic => true
   belongs_to :attached_by, :polymorphic => true
   
-  def attached_to(post, user)
+  def attached_to_by(post, user)
     update_attribute(:attached, post)
     update_attribute(:attached_by, user)
   end
@@ -21,10 +21,6 @@ class Attachable < ActiveRecord::Base
   def to_s
     "id: #{id} a_file_name: #{avatar_file_name} a_content_type #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
   end
-  
-  # https://github.com/thoughtbot/paperclip
-  validates :avatar, :attachment_presence => true
-  validates_with AttachmentPresenceValidator, :attributes => :avatar
 
 #  AttachmentContentTypeValidator
 #  AttachmentPresenceValidator

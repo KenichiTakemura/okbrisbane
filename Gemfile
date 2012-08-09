@@ -54,3 +54,4 @@ gem "paperclip", "~> 3.0"
 gem 'kaminari'
 gem 'uuidtools'
 gem 'encryptor'
+gem "ckeditor", "3.7.1"

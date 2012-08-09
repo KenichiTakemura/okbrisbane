@@ -76,9 +76,11 @@
 					// fjs.parentNode.insertBefore(js, fjs);
 					// }(document, 'script', 'facebook-jssdk'));
 				</script>
-				<% if [:p_home,:p_signin,:p_signup].include?(@okpage)  %>
-				<%= navigation("#41A317","#f0f0f0") %>
+				<% if Style.page(:p_home).eql?(@okpage.to_s) || Style.page(:p_signin).eql?(@okpage.to_s) || Style.page(:p_signup).eql?(@okpage.to_s)  %>
+					<% Rails.logger.debug("included") %>
+					<%= navigation("#41A317","#f0f0f0") %>
 				<% else %>
+					<% Rails.logger.debug("not included #{@okpage}") %>
 					<%= _script_document_ready(%Q|$('\#header').css("height","240px");$('\#header-bottom').css("height","40px");|)%>
 				<% end %>
 			</div>

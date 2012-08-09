@@ -27,11 +27,7 @@ ok.save
 
 # SystemSetting
 ss = SystemSetting.new
-ss.image_thumbnail_size = "100x100>"
-ss.image_max_size_in_kb = "50000"
-ss.attach_acceptable_extention = 'image/jpeg,image/png,image/gif'
-ss.attach_storage_path = ''
-ss.business_profile_picture_size = "500x400>"
+ss.post_expiry_length = 30
 ss.save
 
 # Banner
@@ -127,7 +123,16 @@ Banner.create(:page_id => Style.pageid(_page),
 :img_width => 210, :img_height => 120,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 # Body
-[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
+[:p_signin,:p_signup].each do |page|
+Banner.create(:page_id => Style.pageid(page),
+:section_id => Style.sectionid(:s_body),
+  :position_id => 1,
+  :div_width => 220, :div_height => 130,
+  :img_width => 220, :img_height => 130,
+  :style => 'position:relative;float:left;top:0px',
+  :is_disabled => true)
+end
+[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
 Banner.create(:page_id => Style.pageid(page),
 :section_id => Style.sectionid(:s_body),
   :position_id => 1,
@@ -135,7 +140,7 @@ Banner.create(:page_id => Style.pageid(page),
   :img_width => 220, :img_height => 130,
   :style => 'position:relative;float:left;top:0px')
 end
-[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business].each do |page|
+[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
   Banner.create(:page_id => Style.pageid(page),
   :section_id => Style.sectionid(:s_body),
   :position_id => 2,

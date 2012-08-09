@@ -25,8 +25,6 @@ module Style
   PAGES[:p_sponsor] = "p_sponsor"
   PAGES[:p_mypage] = "p_mypage"
   
-  
-  
   PAGE_IDS[:p_home] = 1
   PAGE_IDS[:p_signin] = 2
   PAGE_IDS[:p_signup] = 3

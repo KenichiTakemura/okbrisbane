@@ -1,5 +1,7 @@
 Okbrisbane::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   #match 'css/:action.css', :controller=>'stylesheet', :as => :css
 
   resources :mypages
@@ -17,8 +19,12 @@ Okbrisbane::Application.routes.draw do
   resources :okboards, :only => ['index'] do
     collection do
       post :more
+      get :view
+      get :write
     end
   end
+  
+  resources :jobs, :only => ["index","new","create","edit","update"]
   
   resources :post_searches, :only => ["index"]
   

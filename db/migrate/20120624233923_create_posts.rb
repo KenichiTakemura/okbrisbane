@@ -13,8 +13,9 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :likes, :default => 0
       t.integer :dislikes, :default => 0
       t.integer :rank, :default => 0
-      t.boolean :abuse, :default => false
+      t.integer :abuse, :default => 0
       t.boolean :is_deleted, :default => false
+      t.integer :z_index, :default => 0
       t.timestamps
     end    
   end

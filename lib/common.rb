@@ -6,10 +6,9 @@ module Common
   def self.hash(ccc)
     OpenSSL::Digest::SHA1.new(ccc).to_s
   end
-
-  require 'encryptor'
   
-  def self.decrypt_data(data)
+  def self.decrypt_data(data)  
+    require 'encryptor'
     key = 'okbrisbane_rocks2012!'
     Base64.decode64(data.tr('-_','+/')).decrypt(:key => key)
     rescue  
@@ -17,6 +16,7 @@ module Common
   end
   
   def self.encrypt_data(data)
+    require 'encryptor'
     key = 'okbrisbane_rocks2012!'
     Base64.encode64(Encryptor.encrypt(data, :key => key)).tr('+/','-_')
     rescue  

@@ -1,0 +1,52 @@
+<div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
+	<p class="okboard_title">
+		<%= t(@okpage.to_s)%> <%= t('write_new')%>
+	</p>
+	<div class="author">
+		<%= t('author') %> <%= current_user.email %>
+	</div>
+
+	<div class="okboard_form_write_new_post">
+		<%= form_for(@post, :html => { :multipart => true, :class => "form" }) do |f| %>
+		<% if @post.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@post.errors.count, "error") %> prohibited this client_image from being saved:</h2>
+			<ul>
+				<% @post.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="group">
+			<%= f.label :subject, t("subject"), :class => "label left" %>
+			<%= f.text_field :subject, :class => "text_field" %>
+		</div>
+		<div class="group">
+			<%= f.label :category, t("category"), :class => "label left" %>
+			<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
+		</div>
+		<%= f.fields_for @post.content do |content_form| %>
+		<div class="group">
+			<%= content_form.label :body, t("content"), :class => "label" %>
+			<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
+		</div>
+		<% end %>
+		<%= f.fields_for @post.attachment do |attachment_form| %>
+		<div class="group">
+			<%= attachment_form.label :avatar, t("attachment"), :class => "label", :style => "color:#fff"  %>
+			<%= attachment_form.file_field :avatar, :class => "avatar", :size => 40 %>
+		</div>
+		<% end %>
+		<div class="group">
+			<div class="left">
+				<%= f.submit t("create"), :class => "button-link_ok" %>
+			</div>
+		</div>
+
+		<% end %>
+
+	</div>
+</div>

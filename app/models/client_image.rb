@@ -33,4 +33,19 @@ class ClientImage < Attachable
     super.to_s + " link_to_url: #{link_to_url} original_size: #{original_size}"
   end
   
+  def thumb_image
+    return self.avatar.url(:thumb) if self.source_url.empty?
+    self.source_url
+  end
+  
+  def medium_image
+    return self.avatar.url(:medium) if self.source_url.empty?
+    self.source_url
+  end
+  
+  def original_image
+    return self.avatar.url(:original) if self.source_url.empty?
+    self.source_url
+  end
+
 end

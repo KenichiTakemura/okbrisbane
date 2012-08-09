@@ -16,7 +16,9 @@
 				<br/>
 				<%= t("drive_away") %>
 				<% end %>
-				<div class="okboard_thumbnail_view"><%= t('view') %><%= section_span(post) %></div>
+				<div class="okboard_thumbnail_view">
+					<%= t('view') %><%= section_span(post) %>
+				</div>
 			</p>
 		</div>
 		<% end %>
@@ -29,6 +31,7 @@
 		<%= single_body_banner(8) %>
 	</div>
 	<% end %>
+	<p style="float:right; margin-right:10px;"><%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link')%></p>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<div id="okboard_filter">
 			<div class="item">
@@ -55,19 +58,20 @@
 		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
-		<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)%>
-		<%= build_board_list(true,true) %>
-		<% else %>
-		<%= build_board_list(true,false) %>
-		<% end %>
-		<div id="okboard_list_body_more_loading">
-			<%= image_tag ("common/ajax_loading.gif")%>
-		</div>
-		<div class="more">
-			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more") %>
-		</div>
+			<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)%>
+			<%= build_board_list(true,true) %>
+			<% else %>
+			<%= build_board_list(true,false) %>
+			<% end %>
+			<div id="okboard_list_body_more_loading">
+				<%= image_tag ("common/ajax_loading.gif")%>
+			</div>
+			<div class="more">
+				<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "button-link") %>
+			</div>
 		</div>
 	</div>
-	<%= _script_document_ready(%Q|$('\#_lastid').val("#{@lastid}");$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
-		$.post("| + more_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
-		})|) %>
+</div>
+<%= _script_document_ready(%Q|$('\#_lastid').val("#{@lastid}");$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
+$.post("| + more_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
+})|) %>

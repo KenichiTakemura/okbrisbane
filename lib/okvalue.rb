@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 module Okvalue
+  
+  COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
     
   # Global Variables
   

@@ -8,6 +8,10 @@ class BusinessProfileImage < Attachable
     where('is_main = true').first
   end
   
+  # https://github.com/thoughtbot/paperclip
+  validates :avatar, :attachment_presence => true
+  validates_with AttachmentPresenceValidator, :attributes => :avatar
+  
   after_initialize :set_default
     
   def set_default

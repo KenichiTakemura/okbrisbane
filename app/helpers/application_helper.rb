@@ -55,7 +55,7 @@ module ApplicationHelper
     elsif
       html += %Q|<div id="#{div_id}"><div class="#{div_id}_slides_container">|
       images.each do |image|
-        html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.avatar.url(:original)}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+        html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
         if !image.caption.nil? && !image.caption.empty?
           html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
         end
@@ -139,12 +139,21 @@ module ApplicationHelper
      html.strip.html_safe
   end
   
+  
   def _okpage_v(okpage)
     Common.encrypt_data(okpage.to_s).chop
   end
   
   def _okboard_link(okpage)
     %Q|/okboards?v=| + _okpage_v(okpage)
+  end
+  
+  def _okboard_link_with_id(okpage, id)
+    %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
+  end
+  
+  def _okboard_link_write(okpage)
+    %Q|/okboards/write?v=| + _okpage_v(okpage)
   end
   
   def _okboard_link_with_category(okpage,category)

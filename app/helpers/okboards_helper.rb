@@ -45,11 +45,11 @@ module OkboardsHelper
     Rails.logger.debug("build_board_list #{header} #{price}")
     html = %Q|<table class="table">|
     if header
-      html += %Q|<tr><th class="first">| + t("category") + "</th><th>"
+      html += %Q|<thead><tr><th class="first">| + t("category") + "</th><th>"
       if price
         html += t("price") + "</th><th>"
       end
-      html += t("subject") + "</th><th>" + t("created_at") + "</th><th>" + t("viewed") +  %Q|</th><th class="last">| + t("view") + %Q|</th></tr>|
+      html += t("subject") + "</th><th>" + t("created_at") + "</th><th>" + t("viewed") + "</th><th>" + t("author") +  %Q|</th><th class="last">| + t("view") + %Q|</th></tr></thead>|
     end
     html += "<tbody>"
     html += build_body_list_body(price)
@@ -64,13 +64,18 @@ module OkboardsHelper
       html += "</td><tr>"
     else
       @board_lists.each do |post|
-        html += %Q|<tr class="okboard_list_body"><td class="first">| + t("#{post.category}") + %Q|</td><td>|
+        html += %Q|<tr class="okboard_list_body"><td class="first">| + t("#{post.category}") + " " + post.id.to_s + %Q|</td><td>|
         if price
           html += "#{_price(post.price)}" + " </td><td>"
         end
         html += _truncate_no_title(post.subject) + "</td><td>" +
-        Common.date_format(post.updated_at) + %Q|</td><td>| + t("viewed") + " " + post.views.to_s + "</td>" + %Q|<td class="okboard_list_view last">| + t("view") +
-        section_span(post) + "</td></tr>"
+        Common.date_format(post.updated_at) + "</td><td>" + post.views.to_s +
+         "</td><td>" + author_name(post) + "</td>" + %Q|<td class="okboard_list_view last">|
+        if price
+          html += t("view") + section_span(post) + "</td></tr>"
+        else
+          html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link")
+        end
       end
     end
     html.html_safe
@@ -119,6 +124,42 @@ module OkboardsHelper
         Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
+    when :p_accommodation
+      links = [Style.page(:p_accommodation),Style.page(:p_job),Style.page(:p_buy_and_sell),
+        Style.page(:p_motor_vehicle),Style.page(:p_wellbeing),Style.page(:p_estate),
+        Style.page(:p_business),Style.page(:p_law),Style.page(:p_tax),
+        Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
+    when :p_wellbeing
+      links = [Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
+        Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
+        Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
+        Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
+    when :p_law
+      links = [Style.page(:p_law),Style.page(:p_tax),Style.page(:p_wellbeing),
+        Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
+        Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
+        Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
+    when :p_tax
+      links = [Style.page(:p_tax),Style.page(:p_law),Style.page(:p_wellbeing),
+        Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
+        Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
+        Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
+    when :p_study
+      links = [Style.page(:p_study),Style.page(:p_immig),Style.page(:p_wellbeing),
+        Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_tax),
+        Style.page(:p_law),Style.page(:p_estate),Style.page(:p_motor_vehicle),
+        Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
+    when :p_immig
+      links = [Style.page(:p_immig),Style.page(:p_study),Style.page(:p_wellbeing),
+        Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_tax),
+        Style.page(:p_law),Style.page(:p_estate),Style.page(:p_motor_vehicle),
+        Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
+      paths = _path(links)
     else
     raise "Not implemented"
     end
@@ -153,6 +194,8 @@ module OkboardsHelper
       categories = Business::Categories
     when Style.page(:p_accommodation)
       categories = Accommodation::Categories
+    when Style.page(:p_law)
+      categories = Law::Categories
     else
     return ""
     end

@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted
-
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted, :z_index
+  
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
 
@@ -23,6 +23,12 @@ class Post < ActiveRecord::Base
   attr_accessible :content, :content_attributes
   alias_method :content=, :content_attributes=
 
+  attr_accessible :attached
+  
+  accepts_nested_attributes_for :attachment
+  attr_accessible :attachment, :attachment_attributes
+  alias_method :attachment=, :attachment_attributes=
+
   # validator
   validates_presence_of :category, :message => I18n.t('must_be_selected')
   validates_presence_of :locale, :message => I18n.t('must_be_selected')
@@ -37,7 +43,7 @@ class Post < ActiveRecord::Base
   end
   
   # pagination
-  default_scope :order => 'updated_at DESC'
+  #default_scope :order => 'updated_at DESC'
   paginates_per 10
   
   # scope
@@ -77,6 +83,7 @@ class Post < ActiveRecord::Base
     self.locale ||= Okvalue::DEFAULT_LOCALE
     self.valid_days = Okvalue::VALID_DAYS if self.valid_days == 0
     self.category ||= Okvalue::DEFAULT_CATEGORY
+    self.z_index ||= 0
   end
 
   def set_valid_until
