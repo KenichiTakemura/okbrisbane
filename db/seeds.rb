@@ -34,16 +34,23 @@ ss.save
 
 Style::PAGES.each do |key, value|
   ## Header
+  if value.eql? Style.page(:p_home)
+    effect = Banner::E_SLIDE
+  else
+    effect = Banner::E_FIX
+  end
   Banner.create(:page_id => Style.pageid(key),
   :section_id => Style.sectionid(:s_header),
   :position_id => 1,
   :div_width => 500, :div_height => 60, :img_width => 500,
-  :img_height => 60, :style => 'position:relative;float:right;top:0px;')
+  :img_height => 60, :style => 'position:relative;float:right;top:0px;',
+  :effect => Banner::E_FIX)
   Banner.create(:page_id => Style.pageid(key),
   :section_id => Style.sectionid(:s_header),
   :position_id => 2,
   :div_width => 710, :div_height => 120, :img_width => 710, :img_height => 120,
-  :style => 'position:relative;float:right;right:0px')
+  :style => 'position:relative;float:right;right:0px',
+  :effect => effect)
   if value.eql? Style.page(:p_home)
     is_disabled = false
   else
@@ -84,9 +91,9 @@ Banner.create(:page_id => Style.pageid(_page),
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 3,
-:div_width => 650, :div_height => 110,
+:div_width => 630, :div_height => 110,
 :img_width => 120, :img_height => 100,
-:style => 'position:relative;float:left;top:0px;left:0px;',
+:style => 'position:relative;float:left;top:0px;left:10px;right:10px ',
 :effect => Banner::E_MSLIDE);
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
@@ -188,4 +195,13 @@ end
   :div_width => 240, :div_height => 150,
   :img_width => 240, :img_height => 150,
   :style => 'position:relative;float:left;top:0px;left:10px')
+end
+# Signin
+[:p_signin].each do |page|
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
+  :position_id => 6,
+  :div_width => 360, :div_height => 500,
+  :img_width => 353, :img_height => 500,
+  :style => 'position:relative;float:left;top:0px')
 end

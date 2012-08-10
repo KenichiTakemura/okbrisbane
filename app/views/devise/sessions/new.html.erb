@@ -30,5 +30,6 @@
 	<%= f.submit t("signin") , :class => "ui-button" %>
 	<% end %>
 </div>
+<%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signin').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

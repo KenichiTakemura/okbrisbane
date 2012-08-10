@@ -154,3 +154,34 @@ div.shadow:hover {
   text-decoration: none;
   z-index: 1;
 }
+
+.ok_weather {
+  position: absolute;
+  width: 200px;
+  height: 70px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px; 
+  border-radius: 10px;
+}
+
+.weather_location {
+  font-size: 14px;
+  width: 50px;
+  margin: 5px;
+  background: -moz-linear-gradient(top, white 2%, #642c78 80%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#642c78));
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a.weather_location:link, a.weather_location:visited { color: #fff; text-decoration: none }
+a.weather_location:hover, a.weather_location:active { color: #fff; text-decoration: none }
+
+.weather_information {
+    font-family: 'NanumGothicExtraBold';
+    font-size: 16px;
+    font-weight: bold;
+    color: #41A317;
+    padding: 2px;
+}

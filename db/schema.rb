@@ -262,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
+    t.string   "address"
     t.boolean  "is_sold",        :default => false
     t.integer  "bed",            :default => 0
     t.integer  "bath",           :default => 0

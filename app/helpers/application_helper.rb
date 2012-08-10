@@ -52,7 +52,7 @@ module ApplicationHelper
       script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
       html += _script_document_ready(script)
     elsif
-    html += %Q|<div id="#{div_id}"><div class="#{div_id}_slides_container">|
+    html += %Q|<div id="#{div_id}">|
       # Flash banner
       if images.size == 1 && images.first.flash?
         html += %Q|<div style="margin: 0px 2px 0px;float:left">
@@ -60,24 +60,52 @@ module ApplicationHelper
           <param name="movie" value="#{images.first.flash_url}" />
           </object></div>|
       elsif
-        count = b.div_width.to_i.div(b.img_width.to_i)
+        if b.div_width.to_i == b.img_width.to_i
+          count = 0
+        else
+          count = b.div_width.to_i.div(b.img_width.to_i)
+        end
         Rails.logger.debug("View banner count: #{count} b.div_width: #{b.div_width} b.img_width: #{b.img_width} effect: #{b.effect}")
-        if [Banner::E_FIX,Banner::E_MSLIDE].include?(b.effect) && count > 0
+        if b.effect.eql?(Banner::E_FIX) && count == 0
+          html += %Q|<div style="margin: 0px 2px 0px;float:left">|
+          if b.is_random 
+            _index = rand(images.size)
+          else
+            _index = 0
+          end
+          html += one_image(b,images[_index])
+          html += "</div>"
+        elsif b.effect.eql?(Banner::E_FIX) && count > 0
+          1.upto(count) do |x|
+            html += %Q|<div style="margin: 0px 2px 0px;float:left">|
+            if b.is_random 
+              _index = rand(images.size)
+            else
+              _index = x - 1
+            end
+            html += one_image(b,images[_index])
+            html += "</div>"
+          end
+        elsif b.effect.eql?(Banner::E_MSLIDE) && count > 0
+          html += %Q|<a class="#{div_id}_prev" href="#" style="position:absolute;top:35px;left:-10px;">| + image_tag("common/bg_box_prev.gif") + "</a>"
+          html += %Q|<a class="#{div_id}_next" href="#" style="position:absolute;top:35px;right:-10px;">| + image_tag("common/bg_box_next.gif") + "</a>"
+          html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             if index == 0
               Rails.logger.debug("index: #{index}")
-              html += %Q|<div style="margin: 0px 2px 0px;float:left">|
+              html += %Q|<div><div style="margin: 0px 2px 0px">|
             elsif index%count == 0
               Rails.logger.debug("index: #{index} count: #{count}")
-              html += %Q|</div><div style="margin: 0px 2px 0px;float:left">|
+              html += %Q|</div></div><div><div style="margin: 0px 2px 0px">|
             end
-            html += %Q|<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+            html += %Q|<img src="#{image.original_image}" style="margin:0 3px 0" width="#{b.img_width}px" height="#{b.img_height}px"/>|
             if !image.caption.nil? && !image.caption.empty?
               html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
             end
           end
-          html += "</div>"
+          html += "</div></div></div>"
         else
+          html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
             if !image.caption.nil? && !image.caption.empty?
@@ -85,12 +113,21 @@ module ApplicationHelper
             end
             html += "</div>"
           end
+          html += "</div>"
         end
       end
-      html += "</div></div>"
+      html += "</div>"
     end
     html += "</div>"
     return html.html_safe
+  end
+  
+  def one_image(b, image)
+    html = %Q|<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+    if !image.caption.nil? && !image.caption.empty?
+       html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+    end
+    html.html_safe
   end
 
   def single_header_banner(a)
@@ -125,24 +162,21 @@ module ApplicationHelper
     html = _banner(p, s, a, div_id)
     script = ""
     if images.size >= 2
-      container = div_id + "_slides_container"
-      effect_speed = b.effect_speed * 1000
-      effect = Style.getEffect(p,s,a)
-      logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
-      script += %Q|$('\##{div_id}').slides({container:'#{container}',
-        preloadImage:'assets/common/loading.gif',|
-      script += "randomize:true," if b.is_random
       case b.effect
       when Banner::E_SLIDE
-        script += %Q|play:#{effect_speed},#{effect}});
-        $("a.prev").text('#{t("effect_prev")}');
-        $("a.next").text('#{t("effect_next")}');|
-      when Banner::E_FIX
-        effect_speed = 3600 * 1000 * 3
-        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
+        container = div_id + "_slides_container"
+        effect_speed = b.effect_speed * 1000
+        effect = Style.getEffect(p,s,a)
+        logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
+        script += %Q|$('\##{div_id}').slides({container:'#{container}',
+          preloadImage:'assets/common/loading.gif',|
+          script += "randomize:true," if b.is_random
+          script += %Q|play:#{effect_speed},#{effect}});
+          $("a.prev").text('#{t("effect_prev")}');
+          $("a.next").text('#{t("effect_next")}');|
+        logger.debug("script: #{script}")
+        html += _script_document_ready(script)
       end
-      logger.debug("script: #{script}")
-      html += _script_document_ready(script)
     end
     html.html_safe
   end
@@ -199,24 +233,21 @@ module ApplicationHelper
     div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
     html = _banner(p,s, a, div_id)
-    script = ""
-    container = div_id + "_slides_container"
-    effect_speed = b.effect_speed * 1000
-    effect = Style.getEffect(p,s,a)
-    logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
-    script += %Q|$('\##{div_id}').slides({container:'#{container}',
-      preloadImage:'assets/common/loading.gif',|
-    script += "randomize:true," if b.is_random
-    case b.effect
-    when Banner::E_MSLIDE
-        effect_speed = 3600 * 1000 * 3
-        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
-    when Banner::E_FIX
-        effect_speed = 3600 * 1000 * 3
-        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
+    if images.size >= 2
+      case b.effect
+      when Banner::E_MSLIDE
+        container = div_id + "_slides_container"
+        effect_speed = b.effect_speed * 1000
+        effect = Style.getEffect(p,s,a)
+        logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
+        script = %Q|$('\##{div_id}').slides({container:'#{container}',
+          preloadImage:'assets/common/loading.gif',|
+          #script += "randomize:true," if b.is_random
+          script += %Q|play:#{effect_speed},next:'#{div_id}_next',prev:'#{div_id}_prev',#{effect}});|
+        logger.debug("script: #{script}")
+        html += _script_document_ready(script)
+      end
     end
-    logger.debug("script: #{script}")
-    html += _script_document_ready(script)
     html.html_safe
   end
 

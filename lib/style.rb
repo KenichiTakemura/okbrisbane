@@ -121,6 +121,7 @@ module Style
   Effect[:_s_header_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},generatePagination:false,hoverPause:true|
   Effect[:_s_header_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},generatePagination:false,hoverPause:true|
   Effect[:p_home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:true,effect:'fade',crossfade: true,generateNextPrev:true|
+  Effect[:p_home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,generatePagination:false,effect:'fade',crossfade: true,generateNextPrev:false|
 
   def Style.getEffect(page, section, position)
     key = "#{page}_#{section}_#{position}"

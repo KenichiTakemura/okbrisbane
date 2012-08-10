@@ -19,7 +19,7 @@ class Business < Post
   
   
   # attr_accessible
-  attr_accessible :price 
+  attr_accessible :price, :address
   validates_presence_of :price, :message => I18n.t('must_be_filled')
   validates_numericality_of :price, :only_integer => false, :greater_than => 0, :message => I18n.t('must_be_numbers')
 

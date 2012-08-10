@@ -348,6 +348,16 @@ ko:
   more_than_1: '1 이상'
   random: '랜덤 표시'
   randomly_display: 'if checked 랜덤으로 표시'
+  weather_information: '날씨 정보'
+  
+  brisbane: '브리즈번'
+  sydney: '시드니'
+  melbourne: '멜버른'
+  canberra: '캠베라'
+  hobart: '호밭'
+  adelaide: '아들레이드'
+  perth: '퍼스'
+  
   
   effect_prev: '＜'
   effect_next: '＞'

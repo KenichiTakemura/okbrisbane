@@ -18,7 +18,7 @@ class Estate < Post
   end
     
   # attr_accessible
-  attr_accessible :price, :is_sold, :bed, :bath, :garage
+  attr_accessible :price, :is_sold, :bed, :bath, :garage, :address
   validates_presence_of :price, :message => I18n.t('must_be_filled')
   validates_numericality_of :price, :only_integer => false, :greater_than => 0, :message => I18n.t('must_be_numbers')
 
