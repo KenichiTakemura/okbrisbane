@@ -8,7 +8,7 @@ class JobsController < ApplicationController
   
   def create
     post = params[:job]
-    logger.debug("post: #{post}")
+    logger.debug("post1: #{post}")
     if post[:attachment]
       @attachment = Attachment.new(:avatar => post[:attachment][:avatar])
       logger.debug("avatar: #{@attachment}")
@@ -16,7 +16,8 @@ class JobsController < ApplicationController
       logger.debug("post: #{post}")
     end
     @post = Job.new(post)
-    logger.debug("post: #{@post}")
+    logger.debug("post2: #{@post}")
+    logger.debug("content: #{@post.content}")
     @post.valid_until = post_expiry
     respond_to do |format|
       if @post.save
@@ -29,6 +30,7 @@ class JobsController < ApplicationController
       else
         flash[:warning] = I18n.t("failed_to_create")
         logger.debug("@post.errors: #{@post.errors}")
+        @post.attachment.build
         format.html { render :template => "okboards/write" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

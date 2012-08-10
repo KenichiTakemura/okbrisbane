@@ -5,7 +5,7 @@ module OkboardsHelper
     if post.posted_by_type.eql? "Admin"
       return t('admin')
     else
-    post.posted_by.email
+    post.posted_by.name
     end
   end
 
@@ -18,8 +18,12 @@ module OkboardsHelper
     post.posted_by.email
     end
   end
-
+  
   def section_span(post)
+    section_span_for(post, @okpage)
+  end
+  
+  def section_span_for(post, category)
     logger.debug("section_span post: #{post.id}")
     html = "<span>"
     html += noimage?(post)
@@ -35,7 +39,7 @@ module OkboardsHelper
     html += %Q|<p class="okboard_description">|
     html += raw(post.content.body) if !post.content.nil?
     html += "</p>"
-    html += link_to(t("more"), _okboard_link(Style.page(@okpage)) << "&bd=#{post.id}") + " | "
+    html += link_to(t("more"), _okboard_link_with_id(Style.page(category), post.id)) + " | "
     html += mail_to(author_email(post), t("contact_person"), :encode => "hex")
     html += "</span>"
     html.html_safe

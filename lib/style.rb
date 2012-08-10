@@ -106,11 +106,11 @@ module Style
   end
   
   def Style.page(key)
-    Style::PAGES[key]
+    Style::PAGES[key.to_sym]
   end
   
   def Style.section(key)
-    Style::SECTIONS[key]
+    Style::SECTIONS[key.to_sym]
   end
 
   

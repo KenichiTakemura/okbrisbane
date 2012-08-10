@@ -24,13 +24,14 @@ class Banner < ActiveRecord::Base
   
   # TODO Is this all?
   E_SLIDE = "slide_auto"
+  E_MSLIDE = "multi_slide_auto"
   E_FIX = "fix"
   
-  validates_inclusion_of :effect, :in => [E_SLIDE,E_FIX], :message => I18n.t('must_be_selected')
+  validates_inclusion_of :effect, :in => [E_SLIDE,E_MSLIDE,E_FIX], :message => I18n.t('must_be_selected')
   validates_numericality_of :effect_speed, :greater_than => 0, :message => I18n.t('must_be_numbers')
   
   def effect_list
-    [[I18n.t("#{E_SLIDE}"),E_SLIDE],[I18n.t("#{E_FIX}"),E_FIX]]
+    [[I18n.t("#{E_SLIDE}"),E_SLIDE],[I18n.t("#{E_MSLIDE}"),E_MSLIDE],[I18n.t("#{E_FIX}"),E_FIX]]
   end
   
   after_initialize :set_default
@@ -38,6 +39,7 @@ class Banner < ActiveRecord::Base
   def set_default
     self.effect ||= E_FIX
     self.effect_speed ||= 5
+    self.is_random ||= true
   end
   
   def name
@@ -65,6 +67,14 @@ class Banner < ActiveRecord::Base
   
   def div_resolution
      "#{div_width}x#{div_height}"
+  end
+  
+  def attach(client_image)
+    self.client_image << client_image
+  end
+  
+  def dettach(client_image)
+    self.client_image.destroy(client_image)
   end
   
 end

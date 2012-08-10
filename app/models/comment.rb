@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
     
   # validator
   validates_presence_of :body
-  validates_length_of :body, :maximum => Okvalue::MAX_COMMENT_LENGTH
+  validates_length_of :body, :maximum => Okvalue::MAX_POST_COMMENT_LENGTH
 
   # Add a comment to a post
   def subscribe_to(post, user)

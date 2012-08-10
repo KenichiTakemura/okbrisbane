@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120808231250) do
+ActiveRecord::Schema.define(:version => 20120809083003) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                            :null => false
@@ -136,11 +136,11 @@ ActiveRecord::Schema.define(:version => 20120808231250) do
 
   create_table "business_profiles", :force => true do |t|
     t.string   "head"
-    t.text     "body"
+    t.text     "body",                 :limit => 16777215
     t.integer  "business_client_id"
     t.string   "business_client_type"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   create_table "businesses", :force => true do |t|
@@ -237,11 +237,11 @@ ActiveRecord::Schema.define(:version => 20120808231250) do
   end
 
   create_table "contents", :force => true do |t|
-    t.text     "body"
+    t.text     "body",           :limit => 16777215
     t.integer  "contented_id"
     t.string   "contented_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "estates", :force => true do |t|
@@ -457,6 +457,8 @@ ActiveRecord::Schema.define(:version => 20120808231250) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

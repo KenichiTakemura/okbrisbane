@@ -1,18 +1,17 @@
 module ApplicationHelper
-  
   # Create left Menu
   def _left_menu(logo, links, paths)
     html = %Q|<div id="page_section_left">|
     if !logo.nil?
-     html += image_tag(logo, :class => "logo")
+      html += image_tag(logo, :class => "logo")
     else
       html += single_body_banner(1)
     end
     html += %Q|<div id="menu"><div class="items">|
     links.each_with_index do |link,i|
-        html += %Q|<div class="item" id="_#{link}"><p class="menu-item">|
-        html += link_to(t(link), paths[i], :class => "non_style_link")
-        html += "</p></div>"
+      html += %Q|<div class="item" id="_#{link}"><p class="menu-item">|
+      html += link_to(t(link), paths[i], :class => "non_style_link")
+      html += "</p></div>"
     end
     html += "</div></div>"
     html += single_body_banner(2)
@@ -21,7 +20,7 @@ module ApplicationHelper
     html += "</div>"
     html.html_safe
   end
-      
+
   # Create banner
   def _collectImage(p, s, a)
     page_id = Style.pageid(p)
@@ -33,7 +32,7 @@ module ApplicationHelper
     images = b.client_image
     return b, images
   end
-  
+
   def _banner(p, s, a, div_id)
     b,images = _collectImage(p,s,a)
     style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
@@ -49,48 +48,75 @@ module ApplicationHelper
       else
         contact = "#{t('banner_contact')}"
       end
-        html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
-        script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
-        html += _script_document_ready(script)
+      html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
+      script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
+      html += _script_document_ready(script)
     elsif
-      html += %Q|<div id="#{div_id}"><div class="#{div_id}_slides_container">|
-      images.each do |image|
-        html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
-        if !image.caption.nil? && !image.caption.empty?
-          html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+    html += %Q|<div id="#{div_id}"><div class="#{div_id}_slides_container">|
+      # Flash banner
+      if images.size == 1 && images.first.flash?
+        html += %Q|<div style="margin: 0px 2px 0px;float:left">
+          <object data="#{images.first.flash_url}" type="application/x-shockwave-flash" width="#{b.img_width}px" height="#{b.img_height}px">
+          <param name="movie" value="#{images.first.flash_url}" />
+          </object></div>|
+      elsif
+        count = b.div_width.to_i.div(b.img_width.to_i)
+        Rails.logger.debug("View banner count: #{count} b.div_width: #{b.div_width} b.img_width: #{b.img_width} effect: #{b.effect}")
+        if [Banner::E_FIX,Banner::E_MSLIDE].include?(b.effect) && count > 0
+          images.each_with_index do |image,index|
+            if index == 0
+              Rails.logger.debug("index: #{index}")
+              html += %Q|<div style="margin: 0px 2px 0px;float:left">|
+            elsif index%count == 0
+              Rails.logger.debug("index: #{index} count: #{count}")
+              html += %Q|</div><div style="margin: 0px 2px 0px;float:left">|
+            end
+            html += %Q|<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+            if !image.caption.nil? && !image.caption.empty?
+              html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+            end
+          end
+          html += "</div>"
+        else
+          images.each_with_index do |image,index|
+            html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+            if !image.caption.nil? && !image.caption.empty?
+              html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+            end
+            html += "</div>"
+          end
         end
-        html += "</div>"
       end
       html += "</div></div>"
     end
     html += "</div>"
     return html.html_safe
   end
-  
+
   def single_header_banner(a)
     logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_header_banner a=#{a})" if !@okpage
     single_banner(@okpage.to_sym, :s_header, a)
   end
-  
+
   def single_body_banner(a)
     logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_body_banner a=#{a})" if !@okpage
     single_banner(@okpage.to_sym, :s_body, a)
   end
-  
+
   def single_background_banner(a)
     logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_background_banner a=#{a})" if !@okpage
     single_banner(@okpage.to_sym, :s_background, a)
   end
-  
+
   def multi_body_banner(a)
     logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(multi_body_banner a=#{a})" if !@okpage
     multi_banner(@okpage.to_sym, :s_body, a)
   end
-  
+
   def single_banner(p, s, a)
     logger.debug("requested single_banner #{p}, #{s}, #{a}")
     div_id = Style.create_banner_div(p,s,a)
@@ -122,40 +148,39 @@ module ApplicationHelper
   end
 
   def _price(price)
-   number_to_currency(price, :locale => 'en')
+    number_to_currency(price, :locale => 'en')
   end
 
   def navigation(over, out)
-     html = %Q|<div id="navigation"><ul class="">|
-     Style::NAVI.each do |key, value|
+    html = %Q|<div id="navigation"><ul class="">|
+    Style::NAVI.each do |key, value|
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
-     end
-     script = ""
-     Style::NAVI.each do |key, value|
+    end
+    script = ""
+    Style::NAVI.each do |key, value|
       script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{_okboard_link(value)}| + %Q|"});|
-     end
-     html += _script_document_ready(script)
-     html += "</ul></div>"
-     html.strip.html_safe
+    end
+    html += _script_document_ready(script)
+    html += "</ul></div>"
+    html.strip.html_safe
   end
-  
-  
+
   def _okpage_v(okpage)
     Common.encrypt_data(okpage.to_s).chop
   end
-  
+
   def _okboard_link(okpage)
     %Q|/okboards?v=| + _okpage_v(okpage)
   end
-  
+
   def _okboard_link_with_id(okpage, id)
     %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
   end
-  
+
   def _okboard_link_write(okpage)
     %Q|/okboards/write?v=| + _okpage_v(okpage)
   end
-  
+
   def _okboard_link_with_category(okpage,category)
     _okboard_link(okpage) + "&c=" + Common.encrypt_data(category).html_safe
   end
@@ -164,24 +189,41 @@ module ApplicationHelper
     html = %Q|<script type="text/javascript" charset="utf-8">$(document).ready(function() {#{script}});</script>|
     html.html_safe
   end
-  
+
   def _script(script)
     %Q|<script type="text/javascript" charset="utf-8">#{script}</script>|.html_safe
   end
-  
+
   def multi_banner(p, s, a)
     logger.debug("requested multi_banner #{p}, #{s}, #{a}")
     div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
     html = _banner(p,s, a, div_id)
-    logger.debug("html: #{html}")
+    script = ""
+    container = div_id + "_slides_container"
+    effect_speed = b.effect_speed * 1000
+    effect = Style.getEffect(p,s,a)
+    logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
+    script += %Q|$('\##{div_id}').slides({container:'#{container}',
+      preloadImage:'assets/common/loading.gif',|
+    script += "randomize:true," if b.is_random
+    case b.effect
+    when Banner::E_MSLIDE
+        effect_speed = 3600 * 1000 * 3
+        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
+    when Banner::E_FIX
+        effect_speed = 3600 * 1000 * 3
+        script += %Q|play:#{effect_speed},pagination:false,generatePagination:false});|
+    end
+    logger.debug("script: #{script}")
+    html += _script_document_ready(script)
     html.html_safe
   end
-  
+
   def version
     "Version 0.1"
   end
-  
+
   def thumbnail(image, action)
     logger.debug("delete_action: #{action}")
     html = %Q|<div style="position: relative; float: left; width:#{image.width}px; height: #{image.height}px; margin-left: 5px">|
@@ -191,17 +233,17 @@ module ApplicationHelper
     html += "</div></div>"
     html.html_safe
   end
-  
+
   def _truncate(expression)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => 26)}</span>|
     html.html_safe
   end
-  
+
   def _truncate_with_length(expression, length)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => length)}</span>|
     html.html_safe
   end
-  
+
   def _truncate_no_title(expression)
     html = %Q|#{truncate(expression, :length => 26)}|
   end
@@ -211,26 +253,26 @@ module ApplicationHelper
     if item.respond_to? :client_image
       if item.client_image.nil? || item.client_image.empty?
         logger.debug("noimage")
-      return noimage
+        return noimage
       end
-   elsif item.respond_to? :image
+    elsif item.respond_to? :image
       if item.image.nil? || item.image.empty?
         logger.debug("noimage")
-       return noimage
+        return noimage
       end
       logger.debug("item.image: #{item.image}")
-   else 
-     raise "Internal Error #{item.class}"
-   end
-   return ""
- end
-  
+    else
+      raise "Internal Error #{item.class}"
+    end
+    return ""
+  end
+
   # Used to show no image
   def noimage
     html = %Q|<img src="/assets/noimage.jpg" width="50px" height="50px" />|
     html.html_safe
   end
-  
+
   def _upload(category, item_id)
     html = <<-HTML
     <style>
@@ -312,6 +354,6 @@ module ApplicationHelper
     </p>
   </div>
    HTML
-  html.html_safe
+    html.html_safe
   end
 end

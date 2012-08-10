@@ -319,7 +319,7 @@ a:hover, a:active { color: #41A317 }
  */
 .button-link_ok {
     text-decoration: none;
-    padding: 3px 5px;
+    padding: 1px 1px;
     background: #642c78;
     color: #FFF;
     -webkit-border-radius: 3px;
@@ -355,7 +355,7 @@ a:hover, a:active { color: #41A317 }
 
 .button-link_naver {
     text-decoration: none;
-    padding: 3px 5px;
+    padding: 1px 1px;
     background: #41A317;
     color: #FFF;
     -webkit-border-radius: 3px;
@@ -391,7 +391,7 @@ a:hover, a:active { color: #41A317 }
 
 .button-link_blue {
     text-decoration: none;
-    padding: 3px 5px;
+    padding: 1px 1px;
     background: #4479BA;
     color: #FFF;
     -webkit-border-radius: 3px;

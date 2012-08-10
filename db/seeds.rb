@@ -14,10 +14,10 @@ BusinessProfileImage.delete_all
 SystemSetting.delete_all
 
 # Users
-User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123')
-anonymous = User.new(:email => "anonymous@okbrisbane.com")
+User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123', :first_name => "켄이치", :last_name => "다케무라")
+anonymous = User.new(:email => "anonymous@okbrisbane.com", :last_name => "Anonymous")
 anonymous.save(:validate => false)
-guest = User.new(:email => "guest@okbrisbane.com")
+guest = User.new(:email => "guest@okbrisbane.com", :last_name => "Guest")
 guest.save(:validate => false)
 
 # OKBRISBANE 
@@ -73,7 +73,8 @@ Banner.create(:page_id => Style.pageid(_page),
 :position_id =>1,
 :div_width => 650, :div_height => 400,
 :img_width => 650, :img_height => 380,
-:style => 'position:relative;float:left;top:0px')
+:style => 'position:relative;float:left;top:0px',
+:effect => Banner::E_SLIDE);
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 2,
@@ -85,7 +86,8 @@ Banner.create(:page_id => Style.pageid(_page),
 :position_id => 3,
 :div_width => 650, :div_height => 110,
 :img_width => 120, :img_height => 100,
-:style => 'position:relative;float:left;top:0px;left:0px;')
+:style => 'position:relative;float:left;top:0px;left:0px;',
+:effect => Banner::E_MSLIDE);
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 4,
@@ -101,26 +103,26 @@ Banner.create(:page_id => Style.pageid(_page),
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 6,
-:div_width => 650, :div_height => 130,
-:img_width => 210, :img_height => 120,
+:div_width => 650, :div_height => 160,
+:img_width => 210, :img_height => 150,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 7,
-:div_width => 650, :div_height => 130,
-:img_width => 210, :img_height => 120,
+:div_width => 650, :div_height => 160,
+:img_width => 210, :img_height => 150,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 8,
-:div_width => 650, :div_height => 130,
-:img_width => 210, :img_height => 120,
+:div_width => 650, :div_height => 160,
+:img_width => 210, :img_height => 150,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 Banner.create(:page_id => Style.pageid(_page),
 :section_id => Style.sectionid(:s_body),
 :position_id => 9,
-:div_width => 650, :div_height => 130,
-:img_width => 210, :img_height => 120,
+:div_width => 650, :div_height => 160,
+:img_width => 210, :img_height => 150,
 :style => 'position:relative;float:right;top:0px;left:0px;')
 # Body
 [:p_signin,:p_signup].each do |page|
