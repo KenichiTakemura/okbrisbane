@@ -5,8 +5,9 @@ module OkboardsHelper
     if post.posted_by_type.eql? "Admin"
       return t('admin')
     else
-    post.posted_by.name
+      post.posted_by.name if !post.posted_by.nil?
     end
+    t("unknown_user")
   end
 
   def author_email(post)

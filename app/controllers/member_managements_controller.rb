@@ -15,6 +15,13 @@ class MemberManagementsController < ApplicationController
     session[:signin_menu] = :singin
     redirect_to new_user_session_path
   end
+  
+  def sign_out
+    @okpage = Style::PAGES[:p_signout]
+    respond_to do |format|
+      format.html # sign_out.html.erb
+    end
+  end
 
   def sign_up
     @member_management = MemberManagement.new

@@ -27,7 +27,7 @@ module ApplicationHelper
     section_id = Style.sectionid(s)
     position_id = a
     b = Banner.where("page_id = ? AND section_id = ? AND position_id = ?", page_id, section_id, position_id).first
-    raise "Bad Argument #{p} > #{s} > #{a}" if b.nil?
+    raise "Bad Argument #{p} > #{s} > #{a} page_id: #{page_id} section_id: #{section_id}" if b.nil?
     logger.debug("banner: #{b}")
     images = b.client_image
     return b, images

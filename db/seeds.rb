@@ -21,7 +21,7 @@ guest = User.new(:email => "guest@okbrisbane.com", :last_name => "Guest")
 guest.save(:validate => false)
 
 # OKBRISBANE 
-ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3343-8880', :business_fax => '07-3343-8558', :business_email => 'mootal@hanmail.net', :contact_name => 'Elliott Joo')
+ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
 ok.build_business_profile(:body => 'OKBRISBANE rocks!')
 ok.save
 
@@ -71,6 +71,35 @@ Style::PAGES.each do |key, value|
   :img_width => 160, :img_height => 800,
   :style => 'position:absolute;top:100px;right:-165px',
   :is_disabled => is_disabled)
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
+  :position_id => 3,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
+  :style => 'position:absolute;top:950px;left:-165px',
+  :is_disabled => is_disabled)
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
+  :position_id => 4,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
+  :style => 'position:absolute;top:950px;right:-165px',
+  :is_disabled => is_disabled)
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
+  :position_id => 5,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
+  :style => 'position:absolute;top:1800px;left:-165px',
+  :is_disabled => is_disabled)
+  Banner.create(:page_id => Style.pageid(key),
+  :section_id => Style.sectionid(:s_background),
+  :position_id => 6,
+  :div_width => 160, :div_height => 800,
+  :img_width => 160, :img_height => 800,
+  :style => 'position:absolute;top:1800px;right:-165px',
+  :is_disabled => is_disabled)
+
 end
 # Home
 _page = :p_home
@@ -131,6 +160,12 @@ Banner.create(:page_id => Style.pageid(_page),
 :div_width => 650, :div_height => 160,
 :img_width => 210, :img_height => 150,
 :style => 'position:relative;float:right;top:0px;left:0px;')
+Banner.create(:page_id => Style.pageid(_page),
+:section_id => Style.sectionid(:s_body),
+:position_id => 10,
+:div_width => 650, :div_height => 160,
+:img_width => 210, :img_height => 150,
+:style => 'position:relative;float:right;top:0px;left:0px;')
 # Body
 [:p_signin,:p_signup].each do |page|
 Banner.create(:page_id => Style.pageid(page),
@@ -149,7 +184,7 @@ Banner.create(:page_id => Style.pageid(page),
   :img_width => 220, :img_height => 130,
   :style => 'position:relative;float:left;top:0px')
 end
-[:p_signin,:p_signup,:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
+[:p_signin,:p_signup,:p_signout, :p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
   Banner.create(:page_id => Style.pageid(page),
   :section_id => Style.sectionid(:s_body),
   :position_id => 2,
@@ -202,6 +237,15 @@ end
   :section_id => Style.sectionid(:s_body),
   :position_id => 6,
   :div_width => 360, :div_height => 500,
-  :img_width => 353, :img_height => 500,
+  :img_width => 360, :img_height => 500,
+  :style => 'position:relative;float:left;top:0px')
+end
+# Signout
+[:p_signout].each do |page|
+  Banner.create(:page_id => Style.pageid(page),
+  :section_id => Style.sectionid(:s_body),
+  :position_id => 6,
+  :div_width => 500, :div_height => 600,
+  :img_width => 500, :img_height => 600,
   :style => 'position:relative;float:left;top:0px')
 end

@@ -24,7 +24,8 @@ module Style
   PAGES[:p_yellowpage] = 'p_yellowpage'
   PAGES[:p_sponsor] = "p_sponsor"
   PAGES[:p_mypage] = "p_mypage"
-  
+  PAGES[:p_signout] = "p_signout"
+    
   PAGE_IDS[:p_home] = 1
   PAGE_IDS[:p_signin] = 2
   PAGE_IDS[:p_signup] = 3
@@ -42,7 +43,8 @@ module Style
   PAGE_IDS[:p_yellowpage] = 15
   PAGE_IDS[:p_sponsor] = 16
   PAGE_IDS[:p_mypage] = 17
-    
+  PAGE_IDS[:p_signout] = 18
+      
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
   NAVI[:p_wellbeing] = "p_wellbeing"

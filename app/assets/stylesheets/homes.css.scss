@@ -83,6 +83,38 @@
 
 }
 
+.signin_title {
+    background: none repeat scroll 0% 0% #642c78;
+    color: white;
+    text-shadow: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 10px 15px;
+    margin: 0px;
+    font-size: 22px;
+    width: 260px;
+    font-weight: normal;
+    font-family: "NanumGothic","Museo700",helvetica,arial,sans-serif;
+}
+
+
+.signout_view {
+  min-height: 100%;
+  left: 100px;
+  width: 100%;
+  position: relative;
+  float: right;
+}
+
+.signout_logo {
+  min-height: 100%;
+  left: 100px;
+  width: 100%;
+  position: relative;
+  align:center;
+  margin: 20px;
+}
+
 // Styles for feed box
 #feed_body {
   position: relative;

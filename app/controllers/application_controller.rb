@@ -43,6 +43,11 @@ class ApplicationController < ActionController::Base
       request.referer || stored_location_for(resource) || root_path
     end
   end
+  
+  def after_sign_out_path_for(resource)
+    logger.debug("after_sign_out_path_for")
+    user_sign_out_path
+  end
 
   protected
 

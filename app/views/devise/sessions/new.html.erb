@@ -1,5 +1,6 @@
 <%= render :partial => "devise/shared/header" %>
-<%= image_tag("common/logo_w.gif")%>
+<!-- %= image_tag("common/logo_w.gif")% -->
+<div class="signin_title">OKBRISBANE <%=t("signin")%></div>
 <div class="flash">
 	<% if notice %>
 	<p class="message notice">
@@ -13,21 +14,19 @@
 	<% end %>
 </div>
 <div id="signin">
-	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-	<%= f.label :email, "#{t(:signin_email)}" %>
-	</br>
-	<%= f.email_field :email %>
-	</br>
-	<%= f.label :password, "#{t(:signin_password)}" %>
-	</br>
-	<%= f.password_field :password %>
-	</br>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
+	<div class="group">
+	<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
+	<%= f.email_field :email, :class => "text_field" %>
+	</div><div class="group">
+	<%= f.label :password, "#{t(:signin_password)}", :class => "label left"  %>
+	<%= f.password_field :password, :class => "text_field" %>
+	</div><div class="group">
 	<% if devise_mapping.rememberable? -%>
 	<%= f.check_box :remember_me%> <%= f.label :remember_me, "#{t(:remember_me)}"  %>
+	</div>
 	<% end -%>
-	</br>
-	</br>
-	<%= f.submit t("signin") , :class => "ui-button" %>
+<div class="group">	<%= f.submit t("signin") , :class => "button-link_ok" %></div>
 	<% end %>
 </div>
 <%= single_body_banner(6) %>

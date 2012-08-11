@@ -106,7 +106,8 @@ body {
   margin: 10 auto 15px;
   color: black;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-  width: 300px;
+  font-size: 14px;
+  width: 100%;
 }
 .flash .message p {
   margin: 0px;

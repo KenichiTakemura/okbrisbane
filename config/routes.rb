@@ -8,6 +8,7 @@ Okbrisbane::Application.routes.draw do
 
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
   match 'member_managements/sign_up', :via => :get
+  match 'member_managements/sign_out', :via => :get, :as => :user_sign_out
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
   resources :member_managements, :only => ["index","new","create"]
