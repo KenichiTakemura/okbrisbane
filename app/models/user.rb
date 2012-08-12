@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   # attr_accessible :title, :body
   
-  has_one :mypage, :as => :mypagable, :dependent => :destroy
+  has_one :mypage, :dependent => :destroy
   has_many :job, :as => :posted_by, :class_name => 'Job', :dependent => :destroy
   has_many :buy_and_sell, :as => :posted_by, :class_name => 'BuyAndSell', :dependent => :destroy
   has_many :comment, :as => :commented_by, :dependent => :destroy      
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   def create_mypage
     logger.info("User created: " << self.to_s)
     m = Mypage.create()
-    m.update_attribute(:mypagable, self)
+    m.update_attribute(:user, self)
   end
   
   def nologin?

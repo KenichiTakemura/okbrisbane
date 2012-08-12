@@ -15,9 +15,9 @@ SystemSetting.delete_all
 
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123', :first_name => "켄이치", :last_name => "다케무라")
-anonymous = User.new(:email => "anonymous@okbrisbane.com", :last_name => "Anonymous")
+anonymous = User.new(:email => "anonymous@okbrisbane.com", :first_name => "", :last_name => "Anonymous")
 anonymous.save(:validate => false)
-guest = User.new(:email => "guest@okbrisbane.com", :last_name => "Guest")
+guest = User.new(:email => "guest@okbrisbane.com", :first_name => "", :last_name => "Guest")
 guest.save(:validate => false)
 
 # OKBRISBANE 

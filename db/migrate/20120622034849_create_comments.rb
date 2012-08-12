@@ -4,7 +4,9 @@ class CreateComments < ActiveRecord::Migration
       t.boolean :is_deleted, :default => false
       t.string :locale
       t.text :body, :limit => Okvalue::DB_POST_COMMENT_LENGTH
-      t.boolean :abuse, :default => false
+      t.integer :abuse, :default => 0
+      t.integer :likes, :default => 0
+      t.integer :dislikes, :default => 0
       t.references :commented, :polymorphic => true
       t.references :commented_by, :polymorphic => true
       t.timestamps

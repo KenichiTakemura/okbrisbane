@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
@@ -60,7 +61,6 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
-    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
-    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -158,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
@@ -208,7 +209,6 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
-    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -227,7 +227,9 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.boolean  "is_deleted",        :default => false
     t.string   "locale"
     t.text     "body"
-    t.boolean  "abuse",             :default => false
+    t.integer  "abuse",             :default => 0
+    t.integer  "likes",             :default => 0
+    t.integer  "dislikes",          :default => 0
     t.integer  "commented_id"
     t.string   "commented_type"
     t.integer  "commented_by_id"
@@ -259,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
@@ -282,14 +285,14 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
-    t.string   "accept_content_type"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.integer  "zindex"
+    t.integer  "write_at"
+    t.string   "something"
   end
 
   create_table "immigrations", :force => true do |t|
@@ -307,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -326,6 +330,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -345,6 +350,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -369,6 +375,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.float    "price"
@@ -376,16 +383,15 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
   end
 
   create_table "mypages", :force => true do |t|
-    t.integer  "mypagable_id"
-    t.string   "mypagable_type"
-    t.boolean  "is_public",      :default => false
+    t.integer  "user_id"
+    t.boolean  "is_public",    :default => false
     t.string   "public_url"
-    t.integer  "blocked",        :default => 0
-    t.integer  "num_of_post",    :default => 0
-    t.boolean  "is_blacklist",   :default => false
-    t.boolean  "nologin",        :default => false
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.integer  "blocked",      :default => 0
+    t.integer  "num_of_post",  :default => 0
+    t.boolean  "is_blacklist", :default => false
+    t.boolean  "nologin",      :default => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "post_searches", :force => true do |t|
@@ -408,6 +414,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -433,6 +440,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -481,6 +489,7 @@ ActiveRecord::Schema.define(:version => 20120809083003) do
     t.integer  "abuse",          :default => 0
     t.boolean  "is_deleted",     :default => false
     t.integer  "z_index",        :default => 0
+    t.integer  "write_at"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end

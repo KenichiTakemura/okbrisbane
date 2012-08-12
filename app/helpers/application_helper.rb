@@ -210,7 +210,11 @@ module ApplicationHelper
   def _okboard_link_with_id(okpage, id)
     %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
   end
-
+  
+  def _okboard_link_upload_image(okpage)
+    %Q|/okboards/upload_image?v=| + _okpage_v(okpage)
+  end
+  
   def _okboard_link_write(okpage)
     %Q|/okboards/write?v=| + _okpage_v(okpage)
   end

@@ -76,6 +76,25 @@ class OkboardsController < OkController
     @lastid ||= @previd
     logger.debug("@lastid: #{@lastid}")
   end
+  
+  # ajax
+  def upload_image
+    logger.debug("upload_image")
+    file = params[:file]
+    timestamp = params[:timestamp]
+    image = Image.new(:avatar => file)
+    if image.thumbnailable?
+      image.write_at = timestamp;
+      image.something = params[:something]
+      image.attached_by(current_user)
+      logger.debug("image saved. #{image}")
+      images = Image.where("attached_by_id = ? AND attached_id is NULL", current_user)
+      render :json => {:result => 0, :images => images.size }
+    else 
+      logger.debug("not thumbnailable? #{image}")
+      render :json => {:result => 1}
+    end
+  end
 
   private
   
@@ -103,6 +122,7 @@ class OkboardsController < OkController
   
   def _write_post
     post = _model.new
+    post.write_at = Time.now.to_i
     post.build_content
     post
   end

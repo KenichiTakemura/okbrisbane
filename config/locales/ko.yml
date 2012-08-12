@@ -466,6 +466,7 @@ ko:
   not_listed: '일람안에 없습니다'
   acceptable_extention: 'acceptable_extention'
   if_checked_not_displayed: 'if_checked_not_displayed'
+  write_something: '뭘 쓰세요...'
   
   # Validation
   must_be_numbers: '수로 입력하십시오'
@@ -505,7 +506,7 @@ ko:
   successfully_updated: '성공적으로 갱신 되었습니다'
   successfully_uploaded: '성공적으로 업로드 되었습니다'
   failed_to_create: '실패 되었습니다'
-  
+  failed_to_upload: '실패 되었습니다' 
   
   banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'

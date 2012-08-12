@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted, :z_index
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted, :z_index, :write_at
   
   # belongs_to
   belongs_to :posted_by, :polymorphic => true

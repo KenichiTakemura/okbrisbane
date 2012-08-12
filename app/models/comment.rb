@@ -19,7 +19,6 @@ class Comment < ActiveRecord::Base
   def subscribe_to(post, user)
     self.update_attribute(:commented_by, user)
     self.update_attribute(:commented, post)
-    self.save
   end
   
 

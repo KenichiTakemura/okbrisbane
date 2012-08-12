@@ -22,6 +22,7 @@ Okbrisbane::Application.routes.draw do
       post :more
       get :view
       get :write
+      post :upload_image
     end
   end
   

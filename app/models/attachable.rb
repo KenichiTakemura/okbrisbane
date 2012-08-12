@@ -14,6 +14,10 @@ class Attachable < ActiveRecord::Base
     update_attribute(:attached_by, user)
   end
   
+  def attached_by(user)
+   update_attribute(:attached_by, user)
+  end
+  
   def attached_to(post)
     update_attribute(:attached, post)
   end
@@ -21,6 +25,12 @@ class Attachable < ActiveRecord::Base
   def to_s
     "id: #{id} a_file_name: #{avatar_file_name} a_content_type #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
   end
+  
+  def thumbnailable?
+    return false unless avatar.content_type
+    ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
+  end 
+  
 
 #  AttachmentContentTypeValidator
 #  AttachmentPresenceValidator

@@ -7,8 +7,10 @@ class JobsController < ApplicationController
   end
   
   def create
+    uuid = params[:uuid]
     post = params[:job]
-    logger.debug("post1: #{post}")
+    logger.debug("uuid: #{post}")
+    logger.debug("post: #{post}")
     if post[:attachment]
       @attachment = Attachment.new(:avatar => post[:attachment][:avatar])
       logger.debug("avatar: #{@attachment}")

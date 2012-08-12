@@ -1,7 +1,7 @@
 class CreateMypages < ActiveRecord::Migration
   def change
     create_table :mypages do |t|
-      t.references :mypagable, :polymorphic => true
+      t.references :user
       t.boolean :is_public, :default => false
       t.string :public_url, :null => true
       t.integer :blocked, :default => 0
