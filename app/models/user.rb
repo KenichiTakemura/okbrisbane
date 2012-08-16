@@ -7,12 +7,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :is_special
   # attr_accessible :title, :body
   
   has_one :mypage, :dependent => :destroy
+  has_many :role, :dependent => :destroy
   has_many :job, :as => :posted_by, :class_name => 'Job', :dependent => :destroy
   has_many :buy_and_sell, :as => :posted_by, :class_name => 'BuyAndSell', :dependent => :destroy
+  has_many :well_being, :as => :posted_by, :class_name => 'WellBeing', :dependent => :destroy
   has_many :comment, :as => :commented_by, :dependent => :destroy      
   has_many :attachment, :as => :attached_by, :class_name => 'Attachment', :dependent => :destroy
   has_many :image, :as  => :attached_by, :class_name => 'Image', :dependent => :destroy
@@ -23,6 +25,11 @@ class User < ActiveRecord::Base
     return "#{self.last_name} #{self.first_name}" if !self.first_name.empty?
     return "#{self.last_name}" if !self.last_name.empty?
     ""
+  end
+  
+  def set_role(name, value)
+    role = self.build_role(:role_name => name, :role_value => value)
+    role.save
   end
   
   def create_mypage
@@ -39,4 +46,11 @@ class User < ActiveRecord::Base
     "id: " << id << " email: " << email
   end
   
+  def unattached_image
+    Image.where("attached_by_id = ? AND attached_id is NULL AND write_at is not NULL", self.id)
+  end
+
+  def unattached_attachment
+    Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at is not NULL", self.id)
+  end  
 end

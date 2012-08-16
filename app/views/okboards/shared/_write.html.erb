@@ -29,75 +29,165 @@
 			<%= f.label :category, t("category"), :class => "label left" %>
 			<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
 		</div>
-	    <div class="group">
-	    	<%= link_to(t("image") + t("add"), "#", :id => "attach_image")%>
-	    	<div class="image" style="display:none">
-			<%= text_field_tag :something, '', :placeholder => t("write_something"), :class => "text_field" %>
-			<%= file_field_tag :image, :id => "image" %><div class="upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-			<div class="flash"><div class="upload_progress"></div></div>
-			<div class="upload_image">
-			<%= submit_tag t("add"), :class => "button-link_naver", :id => "add_image" %>
-			</div>
-			<% script = %Q|function upload() {
-				if($('\#image').val() != "") {
-      				$('div.upload_status').css("display","block");
-     				var formData = new FormData();
-      				formData.append("file", document.getElementById('image').files[0]);
-				    formData.append("authenticity_token", $("input[name='authenticity_token']").attr("value"));
-				    formData.append("timestamp", $("\#write_at").attr("value"));
-      				var xhr = new XMLHttpRequest();
-      				xhr.upload.addEventListener("progress", uploadProgress, false);
-         	        xhr.addEventListener("load", uploadComplete, false);
-      				xhr.open("POST", "#{_okboard_link_upload_image(@okpage)}", true);
-      				xhr.send(formData);
-      			}
-    			};
-    			function uploadProgress(event) {
-      				var progress = Math.round((event.loaded / event.total) * 100);
-      				$('div.upload_progress').html(progress + "%");
-    			};
-    			function uploadComplete(event) {
-    			   $('div.upload_status').css("display","none");
-    			   $('\#image').val('');
-                   if (event.target.status != 200) {
-                     $('div.upload_status').html("<div class=\\"message error\\">"
-                       + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                       return false;
-                    }
-                    data = JSON.parse(event.target.responseText);
-                    if(data.result != 0) {
-                    $('div.upload_progress').html("<div class=\\"message error\\">"
-                      + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                    } else {
-                    	$('div.upload_progress').html("<div class=\\"message notice\\">"
-                      + "<p><strong>#{t("successfully_uploaded")}</strong></p></div>");
-                    }
-    			 };
-    			| %>
-    			<%= _script(%Q|$('\#add_image').click(function() {upload(); return false;});| + script) %>
-			</div>
-			<div class="display_image"></div>
-		</div>
-		<%= _script(%Q|$('\#attach_image').click(function() {$('div.image').toggle("slow");$('div.upload_progress').html('');return false; })|) %>
 		<%= f.fields_for @post.content do |content_form| %>
 		<div class="group">
 			<%= content_form.label :body, t("content"), :class => "label" %>
 			<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
 		</div>
 		<% end %>
-		<%= f.fields_for @post.attachment do |attachment_form| %>
-		<div class="group">
-			<%= attachment_form.label :avatar, t("attachment"), :class => "label", :style => "color:#fff"  %>
-			<%= attachment_form.file_field :avatar, :class => "avatar", :size => 40 %>
+	    <div class="group">
+	    	<div class="image">
+	    	<%= f.label :add_image, t("image") + t("add"), :class => "label left" %>
+	    	<span class="description"><%= t("click_add_after_selection") %></span>
+			<%= text_field_tag :something, '', :placeholder => t("write_something"), :class => "text_field", :id => "something" %>
+			<br/>
+			<%= file_field_tag :image, :id => "image" %><div class="image_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+			<div class="flash"><div class="image_upload_progress"></div></div>
+			<div class="upload_image" style="margin-top: 5px;">
+			<%= submit_tag t("add"), :class => "button-link_naver", :id => "add_image" %>
+			</div>
+			<% script = %Q|
+			    function upload_image() {
+				  if($('\#image').val() != "") {
+      				$('div.image_upload_status').css("display","block");
+     				var formData = new FormData();
+      				formData.append("file", document.getElementById('image').files[0]);
+      				formData.append("something",$("\#something").attr("value"));
+				    formData.append("authenticity_token", $("input[name='authenticity_token']").attr("value"));
+				    formData.append("timestamp", $("\#write_at").attr("value"));
+      				var xhr = new XMLHttpRequest();
+      				xhr.upload.addEventListener("progress", uploadImageProgress, false);
+         	        xhr.addEventListener("load", uploadImageComplete, false);
+      				xhr.open("POST", "#{_okboard_link_upload_image(@okpage)}", true);
+      				xhr.send(formData);
+      			  }
+    			};
+    			function uploadImageProgress(event) {
+      				var progress = Math.round((event.loaded / event.total) * 100);
+      				$('div.image_upload_progress').html(progress + "%");
+    			};
+    			function uploadImageComplete(event) {
+    			   $('div.image_upload_status').css("display","none");
+    			   $('\#image').val('');
+                   if (event.target.status != 200) {
+                     $('div.image_upload_progress').html("<div class=\\"message error\\">"
+                       + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
+                       return false;
+                    }
+                    data = JSON.parse(event.target.responseText);
+                    if(data.result != 0) {
+                    $('div.image_upload_progress').html("<div class=\\"message error\\">"
+                      + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
+                    } else {
+                      $('div.image_upload_progress').html("<div class=\\"message notice\\">"
+                      + "<p><strong>#{t("successfully_uploaded")}</strong></p></div>");
+                      showImages(data);
+                    }
+    			 };
+    			 function showImages(data) {
+    			 	 ids = data.images;
+                     thumbnails = data.thumbnails;
+                     somethingies = data.somethingies;
+                     var html = "";
+                     for (var i=0; i<ids.length; i++) {
+                       html += '<div style="position: relative; float: left;margin-left: 5px">';
+                       html += '<img src="' + thumbnails[i] + '" title="' + somethingies[i] + '" />';
+                        html += '<div style="position: absolute; top: 0px; left:95%;">';
+                        html += '<a href="#{_okboard_link_delete_image(@okpage)}' + ids[i] + '&t=' + $('\#write_at').val() + '" class="delete_x" rel="nofollow" data-remote="true" data-method="delete" data-confirm="#{t('confirm_delete')}" title="#{t('delete')}">' + "#{t('x')}" + "</a>"
+                        html += "</div></div>"
+                     }
+                     $('div.display_image').html(html);
+    			 };
+    			| %>
+    			<%= _script(%Q|$('\#add_image').click(function() {upload_image(); return false;});| + script) %>
+			</div>
+			<div class="group">
+			<div class="display_image" style="margin: 3px;float:left"></div>
+			</div>
 		</div>
-		<% end %>
+		<div class="clear"></div>
+		<div class="group">
+	    	<div class="attachment">
+	    	<%= f.label :add_attachment, t("attachment") + t("add"), :class => "label left" %>
+	    	<span class="description"><%= t("click_add_after_selection") %></span>
+			<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+			<div class="flash"><div class="attachment_upload_progress"></div></div>
+			<div class="upload_attachment" style="margin-top: 5px;">
+			<%= submit_tag t("add"), :class => "button-link_naver", :id => "add_attachment" %>
+			</div>
+			<% script = %Q|
+                function upload_attachment() {
+				  if($('\#attachment').val() != "") {
+      				$('div.attachment_upload_status').css("display","block");
+     				var formData = new FormData();
+      				formData.append("file", document.getElementById('attachment').files[0]);
+				    formData.append("authenticity_token", $("input[name='authenticity_token']").attr("value"));
+				    formData.append("timestamp", $("\#write_at").attr("value"));
+      				var xhr = new XMLHttpRequest();
+      				xhr.upload.addEventListener("progress", uploadAttachmentProgress, false);
+         	        xhr.addEventListener("load", uploadAttachmentComplete, false);
+      				xhr.open("POST", "#{_okboard_link_upload_attachment(@okpage)}", true);
+      				xhr.send(formData);
+      			  }
+    			};
+    			function uploadAttachmentProgress(event) {
+      				var progress = Math.round((event.loaded / event.total) * 100);
+      				$('div.attachment_upload_progress').html(progress + "%");
+    			};
+    			 function uploadAttachmentComplete(event) {
+    			   $('div.attachment_upload_status').css("display","none");
+    			   $('\#attachment').val('');
+                   if (event.target.status != 200) {
+                     $('div.attachment_upload_progress').html("<div class=\\"message error\\">"
+                       + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
+                       return false;
+                    }
+                    data = JSON.parse(event.target.responseText);
+                    if(data.result != 0) {
+                    $('div.attachment_upload_progress').html("<div class=\\"message error\\">"
+                      + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
+                    } else {
+                      $('div.attachment_upload_progress').html("<div class=\\"message notice\\">"
+                      + "<p><strong>#{t("successfully_uploaded")}</strong></p></div>");
+                      showAttachments(data);
+                    }
+    			 };
+    			 function showAttachments(data) {
+                      ids = data.attachments;
+                      filesnames = data.filenames;
+                      var html = "";
+                      for (var i=0; i<ids.length; i++) {
+                        html += '<div style="position: relative; float: left;margin-left: 5px">';
+                        html += '<img src="/assets/common/Icon-Document03-Blue.png" width=50px height=50px title="' + filesnames[i] + '" />';
+                        html += '<div style="position: absolute; top: 0px; left:95%;">';
+                        html += '<a href="#{_okboard_link_delete_attachment(@okpage)}' + ids[i] + '&t=' + $('\#write_at').val() + '" class="delete_x" rel="nofollow" data-remote="true" data-method="delete" data-confirm="#{t('confirm_delete')}" title="#{t('delete')}">' + "#{t('x')}" + "</a>"
+                        html += "</div></div>"
+                      }
+                      $('div.display_attachment').html(html);
+    			 }
+    			| %>
+		    <%= _script(%Q|$('\#add_attachment').click(function() {upload_attachment(); return false;});| + script) %>
+			</div>
+			<div class="group">
+			<div class="display_attachment" style="margin: 3px;float:left"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
 		<div class="group">
 			<div class="left">
 				<%= f.submit t("create"), :class => "button-link_ok" %>
 			</div>
 		</div>
-
 		<% end %>
-
+		<%= _script_document_ready(%Q|
+		  $('div.image_upload_status').css("display","block");
+		  $('div.attachment_upload_status').css("display","block");
+		  $.post("| + get_image_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
+		  	$('div.image_upload_status').css("display","none");showImages(data);
+		  	});
+		  	$.post("| + get_attachment_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
+		  	$('div.attachment_upload_status').css("display","none");showAttachments(data);
+		  	});
+		|) %>
 	</div>
 </div>

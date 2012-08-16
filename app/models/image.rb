@@ -35,5 +35,17 @@ class Image < Attachable
   def height
     "120"
   end
+  
+  def thumb_image
+    self.avatar.url(:thumb)
+  end
+  
+  def medium_image
+    self.avatar.url(:medium)
+  end
+  
+  def original_image
+    self.avatar.url(:original)
+  end
 
 end

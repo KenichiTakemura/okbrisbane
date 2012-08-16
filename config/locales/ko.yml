@@ -302,7 +302,28 @@ ko:
   seeking: '구인'
   buying: '삽니다'
   selling: '팝니다'
+  name: '이름'
+  clear: 'Clear'
+  has: 'Y'
+  hasnot: 'N'
 
+  # User Info
+  member: '멤버'
+  total_signin: 'total 로그인 수'
+  current_signin_at: '현재 로그인'
+  current_signin_ip: '현재 로그인 IP'
+  last_signin_at: '마지막 로그인'
+  last_signin_ip: '마지막 로그인 IP'
+  num_of_post: '투고 수'
+  num_of_job_post: '구인구직 투고 수'
+  num_of_buy_and_sell_post: '벼룩시장 투고 수'
+  num_of_wellbeing_post: '생활정보 투고 수'
+  num_of_comment: 'comment 투고 수'
+  num_of_attachment: '첨부자료 투고 수'
+  num_of_image: '이미지 투고 수'
+  num_of_unattached_image: 'unattached 이미지 투고 수'
+  num_of_unattached_attachment: 'unattached 첨부자료 투고 수'
+    
   p_home: "메인"
   p_signin: "회원로그인"
   p_signup: "회원가입"
@@ -472,6 +493,7 @@ ko:
   must_be_numbers: '수로 입력하십시오'
   must_be_filled: '꼭 입력하십시오'
   must_be_selected: '꼭 선택하십시오'
+  click_add_after_selection: '추가 '
   
   # Upload
   please_drag_n_drop: "이미지를 Drag'n'Drop 하십시오"

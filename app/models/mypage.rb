@@ -3,7 +3,7 @@ class Mypage < ActiveRecord::Base
   belongs_to :user
   
   def add_post
-    self.num_of_post = self.num_of_post + 1
+    update_attribute(:num_of_post, self.num_of_post + 1)
   end
   
 end

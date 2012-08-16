@@ -50,7 +50,6 @@ class Post < ActiveRecord::Base
   scope :is_valid, where("is_deleted != ?", true)
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
 
-  
   # callbacks
   after_initialize :set_default
   after_validation :set_valid_until
@@ -95,10 +94,7 @@ class Post < ActiveRecord::Base
   end
 
   def viewed
-    logger.debug("views => " + self.views.to_s)
-    self.views = self.views + 1
-    self.save
-    logger.info("views => " + self.views.to_s)
+    self.update_attribute(:views, self.views + 1)
   end
 
   def liked
@@ -118,6 +114,16 @@ class Post < ActiveRecord::Base
 
   def set_user(user)
     update_attribute(:posted_by, user)
+    user.mypage.add_post
   end
-    
+  
+  def has_image?
+    return I18n.t("has") if !self.image.empty?
+    I18n.t("hasnot")
+  end
+      
+  def has_attachment?
+    return I18n.t("has") if !self.image.empty?
+    I18n.t("hasnot")
+  end
 end

@@ -215,6 +215,26 @@ module ApplicationHelper
     %Q|/okboards/upload_image?v=| + _okpage_v(okpage)
   end
   
+  def _okboard_link_delete_image(okpage)
+    %Q|/okboards/delete_image?v=| + _okpage_v(okpage) + "&id="
+  end
+
+  def _okboard_link_delete_image_with_id_timestamp(okpage, id, timestamp)
+    %Q|/okboards/delete_image?v=| + _okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
+  end
+  
+  def _okboard_link_upload_attachment(okpage)
+    %Q|/okboards/upload_attachment?v=| + _okpage_v(okpage)
+  end
+  
+  def _okboard_link_delete_attachment(okpage)
+    %Q|/okboards/delete_attachment?v=| + _okpage_v(okpage) + "&id="
+  end
+
+  def _okboard_link_delete_attachment_with_id_timestamp(okpage, id, timestamp)
+    %Q|/okboards/delete_attachment?v=| + _okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
+  end
+  
   def _okboard_link_write(okpage)
     %Q|/okboards/write?v=| + _okpage_v(okpage)
   end
@@ -271,12 +291,12 @@ module ApplicationHelper
 
   def _truncate(expression)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => 26)}</span>|
-    html.html_safe
+    html
   end
 
   def _truncate_with_length(expression, length)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => length)}</span>|
-    html.html_safe
+    html
   end
 
   def _truncate_no_title(expression)

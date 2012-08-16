@@ -1,4 +1,4 @@
-class WellBeing < ActiveRecord::Base
+class WellBeing < Post
   
   Categories = Hash.new
   Categories[:event] = "event"

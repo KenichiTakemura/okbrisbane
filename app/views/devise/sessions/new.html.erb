@@ -1,6 +1,5 @@
 <%= render :partial => "devise/shared/header" %>
 <!-- %= image_tag("common/logo_w.gif")% -->
-<div class="signin_title">OKBRISBANE <%=t("signin")%></div>
 <div class="flash">
 	<% if notice %>
 	<p class="message notice">
@@ -13,6 +12,7 @@
 	</p>
 	<% end %>
 </div>
+<div class="signin_title">OKBRISBANE <%=t("signin")%></div>
 <div id="signin">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
 	<div class="group">

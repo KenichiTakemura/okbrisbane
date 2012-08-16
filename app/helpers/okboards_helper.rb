@@ -5,7 +5,7 @@ module OkboardsHelper
     if post.posted_by_type.eql? "Admin"
       return t('admin')
     else
-      post.posted_by.name if !post.posted_by.nil?
+      return post.posted_by.name if !post.posted_by.nil?
     end
     t("unknown_user")
   end
@@ -46,16 +46,14 @@ module OkboardsHelper
     html.html_safe
   end
 
-  def build_board_list(header, price)
-    Rails.logger.debug("build_board_list #{header} #{price}")
-    html = %Q|<table class="table">|
-    if header
-      html += %Q|<thead><tr><th class="first">| + t("category") + "</th><th>"
-      if price
-        html += t("price") + "</th><th>"
-      end
-      html += t("subject") + "</th><th>" + t("created_at") + "</th><th>" + t("viewed") + "</th><th>" + t("author") +  %Q|</th><th class="last">| + t("view") + %Q|</th></tr></thead>|
+  def build_board_list(price)
+    html = %Q|<table id="okboard_table" width=100%>
+        <thead><tr><th>#{t("category")}</th><th>|
+    if price
+      html += t("price") + "</th><th>"
     end
+    html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th>
+    <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th><th>#{t("view")}</th></tr></thead>|
     html += "<tbody>"
     html += build_body_list_body(price)
     html += "</tbody></table>"
@@ -69,17 +67,17 @@ module OkboardsHelper
       html += "</td><tr>"
     else
       @board_lists.each do |post|
-        html += %Q|<tr class="okboard_list_body"><td class="first">| + t("#{post.category}") + " " + post.id.to_s + %Q|</td><td>|
+        html += %Q|<tr class="okboard_list_body"><td>#{t("#{post.category}")}</td><td>|
         if price
           html += "#{_price(post.price)}" + " </td><td>"
         end
-        html += _truncate_no_title(post.subject) + "</td><td>" +
-        Common.date_format(post.updated_at) + "</td><td>" + post.views.to_s +
-         "</td><td>" + author_name(post) + "</td>" + %Q|<td class="okboard_list_view last">|
+        html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
+         #{Common.date_format(post.updated_at)}</td><td>#{post.views.to_s}
+         </td><td>#{post.has_image?}</td><td>#{post.has_attachment?}</td><td>#{author_name(post)}</td><td>|
         if price
           html += t("view") + section_span(post) + "</td></tr>"
         else
-          html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link")
+          html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link_ok")
         end
       end
     end

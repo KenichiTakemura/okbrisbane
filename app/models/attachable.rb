@@ -2,7 +2,7 @@ class Attachable < ActiveRecord::Base
   # Make it abstract
   self.abstract_class = true
   
-  attr_accessible :is_deleted, :medium_size, :thumb_size, :accept_content_type, :attached_id
+  attr_accessible :is_deleted, :medium_size, :thumb_size, :attached_id
   
   attr_accessible :avatar
   

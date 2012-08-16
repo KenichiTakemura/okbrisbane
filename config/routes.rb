@@ -23,6 +23,11 @@ Okbrisbane::Application.routes.draw do
       get :view
       get :write
       post :upload_image
+      post :upload_attachment
+      post :get_image
+      post :get_attachment
+      delete :delete_image
+      delete :delete_attachment
     end
   end
   

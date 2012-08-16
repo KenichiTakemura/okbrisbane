@@ -25,6 +25,8 @@ class OkboardsController < OkController
       @board_lists = BuyAndSell.latest
       @post = BuyAndSell.new
     when Style.page(:p_wellbeing)
+      @board_lists = WellBeing.latest
+      @post = WellBeing.new
     when Style.page(:p_study)
     when Style.page(:p_immig)
     when Style.page(:p_estate)
@@ -57,6 +59,7 @@ class OkboardsController < OkController
   def view
     raise if @@board_id.nil?
     @post = _select_post
+    @post.viewed
   end
   
   def write
@@ -65,7 +68,6 @@ class OkboardsController < OkController
       redirect_to user_sign_in_path 
     end
     @post = _write_post
-    @post.attachment.build
   end
   
   def more
@@ -75,6 +77,16 @@ class OkboardsController < OkController
     @lastid = find_lastid(@board_lists)
     @lastid ||= @previd
     logger.debug("@lastid: #{@lastid}")
+  end
+  
+  #ajax
+  def get_image
+    timestamp = params[:timestamp]
+    images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
+    image_ids = images.collect{|i| i.id}
+    thumbnails = images.collect{|i| i.thumb_image}
+    somethingies = images.collect{|i| i.something}
+    render :json => {:result => 0, :images => image_ids, :thumbnails => thumbnails, :somethingies => somethingies }    
   end
   
   # ajax
@@ -88,15 +100,69 @@ class OkboardsController < OkController
       image.something = params[:something]
       image.attached_by(current_user)
       logger.debug("image saved. #{image}")
-      images = Image.where("attached_by_id = ? AND attached_id is NULL", current_user)
-      render :json => {:result => 0, :images => images.size }
+      images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
+      image_ids = images.collect{|i| i.id}
+      thumbnails = images.collect{|i| i.thumb_image}
+      somethingies = images.collect{|i| i.something}
+      render :json => {:result => 0, :images => image_ids, :thumbnails => thumbnails, :somethingies => somethingies }
     else 
       logger.debug("not thumbnailable? #{image}")
       render :json => {:result => 1}
     end
+    rescue
+      render :json => {:result => 1}      
+  end
+  
+  #ajax
+  def delete_image
+    logger.debug("delete_image")
+    image = Image.find(params[:id])
+    @timestamp = params[:t]
+    image.destroy
+    @images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)
   end
 
+  #ajax
+  def get_attachment
+    timestamp = params[:timestamp]
+    json_attachment(timestamp)
+  end
+  
+  #ajax
+  def upload_attachment
+    logger.debug("upload_attachment")
+    file = params[:file]
+    timestamp = params[:timestamp]
+    logger.debug("file: #{file}")
+    logger.debug("timestamp: #{timestamp}")
+    attach = Attachment.new(:avatar => file)
+    logger.debug("attachment: #{attach}")
+    attach.write_at = timestamp;
+    attach.attached_by(current_user)
+    logger.debug("attachment saved. #{attach}")
+    json_attachment(timestamp)
+    #rescue
+    #  render :json => {:result => 1}      
+  end
+  
+  #ajax
+  def delete_attachment
+    logger.debug("delete_attachment")
+    attachment = Attachment.find(params[:id])
+    @timestamp = params[:t]
+    attachment.destroy
+    @attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)    
+  end
+
+
   private
+  
+  def json_attachment(timestamp)
+    attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
+    attachment_ids = attachments.collect{|i| i.id}
+    attachment_files = attachments.collect{|i| i.avatar_file_name}
+    render :json => {:result => 0, :attachments => attachment_ids, :filenames => attachment_files }    
+  end
   
   def _make_post_list_with_image(posts, limit)
     image_list = Array.new

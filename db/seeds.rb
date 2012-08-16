@@ -14,14 +14,22 @@ BusinessProfileImage.delete_all
 SystemSetting.delete_all
 
 # Users
-User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123', :password_confirmation => 'kenichi123', :first_name => "켄이치", :last_name => "다케무라")
-anonymous = User.new(:email => "anonymous@okbrisbane.com", :first_name => "", :last_name => "Anonymous")
+User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123',
+ :password_confirmation => 'kenichi123', :first_name => "켄이치", :last_name => "다케무라",
+ :is_special => true)
+anonymous = User.new(:email => "anonymous@okbrisbane.com", :first_name => "", :last_name => "Anonymous",
+ :is_special => true)
 anonymous.save(:validate => false)
-guest = User.new(:email => "guest@okbrisbane.com", :first_name => "", :last_name => "Guest")
+guest = User.new(:email => "guest@okbrisbane.com", :first_name => "", :last_name => "Guest",
+ :is_special => true)
 guest.save(:validate => false)
+User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
+ :password_confirmation => 'kristaadams1', :first_name => "Elliott", :last_name => "Joo",
+ :is_special => true)
+
 
 # OKBRISBANE 
-ok = BusinessClient.create(:business_name => "OKBRISBANE", :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
+ok = BusinessClient.create(:business_name => "OOK Pty Ltd", :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
 ok.build_business_profile(:body => 'OKBRISBANE rocks!')
 ok.save
 

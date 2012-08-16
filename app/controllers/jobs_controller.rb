@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+class JobsController < OkController
   
   before_filter :filter
   
@@ -7,36 +7,46 @@ class JobsController < ApplicationController
   end
   
   def create
-    uuid = params[:uuid]
-    post = params[:job]
-    logger.debug("uuid: #{post}")
-    logger.debug("post: #{post}")
-    if post[:attachment]
-      @attachment = Attachment.new(:avatar => post[:attachment][:avatar])
-      logger.debug("avatar: #{@attachment}")
-      post.delete :attachment
-      logger.debug("post: #{post}")
-    end
-    @post = Job.new(post)
-    logger.debug("post2: #{@post}")
-    logger.debug("content: #{@post.content}")
+    @post = Job.new(params[:job])
     @post.valid_until = post_expiry
-    respond_to do |format|
-      if @post.save
+    logger.debug("post: #{@post}")
+    Post.transaction do
+      begin
+        @post.save
         @post.set_user(current_user)
-        @attachment.attached_to_by(@post, current_user) if @attachment
+        get_image(@post.write_at).each do |image|
+          image.attached_to_by(@post, current_user)
+        end
+        get_attachment(@post.write_at).each do |attachment|
+          attachment.attached_to_by(@post, current_user)
+        end
         @board_lists = Job.latest
         @lastid = find_lastid(@board_lists)
-        format.html { render :template => "okboards/index", notice: I18n.t('successfully_created') }
-        format.json { render json: @post, status: :created }
-      else
+        respond_to do |format|
+          format.html { render :template => "okboards/index", notice: I18n.t('successfully_created') }
+          format.json { render json: @post, status: :created }
+        end
+      rescue
         flash[:warning] = I18n.t("failed_to_create")
-        logger.debug("@post.errors: #{@post.errors}")
-        @post.attachment.build
-        format.html { render :template => "okboards/write" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        @post.errors.full_messages.each do |msg| 
+          logger.warn("@post.errors: #{msg}")
+        end
+        respond_to do |format|
+          format.html { render :template => "okboards/write" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
+  
+  protected
+  
+  def get_image(timestamp)
+     Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
+  end
+  
+  def get_attachment(timestamp)
+     Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
+  end
+  
 end
-
