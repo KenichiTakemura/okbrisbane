@@ -1,10 +1,8 @@
 Okbrisbane::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-
-  #match 'css/:action.css', :controller=>'stylesheet', :as => :css
-
-  resources :mypages
+  
+  resources :mypages, :only => ['index']
 
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
   match 'member_managements/sign_up', :via => :get
@@ -31,8 +29,8 @@ Okbrisbane::Application.routes.draw do
     end
   end
   
-  resources :jobs, :only => ["index","new","create","edit","update"]
-  
+  resources :jobs, :only => ["new","create"]
+  resources :buy_and_sells, :only => ["new","create"]
   resources :post_searches, :only => ["index"]
   
   # The priority is based upon order of creation:

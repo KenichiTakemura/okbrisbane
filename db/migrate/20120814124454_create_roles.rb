@@ -3,7 +3,7 @@ class CreateRoles < ActiveRecord::Migration
     create_table :roles do |t|
       t.string :role_name
       t.integer :role_value
-      t.references :user
+      t.references :rolable, :polymorphic => true
       t.timestamps
     end
   end

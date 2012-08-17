@@ -2,6 +2,9 @@
 	<p class="okboard_title">
 		<%= t(@okpage.to_s)%> <%= t('write_new')%>
 	</p>
+		<p class="okboard_notice">
+		<%= t(@okpage.to_s + "_notice")%>
+	</p>
 	<div class="author">
 		<%= t('author') %> <%= current_user.email %>
 	</div>
@@ -29,6 +32,12 @@
 			<%= f.label :category, t("category"), :class => "label left" %>
 			<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
 		</div>
+		<% if @post.respond_to? :price %>
+		<div class="group">
+			<%= f.label :price, t("price"), :class => "label left" %>
+			<%= f.text_field :price, :class => "text_field" %>
+		</div>
+		<% end %>
 		<%= f.fields_for @post.content do |content_form| %>
 		<div class="group">
 			<%= content_form.label :body, t("content"), :class => "label" %>

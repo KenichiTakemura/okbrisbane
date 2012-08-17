@@ -1,9 +1,17 @@
-<div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
-	<p class="okboard_title">
-		<%= t(@okpage.to_s)%>
-	</p>
+<div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
+	<div class="okboard_top">
+		<p class="okboard_title">
+			<%= t(@okpage.to_s)%>
+		</p>
+		<div class="okboard_title_image">
+			<%= image_tag("#{I18n.locale}/#{@okpage}/logo.gif") %>
+		</div>
+		<div class="okboard_background">
+			<%= image_tag("#{I18n.locale}/#{@okpage}/bg.jpg") %>
+		</div>
+	</div>
 	<% if !@board_image_lists.nil? %>
-	<div id="okboard_for_<%= @okpage %>">
+	<div id="okboard_image_list_for_<%= @okpage %>">
 		<% @board_image_lists.each do |post| %>
 		<div class="okboard_thumbnail">
 			<%= image_tag(post.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
@@ -31,8 +39,12 @@
 		<%= single_body_banner(8) %>
 	</div>
 	<% end %>
+	<div class="okboard_write_new">
 	<%= javascript_include_tag 'jquery.dataTables.min.js' %>
-	<p style="float:right; margin-right:10px;"><%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_ok')%></p>
+	<p style="position: relative; float:right; margin-right:10px;">
+		<%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_ok')%>
+	</p>
+	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<div id="okboard_filter">
 			<div class="item">
@@ -75,7 +87,11 @@
 </div>
 <%= _script_document_ready(%Q|
 $('\#_lastid').val("#{@lastid}");
-$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": true});
 $('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
 $.post("| + more_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
 })|) %>
+<% if !@board_lists.empty? %>
+<%= _script_document_ready(%Q|
+$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": true});
+|) %>
+<% end %>

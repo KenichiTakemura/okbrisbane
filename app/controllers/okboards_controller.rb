@@ -19,10 +19,18 @@ class OkboardsController < OkController
     @post_search = PostSearch.new
     case @board
     when Style.page(:p_job)
-      @board_lists = Job.latest
+      if @@category
+        @board_lists = Job.category_latest(@@category)
+      else
+        @board_lists = Job.latest
+      end
       @post = Job.new
     when Style.page(:p_buy_and_sell)
-      @board_lists = BuyAndSell.latest
+      if @@category
+        @board_lists = BuyAndSell.category_latest(@@category)
+      else
+        @board_lists = BuyAndSell.latest
+      end
       @post = BuyAndSell.new
     when Style.page(:p_wellbeing)
       @board_lists = WellBeing.latest

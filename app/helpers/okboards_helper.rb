@@ -1,14 +1,4 @@
 module OkboardsHelper
-  def author_name(post)
-    return "" if post.nil?
-    logger.debug("posted_by: #{post.posted_by_type}")
-    if post.posted_by_type.eql? "Admin"
-      return t('admin')
-    else
-      return post.posted_by.name if !post.posted_by.nil?
-    end
-    t("unknown_user")
-  end
 
   def author_email(post)
     return "" if post.nil?
@@ -47,14 +37,14 @@ module OkboardsHelper
   end
 
   def build_board_list(price)
-    html = %Q|<table id="okboard_table" width=100%>
-        <thead><tr><th>#{t("category")}</th><th>|
+    html = %Q|<table id="okboard_table" width=100% class="ui-widget">
+        <thead class="ui-widget-header"><tr><th>#{t("category")}</th><th>|
     if price
       html += t("price") + "</th><th>"
     end
     html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th>
     <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th><th>#{t("view")}</th></tr></thead>|
-    html += "<tbody>"
+    html += %Q|<tbody class="ui-widget-content">|
     html += build_body_list_body(price)
     html += "</tbody></table>"
     html.html_safe
@@ -63,17 +53,25 @@ module OkboardsHelper
   def build_body_list_body(price)
     html = ""
     if @board_lists.empty?
-      html += %Q|<tr><td colspan="5">| + t("no_information")
+      html += %Q|<tr><td colspan="8">| + t("no_information")
       html += "</td><tr>"
     else
       @board_lists.each do |post|
-        html += %Q|<tr class="okboard_list_body"><td>#{t("#{post.category}")}</td><td>|
+        html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}"><td>#{t("#{post.category}")}</td><td>|
         if price
           html += "#{_price(post.price)}" + " </td><td>"
         end
         html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
          #{Common.date_format(post.updated_at)}</td><td>#{post.views.to_s}
-         </td><td>#{post.has_image?}</td><td>#{post.has_attachment?}</td><td>#{author_name(post)}</td><td>|
+         </td><td>|
+         if post.has_image?
+           html += image_tag("common/IconData2.gif")
+         end
+         html += "</td><td>"
+         if post.has_attachment?
+           html += image_tag("common/IconData2.gif")
+         end
+         html += %Q|</td><td>#{author_name(post)}</td><td>|
         if price
           html += t("view") + section_span(post) + "</td></tr>"
         else
@@ -189,6 +187,8 @@ module OkboardsHelper
       categories = Job::Categories
     when Style.page(:p_buy_and_sell)
       categories = BuyAndSell::Categories
+    when Style.page(:p_wellbeing)
+      categories = WellBeing::Categories
     when Style.page(:p_motor_vehicle)
       categories = MotorVehicle::Categories
     when Style.page(:p_estate)
@@ -206,6 +206,9 @@ module OkboardsHelper
     html = "<ul>"
     categories.each do |key,category|
       html += "<li>" + link_to(t(category), _okboard_link_with_category(link,category)) + "</li>"
+    end
+    if [Style.page(:p_job), Style.page(:p_buy_and_sell),Style.page(:p_wellbeing)].include? link
+      html += "<li>" + link_to(t('write_new'), _okboard_link_write(@okpage)) + "</li>"
     end
     html += "</ul>"
     html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)

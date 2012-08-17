@@ -384,15 +384,15 @@ ActiveRecord::Schema.define(:version => 20120814124454) do
   end
 
   create_table "mypages", :force => true do |t|
-    t.integer  "user_id"
-    t.boolean  "is_public",    :default => false
+    t.integer  "mypagable_id"
+    t.string   "mypagable_type"
+    t.boolean  "is_public",      :default => false
     t.string   "public_url"
-    t.integer  "blocked",      :default => 0
-    t.integer  "num_of_post",  :default => 0
-    t.boolean  "is_blacklist", :default => false
-    t.boolean  "nologin",      :default => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer  "blocked",        :default => 0
+    t.integer  "num_of_post",    :default => 0
+    t.boolean  "is_blacklist",   :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "post_searches", :force => true do |t|
@@ -403,9 +403,10 @@ ActiveRecord::Schema.define(:version => 20120814124454) do
   create_table "roles", :force => true do |t|
     t.string   "role_name"
     t.integer  "role_value"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "rolable_id"
+    t.string   "rolable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "studies", :force => true do |t|

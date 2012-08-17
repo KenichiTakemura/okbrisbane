@@ -12,6 +12,9 @@ BusinessClient.delete_all
 BusinessProfile.delete_all
 BusinessProfileImage.delete_all
 SystemSetting.delete_all
+Role.delete_all
+Home.delete_all
+MemberManagement.delete_all
 
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123',

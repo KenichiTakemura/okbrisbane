@@ -43,12 +43,14 @@ class Post < ActiveRecord::Base
   end
   
   # pagination
-  #default_scope :order => 'updated_at DESC'
+  default_scope :order => 'updated_at DESC'
   paginates_per 10
   
   # scope
   scope :is_valid, where("is_deleted != ?", true)
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
+  scope :category_latest, lambda { |cate| where('category = ?', cate).latest}
+
 
   # callbacks
   after_initialize :set_default
@@ -118,12 +120,10 @@ class Post < ActiveRecord::Base
   end
   
   def has_image?
-    return I18n.t("has") if !self.image.empty?
-    I18n.t("hasnot")
+    !self.image.empty?
   end
       
   def has_attachment?
-    return I18n.t("has") if !self.image.empty?
-    I18n.t("hasnot")
+    !self.attachment.empty?
   end
 end

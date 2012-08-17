@@ -1,4 +1,16 @@
 module ApplicationHelper
+  
+  def author_name(post)
+    return "" if post.nil?
+    logger.debug("posted_by: #{post.posted_by_type}")
+    if post.posted_by_type.eql? "Admin"
+      return t('admin')
+    else
+      return post.posted_by.name if !post.posted_by.nil?
+    end
+    t("unknown_user")
+  end
+  
   # Create left Menu
   def _left_menu(logo, links, paths)
     html = %Q|<div id="page_section_left">|
@@ -303,6 +315,19 @@ module ApplicationHelper
     html = %Q|#{truncate(expression, :length => 26)}|
   end
 
+  def noattachment?(item)
+    logger.debug("noattachment? item: #{item}")
+    if item.respond_to? :attachment
+      if item.attachment.nil? || item.attachment.empty?
+        logger.debug("noattachment")
+        return noattachment
+      end
+    else
+      raise "Internal Error #{item.class}"
+    end
+    return ""
+  end
+  
   def noimage?(item)
     logger.debug("noimage? item: #{item}")
     if item.respond_to? :client_image
@@ -322,9 +347,13 @@ module ApplicationHelper
     return ""
   end
 
-  # Used to show no image
   def noimage
     html = %Q|<img src="/assets/noimage.jpg" width="50px" height="50px" />|
+    html.html_safe
+  end
+  
+  def noattachment
+    html = %Q|<img src="/assets/noattachment.jpg" width="50px" height="50px" />|
     html.html_safe
   end
 
