@@ -139,7 +139,8 @@ class Post < ActiveRecord::Base
   end
   
   def admin_category_list
-    list = category_list
+    #list = category_list
+    list = Array.new
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
   end
