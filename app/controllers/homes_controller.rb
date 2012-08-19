@@ -1,4 +1,5 @@
 class HomesController < OkController
+  
   def collectFeed(category)
     case category
     when Okvalue::JOB

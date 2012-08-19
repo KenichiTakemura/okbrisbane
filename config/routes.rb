@@ -31,6 +31,8 @@ Okbrisbane::Application.routes.draw do
   
   resources :jobs, :only => ["new","create"]
   resources :buy_and_sells, :only => ["new","create"]
+  resources :well_being, :only => ["new","create"]
+
   resources :post_searches, :only => ["index"]
   
   # The priority is based upon order of creation:

@@ -1,4 +1,4 @@
-class MemberManagementsController < ApplicationController
+class MemberManagementsController < OkController
   
   before_filter :page_p_signup, :only => ["sign_up","term","personal","create"]
   before_filter :page_p_signin, :only => ["sing_in"]

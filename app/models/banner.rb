@@ -50,7 +50,6 @@ class Banner < ActiveRecord::Base
   end
 
   # pagination
-  default_scope :order => 'banners.id ASC'
   paginates_per 10
   
   def to_s

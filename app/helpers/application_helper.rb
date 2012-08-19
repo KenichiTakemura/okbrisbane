@@ -11,6 +11,10 @@ module ApplicationHelper
     t("unknown_user")
   end
   
+  def socialable?
+    SystemSetting.first.socialable
+  end
+  
   # Create left Menu
   def _left_menu(logo, links, paths)
     html = %Q|<div id="page_section_left">|
@@ -222,6 +226,14 @@ module ApplicationHelper
   def _okboard_link_with_id(okpage, id)
     %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
   end
+
+  def _okboard_link_with_user(okpage, user)
+    if !user.nil?
+      %Q|/okboards/view?v=| + _okpage_v(okpage) + "&u=" + Common.encrypt_data(user.to_s).html_safe
+    else
+      _okboard_link(okpage)
+    end
+  end
   
   def _okboard_link_upload_image(okpage)
     %Q|/okboards/upload_image?v=| + _okpage_v(okpage)
@@ -303,7 +315,7 @@ module ApplicationHelper
 
   def _truncate(expression)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => 26)}</span>|
-    html
+    html.html_safe
   end
 
   def _truncate_with_length(expression, length)

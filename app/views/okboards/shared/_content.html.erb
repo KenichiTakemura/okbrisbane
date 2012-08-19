@@ -32,7 +32,7 @@
 		<% end %>
 	</div>
 	<% end %>
-	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage) %>
+	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].include?(@okpage) %>
 	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
 		<%= single_body_banner(6) %>
 		<%= single_body_banner(7) %>
@@ -71,11 +71,7 @@
 		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
-			<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)%>
-			<%= build_board_list(true) %>
-			<% else %>
-			<%= build_board_list(false) %>
-			<% end %>
+			<%= build_board_list %>
 			<div id="okboard_list_body_more_loading">
 				<%= image_tag ("common/ajax_loading.gif")%>
 			</div>

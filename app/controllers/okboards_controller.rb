@@ -32,11 +32,15 @@ class OkboardsController < OkController
         @board_lists = BuyAndSell.latest
       end
       @post = BuyAndSell.new
-    when Style.page(:p_wellbeing)
+    when Style.page(:p_well_being)
       @board_lists = WellBeing.latest
       @post = WellBeing.new
     when Style.page(:p_study)
+      @board_lists = Study.latest
+      @post = Study.new
     when Style.page(:p_immig)
+      @board_lists = Immigration.latest
+      @post = Immigration.new
     when Style.page(:p_estate)
       @board_lists,@board_image_lists  = _make_post_list_with_image(Estate.latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
       @post = Estate.new
@@ -162,7 +166,6 @@ class OkboardsController < OkController
     @attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)    
   end
 
-
   private
   
   def json_attachment(timestamp)
@@ -198,6 +201,7 @@ class OkboardsController < OkController
     post = _model.new
     post.write_at = Time.now.to_i
     post.build_content
+    post.valid_until = post_expiry
     post
   end
     

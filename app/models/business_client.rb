@@ -27,7 +27,7 @@ class BusinessClient < ActiveRecord::Base
   default_scope :order => 'created_at DESC'
   paginates_per 10
   
-  scope :okbrisbane, where(:business_name => 'OKBRISBANE')
+  scope :okbrisbane, where(:business_name => Okvalue::BUSINESS_CLIENT_OK)
   
   def to_s
     "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} client_image: #{client_image} profile_image: #{business_profile_image}"

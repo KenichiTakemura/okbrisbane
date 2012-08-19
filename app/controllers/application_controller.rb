@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-
+  
+  before_filter :authenticate_user!
   before_filter :set_locale
+  
   def set_locale
     #I18n.locale = params[:locale] || I18n.default_locale
     I18n.locale = params[:locale] || "ko"
@@ -14,23 +16,23 @@ class ApplicationController < ActionController::Base
   #end
 
   # if user is logged in, return current_user, else return anonymous_user
-  def current_or_anonymous_user
+  def current_or_guest_user
     if current_user
-      if session[:anonymous_user_id]
+      if session[:guest_user_id]
         logging_in
-        anonymous_user.destroy
-        session[:anonymous_user_id] = nil
+        guest_user.destroy
+        session[:guest_user_id] = nil
       end
       current_user
     else
-      anonymous_user
+      guest_user
     end
   end
 
   # find anonymous_user object associated with the current session,
   # creating one as needed
-  def anonymous_user
-    User.find(session[:anonymous_user_id].nil? ? session[:anonymous_user_id] = create_anonymous_user.id : session[:anonymous_user_id])
+  def guest_user
+    User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
   end
 
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
@@ -81,8 +83,8 @@ class ApplicationController < ActionController::Base
     # end
   end
 
-  def create_anonymous_user
-    u = User.find_by_email("anonymous@okbrisbane.com")
+  def create_guest_user
+    u = User.find_by_email("okbrisbane_guest@okbrisbane.com")
     u
   end
 

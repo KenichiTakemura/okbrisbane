@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration
     create_table table do |t|
       t.string :locale, :null => false
       t.references :posted_by, :polymorphic => true
+      t.references :post_updated_by, :polymorphic => true
       t.string :category, :null => false
       t.string :subject, :null => false
       t.integer  :valid_days, :default => 0

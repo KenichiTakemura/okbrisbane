@@ -36,29 +36,35 @@ module OkboardsHelper
     html.html_safe
   end
 
-  def build_board_list(price)
+  def build_board_list
     html = %Q|<table id="okboard_table" width=100% class="ui-widget">
         <thead class="ui-widget-header"><tr><th>#{t("category")}</th><th>|
-    if price
+    if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
       html += t("price") + "</th><th>"
     end
     html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th>
-    <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th><th>#{t("view")}</th></tr></thead>|
+    <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th><th width=5%>#{t("view")}</th></tr></thead>|
     html += %Q|<tbody class="ui-widget-content">|
-    html += build_body_list_body(price)
+    html += build_body_list_body
     html += "</tbody></table>"
     html.html_safe
   end
 
-  def build_body_list_body(price)
+  def build_body_list_body
     html = ""
     if @board_lists.empty?
       html += %Q|<tr><td colspan="8">| + t("no_information")
       html += "</td><tr>"
     else
       @board_lists.each do |post|
-        html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}"><td>#{t("#{post.category}")}</td><td>|
-        if price
+        html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}">|
+        if post.category.eql?(Okvalue::ADMIN_POST_NOTICE)
+          html += %Q|<td width=15% style="color:red">#{t("#{post.category}")}</td>|
+        else
+          html += %Q|<td width=15%>#{t("#{post.category}")}</td>|
+        end  
+        html += "<td>"
+        if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
           html += "#{_price(post.price)}" + " </td><td>"
         end
         html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
@@ -71,8 +77,8 @@ module OkboardsHelper
          if post.has_attachment?
            html += image_tag("common/IconData2.gif")
          end
-         html += %Q|</td><td>#{author_name(post)}</td><td>|
-        if price
+         html += %Q|</td><td>| + link_to(author_name(post), _okboard_link_with_user(@okpage, post.posted_by_id), :style => "color:#000") + "</td><td>"
+        if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
           html += t("view") + section_span(post) + "</td></tr>"
         else
           html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link_ok")
@@ -96,13 +102,13 @@ module OkboardsHelper
     html += %Q|<div id="okboard_let_menu"><ul class="okboard_left_menu_items">|
     case @okpage
     when :p_job
-      links = [Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_wellbeing),
+      links = [Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_well_being),
         Style.page(:p_estate),Style.page(:p_motor_vehicle),Style.page(:p_business),
         Style.page(:p_accommodation),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_buy_and_sell
-      links = [Style.page(:p_buy_and_sell),Style.page(:p_job),Style.page(:p_wellbeing),
+      links = [Style.page(:p_buy_and_sell),Style.page(:p_job),Style.page(:p_well_being),
         Style.page(:p_estate),Style.page(:p_motor_vehicle),Style.page(:p_business),
         Style.page(:p_accommodation),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
@@ -110,53 +116,53 @@ module OkboardsHelper
     when :p_estate
       links = [Style.page(:p_estate),Style.page(:p_motor_vehicle),Style.page(:p_business),
         Style.page(:p_accommodation),Style.page(:p_job),Style.page(:p_buy_and_sell),
-        Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
+        Style.page(:p_well_being),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_motor_vehicle
       links = [Style.page(:p_motor_vehicle),Style.page(:p_estate),Style.page(:p_business),
         Style.page(:p_accommodation),Style.page(:p_job),Style.page(:p_buy_and_sell),
-        Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
+        Style.page(:p_well_being),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_business
       links = [Style.page(:p_business),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_accommodation),Style.page(:p_job),Style.page(:p_buy_and_sell),
-        Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
+        Style.page(:p_well_being),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_accommodation
       links = [Style.page(:p_accommodation),Style.page(:p_job),Style.page(:p_buy_and_sell),
-        Style.page(:p_motor_vehicle),Style.page(:p_wellbeing),Style.page(:p_estate),
+        Style.page(:p_motor_vehicle),Style.page(:p_well_being),Style.page(:p_estate),
         Style.page(:p_business),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
-    when :p_wellbeing
-      links = [Style.page(:p_wellbeing),Style.page(:p_law),Style.page(:p_tax),
+    when :p_well_being
+      links = [Style.page(:p_well_being),Style.page(:p_law),Style.page(:p_tax),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
         Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_law
-      links = [Style.page(:p_law),Style.page(:p_tax),Style.page(:p_wellbeing),
+      links = [Style.page(:p_law),Style.page(:p_tax),Style.page(:p_well_being),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
         Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_tax
-      links = [Style.page(:p_tax),Style.page(:p_law),Style.page(:p_wellbeing),
+      links = [Style.page(:p_tax),Style.page(:p_law),Style.page(:p_well_being),
         Style.page(:p_study),Style.page(:p_immig),Style.page(:p_job),
         Style.page(:p_buy_and_sell),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_study
-      links = [Style.page(:p_study),Style.page(:p_immig),Style.page(:p_wellbeing),
+      links = [Style.page(:p_study),Style.page(:p_immig),Style.page(:p_well_being),
         Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_tax),
         Style.page(:p_law),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
       paths = _path(links)
     when :p_immig
-      links = [Style.page(:p_immig),Style.page(:p_study),Style.page(:p_wellbeing),
+      links = [Style.page(:p_immig),Style.page(:p_study),Style.page(:p_well_being),
         Style.page(:p_job),Style.page(:p_buy_and_sell),Style.page(:p_tax),
         Style.page(:p_law),Style.page(:p_estate),Style.page(:p_motor_vehicle),
         Style.page(:p_business),Style.page(:p_accommodation),Style.page(:p_yellowpage),Style.page(:p_mypage)]
@@ -187,7 +193,7 @@ module OkboardsHelper
       categories = Job::Categories
     when Style.page(:p_buy_and_sell)
       categories = BuyAndSell::Categories
-    when Style.page(:p_wellbeing)
+    when Style.page(:p_well_being)
       categories = WellBeing::Categories
     when Style.page(:p_motor_vehicle)
       categories = MotorVehicle::Categories
@@ -207,7 +213,7 @@ module OkboardsHelper
     categories.each do |key,category|
       html += "<li>" + link_to(t(category), _okboard_link_with_category(link,category)) + "</li>"
     end
-    if [Style.page(:p_job), Style.page(:p_buy_and_sell),Style.page(:p_wellbeing)].include? link
+    if [Style.page(:p_job), Style.page(:p_buy_and_sell),Style.page(:p_well_being)].include? link
       html += "<li>" + link_to(t('write_new'), _okboard_link_write(@okpage)) + "</li>"
     end
     html += "</ul>"

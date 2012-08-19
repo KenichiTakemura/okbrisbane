@@ -21,4 +21,12 @@ class Attachment < Attachable
     self.medium_size ||= "400x400"
   end
   
+  def url
+    self.avatar.url(:original)
+  end
+  
+  def filename
+    self.avatar_file_name
+  end
+  
 end

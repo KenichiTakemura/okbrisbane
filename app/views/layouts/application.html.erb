@@ -2,13 +2,26 @@
 <html>
 	<head>
 		<title>OKBRISBANE</title>
-		<!-- %= stylesheet_link_tag "web-app-theme/base", "web-app-theme/themes/default/style", "web-app-theme/override", :cache => false % -->
 		<%= stylesheet_link_tag "application" %>
 		<%= csrf_meta_tag %>
 		<%= javascript_include_tag 'application' %>
 		<%= javascript_include_tag 'slides.min.jquery.js' %>
 	</head>
 	<body>
+		<% if socialable? %>
+		<div id="fb-root"></div>
+		<script>
+			( function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id))
+						return;
+					js = d.createElement(s);
+					js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+		</script>
+		<% end %>
 		<%= single_background_banner(1) %>
 		<%= single_background_banner(2) %>
 		<%= single_background_banner(3) %>
@@ -48,53 +61,52 @@
 			</div>
 			<div id="header-right">
 				<div class="ok_weather">
-					<div class="weather_information"><%= t("weather_information")%></div>
+					<div class="weather_information">
+						<%= t("weather_information")%>
+					</div>
 					<%= link_to t("brisbane"), "http://www.weather.com.au/qld/brisbane", :target => "_blank", :class => "weather_location" %>
 					<%= link_to t("sydney"),  "http://www.weather.com.au/nsw/sydney", :target => "_blank", :class => "weather_location" %>
 					<%= link_to t("melbourne"),  "http://www.weather.com.au/vic/melbourne", :target => "_blank", :class => "weather_location" %>
 					<%= link_to t("canberra"),  "http://www.weather.com.au/act/canberra", :target => "_blank", :class => "weather_location" %>
 					<%= link_to t("hobart"),  "http://www.weather.com.au/tas/hobart", :target => "_blank", :class => "weather_location" %>
-                    <%= link_to t("adelaide"),  "http://www.weather.com.au/sa/adelaide", :target => "_blank", :class => "weather_location" %>			
+					<%= link_to t("adelaide"),  "http://www.weather.com.au/sa/adelaide", :target => "_blank", :class => "weather_location" %>
 					<%= link_to t("perth"),  "http://www.weather.com.au/wa/perth", :target => "_blank", :class => "weather_location" %>
 				</div>
 				<%= single_header_banner(1) %>
 				<%= single_header_banner(2) %>
 			</div>
 			<div id="header-bottom">
+				<% if Style.page(:p_home).eql?(@okpage.to_s) || Style.page(:p_signin).eql?(@okpage.to_s) || Style.page(:p_signup).eql?(@okpage.to_s)  %>
+				<%= navigation("#41A317","#f0f0f0") %>
 				<div id="follows">
+					<% if socialable? %>
 					<ul class="wat-cf">
-						<li>
-							<%= image_tag("common/icon_facebook.png") %>
-						</li>
-						<li>
-							<%= image_tag("common/icon_twitter.png") %>
-						</li>
-						<li>
-							<%= image_tag("common/icon_me2day.png") %>
-						</li>
 						<li>
 							<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
 						</li>
+						<li>
+							&nbsp;
+						</li>
+						<li>
+							<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
+							<script>
+								! function(d, s, id) {
+									var js, fjs = d.getElementsByTagName(s)[0];
+									if (!d.getElementById(id)) {
+										js = d.createElement(s);
+										js.id = id;
+										js.src = "//platform.twitter.com/widgets.js";
+										fjs.parentNode.insertBefore(js, fjs);
+									}
+								}(document, "script", "twitter-wjs");
+							</script>
+						</li>
 					</ul>
+					<% end %>
 				</div>
-				<div id="fb-root"></div>
-				<script>
-					// ( function(d, s, id) {
-					// var js, fjs = d.getElementsByTagName(s)[0];
-					// if (d.getElementById(id))>
-					// return;
-					// js = d.createElement(s);
-					// js.id = id;
-					// js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-					// fjs.parentNode.insertBefore(js, fjs);
-					// }(document, 'script', 'facebook-jssdk'));
-				</script>
-				<% if Style.page(:p_home).eql?(@okpage.to_s) || Style.page(:p_signin).eql?(@okpage.to_s) || Style.page(:p_signup).eql?(@okpage.to_s)  %>
-					<% Rails.logger.debug("included") %>
-					<%= navigation("#41A317","#f0f0f0") %>
 				<% else %>
-					<% Rails.logger.debug("not included #{@okpage}") %>
-					<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
+				<% Rails.logger.debug("not included #{@okpage}") %>
+				<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
 				<% end %>
 			</div>
 		</div>

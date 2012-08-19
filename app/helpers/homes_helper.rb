@@ -7,7 +7,7 @@ module HomesHelper
   end
   
   def generateTopFeed(category, lists, image_list, color)
-    html = %Q|<div id="top_feed_list_#{category}"><div id="feed_head" style="position:relative;width:300px;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{category}")}</p></div>|
+    html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list""><div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{category}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p style="line-height: 25px;">| + link_to(t('more'), _okboard_link(category), :class => "button-link_#{color.to_s}") + " "
     html += link_to(t('write_new'), _okboard_link_write(category), :class => "button-link_#{color.to_s}")
     html += %Q|</p></div></div>|
@@ -17,7 +17,7 @@ module HomesHelper
     else
       if !image_list.nil? && !image_list.empty?
          image_list.each do |feed|
-           html += %Q|<tr><td width=40%><div class="shadow">#{image_tag(feed.feeded_to.image.first.avatar.url(:thumb), :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>
+           html += %Q|<tr><td width=40%><div class="shadow">#{image_tag(feed.feeded_to.image.first.thumb_url, :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>
            <td align=left valign=top>#{_truncate_with_length(feed.feeded_to.subject, 70)}|
            if feed.feeded_to.respond_to? :price
              html += %Q|<p class="price_tag">| + _price(feed.feeded_to.price)
@@ -41,8 +41,8 @@ module HomesHelper
       lists.each_with_index do |feed,index|
         html += %Q|<tr height="20px">|
         html += %Q|<td><img src="assets/#{I18n.locale}/#{@okpage}/ic_arrow.gif"></td>|
-        html += %Q|<td nowrap class="small" height="18" width=60%>#{_truncate(feed.feeded_to.subject)}</td>|
-        html += %Q|<td class="small_n">#{feed.feeded_to.postedDate}</td>|
+        html += %Q|<td nowrap class="feed_text" height="18" width=60%>#{_truncate(feed.feeded_to.subject)}</td>|
+        html += %Q|<td class="feed_text">#{feed.feeded_to.postedDate}</td>|
         html += %Q|<td width="20%" align=right>| + link_to(t("view"), _okboard_link_with_id(category.to_sym, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
       end
     end

@@ -4,7 +4,7 @@ class OkController < ApplicationController
 
   MODELS = {:p_job => Job,
     :p_buy_and_sell => BuyAndSell,
-    :p_wellbeing => WellBeing,
+    :p_well_being => WellBeing,
     :p_estate => Estate,
     :p_motor_vehicle => MotorVehicle,
     :p_business => Business,
@@ -17,5 +17,9 @@ class OkController < ApplicationController
     :p_sponsor => BusinessClient,
     :p_mypage => Mypage
   }
+  
+  def _okboard_link(okpage)
+    %Q|/okboards?v=| + Common.encrypt_data(okpage.to_s).chop
+  end
 
 end

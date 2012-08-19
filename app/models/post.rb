@@ -4,10 +4,11 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :is_deleted, :z_index, :write_at
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :is_deleted, :z_index, :write_at
   
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
+  belongs_to :post_updated_by, :polymorphic => true
 
   # has_many
   has_many :comment, :as => :commented, :dependent => :destroy
@@ -34,8 +35,11 @@ class Post < ActiveRecord::Base
   validates_presence_of :locale, :message => I18n.t('must_be_selected')
   validates_presence_of :subject, :message => I18n.t('must_be_filled')
   validates_presence_of :valid_until, :message => I18n.t('must_be_filled')
-  #validates_presence_of :valid_days, :message => 'Invalid valid_days'
-  #validates_numericality_of :valid_days, :only_integer => true, :greater_than => 0, :message => 'Invalid valid_days'
+  validates_numericality_of :views, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :likes, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :dislikes, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :rank, :only_integer => true, :greater_than_or_equal_to => 0
+  validates_numericality_of :abuse, :only_integer => true, :greater_than_or_equal_to => 0
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
@@ -43,11 +47,12 @@ class Post < ActiveRecord::Base
   end
   
   # pagination
-  default_scope :order => 'updated_at DESC'
+  default_scope :order => 'id DESC'
   paginates_per 10
   
   # scope
-  scope :is_valid, where("is_deleted != ?", true)
+  scope :is_valid, where("is_deleted = ?", false)
+  scope :is_invalid, where("is_deleted = ?", true)
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
   scope :category_latest, lambda { |cate| where('category = ?', cate).latest}
 
@@ -61,6 +66,7 @@ class Post < ActiveRecord::Base
   # public functions
   def add_top_feed_list
     logger.debug("add_top_feed_list category: #{self}")
+    return if self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
     logger.debug("Feed: #{feed}")
     if feed
@@ -73,11 +79,12 @@ class Post < ActiveRecord::Base
     logger.debug("Feeded_to: #{top_feed.id}")
    end
    
+   # Delete post from top_feed when deleted
    def delete_top_feed_list
     return if !self.is_deleted
     logger.debug("delete_from_top_feed_list #{self}")
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
-    feed.destroy    
+    feed.destroy if feed
    end
 
   def set_default
@@ -119,11 +126,21 @@ class Post < ActiveRecord::Base
     user.mypage.add_post
   end
   
+  def updated_by(user)
+    update_attribute(:post_updated_by, user)
+  end
+  
   def has_image?
     !self.image.empty?
   end
       
   def has_attachment?
     !self.attachment.empty?
+  end
+  
+  def admin_category_list
+    list = category_list
+    list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
+    list
   end
 end

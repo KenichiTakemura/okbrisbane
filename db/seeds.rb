@@ -23,7 +23,7 @@ User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123
 anonymous = User.new(:email => "anonymous@okbrisbane.com", :first_name => "", :last_name => "Anonymous",
  :is_special => true)
 anonymous.save(:validate => false)
-guest = User.new(:email => "guest@okbrisbane.com", :first_name => "", :last_name => "Guest",
+guest = User.new(:email => "okbrisbane_guest@okbrisbane.com", :first_name => "", :last_name => "Guest",
  :is_special => true)
 guest.save(:validate => false)
 User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
@@ -32,13 +32,14 @@ User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
 
 
 # OKBRISBANE 
-ok = BusinessClient.create(:business_name => "OOK Pty Ltd", :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
+ok = BusinessClient.create(:business_name => Okvalue::BUSINESS_CLIENT_OK, :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
 ok.build_business_profile(:body => 'OKBRISBANE rocks!')
 ok.save
 
 # SystemSetting
 ss = SystemSetting.new
 ss.post_expiry_length = 30
+ss.socialable = false
 ss.save
 
 # Banner
@@ -187,7 +188,7 @@ Banner.create(:page_id => Style.pageid(page),
   :style => 'position:relative;float:left;top:0px',
   :is_disabled => true)
 end
-[:p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
+[:p_job,:p_buy_and_sell,:p_well_being,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation,:p_sponsor,:p_mypage].each do |page|
 Banner.create(:page_id => Style.pageid(page),
 :section_id => Style.sectionid(:s_body),
   :position_id => 1,
@@ -195,7 +196,7 @@ Banner.create(:page_id => Style.pageid(page),
   :img_width => 220, :img_height => 130,
   :style => 'position:relative;float:left;top:0px')
 end
-[:p_signin,:p_signup,:p_signout, :p_job,:p_buy_and_sell,:p_wellbeing,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
+[:p_signin,:p_signup,:p_signout, :p_job,:p_buy_and_sell,:p_well_being,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation,:p_sponsor,:p_mypage].each do |page|
   Banner.create(:page_id => Style.pageid(page),
   :section_id => Style.sectionid(:s_body),
   :position_id => 2,
@@ -222,7 +223,7 @@ end
   :style => 'position:relative;float:left;top:0px')
 end
 # Buy and Sell Related
-[:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].each do |page|
+[:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].each do |page|
   Banner.create(:page_id => Style.pageid(page),
   :section_id => Style.sectionid(:s_body),
   :position_id => 6,

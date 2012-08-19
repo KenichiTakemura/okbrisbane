@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def init_role
-    [:p_job,:p_buy_and_sell,:p_wellbeing].each do |page|
+    [:p_job,:p_buy_and_sell,:p_well_being].each do |page|
     role = Role.new(:role_name => Style.page(page), :role_value => Role::R[:user_all])
     role.assign(self)
     end
@@ -37,10 +37,6 @@ class User < ActiveRecord::Base
     logger.info("User created: " << self.to_s)
     m = Mypage.create()
     m.update_attribute(:mypagable, self)
-  end
-
-  def nologin?
-    Mypage.find_by_mypagable_id(self).nologin
   end
 
   def to_s

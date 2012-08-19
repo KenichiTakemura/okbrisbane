@@ -12,7 +12,7 @@ module Style
   PAGES[:p_signup] = "p_signup"
   PAGES[:p_job] = "p_job"
   PAGES[:p_buy_and_sell] = "p_buy_and_sell"
-  PAGES[:p_wellbeing] = "p_wellbeing"
+  PAGES[:p_well_being] = "p_well_being"
   PAGES[:p_estate] = 'p_estate'
   PAGES[:p_business] = 'p_business'
   PAGES[:p_motor_vehicle] = 'p_motor_vehicle'
@@ -31,7 +31,7 @@ module Style
   PAGE_IDS[:p_signup] = 3
   PAGE_IDS[:p_job] = 4
   PAGE_IDS[:p_buy_and_sell] = 5
-  PAGE_IDS[:p_wellbeing] = 6
+  PAGE_IDS[:p_well_being] = 6
   PAGE_IDS[:p_estate] = 7
   PAGE_IDS[:p_business] = 8
   PAGE_IDS[:p_motor_vehicle] = 9
@@ -47,7 +47,7 @@ module Style
       
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
-  NAVI[:p_wellbeing] = "p_wellbeing"
+  NAVI[:p_well_being] = "p_well_being"
   NAVI[:p_study] = "p_study"
   NAVI[:p_immig] = "p_immig"
   NAVI[:p_estate] = "p_estate"

@@ -19,8 +19,9 @@ class PostsController < OkController
         end
         @board_lists = Job.latest
         @lastid = find_lastid(@board_lists)
+        flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
-          format.html { render :template => "okboards/index", notice: I18n.t('successfully_created') }
+          format.html { redirect_to "#{_okboard_link(@okpage)}" }
           format.json { render json: @post, status: :created }
         end
       else

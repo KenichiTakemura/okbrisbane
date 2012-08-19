@@ -56,4 +56,11 @@ module Okvalue
   BANNER_FADE_SPEED = 800
   
   NUMBER_OF_LEFT_MENU = 5
+  
+  ADMIN_POST_Z_INDEX = 10
+  ADMIN_POST_NOTICE_Z_INDEX = 20
+  ADMIN_POST_NOTICE = "admin_notice"
+  
+  BUSINESS_CLIENT_OK = "OOK Pty Ltd"
+  
 end
