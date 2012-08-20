@@ -50,4 +50,9 @@ module Okvalue
   
   BUSINESS_CLIENT_OK = "OOK Pty Ltd"
   
+  POST_STATUS_DRAFT = "draft"
+  POST_STATUS_PUBLIC = "public"
+  POST_STATUS_HIDDEN = "hidden"
+  POST_STATUS_EXPIRED = "expired"
+  
 end

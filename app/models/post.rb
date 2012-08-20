@@ -4,7 +4,11 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :is_deleted, :z_index, :write_at
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at
+  
+  # status
+  # draft -> public -> hidden -> deleted
+  attr_accessible :status
   
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
@@ -35,6 +39,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :locale, :message => I18n.t('must_be_selected')
   validates_presence_of :subject, :message => I18n.t('must_be_filled')
   validates_presence_of :valid_until, :message => I18n.t('must_be_filled')
+  validates_presence_of :status, :message => I18n.t('must_be_filled')
   validates_numericality_of :views, :only_integer => true, :greater_than_or_equal_to => 0
   validates_numericality_of :likes, :only_integer => true, :greater_than_or_equal_to => 0
   validates_numericality_of :dislikes, :only_integer => true, :greater_than_or_equal_to => 0
@@ -43,7 +48,7 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
-    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until} is_deleted: #{is_deleted}"
+    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until} status #{status}"
   end
   
   # pagination
@@ -51,8 +56,9 @@ class Post < ActiveRecord::Base
   paginates_per 10
   
   # scope
-  scope :is_valid, where("is_deleted = ?", false)
-  scope :is_invalid, where("is_deleted = ?", true)
+  scope :is_valid, where("status = ?", Okvalue::POST_STATUS_PUBLIC)
+  scope :is_invalid, where("status = ? OR status = ?", Okvalue::POST_STATUS_HIDDEN, Okvalue::POST_STATUS_DRAFT)
+  scope :expired, where("status = ?", Okvalue::POST_STATUS_EXPIRED)
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
   scope :category_latest, lambda { |cate| where('category = ?', cate).latest}
 
@@ -81,10 +87,11 @@ class Post < ActiveRecord::Base
    
    # Delete post from top_feed when deleted
    def delete_top_feed_list
-    return if !self.is_deleted
-    logger.debug("delete_from_top_feed_list #{self}")
-    feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
-    feed.destroy if feed
+    if !self.status.eql?(Okvalue::POST_STATUS_PUBLIC)
+      logger.debug("delete_from_top_feed_list #{self}")
+      feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
+      feed.destroy if feed
+    end
    end
 
   def set_default
@@ -92,6 +99,7 @@ class Post < ActiveRecord::Base
     self.valid_days = Okvalue::VALID_DAYS if self.valid_days == 0
     self.category ||= Okvalue::DEFAULT_CATEGORY
     self.z_index ||= 0
+    self.status ||= Okvalue::POST_STATUS_PUBLIC
   end
 
   def set_valid_until
@@ -144,4 +152,14 @@ class Post < ActiveRecord::Base
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
   end
+  
+  def status_list
+    list = Array.new
+    list.push([I18n.t(Okvalue::POST_STATUS_DRAFT),Okvalue::POST_STATUS_DRAFT])
+    list.push([I18n.t(Okvalue::POST_STATUS_PUBLIC),Okvalue::POST_STATUS_PUBLIC])
+    list.push([I18n.t(Okvalue::POST_STATUS_HIDDEN),Okvalue::POST_STATUS_HIDDEN])
+    list
+  end
+  
+  
 end

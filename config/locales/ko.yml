@@ -256,9 +256,7 @@ ko:
   pages: '페이지'
   page: :pages
   post: '투고'
-  expired_post_list: '유효기한를 지난 투고일람'
-  valid_post_list: '유효 투고일람'
-  invalid_post_list: '무효 투고일람'
+  post_list: '투고일람'
     
   size: '사이즈'
   item: '항목'
@@ -298,10 +296,10 @@ ko:
   select: '선택'
   drive_away: 'Drive Away'
   viewed: '조회수'
-  liked: 'Liked'
-  disliked: 'Not-Liked'
-  rank: 'Rank'
-  abuse: 'Abuse reported'
+  likes: '좋음'
+  dislikes: '나쁨'
+  rank: '순위'
+  abuse: '삭제 요청'
   contact_person: 'Contact'
   view: '보기'
   listing: '일람'
@@ -310,24 +308,25 @@ ko:
   buying: '삽니다'
   selling: '팝니다'
   name: '이름'
+  status: '현상황'
 
   # User Info
   member: '멤버'
-  total_signin: 'total 로그인 수'
+  total_signin: '총 로그인 숫자'
   current_signin_at: '현재 로그인'
   current_signin_ip: '현재 로그인 IP'
   last_signin_at: '마지막 로그인'
   last_signin_ip: '마지막 로그인 IP'
-  num_of_post: '투고 수'
-  num_of_job_post: '구인구직 투고 수'
-  num_of_buy_and_sell_post: '벼룩시장 투고 수'
-  num_of_well_being_post: '생활정보 투고 수'
-  num_of_comment: 'comment 투고 수'
-  num_of_attachment: '첨부자료 투고 수'
-  num_of_image: '이미지 투고 수'
-  num_of_unattached_image: 'unattached 이미지 투고 수'
-  num_of_unattached_attachment: 'unattached 첨부자료 투고 수'
-  unknown_user: '이름없는 멤버'
+  num_of_post: '투고 갯수'
+  num_of_job_post: '구인구직 투고 갯수'
+  num_of_buy_and_sell_post: '벼룩시장 투고 갯수'
+  num_of_wellbeing_post: '생활정보 투고 갯수'
+  num_of_comment: '코멘트 투고 갯수'
+  num_of_attachment: '첨부자료 투고 갯수'
+  num_of_image: '이미지 투고 갯수'
+  num_of_unattached_image: '보존 안된 이미지 투고 갯수'
+  num_of_unattached_attachment: '보존 안된 첨부자료 투고 갯수'
+  unknown_user: '모르는 멤버'
     
   p_home: "메인"
   p_signin: "회원로그인"
@@ -432,6 +431,14 @@ ko:
   immigrations: '이민'
   taxes: '세무/회계'
   
+  
+  draft: '초안'
+  public: '공개'
+  hidden: '비공개'
+  expired: '유효기한 지난'
+  search_keyword: '검색 키 워드'
+  business_category: '비지니스 카테고리'
+  
   for_rent: '렌트'
   for_sale: '세일'
   for_auction: '옥션'
@@ -440,8 +447,8 @@ ko:
   used_car: '중고자'
   
   # Tax Category
-  for_business: '비즈니스 세무'
-  for_tax_return: 'Tax Return'
+  for_business: '비지니스 세무'
+  for_tax_return: '텍스 리턴'
 
   # Study Category
   for_study_overseas: '유학'
@@ -532,7 +539,7 @@ ko:
   business_fax: '고객(회사) FAX '
   business_email: '이메일 주소'
   business_profile: '프로필'
-  business_profile_head: '프로필 head'
+  business_profile_head: '프로필 제목'
   business_profile_image: '프로필 이미지'
   
   banner_page: '광고란 페이지'
