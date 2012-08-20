@@ -30,19 +30,6 @@ module Okvalue
   DEFAULT_LOCALE = LOCALE_KO
   VALID_DAYS = 30
   
-  JOB = "jobs"
-  BUY_AND_SELL = "buy_and_sells"
-  
-  # Sales Management
-  ESTATE = "estates"
-  BUSINESS = "businesses"
-  MOTOR_VEHICLE = "motor_vehicles"
-  ACCOMMODATION = "accommodations"
-  # Infomation Management
-  LAW = "legal_services"
-  STUDY = "studies"
-  IMMIGRATION = "immigrations"
-  TAX = "taxes"
 
   TOPFEED_IMAGE_SIZE = "120x90"
   OKBOARD_LIMIT = 15

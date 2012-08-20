@@ -11,12 +11,6 @@
  *= require_self
  *= require_tree .
  */
-@font-face {
-  font-family: "gulim";
-  src: url("fonts/gulim.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
 
 @font-face {
   font-family: "NanumBrush";
