@@ -30,7 +30,7 @@ class BusinessClientTest < ActiveSupport::TestCase
 
   test "add a client and profile" do
     c = addClient
-    p = c.set_profile(body)
+    p = c.set_profile(subject, body)
     assert c.save
     assert_equal(c.business_profile.body, body)
   end
@@ -45,7 +45,7 @@ class BusinessClientTest < ActiveSupport::TestCase
 
   test "delete client" do
     c = addClient
-    p = c.set_profile(body)
+    p = c.set_profile(subject, body)
     addProfileImage(c)
     assert c.save
     assert p.save
@@ -80,6 +80,42 @@ class BusinessClientTest < ActiveSupport::TestCase
     assert_equal(ClientImage.all.size, 1)
     assert c.destroy
     assert_equal(ClientImage.all.size, 0)
+  end
+  
+  test "uniqueness of items" do
+    c = BusinessClient.new(:business_name => business_name, :contact_name => contact_name)
+    assert c.save, "Not Saved"
+    assert c.business_abn.nil?, "Not nil"
+    assert c.business_url.nil?, "Not nil"
+    c = BusinessClient.new(:business_name => "another_name", :contact_name => contact_name)
+    assert c.save, "Not saved"
+    BusinessClient.first.destroy
+    c = BusinessClient.new(:business_name => business_name, :contact_name => contact_name, :business_abn => "123 456 789", :business_url => "http://abc.com.au")
+    assert c.save
+    c = BusinessClient.new(:business_name => business_name, :contact_name => contact_name)
+    assert !c.save, "Saved"
+    c = BusinessClient.new(:business_name => "another_name", :contact_name => contact_name, :business_abn => "123 456 789", :business_url => "http://def.com.au")
+    assert !c.save, "Saved"
+    c = BusinessClient.new(:business_name => "another_name", :contact_name => contact_name, :business_abn => "123 456 789 0", :business_url => "http://abc.com.au")
+    assert !c.save, "Saved"
+  end
+  
+  test "add client with business_category" do
+    assert BusinessCategory.create(:en_name => "category", :display_name => I18n.t("category"))
+    bc = BusinessCategory.first    
+    c = BusinessClient.new(:business_name => business_name, :contact_name => contact_name, :business_category => bc)
+    assert c.save, "Not saved"    
+  end
+  
+  test "add business_category" do
+    bc = BusinessCategory.create(:en_name => "category", :display_name => I18n.t("category"))
+    assert bc.save, "Category not saved"
+    c = BusinessClient.new
+    c.business_name = business_name
+    c.contact_name = contact_name
+    c.business_category = bc
+    assert c.save, "Not saved"
+    assert_equal(c.business_category.en_name,bc.en_name)
   end
 
 end

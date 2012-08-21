@@ -22,6 +22,7 @@ module Okbrisbane
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     config.autoload_paths += %W(#{Rails.root}/lib)
+    config.autoload_paths += %W(#{Rails.root}/app/models/validator)
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -59,5 +60,9 @@ module Okbrisbane
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.to_prepare { Devise::SessionsController.force_ssl }
+    config.to_prepare { Devise::RegistrationsController.force_ssl }
+    config.to_prepare { Devise::PasswordsController.force_ssl }
   end
 end

@@ -20,6 +20,7 @@ class Image < Attachable
   validates :avatar, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :avatar
   validates_attachment_size :avatar, :less_than => 5.megabytes
+  validates :avatar_content_type, :thumbnailable => true
   
   after_initialize :set_default
 

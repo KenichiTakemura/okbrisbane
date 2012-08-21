@@ -11,12 +11,13 @@ class BusinessProfileImage < Attachable
   # https://github.com/thoughtbot/paperclip
   validates :avatar, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :avatar
-  
+  validates :avatar_content_type, :thumbnailable => true
+    
   after_initialize :set_default
     
   def set_default
-    self.thumb_size ||= "150x150>"
-    self.medium_size ||= "500x400>"
+    self.thumb_size ||= "150x150"
+    self.medium_size ||= "500x400"
   end
 
   def to_s

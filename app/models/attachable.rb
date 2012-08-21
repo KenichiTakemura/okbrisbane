@@ -29,9 +29,8 @@ class Attachable < ActiveRecord::Base
   def thumbnailable?
     return false unless avatar.content_type
     ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
-  end 
+  end
   
-
 #  AttachmentContentTypeValidator
 #  AttachmentPresenceValidator
 #  AttachmentSizeValidator

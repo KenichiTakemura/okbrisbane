@@ -25,6 +25,7 @@ class ClientImage < Attachable
 
   validates_presence_of :original_size
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
+  validates :avatar_content_type, :thumbnailable => true
     
   def to_s
     super.to_s + " link_to_url: #{link_to_url} original_size: #{original_size}"

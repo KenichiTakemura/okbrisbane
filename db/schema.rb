@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814124454) do
+ActiveRecord::Schema.define(:version => 20120821111311) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                              :null => false
@@ -101,8 +101,9 @@ ActiveRecord::Schema.define(:version => 20120814124454) do
   create_table "business_categories", :force => true do |t|
     t.string   "en_name"
     t.string   "display_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "search_keyword"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "business_clients", :force => true do |t|
@@ -325,6 +326,17 @@ ActiveRecord::Schema.define(:version => 20120814124454) do
     t.integer  "write_at"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "issues", :force => true do |t|
+    t.integer  "issued_by_id"
+    t.string   "issued_by_type"
+    t.string   "description"
+    t.text     "body"
+    t.string   "status",         :null => false
+    t.string   "category",       :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "jobs", :force => true do |t|

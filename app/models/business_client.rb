@@ -7,6 +7,8 @@ class BusinessClient < ActiveRecord::Base
   attr_accessible :business_fax
   attr_accessible :business_email
   attr_accessible :contact_name
+  attr_accessible :business_category
+  attr_accessible :search_keyword
 
   has_many :client_image, :as => :attached, :dependent => :destroy, :class_name => 'ClientImage'
   has_many :business_profile_image, :as => :attached, :dependent => :destroy, :class_name => 'BusinessProfileImage'
@@ -22,6 +24,10 @@ class BusinessClient < ActiveRecord::Base
   validates_presence_of :business_name
   validates_presence_of :contact_name
   validates_uniqueness_of :business_name
+  #validates_uniqueness_of :business_abn
+  #validates_uniqueness_of :business_url
+  
+  # callbacks
 
   # pagination
   default_scope :order => 'created_at DESC'
@@ -33,8 +39,8 @@ class BusinessClient < ActiveRecord::Base
     "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} client_image: #{client_image} profile_image: #{business_profile_image}"
   end
 
-  def set_profile(body)
-    self.build_business_profile(:body => body)
+  def set_profile(head, body)
+    self.build_business_profile(:head => head, :body => body)
   end
   
   def main_profile_image
