@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode
   
   # status
   # draft -> public -> hidden -> deleted
@@ -62,7 +62,6 @@ class Post < ActiveRecord::Base
   scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
   scope :category_latest, lambda { |cate| where('category = ?', cate).latest}
 
-
   # callbacks
   after_initialize :set_default
   after_validation :set_valid_until
@@ -71,6 +70,7 @@ class Post < ActiveRecord::Base
 
   # public functions
   def add_top_feed_list
+    return unless @@topfeedable
     logger.debug("add_top_feed_list category: #{self}")
     return if self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
@@ -87,6 +87,7 @@ class Post < ActiveRecord::Base
    
    # Delete post from top_feed when deleted
    def delete_top_feed_list
+    return unless @@topfeedable
     if !self.status.eql?(Okvalue::POST_STATUS_PUBLIC)
       logger.debug("delete_from_top_feed_list #{self}")
       feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
@@ -100,11 +101,12 @@ class Post < ActiveRecord::Base
     self.category ||= Okvalue::DEFAULT_CATEGORY
     self.z_index ||= 0
     self.status ||= Okvalue::POST_STATUS_PUBLIC
+    self.mode ||= Role::R[:user_r] | Role::R[:user_w]
   end
 
   def set_valid_until
     if !self.valid_until
-      self.valid_until = self.valid_days.days.since Time.now
+      self.valid_until = self.valid_days.days.since Time.now.utc
     else
       self.valid_days = 0
     end
@@ -127,6 +129,10 @@ class Post < ActiveRecord::Base
 
   def postedDate
     Common.date_format(created_at)
+  end
+
+  def validDate
+    Common.date_format(valid_until)
   end
 
   def set_user(user)
@@ -161,5 +167,9 @@ class Post < ActiveRecord::Base
     list
   end
   
+  protected
   
+  # topfeedable?
+  @@topfeedable = true
+
 end

@@ -18,6 +18,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :status, :null => false
       t.integer :z_index, :default => 0
       t.integer :write_at
+      t.integer :mode
       t.timestamps
     end    
   end

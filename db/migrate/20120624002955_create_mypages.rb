@@ -7,6 +7,7 @@ class CreateMypages < ActiveRecord::Migration
       t.integer :blocked, :default => 0
       t.integer :num_of_post, :default => 0
       t.boolean :is_blacklist, :default => false
+      t.string :locale
       t.timestamps
     end
   end

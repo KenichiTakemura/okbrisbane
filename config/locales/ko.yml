@@ -352,6 +352,8 @@ ko:
   p_sponsor: '고객 페이지'
   
   p_mypage: '마이페이지'
+  p_issue: '문제'
+  
   
   s_header: "페이지 헤드"
   s_background: "페이지 배경"
@@ -378,7 +380,18 @@ ko:
   weather_information: '날씨 정보'
   image_size_list: '이미지 사이즈 일람'
   all_page_list: '전페이지 일람'
-  
+
+  issue: '문제'
+  Bug: 'Fix me'
+  Feature_Request: 'Fix me'
+  Improvement: 'Fix me'
+  due_date: 'Fix me'
+  NEW: 'NEW'
+  ASSIGNED: 'ASSIGNED'
+  ONQA: 'ONQA'
+  CLOSED: 'CLOSED'
+  REOPEN: 'REOPEN'
+
   brisbane: '브리즈번'
   sydney: '시드니'
   melbourne: '멜버른'
@@ -408,6 +421,7 @@ ko:
   listing_business_clients: '고객 일람'
   listing_banners: '광고란 일람'
   listing_business_categories: '비지니스 카테고리 일람'
+  listing_issues: '문제 일람'
 
   member_list: '멤버 일람'
   
@@ -432,7 +446,6 @@ ko:
   studies: '유학/어학'
   immigrations: '이민'
   taxes: '세무/회계'
-  
   
   draft: '초안'
   public: '공개'
@@ -515,9 +528,9 @@ ko:
   must_be_numbers: '수로 입력하십시오'
   must_be_filled: '꼭 입력하십시오'
   must_be_selected: '꼭 선택하십시오'
-  only_characters: ''
-  korean_allowed: ''
-  commma_separated: ''
+  only_characters: 'Fix me'
+  korean_allowed: 'Fix m3'
+  commma_separated: 'Fix m3'
   has_invalid_content_type: 'unacceptable extention'
   
   # notice
@@ -537,6 +550,7 @@ ko:
   new_banner_image: '광고 이미지를 추가하기'
   new_business_profile_image: '프로필 이미지를 추가하기'
   new_business_category: '비지니스 카테고리 추가하기'
+  new_issue: '문제 추가하기'
   
   business_name:  '고객(회사) 이름'
   contact_name:   '담당자 이름 '

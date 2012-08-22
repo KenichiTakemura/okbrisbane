@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.float    "price"
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.float    "price"
@@ -189,6 +191,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.float    "price"
@@ -273,6 +276,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.float    "price"
@@ -324,19 +328,32 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
 
   create_table "issues", :force => true do |t|
-    t.integer  "issued_by_id"
-    t.string   "issued_by_type"
-    t.string   "description"
-    t.text     "body"
-    t.string   "status",         :null => false
-    t.string   "category",       :null => false
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "locale",                              :null => false
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.integer  "post_updated_by_id"
+    t.string   "post_updated_by_type"
+    t.string   "category",                            :null => false
+    t.string   "subject",                             :null => false
+    t.integer  "valid_days",           :default => 0
+    t.datetime "valid_until",                         :null => false
+    t.integer  "views",                :default => 0
+    t.integer  "likes",                :default => 0
+    t.integer  "dislikes",             :default => 0
+    t.integer  "rank",                 :default => 0
+    t.integer  "abuse",                :default => 0
+    t.string   "status",                              :null => false
+    t.integer  "z_index",              :default => 0
+    t.integer  "write_at"
+    t.integer  "mode"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -357,6 +374,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
@@ -379,6 +397,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
@@ -406,6 +425,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.float    "price"
@@ -420,6 +440,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "blocked",        :default => 0
     t.integer  "num_of_post",    :default => 0
     t.boolean  "is_blacklist",   :default => false
+    t.string   "locale"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
   end
@@ -456,6 +477,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
@@ -485,6 +507,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end
@@ -541,6 +564,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
+    t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
   end

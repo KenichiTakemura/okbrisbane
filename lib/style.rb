@@ -25,6 +25,7 @@ module Style
   PAGES[:p_sponsor] = "p_sponsor"
   PAGES[:p_mypage] = "p_mypage"
   PAGES[:p_signout] = "p_signout"
+  PAGES[:p_issue] = "p_issue"
     
   PAGE_IDS[:p_home] = 1
   PAGE_IDS[:p_signin] = 2
@@ -44,6 +45,24 @@ module Style
   PAGE_IDS[:p_sponsor] = 16
   PAGE_IDS[:p_mypage] = 17
   PAGE_IDS[:p_signout] = 18
+  PAGE_IDS[:p_issue] = 19
+  
+  MODEL_TO_SYM = {"Job" => :p_job,
+    "BuyAndSell" => :p_buy_and_sell,
+    "WellBeing" => :p_well_being,
+    "Estate" => :p_estate,
+    "MotorVehicle" => :p_motor_vehicle,
+    "Business" => :p_business,
+    "Accommodation" => :p_accommodation,
+    "Law" => :p_law,
+    "Tax" => :p_tax,
+    "Study" => :p_study,
+    "Immigration" => :p_immig,
+    "BusinessClient" => :p_yellowpage,
+    "BusinessClient" => :p_sponsor,
+    "Mypage" => :p_mypage,
+    "Issue" => :p_issue
+  }
       
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
@@ -114,7 +133,10 @@ module Style
   def Style.section(key)
     Style::SECTIONS[key.to_sym]
   end
-
+  
+  def Style.m2s(model)
+    Style::MODEL_TO_SYM(model)
+  end
   
   Effect = Hash.new
   # Rule page _ section _ postion
