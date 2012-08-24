@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "attached_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "original_size"
     t.boolean  "is_main",             :default => false
   end
 
@@ -306,6 +307,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "attached_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "original_size"
     t.integer  "write_at"
     t.string   "something"
   end

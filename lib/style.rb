@@ -87,6 +87,10 @@ module Style
     PAGE_IDS[PAGES.key value] 
   end
   
+  def Style.pageid_key(key)
+    PAGE_IDS[key]
+  end
+  
   def Style.pagename(id)
     return nil if id.nil?
     PAGES[PAGE_IDS.key id.to_i]

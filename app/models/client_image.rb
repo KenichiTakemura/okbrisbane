@@ -26,7 +26,11 @@ class ClientImage < Attachable
   validates_presence_of :original_size
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
-    
+  validates_presence_of :original_size, :message => I18n.t('failed_to_create')
+  
+  #Paperclip callbacks
+  after_post_process :proc_geo
+  
   def to_s
     super.to_s + " link_to_url: #{link_to_url} original_size: #{original_size}"
   end

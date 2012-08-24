@@ -232,6 +232,7 @@ ko:
   navi_joblist: '구인구직'
   email: '이메일 주소'
   signin: '회원로그인'
+  admin_signin: '로그인'
   signin_email: '이메일 주소'
   signin_password: '비밀번호'
   change_password: '비밀번호 변경'  
@@ -244,7 +245,9 @@ ko:
   forgot_your_password: '비밀번호 찾기'
   password: '비밀번호'
   password_confirmation: '비밀번호 확인 '
-  current_password: '현재 비밀번호'
+  new_password: '새로운 비밀번호'
+  new_password_confirmation: '새로운 비밀번호 확인'
+  current_password: '이전 비밀번호'
   stitle_head: 'OKBRISBANE 회원가입을 환영합니다.'
   stitle_body: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
   termofservice: '[이용약관] 아래의 이용약관을 모두 확인 후 가입하여 주시기 바랍니다.'
@@ -320,7 +323,7 @@ ko:
   current_signin_ip: '현재 로그인 IP'
   last_signin_at: '마지막 로그인'
   last_signin_ip: '마지막 로그인 IP'
-  num_of_post: '투고 갯수'
+  number_of_post: '투고 갯수'
   num_of_job_post: '구인구직 투고 갯수'
   num_of_buy_and_sell_post: '벼룩시장 투고 갯수'
   num_of_wellbeing_post: '생활정보 투고 갯수'
@@ -330,6 +333,8 @@ ko:
   num_of_unattached_image: '보존 안된 이미지 투고 갯수'
   num_of_unattached_attachment: '보존 안된 첨부자료 투고 갯수'
   unknown_user: '모르는 멤버'
+
+  mainpage_title: 'OKBRISBANE 메인 페이지'
     
   Home: "메인"
   Signin: "회원로그인"
@@ -363,31 +368,32 @@ ko:
  
   width: '폭'
   height: '높이'
-  div_width: 'div 사이즈(폭)'
-  div_height: 'div 사이즈(높이)'
+  div_width: '틀 사이즈(폭)'
+  div_height: '틀 사이즈(높이)'
   img_width: '이미지 사이즈(폭)'
   img_height: '이미지 사이즈(높이)'
   image_size: '이미지 사이즈'
-  div_size: 'div 사이즈'
+  div_size: '틀 사이즈'
   effect: '효능(Effect)'
   effect_speed: '효능(Effect) 속도(초)'
-  slide_auto: '자동적으로 슬라이드'
-  multi_slide_auto: 'multi 자동적으로 슬라이드'
-  slide_w_caption: '자막랑 같이 자동적으로 슬라이드'
+  slide_auto: '슬라이드'
+  multi_slide_auto: '복수적으로 슬라이드'
+  slide_w_caption: '자막과 동시에  슬라이드'
+  caption: '자막'
   fix: '고정(슬라이드 없음)'
   unit_second: '단위 : 초'
   more_than_1: '1 이상'
   random: '랜덤 표시'
-  randomly_display: 'if checked 랜덤으로 표시'
+  randomly_display: '체크하면 랜덤으로 표시'
   weather_information: '날씨 정보'
   image_size_list: '이미지 사이즈 일람'
-  all_page_list: '전페이지 일람'
+  all_page_list: '페이지 전부 일람'
 
   issue: '문제'
-  Bug: 'Fix me'
-  Feature_Request: 'Fix me'
-  Improvement: 'Fix me'
-  due_date: '리퀘스트 수정날'
+  Bug: '문제'
+  Feature_Request: '기능 추가'
+  Improvement: '개선 요망'
+  due_date: '희망 변경일'
   NEW: 'NEW'
   ASSIGNED: 'ASSIGNED'
   ON_QA: 'ON_QA'
@@ -453,15 +459,15 @@ ko:
   public: '공개'
   hidden: '비공개'
   expired: '유효기한 지난'
-  search_keyword: '검색 키 워드'
+  search_keyword: '검색 키워드'
   business_category: '비지니스 카테고리'
   
   for_rent: '렌트'
   for_sale: '세일'
   for_auction: '옥션'
   
-  new_car: '새자'
-  used_car: '중고자'
+  new_car: '새차'
+  used_car: '중고차'
   
   # Tax Category
   for_business: '비지니스 세무'
@@ -482,22 +488,21 @@ ko:
   # Accommodation Category
   Hotel: '호텔'
   Motel: '모텔'
-  Self_Catering_Apartments: 'Self_Catering_Apartments'
-  Cottages_Cabins_Houses: 'Cottages_Cabins_Houses'
-  Backpacker_Hostel: ' Backpacker_Hostel'
-  B_AND_B_Guest_House: 'B_AND_B_Guest_House'
-  Tourist_Caravan_Park: 'Tourist_Caravan_Park'
-  Farmstay: 'Farmstay'
-  Lodge: 'Lodge'
-  Pub_Accommodation: 'Pub_Accommodation'
+  Self_Catering_Apartments: '아파트'
+  Cottages_Cabins_Houses: '코테지'
+  Backpacker_Hostel: '유스호스텔'
+  B_AND_B_Guest_House: '게스트 하우스'
+  Tourist_Caravan_Park: 캐러밴 파크'
+  Farmstay: '농장 숙박'
+
 
   # Room Type
-  room_type: 'room_type'
+  room_type: '룸타입'
   room_hotel: "호텔"
-  room_studio: "room_studio"
-  room_1bed: "room_1bed"
-  room_2bed: "room_2bed"
-  room_3plusbed: "room_3plusbed"
+  room_studio: "스튜디오"
+  room_1bed: "원룸"
+  room_2bed: "투룸"
+  room_3plusbed: "방 세개 이상"
 
   # Law type
   for_criminal_action: '형사소송'
@@ -506,9 +511,9 @@ ko:
   for_traffic_accident: '교통사고'
   for_accident: '인신상해'
 
-  select_image: '이미지를 선택'
-  select_all_size: '전사이즈'
-  select_specific_size: '사이즈를 선택'
+  select_image: '이미지 선택'
+  select_all_size: '사이즈 전부'
+  select_specific_size: '사이즈가 맞는 이미지'
   selected: '선택 됨'
   
   add_business_banner_image: '광고 이미지를 추가'
@@ -520,20 +525,23 @@ ko:
   not_present: '없습니다'
 
   optional: '옵션 입력'
-  linked_from_banner: '광고 링크'
+  linked_from_banner: '광고 이미지 링크'
   not_listed: '일람안에 없습니다'
-  acceptable_extention: 'acceptable_extention'
-  if_checked_not_displayed: 'if_checked_not_displayed'
-  write_something: '뭘 쓰세요...'
+  acceptable_extention: '업로드 가능 파일'
+  if_checked_not_displayed: '체크하면 표시 안됨'
+  write_something: '무엇인가 적어 주세요...'
   
   # Validation
   must_be_numbers: '숫자로 입력하십시오'
   must_be_filled: '꼭 입력하십시오'
   must_be_selected: '꼭 선택하십시오'
-  only_characters: 'Fix me'
-  korean_allowed: 'Fix m3'
-  commma_separated: 'Fix m3'
-  has_invalid_content_type: 'unacceptable extention'
+  only_characters: '영숫자만 입력하십시오'
+  korean_allowed: '한글로도 입력 가능합니다'
+  commma_separated: '키워드를 쉼표로 나누어 입력하십시오'
+  has_invalid_content_type: '업로드 불가능한 파일입니다'
+  auto_detect_image_size: '이미지 사이즈는 자동적으로 계산됩니다'
+  read_image_from_the_url: 'URL 의 이미지를 표시함'
+  client_image_source_url: '이미지 URL'
   
   # notice
   admin_notice: '관리자 공지'
@@ -542,8 +550,7 @@ ko:
   p_well_being_notice: '생활정보 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 생활정보 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
 
   # Upload
-  please_drag_n_drop: "이미지를 Drag'n'Drop 하십시오"
-  max_size: 'max 사이즈'
+  max_size: '최대 사이즈'
   
   please_select: '선택하십시오 '
   
@@ -579,11 +586,13 @@ ko:
   invalid_file_extention: '업로드가 안되는 파일 입니다.'
   failed_to_create: '실패 되었습니다'
   failed_to_upload: '업로드가 실패 되었습니다' 
-  failure: '실패하였습니다.'
+  failure: '실패 되었습니다.'
   
   banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'
   client_image_remove_from_banner:  '광고에서 삭제하기'
   confirm_remove_from_banner:  '광고에서 삭제겠습니까? 다시 추가 할수 있습니다.'
-  post_image_upload_description: 'Fix me'
-  post_attachment_upload_description: 'Fix me'
+  post_image_upload_description: '원하는 업로드 이미지를 선택해서 코멘트를 적고 추가보턴을 클릭하여 주십시오'
+  post_attachment_upload_description: '선택하면 자동적으로 업로드 됩니다'
+  
+  client_image_leave_blank_to_show_profile: '공백일 경우에는 회사의 웹페이지를 표시함'

@@ -37,6 +37,14 @@ class Attachable < ActiveRecord::Base
     ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation','application/zip','application/msword','application/msexcel','application/rtf','text/rtf','application/x-gzip'].join('').include?(avatar.content_type)
   end
   
+  def proc_geo
+    file = avatar.queued_for_write[:original].path
+    logger.debug("proc_geo file: #{file}")
+    geo = Paperclip::Geometry.from_file(file)
+    logger.debug("geo: #{geo}")
+    self.original_size = geo.to_s
+  end
+  
 #  AttachmentContentTypeValidator
 #  AttachmentPresenceValidator
 #  AttachmentSizeValidator

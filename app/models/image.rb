@@ -1,5 +1,5 @@
 class Image < Attachable
-  attr_accessible :write_at, :something
+  attr_accessible :original_size, :write_at, :something
 
   has_attached_file :avatar,
   :styles => lambda { |a|
