@@ -7,25 +7,25 @@ module Style
   SECTION_IDS = Hash.new
   
   # div id rule is banner_#{page}_#{section}_#{position}
-  PAGES[:p_home] = "p_home"
-  PAGES[:p_signin] = "p_signin"
-  PAGES[:p_signup] = "p_signup"
-  PAGES[:p_job] = "p_job"
-  PAGES[:p_buy_and_sell] = "p_buy_and_sell"
-  PAGES[:p_well_being] = "p_well_being"
-  PAGES[:p_estate] = 'p_estate'
-  PAGES[:p_business] = 'p_business'
-  PAGES[:p_motor_vehicle] = 'p_motor_vehicle'
-  PAGES[:p_accommodation] = 'p_accommodation'
-  PAGES[:p_law] = 'p_law'
-  PAGES[:p_tax] = 'p_tax'
-  PAGES[:p_study] = 'p_study'
-  PAGES[:p_immig] = 'p_immig'
-  PAGES[:p_yellowpage] = 'p_yellowpage'
-  PAGES[:p_sponsor] = "p_sponsor"
-  PAGES[:p_mypage] = "p_mypage"
-  PAGES[:p_signout] = "p_signout"
-  PAGES[:p_issue] = "p_issue"
+  PAGES[:p_home] = "Home"
+  PAGES[:p_signin] = "Signin"
+  PAGES[:p_signup] = "Signup"
+  PAGES[:p_job] = "Job"
+  PAGES[:p_buy_and_sell] = "BuyAndSell"
+  PAGES[:p_well_being] = "WellBeing"
+  PAGES[:p_estate] = 'Estate'
+  PAGES[:p_business] = 'Business'
+  PAGES[:p_motor_vehicle] = 'MotorVehicle'
+  PAGES[:p_accommodation] = 'Accommodation'
+  PAGES[:p_law] = 'Law'
+  PAGES[:p_tax] = 'Tax'
+  PAGES[:p_study] = 'Study'
+  PAGES[:p_immig] = 'Immigration'
+  PAGES[:p_yellowpage] = 'Yellowpage'
+  PAGES[:p_sponsor] = "Sponsor"
+  PAGES[:p_mypage] = "Mypage"
+  PAGES[:p_signout] = "Signout"
+  PAGES[:p_issue] = "Issue"
     
   PAGE_IDS[:p_home] = 1
   PAGE_IDS[:p_signin] = 2
@@ -46,24 +46,7 @@ module Style
   PAGE_IDS[:p_mypage] = 17
   PAGE_IDS[:p_signout] = 18
   PAGE_IDS[:p_issue] = 19
-  
-  MODEL_TO_SYM = {"Job" => :p_job,
-    "BuyAndSell" => :p_buy_and_sell,
-    "WellBeing" => :p_well_being,
-    "Estate" => :p_estate,
-    "MotorVehicle" => :p_motor_vehicle,
-    "Business" => :p_business,
-    "Accommodation" => :p_accommodation,
-    "Law" => :p_law,
-    "Tax" => :p_tax,
-    "Study" => :p_study,
-    "Immigration" => :p_immig,
-    "BusinessClient" => :p_yellowpage,
-    "BusinessClient" => :p_sponsor,
-    "Mypage" => :p_mypage,
-    "Issue" => :p_issue
-  }
-      
+   
   NAVI[:p_job] = "p_job"
   NAVI[:p_buy_and_sell] = "p_buy_and_sell"
   NAVI[:p_well_being] = "p_well_being"
@@ -86,6 +69,12 @@ module Style
     PAGES
   end
   
+  def Style.banner_pages
+    pages = PAGES.clone
+    pages.delete(:p_issue)
+    pages
+  end
+  
   def Style.sections
     SECTIONS
   end
@@ -94,20 +83,18 @@ module Style
     "banner_#{Style.page(page)}_#{Style.section(section)}_#{position}"
   end
 
-  def Style.pageid(key)
-    PAGE_IDS[key] 
+  def Style.pageid(value)
+    PAGE_IDS[PAGES.key value] 
   end
   
   def Style.pagename(id)
     return nil if id.nil?
-    p = PAGE_IDS.to_a
-    p.rassoc(id.to_i).first.to_s
+    PAGES[PAGE_IDS.key id.to_i]
   end
   
   def Style.pagename_sym(id)
     return nil if id.nil?
-    p = PAGE_IDS.to_a
-    p.rassoc(id.to_i).first
+    PAGE_IDS.key id.to_i
   end
   
   def Style.sectionid(key)
@@ -116,14 +103,12 @@ module Style
   
   def Style.sectionname(id)
     return nil if id.nil?
-    s = SECTION_IDS.to_a
-    s.rassoc(id.to_i).first.to_s
+    SECTIONS[SECTION_IDS.key id.to_i]
   end
   
   def Style.sectionname_sym(id)
     return nil if id.nil?
-    s = SECTION_IDS.to_a
-    s.rassoc(id.to_i).first
+    SECTION_IDS.key id.to_i
   end
   
   def Style.page(key)
@@ -135,7 +120,7 @@ module Style
   end
   
   def Style.m2s(model)
-    Style::MODEL_TO_SYM(model)
+    PAGES.key model
   end
   
   Effect = Hash.new

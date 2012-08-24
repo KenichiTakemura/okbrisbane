@@ -17,7 +17,7 @@ class BannerTest < ActiveSupport::TestCase
   end
 
   def create_banner
-    Style.pages.each do |key, value|
+    Style.banner_pages.each do |key, value|
       Banner.create(:page_id => Style.pageid(key),
       :section_id => Style.sectionid(:s_header),
       :position_id => 1,

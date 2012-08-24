@@ -234,6 +234,7 @@ ko:
   signin: '회원로그인'
   signin_email: '이메일 주소'
   signin_password: '비밀번호'
+  change_password: '비밀번호 변경'  
   remember_me: '자동 로그인 (공용 PC인 경우 체크하지 마세요.) '
   signup: '회원가입'
   signout: '로그아웃'
@@ -243,6 +244,7 @@ ko:
   forgot_your_password: '비밀번호 찾기'
   password: '비밀번호'
   password_confirmation: '비밀번호 확인 '
+  current_password: '현재 비밀번호'
   stitle_head: 'OKBRISBANE 회원가입을 환영합니다.'
   stitle_body: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
   termofservice: '[이용약관] 아래의 이용약관을 모두 확인 후 가입하여 주시기 바랍니다.'
@@ -329,30 +331,30 @@ ko:
   num_of_unattached_attachment: '보존 안된 첨부자료 투고 갯수'
   unknown_user: '모르는 멤버'
     
-  p_home: "메인"
-  p_signin: "회원로그인"
-  p_signup: "회원가입"
-  p_signout: '로그아웃'
+  Home: "메인"
+  Signin: "회원로그인"
+  Signup: "회원가입"
+  Signout: '로그아웃'
 
-  p_job: "구인구직"
-  p_buy_and_sell : "벼룩시장"
-  p_well_being: '생활정보'
+  Job: "구인구직"
+  BuyAndSell : "벼룩시장"
+  WellBeing: '생활정보'
 
-  p_estate: '부동산매매'
-  p_business: '비즈니스매매'
-  p_motor_vehicle: "자동차매매"
-  p_accommodation: '숙박정보'
+  Estate: '부동산매매'
+  Business: '비즈니스매매'
+  MotorVehicle: "자동차매매"
+  Accommodation: '숙박정보'
 
-  p_law: '생활법률'
-  p_study: '유학/어학'
-  p_immig: '이민'
-  p_tax: '세무/회계'
+  Law: '생활법률'
+  Study: '유학/어학'
+  Immigration: '이민'
+  Tax: '세무/회계'
 
-  p_yellowpage: '옐로우페이지'
-  p_sponsor: '고객 페이지'
+  Yellowpage: '옐로우페이지'
+  Sponsor: '고객 페이지'
   
-  p_mypage: '마이페이지'
-  p_issue: '문제'
+  Mypage: '마이페이지'
+  Issue: '문제'
   
   
   s_header: "페이지 헤드"
@@ -385,10 +387,10 @@ ko:
   Bug: 'Fix me'
   Feature_Request: 'Fix me'
   Improvement: 'Fix me'
-  due_date: 'Fix me'
+  due_date: '리퀘스트 수정날'
   NEW: 'NEW'
   ASSIGNED: 'ASSIGNED'
-  ONQA: 'ONQA'
+  ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
 
@@ -525,7 +527,7 @@ ko:
   write_something: '뭘 쓰세요...'
   
   # Validation
-  must_be_numbers: '수로 입력하십시오'
+  must_be_numbers: '숫자로 입력하십시오'
   must_be_filled: '꼭 입력하십시오'
   must_be_selected: '꼭 선택하십시오'
   only_characters: 'Fix me'
@@ -551,6 +553,7 @@ ko:
   new_business_profile_image: '프로필 이미지를 추가하기'
   new_business_category: '비지니스 카테고리 추가하기'
   new_issue: '문제 추가하기'
+  report_issue: '문제를 보고하기'
   
   business_name:  '고객(회사) 이름'
   contact_name:   '담당자 이름 '
@@ -573,8 +576,10 @@ ko:
   successfully_created: '성공적으로 추가 되었습니다'
   successfully_updated: '성공적으로 갱신 되었습니다'
   successfully_uploaded: '성공적으로 업로드 되었습니다'
+  invalid_file_extention: '업로드가 안되는 파일 입니다.'
   failed_to_create: '실패 되었습니다'
-  failed_to_upload: '실패 되었습니다' 
+  failed_to_upload: '업로드가 실패 되었습니다' 
+  failure: '실패하였습니다.'
   
   banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'

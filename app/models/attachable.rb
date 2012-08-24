@@ -31,6 +31,12 @@ class Attachable < ActiveRecord::Base
     ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
   end
   
+  def attachmentable?
+    return true if thumbnailable?
+    return false unless avatar.content_type
+    ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation','application/zip','application/msword','application/msexcel','application/rtf','text/rtf','application/x-gzip'].join('').include?(avatar.content_type)
+  end
+  
 #  AttachmentContentTypeValidator
 #  AttachmentPresenceValidator
 #  AttachmentSizeValidator

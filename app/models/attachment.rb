@@ -12,13 +12,12 @@ class Attachment < Attachable
   validates :avatar, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :avatar
   validates_attachment_size :avatar, :less_than => 5.megabytes
-  #validates_attachment_content_type :avatar, :content_type => ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation'], :message => "unsupported_content_type"
   
   after_initialize :set_default
 
   def set_default
-    self.thumb_size ||= "120x120"
-    self.medium_size ||= "400x400"
+    self.thumb_size ||= ""
+    self.medium_size ||= ""
   end
   
   def url

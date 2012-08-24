@@ -115,7 +115,7 @@ BusinessCategory.create(:en_name => "Waste_Treatment", :display_name => "Waste T
 
 # Banner
 
-Style::PAGES.each do |key, value|
+Style.banner_pages.each do |key, value|
   ## Header
   if value.eql? Style.page(:p_home)
     effect = Banner::E_SLIDE

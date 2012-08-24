@@ -1,5 +1,17 @@
 module ApplicationHelper
   
+  def admin_error_messages!(record)
+    html = ""
+    if record.errors.any?
+      html += <<-HTML
+      <div id="error_explanation">
+      </div>
+      HTML
+    end
+    html.html_safe
+  end
+  
+  
   def author_name(post)
     return "" if post.nil?
     logger.debug("posted_by: #{post.posted_by_type}")
