@@ -47,15 +47,15 @@ module Style
   PAGE_IDS[:p_signout] = 18
   PAGE_IDS[:p_issue] = 19
    
-  NAVI[:p_job] = "p_job"
-  NAVI[:p_buy_and_sell] = "p_buy_and_sell"
-  NAVI[:p_well_being] = "p_well_being"
-  NAVI[:p_study] = "p_study"
-  NAVI[:p_immig] = "p_immig"
-  NAVI[:p_estate] = "p_estate"
-  NAVI[:p_law] = "p_law"
-  NAVI[:p_tax] = "p_tax"
-  NAVI[:p_yellowpage] = "p_yellowpage"
+  NAVI[:p_job] = "Job"
+  NAVI[:p_buy_and_sell] = "BuyAndSell"
+  NAVI[:p_well_being] = "WellBeing"
+  NAVI[:p_study] = "Study"
+  NAVI[:p_immig] = "Immigration"
+  NAVI[:p_estate] = "Estate"
+  NAVI[:p_law] = "Law"
+  NAVI[:p_tax] = "Tax"
+  NAVI[:p_yellowpage] = "Yellowpage"
   
   SECTIONS[:s_header] = "s_header"
   SECTIONS[:s_background] = "s_background"

@@ -51,7 +51,9 @@ module ApplicationHelper
 
   # Create banner
   def _collectImage(p, s, a)
+    logger.debug("_collectImage: #{p} #{s} #{a}")
     page_id = Style.pageid(p)
+    logger.debug("page_id: #{page_id}")
     section_id = Style.sectionid(s)
     position_id = a
     b = Banner.where("page_id = ? AND section_id = ? AND position_id = ?", page_id, section_id, position_id).first
