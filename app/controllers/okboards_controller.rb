@@ -64,7 +64,7 @@ class OkboardsController < OkController
     logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @jobs }
+      format.json { render :json => @jobs }
     end
   end
   

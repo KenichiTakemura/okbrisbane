@@ -18,8 +18,8 @@ class BusinessProfileImage < Attachable
   end
   
   # https://github.com/thoughtbot/paperclip
-  validates :avatar, :attachment_presence => true
-  validates_with AttachmentPresenceValidator, :attributes => :avatar
+  #validates :avatar, :attachment_presence => true
+  validates_attachment_size :avatar, :less_than => Okvalue::MAX_BUSINESS_PROFILE_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
 

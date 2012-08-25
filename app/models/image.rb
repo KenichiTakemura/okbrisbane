@@ -17,10 +17,12 @@ class Image < Attachable
   end
 
   # https://github.com/thoughtbot/paperclip
-  validates :avatar, :attachment_presence => true
-  validates_with AttachmentPresenceValidator, :attributes => :avatar
-  validates_attachment_size :avatar, :less_than => 5.megabytes
+  validates_attachment_size :avatar, :less_than => Okvalue::MAX_POST_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
+  validates_presence_of :original_size, :message => I18n.t('failed_to_create')
+
+  #Paperclip callbacks
+  after_post_process :proc_geo
   
   after_initialize :set_default
 

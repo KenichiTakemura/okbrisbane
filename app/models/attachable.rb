@@ -8,7 +8,9 @@ class Attachable < ActiveRecord::Base
   
   belongs_to :attached, :polymorphic => true
   belongs_to :attached_by, :polymorphic => true
-  
+
+  validates_presence_of :avatar
+    
   def attached_to_by(post, user)
     update_attribute(:attached, post)
     update_attribute(:attached_by, user)
@@ -29,6 +31,11 @@ class Attachable < ActiveRecord::Base
   def thumbnailable?
     return false unless avatar.content_type
     ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
+  end
+
+  def flash_thumbnailable?
+    return false unless avatar.content_type
+    ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg',Okvalue::FLASH_CONTENT_TYPE].join('').include?(avatar.content_type)
   end
   
   def attachmentable?

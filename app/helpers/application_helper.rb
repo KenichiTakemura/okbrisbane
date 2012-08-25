@@ -52,7 +52,7 @@ module ApplicationHelper
   # Create banner
   def _collectImage(p, s, a)
     logger.debug("_collectImage: #{p} #{s} #{a}")
-    page_id = Style.pageid(p)
+    page_id = Style.pageid_value(p)
     logger.debug("page_id: #{page_id}")
     section_id = Style.sectionid(s)
     position_id = a
@@ -322,7 +322,7 @@ module ApplicationHelper
     html = %Q|<div style="position: relative; float: left; width:#{image.width}px; height: #{image.height}px; margin-left: 5px">|
     html += link_to(image_tag(image.avatar.url(:thumb), :class => 'thumbnail'), image.avatar.url(:original), :target => "_blank")
     html += %Q|<div style="position: absolute; top: 0px; left:95%;">|
-    html += link_to(t('x'), action, method: :delete, data: { confirm: t('confirm_delete') }, :remote => true, :class => 'delete_x', :title => t('delete'))
+    html += link_to(t('x'), action, :method => :delete, :data => { :confirm => t('confirm_delete') }, :remote => true, :class => 'delete_x', :title => t('delete'))
     html += "</div></div>"
     html.html_safe
   end

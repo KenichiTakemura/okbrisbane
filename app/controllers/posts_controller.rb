@@ -22,7 +22,7 @@ class PostsController < OkController
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
           format.html { redirect_to "#{_okboard_link(@okpage)}" }
-          format.json { render json: @post, status: :created }
+          format.json { render :json => @post, :status => :created }
         end
       else
         flash[:warning] = I18n.t("failed_to_create")
@@ -31,7 +31,7 @@ class PostsController < OkController
         end
         respond_to do |format|
           format.html { render :template => "okboards/write" }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.json { render :json => @post.errors, :status => :unprocessable_entity }
         end
       end
     end

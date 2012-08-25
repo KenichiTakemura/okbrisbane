@@ -1,6 +1,32 @@
 require 'test_helper'
 
 class BannerTest < ActiveSupport::TestCase
+  
+  test "style" do
+    assert_equal Style.pages.size, 19
+    assert_equal Style.banner_pages.size, 18
+    assert_equal Style.sections.size, 3
+    assert_equal Style.pageid_value("Job"), 4
+    assert_equal Style.pageid_key(:p_job), 4
+    assert_equal Style.pagename("4"), "Job"
+    assert_equal Style.pagename(4), "Job"
+    assert_equal Style.pagename_sym("4"), :p_job
+    assert_equal Style.pagename_sym(4), :p_job
+    assert_equal Style.sectionid(:s_header), 1
+    assert_equal Style.sectionname("1"), "s_header"
+    assert_equal Style.sectionname(1), "s_header"
+    assert_equal Style.sectionname_sym("1"), :s_header
+    assert_equal Style.sectionname_sym(1), :s_header
+    assert_equal Style.page(:p_job), "Job"
+    assert_equal Style.page("p_job"), "Job"
+    assert_equal Style.section(:s_header), "s_header"
+    assert_equal Style.section("s_header"), "s_header"
+    assert_equal Style.m2s("Job"), :p_job
+    assert_not_equal Style.getEffect("Home", :s_body, 1), ""
+    assert_not_equal Style.getEffect("Job", :s_header, 1), ""
+    assert_equal Style.getEffect("Job", :s_body, 1), ""
+  end
+  
   def client_with_banners
     c = BusinessClient.new(:business_name => business_name, :contact_name => contact_name)
     assert c.save
@@ -18,12 +44,12 @@ class BannerTest < ActiveSupport::TestCase
 
   def create_banner
     Style.banner_pages.each do |key, value|
-      Banner.create(:page_id => Style.pageid(key),
+      Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_header),
       :position_id => 1,
       :div_width => 500, :div_height => 60, :img_width => 500,
       :img_height => 60, :style => 'position:relative;float:right;top:0px;')
-      Banner.create(:page_id => Style.pageid(key),
+      Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_header),
       :position_id => 2,
       :div_width => 710, :div_height => 120, :img_width => 710, :img_height => 120,
@@ -33,7 +59,7 @@ class BannerTest < ActiveSupport::TestCase
 
   def getBanner(p,s,a)
     Banner.all.each do |banner|
-      if banner.page_id == Style.pageid(p) && banner.section_id == Style.sectionid(s) && banner.position_id.to_i == a.to_i
+      if banner.page_id == Style.pageid_key(p) && banner.section_id == Style.sectionid(s) && banner.position_id.to_i == a.to_i
         return banner
       end
     end

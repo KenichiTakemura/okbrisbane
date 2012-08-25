@@ -13,7 +13,10 @@ module Okvalue
   MAX_POST_CONTENT_LENGTH = 10000
   MAX_BUSINESS_PROFILE_CONTENT_LENGTH = 50000
   
-  MAX_CLIENT_IMAGE_SIZE = 6.megabytes
+  MAX_CLIENT_IMAGE_SIZE = 5.megabytes
+  MAX_BUSINESS_PROFILE_IMAGE_SIZE = 5.megabytes
+  MAX_POST_IMAGE_SIZE = 5.megabytes
+  MAX_POST_ATTACHMENT_SIZE = 5.megabytes
   
   # DB
   # 1 to 255 bytes: TINYTEXT
@@ -65,5 +68,7 @@ module Okvalue
   ISSUE_BUG = "Bug"
   ISSUE_FEATURE_REQUEST = "Feature_Request"
   ISSUE_IMPROVEMENT = "Improvement"
+  
+  ISSUE_REPORT_TO = "kenichi_takemura1976@yahoo.com"
   
 end

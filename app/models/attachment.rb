@@ -9,10 +9,9 @@ class Attachment < Attachable
   end
 
   # https://github.com/thoughtbot/paperclip
-  validates :avatar, :attachment_presence => true
-  validates_with AttachmentPresenceValidator, :attributes => :avatar
-  validates_attachment_size :avatar, :less_than => 5.megabytes
-  
+  validates_attachment_size :avatar, :less_than => Okvalue::MAX_POST_ATTACHMENT_SIZE
+  validates :avatar_content_type, :thumbnailable => true
+
   after_initialize :set_default
 
   def set_default

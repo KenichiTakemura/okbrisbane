@@ -25,10 +25,9 @@ class MemberManagementsController < OkController
 
   def sign_up
     @member_management = MemberManagement.new
-    
     respond_to do |format|
       format.html # sign_up.html.erb
-      format.json { render json: @member_management }
+      format.json { render :json => @member_management }
     end
   end
 

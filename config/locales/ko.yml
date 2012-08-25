@@ -399,6 +399,7 @@ ko:
   ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
+  send_email_to: '이메일을 보냄'
 
   brisbane: '브리즈번'
   sydney: '시드니'
@@ -407,7 +408,6 @@ ko:
   hobart: '호밭'
   adelaide: '아들레이드'
   perth: '퍼스'
-  
   
   effect_prev: '＜'
   effect_next: '＞'

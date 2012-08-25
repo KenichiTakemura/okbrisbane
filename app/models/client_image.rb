@@ -23,7 +23,6 @@ class ClientImage < Attachable
     self.medium_size ||= "300x300"
   end
 
-  validates_presence_of :original_size
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
