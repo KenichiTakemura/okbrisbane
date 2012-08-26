@@ -1,6 +1,6 @@
 # This class represents banner images for a business client and/or a banner space
 class ClientImage < Attachable
-  attr_accessible :link_to_url, :original_size, :caption, :source_url
+  attr_accessible :link_to_url, :caption, :source_url
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "120x120>" },
    :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
@@ -26,6 +26,8 @@ class ClientImage < Attachable
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
+  validates_format_of :link_to_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, :message => I18n.t("invalid")
+  validates_format_of :source_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, :message => I18n.t("invalid")
   
   #Paperclip callbacks
   after_post_process :proc_geo
@@ -62,8 +64,4 @@ class ClientImage < Attachable
     ['application/x-shockwave-flash'].join('').include?(avatar.content_type)
   end
   
-  def thumbnailable?
-    return false unless avatar.content_type
-    ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
-  end 
 end

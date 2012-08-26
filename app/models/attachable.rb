@@ -2,7 +2,7 @@ class Attachable < ActiveRecord::Base
   # Make it abstract
   self.abstract_class = true
   
-  attr_accessible :is_deleted, :medium_size, :thumb_size, :attached_id
+  attr_accessible :is_deleted, :medium_size, :thumb_size, :attached_id, :original_size
   
   attr_accessible :avatar
   
@@ -10,7 +10,7 @@ class Attachable < ActiveRecord::Base
   belongs_to :attached_by, :polymorphic => true
 
   validates_presence_of :avatar
-    
+  
   def attached_to_by(post, user)
     update_attribute(:attached, post)
     update_attribute(:attached_by, user)

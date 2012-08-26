@@ -5,6 +5,7 @@ class CreateAttachables < ActiveRecord::Migration
       t.has_attached_file :avatar
       t.string :medium_size
       t.string :thumb_size
+      t.string :original_size
       t.references :attached_by, :polymorphic => true
       t.references :attached, :polymorphic => true
       t.timestamps

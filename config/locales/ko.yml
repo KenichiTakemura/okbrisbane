@@ -334,6 +334,9 @@ ko:
   num_of_unattached_attachment: '보존 안된 첨부자료 투고 갯수'
   unknown_user: '모르는 멤버'
 
+  comment: '코멘트'
+  add_comment: '코멘트 추가하기'
+
   mainpage_title: 'OKBRISBANE 메인 페이지'
     
   Home: "메인"
@@ -577,7 +580,10 @@ ko:
   banner_contact :  '광고 문의'
   
   client_banner_image: '광고 이미지'
-  client_image_link_to_url: '링크'
+  link_to_url: '링크'
+  write_link_to_url: '링크를 적어 주세요...'
+  link_on_image_click: '클릭하면 링크를 표시함. 공백일 경우에는 링크없음'
+  leave_blank_to_show_profile: '공백일 경우에는 회사의 웹페이지를 표시함'
   client_image_clicked: '클릭'
   
   successfully_created: '성공적으로 추가 되었습니다'
@@ -595,4 +601,4 @@ ko:
   post_image_upload_description: '원하는 업로드 이미지를 선택해서 코멘트를 적고 추가보턴을 클릭하여 주십시오'
   post_attachment_upload_description: '선택하면 자동적으로 업로드 됩니다'
   
-  client_image_leave_blank_to_show_profile: '공백일 경우에는 회사의 웹페이지를 표시함'
+

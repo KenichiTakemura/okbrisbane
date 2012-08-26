@@ -1,6 +1,7 @@
 cd ../admin.okbrisbane
-rake db:drop
-rake db:create
+#rake db:drop
+#rake db:create
+rake db:reset
 rake db:migrate
 rake db:test:load
 cd ../okbrisbane

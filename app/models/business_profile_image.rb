@@ -1,6 +1,6 @@
 # This class represents profile images for a business client
 class BusinessProfileImage < Attachable
-  attr_accessible :is_main, :original_size
+  attr_accessible :is_main
 
   has_attached_file :avatar,
   :styles => lambda { |a|

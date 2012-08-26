@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "avatar_file_size"
     t.string   "medium_size"
     t.string   "thumb_size"
+    t.string   "original_size"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -129,13 +130,13 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "avatar_file_size"
     t.string   "medium_size"
     t.string   "thumb_size"
+    t.string   "original_size"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "original_size"
     t.boolean  "is_main",             :default => false
   end
 
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "avatar_file_size"
     t.string   "medium_size"
     t.string   "thumb_size"
+    t.string   "original_size"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -229,7 +231,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.datetime "updated_at",                             :null => false
     t.integer  "clicked",             :default => 0
     t.datetime "last_clicked"
-    t.string   "original_size"
     t.string   "caption"
     t.string   "source_url"
     t.string   "link_to_url"
@@ -293,22 +294,24 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "images", :force => true do |t|
-    t.boolean  "is_deleted",          :default => false
+    t.boolean  "is_deleted",                              :default => false
     t.datetime "avatar_updated_at"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.string   "medium_size"
     t.string   "thumb_size"
+    t.string   "original_size"
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "original_size"
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
     t.integer  "write_at"
-    t.string   "something"
+    t.text     "something",           :limit => 16777215
+    t.string   "source_url"
+    t.string   "link_to_url"
   end
 
   create_table "immigrations", :force => true do |t|
