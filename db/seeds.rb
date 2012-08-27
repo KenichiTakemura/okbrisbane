@@ -41,6 +41,8 @@ image.save
 ss = SystemSetting.new
 ss.post_expiry_length = 30
 ss.socialable = false
+ss.issue_report_to = "kenichi_takemura1976@yahoo.com"
+ss.admin_email = "info@okbrisbane.com"
 ss.save
 
 # BusinessCategory

@@ -25,23 +25,23 @@ class Attachable < ActiveRecord::Base
   end
   
   def to_s
-    "id: #{id} a_file_name: #{avatar_file_name} a_content_type #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
+    "id: #{id} a_file_name: #{avatar_file_name} a_content_type: #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
   end
   
   def thumbnailable?
     return false unless avatar.content_type
-    ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg'].join('').include?(avatar.content_type)
+    Okvalue::THUMBNAILABLE.include?(avatar.content_type)
   end
 
   def flash_thumbnailable?
     return false unless avatar.content_type
-    ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg',Okvalue::FLASH_CONTENT_TYPE].join('').include?(avatar.content_type)
+    Okvalue::FLASH_THUMBNAILABLE.include?(avatar.content_type)
   end
   
   def attachmentable?
     return true if thumbnailable?
     return false unless avatar.content_type
-    ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation','application/zip','application/msword','application/msexcel','application/rtf','text/rtf','application/x-gzip'].join('').include?(avatar.content_type)
+    Okvalue::ATTACHABLE.include?(avatar.content_type)
   end
   
   def proc_geo

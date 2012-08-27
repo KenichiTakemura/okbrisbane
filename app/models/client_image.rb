@@ -26,8 +26,8 @@ class ClientImage < Attachable
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
-  validates_format_of :link_to_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, :message => I18n.t("invalid")
-  validates_format_of :source_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, :message => I18n.t("invalid")
+  validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :if => Proc.new { |client_image| !client_image.link_to_url.empty? }
+  validates_format_of :source_url, :with => URI::regexp(%w(http https)), :if => Proc.new { |client_image| !client_image.source_url.empty? }
   
   #Paperclip callbacks
   after_post_process :proc_geo
@@ -61,7 +61,7 @@ class ClientImage < Attachable
   
   def flashable?
     return false unless avatar.content_type
-    ['application/x-shockwave-flash'].join('').include?(avatar.content_type)
+    [Okvalue::FLASH_CONTENT_TYPE].include?(avatar.content_type)
   end
   
 end

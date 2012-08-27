@@ -11,7 +11,6 @@ module ApplicationHelper
     html.html_safe
   end
   
-  
   def author_name(post)
     return "" if post.nil?
     logger.debug("posted_by: #{post.posted_by_type}")

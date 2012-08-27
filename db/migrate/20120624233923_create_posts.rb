@@ -8,7 +8,6 @@ class CreatePosts < ActiveRecord::Migration
       t.references :post_updated_by, :polymorphic => true
       t.string :category, :null => false
       t.string :subject, :null => false
-      t.integer  :valid_days, :default => 0
       t.datetime :valid_until, :null => false
       t.integer :views, :default => 0
       t.integer :likes, :default => 0

@@ -48,7 +48,7 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
-    "category: #{category} locale: #{locale} subject: #{subject} valid_days: #{valid_days} valid_until: #{valid_until} status #{status}"
+    "category: #{category} locale: #{locale} subject: #{subject} valid_until: #{valid_until} status #{status}"
   end
   
   # pagination
@@ -64,7 +64,6 @@ class Post < ActiveRecord::Base
 
   # callbacks
   after_initialize :set_default
-  after_validation :set_valid_until
   before_validation :logging_post
   after_save :add_top_feed_list, :delete_top_feed_list
 
@@ -97,21 +96,12 @@ class Post < ActiveRecord::Base
 
   def set_default
     self.locale ||= Okvalue::DEFAULT_LOCALE
-    self.valid_days = Okvalue::VALID_DAYS if self.valid_days == 0
     self.category ||= Okvalue::DEFAULT_CATEGORY
     self.z_index ||= 0
     self.status ||= Okvalue::POST_STATUS_PUBLIC
     self.mode ||= Role::R[:user_r] | Role::R[:user_w]
   end
-
-  def set_valid_until
-    if !self.valid_until
-      self.valid_until = self.valid_days.days.since Time.now.utc
-    else
-      self.valid_days = 0
-    end
-  end
-
+  
   def viewed
     self.update_attribute(:views, self.views + 1)
   end

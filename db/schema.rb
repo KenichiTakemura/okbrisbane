@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
-    t.float    "price"
+    t.string   "price"
     t.string   "room_type"
   end
 
@@ -157,7 +156,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                                :null => false
     t.string   "subject",                                 :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -170,7 +168,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.float    "price"
+    t.string   "price"
     t.boolean  "is_sold",              :default => false
   end
 
@@ -182,7 +180,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -195,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "mode"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
-    t.float    "price"
+    t.string   "price"
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -267,7 +264,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                                :null => false
     t.string   "subject",                                 :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -280,7 +276,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.float    "price"
+    t.string   "price"
     t.string   "address"
     t.boolean  "is_sold",              :default => false
     t.integer  "bed",                  :default => 0
@@ -322,7 +318,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -345,7 +340,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -368,7 +362,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -391,7 +384,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -419,7 +411,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                                :null => false
     t.string   "subject",                                 :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -432,7 +423,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "mode"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
-    t.float    "price"
+    t.string   "price"
     t.boolean  "is_sold",              :default => false
   end
 
@@ -471,7 +462,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -489,6 +479,8 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   create_table "system_settings", :force => true do |t|
     t.integer  "post_expiry_length"
     t.boolean  "socialable",         :default => false
+    t.string   "issue_report_to"
+    t.string   "admin_email"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -501,7 +493,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
@@ -558,7 +549,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.string   "post_updated_by_type"
     t.string   "category",                            :null => false
     t.string   "subject",                             :null => false
-    t.integer  "valid_days",           :default => 0
     t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0

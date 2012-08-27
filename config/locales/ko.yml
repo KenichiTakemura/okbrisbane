@@ -402,7 +402,7 @@ ko:
   ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
-  send_email_to: '이메일을 보냄'
+  send_email_to: '이메일 to'
 
   brisbane: '브리즈번'
   sydney: '시드니'
@@ -527,12 +527,15 @@ ko:
   confirm_all_delete: '전부 삭제 하시겠습니까?'
   not_present: '없습니다'
 
+  link: '링크'
+  enter_url: 'URL를 입력하십시오...'
   optional: '옵션 입력'
   linked_from_banner: '광고 이미지 링크'
   not_listed: '일람안에 없습니다'
   acceptable_extention: '업로드 가능 파일'
   if_checked_not_displayed: '체크하면 표시 안됨'
   write_something: '무엇인가 적어 주세요...'
+  show_image: 'URL의 이미지를 표시'
   
   # Validation
   must_be_numbers: '숫자로 입력하십시오'

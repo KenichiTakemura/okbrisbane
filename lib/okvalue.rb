@@ -33,16 +33,12 @@ module Okvalue
 
   DEFAULT_CATEGORY = 'na'
   DEFAULT_LOCALE = LOCALE_KO
-  VALID_DAYS = 30
   
-
   TOPFEED_IMAGE_SIZE = "120x90"
   OKBOARD_LIMIT = 15
   OKBOARD_IMAGE_FEED_LIMIT = 5
   OKBOARD_IMAGE_SIZE = "138x118"
   OKBOARD_MORE_SIZE = 10
-  
-  ADMIN_EMAIL = "admin@okbrisbane.com"
   
   BANNER_EFFECT_PAUSE = 2500
   BANNER_FADE_SPEED = 800
@@ -70,6 +66,8 @@ module Okvalue
   ISSUE_FEATURE_REQUEST = "Feature_Request"
   ISSUE_IMPROVEMENT = "Improvement"
   
-  ISSUE_REPORT_TO = "kenichi_takemura1976@yahoo.com"
+  THUMBNAILABLE = ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png', 'image/jpg']
+  FLASH_THUMBNAILABLE = THUMBNAILABLE.clone.push(FLASH_CONTENT_TYPE)
+  ATTACHABLE = ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation','application/zip','application/msword','application/msexcel','application/rtf','text/rtf','application/x-gzip']
   
 end

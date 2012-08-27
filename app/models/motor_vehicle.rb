@@ -18,6 +18,6 @@ class MotorVehicle < Post
     
   attr_accessible :price 
   validates_presence_of :price, :message => I18n.t('must_be_filled')
-  validates_numericality_of :price, :only_integer => false, :greater_than => 0, :message => I18n.t('must_be_numbers')
+  validates_presence_of :price, :message => I18n.t('must_be_filled')
 
 end

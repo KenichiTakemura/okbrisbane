@@ -20,6 +20,9 @@ class Comment < ActiveRecord::Base
     self.update_attribute(:commented_by, user)
     self.update_attribute(:commented, post)
   end
-  
+
+  def postedDate
+    Common.date_format(created_at)
+  end
 
 end
