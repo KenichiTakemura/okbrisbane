@@ -98,7 +98,7 @@ ko:
   errors: &errors
     format: ! '%{attribute} %{message}'
     attributes:
-      email: 'email 111'
+      email: 'email'
     messages:
       accepted: 을(를) 반드시 확인해야 합니다
       blank: 에 내용을 입력해 주세요
@@ -315,6 +315,7 @@ ko:
   name: '이름'
   status: '현상황'
   en_name: '영어 이름'
+  day: 일
 
   # User Info
   member: '멤버'
@@ -402,7 +403,8 @@ ko:
   ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
-  send_email_to: '이메일 to'
+  issue_report_to: '문제 이메일 to'
+  admin_email: '관리자 이메일'
 
   brisbane: '브리즈번'
   sydney: '시드니'
@@ -433,6 +435,7 @@ ko:
   listing_banners: '광고란 일람'
   listing_business_categories: '비지니스 카테고리 일람'
   listing_issues: '문제 일람'
+  listing_system_settings: "사이트 관리"
 
   member_list: '멤버 일람'
   
@@ -464,6 +467,10 @@ ko:
   expired: '유효기한 지난'
   search_keyword: '검색 키워드'
   business_category: '비지니스 카테고리'
+  
+  # System Setting
+  post_expiry_length: '투고 유효기한' 
+  socialable: 'SNS 유효/무효'
   
   for_rent: '렌트'
   for_sale: '세일'

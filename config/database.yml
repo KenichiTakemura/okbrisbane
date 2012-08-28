@@ -35,8 +35,8 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: okbrisbane_production
+  database: okbrisba_okbrisbane
   pool: 5
-  username: root
-  password:
+  username: okbrisba_prod
+  password: Mv36ucP9BiPKiXH1v
   socket: /var/lib/mysql/mysql.sock

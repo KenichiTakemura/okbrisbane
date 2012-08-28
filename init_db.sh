@@ -1,9 +1,10 @@
 cd ../admin.okbrisbane
-#rake db:drop
-#rake db:create
-rake db:reset
-rake db:migrate
+rake db:reset --trace RAILS_ENV="production"
+rake db:migrate --trace RAILS_ENV="production"
+rake db:reset --trace
+rake db:migrate --trace
 rake db:test:load
 cd ../okbrisbane
-rake db:migrate
+rake db:migrate --trace RAILS_ENV="production"
+rake db:migrate --trace RAILS_ENV="development"
 rake db:test:load

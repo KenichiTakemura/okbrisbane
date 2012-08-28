@@ -10,15 +10,17 @@ gem 'mysql2'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
+#group :assets do
+#  gem 'sass-rails',   '~> 3.2.3'
+#  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
+  gem 'therubyracer'
+#  gem 'uglifier', '>= 1.0.3'
+  gem 'execjs'
+  gem 'uglifier'
+#end
 
 gem 'jquery-rails'
 
@@ -38,8 +40,6 @@ gem 'jquery-rails'
 # gem 'debugger'
 #
 # Kenichi Takemura
-gem 'execjs'
-gem 'therubyracer', :platforms => :ruby
 # For Authentication
 gem 'devise'
 # For console
@@ -52,6 +52,6 @@ gem 'gretel'
 gem "paperclip", "~> 2.7"
 # Kaminari
 gem 'kaminari'
-gem 'uuidtools'
+#gem 'uuidtools'
 gem 'encryptor'
 gem "ckeditor", "3.7.1"
