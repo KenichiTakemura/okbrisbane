@@ -2,7 +2,7 @@ class CreatePosts < ActiveRecord::Migration
 
   
   def create_base_table(table)
-    create_table table do |t|
+    create_table(table,:options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8') do |t|
       t.string :locale, :null => false
       t.references :posted_by, :polymorphic => true
       t.references :post_updated_by, :polymorphic => true

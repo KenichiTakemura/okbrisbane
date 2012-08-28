@@ -1,6 +1,6 @@
 class CreateBanners < ActiveRecord::Migration
   def change
-    create_table(:banners) do |t|
+    create_table(:banners, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8') do |t|
       t.references :page
       t.references :section
       t.integer :position_id
