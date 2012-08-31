@@ -11,35 +11,6 @@
  *= require_self
  *= require_tree .
  */
-
-@font-face {
-  font-family: "NanumBrush";
-  src: url("fonts/NanumBrush.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "NanumGothic";
-  src: url("fonts/NanumGothic.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "NanumGothicBold";
-  src: url("fonts/NanumGothicBold.ttf");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "NanumGothicExtraBold";
-  src: url("fonts/NanumGothicExtraBold.ttf");
-  font-weight: bold;
-  font-style: normal;
-}
-
 html {
 	height: 100%;
 	width: 1000px;
@@ -98,7 +69,7 @@ body {
   border-radius: 3px;
   text-align: center;
   margin: 10 auto 15px;
-  color: #c0c0c0;
+  color: #000000;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
   font-size: 15px;
   width: 100%;
@@ -137,6 +108,15 @@ body {
 }
 
 /* Global */
+
+.form div.field_with_errors label.label {
+  display: inline;
+}
+
+.form div.field_with_errors .text_field {
+  color: red;
+  border: 2px solid red;
+}
 
 .fl {
 	float: left;

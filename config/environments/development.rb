@@ -37,4 +37,10 @@ Okbrisbane::Application.configure do
   
   Paperclip.options[:command_path] = "/usr/bin/"
   
+  # Mail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "localhost",
+    :enable_starttls_auto => true  }
+  
 end

@@ -1,5 +1,10 @@
 class Job < Post
 
+  # override
+  def topfeedable?
+    true
+  end
+  
   Categories = Hash.new
   Categories[:seek] = "seeking"
   Categories[:hire] = "hiring"

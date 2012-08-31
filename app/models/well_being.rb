@@ -1,5 +1,10 @@
 class WellBeing < Post
   
+  # override
+  def topfeedable?
+    true
+  end
+  
   Categories = Hash.new
   Categories[:event] = "event"
   Categories[:giving_info] = "giving_info"

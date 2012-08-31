@@ -30,7 +30,7 @@
 		<%= single_background_banner(6) %>
 		<div id="header">
 			<div id="header-left">
-				<%= t("welcome_message", :default => 'Welcome! ')%>
+				<%= t("welcome_message")%>
 				<% if current_user %>
 				<%= current_user.email %>
 				<% else %>
@@ -45,16 +45,16 @@
 				<div id="devise">
 					<div id="account">
 						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
 						<% else %>
-						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_login.gif"), user_sign_in_path %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
 						<% end %>
-						<%= image_tag("#{I18n.locale}/p_signup/bar.gif") %>
+						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
 						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_modify.gif"), edit_user_registration_path %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_modify.gif"), edit_user_registration_path %>
 						<% else %>
 						<!-- %= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), new_user_registration_path % -->
-						<%= link_to image_tag("#{I18n.locale}/p_signup/btn_member.gif"), member_managements_sign_up_path %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
 						<% end %>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 				<%= single_header_banner(2) %>
 			</div>
 			<div id="header-bottom">
-				<% if Style.page(:p_home).eql?(@okpage.to_s) || Style.page(:p_signin).eql?(@okpage.to_s) || Style.page(:p_signup).eql?(@okpage.to_s)  %>
+				<% if [:p_home,:p_signin,:p_signup,:p_signout].include?(@okpage)  %>
 				<%= navigation("#41A317","#f0f0f0") %>
 				<div id="follows">
 					<% if socialable? %>

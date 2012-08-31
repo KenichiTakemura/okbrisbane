@@ -69,8 +69,9 @@ class Post < ActiveRecord::Base
 
   # public functions
   def add_top_feed_list
-    return unless @@topfeedable
-    logger.debug("add_top_feed_list category: #{self}")
+    logger.debug("add_top_feed_list topfeedable: #{self.topfeedable?}")
+    return unless topfeedable?
+    logger.debug("category: #{self}")
     return if self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
     logger.debug("Feed: #{feed}")
@@ -86,7 +87,7 @@ class Post < ActiveRecord::Base
    
    # Delete post from top_feed when deleted
    def delete_top_feed_list
-    return unless @@topfeedable
+    return unless topfeedable?
     if !self.status.eql?(Okvalue::POST_STATUS_PUBLIC)
       logger.debug("delete_from_top_feed_list #{self}")
       feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
@@ -143,8 +144,8 @@ class Post < ActiveRecord::Base
   end
   
   def admin_category_list
-    #list = category_list
-    list = Array.new
+    list = category_list.clone
+    #list = Array.new
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
   end
@@ -159,7 +160,8 @@ class Post < ActiveRecord::Base
   
   protected
   
-  # topfeedable?
-  @@topfeedable = true
+  def topfeedable?
+    false
+  end
 
 end

@@ -4,11 +4,11 @@ class MemberManagementsController < OkController
   before_filter :page_p_signin, :only => ["sing_in"]
   
   def page_p_signup
-    @okpage = Style::PAGES[:p_signup]
+    @okpage = :p_signup
   end
   
   def page_p_signin
-    @okpage = Style::PAGES[:p_signin]
+    @okpage = :p_signin
   end
 
   def sign_in
@@ -17,7 +17,7 @@ class MemberManagementsController < OkController
   end
   
   def sign_out
-    @okpage = Style::PAGES[:p_signout]
+    @okpage = :p_signout
     respond_to do |format|
       format.html # sign_out.html.erb
     end
@@ -29,6 +29,15 @@ class MemberManagementsController < OkController
       format.html # sign_up.html.erb
       format.json { render :json => @member_management }
     end
+  end
+  
+  def inactive_signup
+     @okpage = :p_signup
+     @email = params[:email]
+     respond_to do |format|
+       format.html { render :template => "member_managements/inactive_signup" }
+       format.json { render :json => @email }
+     end  
   end
 
   def term

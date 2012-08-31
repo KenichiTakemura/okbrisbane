@@ -53,18 +53,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def _makeImageList(feed_list, limit)
-    image_list = Array.new
-    feed_list.each_with_index do |feed, i|
-      if !feed.feeded_to.image.empty?
-      image_list.push(feed)
-      feed_list.slice!(i)
-      break if(image_list.size >= limit)
-      end
-    end
-    return feed_list, image_list
-  end
-
   private
 
   # Overwriting the sign_out redirect path method

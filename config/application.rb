@@ -57,6 +57,11 @@ module Okbrisbane
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    
+    config.assets.paths << "#{Rails.root}/app/assets/stylesheets/fonts"
+    config.assets.paths << "#{Rails.root}/app/assets/stylesheets/images"
+    config.assets.paths << "#{Rails.root}/app/assets/stylesheets/messages"
+    config.assets.paths << "#{Rails.root}/app/assets/javascripts/ckeditor"
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
@@ -64,5 +69,8 @@ module Okbrisbane
     config.to_prepare { Devise::SessionsController.force_ssl }
     config.to_prepare { Devise::RegistrationsController.force_ssl }
     config.to_prepare { Devise::PasswordsController.force_ssl }
+    
+    config.action_mailer.default_url_options = { :host => "okbrisbane-stage.com" }
+    
   end
 end

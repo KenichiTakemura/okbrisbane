@@ -47,15 +47,8 @@ module Style
   PAGE_IDS[:p_signout] = 18
   PAGE_IDS[:p_issue] = 19
    
-  NAVI[:p_job] = "Job"
-  NAVI[:p_buy_and_sell] = "BuyAndSell"
-  NAVI[:p_well_being] = "WellBeing"
-  NAVI[:p_study] = "Study"
-  NAVI[:p_immig] = "Immigration"
-  NAVI[:p_estate] = "Estate"
-  NAVI[:p_law] = "Law"
-  NAVI[:p_tax] = "Tax"
-  NAVI[:p_yellowpage] = "Yellowpage"
+   
+  NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
   
   SECTIONS[:s_header] = "s_header"
   SECTIONS[:s_background] = "s_background"

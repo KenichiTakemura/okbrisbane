@@ -70,4 +70,11 @@ module Okvalue
   FLASH_THUMBNAILABLE = THUMBNAILABLE.clone.push(FLASH_CONTENT_TYPE)
   ATTACHABLE = ['text/plain', 'application/pdf','application/vnd.oasis.opendocument.presentation','application/zip','application/msword','application/msexcel','application/rtf','text/rtf','application/x-gzip']
   
+  EMAIL_REGEXP = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  
+  DAYS_OPTIONS = [1,2,3,4,5,6,7,8,9,10]
+  
+  BED_LIST = [1,2,3,4,5]
+  BATH_LIST = [0,1,2,3,4,5]
+  GARAGE_LIST = [0,1,2,3,4,5]
 end

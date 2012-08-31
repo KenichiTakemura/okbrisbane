@@ -1,9 +1,15 @@
 class Business < Post
 
+  # override
+  def topfeedable?
+    true
+  end
+
   Categories = Hash.new
   Categories[:for_rent] = "for_rent"
   Categories[:for_sale] = "for_sale"
   Categories[:for_auction] = "for_auction"
+  Categories[:sold] = "sold"  
   
   def category_list()
     list = Array.new
@@ -19,8 +25,8 @@ class Business < Post
   
   
   # attr_accessible
-  attr_accessible :price, :address
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
+  attr_accessible :price
+  attr_accessible :address
+
 
 end

@@ -13,7 +13,6 @@ tar jcvf okbrisbane_$DATE.tar.bz2\
  config/environment.rb\
  db\
  lib\
- seed_db.sh\
  public/*html\
  public/favicon.ico\
  public/assets\

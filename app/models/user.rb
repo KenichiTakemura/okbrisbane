@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :is_special
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_name, :is_special, :confirmed_at
   # attr_accessible :title, :body
 
   has_one :mypage, :as => :mypagable, :class_name => "Mypage", :dependent => :destroy
@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
   has_many :attachment, :as => :attached_by, :class_name => 'Attachment', :dependent => :destroy
   has_many :image, :as  => :attached_by, :class_name => 'Image', :dependent => :destroy
 
+  validates_presence_of :user_name
   after_create :create_mypage, :init_role
+  
   def name
-    return "#{self.last_name} #{self.first_name}" if !self.first_name.empty?
-    return "#{self.last_name}" if !self.last_name.empty?
-    ""
+    user_name
   end
 
   def init_role

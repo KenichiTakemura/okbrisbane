@@ -154,24 +154,20 @@ p.feed_title:hover {
   -webkit-transition: all 0.5s ease-in-out;
 }
 
-#feed_body tr:hover {
-  font-size: 15px;
-  padding-left: 5px;
-}
+//#feed_body tr:hover {
+//  font-size: 15px;
+//  padding-left: 5px;
+//}
 
 .feed_text {
   
 }
 
 p.price_tag {
-    font-size: 15px;
-    font-family: arial;
-    color: rgb(51, 102, 204);
-    font-weight: bold;
-}
-
-p.price_tag:hover {
-  padding-left: 5px;
+  font-size: 15px;
+  font-family: arial;
+  color: rgb(51, 102, 204);
+  font-weight: bold;
 }
 
 div.shadow:hover {
@@ -223,9 +219,9 @@ a.weather_location:link, a.weather_location:visited { color: #fff; text-decorati
 a.weather_location:hover, a.weather_location:active { color: #fff; text-decoration: none }
 
 .weather_information {
-    font-family: 'NanumGothicExtraBold';
-    font-size: 16px;
-    font-weight: bold;
-    color: #41A317;
-    padding: 2px;
+  font-family: 'NanumGothicExtraBold';
+  font-size: 16px;
+  font-weight: bold;
+  color: #41A317;
+  padding: 2px;
 }

@@ -1,15 +1,24 @@
 class Tax < Post
 
-  FOR_BUSINESS = "for_business"
-  FOR_TAX_RETURN = "for_tax_return"
+  # override
+  def topfeedable?
+    true
+  end
   
-  # attr_accessible
-  validates_inclusion_of :category, :in => [FOR_BUSINESS,FOR_TAX_RETURN], :message => I18n.t('must_be_selected')
-
-  def category_list
-    [[I18n.t("#{FOR_BUSINESS}"),FOR_BUSINESS],
-    [I18n.t("#{FOR_TAX_RETURN}"),FOR_TAX_RETURN]
-    ]
+  Categories = Hash.new
+  Categories[:for_business] = "for_business"
+  Categories[:for_tax_return] = "for_tax_return"
+  
+  def category_list()
+    list = Array.new
+    Categories.each do |key,value|
+      list.push([I18n.t(value),value])
+    end
+    list
+  end
+  
+  def getCategory(key)
+    Categories[key]
   end
   
 end

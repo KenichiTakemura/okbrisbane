@@ -1,12 +1,18 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
+<%= render :partial => "devise/shared/header" %>
+<div class="signin_title">
+	<%= t(:forgot_your_password)%>
+</div>
+<div id="forgot_your_password">
+	<%= devise_error_messages! %>
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form"  }) do |f| %>
+	<div class="group">
+	<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
+	<%= f.email_field :email, :class => "text_field" %>
+	</div>
+	<div class="group">
+		<%= f.submit t(:send_reset_password_instrcutions) , :class => "button-link_ok" %>
+	</div>
+	<% end %>
+</div>
+<%= render :partial => "devise/shared/footer" %>
+<%= _script_document_ready(%Q|$('#_findid').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

@@ -1,39 +1,37 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-	<%= image_tag("#{I18n.locale}/p_signup/tit_611.gif", :class => "title_text")%>
-	<%= image_tag("#{I18n.locale}/p_signup/title.jpg")%>
+	<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
-<div id="_main">
-	<span class="stitle"><%= t("stitle_head")%></span></br>
-	<%= t("stitle_body")%>
-	</br>
-	</br>
-	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+<div id="signup">
+	<span class="stitle"><%= t("stitle_head")%></span>
+	<span class="stitle_body"><%= t("stitle_body")%></span>
+	<div class="signup_form">
 	<%= devise_error_messages! %>
-
-	<div>
-		<%= f.label :email, "#{t(:signin_email)}" %>
-		<br />
-		<%= f.email_field :email %>
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form" }) do |f| %>
+	<div class="group">
+		<%= f.label :email, t(:signin_email), :class => "label left"   %>
+		<%= f.email_field :email, :class => "text_field" %>
 	</div>
-
-	<div>
-		<%= f.label :password, "#{t(:signin_password)}" %>
-		<br />
-		<%= f.password_field :password %>
+	<div class="group">
+		<%= f.label :user_name, t(:user_name), :class => "label left"   %>
+		<%= f.text_field :user_name, :class => "text_field" %>
 	</div>
-
-	<div>
-		<%= f.label :password_confirmation, t("password_confirmation") %>
-		<br />
-		<%= f.password_field :password_confirmation %>
+	<div class="group">
+		<%= f.label :password, t(:signin_password), :class => "label left"   %>
+		<%= f.password_field :password, :class => "text_field" %>
 	</div>
-
-	<div>
-		<%= f.submit "#{t(:signup)}", :class => "ui-button"%>
+	<div class="group">
+		<%= f.label :password_confirmation, t(:password_confirmation), :class => "label left"   %>
+		<%= f.password_field :password_confirmation, :class => "text_field" %>
+	</div>
+	<div class="group">
+		<%= f.submit t(:signup), :class => "button-link_ok"%>
 	</div>
 	<% end %>
+	</div>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

@@ -1,0 +1,29 @@
+<%= render :partial => "devise/shared/header" %>
+
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+</div>
+
+<div class="flash">
+	<% if notice %>
+	<p class="message notice">
+		<%= notice %>
+	</p>
+	<% end %>
+	<% if alert %>
+	<p class="message alert">
+		<%= alert %>
+	</p>
+	<% end %>
+</div>
+<div id="_main">
+	</br>
+	<p class="inactive_signup">
+		<%= t(:inactive_signup_content) %>
+		<%= @email %>
+	</p>
+</div>
+<%= render :partial => "devise/shared/footer" %>
+<%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
+

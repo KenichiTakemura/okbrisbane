@@ -1,34 +1,31 @@
 <%= render :partial => "devise/shared/header" %>
-<!-- %= image_tag("common/logo_w.gif")% -->
-<div class="flash">
-	<% if notice %>
-	<p class="message notice">
-		<%= notice %>
-	</p>
-	<% end %>
-	<% if alert %>
-	<p class="message alert">
-		<%= alert %>
-	</p>
-	<% end %>
+<div class="signin_title">
+	OKBRISBANE <%= t("signin")%>
 </div>
-<div class="signin_title">OKBRISBANE <%=t("signin")%></div>
 <div id="signin">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
 	<div class="group">
-	<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
-	<%= f.email_field :email, :class => "text_field" %>
-	</div><div class="group">
-	<%= f.label :password, "#{t(:signin_password)}", :class => "label left"  %>
-	<%= f.password_field :password, :class => "text_field" %>
-	</div><div class="group">
-	<% if devise_mapping.rememberable? -%>
-	<%= f.check_box :remember_me%> <%= f.label :remember_me, "#{t(:remember_me)}"  %>
+		<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
+		<%= f.email_field :email, :class => "text_field" %>
+	</div>
+	<div class="group">
+		<%= f.label :password, "#{t(:signin_password)}", :class => "label left"  %>
+		<%= f.password_field :password, :class => "text_field" %>
+	</div>
+	<div class="group">
+		<% if devise_mapping.rememberable? -%>
+		<%= f.check_box :remember_me%> <%= f.label :remember_me, "#{t(:remember_me)}"  %>
 	</div>
 	<% end -%>
-<div class="group">	<%= f.submit t("signin") , :class => "button-link_ok" %></div>
+	<div class="group">
+		<%= f.submit t("signin") , :class => "button-link_ok" %>
+	</div>
 	<% end %>
+	<div class="forgot_password">
+	<%= link_to t("forgot_your_password"), new_password_path(resource_name), :class => "button-link_naver" %>
+	</div>
 </div>
+
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signin').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

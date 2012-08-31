@@ -30,7 +30,7 @@ class Image < Attachable
 
   def set_default
     self.thumb_size ||= "120x120"
-    self.medium_size ||= "400x400"
+    self.medium_size ||= "400x300"
     self.source_url ||= ""
   end
 
@@ -55,6 +55,17 @@ class Image < Attachable
   def original_image
     return self.avatar.url(:original) if self.source_url.empty?
     self.source_url
+  end
+  
+  def linkable?
+    if !self.link_to_url.nil? && !self.link_to_url.empty?
+      return true
+    end
+    false   
+  end
+  
+  def link
+    self.link_to_url
   end
 
 end

@@ -1,22 +1,22 @@
 <%= render :partial => "devise/shared/header" %>
 
-   <div id="termsofpersonal">
-      <%= image_tag("#{I18n.locale}/login/bg_title.jpg")%>
-      <%= image_tag("#{I18n.locale}/login/tit_641.gif", :class => 'name')%>
-      <div id="_term">
-        </br>
-        <p class="termofservice">
-          <%= t("termofpersonalinfomation")%>
-        </p>
-        <textarea name="" cols="100" rows="30" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termofpersonalinfomation%>
-      </textarea>                           
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+</div>
+<div id="_main">
+	</br>
+	<p class="termofservice">
+		<%= t("termofpersonalinfomation")%>
+	</p>
+	<textarea name="" cols="100" rows="40" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termofpersonalinfomation%>
+      </textarea>	                           
       </br>
-
-  </div>
+</div>
 <%= render :partial => "devise/shared/footer" %>
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-    	$('#_personal').attr("style", "background: #6A8FE7");
-  });
+	$(document).ready(function() {
+		$('#_personal').attr("style", "background: #6A8FE7");
+	}); 
 </script>
 

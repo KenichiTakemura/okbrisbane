@@ -149,27 +149,27 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string   "locale",                                  :null => false
+    t.string   "locale",                              :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                                :null => false
-    t.string   "subject",                                 :null => false
-    t.datetime "valid_until",                             :null => false
+    t.string   "category",                            :null => false
+    t.string   "subject",                             :null => false
+    t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                                  :null => false
+    t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "price"
-    t.boolean  "is_sold",              :default => false
+    t.string   "address"
   end
 
   create_table "buy_and_sells", :force => true do |t|
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
     t.string   "price"
+    t.integer  "item"
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -257,28 +258,27 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "estates", :force => true do |t|
-    t.string   "locale",                                  :null => false
+    t.string   "locale",                              :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                                :null => false
-    t.string   "subject",                                 :null => false
-    t.datetime "valid_until",                             :null => false
+    t.string   "category",                            :null => false
+    t.string   "subject",                             :null => false
+    t.datetime "valid_until",                         :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                                  :null => false
+    t.string   "status",                              :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "price"
     t.string   "address"
-    t.boolean  "is_sold",              :default => false
     t.integer  "bed",                  :default => 0
     t.integer  "bath",                 :default => 0
     t.integer  "garage",               :default => 0
@@ -440,11 +440,6 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.datetime "updated_at",                        :null => false
   end
 
-  create_table "post_searches", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "roles", :force => true do |t|
     t.string   "role_name"
     t.integer  "role_value"
@@ -525,18 +520,22 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.string   "first_name",             :default => "",    :null => false
-    t.string   "last_name",              :default => "",    :null => false
+    t.string   "user_name",              :default => "",    :null => false
     t.boolean  "is_special",             :default => false
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true

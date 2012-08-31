@@ -1,13 +1,23 @@
 class Immigration < Post
-
-  FOR_IMMIGRATION = "for_immigration"
   
-  # attr_accessible
-  validates_inclusion_of :category, :in => [FOR_IMMIGRATION], :message => I18n.t('must_be_selected')
-
-  def category_list
-    [[I18n.t("#{FOR_IMMIGRATION}"),FOR_IMMIGRATION]
-    ]
+  # override
+  def topfeedable?
+    true
+  end
+  
+  Categories = Hash.new
+  Categories[:for_immigration] = "for_immigration"
+  
+  def category_list()
+    list = Array.new
+    Categories.each do |key,value|
+      list.push([I18n.t(value),value])
+    end
+    list
+  end
+  
+  def getCategory(key)
+    Categories[key]
   end
   
 end

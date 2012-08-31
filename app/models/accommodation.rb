@@ -1,5 +1,10 @@
 class Accommodation < Post
 
+  # override
+  def topfeedable?
+    true
+  end
+  
   Categories = Hash.new
   Categories[:hotel] = "Hotel"
   Categories[:motel] = "Motel"
@@ -30,7 +35,6 @@ class Accommodation < Post
   # attr_accessible
   attr_accessible :price
   attr_accessible :room_type
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
   validates_presence_of :price, :message => I18n.t('must_be_filled')
   validates_inclusion_of :room_type, :in => [ROOM_HOTEL,ROOM_STUDIO,ROOM_1BED,ROOM_2BED,ROOM_3PLUSBED], :message => I18n.t('must_be_selected')
 

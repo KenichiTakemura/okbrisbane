@@ -162,25 +162,25 @@ module ApplicationHelper
   def single_header_banner(a)
     logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_header_banner a=#{a})" if !@okpage
-    single_banner(@okpage, :s_header, a)
+    single_banner(Style.page(@okpage), :s_header, a)
   end
 
   def single_body_banner(a)
     logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_body_banner a=#{a})" if !@okpage
-    single_banner(@okpage, :s_body, a)
+    single_banner(Style.page(@okpage), :s_body, a)
   end
 
   def single_background_banner(a)
     logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_background_banner a=#{a})" if !@okpage
-    single_banner(@okpage, :s_background, a)
+    single_banner(Style.page(@okpage), :s_background, a)
   end
 
   def multi_body_banner(a)
     logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(multi_body_banner a=#{a})" if !@okpage
-    multi_banner(@okpage, :s_body, a)
+    multi_banner(Style.page(@okpage), :s_body, a)
   end
 
   def single_banner(p, s, a)
@@ -216,12 +216,14 @@ module ApplicationHelper
 
   def navigation(over, out)
     html = %Q|<div id="navigation"><ul class="">|
-    Style::NAVI.each do |key, value|
+    Style::NAVI.each do |key|
+      value = Style.page(key)
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
     end
     script = ""
-    Style::NAVI.each do |key, value|
-      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{_okboard_link(value)}| + %Q|"});|
+    Style::NAVI.each do |key|
+      value = Style.page(key)
+      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{_okboard_link(key)}| + %Q|"});|
     end
     html += _script_document_ready(script)
     html += "</ul></div>"
@@ -229,6 +231,8 @@ module ApplicationHelper
   end
 
   def _okpage_v(okpage)
+    logger.debug("_okpage_v okpage: #{okpage}")
+    raise "Bad Request #{okpage}" if Style.page(okpage).nil?
     Common.encrypt_data(okpage.to_s).chop
   end
 

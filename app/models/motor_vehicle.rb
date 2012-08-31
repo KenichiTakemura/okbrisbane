@@ -1,5 +1,10 @@
 class MotorVehicle < Post
     
+  # override
+  def topfeedable?
+    true
+  end
+
   Categories = Hash.new
   Categories[:new_car] = "new_car"
   Categories[:used_car] = "used_car"
@@ -17,7 +22,5 @@ class MotorVehicle < Post
   end
     
   attr_accessible :price 
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
 
 end

@@ -3,7 +3,7 @@ module DeviseHelper
   def devise_error_messages!
     return "" if resource.errors.empty?
 
-    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    messages = resource.errors.full_messages.map { |msg| content_tag(:p, msg, :class => "devise_error") }.join
     sentence = I18n.t("errors.messages.not_saved",
                       :count => resource.errors.count,
                       :resource => resource.class.model_name.human.downcase)
@@ -12,8 +12,8 @@ module DeviseHelper
     messages.sub!('Password',I18n.t("password"))
 
     html = <<-HTML
-    <div id="error_explanation">
-      <div class="error">#{t("failure")}</div>
+    <div class="devise_error_explanation">
+      #{messages}
     </div>
     HTML
 

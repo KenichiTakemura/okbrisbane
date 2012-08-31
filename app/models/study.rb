@@ -1,5 +1,10 @@
 class Study < Post
 
+  # override
+  def topfeedable?
+    true
+  end
+
   Categories = Hash.new
   Categories[:for_study_overseas] = "for_study_overseas"
   Categories[:for_language] = "for_language"

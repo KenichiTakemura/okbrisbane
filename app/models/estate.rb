@@ -1,9 +1,15 @@
 class Estate < Post
   
+  # override
+  def topfeedable?
+    true
+  end
+  
   Categories = Hash.new
   Categories[:for_rent] = "for_rent"
   Categories[:for_sale] = "for_sale"
   Categories[:for_auction] = "for_auction"
+  Categories[:sold] = "sold"  
   
   def category_list()
     list = Array.new
@@ -18,8 +24,7 @@ class Estate < Post
   end
     
   # attr_accessible
-  attr_accessible :price, :is_sold, :bed, :bath, :garage, :address
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
-  validates_presence_of :price, :message => I18n.t('must_be_filled')
+  attr_accessible :price, :bed, :bath, :garage, :address
+  validates_presence_of :price
 
 end

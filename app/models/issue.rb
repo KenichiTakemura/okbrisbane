@@ -5,7 +5,10 @@ class Issue < Post
   paginates_per 10
 
   # override
-  @@topfeedable = false
+  def topfeedable?
+    false
+  end
+  
   scope :is_valid, where("status != ?", Okvalue::ISSUE_CLOSED)
   
   before_save :issue_new

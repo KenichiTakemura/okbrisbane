@@ -1,29 +1,29 @@
 <div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
 	<div class="okboard_top">
 		<p class="okboard_title">
-			<%= t(@okpage.to_s)%>
+			<%= t(Style.page(@okpage))%>
 		</p>
 		<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{@okpage}/logo.gif") %>
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x100") %>
 		</div>
 		<div class="okboard_background">
-			<%= image_tag("#{I18n.locale}/#{@okpage}/bg.jpg") %>
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/bg.jpg") %>
 		</div>
 	</div>
 	<% if !@board_image_lists.nil? %>
 	<div id="okboard_image_list_for_<%= @okpage %>">
 		<% @board_image_lists.each do |post| %>
 		<div class="okboard_thumbnail">
-			<%= image_tag(post.image.first.avatar.url(:medium), :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+			<% if post.image.first.linkable? %>
+			<%= link_to(image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE),  post.image.first.link)%>
+			<% else %>
+			<%= image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+			<% end %>
 			<p class="description">
 				<%= post.subject%>
 			</p>
 			<p class="price_tag">
-				<%= number_to_currency(post.price, :locale => 'en') %>
-				<% if @okpage.to_s.eql? Style::PAGES[:p_motor_vehicle] %>
-				<br/>
-				<%= t("drive_away") %>
-				<% end %>
+				<%= post.price %>
 				<div class="okboard_thumbnail_view">
 					<%= t('view') %><%= section_span(post) %>
 				</div>
@@ -39,36 +39,10 @@
 		<%= single_body_banner(8) %>
 	</div>
 	<% end %>
-	<div class="okboard_write_new">
+
 	<%= javascript_include_tag 'jquery.dataTables.min.js' %>
-	<p style="position: relative; float:right; margin-right:10px;">
-		<%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_ok')%>
-	</p>
-	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
-		<div id="okboard_filter">
-			<div class="item">
-				<%= label_tag :category, t("category"), :class => "label left" %>&nbsp;
-				<%= select_tag :category, options_for_select(@post.category_list, 0) %>
-			</div>
-			<div class="item">
-				<%= label_tag :from_price, t("price"), :class => "label left" %>&nbsp;
-				<%= search_field_tag :from_price %>
-			</div>
-			<div class="item">
-				<%= label_tag :to_price, t("price"), :class => "label left" %>&nbsp;
-				<%= search_field_tag :to_price %>
-			</div>
-			<div class="item">
-				<%= label_tag :from, t("from"), :class => "label left" %>&nbsp;
-				<%= date_select :from, "", :start_year => 2012%>
-			</div>
-			<div class="item">
-				<%= label_tag :to, t("to"), :class => "label left" %>&nbsp;
-				<%= date_select :to, "", :start_year => 2012%>
-			</div>
-			<%= image_tag("#{I18n.locale}/common/org_search.gif") %>
-		</div>
+		<%= render :partial => "okboards/shared/filter" %>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
 			<%= build_board_list %>
@@ -77,6 +51,7 @@
 			</div>
 			<div class="more">
 				<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "button-link_ok") %>
+				<%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_naver')%>
 			</div>
 		</div>
 	</div>

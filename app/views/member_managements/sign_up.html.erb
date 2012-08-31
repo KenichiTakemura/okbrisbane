@@ -1,13 +1,13 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-<%= image_tag("#{I18n.locale}/p_signup/tit_611.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/p_signup/title.jpg")%>
+<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
+<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
 <div id="_main">
-	<span class="stitle"><%= t("stitle_head")%></span></br>
-	<%= t("stitle_body")%>
-	</br>
+	<span class="stitle"><%= t("stitle_head")%></span>
+	<span class="stitle_body"><%= t("stitle_body")%></span>
+	<div class="signup_form">
 	<p class="termofservice">
 		<%= t("termofservice")%>
 	</p>
@@ -24,9 +24,10 @@
 	</p>
 	<%= form_for(@member_management) do |f| %>
 	<div class="actions">
-		<%= f.submit t("agreed"), :id => '_next' %>
+		<%= f.submit t("agreed"), :id => '_next', :class => "button-link_ok"%>
 	</div>
 	<% end %>
+	</div>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");

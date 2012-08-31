@@ -1,5 +1,10 @@
 class BuyAndSell < Post
 
+  # override
+  def topfeedable?
+    true
+  end
+
   Categories = Hash.new
   Categories[:buy] = "buying"
   Categories[:sell] = "selling"

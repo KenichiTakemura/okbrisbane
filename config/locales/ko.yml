@@ -262,6 +262,12 @@ ko:
   page: :pages
   post: '투고'
   post_list: '투고일람'
+  address: '주소'
+  bed: '방'
+  bath: '욕실'
+  garage: '주차장'
+  
+  confirmed: '이메일 확인'
     
   size: '사이즈'
   item: '항목'
@@ -312,6 +318,7 @@ ko:
   seeking: '구인'
   buying: '삽니다'
   selling: '팝니다'
+  user_name: '이름'
   name: '이름'
   status: '현상황'
   en_name: '영어 이름'
@@ -502,7 +509,7 @@ ko:
   Cottages_Cabins_Houses: '코테지'
   Backpacker_Hostel: '유스호스텔'
   B_AND_B_Guest_House: '게스트 하우스'
-  Tourist_Caravan_Park: 캐러밴 파크'
+  Tourist_Caravan_Park: '캐러밴 파크'
   Farmstay: '농장 숙박'
 
 
@@ -611,4 +618,10 @@ ko:
   post_image_upload_description: '원하는 업로드 이미지를 선택해서 코멘트를 적고 추가보턴을 클릭하여 주십시오'
   post_attachment_upload_description: '선택하면 자동적으로 업로드 됩니다'
   
-
+  # After email is sent
+  inactive_signup_content: 'Fix me'
+  # Email content 
+  confirmation_email_content: 'Fix me'
+  # Link to confirm account
+  confirm_my_account: '회원가입'
+  send_reset_password_instrcutions: 'Fix me'

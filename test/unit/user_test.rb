@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
   #end
   
   def setup
-    user = User.new(:email => "test@test.com", :password => "okbrisbane", :password_confirmation => "okbrisbane")
+    user = User.new(:email => "test@test.com", :password => "okbrisbane", :password_confirmation => "okbrisbane", :user_name => "Guest")
     assert user.save, "Cannot save user"
   end
   
@@ -26,7 +26,5 @@ class UserTest < ActiveSupport::TestCase
   test "delete user" do
     user = User.first
     # post job
-    
-  
   end
 end

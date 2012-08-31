@@ -9,9 +9,11 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sign_out', :via => :get, :as => :user_sign_out
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
+  match 'member_managements/inactive_signup', :via=>:get, :as => :user_inactive_signup
+  
   resources :member_managements, :only => ["index","new","create"]
 
-  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions" }
+  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
 
   resources :homes, :only => ["index"]
   
@@ -32,8 +34,9 @@ Okbrisbane::Application.routes.draw do
   resources :jobs, :only => ["new","create"]
   resources :buy_and_sells, :only => ["new","create"]
   resources :well_being, :only => ["new","create"]
+  resources :laws, :only => ["new","create"]
 
-  resources :post_searches, :only => ["index"]
+  resources :comments, :only => ['index',"create"]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
