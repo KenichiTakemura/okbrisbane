@@ -1,6 +1,7 @@
 class OkboardsController < OkController
 
   before_filter :_before_
+  
   def _before_
     raise "Bad Request" if params[:v].nil?
     logger.debug("v #{params[:v]} c: #{params[:c]} d: #{params[:d]}")
@@ -11,6 +12,12 @@ class OkboardsController < OkController
     @@board_id = Common.decrypt_data(params[:d]).to_i if !params[:d].nil?
     logger.debug("@board: #{@board} category: #{@@category} board_id: #{@@board_id}")
     @okpage = @board.to_sym
+    if @okpage.eql?(:p_mypage)
+      if !current_user
+        session["user_return_to"] = request.original_url
+        redirect_to user_sign_in_path
+      end
+    end
   end
 
   def index
@@ -20,12 +27,17 @@ class OkboardsController < OkController
     if @@category
       @board_lists,@board_image_lists  = _make_post_list_with_image(model.category_latest(@@category).latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
     else
-      @board_lists,@board_image_lists  = _make_post_list_with_image(model.latest(@@category).latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      if @okpage.eql?(:p_mypage)
+         @user = User.find(current_user)
+      elsif @okpage.eql?(:p_yellowpage)
+      else
+        @board_lists,@board_image_lists  = _make_post_list_with_image(model.latest(@@category).latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+        @post = model.new
+        @lastid = find_lastid(@board_lists)
+        logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
+        logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
+      end
     end
-    @post = model.new
-    @lastid = find_lastid(@board_lists)
-    logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
-    logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @jobs }

@@ -2,7 +2,7 @@ Okbrisbane::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   
-  resources :mypages, :only => ['show']
+  resources :mypages, :only => ['index','edit','update']
 
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
   match 'member_managements/sign_up', :via => :get
@@ -36,7 +36,15 @@ Okbrisbane::Application.routes.draw do
   resources :well_being, :only => ["new","create"]
   resources :laws, :only => ["new","create"]
 
-  resources :comments, :only => ['index',"create"]
+  match 'comments/:id/likes' => "comments#likes", :via=>:post, :as => :comment_like
+  match 'comments/:id/dislikes' => "comments#dislikes", :via=>:post, :as => :comment_dislike
+  match 'comments/:id/abuses' => "comments#abuses", :via=>:post, :as => :comment_abuse
+  resources :comments, :only => ['index',"create"] do
+  collection do
+      post :dislike
+      post :abuse
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

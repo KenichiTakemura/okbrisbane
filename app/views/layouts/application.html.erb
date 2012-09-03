@@ -30,15 +30,22 @@
 		<%= single_background_banner(6) %>
 		<div id="header">
 			<div id="header-left">
-				<%= t("welcome_message")%>
+				<div class="welcome">
+				<%= t("welcome_message")%><br/>
 				<% if current_user %>
-				<%= current_user.email %>
+				<%= current_user.name %>&nbsp;<%= t(:sir)%>
 				<% else %>
 				<%= link_to t("signin"), user_sign_in_path %>
 				<%= t("or") %>
 				<%= link_to t("signup"), member_managements_sign_up_path %>
 				<%= t("please") %>
 				<% end %>
+				</div>
+				<div class="mypage">
+				<% if current_user %>
+				<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "60x20"), _okboard_link(:p_mypage)) %>
+				<% end %>
+				</div>
 				<div id="logo">
 					<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
 				</div>

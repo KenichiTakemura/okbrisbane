@@ -1,6 +1,5 @@
 class CreatePosts < ActiveRecord::Migration
 
-  
   def create_base_table(table)
     create_table(table,:options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8') do |t|
       t.string :locale, :null => false
@@ -18,6 +17,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :z_index, :default => 0
       t.integer :write_at
       t.integer :mode
+      t.boolean :comment_email, :default => false
       t.timestamps
     end    
   end

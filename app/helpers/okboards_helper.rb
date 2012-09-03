@@ -69,21 +69,21 @@ module OkboardsHelper
         html += "#{post.price}" + " </td><td>"
       end
       html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
-       #{Common.date_format(post.updated_at)}</td><td>#{post.views.to_s}
+       #{post.postedDate}</td><td>#{post.views.to_s}
        </td><td>|
       if post.has_image?
-        html += image_tag("common/IconData2.gif")
+        html += image_tag("common/IconData2.gif") + post.image.size.to_s
       end
       html += "</td><td>"
       if post.has_attachment?
         html += image_tag("common/IconData2.gif")
       end
       html += %Q|</td><td >| + link_to(author_name(post), _okboard_link_with_user(@okpage, post.posted_by_id), :style => "color:#000") + %Q|</td><td class="okboard_list_view">|
-      if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
-        html += t("view") + section_span(post) + "</td></tr>"
-      else
+      #if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
+      #  html += t("view") + section_span(post) + "</td></tr>"
+      #else
         html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link_ok")
-      end
+      #end
     end
     html.html_safe
   end
@@ -104,37 +104,37 @@ module OkboardsHelper
     when :p_job
       links = [:p_job,:p_buy_and_sell,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_buy_and_sell
       links = [:p_buy_and_sell,:p_job,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_well_being
       links = [:p_well_being,:p_job,:p_buy_and_sell,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_estate
       links = [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
         :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_motor_vehicle
       links = [:p_motor_vehicle,:p_estate,:p_business,:p_accommodation,
         :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_business
       links = [:p_business,:p_estate,:p_motor_vehicle,:p_accommodation,
         :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_accommodation
       links = [:p_accommodation,:p_estate,:p_motor_vehicle,:p_business,
         :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage]
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
       paths = _path(links)
     when :p_law
       links = [:p_law,:p_tax,:p_study,:p_immig,:p_yellowpage,:p_mypage,
@@ -147,22 +147,27 @@ module OkboardsHelper
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
       paths = _path(links)
     when :p_study
-      links = [:p_study,:p_law,:p_tax,:p_immig,:p_yellowpage,:p_mypage,
+      links = [:p_study,:p_law,:p_tax,:p_immig,:p_yellowpage,
         :p_buy_and_sell,:p_job,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
       paths = _path(links)
     when :p_immig
-      links = [:p_immig,:p_law,:p_tax,:p_study,:p_yellowpage,:p_mypage,
+      links = [:p_immig,:p_law,:p_tax,:p_study,:p_yellowpage,
         :p_buy_and_sell,:p_job,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
       paths = _path(links)
     when :p_yellowpage
-      links = [:p_yellowpage,:p_law,:p_tax,:p_study,:p_immig,:p_mypage,
+      links = [:p_yellowpage,:p_law,:p_tax,:p_study,:p_immig,
         :p_buy_and_sell,:p_job,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
       paths = _path(links)
+    when :p_mypage
+      links = [:p_job,:p_buy_and_sell,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
+      paths = _path(links)
     else
-    raise "Not implemented"
+      raise "Not implemented"
     end
     links.each_with_index do |link,i|
       html += %Q|<li class="okboard_left_menu_item" id="_#{link}">|
@@ -213,7 +218,7 @@ module OkboardsHelper
     categories.each do |key,category|
       html += "<li>" + link_to(t(category), _okboard_link_with_category(link,category)) + "</li>"
     end
-    if [Style.page(:p_job), Style.page(:p_buy_and_sell),Style.page(:p_well_being)].include? link
+    if [:p_job, :p_buy_and_sell,:p_well_being].include? link
       html += "<li>" + link_to(t('write_new'), _okboard_link_write(@okpage)) + "</li>"
     end
     html += "</ul>"

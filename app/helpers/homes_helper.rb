@@ -9,11 +9,13 @@ module HomesHelper
   def generateTopFeed(category, lists, image_list, color)
     html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list""><div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p style="line-height: 25px;">| + link_to(t('more'), _okboard_link(category), :class => "button-link_#{color.to_s}") + " "
-    html += link_to(t('write_new'), _okboard_link_write(category), :class => "button-link_#{color.to_s}")
+    if [:p_job,:p_buy_and_sell,:p_well_being].include?(category)
+      html += link_to(t('write_new'), _okboard_link_write(category), :class => "button-link_#{color.to_s}")
+    end
     html += %Q|</p></div></div>|
     html += %Q|<div id="feed_body"><table class="" width=100%><tr></tr>|
     Rails.logger.debug("list size: #{lists.size}")
-    if lists.nil? || (!image_list.nil? && image_list.empty?)
+    if lists.nil? || (!lists.nil? && lists.empty?) || (!image_list.nil? && image_list.empty?)
       html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
     else
       if !image_list.nil? && !image_list.empty?

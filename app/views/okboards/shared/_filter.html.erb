@@ -1,29 +1,32 @@
-<div id="okboard_filter">
+<div class="okboard_filter">
+	<div class="advanced_search">
 	<div class="item">
-		<%= label_tag :category, t("category"), :class => "label left" %>&nbsp;
-		<%= select_tag :category, options_for_select(@post.category_list, 0) %>
+		<%= label_tag :category, t(:category), :class => "label left" %>&nbsp;
+		<%= select_tag :category, options_for_select(@post.category_list), :include_blank => true %>
 	</div>
 	<div class="item">
-		<%= label_tag :from_price, t("price"), :class => "label left" %>&nbsp;
-		<%= search_field_tag :from_price %>
+		<%= label_tag :subject, "#{t(:search_keyword)}", :class => "label left" %>&nbsp;
+		<%= text_field_tag :subject %>
 	</div>
 	<div class="item">
-		<%= label_tag :to_price, t("price"), :class => "label left" %>&nbsp;
-		<%= search_field_tag :to_price %>
-	</div>
-	<div class="item">
-		<%= label_tag :days_ago, t("days_ago"), :class => "label left" %>&nbsp;
-		<%= select_tag :days_ago, options_for_select(Okvalue::DAYS_OPTIONS, 0) %>
-	</div>
-	<div class="item">
-		<%= link_to t("week_ago"), "#", :class => "button-link_blue"%>
-	</div>
-	<div class="item">
-		<%= link_to t("weeks2_ago"), "#", :class => "button-link_blue"%>
-	</div>
-	<div class="item">
-		<%= link_to t("weeks3_ago"), "#", :class => "button-link_blue"%>
+		<%= label_tag :image, "#{t(:image)}", :class => "label left" %>&nbsp;
+		<%= select_tag :image, options_for_select(@post.image_yesno_list), :include_blank => true %>
 	</div>
 
-	<%= image_tag("#{I18n.locale}/common/org_search.gif") %>
+	<div class="item">
+	<%= image_tag("#{I18n.locale}/common/btn_search_mainbar.gif", :class => "po") %>
+	</div>
+	</div>
+	<div class="quick_search">
+		<% 1.upto(6) { |d| %>
+			<div class="item">
+				<%= link_to "#{d} #{t(:day_ago)}", "#", :class => "" %>
+			</div>
+		<% } %>
+		<% 1.upto(4) { |w| %>
+			<div class="item">
+				<%= link_to "#{w} #{t(:week_ago)}", "#", :class => "" %>
+			</div>
+		<% } %>
+	</div>
 </div>

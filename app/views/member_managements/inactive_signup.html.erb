@@ -18,11 +18,6 @@
 	<% end %>
 </div>
 <div id="_main">
-	</br>
-	<p class="inactive_signup">
-		<%= t(:inactive_signup_content) %>
-		<%= @email %>
-	</p>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

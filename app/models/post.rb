@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode, :comment_email
   
   # status
   # draft -> public -> hidden -> deleted
@@ -101,6 +101,7 @@ class Post < ActiveRecord::Base
     self.z_index ||= 0
     self.status ||= Okvalue::POST_STATUS_PUBLIC
     self.mode ||= Role::R[:user_r] | Role::R[:user_w]
+    self.comment_email ||= false
   end
   
   def viewed
@@ -156,6 +157,12 @@ class Post < ActiveRecord::Base
     list.push([I18n.t(Okvalue::POST_STATUS_PUBLIC),Okvalue::POST_STATUS_PUBLIC])
     list.push([I18n.t(Okvalue::POST_STATUS_HIDDEN),Okvalue::POST_STATUS_HIDDEN])
     list
+  end
+  
+  def image_yesno_list
+    list = Array.new
+    list.push([I18n.t(Okvalue::IMAGE_YES),Okvalue::IMAGE_YES])
+    list.push([I18n.t(Okvalue::IMAGE_NO),Okvalue::IMAGE_NO])
   end
   
   protected

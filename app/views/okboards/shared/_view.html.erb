@@ -151,6 +151,9 @@
 	<div class="okboard_view_content">
 
 		<div class="okboard_view_controll">
+			<%= image_tag("common/good.gif", :size => "20x20") %>
+			<%= image_tag("common/bad.gif", :size => "20x20") %>
+			<%= @post.likes %>
 			<%= link_to(t("listing"), _okboard_link(@okpage), :class => "button-link_naver", :style => "float:right;margin:5px") %>
 			<%= link_to(t("write_new"), _okboard_link_write(@okpage), :class => "button-link_naver", :style => "float:right;margin:5px") %>
 		</div>
@@ -181,26 +184,67 @@
 				</tr>
 			</tbody>
 		</table>
+		<br/>
+		<%= image_tag("#{I18n.locale}/common/title_commu_main1b.jpg") %>
+		<p style="font-size: 16px">
+			<%= t(:comment) %> <%= t(:write) %>
+		</p>
 		<div class="new_comment">
-			<div class="comment_attr">
-			<%= t(:comment)%> #<%= (@post.comment.size) +1 %>
+			<div class="commnet_user">
+				<%= image_tag("common/ico_people.gif", :size => "30x30") %>
 			</div>
-			<%= form_for(@comment, :method => :post, :html => { :class => "form" }) do |f| %>
+			<% if current_user %>
+			<div class="comment_attr">
+				<%= form_for(@comment, :method => :post, :html => { :class => "form" }) do |f| %>
 				<%= hidden_field_tag :commented_id, @post.id %>
-				<%= hidden_field_tag :commented_type, Style.page(@okpage) %>
-				<%= f.text_area :body, :class => "text_area" %>
-			<br/>
-			<%= f.submit t("add"), :class => "button-link_blue"%>
-			<% end %>
+				<%= hidden_field_tag :commented_type, @okpage %>
+				<%= f.text_area :body, :class => "text_area", :id => "comment_body" %>
+				<br/>
+				<%= f.submit t("add"), :class => "button-link_blue", :id => "comment_submit" %>
+				<% end %>
+				<% else %>
+				<%= t(:please_signin_to_comment)%>
+				<% end %>
+			</div>
 		</div>
-				
-				
+		<div class="comment_list"></div>
 		<table id="okboard_comment" width=100% class="ui-widget" border="0">
 			<tbody>
-				<tr>
-				</tr>				
+				<% @post.comment.reverse_each do |comment| %>
+				<tr class="#{cycle("odd", "even")}">
+					<td>
+					<div class="comment_row">
+						<div class="commnet_user">
+							<%= image_tag("common/ico_people_group.gif", :size => "30x30") %>
+						</div>
+						<div class="comment_attr">
+							<%= comment.postedDate %> <%= comment_author(comment) %>
+						</div>
+
+						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
+							<%= link_to(image_tag("common/likes.gif", :size => "20x20"), comment_like_path(comment), :remote => true, :method => :post) %>
+							<%= comment.likes.to_s %>
+							<%= link_to(image_tag("common/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
+							<%= comment.dislikes.to_s %>
+							<%= link_to(image_tag("common/report_abuse.gif", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
+							<%= comment.abuse.to_s %>
+						</div>
+
+						<div class="comment_content">
+							<%= simple_format(comment.body) %>
+						</div>
+						<div class="comment_reply">
+							<%= image_tag("common/reply.gif", :size => "20x20") %>
+						</div>
+					</div></td>
+				</tr>
+				<% end %>
 			</tbody>
 
 		</table>
 	</div>
 </div>
+<%= _script_document_ready(%Q|
+$('\#comment_submit').click(function() {
+if ($('\#comment_body').val() == "") return false;
+})|) %>

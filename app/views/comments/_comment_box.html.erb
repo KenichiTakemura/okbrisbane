@@ -1,0 +1,6 @@
+<%= image_tag("common/likes.gif", :size => "20x20")  %>
+<%= @comment.likes.to_s %>
+<%= image_tag("common/dislikes.gif", :size => "20x20") %>
+<%= @comment.dislikes.to_s %>
+<%= image_tag("common/report_abuse.gif", :size => "20x20") %>
+<%= @comment.abuse.to_s %>

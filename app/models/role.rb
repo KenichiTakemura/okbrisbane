@@ -25,4 +25,8 @@ class Role < ActiveRecord::Base
     self.update_attribute(:rolable, user)
   end
   
+  def has_role?(page, role_bit)
+    role_name.eql?(Style.page(page)) && role_value | role_bit
+  end
+ 
 end

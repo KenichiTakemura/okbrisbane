@@ -21,7 +21,7 @@ class PostsController < OkController
         @lastid = find_lastid(@board_lists)
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
-          format.html { redirect_to "#{_okboard_link(@okpage)}" }
+          format.html { redirect_to "#{Okboard.okboard_link(@okpage)}" }
           format.json { render :json => @post, :status => :created }
         end
       else

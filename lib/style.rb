@@ -2,7 +2,6 @@ module Style
   
   PAGES = Hash.new
   SECTIONS = Hash.new
-  NAVI = Hash.new
   PAGE_IDS = Hash.new
   SECTION_IDS = Hash.new
   

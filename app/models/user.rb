@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_one :mypage, :as => :mypagable, :class_name => "Mypage", :dependent => :destroy
   has_many :role, :as => :rolable, :class_name => "Role", :dependent => :destroy
+  has_many :post, :as => :posted_by
   has_many :job, :as => :posted_by, :class_name => 'Job', :dependent => :destroy
   has_many :buy_and_sell, :as => :posted_by, :class_name => 'BuyAndSell', :dependent => :destroy
   has_many :well_being, :as => :posted_by, :class_name => 'WellBeing', :dependent => :destroy
@@ -31,6 +32,13 @@ class User < ActiveRecord::Base
     role = Role.new(:role_name => Style.page(page), :role_value => Role::R[:user_all])
     role.assign(self)
     end
+  end
+  
+  def can_write?(page)
+    self.role.each do |r|
+      return true if r.has_role?(page, Role::R[:user_w])
+    end
+    false
   end
 
   def create_mypage

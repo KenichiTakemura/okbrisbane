@@ -10,28 +10,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821111311) do
+ActiveRecord::Schema.define(:version => 20120901124514) do
 
   create_table "accommodations", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "price"
     t.string   "room_type"
   end
@@ -149,49 +150,51 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "price"
     t.string   "address"
   end
 
   create_table "buy_and_sells", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "price"
     t.integer  "item"
   end
@@ -257,26 +260,35 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.datetime "updated_at",                         :null => false
   end
 
+  create_table "daily_hits", :force => true do |t|
+    t.datetime "day",                       :null => false
+    t.integer  "hit",        :default => 0, :null => false
+    t.integer  "user_hit",   :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "estates", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "price"
     t.string   "address"
     t.integer  "bed",                  :default => 0
@@ -311,91 +323,95 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "immigrations", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "issues", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "jobs", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "laws", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "member_managements", :force => true do |t|
@@ -421,6 +437,7 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
+    t.boolean  "comment_email",        :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
@@ -450,25 +467,26 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "studies", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "system_settings", :force => true do |t|
@@ -481,25 +499,26 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   end
 
   create_table "taxes", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "top_feed_lists", :force => true do |t|
@@ -541,25 +560,26 @@ ActiveRecord::Schema.define(:version => 20120821111311) do
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
   create_table "well_beings", :force => true do |t|
-    t.string   "locale",                              :null => false
+    t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
     t.integer  "post_updated_by_id"
     t.string   "post_updated_by_type"
-    t.string   "category",                            :null => false
-    t.string   "subject",                             :null => false
-    t.datetime "valid_until",                         :null => false
+    t.string   "category",                                :null => false
+    t.string   "subject",                                 :null => false
+    t.datetime "valid_until",                             :null => false
     t.integer  "views",                :default => 0
     t.integer  "likes",                :default => 0
     t.integer  "dislikes",             :default => 0
     t.integer  "rank",                 :default => 0
     t.integer  "abuse",                :default => 0
-    t.string   "status",                              :null => false
+    t.string   "status",                                  :null => false
     t.integer  "z_index",              :default => 0
     t.integer  "write_at"
     t.integer  "mode"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comment_email",        :default => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
 end

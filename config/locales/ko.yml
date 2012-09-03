@@ -281,6 +281,7 @@ ko:
   Delete: '삭제'
   more: '더보기'
   write_new: '글쓰기'
+  write: '쓰기'
   change_size: '사이즈 편집'
   subject: '제목'
   image: '이미지'
@@ -322,7 +323,11 @@ ko:
   name: '이름'
   status: '현상황'
   en_name: '영어 이름'
-  day: 일
+  day: '일'
+  day_ago: '일전'
+  week_ago: '주전'
+  image_yes: '잆음'
+  image_no: '없음'
 
   # User Info
   member: '멤버'
@@ -343,8 +348,10 @@ ko:
   unknown_user: '모르는 멤버'
 
   comment: '코멘트'
+  comment_email: '남이 코멘트를 '
   add_comment: '코멘트 추가하기'
-
+  please_signin_to_comment: '코멘트 추가 회원가입합시다'
+  
   mainpage_title: 'OKBRISBANE 메인 페이지'
     
   Home: "메인"
@@ -442,7 +449,8 @@ ko:
   listing_banners: '광고란 일람'
   listing_business_categories: '비지니스 카테고리 일람'
   listing_issues: '문제 일람'
-  listing_system_settings: "사이트 관리"
+  listing_system_settings: '사이트 관리'
+  system_settings: '사이트 관리'
 
   member_list: '멤버 일람'
   
@@ -482,6 +490,7 @@ ko:
   for_rent: '렌트'
   for_sale: '세일'
   for_auction: '옥션'
+  sold: '판매됨'
   
   new_car: '새차'
   used_car: '중고차'
@@ -609,19 +618,25 @@ ko:
   invalid_file_extention: '업로드가 안되는 파일 입니다.'
   failed_to_create: '실패 되었습니다'
   failed_to_upload: '업로드가 실패 되었습니다' 
-  failure: '실패 되었습니다.'
-  
+  failure: '실패 되었습니다'
   banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'
+  
   client_image_remove_from_banner:  '광고에서 삭제하기'
   confirm_remove_from_banner:  '광고에서 삭제겠습니까? 다시 추가 할수 있습니다.'
   post_image_upload_description: '원하는 업로드 이미지를 선택해서 코멘트를 적고 추가보턴을 클릭하여 주십시오'
   post_attachment_upload_description: '선택하면 자동적으로 업로드 됩니다'
   
   # After email is sent
-  inactive_signup_content: 'Fix me'
+  #inactive_signup_content: '회원가입한 확인메일을 등록된 이메일주소에 보내 드렸습니다.'
   # Email content 
-  confirmation_email_content: 'Fix me'
+  confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.   '
+  confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.  '
+  confirmation_email_content3: '회원등록을 완료하기 위해서는 아래의 링크를 클릭하여 주시기 바랍니다.'
+  confirmation_email_content4: '회원등록이 안된 상태에서 받은 이메일에 대해서는 폐기하여 주시기 바랍니다.'
+  confirmation_email_content5: '혹 질문이 있을 경우 아래의 메일주소로 연락주시기 바랍니다. '
+  sir: '님'
+
   # Link to confirm account
   confirm_my_account: '회원가입'
-  send_reset_password_instrcutions: 'Fix me'
+  send_reset_password_instrcutions: '비밀번호 재등록 메일 발송'

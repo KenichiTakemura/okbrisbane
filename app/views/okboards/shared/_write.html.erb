@@ -50,11 +50,13 @@
 	    <div class="group">
 	    	<div class="image">
 	    	<%= f.label :add_image, t("image") + t("add"), :class => "label left" %>
+	    	<div class="image_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+	    	<div class="flash"><div class="image_upload_progress"></div></div>
 	    	<span class="description"><%= t("post_image_upload_description") %></span>
-			<%= text_field_tag :something, '', :placeholder => t("write_something"), :class => "text_field", :id => "something" %>
+	    	<%= file_field_tag :image, :id => "image" %>
+			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
 			<br/>
-			<%= file_field_tag :image, :id => "image" %><div class="image_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-			<div class="flash"><div class="image_upload_progress"></div></div>
+			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "button-link_blue", :style => "margin:5px" %>
 			<% script = %Q|
 			    function upload_image() {
 				  if($('\#image').val() != "") {
@@ -109,7 +111,10 @@
                      $('div.display_image').html(html);
     			 };
     			| %>
-    			<%= _script(%Q|$('\#image').change(function() {upload_image()});| + script) %>
+    			<%= _script(%Q|$('\#upload_image_submit').click(function() {upload_image();return false});
+    			$('\#image').click(function() {$('div.image_upload_progress').html('');});
+    			$('\#image').click(function() {$('div.attachment_upload_progress').html('');});
+    			| + script) %>
 			</div>
 			<div class="group">
 			<div class="display_image" style="margin: 3px;float:left"></div>
@@ -119,9 +124,9 @@
 		<div class="group">
 	    	<div class="attachment">
 	    	<%= f.label :add_attachment, t("attachment") + t("add"), :class => "label left" %>
-	    	<span class="description"><%= t("post_attachment_upload_description") %></span>
-			<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 			<div class="flash"><div class="attachment_upload_progress"></div></div>
+	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+	    	<span class="description"><%= t("post_attachment_upload_description") %></span>
 			<% script = %Q|
                 function upload_attachment() {
 				  if($('\#attachment').val() != "") {
@@ -173,13 +178,20 @@
                       $('div.display_attachment').html(html);
     			 }
     			| %>
-		    <%= _script(%Q|$('\#attachment').change(function() {upload_attachment();});| + script) %>
+		    <%= _script(%Q|$('\#attachment').change(function() {upload_attachment();});
+		    $('\#attachment').click(function() {$('div.image_upload_progress').html('');});
+		    $('\#attachment').click(function() {$('div.attachment_upload_progress').html('');});
+		    | + script) %>
 			</div>
 			<div class="group">
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
 			</div>
 		</div>
 		<div class="clear"></div>
+		<div class="group">
+			<%= f.label :comment_email, t(:comment_email), :class => "label left" %>
+			<%= f.check_box :comment_email %>
+		</div>
 		<div class="group">
 			<div class="left">
 				<%= f.submit t("create"), :class => "button-link_ok" %>

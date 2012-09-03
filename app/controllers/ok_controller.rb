@@ -1,5 +1,28 @@
 class OkController < ApplicationController
 
+  before_filter :hit
+
+  require 'thread'
+
+  def initialize
+    super
+    @lock = Mutex.new
+  end
+  
+  def hit
+     key = Time.now.utc.strftime("%Y%m%d")
+     logger.debug("key: #{key} session[key]: #{session[key.to_sym]}")
+     unless session[key.to_sym]
+       @lock.synchronize {
+         hit_day = DailyHit.find_by_day(key)
+         hit_day ||= DailyHit.new(:day => key)
+         hit_day.hit += 1
+         hit_day.save
+       }
+       session[key.to_sym] = true
+    end
+  end
+
   protected
 
   MODELS = {:p_job => Job,
@@ -18,8 +41,4 @@ class OkController < ApplicationController
     :p_mypage => Mypage
   }
   
-  def _okboard_link(okpage)
-    %Q|/okboards?v=| + Common.encrypt_data(okpage.to_s).chop
-  end
-
 end

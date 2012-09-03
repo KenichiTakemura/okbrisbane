@@ -22,6 +22,13 @@ module ApplicationHelper
     t("unknown_user")
   end
   
+  def comment_author(comment)
+    if comment.commented_by
+       return comment.commented_by.name
+    end
+    t("unknown_user")
+  end
+  
   def socialable?
     SystemSetting.first.socialable
   end
@@ -337,7 +344,7 @@ module ApplicationHelper
 
   def _truncate_with_length(expression, length)
     html = %Q|<span title="#{expression}">#{truncate(expression, :length => length)}</span>|
-    html
+    html.html_safe
   end
 
   def _truncate_no_title(expression)

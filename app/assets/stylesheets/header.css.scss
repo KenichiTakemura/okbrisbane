@@ -6,6 +6,22 @@
 	left: 0px;
 }
 
+#header-left .welcome {
+	position: relative;
+	float:left;
+	margin-top: 0px;
+	text-align:top;
+	height:30px;
+	width: 150px;
+}
+
+#header-left .mypage {
+	position: relative;
+	float:right;
+	margin-right: 10px;
+	height:30px;
+}
+
 #header #header-right {
 	width: 720px;
 	height: 200px;
@@ -23,23 +39,27 @@
 
 #header #header-left  #logo {
 	position:relative;
+	float:left;
 	width: 250px;
 	height: 120px;
-	top: 30px;	
 }
 
 #header #header-left #devise {
 	background-color: #642c78;
 	position:relative;
-	top: 0px;
+	float:left;
+	top:0px;
 	height:30px;
 	width: 250px;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 #header #header-left #devise #account {
 	position: relative;
-	margin-left: 60px;
-	margin-top: 20px;
+	float:left;
+	margin-left: 100px;
+	margin-right:auto;
 	padding: 5px;
 }
 

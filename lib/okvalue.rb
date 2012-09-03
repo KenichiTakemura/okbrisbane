@@ -77,4 +77,7 @@ module Okvalue
   BED_LIST = [1,2,3,4,5]
   BATH_LIST = [0,1,2,3,4,5]
   GARAGE_LIST = [0,1,2,3,4,5]
+  
+  IMAGE_YES = "image_yes"
+  IMAGE_NO = "image_no"
 end

@@ -6,10 +6,13 @@
 		<div class="okboard_title_image">
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x100") %>
 		</div>
+		<!--
 		<div class="okboard_background">
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/bg.jpg") %>
 		</div>
+		-->
 	</div>
+	<div class="okboard_image_list">
 	<% if !@board_image_lists.nil? %>
 	<div id="okboard_image_list_for_<%= @okpage %>">
 		<% @board_image_lists.each do |post| %>
@@ -24,14 +27,18 @@
 			</p>
 			<p class="price_tag">
 				<%= post.price %>
+				<!-- 
 				<div class="okboard_thumbnail_view">
 					<%= t('view') %><%= section_span(post) %>
 				</div>
+				-->
 			</p>
+			<%= link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 		</div>
 		<% end %>
 	</div>
 	<% end %>
+	</div>
 	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].include?(@okpage) %>
 	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
 		<%= single_body_banner(6) %>
@@ -40,9 +47,11 @@
 	</div>
 	<% end %>
 
+	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
+	<%= render :partial => "okboards/shared/filter" %>
+	<% end %>
 	<%= javascript_include_tag 'jquery.dataTables.min.js' %>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
-		<%= render :partial => "okboards/shared/filter" %>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
 			<%= build_board_list %>
@@ -51,7 +60,9 @@
 			</div>
 			<div class="more">
 				<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "button-link_ok") %>
+				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
 				<%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_naver')%>
+				<% end %>
 			</div>
 		</div>
 	</div>

@@ -12,31 +12,24 @@
  *= require_tree .
  */
 html {
-	height: 100%;
-	width: 1000px;
-	margin: 0 auto;
-	background: #F2F2F2;
+  height: 100%;
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #F2F2F2;
 }
 
 body {
 	overflow: auto;
-	min-height: 100%;
-	padding: 2px;
-	/*border: 1px solid white;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
-	Safari 4 does not support an inset shadow
-	 -webkit-box-shadow: 5px 5px 25px rgba(0,0,0,.5);
-	 Chrome 5 does, Safari 4 will ignore this declaration/
-	 -webkit-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
-	 -moz-box-shadow: inset 5px 5px 25px rgba(0,0,0,.5);
-	box-shadow: inset 5px 5px 25px rgba(0,0,0,.1);*/
+	padding: 5px;
+	height: 100%;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 	font-size: 12px;
 	font-family: 'NanumGothic'; 
 	color: #333;
 	position: relative;
-	/* background-color: #ffffff; */
+	min-height: 100%;
 }
 
 #header {
@@ -52,6 +45,8 @@ body {
 	position: relative;
 	left: 0px;
 	top: 0px;
+	height: 100%;
+	margin-bottom: 20px;
 }
 #footer {
 	padding-bottom: 20px;
@@ -231,6 +226,7 @@ a:hover, a:active { color: #41A317 }
   width: 220px;
   margin: 3px;
   float: left;
+  margin-bottom:30px;
 }
 
 
@@ -242,6 +238,7 @@ a:hover, a:active { color: #41A317 }
 #page_section_right {
   width: 750px;
   float:right;
+    margin-bottom:30px;
 }
 
 #page_section_right #content_head {
