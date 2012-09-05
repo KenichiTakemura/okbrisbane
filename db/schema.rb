@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901124514) do
+ActiveRecord::Schema.define(:version => 20120905025344) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
@@ -168,6 +170,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
@@ -193,10 +197,11 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
-    t.integer  "item"
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -238,7 +243,7 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
   end
 
   create_table "comments", :force => true do |t|
-    t.boolean  "is_deleted",        :default => false
+    t.string   "status",                           :null => false
     t.string   "locale"
     t.text     "body"
     t.integer  "abuse",             :default => 0
@@ -248,8 +253,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.string   "commented_type"
     t.integer  "commented_by_id"
     t.string   "commented_by_type"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "contents", :force => true do |t|
@@ -287,6 +292,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
@@ -341,6 +348,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -364,6 +373,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -387,6 +398,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -410,6 +423,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -438,6 +453,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
@@ -455,6 +472,20 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.string   "locale"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "post_searches", :force => true do |t|
+    t.string   "okpage"
+    t.string   "category"
+    t.string   "keyword"
+    t.string   "price"
+    t.boolean  "image"
+    t.boolean  "attachment"
+    t.string   "time_by"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -485,6 +516,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -517,6 +550,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
@@ -578,6 +613,8 @@ ActiveRecord::Schema.define(:version => 20120901124514) do
     t.integer  "write_at"
     t.integer  "mode"
     t.boolean  "comment_email",        :default => false
+    t.boolean  "has_image",            :default => false
+    t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end

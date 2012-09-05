@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_one :mypage, :as => :mypagable, :class_name => "Mypage", :dependent => :destroy
   has_many :role, :as => :rolable, :class_name => "Role", :dependent => :destroy
+  has_many :post_search, :as => :searchable, :class_name => "PostSearch", :dependent => :destroy
   has_many :post, :as => :posted_by
   has_many :job, :as => :posted_by, :class_name => 'Job', :dependent => :destroy
   has_many :buy_and_sell, :as => :posted_by, :class_name => 'BuyAndSell', :dependent => :destroy
@@ -48,7 +49,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    "id: " << id << " email: " << email
+    "id: #{id} name: #{name} email: #{email}"
   end
 
   def unattached_image

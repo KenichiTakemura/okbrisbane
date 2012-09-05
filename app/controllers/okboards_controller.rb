@@ -1,22 +1,41 @@
 class OkboardsController < OkController
+  def initialize
+    super
+    @sns_lock = Mutex.new
+  end
 
-  before_filter :_before_
-  
+  before_filter :_before_, :except => ["mypage","yellowpage"]
+
   def _before_
     raise "Bad Request" if params[:v].nil?
-    logger.debug("v #{params[:v]} c: #{params[:c]} d: #{params[:d]}")
+    logger.debug("v #{params[:v]} c: #{params[:c]} d: #{params[:d]} s: #{params[:s]}")
     @board = Common.decrypt_data(params[:v])
     @@category = nil
     @@board_id = nil
+    @@search_id = nil
     @@category = Common.decrypt_data(params[:c]) if !params[:c].nil?
     @@board_id = Common.decrypt_data(params[:d]).to_i if !params[:d].nil?
-    logger.debug("@board: #{@board} category: #{@@category} board_id: #{@@board_id}")
+    @@search_id = Common.decrypt_data(params[:s]).to_i if !params[:s].nil?
+    logger.debug("@board: #{@board} category: #{@@category} board_id: #{@@board_id} search_id #{@@search_id}")
     @okpage = @board.to_sym
-    if @okpage.eql?(:p_mypage)
-      if !current_user
-        session["user_return_to"] = request.original_url
-        redirect_to user_sign_in_path
-      end
+  end
+
+  def mypage
+    @okpage = :p_mypage
+    if !current_user
+      session["user_return_to"] = request.original_url
+      redirect_to user_sign_in_path
+    end
+    @user = User.find(current_user)
+    respond_to do |format|
+      format.html { render :template => "okboards/index" }
+    end
+  end
+
+  def yellowpage
+    @okpage = :p_yellowpage
+    respond_to do |format|
+      format.html { render :template => "okboards/index" }
     end
   end
 
@@ -24,20 +43,25 @@ class OkboardsController < OkController
     logger.debug("v: #{@board}")
     model = MODELS[@okpage]
     raise "Bad Board Request" if model.nil?
+    @@list = nil
+    @post_search = PostSearch.new(:okpage => @okpage)
     if @@category
-      @board_lists,@board_image_lists  = _make_post_list_with_image(model.category_latest(@@category).latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      @@list = model.category_latest(@@category).latest
+      @post_search.category = @@category
     else
-      if @okpage.eql?(:p_mypage)
-         @user = User.find(current_user)
-      elsif @okpage.eql?(:p_yellowpage)
-      else
-        @board_lists,@board_image_lists  = _make_post_list_with_image(model.latest(@@category).latest, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
-        @post = model.new
-        @lastid = find_lastid(@board_lists)
-        logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
-        logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
+      if @@search_id
+        # Find Search Condition
+        @post_search_id = @@search_id
+        post_search = PostSearch.find(@@search_id)
+        model.search(post_search)
       end
+      @@list  = model.latest
     end
+    @post = model.new
+    @lastid = find_lastid(@board_lists)
+    @board_lists,@board_image_lists  = _make_post_list_with_image(@@list, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+    logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
+    logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @jobs }
@@ -47,8 +71,15 @@ class OkboardsController < OkController
   def view
     raise if @@board_id.nil?
     @post = _select_post
-    @post.viewed
-    @comment = Comment.new
+    if @post.status != Okvalue::POST_STATUS_PUBLIC
+      respond_to do |format|
+        format.html { render :template => "okboards/view_deleted" }
+        format.json { render :json => @post }
+      end
+    else
+      @post.viewed
+      @comment = Comment.new
+    end
   end
 
   def write
@@ -134,13 +165,44 @@ class OkboardsController < OkController
   #  render :json => {:result => 1}
   end
 
-  #ajax
+  # Ajax
   def delete_attachment
     logger.debug("delete_attachment")
     attachment = Attachment.find(params[:id])
     @timestamp = params[:t]
     attachment.destroy
     @attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)
+  end
+
+  # Ajax
+  def likes
+    model = MODELS[@okpage]
+    @sns_lock.synchronize {
+      ActiveRecord::Base.transaction do
+        model.find(@@board_id).like
+      end
+    }
+    @post = model.find(@@board_id)
+  end
+
+  def dislikes
+    model = MODELS[@okpage]
+    @sns_lock.synchronize {
+      ActiveRecord::Base.transaction do
+        model.find(@@board_id).dislike
+      end
+    }
+    @post = model.find(@@board_id)
+  end
+
+  def abuses
+    model = MODELS[@okpage]
+    @sns_lock.synchronize {
+      ActiveRecord::Base.transaction do
+        model.find(@@board_id).report_abuse
+      end
+    }
+    @post = model.find(@@board_id)
   end
 
   private

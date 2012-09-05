@@ -13,15 +13,15 @@ class Image < Attachable
    :path => ':rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename'
    
   def to_s
-    super.to_s + " write_at #{write_at}"
+    super.to_s + " write_at: #{write_at} something: #{something} link_to_url: #{link_to_url} source_url: #{source_url}"
   end
 
   # https://github.com/thoughtbot/paperclip
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_POST_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
-  validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid")
-  validates_format_of :source_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid")
+  validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.link_to_url.empty? }
+  validates_format_of :source_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.source_url.empty? }
 
   #Paperclip callbacks
   after_post_process :proc_geo
@@ -31,6 +31,7 @@ class Image < Attachable
   def set_default
     self.thumb_size ||= "120x120"
     self.medium_size ||= "400x300"
+    self.link_to_url ||= ""
     self.source_url ||= ""
   end
 

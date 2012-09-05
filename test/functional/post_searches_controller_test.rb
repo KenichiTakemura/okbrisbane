@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PostSearchControllerTest < ActionController::TestCase
+class PostSearchesControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

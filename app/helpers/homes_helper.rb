@@ -15,7 +15,7 @@ module HomesHelper
     html += %Q|</p></div></div>|
     html += %Q|<div id="feed_body"><table class="" width=100%><tr></tr>|
     Rails.logger.debug("list size: #{lists.size}")
-    if lists.nil? || (!lists.nil? && lists.empty?) || (!image_list.nil? && image_list.empty?)
+    if (lists.nil? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
       html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
     else
       if !image_list.nil? && !image_list.empty?
@@ -38,8 +38,8 @@ module HomesHelper
         html += %Q|<tr height="20px">|
         html += %Q|<td><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
         html += %Q|<td nowrap class="feed_text" height="18" width=60%>#{_truncate(feed.feeded_to.subject)}</td>|
-        html += %Q|<td class="feed_text">#{feed.feeded_to.postedDate}</td>|
-        html += %Q|<td width="20%" align=right>| + link_to(t("view"), _okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
+        html += %Q|<td width="15%" class="feed_text">#{feed.feeded_to.feeded_date}</td>|
+        html += %Q|<td width="15%" align=right>| + link_to(t("view"), _okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
       end
     end
     html += <<-HTML

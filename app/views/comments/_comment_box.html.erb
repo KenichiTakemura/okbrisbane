@@ -1,6 +1,16 @@
-<%= image_tag("common/likes.gif", :size => "20x20")  %>
+<% if Okbrisbane::Application.config.ok_debug %>
+<%= link_to(image_tag("common/sns/likes.gif", :size => "20x20"), comment_like_path(@comment), :remote => true, :method => :post) %>
 <%= @comment.likes.to_s %>
-<%= image_tag("common/dislikes.gif", :size => "20x20") %>
+<%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(@comment), :remote => true, :method => :post) %>
 <%= @comment.dislikes.to_s %>
-<%= image_tag("common/report_abuse.gif", :size => "20x20") %>
+<%= link_to(image_tag("common/sns/report_abuse.gif", :size => "20x20"), comment_abuse_path(@comment), :remote => true, :method => :post) %>
+<%= t(:abuse) %>
 <%= @comment.abuse.to_s %>
+<% else %>
+<%= image_tag("common/sns/likes.gif", :size => "20x20")  %>
+<%= @comment.likes.to_s %>
+<%= image_tag("common/sns/dislikes.gif", :size => "20x20") %>
+<%= @comment.dislikes.to_s %>
+<%= image_tag("common/sns/report_abuse.gif", :size => "20x20") %>
+<%= @comment.abuse.to_s %>
+<% end %>

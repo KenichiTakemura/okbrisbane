@@ -1,5 +1,12 @@
 class CommentsController < OkController
   
+  before_filter :authenticate_user!, :only => [:create, :reply]
+  
+  def initialize
+    super
+    @lock = Mutex.new
+  end
+
   def create
     comment = Comment.new(params[:comment])
     logger.debug("Commented_id #{params[:commented_id]}")
@@ -19,7 +26,7 @@ class CommentsController < OkController
       else
         flash[:warning] = I18n.t("failed_to_create")
         @post.errors.full_messages.each do |msg|
-           logger.warn("@post.errors: #{msg}")
+          logger.warn("@post.errors: #{msg}")
         end
         respond_to do |format|
           format.html { render :template => "okboards/view" }
@@ -29,25 +36,49 @@ class CommentsController < OkController
     end
   end
   
+  # Redirect to sign in
+  def new
+    logger.debug("Comment_signin : category: #{params[:category]} id: #{params[:id]}")
+    @okpage = params[:category].to_sym
+    model = MODELS[@okpage]
+    @post = model.find(params[:id])
+    if !current_user
+      session["user_return_to"] = Okboard.okboard_link_with_id_write_comment(@okpage, @post.id)
+      redirect_to user_sign_in_path
+    else
+    end      
+  end
+
+  # Redirect to sign in
+  def reply
+    @comment = Comment.find(params[:id])
+  end
+
   # Ajax
   def likes
-    ActiveRecord::Base.transaction do
-      Comment.find(params[:id]).like
-    end
+    @lock.synchronize {
+      ActiveRecord::Base.transaction do
+        Comment.find(params[:id]).like
+      end
+    }
     @comment = Comment.find(params[:id])
   end
-  
+
   def dislikes
-    ActiveRecord::Base.transaction do
-      Comment.find(params[:id]).dislike
-    end
+    @lock.synchronize {
+      ActiveRecord::Base.transaction do
+        Comment.find(params[:id]).dislike
+      end
+    }
     @comment = Comment.find(params[:id])
   end
-  
+
   def abuses
-    ActiveRecord::Base.transaction do
-      Comment.find(params[:id]).report_abuse
-    end
+    @lock.synchronize {
+      ActiveRecord::Base.transaction do
+        Comment.find(params[:id]).report_abuse
+      end
+    }
     @comment = Comment.find(params[:id])
   end
 

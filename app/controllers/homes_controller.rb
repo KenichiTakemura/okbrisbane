@@ -3,21 +3,21 @@ class HomesController < OkController
   def collectFeed(category)
     case category
     when :p_job
-      return TopFeedList.job_feed
+      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT)
     when :p_buy_and_sell
-      return TopFeedList.buy_and_sell_feed
+      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT)
     when :p_estate
-      return _makeImageList(TopFeedList.estate_feed, TopFeedList::IMAGE_FEED_LIMIT)
+      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     when :p_business
-      return _makeImageList(TopFeedList.business_feed, TopFeedList::IMAGE_FEED_LIMIT)
+      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     when :p_motor_vehicle
-      return _makeImageList(TopFeedList.motor_vehicle_feed, TopFeedList::IMAGE_FEED_LIMIT)
+      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     when :p_accommodation
-      return _makeImageList(TopFeedList.accommodation_feed, TopFeedList::IMAGE_FEED_LIMIT)
+      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     when :p_law
-      return TopFeedList.legal_service_feed_with_limit(5)
+      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT_LOWER)
     when :p_study
-      return TopFeedList.study_feed_with_limit(5)
+      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT_LOWER)
     else
     raise "Bad Category"
     end
@@ -41,23 +41,5 @@ class HomesController < OkController
   end
 
   private
-
-  def _makeImageList(feed_list, limit)
-    list = Array.new
-    image_list = Array.new
-    feed_list.each_with_index do |feed, i|
-    end
-    feed_list.each_with_index do |feed, i|
-      if !feed.feeded_to.image.empty?
-        image_list.push(feed)
-        if(image_list.size >= limit)
-          break
-        end
-      else
-        list.push(feed)
-      end
-    end
-    return list, image_list
-  end
 
 end

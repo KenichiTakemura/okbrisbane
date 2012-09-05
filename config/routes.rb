@@ -16,9 +16,12 @@ Okbrisbane::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
 
   resources :homes, :only => ["index"]
+  resources :post_searches, :only => ["index","create"]
   
-  resources :okboards, :only => ['index'] do
+   resources :okboards, :only => ['index'] do
     collection do
+      get :mypage
+      get :yellowpage
       post :more
       get :view
       get :write
@@ -28,6 +31,9 @@ Okbrisbane::Application.routes.draw do
       post :get_attachment
       delete :delete_image
       delete :delete_attachment
+      post :likes
+      post :dislikes
+      post :abuses
     end
   end
   
@@ -39,6 +45,8 @@ Okbrisbane::Application.routes.draw do
   match 'comments/:id/likes' => "comments#likes", :via=>:post, :as => :comment_like
   match 'comments/:id/dislikes' => "comments#dislikes", :via=>:post, :as => :comment_dislike
   match 'comments/:id/abuses' => "comments#abuses", :via=>:post, :as => :comment_abuse
+  match 'comments/:id/new' => "comments#new", :via=>:get, :as => :comment_new
+  match 'comments/:id/reply' => "comments#reply", :via=>:post, :as => :comment_reply
   resources :comments, :only => ['index',"create"] do
   collection do
       post :dislike

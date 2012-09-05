@@ -38,14 +38,14 @@ module OkboardsHelper
     if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
       html += t("price") + "</th><th>"
     end
-    html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th>
+    html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th><th>#{t("comment")}</th>
     <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th><th width=5%>#{t("view")}</th></tr></thead>|
     html += %Q|<tbody class="ui-widget-content">|
     if @board_lists.empty?
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
-        html += %Q|<tr><td colspan="9">| + t("no_information")
+        html += %Q|<tr><td colspan="10">| + t("no_information")
       else
-        html += %Q|<tr><td colspan="8">| + t("no_information")
+        html += %Q|<tr><td colspan="9">| + t("no_information")
       end        
       html += "</td><tr>"
     else
@@ -69,8 +69,7 @@ module OkboardsHelper
         html += "#{post.price}" + " </td><td>"
       end
       html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
-       #{post.postedDate}</td><td>#{post.views.to_s}
-       </td><td>|
+       #{post.postedDate}</td><td>#{post.views}</td><td>| + image_tag("#{I18n.locale}/common/say.png") + "#{post.comment.size}</td><td>"
       if post.has_image?
         html += image_tag("common/IconData2.gif") + post.image.size.to_s
       end
@@ -82,7 +81,7 @@ module OkboardsHelper
       #if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
       #  html += t("view") + section_span(post) + "</td></tr>"
       #else
-        html += link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => "button-link_ok")
+        html += link_to(image_tag("#{I18n.locale}/common/view_1.gif", :style => "margin-top:2px"), _okboard_link_with_id(@okpage, post.id))
       #end
     end
     html.html_safe

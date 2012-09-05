@@ -22,10 +22,25 @@ class Attachable < ActiveRecord::Base
   
   def attached_to(post)
     update_attribute(:attached, post)
+    if self.instance_of? Image
+      post.set_has_image(true)
+    elsif self.instance_of? Attachment
+      post.set_has_attachment(true)
+    end
   end
   
+  after_destroy :post_has_attached
+  
+  def post_has_attached
+    if self.instance_of? Image
+      self.attached.set_has_image(false) if self.attached.image.size == 0
+    elsif self.instance_of? Attachment
+      self.attached.set_has_attachment(false) if self.attached.attachment.size == 0
+    end
+  end
+
   def to_s
-    "id: #{id} a_file_name: #{avatar_file_name} a_content_type: #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type}"
+    "id: #{id} a_file_name: #{avatar_file_name} a_content_type: #{avatar_content_type} a_file_size: #{avatar_file_size} attached_id: #{attached_id} attached_type: #{attached_type} original_size: #{original_size}"
   end
   
   def thumbnailable?
@@ -51,12 +66,5 @@ class Attachable < ActiveRecord::Base
     logger.debug("geo: #{geo}")
     self.original_size = geo.to_s
   end
-  
-#  AttachmentContentTypeValidator
-#  AttachmentPresenceValidator
-#  AttachmentSizeValidator
-#  validates_attachment :avatar, :presence => true,
-#  :content_type => { :content_type => "image/jpg" },
-#  :size => { :in => 0..10.kilobytes }
   
 end

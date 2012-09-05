@@ -3,6 +3,9 @@
 		<p class="okboard_title">
 			<%= t(Style.page(@okpage))%>
 		</p>
+		<div class="okboard_title_image">
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/view_bg.gif", :size => "750x100") %>
+		</div>
 		<div class="okboard_view_sns">
 			<% if socialable? %>
 			<div class="fb-like" data-send="true" data-width="450" data-show-faces="true" data-font="tahoma"></div>
@@ -78,84 +81,101 @@
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var currentPosition = 0;
-			var slideWidth = 650;
-			var slides = $('.slide');
-			var numberOfSlides = slides.length;
 
-			// Remove scrollbar in JS
-			$('#slidesContainer').css('overflow', 'hidden');
+			$(document).ready(function() {
+				var currentPosition = 0;
+				var slideWidth = 650;
+				var slides = $('.slide');
+				var numberOfSlides = slides.length;
 
-			// Wrap all .slides with #slideInner div
-			slides.wrapAll('<div id="slideInner"></div>')
-			// Float left to display horizontally, readjust .slides width
-			.css({
-				'float' : 'left',
-				'width' : slideWidth
-			});
+				// Remove scrollbar in JS
+				$('#slidesContainer').css('overflow', 'hidden');
 
-			// Set #slideInner width equal to total width of all slides
-			$('#slideInner').css('width', slideWidth * numberOfSlides);
+				// Wrap all .slides with #slideInner div
+				slides.wrapAll('<div id="slideInner"></div>')
+				// Float left to display horizontally, readjust .slides width
+				.css({
+					'float' : 'left',
+					'width' : slideWidth
+				});
 
-			// Insert controls in the DOM
-			/*
-			$('#slideshow')
-			.prepend('<span class="control" id="leftControl">Clicking moves left</span>')
-			.append('<span class="control" id="rightControl">Clicking moves right</span>');
-			*/
+				// Set #slideInner width equal to total width of all slides
+				$('#slideInner').css('width', slideWidth * numberOfSlides);
 
-			// Hide left arrow control on first load
-			//manageControls(currentPosition);
+				// Insert controls in the DOM
+				/*
+				$('#slideshow')
+				.prepend('<span class="control" id="leftControl">Clicking moves left</span>')
+				.append('<span class="control" id="rightControl">Clicking moves right</span>');
+				*/
 
-			// Create event listeners for .controls clicks
-			$('.control').bind('click', function() {
-				// Determine new position
-
-				var position = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
-
-				// Hide / show controls
+				// Hide left arrow control on first load
 				//manageControls(currentPosition);
 
-				//alert(currentPosition);
-				if (position < 0 || position > numberOfSlides - 1)
-					return;
+				// Create event listeners for .controls clicks
+				$('.control').bind('click', function() {
+					// Determine new position
 
-				currentPosition = position;
+					var position = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
 
-				// Move slideInner using margin-left
-				$('#slideInner').animate({
-					'marginLeft' : slideWidth * (-currentPosition)
+					// Hide / show controls
+					//manageControls(currentPosition);
+
+					//alert(currentPosition);
+					if (position < 0 || position > numberOfSlides - 1)
+						return;
+
+					currentPosition = position;
+
+					// Move slideInner using margin-left
+					$('#slideInner').animate({
+						'marginLeft' : slideWidth * (-currentPosition)
+					});
 				});
+
+				// manageControls: Hides and Shows controls depending on currentPosition
+				function manageControls(position) {
+					// Hide left arrow if position is first slide
+					if (position == 0) {
+						$('#leftControl').hide()
+					} else {
+						$('#leftControl').show()
+					}
+					// Hide right arrow if position is last slide
+					if (position == numberOfSlides - 1) {
+						$('#rightControl').hide()
+					} else {
+						$('#rightControl').show()
+					}
+				}
+
 			});
-
-			// manageControls: Hides and Shows controls depending on currentPosition
-			function manageControls(position) {
-				// Hide left arrow if position is first slide
-				if (position == 0) {
-					$('#leftControl').hide()
-				} else {
-					$('#leftControl').show()
-				}
-				// Hide right arrow if position is last slide
-				if (position == numberOfSlides - 1) {
-					$('#rightControl').hide()
-				} else {
-					$('#rightControl').show()
-				}
-			}
-
-		});
 	</script>
 
 	<div class="okboard_view_content">
-
 		<div class="okboard_view_controll">
-			<%= image_tag("common/good.gif", :size => "20x20") %>
-			<%= image_tag("common/bad.gif", :size => "20x20") %>
-			<%= @post.likes %>
-			<%= link_to(t("listing"), _okboard_link(@okpage), :class => "button-link_naver", :style => "float:right;margin:5px") %>
-			<%= link_to(t("write_new"), _okboard_link_write(@okpage), :class => "button-link_naver", :style => "float:right;margin:5px") %>
+			<div id="okboard_likes">
+				<%= link_to(image_tag("common/sns/good.gif", :size => "20x20"), Okboard.okboard_link_like(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= @post.likes.to_s %>
+				<%= image_tag("common/rank/#{@post.rank}.png") %>
+				<%= link_to(image_tag("common/sns/bad.gif", :size => "20x20"), Okboard.okboard_link_dislike(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= @post.dislikes.to_s %>
+				<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= t(:abuse) %>
+				<%= @post.abuse.to_s %>
+			</div>
+			<div id="okboard_quick_links">
+				<%= link_to(image_tag("#{I18n.locale}/common/listing.gif"), Okboard.okboard_link(@okpage), :style => "margin:1px") %>
+				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
+				<%= link_to(image_tag("#{I18n.locale}/common/write.gif"), Okboard.okboard_link_write(@okpage), :style => "margin:1px") %>
+				<% end %>
+				<% if current_user %>
+				<%= link_to(image_tag("#{I18n.locale}/common/mypage_1.gif", :size => "60x20"), Okboard.okboard_link(:p_mypage), :style => "margin:1px") %>
+				<% end %>
+				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
+				<%= link_to(image_tag("#{I18n.locale}/common/home.gif"), root_path, :style => "margin:1px") %>
+
+			</div>
 		</div>
 		<table id="okboard_view_table" width=100% class="ui-widget" border="0">
 			<tbody>
@@ -189,55 +209,91 @@
 		<p style="font-size: 16px">
 			<%= t(:comment) %> <%= t(:write) %>
 		</p>
-		<div class="new_comment">
+		<div class="new_comment" id="new_comment">
+			<% if !current_user %>
+			<%= link_to(t(:please_signin_to_comment), comment_new_path(@post, :category => @okpage)) %>
+			<% else %>
 			<div class="commnet_user">
-				<%= image_tag("common/ico_people.gif", :size => "30x30") %>
+				<%= image_tag("common/sns/ico_people.gif", :size => "30x30") %>
 			</div>
-			<% if current_user %>
-			<div class="comment_attr">
+			<div class="new_comment_box">
 				<%= form_for(@comment, :method => :post, :html => { :class => "form" }) do |f| %>
 				<%= hidden_field_tag :commented_id, @post.id %>
 				<%= hidden_field_tag :commented_type, @okpage %>
-				<%= f.text_area :body, :class => "text_area", :id => "comment_body" %>
+				<%= f.text_area :body, :class => "text_area", :id => "comment_body", :rows => 15, :cols => 10%>
 				<br/>
 				<%= f.submit t("add"), :class => "button-link_blue", :id => "comment_submit" %>
 				<% end %>
-				<% else %>
-				<%= t(:please_signin_to_comment)%>
-				<% end %>
+
 			</div>
+							<% end %>
+
 		</div>
 		<div class="comment_list"></div>
 		<table id="okboard_comment" width=100% class="ui-widget" border="0">
 			<tbody>
+				<% index = 1 %>
 				<% @post.comment.reverse_each do |comment| %>
 				<tr class="#{cycle("odd", "even")}">
 					<td>
 					<div class="comment_row">
 						<div class="commnet_user">
-							<%= image_tag("common/ico_people_group.gif", :size => "30x30") %>
+							<%= image_tag("common/sns/ico_people_group.gif", :size => "30x30") %>
 						</div>
 						<div class="comment_attr">
-							<%= comment.postedDate %> <%= comment_author(comment) %>
+							<%= t(:comment) %>#<%= index.to_s %> <%= comment.postedDate %> <%= comment_author(comment) %>
 						</div>
 
 						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
-							<%= link_to(image_tag("common/likes.gif", :size => "20x20"), comment_like_path(comment), :remote => true, :method => :post) %>
+							<%= link_to(image_tag("common/sns/likes.gif", :size => "20x20"), comment_like_path(comment), :remote => true, :method => :post) %>
 							<%= comment.likes.to_s %>
-							<%= link_to(image_tag("common/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
+							<%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
 							<%= comment.dislikes.to_s %>
-							<%= link_to(image_tag("common/report_abuse.gif", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
+							<%= link_to(image_tag("common/sns/report_abuse.gif", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
+							<%= t(:abuse) %>
 							<%= comment.abuse.to_s %>
 						</div>
 
 						<div class="comment_content">
-							<%= simple_format(comment.body) %>
+							<div id="comment_content_<%= comment.id %>">
+								<%= simple_format(comment.body) %>
+							</div>
 						</div>
+						<div class="comment_hiddne_content">
+							<div id="comment_hidden_<%= comment.id %>" style="display:none">
+								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to(t("Show"), "#", :id => "comment_show_#{comment.id}") %>
+							</div>
+						</div>
+
+						<% if comment.hide? %>
+						<%= _script(%Q|
+						$("\#comment_content_#{comment.id}").css("display","none");
+						$("\#comment_hidden_#{comment.id}").css("display","block");
+						$("\#comment_show_#{comment.id}").click(function() {
+						$("\#comment_content_#{comment.id}").toggle('slow');
+						$("\#comment_hidden_#{comment.id}").toggle('slow');
+						return false;
+						});
+						|) %>
+
+						<% else %>
+						<% if current_user %>
 						<div class="comment_reply">
-							<%= image_tag("common/reply.gif", :size => "20x20") %>
+							<%= link_to(image_tag("common/sns/reply.gif", :size => "20x20"), "#", :id => "reply_comment_#{comment.id}") %>
+							<%= _script(%Q|
+							$("\#reply_comment_#{comment.id}").click(function() {
+								$("\#comment_body").val(" > #{comment_author(comment)} #{t(:sir)} #{comment.postedDate} #{t(:comment)}\##{index}\\n");
+								$("\#comment_body").focus();
+								return false;
+							});
+							|) %>
+
 						</div>
+						<% end %>
+						<% end %>
 					</div></td>
 				</tr>
+				<% index += 1 %>
 				<% end %>
 			</tbody>
 

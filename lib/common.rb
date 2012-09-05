@@ -3,6 +3,11 @@ module Common
     date.strftime("%Y-%m-%d") if date
   end
 
+  def self.date_format_md(date)
+    date.strftime("%m-%d") if date
+  end
+
+
   def self.hash(ccc)
     OpenSSL::Digest::SHA1.new(ccc).to_s
   end

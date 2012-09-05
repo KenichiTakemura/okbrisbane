@@ -18,6 +18,8 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :write_at
       t.integer :mode
       t.boolean :comment_email, :default => false
+      t.boolean :has_image, :default => false
+      t.boolean :has_attachment, :default => false
       t.timestamps
     end    
   end

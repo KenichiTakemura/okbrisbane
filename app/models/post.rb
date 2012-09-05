@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   self.abstract_class = true
 
   # attr_accessible
-  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode, :comment_email
+  attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode, :comment_email, :has_image, :has_attachment
   
   # status
   # draft -> public -> hidden -> deleted
@@ -105,14 +105,42 @@ class Post < ActiveRecord::Base
   end
   
   def viewed
-    self.update_attribute(:views, self.views + 1)
+    update_attribute(:views, views + 1)
   end
 
-  def liked
-    logger.debug("likes => " + self.likes.to_s)
-    self.likes = self.likes + 1
-    self.save
-    logger.info("likes => " + self.likes.to_s)
+  def like
+    update_attribute(:likes, likes + 1)
+    update_attribute(:rank, mark_rank)
+  end
+  
+  def dislike
+    update_attribute(:dislikes, dislikes + 1)
+    update_attribute(:rank, mark_rank)
+  end
+    
+  def report_abuse
+    update_attribute(:abuse, abuse + 1)
+    update_attribute(:rank, mark_rank)
+  end
+  
+  def mark_rank
+    if abuse >= Okvalue::POST_ABUSE_LIMIT
+      return 0
+    end
+    case (likes - dislikes)
+    when Okvalue::POST_RANK_0
+      return 0
+    when Okvalue::POST_RANK_1
+      return 1
+    when Okvalue::POST_RANK_2
+      return 2
+    when Okvalue::POST_RANK_3
+      return 3
+    when Okvalue::POST_RANK_4
+      return 4
+    else
+      return 5
+    end
   end
 
   def logging_post
@@ -121,6 +149,10 @@ class Post < ActiveRecord::Base
 
   def postedDate
     Common.date_format(created_at)
+  end
+  
+  def feeded_date
+    Common.date_format_md(created_at)
   end
 
   def validDate
@@ -136,12 +168,22 @@ class Post < ActiveRecord::Base
     update_attribute(:post_updated_by, user)
   end
   
+  def set_has_image(yesno)
+    update_attribute(:has_image, yesno)
+  end
+
+  def set_has_attachment(yesno)
+    update_attribute(:has_attachment, yesno)
+  end
+    
   def has_image?
-    !self.image.empty?
+    #!self.image.empty?
+    has_image
   end
       
   def has_attachment?
-    !self.attachment.empty?
+    #!self.attachment.empty?
+    has_attachment
   end
   
   def admin_category_list
@@ -163,6 +205,11 @@ class Post < ActiveRecord::Base
     list = Array.new
     list.push([I18n.t(Okvalue::IMAGE_YES),Okvalue::IMAGE_YES])
     list.push([I18n.t(Okvalue::IMAGE_NO),Okvalue::IMAGE_NO])
+  end
+  
+  def search(post_search)
+    return if post_search.nil?
+    
   end
   
   protected

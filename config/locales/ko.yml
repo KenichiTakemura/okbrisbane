@@ -350,7 +350,8 @@ ko:
   comment: '코멘트'
   comment_email: '남이 코멘트를 '
   add_comment: '코멘트 추가하기'
-  please_signin_to_comment: '코멘트 추가 회원가입합시다'
+  please_signin_to_comment: 'Fix me'
+  comment_is_hidden: 'Fix me'
   
   mainpage_title: 'OKBRISBANE 메인 페이지'
     

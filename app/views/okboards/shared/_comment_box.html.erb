@@ -1,0 +1,19 @@
+<% if Okbrisbane::Application.config.ok_debug %>
+<%= link_to(image_tag("common/sns/good.gif", :size => "20x20"), Okboard.okboard_link_like(@okpage, @post.id), :remote => true, :method => :post) %>
+<%= @post.likes.to_s %>
+<%= image_tag("common/rank/#{@post.rank}.png") %>
+<%= link_to(image_tag("common/sns/bad.gif", :size => "20x20"), Okboard.okboard_link_dislike(@okpage, @post.id), :remote => true, :method => :post) %>
+<%= @post.dislikes.to_s %>
+<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
+<%= t(:abuse) %>
+<%= @post.abuse.to_s %>
+<% else %>
+<%= image_tag("common/sns/good.gif", :size => "20x20") %>
+<%= @post.likes.to_s %>
+<%= image_tag("common/rank/#{@post.rank}.png") %>
+<%= image_tag("common/sns/bad.gif", :size => "20x20") %>
+<%= @post.dislikes.to_s %>
+<%= image_tag("common/sns/abuse.png", :size => "20x20") %>
+<%= t(:abuse) %>
+<%= @post.abuse.to_s %>
+<% end %>

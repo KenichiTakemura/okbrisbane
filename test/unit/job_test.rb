@@ -10,14 +10,15 @@ class JobTest < ActiveSupport::TestCase
   end
 
   def setup
-    u = User.new(:email => "test@test.com", :password => "okbrisbane", :password_confirmation => "okbrisbane")
+    u = User.new(:email => "test@test.com", :password => "okbrisbane", :password_confirmation => "okbrisbane", :user_name => "okbrisbane")
+    u.confirmed_at = Time.now.utc
     assert u.save, "Cannot save user"
     u = User.first
     assert u, "User not found"
   end
 
   def new_post
-    job = Job.new(:subject => subject, :category => Job::SEEK)
+    job = Job.new(:subject => subject, :category => Job::Categories[:seek], :valid_until => Time.now.utc)
     assert job.save
     job
   end
@@ -37,13 +38,13 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "post with HIRE" do
-    job = Job.new(:subject => subject, :category => Job::HIRE)
+    job = Job.new(:subject => subject, :category => Job::Categories[:hire], :valid_until => Time.now.utc)
     assert job.save
   end
 
   test "post with invalid category" do
-    job = Job.new(:subject => subject, :category => BuyAndSell::BUY)
-    assert !job.save
+    job = Job.new(:subject => subject, :category => BuyAndSell::Categories[:buy], :valid_until => Time.now.utc)
+    assert job.save
   end
 
   test "post check default values"   do
@@ -59,27 +60,6 @@ class JobTest < ActiveSupport::TestCase
     assert job.image.empty?, "Image allocated"
     assert !job.content, "Content allocated"
     assert job.top_feed_list, "TopFeedList not found"
-  end
-
-  test "post with valid_days"   do
-    job = new_post
-    assert_equal(job.valid_days, 30)
-  end
-
-  test "post with valid_days changed"   do
-    job = Job.new(:subject => subject, :category => Job::SEEK)
-    job.valid_days = 60;
-    assert job.save
-    assert_equal(job.valid_days, 60)
-    due = 60.days.since job.created_at
-    assert_equal(job.valid_until.strftime("%x"), due.strftime("%x"))
-  end
-  
-  test "post with valid_until" do
-    job = Job.new(:subject => subject, :category => Job::SEEK)
-    job.valid_until = Time.now + 60.days
-    job.save
-    assert_equal(job.valid_days, 0)
   end
 
   test "post with user" do
@@ -111,10 +91,22 @@ class JobTest < ActiveSupport::TestCase
     assert_equal(job.views,1)
   end
 
-  test "liked" do
+  test "like" do
     job = new_post
-    job.liked
+    job.like
     assert_equal(job.likes,1)
+  end
+
+  test "dislike" do
+    job = new_post
+    job.dislike
+    assert_equal(job.dislikes,1)
+  end
+
+  test "abuse" do
+    job = new_post
+    job.report_abuse
+    assert_equal(job.abuse,1)
   end
 
   test "user post" do
@@ -125,6 +117,61 @@ class JobTest < ActiveSupport::TestCase
     job1.set_user(u)
     Rails.logger.info("u.job : #{u.job}")
     assert_equal(u.job.size, 2)
+  end
+
+  test "rank" do
+    job = new_post
+    assert_equal(job.rank,0)
+    1.upto(Okvalue::POST_RANK_0.max) {
+      job.like
+    }
+    assert_equal(job.rank,0)
+    job.like
+    assert_equal(job.rank,1)
+    job.dislike
+    assert_equal(job.rank,0)    
+    (Okvalue::POST_RANK_1.min).upto(Okvalue::POST_RANK_1.max) {
+      job.like
+    }
+    assert_equal(job.rank,1)
+    job.like
+    assert_equal(job.rank,2)
+    job.dislike
+    assert_equal(job.rank,1)    
+    (Okvalue::POST_RANK_2.min).upto(Okvalue::POST_RANK_2.max) {
+      job.like
+    }
+    assert_equal(job.rank,2)
+    job.like
+    assert_equal(job.rank,3)
+    job.dislike
+    assert_equal(job.rank,2)
+    (Okvalue::POST_RANK_3.min).upto(Okvalue::POST_RANK_3.max) {
+      job.like
+    }
+    assert_equal(job.rank,3)
+    job.like
+    assert_equal(job.rank,4)
+    job.dislike
+    assert_equal(job.rank,3)
+    (Okvalue::POST_RANK_4.min).upto(Okvalue::POST_RANK_4.max) {
+      job.like
+    }
+    assert_equal(job.rank,4)
+    job.like
+    assert_equal(job.rank,5)
+    job.dislike
+    assert_equal(job.rank,4)
+    job.like
+    assert_equal(job.rank,5)
+    1.upto(10) {
+      job.like
+    }
+    assert_equal(job.rank,5)
+    job.report_abuse
+    assert_equal(job.rank,5)
+    job.report_abuse
+    assert_equal(job.rank,0)
   end
 
 end

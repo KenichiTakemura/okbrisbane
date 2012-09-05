@@ -1,14 +1,21 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :is_deleted, :locale, :likes, :dislikes, :abuse
+  attr_accessible :body, :status, :locale, :likes, :dislikes, :abuse
 
   belongs_to :commented_by, :polymorphic => true
 
   belongs_to :commented, :polymorphic => true
 
+  scope :is_valid, where("status = ?", Okvalue::POST_STATUS_PUBLIC)
+  
+  def size
+    is_valid.size
+  end
+  
   after_initialize :set_default
   
   def set_default
     self.locale ||= Okvalue::DEFAULT_LOCALE
+    self.status ||= Okvalue::POST_STATUS_PUBLIC
   end
     
   # validator
@@ -35,6 +42,17 @@ class Comment < ActiveRecord::Base
     
   def report_abuse
     update_attribute(:abuse, abuse + 1)
+  end
+  
+  def hide?
+    abuse >= Okvalue::POST_ABUSE_LIMIT
+  end
+  
+  def status_list
+    list = Array.new
+    list.push([I18n.t(Okvalue::POST_STATUS_PUBLIC),Okvalue::POST_STATUS_PUBLIC])
+    list.push([I18n.t(Okvalue::POST_STATUS_HIDDEN),Okvalue::POST_STATUS_HIDDEN])
+    list
   end
   
 end

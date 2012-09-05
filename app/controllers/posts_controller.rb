@@ -1,7 +1,10 @@
 class PostsController < OkController
 
   before_filter :filter
+  before_filter :authenticate_user!, :only => [:create_post]
+
   def filter
+    
   end
 
   def create_post(_model, _param)

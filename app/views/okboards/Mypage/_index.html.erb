@@ -7,6 +7,7 @@
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x100") %>
 		</div>
 	</div>
+	<%= link_to image_tag("#{I18n.locale}/Signup/btn_modify.gif"), edit_user_registration_path %>
 	<div id="mypage_mypost_list" style="position: relative; float: left; width: 100%">
 		<table id="mypost_table" width=100% class="ui-widget">
 			<thead class="ui-widget-header">
@@ -20,6 +21,7 @@
 					<th><%= t(:attachment) %></th>
 					<th><%= t(:comment) %></th>
 					<th><%= t(:comment_email) %></th>
+					<th><%= t(:view) %></th>
 				</tr>
 			</thead>
 			<tbody class="ui-widget-content">

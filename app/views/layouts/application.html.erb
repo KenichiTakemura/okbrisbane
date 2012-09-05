@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<% if Okbrisbane::Application.config.ok_debug %>
+		<title>OKBRISBANE DEBUG</title>
+		<% else %>
 		<title>OKBRISBANE</title>
+		<% end %>
 		<%= stylesheet_link_tag "application" %>
 		<%= csrf_meta_tag %>
 		<%= javascript_include_tag 'application' %>
@@ -41,49 +45,62 @@
 				<%= t("please") %>
 				<% end %>
 				</div>
-				<div class="mypage">
-				<% if current_user %>
-				<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "60x20"), _okboard_link(:p_mypage)) %>
-				<% end %>
-				</div>
 				<div id="logo">
 					<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
 				</div>
 				<div id="devise">
 					<div id="account">
-						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete %>
-						<% else %>
+						<% if !user_signed_in? %>
 						<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
 						<% end %>
+						<% if !user_signed_in? %>
 						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
-						<% if user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_modify.gif"), edit_user_registration_path %>
-						<% else %>
-						<!-- %= link_to image_tag("#{I18n.locale}/login/btn_member.gif"), new_user_registration_path % -->
 						<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
-						<% end %>
+						<% else %>
+										<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
+										<% end %>
 					</div>
 				</div>
 			</div>
 			<div id="header-right">
-				<div class="ok_weather">
-					<div class="weather_information">
-						<%= t("weather_information")%>
-					</div>
-					<%= link_to t("brisbane"), "http://www.weather.com.au/qld/brisbane", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("sydney"),  "http://www.weather.com.au/nsw/sydney", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("melbourne"),  "http://www.weather.com.au/vic/melbourne", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("canberra"),  "http://www.weather.com.au/act/canberra", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("hobart"),  "http://www.weather.com.au/tas/hobart", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("adelaide"),  "http://www.weather.com.au/sa/adelaide", :target => "_blank", :class => "weather_location" %>
-					<%= link_to t("perth"),  "http://www.weather.com.au/wa/perth", :target => "_blank", :class => "weather_location" %>
-				</div>
+				<% if current_user %>
+				<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path) %>
+				<% end %>
 				<%= single_header_banner(1) %>
 				<%= single_header_banner(2) %>
 			</div>
+			<div class="ok_information">
+					<div class="weather_information">
+						<%= link_to(image_tag("#{I18n.locale}/common/weather.gif"), "#", :id => "weather") %>
+					</div>
+					<div class="rate_information">
+						<%= image_tag("#{I18n.locale}/common/rate.gif") %>
+					</div>
+					<div class="weather_information_box" style="display:none">
+						<table>
+							<tbody>
+								<tr><td>Sydney</td></tr>
+								<tr><td>Melbourne</td></tr>
+								<tr><td>Brisbane</td></tr>
+								<tr><td>Perth</td></tr>
+								<tr><td>Adelaide</td></tr>
+								<tr><td>Hobart</td></tr>
+								<tr><td>Canberra</td></tr>
+								<tr><td>Darwin</td></tr>
+								<tr><td><%= t(:seoul) %></td></tr>
+							</tbody>	
+						</table>
+					</div>
+					<%= _script(%Q|
+							$("\#weather").click(function() {
+								$("div.weather_information_box").toggle("slow");
+								return false;
+							})
+						
+					|)%>	
+			</div>
 			<div id="header-bottom">
-				<% if [:p_home,:p_signin,:p_signup,:p_signout].include?(@okpage)  %>
+				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
 				<%= navigation("#41A317","#f0f0f0") %>
 				<div id="follows">
 					<% if socialable? %>
