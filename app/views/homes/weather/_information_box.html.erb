@@ -1,0 +1,68 @@
+<div class="information_window_control">
+	<%= select_tag :country, options_for_select(Weather::COUNTRIES, @country), :style => "float:left;margin-left:5px", :id => "country" %>
+	<%= link_to(image_tag("#{I18n.locale}/common/btn_refresh.gif"), "#", :id => "refresh", :style => "float:left; margin:3px")%>
+	<%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "close", :style => "float:right")%>
+</div>
+<% if @country.eql?(Okvalue::AUS )%>
+<%= image_tag("common/australia.gif", :size => "300x250", :style => "position:absolute;top:80px;z-index:-1;")%>
+<% elsif @country.eql?(Okvalue::KOR) %>
+<%= image_tag("common/south-korea.jpg", :size => "300x250", :style => "position:absolute;top:100px;z-index:-1;")%>
+<%= image_tag("common/south-korea.jpg", :size => "300x250", :style => "position:absolute;top:400px;z-index:-1;")%>
+
+<% end %>
+<p class="city">
+	<%= t(:weather_forecast_for) %> <%= @dateOn %>
+</p>
+<table class="ui-widget information_table" style="opacity:0.9;filter:alpha(opacity=90);">
+	<thead class="ui-widget-header">
+		<tr>
+			<th class="small"><%= t(:location)%></th>
+			<th class="small"><%= t(:forecast)%></th>
+			<th class="small"><%= t(:issuedOn)%></th>
+			<th class="small"><%= t(:minTemp)%></th>
+			<th class="small"><%= t(:maxTemp)%></th>
+			</tr>
+	</thead>
+	<tbody class="ui-widget-content">
+		<% if @weather.empty? %>
+		<tr><td colspan="5"><%= t(:no_information) %>
+		</td></tr>
+		<% else %>
+			<% @weather.each do |w| %>
+			<% if @country.eql?(Okvalue::AUS )%>
+				<% next if !WeatherConfig::AUSCityVisibleMap[w.location.to_sym] %>
+			<tr>
+				<td class="city"><%= link_to(t(w.location), WeatherConfig::AUSCityMap[w.location.to_sym], :target => "_blank") %></td>
+			<% elsif @country.eql?(Okvalue::KOR) %>
+			<tr>
+				<td ><%= image_tag("#{I18n.locale}/city/btn_area_#{w.location}_ov.gif") %></td>
+			<% end %>
+			<td><%= image_tag("common/weather/#{w.forecast}.png") %></td>
+			<td><%= w.issued %></td>
+			<td><%= w.min %></td>
+			<td><%= w.max %></td>
+			</tr>
+		<% end %>
+		<% end %>
+	</tbody>
+</table>
+<% if @country.eql?(Okvalue::KOR) %>
+<%= _script_document_ready(%Q|
+$("div.weather_information_box").height("800");
+|)%>
+<% else %>
+<%= _script_document_ready(%Q|
+$("div.weather_information_box").height("400");
+|)%>
+<% end %>
+<%= _script(%Q|
+	$("\#close").click(function() {
+	$("div.weather_information_box").hide("slow");
+	return false;
+	});
+	$("\#refresh").click(function() {
+	$('div._information_status').css("display","block");
+	$.post("/homes/current_weather?locale=#{I18n.locale}&c=" + $("#country").val());
+	return false;
+});
+|)%>

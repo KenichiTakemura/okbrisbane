@@ -59,9 +59,36 @@ class Post < ActiveRecord::Base
   scope :is_valid, where("status = ?", Okvalue::POST_STATUS_PUBLIC)
   scope :is_invalid, where("status = ? OR status = ?", Okvalue::POST_STATUS_HIDDEN, Okvalue::POST_STATUS_DRAFT)
   scope :expired, where("status = ?", Okvalue::POST_STATUS_EXPIRED)
-  scope :latest, is_valid.order.limit(Okvalue::OKBOARD_LIMIT)
-  scope :category_latest, lambda { |cate| where('category = ?', cate).latest}
+  scope :latest, is_valid.order
 
+  scope :c_category, lambda { |cond|
+    if cond.has_category?
+      where('category = ?', cond.category)
+    end
+  }
+  scope :c_keyword, lambda { |cond|
+    if cond.has_keyword?
+      where('subject like ?', "%#{cond.keyword}%")
+    end
+  }
+  scope :c_image, lambda { |cond|
+    if cond.has_image?
+      where('has_image = ?', cond.image)
+    end
+  }
+  scope :c_attachment, lambda { |cond|
+    if cond.has_attachment?
+      where('has_attachment = ?', cond.attachment)
+    end
+  }
+  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).latest.limit(limit) }
+  scope :except_ids, lambda { |ids| 
+    if !ids.nil? && !ids.empty?  
+      where('id not in (?)', ids)
+    end
+  }
+  scope :search_except, lambda { |cond,ids,limit| search(cond,limit).except_ids(ids) }
+    
   # callbacks
   after_initialize :set_default
   before_validation :logging_post
@@ -201,15 +228,10 @@ class Post < ActiveRecord::Base
     list
   end
   
-  def image_yesno_list
+  def yesno_list
     list = Array.new
-    list.push([I18n.t(Okvalue::IMAGE_YES),Okvalue::IMAGE_YES])
-    list.push([I18n.t(Okvalue::IMAGE_NO),Okvalue::IMAGE_NO])
-  end
-  
-  def search(post_search)
-    return if post_search.nil?
-    
+    list.push([I18n.t(Okvalue::ATTACHABLE_YES),true])
+    list.push([I18n.t(Okvalue::ATTACHABLE_NO),false])
   end
   
   protected

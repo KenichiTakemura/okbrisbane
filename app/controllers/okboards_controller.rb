@@ -43,28 +43,33 @@ class OkboardsController < OkController
     logger.debug("v: #{@board}")
     model = MODELS[@okpage]
     raise "Bad Board Request" if model.nil?
-    @@list = nil
-    @post_search = PostSearch.new(:okpage => @okpage)
-    if @@category
-      @@list = model.category_latest(@@category).latest
-      @post_search.category = @@category
+    if !@@search_id.nil?
+      @post_search_id = @@search_id
+      @post_search = PostSearch.find(@@search_id)
     else
-      if @@search_id
-        # Find Search Condition
-        @post_search_id = @@search_id
-        post_search = PostSearch.find(@@search_id)
-        model.search(post_search)
+      @post_search = PostSearch.new(:okpage => @okpage)
+      if @@category
+        @post_search.category = @@category
       end
-      @@list  = model.latest
+    end
+    # Find Search Condition
+    if [:p_job,:p_buy_and_sell,:p_well_being,:p_estate,:p_business,:p_motor_vehicle,:p_accommodation].include?(@okpage)
+      post_search = @post_search.dup
+      post_search.image = true
+      @board_image_lists = model.search(post_search, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
+      ids = @board_image_lists.collect {|post| post.id }
+      @board_lists = model.search_except(@post_search, ids, Okvalue::OKBOARD_LIMIT)
+    else
+      @board_lists = model.search(@post_search, Okvalue::OKBOARD_LIMIT)
     end
     @post = model.new
     @lastid = find_lastid(@board_lists)
-    @board_lists,@board_image_lists  = _make_post_list_with_image(@@list, Okvalue::OKBOARD_IMAGE_FEED_LIMIT)
     logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
     logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
+    logger.debug("SearchedBy #{@post_search}")
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @jobs }
+      format.json { render :json => @post }
     end
   end
 
@@ -212,23 +217,6 @@ class OkboardsController < OkController
     attachment_ids = attachments.collect{|i| i.id}
     attachment_files = attachments.collect{|i| i.avatar_file_name}
     render :json => {:result => 0, :attachments => attachment_ids, :filenames => attachment_files }
-  end
-
-  def _make_post_list_with_image(posts, limit)
-    image_list = Array.new
-    post_list = Array.new
-    posts.each_with_index do |post, i|
-      if(image_list.size < limit)
-        if !post.image.empty?
-        image_list.push(post)
-        else
-        post_list.push(post)
-        end
-      else
-      post_list.push(post)
-      end
-    end
-    return post_list, image_list
   end
 
   def _more_post

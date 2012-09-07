@@ -1,16 +1,29 @@
-<h2>Change your password</h2>
+<%= render :partial => "devise/shared/header" %>
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/Signup/tit_711.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+</div>
+<div id="signin">
+<%= devise_error_messages! %>
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "form" }) do |f| %>
+<%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="group">
+	<%= f.label :password, t(:new_password), :class => "label left"   %>
+	<%= f.password_field :password, :class => "text_field" %>
+</div>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></div>
+<div class="group">
+	<%= f.label :password_confirmation, t(:new_password_confirmation), :class => "label left"   %>
+	<br />
+	<%= f.password_field :password_confirmation, :class => "text_field" %>
+</div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Change my password" %></div>
+<div>
+		<%= f.submit t(:change_password) , :class => "button-link_ok" %>
+</div>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>
+</div>
+<%= single_body_banner(6) %>
+<%= render :partial => "devise/shared/footer" %>
+<%= _script_document_ready(%Q|$('#_findid').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

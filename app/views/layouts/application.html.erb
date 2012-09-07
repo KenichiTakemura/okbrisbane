@@ -76,28 +76,7 @@
 					<div class="rate_information">
 						<%= image_tag("#{I18n.locale}/common/rate.gif") %>
 					</div>
-					<div class="weather_information_box" style="display:none">
-						<table>
-							<tbody>
-								<tr><td>Sydney</td></tr>
-								<tr><td>Melbourne</td></tr>
-								<tr><td>Brisbane</td></tr>
-								<tr><td>Perth</td></tr>
-								<tr><td>Adelaide</td></tr>
-								<tr><td>Hobart</td></tr>
-								<tr><td>Canberra</td></tr>
-								<tr><td>Darwin</td></tr>
-								<tr><td><%= t(:seoul) %></td></tr>
-							</tbody>	
-						</table>
-					</div>
-					<%= _script(%Q|
-							$("\#weather").click(function() {
-								$("div.weather_information_box").toggle("slow");
-								return false;
-							})
-						
-					|)%>	
+					<%= render :partial => "homes/weather" %>
 			</div>
 			<div id="header-bottom">
 				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
@@ -134,21 +113,6 @@
 				<% end %>
 			</div>
 		</div>
-		<!-- header -->
-		<!--
-		<div class="flash">
-		<% if notice %>
-		<p class="message notice">
-		<%= notice %>
-		</p>
-		<% end %>
-		<% if alert %>
-		<p class="message alert">
-		<%= alert %>
-		</p>
-		<% end %>
-		</div>
-		-->
 		<div id="main">
 			<%= yield %>
 		</div>

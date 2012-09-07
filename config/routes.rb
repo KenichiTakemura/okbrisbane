@@ -10,13 +10,21 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
   match 'member_managements/inactive_signup', :via=>:get, :as => :user_inactive_signup
+  match 'member_managements/sending_reset_password_instructions', :via=>:get, :as => :user_sending_reset_password_instructions
+  match 'member_managements/after_reset_password', :via=>:get, :as => :user_after_reset_passwod
   
   resources :member_managements, :only => ["index","new","create"]
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
 
-  resources :homes, :only => ["index"]
-  resources :post_searches, :only => ["index","create"]
+  resources :homes, :only => ["index"] do
+    collection do
+      post :current_weather
+      post :current_rate
+    end
+  end
+  
+  resources :post_searches, :only => ["index","create","edit","update"]
   
    resources :okboards, :only => ['index'] do
     collection do

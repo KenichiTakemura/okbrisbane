@@ -1,8 +1,8 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-	<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
-	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+<%= image_tag("#{I18n.locale}/Signup/tit_641.gif", :class => "title_text")%>
+<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
 <div id="_main">
 	</br>
@@ -11,12 +11,9 @@
 	</p>
 	<textarea name="" cols="100" rows="40" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termofpersonalinfomation%>
       </textarea>	                           
-      </br>
 </div>
+<br/>
+<%= link_to(image_tag("#{I18n.locale}/common/btn_top.gif"), "#_main")%>
 <%= render :partial => "devise/shared/footer" %>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#_personal').attr("style", "background: #6A8FE7");
-	}); 
-</script>
+<%= _script_document_ready(%Q|$('#_termsofpersonalinfo').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
 

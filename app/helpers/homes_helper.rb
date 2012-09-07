@@ -14,8 +14,7 @@ module HomesHelper
     end
     html += %Q|</p></div></div>|
     html += %Q|<div id="feed_body"><table class="" width=100%><tr></tr>|
-    Rails.logger.debug("list size: #{lists.size}")
-    if (lists.nil? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
+    if (lists.empty? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
       html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
     else
       if !image_list.nil? && !image_list.empty?
@@ -30,7 +29,7 @@ module HomesHelper
            else
              html += "<p></p>"
            end
-           html += %Q|<div class="feed_category_view">| + t("view") + section_span_for(feed.feeded_to,category) + "</div>"
+           html += %Q|<div class="feed_category_view">| + image_tag("#{I18n.locale}/common/feed_view.gif") + section_span_for(feed.feeded_to,category) + "</div>"
         end
         html += %Q|</table><table class="">|
       end      

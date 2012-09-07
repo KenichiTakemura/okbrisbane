@@ -129,7 +129,7 @@ class JobTest < ActiveSupport::TestCase
     job.like
     assert_equal(job.rank,1)
     job.dislike
-    assert_equal(job.rank,0)    
+    assert_equal(job.rank,0)
     (Okvalue::POST_RANK_1.min).upto(Okvalue::POST_RANK_1.max) {
       job.like
     }
@@ -137,7 +137,7 @@ class JobTest < ActiveSupport::TestCase
     job.like
     assert_equal(job.rank,2)
     job.dislike
-    assert_equal(job.rank,1)    
+    assert_equal(job.rank,1)
     (Okvalue::POST_RANK_2.min).upto(Okvalue::POST_RANK_2.max) {
       job.like
     }
@@ -172,6 +172,46 @@ class JobTest < ActiveSupport::TestCase
     assert_equal(job.rank,5)
     job.report_abuse
     assert_equal(job.rank,0)
+  end
+
+  test "search" do
+    job1 = Job.create(:subject => "123abc456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
+    job2 = Job.create(:subject => "123efg456", :category => Job::Categories[:hire], :valid_until => Time.now.utc)
+    job3 = Job.create(:subject => "123hij456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
+    job4 = Job.create(:subject => "123klm456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
+    Image.create(:source_url => "http://test.com").attached_to(job3)
+    Attachment.create(:avatar => File.new("test/fixtures/images/companyprofile.jpg")).attached_to(job4)
+    post_search = PostSearches.new(:okpage => :p_job)
+    assert post_search.save
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
+    post_search.category = Job::Categories[:seek]
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 3)
+    post_search.category = Job::Categories[:hire]
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)
+    post_search.image = true
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 0)
+    post_search.category = Job::Categories[:seek]
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)
+    post_search.attachment = true
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 0)
+    post_search.image = false
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)
+    post_search = PostSearches.first
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
+    post_search.keyword = "abc"
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)
+    post_search.keyword = "456"
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
+    post_search.keyword = "1"
+    assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
+    
+    assert_equal(Job.except_ids([job1.id]).size, 3)
+    assert_equal(Job.except_ids([job1.id,job2.id]).size, 2)
+    assert_equal(Job.except_ids([job1.id,job2.id,job3.id]).size, 1)
+    assert_equal(Job.except_ids([job1.id,job2.id,job3.id,job4.id]).size, 0)
+
+    assert_equal(Job.search_except(post_search, [job1.id], Okvalue::OKBOARD_LIMIT).size, 3)
+
   end
 
 end

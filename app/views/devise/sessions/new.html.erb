@@ -1,9 +1,11 @@
 <%= render :partial => "devise/shared/header" %>
-<div class="signin_title">
-	OKBRISBANE <%= t("signin")%>
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/Signup/tit_651.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
 <div id="signin">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
+	<%= devise_error_messages! %>
 	<div class="group">
 		<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
 		<%= f.email_field :email, :class => "text_field" %>
@@ -18,12 +20,9 @@
 	</div>
 	<% end -%>
 	<div class="group">
-		<%= f.submit t("signin") , :class => "button-link_ok" %>
+		<%= image_submit_tag("#{I18n.locale}/Signin/signin_1.gif", :class => "image_submit_ok") %>
 	</div>
 	<% end %>
-	<div class="forgot_password">
-	<%= link_to t("forgot_your_password"), new_password_path(resource_name), :class => "button-link_naver" %>
-	</div>
 </div>
 
 <%= single_body_banner(6) %>

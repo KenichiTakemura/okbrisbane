@@ -12,11 +12,11 @@
 	</div>
 	<div class="item">
 		<%= f.label :image, "#{t(:image)}", :class => "label left" %>&nbsp;
-		<%= f.select :image, options_for_select(@post.image_yesno_list), :include_blank => true %>
+		<%= f.select :image, options_for_select(@post.yesno_list, @post_search.image), :include_blank => true %>
 	</div>
 	<div class="item">
 		<%= f.label :attachment, "#{t(:attachment)}", :class => "label left" %>&nbsp;
-		<%= f.select :attachment, options_for_select(@post.image_yesno_list), :include_blank => true %>
+		<%= f.select :attachment, options_for_select(@post.yesno_list, @post_search.attachment), :include_blank => true %>
 	</div>
 	</div>
 	<br/>
@@ -35,7 +35,7 @@
 	<% } %>
 	</div>
 	<div class="group search">
-	<%= image_submit_tag("#{I18n.locale}/common/search.png", :class => "po") %>
+	<%= image_submit_tag "#{I18n.locale}/common/search.png", :class => "po image_submit_ok" %>
 	</div>
 	<% end %>
 </div>

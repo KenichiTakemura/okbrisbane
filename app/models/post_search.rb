@@ -26,11 +26,31 @@ class PostSearch < ActiveRecord::Base
   end
   
   def to_s
-    "okpage: #{okpage} category: #{category} keyword: #{keyword} price: #{price} image: #{image} attach: #{attachment} time_by: #{time_by}"
+    "id: #{id} okpage: #{okpage} category: #{category} keyword: #{keyword} price: #{price} image: #{image} attach: #{attachment} time_by: #{time_by}"
   end
   
   def condition_empty?
     category.empty? && keyword.empty? && image.nil? && attachment.nil? && time_by.nil?
+  end
+  
+  def has_category?
+    !category.nil? && !category.empty? 
+  end
+  
+  def has_keyword?
+    !keyword.nil? && !keyword.empty? 
+  end
+  
+  def has_image?
+    !image.nil?
+  end
+  
+  def has_attachment?
+    !attachment.nil?
+  end
+  
+  def has_time_by?
+    !time_by.nil? && !time_by.empty?
   end
   
 end

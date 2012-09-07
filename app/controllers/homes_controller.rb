@@ -39,6 +39,35 @@ class HomesController < OkController
       format.json { render :json => @estate_image_lists }
     end
   end
+  
+  def current_weather
+    @country = params[:c]
+    @weather = Weather.weather_for(Common.today, @country)
+    @dateOn = Common.today
+  end
+
+  def collect_weather
+    require 'net/ftp'
+    tries = 0
+    begin
+      tries += 1
+      logger.info("Accessing to #{Okvalue::WEATHER_AUS}")
+      Net::FTP.open(Okvalue::WEATHER_AUS) do |ftp|
+        ftp.passive = true
+        ftp.login
+        ftp.getbinaryfile("anon/gen/fwo/IDA00100.dat")
+        ftp.close
+        logger.debug(ftp.read)
+      end
+      logger.info("Returned.")
+    rescue Exception => e
+      logger.error(e.message)
+      if (tries < Okvalue::WEATHER_RETRY)
+        sleep(2**tries)
+        retry
+      end
+    end
+  end
 
   private
 

@@ -3,6 +3,8 @@
 <div id="_title">
 <%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
 <%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+<%= image_tag("#{I18n.locale}/Signup/img_process01_on.gif")%>
+
 </div>
 <div id="_main">
 	<span class="stitle"><%= t("stitle_head")%></span>
@@ -24,7 +26,8 @@
 	</p>
 	<%= form_for(@member_management) do |f| %>
 	<div class="actions">
-		<%= f.submit t("agreed"), :id => '_next', :class => "button-link_ok"%>
+		<%= image_submit_tag("#{I18n.locale}/Signup/agreement.jpg", :class => "image_submit_ok") %>
+		<!-- %= f.submit t("agreed"), :id => '_next', :class => "button-link_ok" -->
 	</div>
 	<% end %>
 	</div>

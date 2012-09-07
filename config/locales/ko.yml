@@ -227,6 +227,7 @@ ko:
   korean: '한국어'
   chinese_simplified: '중국어'
   admin: '관리자'
+  token: '토큰'
   or: '또는'
   please: '해주세요.'
   navi_joblist: '구인구직'
@@ -326,8 +327,8 @@ ko:
   day: '일'
   day_ago: '일전'
   week_ago: '주전'
-  image_yes: '잆음'
-  image_no: '없음'
+  attachable_yes: '잆음'
+  attachable_no: '없음'
 
   # User Info
   member: '멤버'
@@ -421,14 +422,7 @@ ko:
   issue_report_to: '문제 이메일 to'
   admin_email: '관리자 이메일'
 
-  brisbane: '브리즈번'
-  sydney: '시드니'
-  melbourne: '멜버른'
-  canberra: '캠베라'
-  hobart: '호밭'
-  adelaide: '아들레이드'
-  perth: '퍼스'
-  
+
   effect_prev: '＜'
   effect_next: '＞'
 
@@ -640,4 +634,27 @@ ko:
 
   # Link to confirm account
   confirm_my_account: '회원가입'
+  change_my_password: '비밀번호를 변경'
   send_reset_password_instrcutions: '비밀번호 재등록 메일 발송'
+  sending_reset_password_instructions_content1: 'Someone has requested a link to change your password, and you can do this through the link below.'
+  sending_reset_password_instructions_content2: 'If you did not request this, please ignore this email.'
+  sending_reset_password_instructions_content3: 'Your password will not change until you access the link above and create a new one.'
+  
+  # Weather
+  weather_forecast_for: '날씨 정보'
+  issuedOn: '발표일'
+  location: '장소'
+  maxTemp: '최고 기온'
+  minTemp: '최저 기온' 
+  forecast: '예보'
+  brisbane: '브리즈번'
+  sydney: '시드니'
+  melbourne: '멜버른'
+  canberra: '캠베라'
+  hobart: '호밭'
+  adelaide: '아들레이드'
+  perth: '퍼스'
+  darwin: 'Darwin'
+    
+  korea: '한국'
+  australia: '호주'

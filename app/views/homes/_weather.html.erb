@@ -1,0 +1,18 @@
+<div class="weather_information_box" style="display:none">
+<div class="_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+<div class="information_box" id="information_box" style="display:none">
+</div>
+</div>
+<%= _script(%Q|
+$("\#weather").click(function() {
+	if ($("div.weather_information_box").is(":hidden")) {
+		$("div.weather_information_box").show("slow");
+		$('div._information_status').css("display","block");
+	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::AUS}");
+	}
+	else {
+		$("div.weather_information_box").hide("slow");
+	}
+	return false;
+})
+|)%> 

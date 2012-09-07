@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
   # redirect back to current page without oauth signin
   def after_sign_in_path_for(resource)
+    logger.debug("after_sign_out_path_for")
     sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if (request.referer == sign_in_url)
       super

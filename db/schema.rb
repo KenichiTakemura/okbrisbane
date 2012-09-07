@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905025344) do
+ActiveRecord::Schema.define(:version => 20120907081741) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -377,6 +377,7 @@ ActiveRecord::Schema.define(:version => 20120905025344) do
     t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.string   "version"
   end
 
   create_table "jobs", :force => true do |t|
@@ -434,6 +435,14 @@ ActiveRecord::Schema.define(:version => 20120905025344) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "monthly_hits", :force => true do |t|
+    t.datetime "month",                     :null => false
+    t.integer  "hit",        :default => 0, :null => false
+    t.integer  "user_hit",   :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "motor_vehicles", :force => true do |t|
     t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
@@ -486,6 +495,18 @@ ActiveRecord::Schema.define(:version => 20120905025344) do
     t.string   "searchable_type"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "rates", :force => true do |t|
+    t.datetime "issued"
+    t.datetime "fixed"
+    t.string   "currency_from"
+    t.string   "currency_to"
+    t.float    "rate_a"
+    t.float    "rate_b"
+    t.float    "rate_c"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -593,6 +614,20 @@ ActiveRecord::Schema.define(:version => 20120905025344) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "weathers", :force => true do |t|
+    t.datetime "issuedOn"
+    t.datetime "dateOn"
+    t.string   "location"
+    t.string   "state"
+    t.string   "country"
+    t.string   "forecast"
+    t.integer  "min"
+    t.integer  "max"
+    t.string   "warning"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "well_beings", :force => true do |t|
     t.string   "locale",                                  :null => false

@@ -26,7 +26,7 @@ module OkboardsHelper
     html += %Q|<p class="okboard_description">|
     html += raw(post.content.body) if !post.content.nil?
     html += "</p>"
-    html += link_to(t("more"), _okboard_link_with_id(category, post.id))
+    html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), _okboard_link_with_id(category, post.id))
     #html += mail_to(author_email(post), t("contact_person"), :encode => "hex")
     html += "</span>"
     html.html_safe
@@ -177,10 +177,11 @@ module OkboardsHelper
       html += "</li>"
     end
     html += "</ul></div>"
+    html += %Q|<div class="okboard_left_fixed_banners">|
     html += single_body_banner(2)
     html += single_body_banner(3)
     html += single_body_banner(4)
-    html += "</div>"
+    html += "</div></div>"
     html.html_safe
   end
 

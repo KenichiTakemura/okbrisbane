@@ -1,12 +1,13 @@
 <%= render :partial => "devise/shared/header" %>
-<div class="signin_title">
-	<%= t(:forgot_your_password)%>
+<div id="_title">
+<%= image_tag("#{I18n.locale}/Signup/tit_621.gif", :class => "title_text")%>
+<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
-<div id="forgot_your_password">
+<div id="signin">
 	<%= devise_error_messages! %>
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form"  }) do |f| %>
 	<div class="group">
-	<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
+	<%= f.label :email, t(:signin_email), :class => "label left"   %>
 	<%= f.email_field :email, :class => "text_field" %>
 	</div>
 	<div class="group">
@@ -14,5 +15,6 @@
 	</div>
 	<% end %>
 </div>
+<%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_findid').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

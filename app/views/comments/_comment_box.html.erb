@@ -3,7 +3,7 @@
 <%= @comment.likes.to_s %>
 <%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(@comment), :remote => true, :method => :post) %>
 <%= @comment.dislikes.to_s %>
-<%= link_to(image_tag("common/sns/report_abuse.gif", :size => "20x20"), comment_abuse_path(@comment), :remote => true, :method => :post) %>
+<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(@comment), :remote => true, :method => :post) %>
 <%= t(:abuse) %>
 <%= @comment.abuse.to_s %>
 <% else %>
@@ -11,6 +11,6 @@
 <%= @comment.likes.to_s %>
 <%= image_tag("common/sns/dislikes.gif", :size => "20x20") %>
 <%= @comment.dislikes.to_s %>
-<%= image_tag("common/sns/report_abuse.gif", :size => "20x20") %>
+<%= image_tag("common/sns/abuse.png", :size => "20x20") %>
 <%= @comment.abuse.to_s %>
 <% end %>

@@ -238,7 +238,6 @@ module ApplicationHelper
   end
 
   def _okpage_v(okpage)
-    logger.debug("_okpage_v okpage: #{okpage}")
     raise "Bad Request #{okpage}" if Style.page(okpage).nil?
     Common.encrypt_data(okpage.to_s).chop
   end

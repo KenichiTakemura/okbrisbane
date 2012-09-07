@@ -1,8 +1,9 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-	<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
-	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
+<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+<%= image_tag("#{I18n.locale}/Signup/img_process03_on.gif")%>
 </div>
 
 <div class="flash">
@@ -18,6 +19,7 @@
 	<% end %>
 </div>
 <div id="_main">
+		<%= image_tag("#{I18n.locale}/common/img_sendmail_ok.gif")%>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>

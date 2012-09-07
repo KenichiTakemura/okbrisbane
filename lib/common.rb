@@ -2,6 +2,10 @@ module Common
   def self.date_format(date)
     date.strftime("%Y-%m-%d") if date
   end
+  
+  def self.today
+    Time.now.utc.strftime("%Y-%m-%d")
+  end
 
   def self.date_format_md(date)
     date.strftime("%m-%d") if date

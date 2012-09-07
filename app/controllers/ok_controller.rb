@@ -16,8 +16,10 @@ class OkController < ApplicationController
        @lock.synchronize {
          hit_day = DailyHit.find_by_day(key)
          hit_day ||= DailyHit.new(:day => key)
-         hit_day.hit += 1
-         hit_day.save
+         hit_day.hitting
+         if current_user
+           hit_day.user_hitting
+         end
        }
        session[key.to_sym] = true
     end

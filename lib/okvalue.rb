@@ -85,7 +85,16 @@ module Okvalue
   BATH_LIST = [0,1,2,3,4,5]
   GARAGE_LIST = [0,1,2,3,4,5]
 
-  IMAGE_YES = "image_yes"
-  IMAGE_NO = "image_no"
+  ATTACHABLE_YES = "attachable_yes"
+  ATTACHABLE_NO = "attachable_no"
   
+  WEATHER_AUS = "ftp2.bom.gov.au"
+  WEATHER_KOR = "http://www.kma.go.kr/wid/queryDFS.jsp?"
+  RATE = "http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/12776_0.html"
+  
+  WEATHER_RETRY = 1
+
+  AUS = "AUS"
+  KOR = "KOR"
+
 end

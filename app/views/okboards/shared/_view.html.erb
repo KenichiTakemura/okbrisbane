@@ -38,6 +38,7 @@
 			<% end %>
 		</div>
 	</div>
+    <%= image_tag("#{I18n.locale}/common/title_dt_detail_photos.gif") %>
 	<div class="okboard_image_gallery">
 		<% if !@post.image.empty? %>
 		<div class="bigPicture">
@@ -151,7 +152,7 @@
 
 			});
 	</script>
-
+    <%= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") %>
 	<div class="okboard_view_content">
 		<div class="okboard_view_controll">
 			<div id="okboard_likes">
@@ -170,11 +171,19 @@
 				<%= link_to(image_tag("#{I18n.locale}/common/write.gif"), Okboard.okboard_link_write(@okpage), :style => "margin:1px") %>
 				<% end %>
 				<% if current_user %>
-				<%= link_to(image_tag("#{I18n.locale}/common/mypage_1.gif", :size => "60x20"), Okboard.okboard_link(:p_mypage), :style => "margin:1px") %>
+				<%= link_to(image_tag("#{I18n.locale}/common/mypage_1.gif", :size => "60x20"), mypage_okboards_path, :style => "margin:1px") %>
 				<% end %>
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 				<%= link_to(image_tag("#{I18n.locale}/common/home.gif"), root_path, :style => "margin:1px") %>
 
+			</div>
+		</div>
+		<div class="page_control">
+			<div id="to_prev">
+			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "70x30"), "#")%>
+			</div>
+			<div id="to_next">
+			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "70x30"), "#")%>
 			</div>
 		</div>
 		<table id="okboard_view_table" width=100% class="ui-widget" border="0">
@@ -204,11 +213,23 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="page_control">
+			<div id="to_prev">
+			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "70x30"), "#")%>
+			</div>
+			<div id="to_next">
+			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "70x30"), "#")%>
+			</div>
+		</div>
+
 		<br/>
-		<%= image_tag("#{I18n.locale}/common/title_commu_main1b.jpg") %>
-		<p style="font-size: 16px">
+		<div class="comment_logo">
+		<%= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") %>
+
+		<p class="comment_title">
 			<%= t(:comment) %> <%= t(:write) %>
 		</p>
+		</div>
 		<div class="new_comment" id="new_comment">
 			<% if !current_user %>
 			<%= link_to(t(:please_signin_to_comment), comment_new_path(@post, :category => @okpage)) %>
@@ -249,7 +270,7 @@
 							<%= comment.likes.to_s %>
 							<%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
 							<%= comment.dislikes.to_s %>
-							<%= link_to(image_tag("common/sns/report_abuse.gif", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
+							<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
 							<%= t(:abuse) %>
 							<%= comment.abuse.to_s %>
 						</div>
@@ -259,7 +280,7 @@
 								<%= simple_format(comment.body) %>
 							</div>
 						</div>
-						<div class="comment_hiddne_content">
+						<div class="comment_hidden_content">
 							<div id="comment_hidden_<%= comment.id %>" style="display:none">
 								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to(t("Show"), "#", :id => "comment_show_#{comment.id}") %>
 							</div>
