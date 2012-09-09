@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 module Okvalue
 
+  ACCESS_KEY = "Showa"
+
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
 
   # Global Variables
@@ -94,7 +96,8 @@ module Okvalue
   
   WEATHER_RETRY = 1
 
-  AUS = "AUS"
-  KOR = "KOR"
+  AU = 1
+  NZ = 2
+  KR = 3
 
 end

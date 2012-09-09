@@ -1,13 +1,50 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
-  
+
   #before_filter :authenticate_user!
   before_filter :set_locale
-  
+  before_filter :opening_soon
+  #before_filter :hit
+
+  require 'thread'
+
+  def initialize
+    super
+    @lock = Mutex.new
+  end
+
+  def hit
+    key = Time.now.utc.strftime("%Y%m%d")
+    logger.debug("key: #{key} session[key]: #{session[key.to_sym]}")
+    unless session[key.to_sym]
+      @lock.synchronize {
+        hit_day = DailyHit.find_by_day(key)
+        hit_day ||= DailyHit.new(:day => key)
+        hit_day.hitting
+        if current_user
+        hit_day.user_hitting
+        end
+      }
+      session[key.to_sym] = true
+    end
+  end
+
   def set_locale
     #I18n.locale = params[:locale] || I18n.default_locale
     I18n.locale = params[:locale] || "ko"
+  end
+
+  def opening_soon
+    hit
+    if !session[:granted]
+      if !params[:k] || !params[:k].eql?(Okvalue::ACCESS_KEY)
+        logger.info("BEFORE OPENNING ACCESS")
+        render  :layout => "opening_soon", :file => "homes/opening_soon.html.erb"
+      else
+        session[:granted] = true
+      end
+    end
   end
 
   #def default_url_options(options={})
@@ -41,12 +78,12 @@ class ApplicationController < ActionController::Base
     logger.debug("after_sign_out_path_for")
     sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if (request.referer == sign_in_url)
-      super
+    super
     else
       request.referer || stored_location_for(resource) || root_path
     end
   end
-  
+
   def after_sign_out_path_for(resource)
     logger.debug("after_sign_out_path_for")
     user_sign_out_path

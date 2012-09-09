@@ -13,13 +13,13 @@
 	<p class="termofservice">
 		<%= t("termofservice")%>
 	</p>
-	<textarea name="" cols="100" rows="13" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termsofservice%>
+	<textarea name="" cols="90" rows="13" class="textarea textarea_content" readonly><%= UsersHelper.termsofservice%>
       </textarea>			                           
       </br>
 	<p class="termofservice">
 		<%= t("termofpersonalinfomation")%>
 	</p>
-	<textarea name="" cols="100" rows="13" class="textarea" readonly style="background: #ffffff"><%= UsersHelper.termofpersonalinfomation%>
+	<textarea name="" cols="90" rows="13" class="textarea textarea_content" readonly><%= UsersHelper.termofpersonalinfomation%>
       </textarea>
 	<p class="agree">
 		<%= check_box_tag :_agree %><%= label_tag :_agree, t("agree")  %>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>OKBRISBANE</title>
+		<%= stylesheet_link_tag "application"%>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+				<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
+		<%= yield %>
+	</body>
+</html>

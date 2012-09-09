@@ -4,8 +4,7 @@ class CreateWeathers < ActiveRecord::Migration
       t.datetime :issuedOn
       t.datetime :dateOn
       t.string :location
-      t.string :state
-      t.string :country
+      t.integer :country
       t.string :forecast
       t.integer :min
       t.integer :max

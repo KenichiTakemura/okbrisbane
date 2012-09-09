@@ -3,8 +3,9 @@ class CreateRates < ActiveRecord::Migration
     create_table :rates do |t|
       t.datetime :issuedOn
       t.datetime :dateOn
-      t.string :currency_from
-      t.string :currency_to
+      t.integer :currency_from
+      t.integer :currency_to
+      t.integer :buy_or_sell
       t.float :rate_a
       t.float :rate_b
       t.float :rate_c

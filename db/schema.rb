@@ -498,10 +498,11 @@ ActiveRecord::Schema.define(:version => 20120907081741) do
   end
 
   create_table "rates", :force => true do |t|
-    t.datetime "issued"
-    t.datetime "fixed"
-    t.string   "currency_from"
-    t.string   "currency_to"
+    t.datetime "issuedOn"
+    t.datetime "dateOn"
+    t.integer  "currency_from"
+    t.integer  "currency_to"
+    t.integer  "buy_or_sell"
     t.float    "rate_a"
     t.float    "rate_b"
     t.float    "rate_c"
@@ -619,8 +620,7 @@ ActiveRecord::Schema.define(:version => 20120907081741) do
     t.datetime "issuedOn"
     t.datetime "dateOn"
     t.string   "location"
-    t.string   "state"
-    t.string   "country"
+    t.integer  "country"
     t.string   "forecast"
     t.integer  "min"
     t.integer  "max"

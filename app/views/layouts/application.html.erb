@@ -5,6 +5,9 @@
 		<title>OKBRISBANE DEBUG</title>
 		<% else %>
 		<title>OKBRISBANE</title>
+		<script type="text/javascript">
+			var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+		</script>
 		<% end %>
 		<%= stylesheet_link_tag "application" %>
 		<%= csrf_meta_tag %>
@@ -74,9 +77,9 @@
 						<%= link_to(image_tag("#{I18n.locale}/common/weather.gif"), "#", :id => "weather") %>
 					</div>
 					<div class="rate_information">
-						<%= image_tag("#{I18n.locale}/common/rate.gif") %>
+						<%= link_to(image_tag("#{I18n.locale}/common/rate.gif"), "#", :id => "ex_rate") %>
 					</div>
-					<%= render :partial => "homes/weather" %>
+					<%= render :partial => "homes/ok_information" %>
 			</div>
 			<div id="header-bottom">
 				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
@@ -108,7 +111,6 @@
 					<% end %>
 				</div>
 				<% else %>
-				<% Rails.logger.debug("not included #{@okpage}") %>
 				<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
 				<% end %>
 			</div>

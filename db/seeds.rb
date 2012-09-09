@@ -24,9 +24,9 @@ User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123
 guest = User.new(:email => "okbrisbane_guest@okbrisbane.com", :user_name => "Guest",
  :is_special => true, :confirmed_at => Time.now.utc)
 guest.save(:validate => false)
-User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
- :password_confirmation => 'kristaadams1', :user_name => "Elliott Joo",
- :is_special => true, :confirmed_at => Time.now.utc)
+#User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
+# :password_confirmation => 'kristaadams1', :user_name => "Elliott Joo",
+# :is_special => true, :confirmed_at => Time.now.utc)
 
 
 # OKBRISBANE 

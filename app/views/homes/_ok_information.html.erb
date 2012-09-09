@@ -1,0 +1,34 @@
+<div class="weather_information_box" style="display:none">
+<div class="_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+<div class="information_box" id="information_box" style="display:none">
+</div>
+</div>
+<div class="rate_information_box" style="display:none">
+<div class="_rate_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+<div class="rate_information_box" id="rate_information_box" style="display:none">
+</div>
+</div>
+<%= _script(%Q|
+$("\#weather").click(function() {
+	if ($("div.weather_information_box").is(":hidden")) {
+		$("div.weather_information_box").show("slow");
+		$('div._information_status').css("display","block");
+	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
+	}
+	else {
+		$("div.weather_information_box").hide("slow");
+	}
+	return false;
+});
+$("\#ex_rate").click(function() {
+	if ($("div.rate_information_box").is(":hidden")) {
+		$("div.rate_information_box").show("slow");
+		$('div._rate_information_status').css("display","block");
+	    $.post("/homes/current_rate?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
+	}
+	else {
+		$("div.rate_information_box").hide("slow");
+	}
+	return false;
+});
+|)%> 

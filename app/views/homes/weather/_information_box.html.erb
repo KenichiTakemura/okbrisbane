@@ -3,12 +3,10 @@
 	<%= link_to(image_tag("#{I18n.locale}/common/btn_refresh.gif"), "#", :id => "refresh", :style => "float:left; margin:3px")%>
 	<%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "close", :style => "float:right")%>
 </div>
-<% if @country.eql?(Okvalue::AUS )%>
+<% if @country.to_i == Okvalue::AU %>
 <%= image_tag("common/australia.gif", :size => "300x250", :style => "position:absolute;top:80px;z-index:-1;")%>
-<% elsif @country.eql?(Okvalue::KOR) %>
-<%= image_tag("common/south-korea.jpg", :size => "300x250", :style => "position:absolute;top:100px;z-index:-1;")%>
-<%= image_tag("common/south-korea.jpg", :size => "300x250", :style => "position:absolute;top:400px;z-index:-1;")%>
-
+<% elsif @country.to_i == Okvalue::KR %>
+<%= image_tag("common/south-korea.jpg", :size => "300x250", :style => "position:absolute;top:80px;z-index:-1;")%>
 <% end %>
 <p class="city">
 	<%= t(:weather_forecast_for) %> <%= @dateOn %>
@@ -29,13 +27,14 @@
 		</td></tr>
 		<% else %>
 			<% @weather.each do |w| %>
-			<% if @country.eql?(Okvalue::AUS )%>
+			<% if @country.to_i == Okvalue::AU %>
 				<% next if !WeatherConfig::AUSCityVisibleMap[w.location.to_sym] %>
 			<tr>
 				<td class="city"><%= link_to(t(w.location), WeatherConfig::AUSCityMap[w.location.to_sym], :target => "_blank") %></td>
-			<% elsif @country.eql?(Okvalue::KOR) %>
+			<% elsif @country.to_i == Okvalue::KR %>
+				<% next if !WeatherConfig::KORCityVisibleMap[w.location.to_sym] %>
 			<tr>
-				<td ><%= image_tag("#{I18n.locale}/city/btn_area_#{w.location}_ov.gif") %></td>
+				<td ><%= link_to(image_tag("#{I18n.locale}/city/btn_area_#{w.location}_ov.gif"), WeatherConfig::KORCityMap[w.location.to_sym], :target => "_blank") %></td>
 			<% end %>
 			<td><%= image_tag("common/weather/#{w.forecast}.png") %></td>
 			<td><%= w.issued %></td>
@@ -46,15 +45,6 @@
 		<% end %>
 	</tbody>
 </table>
-<% if @country.eql?(Okvalue::KOR) %>
-<%= _script_document_ready(%Q|
-$("div.weather_information_box").height("800");
-|)%>
-<% else %>
-<%= _script_document_ready(%Q|
-$("div.weather_information_box").height("400");
-|)%>
-<% end %>
 <%= _script(%Q|
 	$("\#close").click(function() {
 	$("div.weather_information_box").hide("slow");

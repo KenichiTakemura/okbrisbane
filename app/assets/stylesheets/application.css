@@ -211,6 +211,11 @@ textarea {
 	padding: 3px;
 }
 
+.textarea_content {
+  font-size: 14px;
+  font-family: 'NanumGothic';
+  background-color: #B7E2F0;
+}
 /*
 a {
 	text-decoration: none

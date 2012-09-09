@@ -1,0 +1,15 @@
+<div class="information_window_control">
+<%= link_to(image_tag("#{I18n.locale}/common/btn_refresh.gif"), "#", :id => "refresh", :style => "float:left; margin:3px")%>
+<%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "close", :style => "float:right")%>
+</div>
+<%= _script(%Q|
+	$("\#close").click(function() {
+	$("div.rate_information_box").hide("slow");
+	return false;
+	});
+	$("\#refresh").click(function() {
+	$('div._rate_information_status').css("display","block");
+	$.post("/homes/current_rate?locale=#{I18n.locale}&c=" + $("#country").val());
+	return false;
+});
+|)%>

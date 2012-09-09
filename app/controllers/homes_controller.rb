@@ -46,6 +46,12 @@ class HomesController < OkController
     @dateOn = Common.today
   end
 
+  def current_rate
+    @country = params[:c]
+    @weather = Rate.rate_for(Common.today, @country)
+    @dateOn = Common.today
+  end
+
   def collect_weather
     require 'net/ftp'
     tries = 0

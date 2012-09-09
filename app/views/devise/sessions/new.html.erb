@@ -3,9 +3,20 @@
 	<%= image_tag("#{I18n.locale}/Signup/tit_651.gif", :class => "title_text")%>
 	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
+<div class="flash">
+	<% if notice %>
+	<p class="message notice">
+		<%= notice %>
+	</p>
+	<% end %>
+	<% if alert %>
+	<p class="message alert">
+		<%= alert %>
+	</p>
+	<% end %>
+</div>
 <div id="signin">
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
-	<%= devise_error_messages! %>
 	<div class="group">
 		<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
 		<%= f.email_field :email, :class => "text_field" %>
