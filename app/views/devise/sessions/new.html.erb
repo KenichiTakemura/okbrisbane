@@ -31,10 +31,14 @@
 	</div>
 	<% end -%>
 	<div class="group">
-		<%= image_submit_tag("#{I18n.locale}/Signin/signin_1.gif", :class => "image_submit_ok") %>
+		<%= f.submit t(:signin), :class => "button-link_ok" %>
+	</div>
+	<div class="group">
+	<%= link_to t(:resend_confirmation_email), new_user_confirmation_path, :class => "button-link_ok" %>
 	</div>
 	<% end %>
 </div>
+
 
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>

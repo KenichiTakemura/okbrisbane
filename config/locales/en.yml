@@ -10,4 +10,9 @@ en:
   please_signin_or_register: 'Please sign in or register'
   user_guest: 'Guest'
   navi_joblist: 'Job List'
+
+
   
+  # Workaround
+  korea: '한국'
+  australia: '호주'

@@ -12,6 +12,7 @@
 $("\#weather").click(function() {
 	if ($("div.weather_information_box").is(":hidden")) {
 		$("div.weather_information_box").show("slow");
+		$("div.rate_information_box").hide("slow");
 		$('div._information_status').css("display","block");
 	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
 	}
@@ -23,6 +24,7 @@ $("\#weather").click(function() {
 $("\#ex_rate").click(function() {
 	if ($("div.rate_information_box").is(":hidden")) {
 		$("div.rate_information_box").show("slow");
+		$("div.weather_information_box").hide("slow");
 		$('div._rate_information_status').css("display","block");
 	    $.post("/homes/current_rate?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
 	}

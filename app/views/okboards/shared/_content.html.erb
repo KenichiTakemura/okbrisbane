@@ -6,11 +6,6 @@
 		<div class="okboard_title_image">
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x100") %>
 		</div>
-		<!--
-		<div class="okboard_background">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/bg.jpg") %>
-		</div>
-		-->
 	</div>
 	<div class="okboard_image_list">
 	<% if !@board_image_lists.nil? %>
@@ -27,11 +22,6 @@
 			</p>
 			<p class="price_tag">
 				<%= post.price %>
-				<!-- 
-				<div class="okboard_thumbnail_view">
-					<%= t('view') %><%= section_span(post) %>
-				</div>
-				-->
 			</p>
 			<%= link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 		</div>

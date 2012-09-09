@@ -64,14 +64,27 @@ Okbrisbane::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
+
   config.ok_debug = false
-  
+
   Paperclip.options[:command_path] = "/usr/bin/"
-  
+
   # Mail
   config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  :address              => "localhost",
+  #  :enable_starttls_auto => true  }
+  config.action_mailer.default_url_options = { :host => "okbrisbane.com" }
   config.action_mailer.smtp_settings = {
-    :address              => "localhost",
-    :enable_starttls_auto => true  }
+    :address => 's4-sydney.accountservergroup.com',
+    :enable_starttls_auto => false,
+    :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
+    #:authentication => :login,
+    :authentication => :plain,
+    :user_name => 'do_not_reply@okbrisbane.com',
+    #:domain => 'okbrisbane.com',
+    :password => 'okbrisbaneawesome2012!',
+    #:port => 465
+  }
+
 end
