@@ -16,5 +16,6 @@
 /public/system
 /public/fonts
 /public/stylesheets/
+/public/assets*
 /log
 /vendor/bundle
