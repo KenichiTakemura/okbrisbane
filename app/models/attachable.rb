@@ -12,7 +12,7 @@ class Attachable < ActiveRecord::Base
   validates_presence_of :avatar
   
   def attached_to_by(post, user)
-    update_attribute(:attached, post)
+    attached_to(post)
     update_attribute(:attached_by, user)
   end
   

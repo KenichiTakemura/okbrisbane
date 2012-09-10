@@ -11,12 +11,14 @@ class Attachment < Attachable
   # https://github.com/thoughtbot/paperclip
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_POST_ATTACHMENT_SIZE
   validates :avatar_content_type, :thumbnailable => true
-
+  validates_presence_of :write_at, :message => I18n.t('must_be_filled')
+  
   after_initialize :set_default
 
   def set_default
     self.thumb_size ||= ""
     self.medium_size ||= ""
+    self.write_at ||= Time.now.to_i
   end
   
   def url

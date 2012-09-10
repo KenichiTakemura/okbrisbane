@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 module Okvalue
   
+  #Release History
+  #VERSION = "0.1-20120909"
   VERSION = "0.2-20120910"
-
+  #Plan
+  #VERSION = "0.3-20120912"
+  #VERSION = "0.4-20120914"
+  #VERSION = "0.5-20120916"
+    
   ACCESS_KEY = "Showa"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
@@ -11,6 +17,8 @@ module Okvalue
   ADMIN_PHONE = "07-3345-3256"
   ADMIN_FAX = "07-3343-8558"
   ADMIN_EMAIL = "info@okbrisbane.com"
+  
+  POST_ADMIN = "post_admin@okbrisbane.com"
 
   # Global Variables
 

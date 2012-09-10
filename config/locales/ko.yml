@@ -452,7 +452,7 @@ ko:
   
   statistics: '통계'
   daily_statistics: '일 통계'
-  monthly_statistics: '달 통계'
+  monthly_statistics: '월 통계'
   statistics_date: '통계 일'
   visitor: '총'
   user_visitor: '멤버'

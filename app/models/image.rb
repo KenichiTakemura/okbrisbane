@@ -19,6 +19,7 @@ class Image < Attachable
   # https://github.com/thoughtbot/paperclip
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_POST_IMAGE_SIZE
   validates :avatar_content_type, :thumbnailable => true
+  validates_presence_of :write_at, :message => I18n.t('must_be_filled')
   validates_presence_of :original_size, :message => I18n.t('failed_to_create')
   validates_format_of :link_to_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.link_to_url.empty? }
   validates_format_of :source_url, :with => URI::regexp(%w(http https)), :message => I18n.t("invalid"), :if => Proc.new { |image| !image.source_url.empty? }
@@ -33,6 +34,7 @@ class Image < Attachable
     self.medium_size ||= "400x300"
     self.link_to_url ||= ""
     self.source_url ||= ""
+    self.write_at ||= Time.now.to_i
   end
 
   def width

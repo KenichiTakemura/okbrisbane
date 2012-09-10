@@ -40,6 +40,8 @@ class Post < ActiveRecord::Base
   validates_presence_of :subject, :message => I18n.t('must_be_filled')
   validates_presence_of :valid_until, :message => I18n.t('must_be_filled')
   validates_presence_of :status, :message => I18n.t('must_be_filled')
+  validates_presence_of :write_at, :message => I18n.t('must_be_filled')
+
   validates_numericality_of :views, :only_integer => true, :greater_than_or_equal_to => 0
   validates_numericality_of :likes, :only_integer => true, :greater_than_or_equal_to => 0
   validates_numericality_of :dislikes, :only_integer => true, :greater_than_or_equal_to => 0
@@ -129,6 +131,7 @@ class Post < ActiveRecord::Base
     self.status ||= Okvalue::POST_STATUS_PUBLIC
     self.mode ||= Role::R[:user_r] | Role::R[:user_w]
     self.comment_email ||= false
+    self.write_at ||= Time.now.to_i
   end
   
   def viewed
@@ -214,7 +217,7 @@ class Post < ActiveRecord::Base
   end
   
   def admin_category_list
-    list = category_list.clone
+    list = category_list.dup
     #list = Array.new
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
