@@ -222,6 +222,7 @@ ko:
       last: '마지막 '
       
   welcome_message: '환영합니다!'
+  hello: '안녕하세요!'
   select_language: '다른 언어로 사이트 보기'
   english: '영어'
   korean: '한국어'
@@ -236,7 +237,8 @@ ko:
   admin_signin: '로그인'
   signin_email: '이메일 주소'
   signin_password: '비밀번호'
-  change_password: '비밀번호 변경'  
+  change_password: '비밀번호 변경'
+  change_registration: '변경'
   remember_me: '자동 로그인 (공용 PC인 경우 체크하지 마세요.) '
   signup: '회원가입'
   signout: '로그아웃'
@@ -258,7 +260,8 @@ ko:
   create: '등록'
   delete: '삭제'
   add: '추가'
-  findid: :forgot_your_password
+  findid: '아이디 찾기'
+  findpassword: '비밀번호 찾기'
   pages: '페이지'
   page: :pages
   post: '투고'
@@ -446,7 +449,14 @@ ko:
   listing_issues: '문제 일람'
   listing_system_settings: '사이트 관리'
   system_settings: '사이트 관리'
-
+  
+  statistics: '통계'
+  daily_statistics: '일 통계'
+  monthly_statistics: '달 통계'
+  statistics_date: '통계 일'
+  visitor: '총'
+  user_visitor: '멤버'
+  
   member_list: '멤버 일람'
   
   jobs: "구인구직"
@@ -598,7 +608,8 @@ ko:
   business_profile_image: '프로필 이미지'
   
   banner_page: '광고란 페이지'
-  banner_contact :  '광고 문의'
+  banner_contact:  '광고 문의'
+  general_contact: 'Contact US'
   
   client_banner_image: '광고 이미지'
   link_to_url: '링크'
@@ -636,11 +647,15 @@ ko:
   confirm_my_account: '회원가입'
   change_my_password: '비밀번호를 변경'
   send_reset_password_instrcutions: '비밀번호 재등록 메일 발송'
-  sending_reset_password_instructions_content1: 'Someone has requested a link to change your password, and you can do this through the link below.'
-  sending_reset_password_instructions_content2: 'If you did not request this, please ignore this email.'
-  sending_reset_password_instructions_content3: 'Your password will not change until you access the link above and create a new one.'
+  sending_reset_password_instructions_content1: '비밀번호를 변경하기 위해서는 아래의 링크를 클릭하여 주시기 바랍니다. '
+  sending_reset_password_instructions_content2: '비밀번호를 변경이 안된 상태에서 받은 이메일에 대해서는 폐기하여 주시기 바랍니다.'
+  sending_reset_password_instructions_content3: '아래의 링크를 클릭하여 비밀번호를 변경할때까지 비밀번호는 안 바뀝니다.'
   
   resend_confirmation_email: '회원가입 확인메일을 다시반송'
+  
+  signin_instructions_for: '이메일 주소 하고 비밀번호를 입력하여 주시기 바랍니다.'
+  change_password_instructions_for: '이메일 주소를 입력하여 주시기 바랍니다. 어떻게 비밀번호를 재설정하는지 안내하는 메일을 발송합니다.'
+  sending_confirmation_instructions_for: '회원등록 이메일 주소를 입력하여 주시기 바랍니다. 이메일 주소를 확인하는 메일을 다시발송합니다.'
   
   # Weather
   weather_forecast_for: '날씨 정보'

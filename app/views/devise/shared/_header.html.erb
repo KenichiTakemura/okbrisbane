@@ -1,6 +1,6 @@
 <div id="usermanagement">
-	<% links = ["signin","signup","findid","termsofservice","termsofpersonalinfo"] %>
-	<% paths = [new_user_session_path,member_managements_sign_up_path,new_user_password_path,termsofservice_path,termsofpersonal_path] %>
+	<% links = ["signin","signup","findid","findpassword","termsofservice","termsofpersonalinfo"] %>
+	<% paths = [new_user_session_path,member_managements_sign_up_path,new_user_confirmation_path,new_user_password_path,termsofservice_path,termsofpersonal_path] %>
 	<%= _left_menu("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", links,paths) %>
 	<div id="page_section_right">
 		<div id="content_head">

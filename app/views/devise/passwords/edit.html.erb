@@ -15,15 +15,14 @@
 
 <div class="group">
 	<%= f.label :password_confirmation, t(:new_password_confirmation), :class => "label left"   %>
-	<br />
 	<%= f.password_field :password_confirmation, :class => "text_field" %>
 </div>
 
-<div>
+<div class="group">
 		<%= f.submit t(:change_password) , :class => "button-link_ok" %>
 </div>
 <% end %>
 </div>
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
-<%= _script_document_ready(%Q|$('#_findid').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
+<%= active_menu("_findpassword") %>

@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 module Okvalue
+  
+  VERSION = "0.2-20120910"
 
   ACCESS_KEY = "Showa"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
+  
+  ADMIN_ADDRESS = "OOK Pty Ltd  ABN 98 152 354 768 Shop 3 6 Zamia Street Sunny Bank QLD 4109"
+  ADMIN_PHONE = "07-3345-3256"
+  ADMIN_FAX = "07-3343-8558"
+  ADMIN_EMAIL = "info@okbrisbane.com"
 
   # Global Variables
 
@@ -99,5 +106,8 @@ module Okvalue
   AU = 1
   NZ = 2
   KR = 3
+  
+  SITE_STATISTICS_DAILY = "daily"
+  SITE_STATISTICS_MONTHLY = "monthly"
 
 end

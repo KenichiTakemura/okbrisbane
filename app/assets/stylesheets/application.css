@@ -13,16 +13,21 @@
  */
 html {
   height: 100%;
-  width: 1000px;
   margin: 0 auto;
   background-color: #F2F2F2;
 }
 
 body {
-	overflow: auto;
+  overflow: auto;
+  padding: 5px;
+  height: 100%;
+}
+
+#page_body {
+	overflow: none;
 	padding: 5px;
 	height: 100%;
-    width: 1000px;
+	width:1000px;
     margin-left: auto;
     margin-right: auto;
 	font-size: 12px;
@@ -48,14 +53,54 @@ body {
 	height: 100%;
 	margin-bottom: 20px;
 }
-#footer {
-	padding-bottom: 20px;
+
+div#footer {
+    margin: 0px;
+    bottom:0px;
+    width:100%;
+    position: fixed;
+    left:0px;
 }
 
-#footer img {
-	height: 110px;
+div#footer .footer_content {
+	position: relative;
+	float:left;
+	width:100%;
+	height: 35px;
+	background-color: #ADD8E6;
+    color: rgb(166, 166, 166);
+    box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
 }
 
+div#footer .footer_links {
+	position: relative;
+	float:right;
+	line-height: 30px;
+}
+
+div#footer .footer_text {
+	font-family: 'NanumGothicExtraBold';
+	font-size: 17px;
+	color: #4E4E4E;
+}
+
+div#footer .copyright {
+	font-family: 'NanumGothic';
+	font-size: 13px;
+	float:left;
+	color: #4E4E4E;
+	line-height: 10px;
+	margin-right:5px;
+}
+
+div#footer .developer {
+	position:absolute;
+	top:30px;
+	font-size:8px;
+	right:15px;
+	color: #4E4E4E;
+	line-height: 0px;
+}
 /* Flash */
 
 .flash .message {
@@ -243,7 +288,7 @@ a:hover, a:active { color: #41A317 }
 #page_section_right {
   width: 750px;
   float:right;
-    margin-bottom:30px;
+  margin-bottom:30px;
 }
 
 #page_section_right #content_head {
@@ -260,15 +305,14 @@ a:hover, a:active { color: #41A317 }
   position:relative;
   float:left;
   width: 100%;
-  background: url("common/rows_tpl_type11all.gif");
-  background-repeat:repeat-x;
+  height: 240px;
+  border: 1px solid #c0c0c0;
+  background-color: #DEE3FF;
 }
   
 #page_section_left .items {
   position:relative;
   margin-top: 0px;
-  height: 190px;
-  border: 1px solid #c0c0c0;
 }
 
 #page_section_left .item {
@@ -279,7 +323,9 @@ a:hover, a:active { color: #41A317 }
 }
 
 #page_section_left .item .menu-item {
-  font-size: 13px;
+  font-size: 14px;
+  height:25px;
+  line-height: 25px;
   font-weight: bold;
   text-align: center;
   padding: 1px;
@@ -287,7 +333,8 @@ a:hover, a:active { color: #41A317 }
 }
 
 #page_section_left .item .menu-item:hover {
-  background: #41A317;
+  background-color: #41A317;
+  font-size: 16px;
   -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   box-shadow: 0 0 5px rgba(0,0,0,0.5);

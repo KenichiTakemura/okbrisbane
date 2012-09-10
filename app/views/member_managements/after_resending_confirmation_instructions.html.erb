@@ -18,7 +18,13 @@
 	<% end %>
 </div>
 <div id="_main">
+<div class="after_confirmation_logo">	
+<%= link_to(image_tag("common/logo_w.gif"), root_path)%>
+</div>
+<div class="after_confirmation_banner">
+	<%= single_body_banner(6) %>
+</div>
 </div>
 <%= render :partial => "devise/shared/footer" %>
-<%= active_menu("_findpassword") %>
+<%= active_menu("_findid") %>
 

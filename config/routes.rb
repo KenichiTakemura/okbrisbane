@@ -13,6 +13,8 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sending_reset_password_instructions', :via=>:get, :as => :user_sending_reset_password_instructions
   match 'member_managements/after_reset_password', :via=>:get, :as => :user_after_reset_passwod
   match 'member_managements/after_confirmation', :via=>:get, :as => :user_after_confirmation
+  match 'member_managements/after_resending_confirmation_instructions', :via=>:get, :as => :user_after_resending_confirmation_instructions
+
   resources :member_managements, :only => ["index","new","create"]
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }

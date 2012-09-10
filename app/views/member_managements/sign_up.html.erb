@@ -32,6 +32,6 @@
 	</div>
 </div>
 <%= render :partial => "devise/shared/footer" %>
-<%= _script_document_ready(%Q|$('#_signup').attr("style", "opacity:1;filter:alpha(opacity=100);");
-	$('#_next').click(function() {if ($('#_agree').attr('checked')) {} else {return false;}});|) %>
+<%= active_menu("_signup") %>
+<%= _script_document_ready(%Q|$('#_next').click(function() {if ($('#_agree').attr('checked')) {} else {return false;}});|) %>
 

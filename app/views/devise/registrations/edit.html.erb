@@ -1,25 +1,40 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= render :partial => "devise/shared/header" %>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div id="_title">
+	<%= image_tag("#{I18n.locale}/Signup/tit_711.gif", :class => "title_text")%>
+	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+</div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+<div id="signin">
+	<p class="termofservice">
+		<%= t(:hello)%> <%= resource.name%> <%= t(:sir)%>
+		<br/>
+		<%= t(:edit_instructions_for)%>
+	</p>
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form" }) do |f| %>
+	<%= devise_error_messages! %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
+	<div class="group">
+		<%= f.label :email, t(:email), :class => "label left"   %>
+		<%= resource.email %>
+	</div>
+	<div class="group">
+		<%= f.label :password, t(:new_password), :class => "label left"   %>
+		<%= f.password_field :password, :autocomplete => "off" %>
+	</div>
+	<div class="group">
+		<%= f.label :password_confirmation, t(:new_password_confirmation), :class => "label left"   %>
+		<%= f.password_field :password_confirmation %>
+	</div>
+	<div class="group">
+		<%= f.label :current_password, t(:current_password), :class => "label left"   %>
+		<%= f.password_field :current_password %>
+	</div>
+	
+	<div class="group">
+		<%= f.submit t(:change_registration) , :class => "button-link_ok" %>
+	</div>
+	<% end %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+	<%= render :partial => "devise/shared/footer" %>
+	<%= active_menu("_signin") %>

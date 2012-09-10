@@ -4,6 +4,9 @@
 <%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
 <div id="signin">
+	<p class="termofservice">
+		<%= t(:change_password_instructions_for)%>
+	</p>
 	<%= devise_error_messages! %>
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form"  }) do |f| %>
 	<div class="group">
@@ -17,6 +20,5 @@
 	</div>
 	<% end %>
 </div>
-<%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
-<%= _script_document_ready(%Q|$('#_findid').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
+<%= active_menu("_findpassword") %>

@@ -1,30 +1,5 @@
 class OkController < ApplicationController
 
-  before_filter :hit
-
-  require 'thread'
-
-  def initialize
-    super
-    @lock = Mutex.new
-  end
-  
-  def hit
-     key = Time.now.utc.strftime("%Y%m%d")
-     logger.debug("key: #{key} session[key]: #{session[key.to_sym]}")
-     unless session[key.to_sym]
-       @lock.synchronize {
-         hit_day = DailyHit.find_by_day(key)
-         hit_day ||= DailyHit.new(:day => key)
-         hit_day.hitting
-         if current_user
-           hit_day.user_hitting
-         end
-       }
-       session[key.to_sym] = true
-    end
-  end
-
   protected
 
   MODELS = {:p_job => Job,

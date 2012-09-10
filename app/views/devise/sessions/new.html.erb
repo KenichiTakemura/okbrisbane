@@ -16,6 +16,9 @@
 	<% end %>
 </div>
 <div id="signin">
+	<p class="termofservice">
+		<%= t(:signin_instructions_for)%>
+	</p>
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
 	<div class="group">
 		<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
@@ -33,13 +36,10 @@
 	<div class="group">
 		<%= f.submit t(:signin), :class => "button-link_ok" %>
 	</div>
-	<div class="group">
-	<%= link_to t(:resend_confirmation_email), new_user_confirmation_path, :class => "button-link_ok" %>
-	</div>
 	<% end %>
 </div>
 
 
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
-<%= _script_document_ready(%Q|$('#_signin').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
+<%= active_menu("_signin") %>

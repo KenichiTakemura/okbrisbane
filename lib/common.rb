@@ -6,6 +6,10 @@ module Common
   def self.today
     Time.now.utc.strftime("%Y-%m-%d")
   end
+  
+  def self.this_month
+    Time.now.utc.strftime("%Y-%m")
+  end
 
   def self.date_format_md(date)
     date.strftime("%m-%d") if date

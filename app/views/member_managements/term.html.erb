@@ -16,5 +16,5 @@
 <%= link_to(image_tag("#{I18n.locale}/common/btn_top.gif"), "#_main")%>
 
 <%= render :partial => "devise/shared/footer" %>
-<%= _script_document_ready(%Q|$('#_termsofservice').attr("style", "opacity:1;filter:alpha(opacity=100);");|) %>
+<%= active_menu("_termsofservice") %>
 

@@ -30,7 +30,7 @@
 
 ul.okboard_left_menu_items {
   list-style-type: none;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   float:left;
 }
@@ -40,6 +40,7 @@ li.okboard_left_menu_item {
   opacity: 0.5;
   filter: alpha(opacity=50);
   margin-left:0px;
+  margin-top:5px;
 }
 
 a.okboard_left_menu_link:hover {
@@ -170,8 +171,9 @@ a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
 
 .okboard_view_sns {
   position: relative;
-  float: right;
-  height: 40px;
+  float: left;
+  height: 60px;
+  width:100%;
 }
 
 .okboard_view_controll {

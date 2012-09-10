@@ -32,28 +32,7 @@ module ApplicationHelper
   def socialable?
     SystemSetting.first.socialable
   end
-  
-  # Create left Menu
-  def _left_menu(logo, links, paths)
-    html = %Q|<div id="page_section_left">|
-    if !logo.nil?
-      html += image_tag(logo, :class => "logo")
-    else
-      html += single_body_banner(1)
-    end
-    html += %Q|<div id="menu"><div class="items">|
-    links.each_with_index do |link,i|
-      html += %Q|<div class="item" id="_#{link}"><p class="menu-item">|
-      html += link_to(t(link), paths[i], :class => "non_style_link")
-      html += "</p></div>"
-    end
-    html += "</div></div>"
-    html += single_body_banner(2)
-    html += single_body_banner(3)
-    html += single_body_banner(4)
-    html += "</div>"
-    html.html_safe
-  end
+
 
   # Create banner
   def _collectImage(p, s, a)
@@ -323,7 +302,7 @@ module ApplicationHelper
   end
 
   def version
-    "Version 0.1"
+    "Version #{Okvalue::VERSION}"
   end
 
   def thumbnail(image, action)

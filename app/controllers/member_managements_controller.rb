@@ -1,7 +1,7 @@
 class MemberManagementsController < OkController
 
   before_filter :page_p_signup, :only => ["sign_up","term","personal","create","inactive_signup"]
-  before_filter :page_p_signin, :only => ["sing_in","sending_reset_password_instructions","after_reset_password","after_confirmation"]
+  before_filter :page_p_signin, :only => ["sing_in","sending_reset_password_instructions","after_reset_password","after_confirmation","after_resending_confirmation_instructions"]
   def page_p_signup
     @okpage = :p_signup
   end
@@ -57,6 +57,12 @@ class MemberManagementsController < OkController
     end
   end
   
+  def after_resending_confirmation_instructions
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def term
     respond_to do |format|
       format.html # term.html.erb

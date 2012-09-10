@@ -8,5 +8,7 @@ class DailyHit < ActiveRecord::Base
   def user_hitting
     update_attribute(:user_hit, user_hit + 1)    
   end
+  
+  scope :month_for, lambda { |month| where("day like ?", "#{month}%") }
 
 end

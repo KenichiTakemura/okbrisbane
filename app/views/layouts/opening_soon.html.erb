@@ -6,7 +6,8 @@
 		<%= csrf_meta_tag %>
 	</head>
 	<body>
-				<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
+		<div style="margin-left:auto;margin-right:auto;width:800px">
+		<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko'), :style => "align:center" %>
 		<%= yield %>
 	</body>
 </html>

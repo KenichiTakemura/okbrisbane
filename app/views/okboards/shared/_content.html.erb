@@ -40,7 +40,6 @@
 	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
 	<%= render :partial => "okboards/shared/filter" %>
 	<% end %>
-	<%= javascript_include_tag 'jquery.dataTables.min.js' %>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">

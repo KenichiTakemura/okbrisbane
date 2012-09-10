@@ -40,6 +40,7 @@ Okbrisbane::Application.configure do
   Paperclip.options[:command_path] = "/usr/bin/"
   
   # Mail
+  config.action_mailer.default_url_options = { :host => "okbrisbane-stage.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "localhost",

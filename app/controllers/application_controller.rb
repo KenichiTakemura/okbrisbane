@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def hit
-    key = Time.now.utc.strftime("%Y%m%d")
-    logger.debug("key: #{key} session[key]: #{session[key.to_sym]}")
+    key = Time.now.strftime("%Y-%m-%d")
+    logger.info("key: #{key} session[key]: #{session[key.to_sym]}")
     unless session[key.to_sym]
       @lock.synchronize {
         hit_day = DailyHit.find_by_day(key)
