@@ -4,17 +4,33 @@ module Common
   end
   
   def self.today
-    Time.now.utc.strftime("%Y-%m-%d")
+    current_time.strftime("%Y-%m-%d")
+  end
+  
+  # Time must be got from this method
+  def self.current_time
+    Time.now
   end
   
   def self.this_month
-    Time.now.utc.strftime("%Y-%m")
+    current_time.strftime("%Y-%m")
   end
 
   def self.date_format_md(date)
     date.strftime("%m-%d") if date
   end
+  
+  def self.uniqe_token
+    rand(36**8).to_s(36)
+  end
 
+  def self.random_index(a, b)
+    return 0 if a.size >= b
+    while true
+      v = rand(b)
+      return v if !a.include?(v)
+    end
+  end
 
   def self.hash(ccc)
     OpenSSL::Digest::SHA1.new(ccc).to_s

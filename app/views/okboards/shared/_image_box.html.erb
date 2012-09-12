@@ -2,7 +2,7 @@
 <div style="position: relative; float: left;margin-left: 5px">
 	<%= image_tag(image.thumb_image, :title => "#{image.avatar_file_name}") %>
 	<div style="position: absolute; top: 0px; left:95%;">
-		<%= link_to(t('x'), _okboard_link_delete_image_with_id_timestamp(@okpage, image.id, @timestamp), :class => "delete_x", :remote => true, :method => :delete, :data => { :confirm => t('confirm_delete') }) %> 
+		<%= link_to(t('x'), Okboard.okboard_link_delete_image_with_id_timestamp(@okpage, image.id, @timestamp), :class => "delete_x", :remote => true, :method => :delete, :data => { :confirm => t('confirm_delete') }) %> 
 	</div>
 </div>
 <% end %>

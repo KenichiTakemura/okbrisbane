@@ -20,13 +20,13 @@ MemberManagement.delete_all
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123',
  :password_confirmation => 'kenichi123', :user_name => "다케무라 켄이치",
- :is_special => true, :confirmed_at => Time.now.utc)
+ :is_special => true, :confirmed_at => Common.current_time)
 guest = User.new(:email => "okbrisbane_guest@okbrisbane.com", :user_name => "Guest",
- :is_special => true, :confirmed_at => Time.now.utc)
+ :is_special => true, :confirmed_at => Common.current_time)
 guest.save(:validate => false)
 #User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
 # :password_confirmation => 'kristaadams1', :user_name => "Elliott Joo",
-# :is_special => true, :confirmed_at => Time.now.utc)
+# :is_special => true, :confirmed_at => Common.current_time)
 
 
 # OKBRISBANE 

@@ -23,7 +23,7 @@
 			<p class="price_tag">
 				<%= post.price %>
 			</p>
-			<%= link_to(t("view"), _okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
+			<%= link_to(t("view"), Okboard.okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 		</div>
 		<% end %>
 	</div>
@@ -50,7 +50,7 @@
 			<div class="more">
 				<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "button-link_ok") %>
 				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
-				<%= link_to(t('write_new'), _okboard_link_write(@okpage), :class => 'button-link_naver')%>
+				<%= link_to(t('write_new'), Okboard.okboard_link_write(@okpage), :class => 'button-link_naver')%>
 				<% end %>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 <%= _script_document_ready(%Q|
 $('\#_lastid').val("#{@lastid}");
 $('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
-$.post("| + more_okboards_path + %Q|", {v: '| + _okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
+$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
 })|) %>
 <% if !@board_lists.empty? %>
 <%= _script_document_ready(%Q|

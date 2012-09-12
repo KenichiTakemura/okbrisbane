@@ -29,13 +29,23 @@ class Attachable < ActiveRecord::Base
     end
   end
   
+  before_destroy :save_attached_post
+  
+  def save_attached_post
+    @@post = self.attached
+    logger.debug("before_destroy save_attached_post #{@@post}")
+  end
+  
   after_destroy :post_has_attached
   
   def post_has_attached
+    logger.debug("after_destroy save_attached_post #{@@post}")
+    # This indicates attached is not saved yet.
+    return if @@post.nil?
     if self.instance_of? Image
-      self.attached.set_has_image(false) if self.attached.image.size == 0
+      @@post.set_has_image(false) if @@post.image.empty?
     elsif self.instance_of? Attachment
-      self.attached.set_has_attachment(false) if self.attached.attachment.size == 0
+      @@post.set_has_attachment(false) if @@post.attachment.empty?
     end
   end
 

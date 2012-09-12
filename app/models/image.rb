@@ -34,7 +34,6 @@ class Image < Attachable
     self.medium_size ||= "400x300"
     self.link_to_url ||= ""
     self.source_url ||= ""
-    self.write_at ||= Time.now.to_i
   end
 
   def width
@@ -64,7 +63,14 @@ class Image < Attachable
     if !self.link_to_url.nil? && !self.link_to_url.empty?
       return true
     end
-    false   
+    false
+  end
+  
+  def somethingable?
+    if !self.something.nil? && !self.something.empty?
+      return true
+    end
+    false
   end
   
   def link

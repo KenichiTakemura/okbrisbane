@@ -18,7 +18,6 @@ class Attachment < Attachable
   def set_default
     self.thumb_size ||= ""
     self.medium_size ||= ""
-    self.write_at ||= Time.now.to_i
   end
   
   def url

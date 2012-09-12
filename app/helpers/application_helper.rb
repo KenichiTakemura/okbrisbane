@@ -84,17 +84,18 @@ module ApplicationHelper
         if b.effect.eql?(Banner::E_FIX) && count == 0
           html += %Q|<div style="margin: 0px 2px 0px;float:left">|
           if b.is_random 
-            _index = rand(images.size)
+            html += one_image(b,images[rand(images.size)])
           else
-            _index = 0
-          end
-          html += one_image(b,images[_index])
+            html += one_image(b,images[0])
+          end          
           html += "</div>"
         elsif b.effect.eql?(Banner::E_FIX) && count > 0
+          _rand_index = Array.new
           1.upto(count) do |x|
             html += %Q|<div style="margin: 0px 2px 0px;float:left">|
             if b.is_random 
-              _index = rand(images.size)
+              _index = Common.random_index(_rand_index, images.size)
+              _rand_index.push(_index)
             else
               _index = x - 1
             end
@@ -209,66 +210,13 @@ module ApplicationHelper
     script = ""
     Style::NAVI.each do |key|
       value = Style.page(key)
-      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{_okboard_link(key)}| + %Q|"});|
+      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
     end
     html += _script_document_ready(script)
     html += "</ul></div>"
     html.strip.html_safe
   end
-
-  def _okpage_v(okpage)
-    raise "Bad Request #{okpage}" if Style.page(okpage).nil?
-    Common.encrypt_data(okpage.to_s).chop
-  end
-
-  def _okboard_link(okpage)
-    %Q|/okboards?v=| + _okpage_v(okpage)
-  end
-
-  def _okboard_link_with_id(okpage, id)
-    %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
-  end
-
-  def _okboard_link_with_user(okpage, user)
-    if !user.nil?
-      %Q|/okboards/view?v=| + _okpage_v(okpage) + "&u=" + Common.encrypt_data(user.to_s).html_safe
-    else
-      _okboard_link(okpage)
-    end
-  end
-  
-  def _okboard_link_upload_image(okpage)
-    %Q|/okboards/upload_image?v=| + _okpage_v(okpage)
-  end
-  
-  def _okboard_link_delete_image(okpage)
-    %Q|/okboards/delete_image?v=| + _okpage_v(okpage) + "&id="
-  end
-
-  def _okboard_link_delete_image_with_id_timestamp(okpage, id, timestamp)
-    %Q|/okboards/delete_image?v=| + _okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
-  end
-  
-  def _okboard_link_upload_attachment(okpage)
-    %Q|/okboards/upload_attachment?v=| + _okpage_v(okpage)
-  end
-  
-  def _okboard_link_delete_attachment(okpage)
-    %Q|/okboards/delete_attachment?v=| + _okpage_v(okpage) + "&id="
-  end
-
-  def _okboard_link_delete_attachment_with_id_timestamp(okpage, id, timestamp)
-    %Q|/okboards/delete_attachment?v=| + _okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
-  end
-  
-  def _okboard_link_write(okpage)
-    %Q|/okboards/write?v=| + _okpage_v(okpage)
-  end
-
-  def _okboard_link_with_category(okpage,category)
-    _okboard_link(okpage) + "&c=" + Common.encrypt_data(category).html_safe
-  end
-
+    
   def _script_document_ready(script)
     html = %Q|<script type="text/javascript" charset="utf-8">$(document).ready(function() {#{script}});</script>|
     html.html_safe
@@ -370,5 +318,5 @@ module ApplicationHelper
     html = %Q|<img src="/assets/noattachment.jpg" width="50px" height="50px" />|
     html.html_safe
   end
-
+  
 end

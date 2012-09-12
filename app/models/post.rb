@@ -131,7 +131,6 @@ class Post < ActiveRecord::Base
     self.status ||= Okvalue::POST_STATUS_PUBLIC
     self.mode ||= Role::R[:user_r] | Role::R[:user_w]
     self.comment_email ||= false
-    self.write_at ||= Time.now.to_i
   end
   
   def viewed
@@ -235,6 +234,17 @@ class Post < ActiveRecord::Base
     list = Array.new
     list.push([I18n.t(Okvalue::ATTACHABLE_YES),true])
     list.push([I18n.t(Okvalue::ATTACHABLE_NO),false])
+  end
+  
+  def image_feed_for
+    return if image.empty?
+    image.each do |i|
+      return i if i.linkable? && i.somethingable?
+    end
+    image.each do |i|
+      return i if i.linkable?
+    end
+    image.first
   end
   
   protected

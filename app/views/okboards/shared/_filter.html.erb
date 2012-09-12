@@ -21,18 +21,46 @@
 	</div>
 	<br/>
 	<div class="itemgroup">
-	<% 1.upto(6) { |d| %>
 	<div class="item">
-		<%= f.label :time_by, "#{d} #{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond["time_by_day_#{d}".to_sym] %>
+		<%= f.label :time_by, "#{t(:one)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_1] %>
 	</div>
-	<% } %>
-	<% 1.upto(4) { |w| %>
 	<div class="item">
-		<%= f.label :time_by, "#{w} #{t(:week_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond["time_by_week_#{w}".to_sym] %>
+		<%= f.label :time_by, "#{t(:two)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_2] %>
 	</div>
-	<% } %>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:three)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_3] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:four)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_4] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:five)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_5] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:six)} #{t(:day_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_day_6] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:one)} #{t(:week_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_week_1] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:two)} #{t(:week_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_week_2] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:three)} #{t(:week_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_week_3] %>
+	</div>
+	<div class="item">
+		<%= f.label :time_by, "#{t(:four)} #{t(:week_ago)}", :class => "label left" %>&nbsp;
+		<%= f.radio_button :time_by, PostSearch::SearchCond[:time_by_week_4] %>
+	</div>
 	</div>
 	<div class="group search">
 	<%= image_submit_tag "#{I18n.locale}/common/search.png", :class => "po image_submit_ok" %>

@@ -8,14 +8,11 @@ class OkboardsController < OkController
 
   def _before_
     raise "Bad Request" if params[:v].nil?
-    logger.debug("v #{params[:v]} c: #{params[:c]} d: #{params[:d]} s: #{params[:s]}")
-    @board = Common.decrypt_data(params[:v])
-    @@category = nil
-    @@board_id = nil
-    @@search_id = nil
-    @@category = Common.decrypt_data(params[:c]) if !params[:c].nil?
-    @@board_id = Common.decrypt_data(params[:d]).to_i if !params[:d].nil?
-    @@search_id = Common.decrypt_data(params[:s]).to_i if !params[:s].nil?
+    logger.debug("v: #{params[:v]} c: #{params[:c]} d: #{params[:d]} s: #{params[:s]}")
+    @board = Okboard.param_v(params[:v])
+    @@category = params[:c].present? ? Okboard.param_to_s(params[:c]) : nil
+    @@board_id = params[:d].present? ? Okboard.param_to_i(params[:d]) : nil
+    @@search_id = params[:s].present? ? Okboard.param_to_i(params[:s]) : nil
     logger.debug("@board: #{@board} category: #{@@category} board_id: #{@@board_id} search_id #{@@search_id}")
     @okpage = @board.to_sym
   end
@@ -43,13 +40,17 @@ class OkboardsController < OkController
     logger.debug("v: #{@board}")
     model = MODELS[@okpage]
     raise "Bad Board Request" if model.nil?
-    if !@@search_id.nil?
-      @post_search_id = @@search_id
+    if @@search_id.present?
       @post_search = PostSearch.find(@@search_id)
     else
       @post_search = PostSearch.new(:okpage => @okpage)
       if @@category
         @post_search.category = @@category
+        ActiveRecord::Base.transaction do
+          if @post_search.save
+              @post_search.set_user(current_user) if current_user
+          end
+        end
       end
     end
     # Find Search Condition
@@ -190,6 +191,7 @@ class OkboardsController < OkController
     @post = model.find(@@board_id)
   end
 
+  # Ajax
   def dislikes
     model = MODELS[@okpage]
     @sns_lock.synchronize {
@@ -200,6 +202,7 @@ class OkboardsController < OkController
     @post = model.find(@@board_id)
   end
 
+  # Ajax
   def abuses
     model = MODELS[@okpage]
     @sns_lock.synchronize {
@@ -208,6 +211,11 @@ class OkboardsController < OkController
       end
     }
     @post = model.find(@@board_id)
+  end
+  
+  # Ajax
+  def next_post
+    
   end
 
   private
@@ -231,7 +239,7 @@ class OkboardsController < OkController
 
   def _write_post
     post = _model.new
-    post.write_at = Time.now.to_i
+    post.write_at = Common.current_time.to_i
     post.build_content
     post.valid_until = post_expiry
     post

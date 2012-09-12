@@ -44,6 +44,8 @@ Okbrisbane::Application.routes.draw do
       post :likes
       post :dislikes
       post :abuses
+      post :next_post
+      post :prev_post
     end
   end
   

@@ -1,44 +1,120 @@
 module Okboard
 
-  def self._okpage_v(okpage)
+  def self.dec(d)
+    Common.decrypt_data(d)  
+  end
+  
+  def self.enc(d)
+    Common.encrypt_data(d.to_s)
+  end
+  
+  def self.param_v(v)
+    Rails.logger.debug("param_v v: #{v}")
+    d = dec(v)
+    Rails.logger.debug("param_v d: #{d}")
+    p =  d.split(SP)[1]
+    Rails.logger.debug("param_v p: #{p}")
+    p
+  end
+
+  def self.param_to_s(p)
+    d = dec(p)
+    Rails.logger.debug("okpage_p d: #{d}")
+    d
+  end
+  
+  def self.param_to_i(p)
+    d = dec(p).to_i
+    Rails.logger.debug("okpage_p d: #{d}")
+    d
+  end
+  
+  def self.okpage_v(okpage)
     raise "Bad Request #{okpage}" if Style.page(okpage).nil?
-    Common.encrypt_data(okpage.to_s).chop
+    enc("#{Common.current_time.to_i}#{SP}#{okpage}").chop
   end
 
   def self.okboard_link(okpage)
-    %Q|/okboards?v=| + _okpage_v(okpage)
+    %Q|/okboards?v=| + okpage_v(okpage)
   end
 
-  def self.okboard_link_with_search(okpage, post_search)
-    %Q|/okboards?v=| + _okpage_v(okpage) + "&s=" + Common.encrypt_data(post_search.to_s).html_safe
+  def self.okboard_link_with_id(okpage, id, post_search_id=nil)
+    link = %Q|/okboards/view?v=| + okpage_v(okpage) + "&d=" + enc(id)
+    link += "&s=" + enc(post_search_id) if post_search_id
+    link
+  end
+
+  def self.okboard_link_with_id_with_saved_search(okpage, post_search_id)
+    %Q|/okboards/view?v=| + okpage_v(okpage) + "&d=" + enc(id)
+  end
+
+
+  def self.okboard_link_with_search(okpage, post_search_id)
+    %Q|/okboards?v=| + okpage_v(okpage) + "&s=" + enc(post_search_id)
   end
   
   def self.okboard_link_write(okpage)
-    %Q|/okboards/write?v=| + _okpage_v(okpage)
+    %Q|/okboards/write?v=| + okpage_v(okpage)
   end
   
-  def self.okboard_link_with_id(okpage, id)
-    %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
+  def self.okboard_link_with_user(okpage, user)
+    if !user.nil?
+      %Q|/okboards/view?v=| + okpage_v(okpage) + "&u=" + enc(user)
+    else
+      okboard_link(okpage)
+    end
+  end
+  
+  def self.okboard_link_with_category(okpage,category)
+    okboard_link(okpage) + "&c=" + enc(category)
   end
 
+  def self.okboard_link_upload_image(okpage)
+    %Q|/okboards/upload_image?v=| + okpage_v(okpage)
+  end
+  
+  def self.okboard_link_delete_image(okpage)
+    %Q|/okboards/delete_image?v=| + okpage_v(okpage) + "&id="
+  end
+
+  def self.okboard_link_delete_image_with_id_timestamp(okpage, id, timestamp)
+    %Q|/okboards/delete_image?v=| + okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
+  end
+  
+  def self.okboard_link_upload_attachment(okpage)
+    %Q|/okboards/upload_attachment?v=| + okpage_v(okpage)
+  end
+  
+  def self.okboard_link_delete_attachment(okpage)
+    %Q|/okboards/delete_attachment?v=| + okpage_v(okpage) + "&id="
+  end
+
+  def self.okboard_link_delete_attachment_with_id_timestamp(okpage, id, timestamp)
+    %Q|/okboards/delete_attachment?v=| + okpage_v(okpage) + "&id=#{id}&t=#{timestamp}"
+  end
+  
   def self.okboard_link_with_id_write_comment(okpage, id)
-    %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe + "#new_comment"
+    %Q|/okboards/view?v=| + okpage_v(okpage) + "&d=" + enc(id) + "#new_comment"
   end
   
   def self.okboard_link_with_id_reply_comment(okpage, id)
-    %Q|/okboards/view?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe + "#new_comment"
+    %Q|/okboards/view?v=| + okpage_v(okpage) + "&d=" + enc(id) + "#new_comment"
   end
   
   def self.okboard_link_like(okpage, id)
-    %Q|/okboards/likes?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
+    %Q|/okboards/likes?v=| + okpage_v(okpage) + "&d=" + enc(id)
   end
   
   def self.okboard_link_dislike(okpage, id)
-    %Q|/okboards/dislikes?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
+    %Q|/okboards/dislikes?v=| + okpage_v(okpage) + "&d=" + enc(id)
   end
   
   def self.okboard_link_abuse(okpage, id)
-    %Q|/okboards/abuses?v=| + _okpage_v(okpage) + "&d=" + Common.encrypt_data(id.to_s).html_safe
+    %Q|/okboards/abuses?v=| + okpage_v(okpage) + "&d=" + enc(id)
   end
+  
+  private
+  
+  SP = "+"
   
 end

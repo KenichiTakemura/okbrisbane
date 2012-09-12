@@ -200,13 +200,13 @@ a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
   height:30px;
 }
 
-.page_control #to_prev {
+.page_control .to_prev {
   float:left;
   left:0px;
   margin-left: 5px;
 }
 
-.page_control #to_next {
+.page_control .to_next {
   float:right;
   right:0px;
   margin-right: 5px;
@@ -282,15 +282,15 @@ tr.okboard_view_list_body {
   float: left;
   margin-left: auto;
   margin-right: auto;
-  width:700px;
-  -moz-box-shadow: 0 1px 2px #d1d1d1;
-  -webkit-box-shadow: 0 1px 2px #d1d1d1;
-  box-shadow: 0 1px 2px #d1d1d1;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  background: url("common/title_img_detail_srch01b.gif");
+  width:730px;
+  -moz-box-shadow: 2px 1px 2px #d1d1d1;
+  -webkit-box-shadow: 2px 1px 2px #d1d1d1;
+  box-shadow: 2px 1px 2px #d1d1d1;
+  border: 2px solid #e0e0e0;
   margin: 5px;
+  background: none repeat scroll 0% 0% rgb(61, 186, 186);
 }
+
 
 .okboard_filter .search {
   position:absolute;

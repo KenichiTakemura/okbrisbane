@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def hit
-    key = Time.now.strftime("%Y-%m-%d")
+    key = Common.current_time.strftime("%Y-%m-%d")
     logger.info("key: #{key} session[key]: #{session[key.to_sym]}")
     unless session[key.to_sym]
       @lock.synchronize {
@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
 
   def post_expiry
     system_setting = SystemSetting.first
-    Time.now + system_setting.post_expiry_length.days
+    Common.current_time + system_setting.post_expiry_length.days
   end
 
   def find_lastid(board_list)

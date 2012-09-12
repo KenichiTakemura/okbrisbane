@@ -220,7 +220,19 @@ ko:
       truncate: "..."
       first: '처음 '
       last: '마지막 '
-      
+
+  # Number
+  one: '일'
+  two: '이'
+  three: '삼'
+  four: '사'
+  five: '오'
+  six: '육'
+  seven: '칠'
+  eight: '팔'
+  nine: '구'
+  ten: '십'
+    
   welcome_message: '환영합니다!'
   hello: '안녕하세요!'
   select_language: '다른 언어로 사이트 보기'
@@ -350,6 +362,7 @@ ko:
   num_of_unattached_image: '보존 안된 이미지 투고 갯수'
   num_of_unattached_attachment: '보존 안된 첨부자료 투고 갯수'
   unknown_user: '모르는 멤버'
+  number_of: '숫자'
 
   comment: '코멘트'
   comment_email: '남이 코멘트를 '
@@ -576,6 +589,7 @@ ko:
   auto_detect_image_size: '이미지 사이즈는 자동적으로 계산됩니다'
   read_image_from_the_url: 'URL 의 이미지를 표시함'
   client_image_source_url: '이미지 URL'
+  set_zero_to_reset: 'Translate me'
   
   # notice
   admin_notice: '관리자 공지'

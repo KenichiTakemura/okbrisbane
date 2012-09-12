@@ -125,18 +125,17 @@
 		</div>
 		</div>
 		<div id="footer">
-			<div class="footer_content">
+				<div class="copyright">
+				Copyright &copy; <%= Common.current_time.year %> OKBRISBANE. ALL RIGHTS RESERVED.<br/>
+				<%= Okvalue::ADMIN_ADDRESS %> <%= Okvalue::ADMIN_PHONE %> <%= Okvalue::ADMIN_FAX %>
+				</div>
 				<div class="footer_links">
 				<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
 				<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
 				<%= link_to(t(:banner_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
 				<%= link_to(t(:general_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>	
-				</div>
-				<p class="copyright">Copyright &copy; <%= Time.now.year %> OKBRISBANE. ALL RIGHTS RESERVED.</p>
-				<p class="copyright"><%= Okvalue::ADMIN_ADDRESS %> <%= Okvalue::ADMIN_PHONE %> <%= Okvalue::ADMIN_FAX %></p>   
-				<div class="developer">Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></div>
-			</div>
-			
+				<div class="developer">Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></div>	
+				</div>				
 		</div>
 	</body>
 </html>

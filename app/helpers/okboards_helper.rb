@@ -26,7 +26,7 @@ module OkboardsHelper
     html += %Q|<p class="okboard_description">|
     html += raw(post.content.body) if !post.content.nil?
     html += "</p>"
-    html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), _okboard_link_with_id(category, post.id))
+    html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), Okboard.okboard_link_with_id(category, post.id))
     #html += mail_to(author_email(post), t("contact_person"), :encode => "hex")
     html += "</span>"
     html.html_safe
@@ -77,11 +77,11 @@ module OkboardsHelper
       if post.has_attachment?
         html += image_tag("common/IconData2.gif")
       end
-      html += %Q|</td><td >| + link_to(author_name(post), _okboard_link_with_user(@okpage, post.posted_by_id), :style => "color:#000") + %Q|</td><td class="okboard_list_view">|
+      html += %Q|</td><td >| + link_to(author_name(post), Okboard.okboard_link_with_user(@okpage, post.posted_by_id), :style => "color:#000") + %Q|</td><td class="okboard_list_view">|
       #if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
       #  html += t("view") + section_span(post) + "</td></tr>"
       #else
-        html += link_to(image_tag("#{I18n.locale}/common/view_1.gif", :style => "margin-top:2px"), _okboard_link_with_id(@okpage, post.id))
+        html += link_to(image_tag("#{I18n.locale}/common/view_1.gif", :style => "margin-top:2px"), Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id))
       #end
     end
     html.html_safe
@@ -90,7 +90,7 @@ module OkboardsHelper
   def _path(links)
     path = Array.new
     links.each do |link|
-      path.push(_okboard_link(link))
+      path.push(Okboard.okboard_link(link))
     end
     path
   end
@@ -216,10 +216,10 @@ module OkboardsHelper
     logger.debug("categories: #{categories}")
     html = "<ul>"
     categories.each do |key,category|
-      html += "<li>" + link_to(t(category), _okboard_link_with_category(link,category)) + "</li>"
+      html += "<li>" + link_to(t(category), Okboard.okboard_link_with_category(link,category)) + "</li>"
     end
     if [:p_job, :p_buy_and_sell,:p_well_being].include? link
-      html += "<li>" + link_to(t('write_new'), _okboard_link_write(@okpage)) + "</li>"
+      html += "<li>" + link_to(t('write_new'), Okboard.okboard_link_write(@okpage)) + "</li>"
     end
     html += "</ul>"
     html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)

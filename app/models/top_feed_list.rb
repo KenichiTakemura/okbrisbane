@@ -17,15 +17,18 @@ class TopFeedList < ActiveRecord::Base
   scope :find_a_feed, lambda { |cate,id| where('feeded_to_type = ? AND feeded_to_id = ?', cate, id)}
 
   scope :with_image, lambda { |table| joins("left outer join #{table} on #{table}.id = top_feed_lists.feeded_to_id").where("#{table}.has_image = true") }
-  scope :without_image, lambda { |table| joins("left outer join #{table} on #{table}.id = top_feed_lists.feeded_to_id").where("#{table}.has_image = false") }
 
   scope :feed_order,  order("created_at DESC")
   scope :category_feed, lambda { |cate| where('feeded_to_type = ?', cate)}
   
   scope :feed_with_image, lambda { |cate,limit| category_feed(Style.page(cate)).with_image(M2T[cate]).feed_order.limit(limit) }
-  scope :feed_without_image, lambda { |cate,limit| category_feed(Style.page(cate)).without_image(M2T[cate]).feed_order.limit(limit) }
+  scope :except_ids, lambda { |ids| 
+    if !ids.nil? && !ids.empty?  
+      where('id not in (?)', ids)
+    end
+  }
+  scope :feed_nomatter_image_except, lambda { |cate,ids,limit| category_feed(Style.page(cate)).except_ids(ids).feed_order.limit(limit) }
   scope :feed_nomatter_image, lambda { |cate,limit| category_feed(Style.page(cate)).feed_order.limit(limit) }
-  
   after_save :clean_oldest_feed
   
   def clean_oldest_feed

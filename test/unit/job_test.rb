@@ -8,17 +8,25 @@ class JobTest < ActiveSupport::TestCase
       Job.find(post)
     }
   end
+  
+  def written_at
+    Common.current_time
+  end
+  
+  def expiry
+    Common.current_time
+  end
 
   def setup
     u = User.new(:email => "test@test.com", :password => "okbrisbane", :password_confirmation => "okbrisbane", :user_name => "okbrisbane")
-    u.confirmed_at = Time.now.utc
+    u.confirmed_at = Common.current_time
     assert u.save, "Cannot save user"
     u = User.first
     assert u, "User not found"
   end
 
   def new_post
-    job = Job.new(:subject => subject, :category => Job::Categories[:seek], :valid_until => Time.now.utc)
+    job = Job.new(:subject => subject, :category => Job::Categories[:seek], :valid_until => expiry, :write_at => written_at)
     assert job.save
     job
   end
@@ -38,12 +46,12 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "post with HIRE" do
-    job = Job.new(:subject => subject, :category => Job::Categories[:hire], :valid_until => Time.now.utc)
+    job = Job.new(:subject => subject, :category => Job::Categories[:hire], :valid_until => expiry, :write_at => written_at)
     assert job.save
   end
 
   test "post with invalid category" do
-    job = Job.new(:subject => subject, :category => BuyAndSell::Categories[:buy], :valid_until => Time.now.utc)
+    job = Job.new(:subject => subject, :category => BuyAndSell::Categories[:buy], :valid_until => expiry, :write_at => written_at)
     assert job.save
   end
 
@@ -175,13 +183,13 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "search" do
-    job1 = Job.create(:subject => "123abc456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
-    job2 = Job.create(:subject => "123efg456", :category => Job::Categories[:hire], :valid_until => Time.now.utc)
-    job3 = Job.create(:subject => "123hij456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
-    job4 = Job.create(:subject => "123klm456", :category => Job::Categories[:seek], :valid_until => Time.now.utc)
+    job1 = Job.create(:subject => "123abc456", :category => Job::Categories[:seek], :valid_until => expiry, :write_at => written_at)
+    job2 = Job.create(:subject => "123efg456", :category => Job::Categories[:hire], :valid_until => expiry, :write_at => written_at)
+    job3 = Job.create(:subject => "123hij456", :category => Job::Categories[:seek], :valid_until => expiry, :write_at => written_at)
+    job4 = Job.create(:subject => "123klm456", :category => Job::Categories[:seek], :valid_until => expiry, :write_at => written_at)
     Image.create(:source_url => "http://test.com").attached_to(job3)
     Attachment.create(:avatar => File.new("test/fixtures/images/companyprofile.jpg")).attached_to(job4)
-    post_search = PostSearches.new(:okpage => :p_job)
+    post_search = PostSearch.new(:okpage => :p_job)
     assert post_search.save
     assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
     post_search.category = Job::Categories[:seek]
@@ -196,7 +204,7 @@ class JobTest < ActiveSupport::TestCase
     assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 0)
     post_search.image = false
     assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)
-    post_search = PostSearches.first
+    post_search = PostSearch.first
     assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 4)
     post_search.keyword = "abc"
     assert_equal(Job.search(post_search, Okvalue::OKBOARD_LIMIT).size, 1)

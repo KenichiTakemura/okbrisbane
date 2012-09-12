@@ -7,13 +7,21 @@ class HomesController < OkController
     when :p_buy_and_sell
       return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT)
     when :p_estate
-      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
+      return list,image_list
     when :p_business
-      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
+      return list,image_list
     when :p_motor_vehicle
-      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
+      return list,image_list
     when :p_accommodation
-      return TopFeedList.feed_without_image(category, TopFeedList::TOP_FEED_LIMIT), TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
+      return list,image_list
     when :p_law
       return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT_LOWER)
     when :p_study
@@ -76,5 +84,9 @@ class HomesController < OkController
   end
 
   private
+
+  def collect_image_id(image_list)
+    ids = image_list.collect {|feed| feed.id }
+  end
 
 end

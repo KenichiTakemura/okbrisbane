@@ -8,127 +8,13 @@
 		</div>
 	</div>
     <%= image_tag("#{I18n.locale}/common/title_dt_detail_photos.gif") %>
-	<div class="okboard_image_gallery">
-		<% if !@post.image.empty? %>
-		<div class="something" id="something">
-				<%= @post.image.first.something %>
-			</div>
-		<div class="bigPicture">
-			<%= image_tag(@post.image.first.original_image, :id => "proimg")  %>
-		</div>
-		<div class="thumbBox">
-			<div id="slideshow">
-				<% if @post.image.size > 5 %>
-				<div class="fl">
-					<%= image_tag("common/btn_img_left.gif", :id => "leftControl", :class => "control po") %>
-				</div>
-				<% end %>
-
-				<div id="slidesContainer" class="fl">
-
-					<div class="slide">
-						<% @post.image.each_with_index do |image,i| %>
-						<div class="fl thumb">
-							<%= image_tag(image.thumb_image, :class => "po", :size => "115x100", :onclick => "$('#proimg').attr('src',\"#{image.original_image}\");$('#something').text(\"#{image.something}\");") %>
-						</div>
-						<% if i%5==4 && i>0  %>
-					</div>
-					<div class="slide">
-						<% end %>
-						<% end %>
-					</div>
-
-				</div>
-
-				<% if @post.image.size > 5 %>
-				<div class="fl">
-					<%= image_tag("common/btn_img_right.gif", :id => "rightControl", :class => "control po") %>
-				</div>
-				<% end %>
-
-			</div>
-
-		</div>
-
-		<% end %>
-	</div>
-
-	<script type="text/javascript">
-
-			$(document).ready(function() {
-				var currentPosition = 0;
-				var slideWidth = 650;
-				var slides = $('.slide');
-				var numberOfSlides = slides.length;
-
-				// Remove scrollbar in JS
-				$('#slidesContainer').css('overflow', 'hidden');
-
-				// Wrap all .slides with #slideInner div
-				slides.wrapAll('<div id="slideInner"></div>')
-				// Float left to display horizontally, readjust .slides width
-				.css({
-					'float' : 'left',
-					'width' : slideWidth
-				});
-
-				// Set #slideInner width equal to total width of all slides
-				$('#slideInner').css('width', slideWidth * numberOfSlides);
-
-				// Insert controls in the DOM
-				/*
-				$('#slideshow')
-				.prepend('<span class="control" id="leftControl">Clicking moves left</span>')
-				.append('<span class="control" id="rightControl">Clicking moves right</span>');
-				*/
-
-				// Hide left arrow control on first load
-				//manageControls(currentPosition);
-
-				// Create event listeners for .controls clicks
-				$('.control').bind('click', function() {
-					// Determine new position
-
-					var position = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
-
-					// Hide / show controls
-					//manageControls(currentPosition);
-
-					//alert(currentPosition);
-					if (position < 0 || position > numberOfSlides - 1)
-						return;
-
-					currentPosition = position;
-
-					// Move slideInner using margin-left
-					$('#slideInner').animate({
-						'marginLeft' : slideWidth * (-currentPosition)
-					});
-				});
-
-				// manageControls: Hides and Shows controls depending on currentPosition
-				function manageControls(position) {
-					// Hide left arrow if position is first slide
-					if (position == 0) {
-						$('#leftControl').hide()
-					} else {
-						$('#leftControl').show()
-					}
-					// Hide right arrow if position is last slide
-					if (position == numberOfSlides - 1) {
-						$('#rightControl').hide()
-					} else {
-						$('#rightControl').show()
-					}
-				}
-
-			});
-	</script>
+    <%= render :partial => "okboards/shared/gallery" %>
 	<%= render :partial => "okboards/shared/sns" %>
     <%= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") %>
 	<div class="okboard_view_content">
 		<div class="okboard_view_controll">
 			<div id="okboard_likes">
+				<%= image_tag("#{I18n.locale}/common/btn_vote.gif") %>
 				<%= link_to(image_tag("common/sns/good.gif", :size => "20x20"), Okboard.okboard_link_like(@okpage, @post.id), :remote => true, :method => :post) %>
 				<%= @post.likes.to_s %>
 				<%= image_tag("common/rank/#{@post.rank}.png") %>
@@ -152,11 +38,13 @@
 			</div>
 		</div>
 		<div class="page_control">
-			<div id="to_prev">
+			<div class="to_prev" id="to_prev_u">
 			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "45x25"), "#")%>
+			<div class="to_prev_status_u" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
-			<div id="to_next">
+			<div class="to_next" id="to_next_u">
 			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "45x25"), "#")%>
+			<div class="to_next_status_d" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 		</div>
 		<table id="okboard_view_table" width=100% class="ui-widget" border="0">
@@ -187,11 +75,13 @@
 			</tbody>
 		</table>
 		<div class="page_control">
-			<div id="to_prev">
+			<div class="to_prev" id="to_prev_d">
 			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "45x25"), "#")%>
+			<div class="to_prev_status_d" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
-			<div id="to_next">
+			<div class="to_next" id="to_next_d">
 			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "45x25"), "#")%>
+			<div class="to_next_status_d" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 		</div>
 
@@ -294,7 +184,14 @@
 		</table>
 	</div>
 </div>
-<%= _script_document_ready(%Q|
+<%= _script(%Q|
 $('\#comment_submit').click(function() {
 if ($('\#comment_body').val() == "") return false;
 })|) %>
+<%= _script_document_ready(%Q|
+	$('div.to_prev_status_u').css("display","block");
+	$('div.to_next_status_u').css("display","block");
+	$('div.to_prev_status_d').css("display","block");
+	$('div.to_next_status_d').css("display","block");
+	$.post("| + next_post_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|'});
+|) %>
