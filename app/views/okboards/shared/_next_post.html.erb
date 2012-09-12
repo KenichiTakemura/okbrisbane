@@ -1,0 +1,6 @@
+<% if @next_post.present? %>
+<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "45x25"), Okboard.okboard_link_with_id(@okpage,@next_post.id,@post_search.id), :class => "to_next_link")%>
+<div class="to_next_title"><%= @next_post.subject %></div>
+<% else %>
+
+<% end %>

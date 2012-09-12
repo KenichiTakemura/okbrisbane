@@ -50,18 +50,20 @@ class Post < ActiveRecord::Base
   validates_inclusion_of :locale, :in => [Okvalue::LOCALE_EN,Okvalue::LOCALE_KO,Okvalue::LOCALE_ZHCN], :message => 'Invalid locale'
   #
   def to_s
-    "category: #{category} locale: #{locale} subject: #{subject} valid_until: #{valid_until} status #{status}"
+    "id: #{id} category: #{category} locale: #{locale} subject: #{subject} valid_until: #{valid_until} status #{status}"
   end
   
   # pagination
-  default_scope :order => 'id DESC'
+  #default_scope :order => 'id DESC'
   paginates_per 10
   
   # scope
+  scope :asc, :order => 'id ASC'
+  scope :desc, :order => 'id DESC'
   scope :is_valid, where("status = ?", Okvalue::POST_STATUS_PUBLIC)
   scope :is_invalid, where("status = ? OR status = ?", Okvalue::POST_STATUS_HIDDEN, Okvalue::POST_STATUS_DRAFT)
   scope :expired, where("status = ?", Okvalue::POST_STATUS_EXPIRED)
-  scope :latest, is_valid.order
+  scope :latest, is_valid.desc
 
   scope :c_category, lambda { |cond|
     if cond.has_category?
@@ -83,13 +85,27 @@ class Post < ActiveRecord::Base
       where('has_attachment = ?', cond.attachment)
     end
   }
-  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).latest.limit(limit) }
   scope :except_ids, lambda { |ids| 
     if !ids.nil? && !ids.empty?  
       where('id not in (?)', ids)
     end
   }
-  scope :search_except, lambda { |cond,ids,limit| search(cond,limit).except_ids(ids) }
+  scope :after, lambda { |post_id| 
+    if post_id.present? 
+      where('id > ?', post_id)
+    end
+  }
+  scope :before, lambda { |post_id| 
+    if post_id.present? 
+      where('id < ?', post_id)
+    end
+  }
+  
+  
+  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).is_valid.limit(limit) }
+  scope :search_except, lambda { |cond,ids,limit| search(cond,limit).except_ids(ids).desc }
+  scope :search_after, lambda { |cond,post_id,limit| search(cond,limit).after(post_id).asc }
+  scope :search_before, lambda { |cond,post_id,limit| search(cond,limit).before(post_id).desc }
     
   # callbacks
   after_initialize :set_default

@@ -20,9 +20,11 @@
 			<p class="description">
 				<%= post.subject%>
 			</p>
+			<% if post.respond_to? :price%>
 			<p class="price_tag">
 				<%= post.price %>
 			</p>
+			<% end %>
 			<%= link_to(t("view"), Okboard.okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 		</div>
 		<% end %>

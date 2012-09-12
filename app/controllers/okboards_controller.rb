@@ -83,6 +83,7 @@ class OkboardsController < OkController
         format.json { render :json => @post }
       end
     else
+      @search_id = @@search_id if @@search_id.present?
       @post.viewed
       @comment = Comment.new
     end
@@ -215,7 +216,16 @@ class OkboardsController < OkController
   
   # Ajax
   def next_post
-    
+      @post_search = @@search_id.present? ?  PostSearch.find(@@search_id)  : PostSearch.new(:okpage => @okpage)
+      @next_post = _model.search_after(@post_search, @@board_id, 1).first
+      logger.debug("next_post #{@next_post}")
+  end
+
+  #Ajax
+  def prev_post
+      @post_search = @@search_id.present? ?  PostSearch.find(@@search_id)  : PostSearch.new(:okpage => @okpage)
+      @prev_post = _model.search_before(@post_search, @@board_id, 1).first
+      logger.debug("prev_post #{@prev_post}")    
   end
 
   private
@@ -233,7 +243,6 @@ class OkboardsController < OkController
 
   def _select_post
     post = _model.find(@@board_id)
-    logger.debug("post: #{post}")
     post
   end
 

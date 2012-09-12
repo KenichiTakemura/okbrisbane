@@ -197,19 +197,57 @@ a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
   width:100%;
   margin-top: 5px;
   margin-bottom: 5px;
-  height:30px;
+  height:45px;
 }
 
 .page_control .to_prev {
   float:left;
-  left:0px;
-  margin-left: 5px;
 }
 
 .page_control .to_next {
   float:right;
+}
+
+.page_control .to_prev_status {
+  position:absolute;
+  top:30px;
+  left:0px;
+  margin-left: 5px;
+}
+
+.page_control .to_next_status {
+  position:absolute;
+  top:30px;
   right:0px;
   margin-right: 5px;
+}
+
+.page_control .to_next_link img {
+  position:absolute;
+  top:0px;
+  right:0px;
+  margin-right: 5px;
+}
+
+.page_control .to_prev_link img {
+  position:absolute;
+  top:0px;
+  left:0px;
+  margin-left: 5px;
+}
+
+.page_control .to_next_title {
+  position:absolute;
+  right:0px;
+  top:30px;
+  margin-right: 5px;
+}
+
+.page_control .to_prev_title {
+  position:absolute;
+  left:0px;
+  top:30px;
+  margin-left: 5px;
 }
 
 

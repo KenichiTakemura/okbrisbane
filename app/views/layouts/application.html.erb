@@ -15,66 +15,67 @@
 	</head>
 	<body>
 		<div id="page_body">
-		<% if socialable? %>
-		<div id="fb-root"></div>
-		<script>
-			( function(d, s, id) {
-					var js, fjs = d.getElementsByTagName(s)[0];
-					if (d.getElementById(id))
-						return;
-					js = d.createElement(s);
-					js.id = id;
-					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-					fjs.parentNode.insertBefore(js, fjs);
-				}(document, 'script', 'facebook-jssdk'));
-		</script>
-		<% end %>
-		<%= single_background_banner(1) %>
-		<%= single_background_banner(2) %>
-		<%= single_background_banner(3) %>
-		<%= single_background_banner(4) %>
-		<%= single_background_banner(5) %>
-		<%= single_background_banner(6) %>
-		<div id="header">
-			<div id="header-left">
-				<div class="welcome">
-				<%= t("welcome_message")%><br/>
-				<% if current_user %>
-				<%= current_user.name %>&nbsp;<%= t(:sir)%>
-				<% else %>
-				<%= link_to t("signin"), user_sign_in_path %>
-				<%= t("or") %>
-				<%= link_to t("signup"), member_managements_sign_up_path %>
-				<%= t("please") %>
-				<% end %>
-				</div>
-				<% if current_user %>
-				<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path, :class => "mypage image_submit_ok") %>
-				<% end %>
-				
-				<div id="logo">
-					<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
-				</div>
-				<div id="devise">
-					<div id="account">
-						<% if !user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
-						<% end %>
-						<% if !user_signed_in? %>
-						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
+			<% if socialable? %>
+			<div id="fb-root"></div>
+			<script>
+				( function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id))
+							return;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+			</script>
+			<% end %>
+			<%= single_background_banner(1) %>
+			<%= single_background_banner(2) %>
+			<%= single_background_banner(3) %>
+			<%= single_background_banner(4) %>
+			<%= single_background_banner(5) %>
+			<%= single_background_banner(6) %>
+			<div id="header">
+				<div id="header-left">
+					<div class="welcome">
+						<%= t("welcome_message")%>
+						<br/>
+						<% if current_user %>
+						<%= current_user.name %>&nbsp;<%= t(:sir)%>
 						<% else %>
-										<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
-										<% end %>
+						<%= link_to t("signin"), user_sign_in_path %>
+						<%= t("or") %>
+						<%= link_to t("signup"), member_managements_sign_up_path %>
+						<%= t("please") %>
+						<% end %>
+					</div>
+					<% if current_user %>
+					<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path, :class => "mypage image_submit_ok") %>
+					<% end %>
+
+					<div id="logo">
+						<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
+					</div>
+					<div id="devise">
+						<div id="account">
+							<% if !user_signed_in? %>
+							<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
+							<% end %>
+							<% if !user_signed_in? %>
+							<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
+							<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
+							<% else %>
+							<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
+							<% end %>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div id="header-right">
+				<div id="header-right">
 
-				<%= single_header_banner(1) %>
-				<%= single_header_banner(2) %>
-			</div>
-			<div class="ok_information">
+					<%= single_header_banner(1) %>
+					<%= single_header_banner(2) %>
+				</div>
+				<div class="ok_information">
 					<div class="weather_information">
 						<%= link_to(image_tag("#{I18n.locale}/common/weather.gif"), "#", :id => "weather") %>
 					</div>
@@ -82,60 +83,62 @@
 						<%= link_to(image_tag("#{I18n.locale}/common/rate.gif"), "#", :id => "ex_rate") %>
 					</div>
 					<%= render :partial => "homes/ok_information" %>
-			</div>
-			<div id="header-bottom">
-				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
-				<%= navigation("#41A317","#f0f0f0") %>
-				<div id="follows">
-					<% if socialable? %>
-					<ul class="wat-cf">
-						<li>
-							<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
-						</li>
-						<li>
-							&nbsp;
-						</li>
-						<li>
-							<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
-							<script>
-								! function(d, s, id) {
-									var js, fjs = d.getElementsByTagName(s)[0];
-									if (!d.getElementById(id)) {
-										js = d.createElement(s);
-										js.id = id;
-										js.src = "//platform.twitter.com/widgets.js";
-										fjs.parentNode.insertBefore(js, fjs);
-									}
-								}(document, "script", "twitter-wjs");
-							</script>
-						</li>
-					</ul>
+				</div>
+				<div id="header-bottom">
+					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
+					<%= navigation("#41A317","#f0f0f0") %>
+					<div id="follows">
+						<% if socialable? %>
+						<ul class="wat-cf">
+							<li>
+								<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
+							</li>
+							<li>
+								&nbsp;
+							</li>
+							<li>
+								<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
+								<script>
+									! function(d, s, id) {
+										var js, fjs = d.getElementsByTagName(s)[0];
+										if (!d.getElementById(id)) {
+											js = d.createElement(s);
+											js.id = id;
+											js.src = "//platform.twitter.com/widgets.js";
+											fjs.parentNode.insertBefore(js, fjs);
+										}
+									}(document, "script", "twitter-wjs");
+								</script>
+							</li>
+						</ul>
+						<% end %>
+					</div>
+					<% else %>
+					<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
 					<% end %>
 				</div>
-				<% else %>
-				<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
-				<% end %>
+			</div>
+			<div id="main">
+				<%= yield %>
+			</div>
+			<div id="sidebar">
+				<%= yield :sidebar %>
 			</div>
 		</div>
-		<div id="main">
-			<%= yield %>
-		</div>
-		<div id="sidebar">
-			<%= yield :sidebar %>
-		</div>
-		</div>
 		<div id="footer">
-				<div class="copyright">
-				Copyright &copy; <%= Common.current_time.year %> OKBRISBANE. ALL RIGHTS RESERVED.<br/>
-				<%= Okvalue::ADMIN_ADDRESS %> <%= Okvalue::ADMIN_PHONE %> <%= Okvalue::ADMIN_FAX %>
-				</div>
-				<div class="footer_links">
-				<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
-				<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
-				<%= link_to(t(:banner_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
-				<%= link_to(t(:general_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>	
-				<div class="developer">Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></div>	
-				</div>				
+			<div class="copyright">
+				<p class="copyright_text">Copyright &copy; <%= Common.current_time.year %> OKBRISBANE. ALL RIGHTS RESERVED.</p>
+				<p class="copyright_text"><%= Okvalue::ADMIN_ADDRESS %> <%= Okvalue::ADMIN_PHONE %> <%= Okvalue::ADMIN_FAX %></p>
+<div class="developer">
+				Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %>
+			</div>
+			</div>
+		</div>
+		<div class="footer_links">
+			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
+			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
+			<%= link_to(t(:banner_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
+			<%= link_to(t(:general_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
 		</div>
 	</body>
 </html>
