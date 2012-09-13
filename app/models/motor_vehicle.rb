@@ -5,7 +5,7 @@ class MotorVehicle < Post
     true
   end
 
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:new_car] = "new_car"
   Categories[:used_car] = "used_car"
   

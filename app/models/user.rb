@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   
   def can_write?(page)
     self.role.each do |r|
-      return true if r.has_role?(page, Role::R[:user_w])
+      return true if r.role_name.eql?(Style.page(page)) && r.has_role?(Role::R[:user_w])
     end
     false
   end

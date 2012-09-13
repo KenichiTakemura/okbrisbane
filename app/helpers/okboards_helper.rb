@@ -90,7 +90,11 @@ module OkboardsHelper
   def _path(links)
     path = Array.new
     links.each do |link|
-      path.push(Okboard.okboard_link(link))
+      if link.eql?(:p_yellowpage)
+        path.push(yellowpage_okboards_path)
+      else
+        path.push(Okboard.okboard_link(link))
+      end
     end
     path
   end

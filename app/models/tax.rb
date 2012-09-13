@@ -5,7 +5,7 @@ class Tax < Post
     true
   end
   
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:for_business] = "for_business"
   Categories[:for_tax_return] = "for_tax_return"
   

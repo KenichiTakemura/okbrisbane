@@ -5,7 +5,7 @@ class BuyAndSell < Post
     true
   end
 
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:buy] = "buying"
   Categories[:sell] = "selling"
   

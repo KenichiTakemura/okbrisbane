@@ -1,6 +1,6 @@
 class PostSearch < ActiveRecord::Base
 
-  SearchCond = Hash.new
+  SearchCond = Common.new_orderd_hash
   SearchCond[:time_by_day_1] = :post_search_by_time_1
   SearchCond[:time_by_day_2] = :post_search_by_time_2
   SearchCond[:time_by_day_3] = :post_search_by_time_3

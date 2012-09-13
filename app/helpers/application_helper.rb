@@ -210,7 +210,11 @@ module ApplicationHelper
     script = ""
     Style::NAVI.each do |key|
       value = Style.page(key)
-      script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
+      if key.eql?(:p_yellowpage)
+        script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{yellowpage_okboards_path}| + %Q|"});|
+      else
+        script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
+      end
     end
     html += _script_document_ready(script)
     html += "</ul></div>"

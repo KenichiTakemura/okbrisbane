@@ -5,7 +5,7 @@ class Law < Post
     true
   end
   
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:for_criminal_action] = "for_criminal_action"
   Categories[:for_conveyancing] = "for_conveyancing"
   Categories[:for_business_buysing_and_selling] = "for_business_buysing_and_selling"

@@ -5,7 +5,7 @@ class Business < Post
     true
   end
 
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:for_rent] = "for_rent"
   Categories[:for_sale] = "for_sale"
   Categories[:for_auction] = "for_auction"

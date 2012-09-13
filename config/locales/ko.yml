@@ -290,12 +290,19 @@ ko:
   content: '내용'
   content_body: '긴 설명글'
   Back: '뒤로'
+  back: :Back
   Edit: '편집'
+  edit: :Edit
   List: '일람'
+  list: :List
   Show: '표시'
+  show: :Show
   New: '추가'
+  new: :New
   Delete: '삭제'
+  delete: :Delete
   more: '더보기'
+  role: 'Fix me'
   write_new: '글쓰기'
   write: '쓰기'
   change_size: '사이즈 편집'

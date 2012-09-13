@@ -5,7 +5,7 @@ class Study < Post
     true
   end
 
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:for_study_overseas] = "for_study_overseas"
   Categories[:for_language] = "for_language"
   

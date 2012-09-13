@@ -5,7 +5,7 @@ class Accommodation < Post
     true
   end
   
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:hotel] = "Hotel"
   Categories[:motel] = "Motel"
   Categories[:apartment] = "Self_Catering_Apartments"

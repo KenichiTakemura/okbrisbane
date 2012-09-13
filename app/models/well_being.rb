@@ -5,7 +5,7 @@ class WellBeing < Post
     true
   end
   
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:event] = "event"
   Categories[:giving_info] = "giving_info"
   Categories[:asking_info] = "asking_info"

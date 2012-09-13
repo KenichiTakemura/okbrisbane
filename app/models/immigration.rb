@@ -5,7 +5,7 @@ class Immigration < Post
     true
   end
   
-  Categories = Hash.new
+  Categories = Common.new_orderd_hash
   Categories[:for_immigration] = "for_immigration"
   
   def category_list()

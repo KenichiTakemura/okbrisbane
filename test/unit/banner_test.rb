@@ -25,6 +25,13 @@ class BannerTest < ActiveSupport::TestCase
     assert_not_equal Style.getEffect("Home", :s_body, 1), ""
     assert_not_equal Style.getEffect("Job", :s_header, 1), ""
     assert_equal Style.getEffect("Job", :s_body, 1), ""
+    
+    i = 1
+    Style.pages.each do |key,value|
+      assert_equal Style.pageid_key(key), i
+      i += 1
+    end
+    
   end
   
   def client_with_banners

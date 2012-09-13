@@ -7,7 +7,7 @@ class TopFeedList < ActiveRecord::Base
 
   belongs_to :feeded_to, :polymorphic => true
   
-  M2T = Hash.new
+  M2T = Common.new_orderd_hash
   M2T[:p_estate] = "estates"
   M2T[:p_business] = "businesses"
   M2T[:p_motor_vehicle] = "motor_vehicles"

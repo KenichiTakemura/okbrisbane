@@ -3,6 +3,14 @@ module Common
     date.strftime("%Y-%m-%d") if date
   end
   
+  def self.date_format_md(date)
+    date.strftime("%m-%d") if date
+  end
+
+  def self.date_format_ymdhms(date)
+    date.localtime.strftime("%Y-%m-%d %H:%M.%S") if date
+  end
+    
   def self.today
     current_time.strftime("%Y-%m-%d")
   end
@@ -15,9 +23,9 @@ module Common
   def self.this_month
     current_time.strftime("%Y-%m")
   end
-
-  def self.date_format_md(date)
-    date.strftime("%m-%d") if date
+  
+  def self.new_orderd_hash
+    ActiveSupport::OrderedHash.new
   end
   
   def self.uniqe_token

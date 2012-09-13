@@ -1,9 +1,10 @@
 module Style
   
-  PAGES = Hash.new
-  SECTIONS = Hash.new
-  PAGE_IDS = Hash.new
-  SECTION_IDS = Hash.new
+  PAGES = Common.new_orderd_hash
+  SECTIONS = Common.new_orderd_hash
+  PAGE_IDS = Common.new_orderd_hash
+  SECTION_IDS = Common.new_orderd_hash
+  ADMIN_ROLES = Common.new_orderd_hash
   
   # div id rule is banner_#{page}_#{section}_#{position}
   PAGES[:p_home] = "Home"
@@ -25,7 +26,16 @@ module Style
   PAGES[:p_mypage] = "Mypage"
   PAGES[:p_signout] = "Signout"
   PAGES[:p_issue] = "Issue"
-    
+  
+  ADMIN_ROLES[:m_business_client] = "BusinessClientManagement"
+  ADMIN_ROLES[:m_banner] = "BannerManagement"
+  ADMIN_ROLES[:m_sales] = "SalesManagement"
+  ADMIN_ROLES[:m_post] = "PostManagement"
+  ADMIN_ROLES[:m_user] = "UserManagement"
+  ADMIN_ROLES[:m_site] = "SiteStatistics"
+  ADMIN_ROLES[:m_issue] = "IssueManagement"
+  ADMIN_ROLES[:m_system_setting] = "SystemSettingManagement"
+  
   PAGE_IDS[:p_home] = 1
   PAGE_IDS[:p_signin] = 2
   PAGE_IDS[:p_signup] = 3
@@ -45,6 +55,8 @@ module Style
   PAGE_IDS[:p_mypage] = 17
   PAGE_IDS[:p_signout] = 18
   PAGE_IDS[:p_issue] = 19
+  
+  PAGE_ID_MAX = 19
    
    
   NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
@@ -57,69 +69,78 @@ module Style
   SECTION_IDS[:s_background] = 2
   SECTION_IDS[:s_body] = 3
   
-  def Style.pages
-    PAGES
+  def self.pages
+     PAGES
   end
   
-  def Style.banner_pages
-    pages = PAGES.clone
-    pages.delete(:p_issue)
-    pages
+  def self.admin_roles
+    ADMIN_ROLES
   end
   
-  def Style.sections
+  def self.admin_role(o)
+    admin_roles[o]
+  end
+  
+  def self.banner_pages
+    b_pages = pages.clone
+    b_pages.delete(:p_issue)
+    b_pages
+  end
+  
+  def self.sections
     SECTIONS
   end
 
-  def Style.create_banner_div(page, section, position)
+  def self.create_banner_div(page, section, position)
     "banner_#{Style.page(page)}_#{Style.section(section)}_#{position}"
   end
 
-  def Style.pageid_value(value)
+  def self.pageid_value(value)
     PAGE_IDS[PAGES.index value] 
   end
   
-  def Style.pageid_key(key)
+  def self.pageid_key(key)
     PAGE_IDS[key]
   end
   
-  def Style.pagename(id)
+  def self.pagename(id)
     return nil if id.nil?
     PAGES[PAGE_IDS.index id.to_i]
   end
   
-  def Style.pagename_sym(id)
+  def self.pagename_sym(id)
     return nil if id.nil?
     PAGE_IDS.index id.to_i
   end
   
-  def Style.sectionid(key)
+  def self.sectionid(key)
     SECTION_IDS[key]
   end
   
-  def Style.sectionname(id)
+  def self.sectionname(id)
     return nil if id.nil?
     SECTIONS[SECTION_IDS.index id.to_i]
   end
   
-  def Style.sectionname_sym(id)
+  def self.sectionname_sym(id)
     return nil if id.nil?
     SECTION_IDS.index id.to_i
   end
   
-  def Style.page(key)
+  def self.page(key)
     Style::PAGES[key.to_sym]
   end
   
-  def Style.section(key)
+  def self.section(key)
     Style::SECTIONS[key.to_sym]
   end
   
-  def Style.m2s(model)
+  def self.m2s(model)
     PAGES.index model
   end
   
-  Effect = Hash.new
+  Effect = Common.new_orderd_hash
+  
   # Rule page _ section _ postion
   # if _ section _ position => any page
   Effect[:any] = ""
@@ -128,7 +149,7 @@ module Style
   Effect[:Home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:true,effect:'fade',crossfade: true,generateNextPrev:true|
   Effect[:Home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,generatePagination:false,effect:'fade',crossfade: true,generateNextPrev:false|
 
-  def Style.getEffect(page, section, position)
+  def self.getEffect(page, section, position)
     key = "#{page}_#{section}_#{position}"
     Rails.logger.debug("getEffect key: #{key}")
     effect = Effect[key.to_sym]
@@ -142,7 +163,7 @@ module Style
     Effect[:any]
   end
   
-  def Style.create_banners
+  def self.create_banners
     Style.banner_pages.each do |key, value|
       ## Header
       if value.eql? Style.page(:p_home)
