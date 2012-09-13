@@ -33,7 +33,7 @@ guest.save(:validate => false)
 ok = BusinessClient.create(:business_name => Okvalue::BUSINESS_CLIENT_OK, :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
 ok.build_business_profile(:head => "OKBRISBANE", :body => 'OKBRISBANE rocks!')
 ok.save
-image = BusinessProfileImage.new(:avatar => File.new("app/assets/images/common/logo.gif"), :is_main => true)
+image = BusinessProfileImage.new(:avatar => File.new("public/images/logo.gif"), :is_main => true)
 image.attached_to(ok)
 image.save
 

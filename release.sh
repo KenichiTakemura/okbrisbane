@@ -18,5 +18,7 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  public/*html\
  public/favicon.ico\
  public/assets\
+ public/images\
+ public/javascripts\
  public/robots.txt
 rm -rf public/assets
