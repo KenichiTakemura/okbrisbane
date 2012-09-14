@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120907081741) do
+ActiveRecord::Schema.define(:version => 20120914101735) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -499,7 +499,6 @@ ActiveRecord::Schema.define(:version => 20120907081741) do
 
   create_table "rates", :force => true do |t|
     t.datetime "issuedOn"
-    t.datetime "dateOn"
     t.integer  "currency_from"
     t.integer  "currency_to"
     t.integer  "buy_or_sell"

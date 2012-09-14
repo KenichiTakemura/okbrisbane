@@ -55,9 +55,8 @@ class HomesController < OkController
   end
 
   def current_rate
-    @country = params[:c]
-    @weather = Rate.rate_for(Common.today, @country)
-    @dateOn = Common.today
+    @rates = Rate.rate_for()
+    @dateOn = Common.date_format(@rates.first.issuedOn)
   end
 
   def collect_weather

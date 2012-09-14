@@ -2,6 +2,65 @@
 <%= link_to(image_tag("#{I18n.locale}/common/btn_refresh.gif"), "#", :id => "rate_refresh", :style => "float:left; margin:3px")%>
 <%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "rate_close", :style => "float:right")%>
 </div>
+<br/>
+<p class="city">
+	<%= t(:rate_information_for) %> <%= @dateOn %>
+</p>
+<table class="ui-widget information_table" style="opacity:0.9;filter:alpha(opacity=90);">
+	<thead class="ui-widget-header">
+		<tr>
+			<th class="small"></th>
+			<th class="small"><%= t(:rate_sell)%></th>
+			<th class="small"><%= t(:rate_buy)%></th>
+			</tr>
+	</thead>
+	<tbody class="ui-widget-content">
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/aud.gif")%> 1AUD</td>
+			<td><%= number_to_currency(@rates[0].rate_a, :locale => 'en_AU')%></td>
+			<td><%= number_to_currency(@rates[1].rate_a, :locale => 'en_AU')%></td>
+		</tr>
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/nzd.gif")%> 1NZD</td>
+			<td><%= number_to_currency(@rates[2].rate_a, :locale => 'en_NZ')%></td>
+			<td><%= number_to_currency(@rates[3].rate_a, :locale => 'en_NZ')%></td>
+		</tr>
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/usd.gif")%> 1USD</td>
+			<td><%= number_to_currency(@rates[4].rate_a, :locale => 'en_US')%></td>
+			<td><%= number_to_currency(@rates[5].rate_a, :locale => 'en_US')%></td>
+		</tr>
+	</tbody>
+</table>
+<p class="city">
+	<%= t(:send_information_for) %> <%= @dateOn %>
+</p>
+<table class="ui-widget information_table" style="opacity:0.9;filter:alpha(opacity=90);">
+	<thead class="ui-widget-header">
+		<tr>
+			<th class="small"></th>
+			<th class="small"><%= t(:rate_send)%></th>
+			<th class="small"><%= t(:rate_recv)%></th>
+			</tr>
+	</thead>
+	<tbody class="ui-widget-content">
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/aud.gif")%> 1AUD</td>
+			<td><%= number_to_currency(@rates[0].rate_b, :locale => 'en_AU')%></td>
+			<td><%= number_to_currency(@rates[1].rate_b, :locale => 'en_AU')%></td>
+		</tr>
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/nzd.gif")%> 1NZD</td>
+			<td><%= number_to_currency(@rates[2].rate_b, :locale => 'en_NZ')%></td>
+			<td><%= number_to_currency(@rates[3].rate_b, :locale => 'en_NZ')%></td>
+		</tr>
+		<tr>
+			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/usd.gif")%> 1USD</td>
+			<td><%= number_to_currency(@rates[4].rate_b, :locale => 'en_US')%></td>
+			<td><%= number_to_currency(@rates[5].rate_b, :locale => 'en_US')%></td>
+		</tr>
+	</tbody>
+</table>
 <%= _script(%Q|
 	$("\#rate_close").click(function() {
 	$("div.rate_information_box").hide("slow");

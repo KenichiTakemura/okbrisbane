@@ -46,4 +46,7 @@ Okbrisbane::Application.configure do
     :address              => "localhost",
     :enable_starttls_auto => true  }
   
+  # Disable assets log
+  config.assets.logger = false
+  config.assets.debug = false
 end

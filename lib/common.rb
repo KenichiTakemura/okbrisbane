@@ -1,14 +1,17 @@
 module Common
   def self.date_format(date)
-    date.strftime("%Y-%m-%d") if date
+    date_l = date.utc? ? date.localtime : date
+    date_l.strftime("%Y-%m-%d")
   end
   
   def self.date_format_md(date)
-    date.strftime("%m-%d") if date
+    date_l = date.utc? ? date.localtime : date
+    date_l.localtime.strftime("%m-%d")
   end
 
   def self.date_format_ymdhms(date)
-    date.localtime.strftime("%Y-%m-%d %H:%M.%S") if date
+    date_l = date.utc? ? date.localtime : date
+    date_l.strftime("%Y-%m-%d %H:%M.%S")
   end
     
   def self.today
@@ -17,11 +20,15 @@ module Common
   
   # Time must be got from this method
   def self.current_time
-    Time.now
+    Time.now.localtime
   end
   
   def self.this_month
     current_time.strftime("%Y-%m")
+  end
+  
+  def self.days_ago(x)
+    (current_time - x.days)
   end
   
   def self.new_orderd_hash

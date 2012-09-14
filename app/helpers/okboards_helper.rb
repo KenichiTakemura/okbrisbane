@@ -69,7 +69,12 @@ module OkboardsHelper
         html += "#{post.price}" + " </td><td>"
       end
       html += %Q|#{_truncate_with_length(post.subject, 35)}</td><td>
-       #{post.postedDate}</td><td>#{post.views}</td><td>| + image_tag("#{I18n.locale}/common/say.png") + "#{post.comment.size}</td><td>"
+       #{post.postedDate}</td><td>#{post.views}</td><td>|
+       if post.comment.size > 0
+         html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td><td>"
+       else
+         html += %Q|#{image_tag("#{I18n.locale}/common/say.png")}| + "#{post.comment.size}</td><td>"
+       end
       if post.has_image?
         html += image_tag("common/IconData2.gif") + post.image.size.to_s
       end
@@ -223,7 +228,7 @@ module OkboardsHelper
       html += "<li>" + link_to(t(category), Okboard.okboard_link_with_category(link,category)) + "</li>"
     end
     if [:p_job, :p_buy_and_sell,:p_well_being].include? link
-      html += "<li>" + link_to(t('write_new'), Okboard.okboard_link_write(@okpage)) + "</li>"
+      html += "<li>" + link_to(t('write_new'), Okboard.okboard_link_write(link)) + "</li>"
     end
     html += "</ul>"
     html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)

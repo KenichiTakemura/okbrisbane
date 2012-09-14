@@ -4,7 +4,6 @@
 <%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(@comment), :remote => true, :method => :post) %>
 <%= @comment.dislikes.to_s %>
 <%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(@comment), :remote => true, :method => :post) %>
-<%= t(:abuse) %>
 <%= @comment.abuse.to_s %>
 <% else %>
 <%= image_tag("common/sns/likes.gif", :size => "20x20")  %>

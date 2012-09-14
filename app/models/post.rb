@@ -85,27 +85,65 @@ class Post < ActiveRecord::Base
       where('has_attachment = ?', cond.attachment)
     end
   }
+  scope :c_time, lambda { |cond|
+    if cond.has_time_by?
+      case cond.time_by.to_sym
+      when :time_by_day_0
+        post_search_by_time(0,1)
+      when :time_by_day_1
+        post_search_by_time(1,2)
+      when :time_by_day_2
+        post_search_by_time(2,3)
+      when :time_by_day_3
+        post_search_by_time(3,4)
+      when :time_by_day_4
+        post_search_by_time(4,5)
+      when :time_by_day_5
+        post_search_by_time(5,6)
+      when :time_by_day_6
+        post_search_by_time(6,7)
+      when :time_by_week_1
+        post_search_by_time(7,8)
+      when :time_by_week_2
+        post_search_by_time(8,15)
+      when :time_by_week_3
+        post_search_by_time(15,22)
+      when :time_by_week_4
+        post_search_by_time(22,29)
+      when :time_by_older
+        post_search_by_time(29,-1)
+      end
+    end
+  }
+  scope :post_search_by_time, lambda { |x,y| 
+    if y.to_i > 0
+      where("created_at <=? and created_at > ?", (Common.days_ago(x)), (Common.days_ago(y)))
+    else
+      where("created_at <=?", (Common.days_ago(x)))
+    end
+  }
+  
   scope :except_ids, lambda { |ids| 
     if !ids.nil? && !ids.empty?  
       where('id not in (?)', ids)
     end
   }
-  scope :after, lambda { |post_id| 
+  scope :after_id, lambda { |post_id| 
     if post_id.present? 
       where('id > ?', post_id)
     end
   }
-  scope :before, lambda { |post_id| 
+  scope :before_id, lambda { |post_id| 
     if post_id.present? 
       where('id < ?', post_id)
     end
   }
   
   
-  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).is_valid.limit(limit) }
+  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).is_valid.limit(limit) }
   scope :search_except, lambda { |cond,ids,limit| search(cond,limit).except_ids(ids).desc }
-  scope :search_after, lambda { |cond,post_id,limit| search(cond,limit).after(post_id).asc }
-  scope :search_before, lambda { |cond,post_id,limit| search(cond,limit).before(post_id).desc }
+  scope :search_after, lambda { |cond,post_id,limit| search(cond,limit).after_id(post_id).asc }
+  scope :search_before, lambda { |cond,post_id,limit| search(cond,limit).before_id(post_id).desc }
     
   # callbacks
   after_initialize :set_default
@@ -196,6 +234,7 @@ class Post < ActiveRecord::Base
     Common.date_format(created_at)
   end
   
+  # This is used for smaller space
   def feeded_date
     Common.date_format_md(created_at)
   end

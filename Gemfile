@@ -55,3 +55,4 @@ gem 'kaminari'
 #gem 'uuidtools'
 gem 'encryptor'
 gem "ckeditor", "3.7.1"
+gem "nokogiri"

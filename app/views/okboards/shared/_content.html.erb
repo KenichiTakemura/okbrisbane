@@ -8,28 +8,31 @@
 		</div>
 	</div>
 	<div class="okboard_image_list">
-	<% if !@board_image_lists.nil? %>
-	<div id="okboard_image_list_for_<%= @okpage %>">
-		<% @board_image_lists.each do |post| %>
-		<div class="okboard_thumbnail">
-			<% if post.image.first.linkable? %>
-			<%= link_to(image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE),  post.image.first.link)%>
-			<% else %>
-			<%= image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+		<% if !@board_image_lists.nil? %>
+		<div id="okboard_image_list_for_<%= @okpage %>">
+			<% @board_image_lists.each do |post| %>
+			<div class="okboard_thumbnail">
+				<% if post.image.first.linkable? %>
+				<%= link_to(image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE),  post.image.first.link)%>
+				<% else %>
+				<%= image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+				<% end %>
+				<p class="description">
+					<%= post.subject%>
+				</p>
+				<p class="description">
+					<%= post.postedDate%>
+				</p>				
+				<% if post.respond_to? :price%>
+				<p class="price_tag">
+					<%= post.price %>
+				</p>
+				<% end %>
+				<%= link_to(t("view"), Okboard.okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
+			</div>
 			<% end %>
-			<p class="description">
-				<%= post.subject%>
-			</p>
-			<% if post.respond_to? :price%>
-			<p class="price_tag">
-				<%= post.price %>
-			</p>
-			<% end %>
-			<%= link_to(t("view"), Okboard.okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 		</div>
 		<% end %>
-	</div>
-	<% end %>
 	</div>
 	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].include?(@okpage) %>
 	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
@@ -40,8 +43,21 @@
 	<% end %>
 
 	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
+
 	<%= render :partial => "okboards/shared/filter" %>
 	<% end %>
+
+	<div class="okboard_list_top" id="okboard_list_top">
+	<div class="list_total_num" style="float:left;">
+		<%= "#{t(:list_total_num)} #{@board_lists.size}" %>
+	</div>
+	<div class="more" style="float:right;">
+		<%= link_to(t(:down), "#_more", :class => 'button-link_blue')%>
+		<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
+		<%= link_to(t('write_new'), Okboard.okboard_link_write(@okpage), :class => 'button-link_naver')%>
+		<% end %>
+	</div>
+	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
@@ -54,6 +70,9 @@
 				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
 				<%= link_to(t('write_new'), Okboard.okboard_link_write(@okpage), :class => 'button-link_naver')%>
 				<% end %>
+				<%= link_to(t(:up), "#okboard_list_top", :class => 'button-link_blue')%>
+				<%= link_to(t(:search), "#okboard_filter", :class => 'button-link_blue')%>
+
 			</div>
 		</div>
 	</div>

@@ -221,5 +221,30 @@ class JobTest < ActiveSupport::TestCase
     assert_equal(Job.search_except(post_search, [job1.id], Okvalue::OKBOARD_LIMIT).size, 3)
 
   end
+  
+  test "Search_by_time" do
+    expiry = Common.current_time + 60.days
+
+    59.downto(0) { |x|
+      post = Job.new(:category => Job::Categories[:seek], :subject => "안녕 하세요 #{x}", :valid_until => expiry);
+      post.created_at = Common.current_time - x.days
+      content = post.build_content(:body => "안녕 하세요")
+      post.save
+      post.set_user(user)
+      content.save
+    }
+
+    60.upto(100) { |x|
+      post = Job.new(:category => Job::Categories[:seek], :subject => "안녕 하세요 #{x}", :valid_until => expiry);
+      post.created_at = Common.current_time
+      content = post.build_content(:body => "안녕 하세요")
+      post.save
+      post.set_user(user)
+      content.save
+    }
+    
+    post_search = PostSearch.new(:okpage => :p_job)
+    
+  end
 
 end

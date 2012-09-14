@@ -21,6 +21,7 @@ body {
   overflow: auto;
   padding: 5px;
   height: 100%;
+  font-family: 'NanumGothic'; 
 }
 
 #page_body {
@@ -270,15 +271,6 @@ textarea {
   font-family: 'NanumGothic';
   background-color: #B7E2F0;
 }
-/*
-a {
-	text-decoration: none
-	color: #ffffff;
-}
-
-a:link, a:visited { color: #642c78 }
-a:hover, a:active { color: #41A317 }
-*/
 
 #page_section_left {
   position: relative;

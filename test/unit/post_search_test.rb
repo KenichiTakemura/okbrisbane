@@ -3,7 +3,7 @@ require 'test_helper'
 class PostSearchTest < ActiveSupport::TestCase
 
   test "search" do
-    post_search = PostSearches.new(:okpage => :p_job)
+    post_search = PostSearch.new(:okpage => :p_job)
     assert post_search.save
     assert post_search.okpage
     assert !post_search.has_category?

@@ -12,8 +12,8 @@ class BusinessCategory < ActiveRecord::Base
   validates :en_name, :format => { :with => /^[\w]*$/ }
 
   # pagination
-  default_scope :order => 'created_at DESC'
-  paginates_per 10
+  default_scope :order => 'en_name'
+  paginates_per 100
   
   def to_s
     "#{display_name}"

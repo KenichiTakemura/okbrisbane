@@ -27,6 +27,7 @@ module HomesHelper
              html += "#{image_tag(image.thumb_image, :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>"
            end
            html += %Q|<td align=left valign=top>#{_truncate_with_length(feed.feeded_to.subject, 70)}|
+           html += "<p>#{feed.feeded_to.postedDate}</p>"
            if feed.feeded_to.respond_to? :price
              html += %Q|<p class="price_tag">| + feed.feeded_to.price + "</p>"
            end
@@ -42,9 +43,9 @@ module HomesHelper
       lists.each_with_index do |feed,index|
         html += %Q|<tr height="20px">|
         html += %Q|<td><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
-        html += %Q|<td nowrap class="feed_text" height="18" width=60%>#{_truncate(feed.feeded_to.subject)}</td>|
+        html += %Q|<td nowrap class="feed_text" height="18" width=75%>#{_truncate(feed.feeded_to.subject)}</td>|
         html += %Q|<td width="15%" class="feed_text">#{feed.feeded_to.feeded_date}</td>|
-        html += %Q|<td width="15%" align=right>| + link_to(t("view"), Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
+        html += %Q|<td width="10%" align=right>| + link_to(t("view"), Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
       end
     end
     html += <<-HTML

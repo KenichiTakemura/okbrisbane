@@ -7,7 +7,7 @@
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/view_bg.gif", :size => "750x100") %>
 		</div>
 	</div>
-    <%= image_tag("#{I18n.locale}/common/title_dt_detail_photos.gif") %>
+
     <%= render :partial => "okboards/shared/gallery" %>
 	<%= render :partial => "okboards/shared/sns" %>
     <%= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") %>
@@ -21,11 +21,10 @@
 				<%= link_to(image_tag("common/sns/bad.gif", :size => "20x20"), Okboard.okboard_link_dislike(@okpage, @post.id), :remote => true, :method => :post) %>
 				<%= @post.dislikes.to_s %>
 				<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
-				<%= t(:abuse) %>
 				<%= @post.abuse.to_s %>
 			</div>
 			<div id="okboard_quick_links">
-				<%= link_to(image_tag("#{I18n.locale}/common/listing.gif"), Okboard.okboard_link(@okpage), :style => "margin:1px") %>
+				<%= link_to(image_tag("#{I18n.locale}/common/listing.gif"), Okboard.okboard_link(@okpage), :style => "margin:1px", :class => "") %>
 				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
 				<%= link_to(image_tag("#{I18n.locale}/common/write.gif"), Okboard.okboard_link_write(@okpage), :style => "margin:1px") %>
 				<% end %>
@@ -113,6 +112,13 @@
 			<% end %>
 
 		</div>
+		<% if @post.comment.present?%>
+		<div class="comment_remark">
+		<%= image_tag("common/sns/likes.gif", :size => "20x20") %>&nbsp;<%= t(:agree_comment) %>
+		<%= image_tag("common/sns/dislikes.gif", :size => "20x20") %>&nbsp;<%= t(:disagree_comment) %>
+		<%= image_tag("common/sns/abuse.png", :size => "20x20")%>&nbsp;<%= t(:report_abuse_comment) %>
+		</div>
+		<% end %>
 		<div class="comment_list"></div>
 		<table id="okboard_comment" width=100% class="ui-widget" border="0">
 			<tbody>
@@ -134,7 +140,6 @@
 							<%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
 							<%= comment.dislikes.to_s %>
 							<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
-							<%= t(:abuse) %>
 							<%= comment.abuse.to_s %>
 						</div>
 

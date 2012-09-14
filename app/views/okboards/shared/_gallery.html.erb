@@ -1,5 +1,6 @@
+<% if !@post.image.empty? %>
+<%= image_tag("#{I18n.locale}/common/title_dt_detail_photos.gif") %>
 <div class="okboard_image_gallery">
-	<% if !@post.image.empty? %>
 	<div class="something" id="something">
 		<%= @post.image.first.something %>
 	</div>
@@ -35,12 +36,8 @@
 				<%= image_tag("common/btn_img_right.gif", :id => "rightControl", :class => "control po") %>
 			</div>
 			<% end %>
-
 		</div>
-
 	</div>
-
-	<% end %>
 </div>
 
 <script type="text/javascript">
@@ -106,3 +103,4 @@
 
 	}); 
 </script>
+<% end %>

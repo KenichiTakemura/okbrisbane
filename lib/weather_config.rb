@@ -2,7 +2,7 @@
 module WeatherConfig
   
   AUSCityOrderList = [:brisbane, :sydney, :melbourne,  :canberra, :hobart, :adelaide, :perth, :darwin]
-  AUSCityMap = Hash.new  
+  AUSCityMap = Common.new_orderd_hash
   AUSCityMap[:sydney] = "http://www.weather.com.au/nsw/sydney"
   AUSCityMap[:melbourne] = "http://www.weather.com.au/vic/melbourne"
   AUSCityMap[:brisbane] = "http://www.weather.com.au/qld/brisbane"
@@ -12,7 +12,7 @@ module WeatherConfig
   AUSCityMap[:perth] = "http://www.weather.com.au/wa/perth"
   AUSCityMap[:darwin] = "http://www.weather.com.au/nt/darwin"
 
-  AUSCityVisibleMap = Hash.new
+  AUSCityVisibleMap = Common.new_orderd_hash
   AUSCityVisibleMap[:sydney] = true
   AUSCityVisibleMap[:melbourne] = true
   AUSCityVisibleMap[:brisbane] = true
@@ -24,7 +24,7 @@ module WeatherConfig
     
   KORCityOrderList = [:seo,:ich,:bsn,:cbk,:cnm,:dgu,:djn,:gbk,:ggi,:gju,:gnm,:gwn,:jbk,:jju,:jnm,:usn]
   
-  KORCityMap = Hash.new
+  KORCityMap = Common.new_orderd_hash
   KORCityMap[:seo] = "http://www.kma.go.kr/weather/main_all.jsp?stncd=108"
   KORCityMap[:ich] = "http://www.kma.go.kr/weather/main_all.jsp?stncd=112"
     

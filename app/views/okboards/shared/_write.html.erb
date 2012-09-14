@@ -2,6 +2,9 @@
 	<p class="okboard_title">
 		<%= t(Style.page(@okpage))%> <%= t('write_new')%>
 	</p>
+			<div class="okboard_title_image">
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/write_bg.jpg", :size => "750x100") %>
+		</div>
 		<p class="okboard_notice">
 		<%= t(@okpage.to_s + "_notice")%>
 	</p>    
