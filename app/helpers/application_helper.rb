@@ -33,8 +33,7 @@ module ApplicationHelper
     SystemSetting.first.socialable
   end
 
-
-  # Create banner
+ # Create banner
   def _collectImage(p, s, a)
     logger.debug("_collectImage: #{p} #{s} #{a}")
     page_id = Style.pageid_value(p)
@@ -108,25 +107,26 @@ module ApplicationHelper
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             if index == 0
-              Rails.logger.debug("index: #{index}")
               html += %Q|<div><div style="margin: 0px 2px 0px">|
             elsif index%count == 0
-              Rails.logger.debug("index: #{index} count: #{count}")
               html += %Q|</div></div><div><div style="margin: 0px 2px 0px">|
             end
-            html += %Q|<img src="#{image.original_image}" style="margin:0 3px 0" width="#{b.img_width}px" height="#{b.img_height}px"/>|
-            if !image.caption.nil? && !image.caption.empty?
-              html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
-            end
+            #html += %Q|<img src="#{image.original_image}" style="margin:0 3px 0" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+            #if !image.caption.nil? && !image.caption.empty?
+            #  html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+            #end
+            html += one_image(b,image,"margin:0 3px 0")
           end
           html += "</div></div></div>"
         else
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
-            html += %Q|<div style="margin: 0px 2px 0px;float:left"><img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
-            if !image.caption.nil? && !image.caption.empty?
-              html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
-            end
+            html += %Q|<div style="margin: 0px 2px 0px;float:left">|
+            html += one_image(b, image)
+            #<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+            #if !image.caption.nil? && !image.caption.empty?
+            #  html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
+            #end
             html += "</div>"
           end
           html += "</div>"
@@ -138,8 +138,14 @@ module ApplicationHelper
     return html.html_safe
   end
   
-  def one_image(b, image)
-    html = %Q|<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
+  def one_image(b, image,style=nil)
+    if image.linkable?
+      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), image.link_to_url)
+    elsif image.attached.business_url.present?
+      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), image.attached.business_url)
+    else
+      html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+    end
     if !image.caption.nil? && !image.caption.empty?
        html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
     end

@@ -34,7 +34,7 @@
 			<% elsif @country.to_i == Okvalue::KR %>
 				<% next if !WeatherConfig::KORCityVisibleMap[w.location.to_sym] %>
 			<tr>
-				<td ><%= link_to(image_tag("#{I18n.locale}/city/btn_area_#{w.location}_ov.gif"), WeatherConfig::KORCityMap[w.location.to_sym], :target => "_blank") %></td>
+				<td class="city"><%= link_to(t(w.location), WeatherConfig::KORCityMap[w.location.to_sym], :target => "_blank") %></td>
 			<% end %>
 			<td><%= image_tag("common/weather/#{w.forecast}.png") %></td>
 			<td><%= w.issued %></td>

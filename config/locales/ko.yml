@@ -574,7 +574,7 @@ ko:
 
   select_image: '이미지 선택'
   select_all_size: '이미지 전부'
-  not_select_image: '선택 안된 이미지'
+  select_not_selected_size: '선택 안된 이미지'
   select_specific_size: '사이즈가 맞는 이미지'
   selected: '선택 됨'
   
@@ -700,12 +700,22 @@ ko:
   brisbane: '브리즈번'
   sydney: '시드니'
   melbourne: '멜버른'
-  canberra: '캠베라'
-  hobart: '호밭'
+  canberra: '캔버라'
+  hobart: '호밧'
   adelaide: '아들레이드'
   perth: '퍼스'
-  darwin: '다윈'
-    
+  darwin: '다윈' 
+
+  seo: '서울·경기도'
+  gwn: '강원도'
+  cbk: '충청북도'
+  cnm: '충청남도'
+  jbk: '전라북도'
+  jnm: '전라남도'
+  gbk: '경상북도'
+  gnm: '경상남도'
+  jju: '제주특별자치도'
+  
   korea: '한국'
   australia: '호주'
   rate_information: '현찰 정보'
@@ -716,5 +726,5 @@ ko:
   rate_send: '보낼때'
   rate_recv: '받을때' 
   
-  collect_information: 'Fix me'
+  collect_information: '정보 수집'
   

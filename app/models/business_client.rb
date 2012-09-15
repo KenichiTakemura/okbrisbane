@@ -34,6 +34,11 @@ class BusinessClient < ActiveRecord::Base
   paginates_per 10
   
   scope :okbrisbane, where(:business_name => Okvalue::BUSINESS_CLIENT_OK)
+  #scope :only_not_selected_image, lambda { ||
+  #  joins("left outer join client_images on client_images.id = business_client.attached_to_id").where("client_images.banner = true") }
+  scope :match_size, lambda { |size|
+    joins("left outer join client_images on client_images.id = business_client.attached_to_id").where("client_images.original_size = ?", size) 
+    }
   
   def to_s
     "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} client_image: #{client_image} profile_image: #{business_profile_image}"

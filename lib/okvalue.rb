@@ -4,12 +4,18 @@ module Okvalue
   #Release History
   #VERSION = "0.1-20120909"
   #VERSION = "0.2-20120910"
-  #Plan
   #VERSION = "0.3-20120912"
   #VERSION = "0.3.1-20120913"
-  VERSION = "0.4-20120914"
-  #VERSION = "0.5-20120916"
-    
+  #VERSION = "0.4-20120914"
+  #Plan
+  VERSION = "0.5-20120916"
+  VERSION = "0.6-20120919"
+  VERSION = "0.7-20120921"
+  VERSION = "0.8-20120923"
+  VERSION = "0.9-20120926"
+  VERSION = "1.0-20120929"
+
+  
   ACCESS_KEY = "Showa"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}

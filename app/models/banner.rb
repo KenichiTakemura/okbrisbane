@@ -60,6 +60,10 @@ class Banner < ActiveRecord::Base
     "#{I18n.t(Style.pagename(page_id))} >> #{I18n.t(Style.sectionname(section_id))}\##{position_id}"
   end
   
+  def name_with_img_resolution
+    "#{name} #{img_resolution}"
+  end
+  
   def img_resolution
      "#{img_width}x#{img_height}"
   end

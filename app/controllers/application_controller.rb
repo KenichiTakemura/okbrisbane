@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def hit
-    key = Common.current_time.strftime("%Y-%m-%d")
+    key = Common.today
     logger.info("key: #{key} session[key]: #{session[key.to_sym]}")
     unless session[key.to_sym]
       @lock.synchronize {

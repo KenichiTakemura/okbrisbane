@@ -64,4 +64,15 @@ class ClientImage < Attachable
     [Okvalue::FLASH_CONTENT_TYPE].include?(avatar.content_type)
   end
   
+  def attachable_list
+    Okvalue::FLASH_THUMBNAILABLE.collect {|a| "#{a} "}
+  end
+  
+  def linkable?
+    if !self.link_to_url.nil? && !self.link_to_url.empty?
+      return true
+    end
+    false
+  end
+  
 end
