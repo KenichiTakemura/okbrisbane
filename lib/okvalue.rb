@@ -8,7 +8,7 @@ module Okvalue
   #VERSION = "0.3.1-20120913"
   #VERSION = "0.4-20120914"
   #Plan
-  VERSION = "0.5-20120916"
+  VERSION = "0.5-20120917"
   VERSION = "0.6-20120919"
   VERSION = "0.7-20120921"
   VERSION = "0.8-20120923"
@@ -108,11 +108,8 @@ module Okvalue
   ATTACHABLE_YES = "attachable_yes"
   ATTACHABLE_NO = "attachable_no"
   
-  WEATHER_AUS = "ftp2.bom.gov.au"
-  WEATHER_KOR = "http://www.kma.go.kr/wid/queryDFS.jsp?"
   RATE = "http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/12776_0.html"
   
-  WEATHER_RETRY = 1
 
   AU = 1
   NZ = 2

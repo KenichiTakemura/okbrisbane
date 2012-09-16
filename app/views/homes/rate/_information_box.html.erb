@@ -1,5 +1,4 @@
 <div class="rate_information_window_control">
-<%= link_to(image_tag("#{I18n.locale}/common/btn_refresh.gif"), "#", :id => "rate_refresh", :style => "float:left; margin:3px")%>
 <%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "rate_close", :style => "float:right")%>
 </div>
 <br/>
@@ -16,17 +15,17 @@
 	</thead>
 	<tbody class="ui-widget-content">
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/aud.gif")%> 1AUD</td>
+			<td><%= image_tag("common/aud.gif")%> 1AUD</td>
 			<td><%= number_to_currency(@rates[0].rate_a, :locale => 'en_AU')%></td>
 			<td><%= number_to_currency(@rates[1].rate_a, :locale => 'en_AU')%></td>
 		</tr>
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/nzd.gif")%> 1NZD</td>
+			<td><%= image_tag("common/nzd.gif")%> 1NZD</td>
 			<td><%= number_to_currency(@rates[2].rate_a, :locale => 'en_NZ')%></td>
 			<td><%= number_to_currency(@rates[3].rate_a, :locale => 'en_NZ')%></td>
 		</tr>
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/usd.gif")%> 1USD</td>
+			<td><%= image_tag("common/usd.gif")%> 1USD</td>
 			<td><%= number_to_currency(@rates[4].rate_a, :locale => 'en_US')%></td>
 			<td><%= number_to_currency(@rates[5].rate_a, :locale => 'en_US')%></td>
 		</tr>
@@ -63,12 +62,10 @@
 </table>
 <%= _script(%Q|
 	$("\#rate_close").click(function() {
-	$("div.rate_information_box").hide("slow");
+	$("#rate_information_box").hide("slow");
 	return false;
 	});
-	$("\#rate_refresh").click(function() {
-	$('div._rate_information_status').css("display","block");
-	$.post("/homes/current_rate?locale=#{I18n.locale}&c=" + $("#country").val());
-	return false;
-});
+|)%>
+<%= _script_document_ready(%Q|
+	$("div.ok_information").height("300px");
 |)%>

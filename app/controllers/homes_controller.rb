@@ -51,35 +51,12 @@ class HomesController < OkController
   def current_weather
     @country = params[:c]
     @weather = Weather.weather_for(Common.today, @country)
-    @dateOn = Common.today
+    @dateOn = @weather.first.forecast_for if @weather.present?
   end
 
   def current_rate
     @rates = Rate.rate_for()
     @dateOn = Common.date_format_ymdhm(@rates.first.issuedOn)
-  end
-
-  def collect_weather
-    require 'net/ftp'
-    tries = 0
-    begin
-      tries += 1
-      logger.info("Accessing to #{Okvalue::WEATHER_AUS}")
-      Net::FTP.open(Okvalue::WEATHER_AUS) do |ftp|
-        ftp.passive = true
-        ftp.login
-        ftp.getbinaryfile("anon/gen/fwo/IDA00100.dat")
-        ftp.close
-        logger.debug(ftp.read)
-      end
-      logger.info("Returned.")
-    rescue Exception => e
-      logger.error(e.message)
-      if (tries < Okvalue::WEATHER_RETRY)
-        sleep(2**tries)
-        retry
-      end
-    end
   end
 
   private

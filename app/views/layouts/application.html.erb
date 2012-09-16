@@ -77,10 +77,14 @@
 				</div>
 				<div class="ok_information">
 					<div class="weather_information">
-						<%= link_to(image_tag("#{I18n.locale}/common/weather.gif"), "#", :id => "weather") %>
+						<%= image_tag("common/australia.gif", :size => "20x20") %>
+						<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "ok_information_link") %>
+						<%= image_tag("common/korea.gif", :size => "20x20") %>
+						<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "ok_information_link") %>
 					</div>
 					<div class="rate_information">
-						<%= link_to(image_tag("#{I18n.locale}/common/rate.gif"), "#", :id => "ex_rate") %>
+						<%= image_tag("common/won.gif", :size => "20x20") %>
+						<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "ok_information_link") %>
 					</div>
 					<%= render :partial => "homes/ok_information" %>
 				</div>

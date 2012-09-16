@@ -1,35 +1,49 @@
-<div class="weather_information_box" style="display:none">
-<div class="_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-<div class="information_box" id="information_box" style="display:none">
+<div class="weather_au_information_box" id="weather_au_information_box" style="display:none">
+<div class="_weather_au_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 </div>
+<div class="weather_kr_information_box" id="weather_kr_information_box" style="display:none">
+<div class="_weather_kr_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 </div>
-<div class="rate_information_box" style="display:none">
-<div class="_rate_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 <div class="rate_information_box" id="rate_information_box" style="display:none">
-</div>
+<div class="_rate_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 </div>
 <%= _script(%Q|
-$("\#weather").click(function() {
-	if ($("div.weather_information_box").is(":hidden")) {
-		$("div.weather_information_box").show("slow");
-		$("div.rate_information_box").hide("slow");
-		$('div._information_status').css("display","block");
+$("\#weather_au").click(function() {
+	if ($("#weather_au_information_box").is(":hidden")) {
+		$("#weather_au_information_box").show("slow");
+		$("#weather_kr_information_box").hide("slow");
+		$("#rate_information_box").hide("slow");
+		$('div._weather_au_information_status').css("display","block");
 	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
 	}
 	else {
-		$("div.weather_information_box").hide("slow");
+		$("#weather_au_information_box").hide("slow");
+	}
+	return false;
+});
+$("\#weather_kr").click(function() {
+	if ($("#weather_kr_information_box").is(":hidden")) {
+		$("#weather_kr_information_box").show("slow");
+		$("#weather_au_information_box").hide("slow");
+		$("#rate_information_box").hide("slow");
+		$('div._weather_kr_information_status').css("display","block");
+	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::KR}");
+	}
+	else {
+		$("#weather_kr_information_box").hide("slow");
 	}
 	return false;
 });
 $("\#ex_rate").click(function() {
-	if ($("div.rate_information_box").is(":hidden")) {
-		$("div.rate_information_box").show("slow");
-		$("div.weather_information_box").hide("slow");
+	if ($("#rate_information_box").is(":hidden")) {
+		$("#rate_information_box").show("slow");
+		$("#weather_au_information_box").hide("slow");
+		$("#weather_kr_information_box").hide("slow");
 		$('div._rate_information_status').css("display","block");
-	    $.post("/homes/current_rate?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
+	    $.post("/homes/current_rate?locale=#{I18n.locale}");
 	}
 	else {
-		$("div.rate_information_box").hide("slow");
+		$("#rate_information_box").hide("slow");
 	}
 	return false;
 });

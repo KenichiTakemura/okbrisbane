@@ -1,3 +1,9 @@
-$('div._information_status').css("display","none");
-$('#information_box').html("<%= escape_javascript(render 'homes/weather/information_box') %>")
-$('#information_box').css("display","block");
+<% if @country.to_i == Okvalue::AU %>
+$('div._weather_au_information_status').css("display","none");
+$('#weather_au_information_box').html("<%= escape_javascript(render 'homes/weather/au_information_box') %>")
+$('#weather_au_information_box').css("display","block");
+<% else %>
+$('div._weather_kr_information_status').css("display","none");
+$('#weather_kr_information_box').html("<%= escape_javascript(render 'homes/weather/kr_information_box') %>")
+$('#weather_kr_information_box').css("display","block");
+<% end %>
