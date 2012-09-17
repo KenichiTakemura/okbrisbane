@@ -1,7 +1,7 @@
 <div class="information_window_control">
 	<%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "w_au_close", :style => "float:right")%>
 </div>
-<p class="city">
+<p class="title">
 	<%= t(:weather_forecast_for) %> <%= @dateOn %>
 </p>
 <table class="ui-widget information_table" style="opacity:0.95;filter:alpha(opacity=95);">
@@ -18,7 +18,7 @@
 		<tr><td colspan="4"><%= t(:no_information) %>
 		</td></tr>
 		<% else %>
-			<% @weather.each do |w| %>
+			<% @weather.reverse_each do |w| %>
 			<% next if !WeatherConfig::AUSCityVisibleMap[w.location.to_sym] %>
 			<tr>
 				<td class="city"><%= link_to(t(w.location), WeatherConfig::AUSCityMap[w.location.to_sym], :target => "_blank") %></td>

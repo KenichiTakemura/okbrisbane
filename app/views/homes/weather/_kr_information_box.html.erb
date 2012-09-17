@@ -1,7 +1,7 @@
 <div class="information_window_control">
 	<%= link_to(image_tag("#{I18n.locale}/common/btn_close.gif"), "#", :id => "w_kr_close", :style => "float:right")%>
 </div>
-<p class="city">
+<p class="title">
 	<%= t(:weather_forecast_for) %> <%= @dateOn %>
 </p>
 <table class="ui-widget information_table" style="opacity:0.95;filter:alpha(opacity=95);">
@@ -10,25 +10,29 @@
 			<th class="small"><%= t(:location)%></th>
 			<th class="small"><%= t(:forecast)%></th>
 			<th class="small"><%= t(:issuedOn)%></th>
+			<th class="small"><%= t(:minTemp)%></th>
 			<th class="small"><%= t(:maxTemp)%></th>
+			<th class="small" width="15%"><%= t(:forecast)%></th>
 			</tr>
 	</thead>
 	<tbody class="ui-widget-content">
 		<% if !@weather.present? %>
-		<tr><td colspan="4"><%= t(:no_information) %>
+		<tr><td colspan="6"><%= t(:no_information) %>
 		</td></tr>
 		<% else %>
-			<% @weather.each do |w| %>
+			<% @weather.reverse_each do |w| %>
 			<% next if !WeatherConfig::KORCityVisibleMap[w.location.to_sym] %>
 			<tr>
 				<td class="city"><%= link_to(t(w.location), WeatherConfig::KORCityMap[w.location.to_sym], :target => "_blank") %></td>
-			<% if WeatherConfig.letter_to_icon(w.forecast).present? %>
-			<td><%= image_tag("common/weather/#{WeatherConfig.letter_to_icon(w.forecast)}.png") %></td>
+			<% if WeatherConfig.kr_letter_to_icon(w.forecast).present? %>
+			<td><%= image_tag("common/weather/#{WeatherConfig.kr_letter_to_icon(w.forecast)}.png") %></td>
 			<% else %>
 			<td><%= image_tag("common/weather/haze.png") %></td>
 			<% end %>
 			<td><%= w.issued %></td>
+			<td><%= w.min %></td>
 			<td><%= w.max %></td>
+			<td ><div class="kr_weather_forecast_view"><%= t(:view)%><span><%= raw(w.warning) %></span></div></td>
 			</tr>
 		<% end %>
 		<% end %>
@@ -41,5 +45,5 @@
 	});
 |)%>
 <%= _script_document_ready(%Q|
-	$("div.ok_information").height("350px");
+	$("div.ok_information").height("400px");
 |)%>

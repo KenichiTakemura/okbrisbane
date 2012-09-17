@@ -31,6 +31,7 @@ module WeatherConfig
 
   # 서울·경기도  강원도 충청북도 충청남도 전라북도 전라남도 경상북도 경상남도 제주특별자치도
   KORCityOrderList = [:seo,:gwn,:cbk,:cnm,:jbk,:jnm,:gbk,:gnm,:jju]
+  #KORCityOrderList = [:seo]
 
   KORCityXMLMap = Common.new_orderd_hash
 
@@ -130,6 +131,11 @@ module WeatherConfig
   end
 
   def self.saveWeather
+    save_au_weather
+    save_kr_weather
+  end
+  
+  def self.save_au_weather
     ftp_weather_data
     info = get_AU_data
     return if !info.present?
@@ -137,7 +143,7 @@ module WeatherConfig
     Rails.logger.info("issuedOn: #{issuedOn}")
     weather = Weather.find_by_issuedOn(issuedOn)
     return if weather.present?
-
+    ActiveRecord::Base.transaction do
     info.each do |i|
       e = i.split("#")
       w = Weather.new(:country => Okvalue::AU)
@@ -147,6 +153,29 @@ module WeatherConfig
       w.max = e[6].to_i
       w.forecast = e[7]
       w.save
+    end
+    end
+  end
+
+  def self.save_kr_weather
+    info = get_KR_data
+    return if !info.present?
+    issuedOn = Time.parse(info[:seo][0])
+    weather = Weather.find_by_issuedOn(issuedOn)
+    return if weather.present?
+    ActiveRecord::Base.transaction do
+    info.each do |location,data|
+      w = Weather.new(:country => Okvalue::KR)
+      w.issuedOn = Time.parse(data[0])
+      w.warning = data[1]
+      w.location = location
+      forecast = data[2].first
+      w.dateOn = Time.parse(forecast[0])
+      w.forecast = forecast[1]
+      w.min = forecast[2]
+      w.max = forecast[3]
+      w.save
+    end
     end
   end
 
@@ -188,23 +217,35 @@ module WeatherConfig
   def self.get_KR_data
     infobox = Common.new_orderd_hash
     require 'open-uri'
+    tm = nil
     KORCityOrderList.each do |location|
       each_info_box = Array.new
       doc = Nokogiri::XML(open(KORCityXMLMap[location]))
+      doc.search('header/tm').each do |link|
+        if !tm.nil? && !tm.eql?(link.content)
+          Rails.logger.error("get_KR_data filed. tm does not match expected #{tm} but #{link.content} for #{location}")
+          return nil
+        end
+        tm = link.content
+        each_info_box.push(link.content)
+      end
       doc.search('header/wf').each do |link|
         each_info_box.push(link.content)
       end
+      location_data = Array.new
       doc.search('body/location').each do |node|
         if node[:city].eql? KORLocationCode[location]
           node.xpath('data').each do |data|
-              each_info_box.push data.xpath('tmEf').first.text
-              each_info_box.push data.xpath('wf').first.text
-              puts data.xpath('wf').first.text
-              each_info_box.push data.xpath('tmn').first.text
-              each_info_box.push data.xpath('tmx').first.text
+              data_for = Array.new
+              data_for.push data.xpath('tmEf').first.text
+              data_for.push data.xpath('wf').first.text
+              data_for.push data.xpath('tmn').first.text
+              data_for.push data.xpath('tmx').first.text
+              location_data.push data_for
           end
         end
       end
+      each_info_box.push location_data
       infobox[location] = each_info_box
     end
     infobox
