@@ -16,7 +16,6 @@
 		<%= f.hidden_field :write_at, :id => "write_at" %>
 		<% if @post.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@post.errors.count, "error") %> prohibited this client_image from being saved:</h2>
 			<ul>
 				<% @post.errors.full_messages.each do |msg| %>
 				<li>
@@ -46,7 +45,7 @@
 		</div>
 		<%= f.fields_for @post.content do |content_form| %>
 		<div class="group">
-			<%= content_form.label :body, t("content"), :class => "label" %>
+			<%= content_form.label :body, t("content"), :class => "label left" %>
 			<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
 		</div>
 		<% end %>

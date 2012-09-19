@@ -5,6 +5,8 @@ class CreateSystemSettings < ActiveRecord::Migration
       t.boolean :socialable, :default => false
       t.string :issue_report_to
       t.string :admin_email
+      t.string :contact_email
+      t.boolean :top_page_ajax, :default => false
       t.timestamps
     end
   end

@@ -53,5 +53,9 @@ class BusinessClient < ActiveRecord::Base
        return profile_image if profile_image.is_main
     end
   end
+  
+  def has_url?
+    self.business_url.present?
+  end
 
 end

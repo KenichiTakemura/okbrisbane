@@ -45,6 +45,32 @@ class ActiveSupport::TestCase
   def locale
     Okbrisbane::LOCALE_KO  
   end
+  
+  def emailaddress
+    "ok_test_123@gmail.com"
+  end
+  
+  def phonenumber1
+    "0433-654-800"    
+  end
 
+  def phonenumber2
+    "0433654800"    
+  end
+  
+  def phonenumber3
+    "0433 654 800"    
+  end
 
+  def phonenumber4
+    "(07) 3365 4800"    
+  end
+
+  def phonenumber5
+    "61 (7) 3365 4800"    
+  end
+
+  def phonenumber6
+    "+61-7 3365 4800"    
+  end
 end

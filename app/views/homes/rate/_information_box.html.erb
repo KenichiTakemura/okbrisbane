@@ -14,6 +14,10 @@
 			</tr>
 	</thead>
 	<tbody class="ui-widget-content">
+		<% if !@rates.present? %>
+		<tr><td colspan="3"><%= t(:no_information) %>
+		</td></tr>
+		<% else %>
 		<tr>
 			<td><%= image_tag("common/aud.gif")%> 1AUD</td>
 			<td><%= number_to_currency(@rates[0].rate_a, :locale => 'en_AU')%></td>
@@ -29,6 +33,7 @@
 			<td><%= number_to_currency(@rates[4].rate_a, :locale => 'en_US')%></td>
 			<td><%= number_to_currency(@rates[5].rate_a, :locale => 'en_US')%></td>
 		</tr>
+		<% end %>
 	</tbody>
 </table>
 <p class="city">
@@ -43,21 +48,26 @@
 			</tr>
 	</thead>
 	<tbody class="ui-widget-content">
+		<% if !@rates.present? %>
+		<tr><td colspan="3"><%= t(:no_information) %>
+		</td></tr>
+		<% else %>
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/aud.gif")%> 1AUD</td>
+			<td><%= image_tag("common/aud.gif")%> 1AUD</td>
 			<td><%= number_to_currency(@rates[0].rate_b, :locale => 'en_AU')%></td>
 			<td><%= number_to_currency(@rates[1].rate_b, :locale => 'en_AU')%></td>
 		</tr>
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/nzd.gif")%> 1NZD</td>
+			<td><%= image_tag("common/nzd.gif")%> 1NZD</td>
 			<td><%= number_to_currency(@rates[2].rate_b, :locale => 'en_NZ')%></td>
 			<td><%= number_to_currency(@rates[3].rate_b, :locale => 'en_NZ')%></td>
 		</tr>
 		<tr>
-			<td><%= image_tag("http://community.fxkeb.com/fxportal/web/img/co/usd.gif")%> 1USD</td>
+			<td><%= image_tag("common/usd.gif")%> 1USD</td>
 			<td><%= number_to_currency(@rates[4].rate_b, :locale => 'en_US')%></td>
 			<td><%= number_to_currency(@rates[5].rate_b, :locale => 'en_US')%></td>
 		</tr>
+		<% end %>
 	</tbody>
 </table>
 <%= _script(%Q|

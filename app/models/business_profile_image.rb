@@ -12,11 +12,7 @@ class BusinessProfileImage < Attachable
    },
    :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
    :path => ':rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename'
-  
-  def main
-    where('is_main = true').first
-  end
-  
+   
   # https://github.com/thoughtbot/paperclip
   #validates :avatar, :attachment_presence => true
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_BUSINESS_PROFILE_IMAGE_SIZE
@@ -34,6 +30,10 @@ class BusinessProfileImage < Attachable
 
   def to_s
     super.to_s + " is_main: #{is_main}"
+  end
+
+  def original_image
+    return self.avatar.url(:original)
   end
   
 end

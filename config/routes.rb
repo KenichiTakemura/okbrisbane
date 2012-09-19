@@ -19,6 +19,16 @@ Okbrisbane::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
 
+  resources :sponsors, :only => [] do
+    collection do
+      get :show
+      get :show_ok
+      get :thank_you
+    end
+  end
+  
+  resources :contacts, :only => ["index","create","new"]
+
   resources :homes, :only => ["index"] do
     collection do
       post :current_weather
@@ -44,14 +54,14 @@ Okbrisbane::Application.routes.draw do
       post :likes
       post :dislikes
       post :abuses
-      post :next_post
+      post :next_posttest
       post :prev_post
     end
   end
   
   resources :jobs, :only => ["new","create"]
   resources :buy_and_sells, :only => ["new","create"]
-  resources :well_being, :only => ["new","create"]
+  resources :well_beings, :only => ["new","create"]
   resources :laws, :only => ["new","create"]
 
   match 'comments/:id/likes' => "comments#likes", :via=>:post, :as => :comment_like

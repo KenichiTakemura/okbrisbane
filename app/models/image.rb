@@ -34,6 +34,7 @@ class Image < Attachable
     self.medium_size ||= "400x300"
     self.link_to_url ||= ""
     self.source_url ||= ""
+    self.something ||= ""
   end
 
   def width

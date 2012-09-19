@@ -89,8 +89,8 @@
 					<%= render :partial => "homes/ok_information" %>
 				</div>
 				<div id="header-bottom">
-					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
 					<%= navigation("#41A317","#f0f0f0") %>
+					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
 					<div id="follows">
 						<% if socialable? %>
 						<ul class="wat-cf">
@@ -117,8 +117,6 @@
 						</ul>
 						<% end %>
 					</div>
-					<% else %>
-					<%= _script_document_ready(%Q|$('\#header').css("height","260px");$('\#header-bottom').css("height","60px");|)%>
 					<% end %>
 				</div>
 			</div>
@@ -141,8 +139,8 @@
 		<div class="footer_links">
 			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
 			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
-			<%= link_to(t(:banner_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
-			<%= link_to(t(:general_contact), "#", :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
+			<%= link_to(t(:banner_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
+			<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
 		</div>
 	</body>
 </html>

@@ -138,13 +138,12 @@ module ApplicationHelper
     return html.html_safe
   end
   
-  def one_image(b, image,style=nil)
-    if image.linkable?
-      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), image.link_to_url)
-    elsif image.attached.business_url.present?
-      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), image.attached.business_url)
-    else
+  def one_image(b, image, style=nil)
+    Rails.logger.debug("one_image host : #{request.host}")
+    if request.host =~ /admin.okbrisbane/
       html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+    else
+      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
     end
     if !image.caption.nil? && !image.caption.empty?
        html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
@@ -191,7 +190,7 @@ module ApplicationHelper
         effect = Style.getEffect(p,s,a)
         logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
         script += %Q|$('\##{div_id}').slides({container:'#{container}',
-          preloadImage:'assets/common/loading.gif',|
+          preloadImage:'assets/common/ajax_loading_1.gif',|
           script += "randomize:true," if b.is_random
           script += %Q|play:#{effect_speed},#{effect}});
           $("a.prev").text('#{t("effect_prev")}');
@@ -249,7 +248,7 @@ module ApplicationHelper
         effect = Style.getEffect(p,s,a)
         logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
         script = %Q|$('\##{div_id}').slides({container:'#{container}',
-          preloadImage:'assets/common/loading.gif',|
+          preloadImage:'assets/common/ajax_loading_1.gif',|
           #script += "randomize:true," if b.is_random
           script += %Q|play:#{effect_speed},next:'#{div_id}_next',prev:'#{div_id}_prev',#{effect}});|
         logger.debug("script: #{script}")

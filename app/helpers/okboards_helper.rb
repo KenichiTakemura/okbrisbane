@@ -82,7 +82,7 @@ module OkboardsHelper
       if post.has_attachment?
         html += image_tag("common/IconData2.gif")
       end
-      html += %Q|</td><td >| + link_to(author_name(post), Okboard.okboard_link_with_user(@okpage, post.posted_by_id), :style => "color:#000") + %Q|</td><td class="okboard_list_view">|
+      html += %Q|</td><td >| + author_name(post) + %Q|</td><td class="okboard_list_view">|
       #if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
       #  html += t("view") + section_span(post) + "</td></tr>"
       #else
@@ -170,6 +170,11 @@ module OkboardsHelper
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
       paths = _path(links)
     when :p_mypage
+      links = [:p_job,:p_buy_and_sell,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]
+      paths = _path(links)
+    when :p_sponsor
       links = [:p_job,:p_buy_and_sell,:p_well_being,
         :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
         :p_law,:p_tax,:p_study,:p_immig,:p_yellowpage]

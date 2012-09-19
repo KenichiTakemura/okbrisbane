@@ -10,7 +10,9 @@
  *
  *= require_self
  *= require_tree .
+ *= require_tree '../../../vendor/assets/stylesheets/jquery-ui'
  */
+
 html {
   height: 100%;
   margin: 0 auto;
@@ -161,12 +163,10 @@ div#footer .developer {
 
 .form div.field_with_errors label.label {
   display: inline;
-}
-
-.form div.field_with_errors .text_field {
   color: red;
   border: 2px solid red;
 }
+
 
 .fl {
 	float: left;

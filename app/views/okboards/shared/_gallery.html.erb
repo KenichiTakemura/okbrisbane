@@ -5,7 +5,11 @@
 		<%= @post.image.first.something %>
 	</div>
 	<div class="bigPicture">
-		<%= image_tag(@post.image.first.original_image, :id => "proimg")  %>
+		<% if @post.image.first.linkable? %>
+			<%= link_to(image_tag(@post.image.first.original_image, :id => "proimg"), @post.image.first.link, :id => "proimg_href") %>
+		<% else %>
+			<%= image_tag(@post.image.first.original_image, :id => "proimg") %>
+		<% end %>
 	</div>
 	<div class="thumbBox">
 		<div id="slideshow">
@@ -14,13 +18,12 @@
 				<%= image_tag("common/btn_img_left.gif", :id => "leftControl", :class => "control po") %>
 			</div>
 			<% end %>
-
 			<div id="slidesContainer" class="fl">
-
 				<div class="slide">
 					<% @post.image.each_with_index do |image,i| %>
 					<div class="fl thumb">
-						<%= image_tag(image.thumb_image, :class => "po", :size => "115x100", :onclick => "$('#proimg').attr('src',\"#{image.original_image}\");$('#something').text(\"#{image.something}\");") %>
+						<%= image_tag(image.thumb_image, :class => "po", :size => "115x100",
+						 :onclick => "$('#proimg').attr('src',\"#{image.original_image}\");$('#something').text(\"#{image.something}\");$('#proimg_href').attr('href',\"#{image.link}\");") %>
 					</div>
 					<% if i%5==4 && i>0  %>
 				</div>
@@ -28,9 +31,7 @@
 					<% end %>
 					<% end %>
 				</div>
-
 			</div>
-
 			<% if @post.image.size > 5 %>
 			<div class="fl">
 				<%= image_tag("common/btn_img_right.gif", :id => "rightControl", :class => "control po") %>

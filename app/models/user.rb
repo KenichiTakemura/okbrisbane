@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :comment, :as => :commented_by, :dependent => :destroy
   has_many :attachment, :as => :attached_by, :class_name => 'Attachment', :dependent => :destroy
   has_many :image, :as  => :attached_by, :class_name => 'Image', :dependent => :destroy
+  has_many :contact, :as => :contacted_by
 
   validates_presence_of :user_name
   after_create :create_mypage, :init_role

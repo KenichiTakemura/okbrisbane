@@ -1,0 +1,20 @@
+<%= content_tag(:p, "#{@contact.user_name} #{t(:received_contact_message)}")%>
+<br/>
+<%= content_tag(:p, "#{t(:subject)} #{@subject}") %>
+<%= content_tag(:p, t(:content)) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= raw(@contact.body) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<br/>
+<%= content_tag(:p, t(:name)) %> 
+<%= content_tag(:p, @contact.user_name) %>
+<br/>
+<%= content_tag(:p, t(:email)) %>
+<%= content_tag(:p, @contact.email) %>
+<br/>
+<%= content_tag(:p, t(:phone)) %>
+<%= content_tag(:p, @contact.phone) %>
+<br/>
+<%= content_tag(:p, t(:visit_following_list_to_view))%>
+
+<%= link_to(t(:confirmation), "http://admin.okbrisbane.com/contact/#{@contact.id}")%>

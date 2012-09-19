@@ -8,8 +8,8 @@ module Okvalue
   #VERSION = "0.3.1-20120913"
   #VERSION = "0.4-20120914"
   #Plan
-  VERSION = "0.5-20120917"
-  #VERSION = "0.6-20120919"
+  #VERSION = "0.5-20120917"
+  VERSION = "0.6-20120919"
   #VERSION = "0.7-20120921"
   #VERSION = "0.8-20120923"
   #VERSION = "0.9-20120926"
@@ -20,7 +20,6 @@ module Okvalue
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   
-  ADMIN_EMAIL = "info@okbrisbane.com"
   POST_ADMIN = "post_admin@okbrisbane.com"
 
   # Global Variables
@@ -115,6 +114,12 @@ module Okvalue
   NZ = 2
   KR = 3
   US = 4
+  
+  CONTACT_BANNER = 1
+  CONTACT_GENERAL = 2
+  CONTACT_FEEDBACK = 3
+  CONTACT_ISSUE = 4
+  CONTACT_EXIT = 5
   
   SITE_STATISTICS_DAILY = "daily"
   SITE_STATISTICS_MONTHLY = "monthly"

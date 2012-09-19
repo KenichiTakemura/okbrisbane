@@ -37,10 +37,10 @@ class Post < ActiveRecord::Base
   # validator
   validates_presence_of :category, :message => I18n.t('must_be_selected')
   validates_presence_of :locale, :message => I18n.t('must_be_selected')
-  validates_presence_of :subject, :message => I18n.t('must_be_filled')
-  validates_presence_of :valid_until, :message => I18n.t('must_be_filled')
-  validates_presence_of :status, :message => I18n.t('must_be_filled')
-  validates_presence_of :write_at, :message => I18n.t('must_be_filled')
+  validates_presence_of :subject
+  validates_presence_of :valid_until
+  validates_presence_of :status
+  validates_presence_of :write_at
 
   validates_numericality_of :views, :only_integer => true, :greater_than_or_equal_to => 0
   validates_numericality_of :likes, :only_integer => true, :greater_than_or_equal_to => 0
@@ -185,6 +185,7 @@ class Post < ActiveRecord::Base
     self.status ||= Okvalue::POST_STATUS_PUBLIC
     self.mode ||= Role::R[:user_r] | Role::R[:user_w]
     self.comment_email ||= false
+    self.write_at ||= Common.current_time.to_i
   end
   
   def viewed

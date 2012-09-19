@@ -21,6 +21,8 @@ class ClientImage < Attachable
   def set_default
     self.thumb_size ||= "120x120"
     self.medium_size ||= "300x300"
+    self.link_to_url ||= ""
+    self.source_url ||= ""
   end
 
   validates_attachment_size :avatar, :less_than => Okvalue::MAX_CLIENT_IMAGE_SIZE
@@ -73,6 +75,15 @@ class ClientImage < Attachable
       return true
     end
     false
+  end
+  
+  def link
+    self.link_to_url
+  end
+  
+  def click
+    update_attribute(:clicked, clicked + 1)
+    update_attribute(:last_clicked, Common.current_time)
   end
   
 end

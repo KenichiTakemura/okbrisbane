@@ -11,8 +11,8 @@
 
 @font-face {
     font-family: 'NanumGothicBold';
-    font-weight: 'normal';
-    font-style: 'normal';
+    font-weight: 'bold';
+    font-style: 'bold';
     src: local('NanumGothicBold');
     src: url('fonts/NanumGothicBold.eot');
     src: url('fonts/NanumGothicBold.eot') format('embedded-opentype'),
@@ -22,8 +22,8 @@
 
 @font-face {
     font-family: 'NanumGothicExtraBold';
-    font-weight: 'normal';
-    font-style: 'normal';
+    font-weight: 'extraBold';
+    font-style: 'extraBold';
     src: local('NanumGothicExtraBold');
     src: url('fonts/NanumGothicExtraBold.eot');
     src: url('fonts/NanumGothicExtraBold.eot') format('embedded-opentype'),

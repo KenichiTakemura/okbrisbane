@@ -1,0 +1,47 @@
+<div class="ok_page" id="okboard_for_<%= @okpage %>">
+	<div class="ok_page_top">
+		<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/ok_logo.gif") %>
+	</div>
+
+	<div class="contact_form">
+		<%= form_for(@contact, :html => { :multipart => true, :class => "form" }) do |f| %>
+		<% if @contact.errors.any? %>
+		<div id="error_explanation">
+			<ul>
+				<% @contact.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+		<div class="group">
+			<%= f.label :user_name, t(:user_name), :class => "label left" %>
+			<%= f.text_field :user_name, :class => "text_field" %>
+		</div>
+		<div class="group">
+			<%= f.label :email, t(:email), :class => "label left" %>
+			<%= f.email_field :email, :class => "text_field" %>
+		</div>
+		<div class="group">
+			<%= f.label :phone, t(:phone), :class => "label left" %>
+			<%= f.telephone_field :phone, :class => "text_field" %>
+		</div>
+		<div class="group">
+			<%= f.label :type, t(:subject), :class => "label left" %>
+			<%= f.select :type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.type) %>
+		</div>
+		<div class="group">
+			<%= f.label :body, t(:content), :class => "label left" %>
+			<%= f.text_area :body, :class => "text_area" %>
+		</div>
+		<div class="group">
+			<div class="left">
+				<%= f.submit t(:send), :class => "button-link_ok" %>
+			</div>
+		</div>
+		<% end %>
+
+	</div>
+</div>

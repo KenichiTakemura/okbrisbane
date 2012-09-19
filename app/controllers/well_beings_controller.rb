@@ -7,8 +7,8 @@ class WellBeingsController < PostsController
   end
   
   def create
-    logger.debug("create buy_and_sell post by #{current_user}")
-    create_post(BuyAndSell, :buy_and_sell)
+    logger.debug("create well_being post by #{current_user}")
+    create_post(WellBeing, :well_being)
   end
     
 end

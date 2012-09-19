@@ -160,23 +160,21 @@ module WeatherConfig
   def self.save_kr_weather
     info = get_KR_data
     return if !info.present?
-    issuedOn = Time.parse(info[:seo][0])
-    weather = Weather.find_by_issuedOn(issuedOn)
-    return if weather.present?
     ActiveRecord::Base.transaction do
-    info.each do |location,data|
-      w = Weather.new(:country => Okvalue::KR)
-      w.issuedOn = Time.parse(data[0])
-      w.warning = data[1]
-      w.location = location
-      forecast = data[2].first
-      w.dateOn = Time.parse(forecast[0])
-      w.forecast = forecast[1]
-      w.min = forecast[2]
-      w.max = forecast[3]
+     info.each do |location,data|
+      issuedOn = Time.parse(data[0])
+      forecast = data[2]
+      f = forecast.first
+      dateon = Common.date_format(Time.parse(f[0]))
+      w = Weather.where('dateOn = ? and location = ?', dateon, location).first
+      w ||= Weather.new(:country => Okvalue::KR, :location => location, :dateOn => dateon)
+      w.issuedOn = issuedOn
+      w.forecast = f[1]
+      w.min = f[2]
+      w.max = f[3]
       w.save
     end
-    end
+  end
   end
 
   def self.au_letter_to_icon(letter)

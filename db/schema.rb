@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914101735) do
+ActiveRecord::Schema.define(:version => 20120919021228) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -255,6 +255,18 @@ ActiveRecord::Schema.define(:version => 20120914101735) do
     t.string   "commented_by_type"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.integer  "contacted_by_id"
+    t.string   "contacted_by_type"
+    t.integer  "type"
+    t.text     "body"
+    t.string   "user_name"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "contents", :force => true do |t|
@@ -548,6 +560,8 @@ ActiveRecord::Schema.define(:version => 20120914101735) do
     t.boolean  "socialable",         :default => false
     t.string   "issue_report_to"
     t.string   "admin_email"
+    t.string   "contact_email"
+    t.boolean  "top_page_ajax",      :default => false
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
@@ -621,6 +635,7 @@ ActiveRecord::Schema.define(:version => 20120914101735) do
     t.string   "location"
     t.integer  "country"
     t.string   "forecast"
+    t.string   "summary"
     t.integer  "min"
     t.integer  "max"
     t.string   "warning"

@@ -6,16 +6,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.delete_all
-Banner.delete_all
-BusinessClient.delete_all
-BusinessProfile.delete_all
-BusinessProfileImage.delete_all
-BusinessCategory.delete_all
-SystemSetting.delete_all
-Role.delete_all
-Home.delete_all
-MemberManagement.delete_all
+User.destroy_all
+Banner.destroy_all
+BusinessClient.destroy_all
+BusinessProfile.destroy_all
+BusinessProfileImage.destroy_all
+
+SystemSetting.destroy_all
+Role.destroy_all
+Home.destroy_all
+MemberManagement.destroy_all
 
 # Users
 User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123',
@@ -24,9 +24,6 @@ User.create(:email => "kenichi_takemura1976@yahoo.com", :password => 'kenichi123
 guest = User.new(:email => "okbrisbane_guest@okbrisbane.com", :user_name => "Guest",
  :is_special => true, :confirmed_at => Common.current_time)
 guest.save(:validate => false)
-#User.create(:email => "mootal@hanmail.net", :password => 'kristaadams1',
-# :password_confirmation => 'kristaadams1', :user_name => "Elliott Joo",
-# :is_special => true, :confirmed_at => Common.current_time)
 
 
 # OKBRISBANE 
@@ -37,83 +34,17 @@ image = BusinessProfileImage.new(:avatar => File.new("public/images/logo.gif"), 
 image.attached_to(ok)
 image.save
 
+contact_mail_to = "kenichi_takemura1976@yahoo.com"
+
 # SystemSetting
 ss = SystemSetting.new
 ss.post_expiry_length = 30
 ss.socialable = false
 ss.issue_report_to = "kenichi_takemura1976@yahoo.com"
 ss.admin_email = "info@okbrisbane.com"
+ss.contact_email = contact_mail_to
+ss.top_page_ajax = false
 ss.save
-
-# BusinessCategory
-BusinessCategory.create(:en_name => "Accommodation", :display_name => "Accommodation")
-BusinessCategory.create(:en_name => "Hotels", :display_name => "Hotels")
-BusinessCategory.create(:en_name => "Motels", :display_name => "Motels")
-BusinessCategory.create(:en_name => "Adult_Services", :display_name => "Adult Services")
-BusinessCategory.create(:en_name => "Pubs_and_Bars", :display_name => "Pubs & Bars")
-BusinessCategory.create(:en_name => "Cinema", :display_name => "Cinema")
-BusinessCategory.create(:en_name => "Art_Galleries", :display_name => "Art Galleries")
-BusinessCategory.create(:en_name => "Car_Mechanic", :display_name => "Car Mechanic")
-BusinessCategory.create(:en_name => "Parking", :display_name => "Parking")
-BusinessCategory.create(:en_name => "Towing", :display_name => "Towing")
-BusinessCategory.create(:en_name => "Child_Care_and_Day_Care", :display_name => "Child Care & Day Care")
-BusinessCategory.create(:en_name => "Dry_Cleaning_and_Laundry", :display_name => "Dry Cleaning & Laundry")
-BusinessCategory.create(:en_name => "Pest_Control", :display_name => "Pest Control")
-BusinessCategory.create(:en_name => "Schools", :display_name => "Schools")
-BusinessCategory.create(:en_name => "TAFE", :display_name => "TAFE")
-BusinessCategory.create(:en_name => "Universities", :display_name => "Universities")
-BusinessCategory.create(:en_name => "Wedding_Planning", :display_name => "Wedding Planning")
-BusinessCategory.create(:en_name => "Wedding_Supplies", :display_name => "Wedding Supplies")
-BusinessCategory.create(:en_name => "Party_Supplies", :display_name => "Party Supplies")
-BusinessCategory.create(:en_name => "ATM", :display_name => "ATM")
-BusinessCategory.create(:en_name => "Bookkeeping", :display_name => "Bookkeeping")
-BusinessCategory.create(:en_name => "Banks", :display_name => "Banks")
-BusinessCategory.create(:en_name => "Supermarket_and_Grocery_Stores", :display_name => "Supermarket & Grocery Stores")
-BusinessCategory.create(:en_name => "Bottle_Shops", :display_name => "Bottle Shops")
-BusinessCategory.create(:en_name => "Fruits_and_Vegetables", :display_name => "Fruits & Vegetables")
-BusinessCategory.create(:en_name => "Consulates_and_Embassies", :display_name => "Consulates & Embassies")
-BusinessCategory.create(:en_name => "Courts", :display_name => "Courts")
-BusinessCategory.create(:en_name => "Emergency_Services", :display_name => "Emergency Services")
-BusinessCategory.create(:en_name => "Beauty_Salons", :display_name => "Beauty Salons")
-BusinessCategory.create(:en_name => "Day_Spas", :display_name => "Day Spas")
-BusinessCategory.create(:en_name => "Hairdressers", :display_name => "Hairdressers")
-BusinessCategory.create(:en_name => "Clothing_Manufacturers", :display_name => "Clothing Manufacturers")
-BusinessCategory.create(:en_name => "Footwear_Manufacturers", :display_name => "Footwear Manufacturers")
-BusinessCategory.create(:en_name => "Sporting_Goods_Manufacturers", :display_name => "Sporting Goods Manufacturers")
-BusinessCategory.create(:en_name => "Couriers", :display_name => "Couriers")
-BusinessCategory.create(:en_name => "Internet_Services", :display_name => "Internet Services")
-BusinessCategory.create(:en_name => "Telephone_Services", :display_name => "Telephone Services")
-BusinessCategory.create(:en_name => "More_Media_and_Communication", :display_name => "More Media & Communication")
-BusinessCategory.create(:en_name => "Dentists", :display_name => "Dentists")
-BusinessCategory.create(:en_name => "Mobility_Aids", :display_name => "Mobility Aids")
-BusinessCategory.create(:en_name => "Doctors", :display_name => "Doctors")
-BusinessCategory.create(:en_name => "Pet_Boarding", :display_name => "Pet Boarding")
-BusinessCategory.create(:en_name => "Pet_Care", :display_name => "Pet Care")
-BusinessCategory.create(:en_name => "Pet_Training", :display_name => "Pet Training")
-BusinessCategory.create(:en_name => "Accountants", :display_name => "Accountants")
-BusinessCategory.create(:en_name => "Business_Broker", :display_name => "Business Broker")
-BusinessCategory.create(:en_name => "Associations_and_Unions", :display_name => "Associations & Unions")
-BusinessCategory.create(:en_name => "Churches", :display_name => "Churches")
-BusinessCategory.create(:en_name => "Mosques", :display_name => "Mosques")
-BusinessCategory.create(:en_name => "Synagogues", :display_name => "Synagogues")
-BusinessCategory.create(:en_name => "Cafes", :display_name => "Cafes")
-BusinessCategory.create(:en_name => "Restaurants", :display_name => "Restaurants")
-BusinessCategory.create(:en_name => "Takeaways", :display_name => "Takeaways")
-BusinessCategory.create(:en_name => "Florists", :display_name => "Florists")
-BusinessCategory.create(:en_name => "Mobile_Phones_Retailers", :display_name => "Mobile Phones Retailers")
-BusinessCategory.create(:en_name => "Shopping_Centres", :display_name => "Shopping Centres")
-BusinessCategory.create(:en_name => "Extreme_Sports", :display_name => "Extreme Sports")
-BusinessCategory.create(:en_name => "Gyms_and_Fitness_Centres", :display_name => "Gyms & Fitness Centres")
-BusinessCategory.create(:en_name => "Surf_School", :display_name => "Surf School")
-BusinessCategory.create(:en_name => "Electricians", :display_name => "Electricians")
-BusinessCategory.create(:en_name => "Handyman", :display_name => "Handyman")
-BusinessCategory.create(:en_name => "Removalists", :display_name => "Removalists")
-BusinessCategory.create(:en_name => "Car_Rental", :display_name => "Car Rental")
-BusinessCategory.create(:en_name => "Airport_Shuttles", :display_name => "Airport Shuttles")
-BusinessCategory.create(:en_name => "Taxis", :display_name => "Taxis")
-BusinessCategory.create(:en_name => "Electricity_Supply", :display_name => "Electricity Supply")
-BusinessCategory.create(:en_name => "Gas_Supply", :display_name => "Gas Supply")
-BusinessCategory.create(:en_name => "Waste_Treatment", :display_name => "Waste Treatment")
 
 # Banner
 

@@ -1,0 +1,19 @@
+<%= content_tag(:p, t(:contact_confirmation_email_content1))%>
+<%= content_tag(:p, t(:contact_confirmation_email_content2))%>
+<%= content_tag(:p, t(:contact_confirmation_email_content3))%>
+<%= content_tag(:p, t(:contact_confirmation_email_content4))%>
+<br/>
+<%= content_tag(:p, "#{t(:subject)} #{@subject}") %>
+<%= content_tag(:p, t(:content)) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= raw(@contact.body) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<br/>
+<%= content_tag(:p, t(:name)) %> 
+<%= content_tag(:p, @contact.user_name) %>
+<br/>
+<%= content_tag(:p, t(:email)) %>
+<%= content_tag(:p, @contact.email) %>
+<br/>
+<%= content_tag(:p, t(:phone)) %>
+<%= content_tag(:p, @contact.phone) %>
