@@ -5,7 +5,9 @@
 		</p>
 		<% if @business_client.business_profile_image.present? %>
 		<div class="profile_image">
-			<%= image_tag(@business_client.main_profile_image.original_image )%>
+			<div class="bigPicture">
+			<%= image_tag(@business_client.main_profile_image.original_image, :id => "proimg")%>
+			</div>
 		</div>
 		<% end %>
 	</div>

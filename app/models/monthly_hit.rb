@@ -1,6 +1,6 @@
 class MonthlyHit < ActiveRecord::Base
-  attr_accessible :day, :hit, :user_hit
+  attr_accessible :month, :hit, :user_hit
   
-  scope :month_for, lambda { |month| where("Month(day) = ?", month) }
+  scope :year_for, lambda { |year| where("Year(month) = ?", year) }
     
 end
