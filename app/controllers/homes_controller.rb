@@ -30,8 +30,8 @@ class HomesController < OkController
     raise "Bad Category"
     end
   end
-
-  def index
+  
+  def pick_feed
     @job_feed_lists = collectFeed(:p_job)
     @buy_and_sell_feed_lists = collectFeed(:p_buy_and_sell)
     @estate_lists,@estate_image_lists  = collectFeed(:p_estate)
@@ -40,12 +40,25 @@ class HomesController < OkController
     @accommodation_lists,@accommodation_image_lists = collectFeed(:p_accommodation)
     @legal_service_lists = collectFeed(:p_law)
     @study_lists = collectFeed(:p_study)
+  end
+
+  def index
+    if !top_page_ajaxable?
+      pick_feed
+    else
+    end
     @okpage = :p_home
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @estate_lists }
-      format.json { render :json => @estate_image_lists }
     end
+  end
+  
+  # Ajax
+  def top_feed
+    @okpage = :p_home
+    @category = params[:c].to_sym
+    @list,@image_list = collectFeed(@category)
+    logger.debug("top_feed: #{@category} #{@list} #{@image_list}")
   end
   
   def current_weather

@@ -119,6 +119,10 @@ class ApplicationController < ActionController::Base
     Common.current_time + system_setting.post_expiry_length.days
   end
 
+  def top_page_ajaxable?
+    SystemSetting.first.top_page_ajax    
+  end
+
   def find_lastid(board_list)
     if !board_list.nil? && !board_list.empty?
     lastid = board_list.last.id

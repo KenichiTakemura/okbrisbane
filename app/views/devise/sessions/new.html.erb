@@ -21,11 +21,11 @@
 	</p>
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
 	<div class="group">
-		<%= f.label :email, "#{t(:signin_email)}", :class => "label left"   %>
+		<%= f.label :email, t(:signin_email), :class => "label" %>
 		<%= f.email_field :email, :class => "text_field" %>
 	</div>
 	<div class="group">
-		<%= f.label :password, "#{t(:signin_password)}", :class => "label left"  %>
+		<%= f.label :password, "#{t(:signin_password)}", :class => "label left" %>
 		<%= f.password_field :password, :class => "text_field" %>
 	</div>
 	<div class="group">

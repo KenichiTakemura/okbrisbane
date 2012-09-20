@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module Okvalue
-  
+
   #Release History
   #VERSION = "0.1-20120909"
   #VERSION = "0.2-20120910"
@@ -9,8 +9,8 @@ module Okvalue
   #VERSION = "0.4-20120914"
   #Plan
   #VERSION = "0.5-20120917"
-  VERSION = "0.6-20120919"
-  #VERSION = "0.7-20120921"
+  #VERSION = "0.6-20120919"
+  VERSION = "0.7-20120921"
   #VERSION = "0.8-20120923"
   #VERSION = "0.9-20120926"
   #VERSION = "1.0-20120929"
@@ -19,6 +19,17 @@ module Okvalue
   ACCESS_KEY = "Showa"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
+  
+  FEED_COLORMAP = {
+    :p_job => :ok,
+    :p_buy_and_sell => :ok,
+    :p_estate => :naver,
+    :p_business => :naver,
+    :p_motor_vehicle => :naver,
+    :p_accommodation => :blue,
+    :p_law => :blue,
+    :p_study => :blue
+  }
   
   POST_ADMIN = "post_admin@okbrisbane.com"
 

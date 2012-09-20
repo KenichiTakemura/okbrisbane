@@ -32,6 +32,10 @@ module ApplicationHelper
   def socialable?
     SystemSetting.first.socialable
   end
+  
+  def top_page_ajaxable?
+    SystemSetting.first.top_page_ajax
+  end
 
  # Create banner
   def _collectImage(p, s, a)

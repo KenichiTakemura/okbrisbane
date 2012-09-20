@@ -7,23 +7,33 @@
 			<%= multi_body_banner(5) %>	
 		</div>
 			<div id="first_section_right">
-				<%= single_body_banner(2) %>	
-				<%= generateTopFeed(:p_job, @job_feed_lists, nil, :ok) %>
-				<%= generateTopFeed(:p_buy_and_sell, @buy_and_sell_feed_lists, nil, :ok) %>
+				<%= single_body_banner(2) %>
+				<%= top_feed_div(:p_job, @job_feed_lists, nil) %>
+				<%= top_feed_div(:p_buy_and_sell, @buy_and_sell_feed_lists, nil) %>
 			</div>
 	</div>
 	<div id="second_section">
-		<div id="section_left"><div id="second_section_bar"></div><%= generateTopFeed(:p_estate, @estate_lists, @estate_image_lists, :naver) %></div>
-		<div id="section_center"><div id="second_section_bar"></div><%= generateTopFeed(:p_business, @business_lists, @business_image_lists, :naver) %></div>
-		<div id="section_right"><div id="second_section_bar"></div><%= generateTopFeed(:p_motor_vehicle, @motor_vehicle_lists, @motor_vehicle_image_lists, :naver) %></div>
+		<div id="section_left">
+			<div id="second_section_bar"></div>
+				<%= top_feed_div(:p_estate, @estate_lists, @estate_image_lists) %>
+		</div>
+		<div id="section_center">
+			<div id="second_section_bar"></div>
+				<%= top_feed_div(:p_business, @business_lists, @business_image_lists) %>
+			</div>
+		<div id="section_right">
+			<div id="second_section_bar"></div>
+				<%= top_feed_div(:p_motor_vehicle, @motor_vehicle_lists, @motor_vehicle_image_lists) %>
+			</div>
 	</div>
 	<div id="third_section">
 		<div id="third_section_bar"></div>
 		<div id="thrid_section_left">
-			<%= generateTopFeed(:p_accommodation, @accommodation_lists, @accommodation_image_lists, :blue) %>
-			<%= generateTopFeed(:p_law, @legal_service_lists, nil, :blue) %>
-			<%= generateTopFeed(:p_study, @study_lists, nil, :blue) %>
+				<%= top_feed_div(:p_accommodation, @accommodation_lists, @accommodation_image_lists) %>
+				<%= top_feed_div(:p_law, @legal_service_lists, nil) %>
+				<%= top_feed_div(:p_study, @study_lists, nil) %>
 			</div>
 		<div id="thrid_section_right"><%= multi_body_banner(6) %><%= multi_body_banner(7) %><%= multi_body_banner(8) %><%= multi_body_banner(9) %><%= multi_body_banner(10) %></div>
 	</div>
 </div>
+<%= render :partial => "homes/top_feed" %>

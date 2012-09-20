@@ -33,6 +33,7 @@ Okbrisbane::Application.routes.draw do
     collection do
       post :current_weather
       post :current_rate
+      post :top_feed
     end
   end
   
@@ -54,7 +55,7 @@ Okbrisbane::Application.routes.draw do
       post :likes
       post :dislikes
       post :abuses
-      post :next_posttest
+      post :next_post
       post :prev_post
     end
   end

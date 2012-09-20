@@ -149,7 +149,7 @@ module WeatherConfig
       w = Weather.new(:country => Okvalue::AU)
       w.location = e[0]
       w.issuedOn = Time.parse(e[2])
-      w.dateOn = Time.parse(e[5])
+      w.dateOn = Common.date_format(Time.parse(e[5]))
       w.max = e[6].to_i
       w.forecast = e[7]
       w.save

@@ -1,0 +1,1 @@
+$("#feed_body_<%= escape_javascript(@category.to_s) %>").html("<%= escape_javascript(generateTopFeed(@category, @list, @image_list)) %>");

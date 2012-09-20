@@ -6,15 +6,33 @@ module HomesHelper
       image_tag("#{I18n.locale}/#{Style.page(:p_estate)}/icon_garage.gif") + " " + estate.garage.to_s 
   end
   
-  def generateTopFeed(category, lists, image_list, color)
-    html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list""><div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
+  def generateTopFeed_ajax(category)
+          #_script_document_ready(%Q|
+        #$.post("| + get_image_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
+        #$('div.image_upload_status').css("display","none");showImages(data);
+        #}); |%>
+  end
+  
+  def top_feed_div(category, lists, image_list)
+    color = Okvalue::FEED_COLORMAP[category]
+    html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list">|
+    html += %Q|<div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p style="line-height: 25px;">| + link_to(t('more'), Okboard.okboard_link(category), :class => "button-link_#{color.to_s}") + " "
     if [:p_job,:p_buy_and_sell,:p_well_being].include?(category)
       html += link_to(t('write_new'), Okboard.okboard_link_write(category), :class => "button-link_#{color.to_s}")
     end
-    html += %Q|</p></div></div>|
-    html += %Q|<div id="feed_body"><table class="" width=100%><tr></tr>|
-    if (lists.empty? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
+    html += %Q|</p></div></div><div id="feed_body_#{category}" class="feed_body">|
+    if !top_page_ajaxable?
+      html += generateTopFeed(category, lists, image_list)
+    end
+    html += "</div></div>"
+    html.html_safe
+  end
+  
+  def generateTopFeed(category, lists, image_list)
+    color = Okvalue::FEED_COLORMAP[category]
+    html = %Q|<table class="" width=100%><tr></tr>|
+    if lists.nil? || (lists.empty? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
       html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
     else
       if !image_list.nil? && !image_list.empty?
@@ -48,12 +66,8 @@ module HomesHelper
         html += %Q|<td width="10%" align=right>| + link_to(t("view"), Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
       end
     end
-    html += <<-HTML
-    </table>
-    </div>
-    </div>
-    HTML
-    html.strip!.html_safe
+    html += "</table>"
+    html.html_safe
   end
   
 end
