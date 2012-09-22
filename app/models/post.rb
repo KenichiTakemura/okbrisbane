@@ -139,11 +139,11 @@ class Post < ActiveRecord::Base
     end
   }
   
-  
-  scope :search, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).is_valid.limit(limit) }
-  scope :search_except, lambda { |cond,ids,limit| search(cond,limit).except_ids(ids).desc }
-  scope :search_after, lambda { |cond,post_id,limit| search(cond,limit).after_id(post_id).asc }
-  scope :search_before, lambda { |cond,post_id,limit| search(cond,limit).before_id(post_id).desc }
+  scope :search_no_order, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).is_valid.limit(limit)}
+  scope :search, lambda { |cond,limit| search_no_order(cond,limit).desc }
+  scope :search_except, lambda { |cond,ids,limit| search_no_order(cond,limit).except_ids(ids).desc }
+  scope :search_after, lambda { |cond,post_id,limit| search_no_order(cond,limit).after_id(post_id).asc }
+  scope :search_before, lambda { |cond,post_id,limit| search_no_order(cond,limit).before_id(post_id).desc }
     
   # callbacks
   after_initialize :set_default

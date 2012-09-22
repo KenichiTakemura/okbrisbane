@@ -2,7 +2,7 @@
     font-family: 'NanumBrush';
     font-weight: 'normal';
     font-style: 'normal';
-    src: local("☺");
+    src: local("NanumBrush.eot");
     src: url('fonts/NanumBrush.eot');
     src: url('fonts/NanumBrush.eot') format('embedded-opentype'),
           url('fonts/NanumBrush.ttf') format('truetype'),
@@ -11,9 +11,9 @@
 
 @font-face {
     font-family: 'NanumGothicBold';
-    font-weight: 'normal';
-    font-style: 'normal';
-    src: local("☺");
+    font-weight: 'bold';
+    font-style: 'bold';
+    src: local("NanumGothicBold.eot");
     src: url('fonts/NanumGothicBold.eot');
     src: url('fonts/NanumGothicBold.eot') format('embedded-opentype'),
           url('fonts/NanumGothicBold.ttf') format('truetype'),
@@ -24,7 +24,7 @@
     font-family: 'NanumGothicExtraBold';
     font-weight: 'normal';
     font-style: 'normal';
-    src: local("☺");
+    src: local("NanumGothicExtraBold.eot");
     src: url('fonts/NanumGothicExtraBold.eot');
     src: url('fonts/NanumGothicExtraBold.eot') format('embedded-opentype'),
           url('fonts/NanumGothicExtraBold.ttf') format('truetype'),

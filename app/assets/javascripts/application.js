@@ -15,6 +15,7 @@
 //= require jquery_dataTables
 //= require jquery_ui
 //= require jquery_slides
+//= require bootstrap
 //= require_tree .
 //= require_tree '../../../vendor/assets/javascripts/ckeditor'
 

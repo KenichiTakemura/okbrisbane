@@ -1,11 +1,9 @@
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
 	<div class="okboard_top">
-		<p class="okboard_title">
+		<h2 class="okboard_title">
 			<%= t(Style.page(@okpage))%>
-		</p>
-		<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/view_bg.gif", :size => "750x100") %>
-		</div>
+		</h2>
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/view_bg.gif", :style => "width:750px;height:100px", :class => "img-circle") %>
 	</div>
 
     <%= render :partial => "okboards/shared/gallery" %>
@@ -38,48 +36,35 @@
 		</div>
 		<div class="page_control">
 			<div class="to_prev">
-			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "45x25"), "#", :class => "to_prev_link")%>
 			<div class="to_prev_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 			<div class="to_next">
-			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "45x25"), "#", :class => "to_next_link")%>
 			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 		</div>
-		<table id="okboard_view_table" width=100% class="ui-widget" border="0">
-			<tbody>
-				<tr class="okboard_view_list_body">
-					<td class="item" width="20%"><%= t("author") %></td><td class="body" width="80%"><%= author_name(@post) %></td>
-				</tr>
-				<tr class="okboard_view_list_body">
-					<td class="item" ><%= t("created_at") %></td><td class="body" ><%= Common.date_format(@post.updated_at) %></td>
-				</tr>
-				<tr class="okboard_view_list_body">
-					<td class="item" ><%= t("category") %></td><td class="body" ><%= t("#{@post.category}") %></td>
-				</tr>
-				<tr class="okboard_view_list_body">
-					<td class="item" ><%= t("subject") %></td><td class="body" ><%= @post.subject %></td>
-				</tr>
-				<tr class="okboard_view_list_body">
-					<td class="item" ><%= t("attachment") %></td>
-					<td class="body" > <% @post.attachment.each do |attachment| %>
+		<dl class="dl-horizontal">
+			<dt><%= t("author") %></dt>
+			<dd><%= author_name(@post) %></dd>
+			<dt><%= t("created_at") %></dt>
+			<dd><%= Common.date_format(@post.updated_at) %></dd>
+			<dt><%= t("category") %></dt>
+			<dd><%= t("#{@post.category}") %></dd>
+			<dt><%= t("subject") %></dt>
+			<dd><%= @post.subject %></dd>
+			<dt><%= t("attachment") %></dt>
+			<dd> <% @post.attachment.each do |attachment| %>
 					<div style="position: relative; float: left;margin-left: 5px">
 						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :size => "50x50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
 						<%= attachment.filename %>
-					</div> <% end %> </td>
-				</tr>
-				<tr class="okboard_view_list_body">
-					<td class="item"><%= t("content") %></td><td class="body" style="overflow-x: auto"><%= raw(@post.content.body) %></td>
-				</tr>
-			</tbody>
-		</table>
+					</div> <% end %></dd>
+			<dt><%= t("content") %></dt>
+			<dd><%= raw(@post.content.body) %></dd>
+		</dl>
 		<div class="page_control">
 			<div class="to_prev">
-			<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "45x25"), "#", :class => "to_prev_link")%>
 			<div class="to_prev_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 			<div class="to_next">
-			<%= link_to(image_tag("#{I18n.locale}/common/btn_next.gif", :size => "45x25"), "#", :class => "to_next_link")%>
 			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 
@@ -89,24 +74,24 @@
 		<div class="comment_logo">
 		<%= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") %>
 
-		<p class="comment_title">
-			<%= t(:comment) %> <%= t(:write) %>
-		</p>
+		<div class="page-header">
+			<h1><%= t(:comment) %> <%= t(:write) %></h1>
+		</div>
 		</div>
 		<div class="new_comment" id="new_comment">
 			<% if !current_user %>
-			<%= link_to(t(:please_signin_to_comment), comment_new_path(@post, :category => @okpage)) %>
+			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-warning"><i class="icon-pencil" style=""></i><%=t(:please_signin_to_comment)%></a>
 			<% else %>
 			<div class="commnet_user">
 				<%= image_tag("common/sns/ico_people.gif", :size => "30x30") %>
 			</div>
 			<div class="new_comment_box">
-				<%= form_for(@comment, :method => :post, :html => { :class => "form" }) do |f| %>
+				<%= form_for(@comment, :method => :post) do |f| %>
 				<%= hidden_field_tag :commented_id, @post.id %>
 				<%= hidden_field_tag :commented_type, @okpage %>
-				<%= f.text_area :body, :class => "text_area", :id => "comment_body", :rows => 15, :cols => 10%>
+				<%= f.text_area :body, :id => "comment_body", :rows => 5, :style => "width:600px;"%>
 				<br/>
-				<%= f.submit t("add"), :class => "button-link_blue", :id => "comment_submit" %>
+				<%= f.submit t("add"), :class => "btn btn-primary", :id => "comment_submit" %>
 				<% end %>
 			</div>
 			<% end %>

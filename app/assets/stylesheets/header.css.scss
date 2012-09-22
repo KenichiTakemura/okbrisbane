@@ -29,9 +29,17 @@
 	position: absolute;
 }
 
+#header #header-middle {
+	position: absolute;
+	width:720px;
+	height: 30px;
+	top: 10px;
+	left: 220px
+}
+
 #header #header-bottom {
 	position: absolute;
-	top: 220px;
+	top: 240px;
 	height: 80px;
 	width: 100%;
 }
@@ -90,10 +98,9 @@
 }
 
 #header #header-bottom #navigation ul li:hover {
-  background-color: #41A317;
   cursor: hand;
   cursor: pointer;
-    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
   -moz-border-radius: 5px;

@@ -6,20 +6,13 @@ module HomesHelper
       image_tag("#{I18n.locale}/#{Style.page(:p_estate)}/icon_garage.gif") + " " + estate.garage.to_s 
   end
   
-  def generateTopFeed_ajax(category)
-          #_script_document_ready(%Q|
-        #$.post("| + get_image_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
-        #$('div.image_upload_status').css("display","none");showImages(data);
-        #}); |%>
-  end
-  
   def top_feed_div(category, lists, image_list)
     color = Okvalue::FEED_COLORMAP[category]
     html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list">|
     html += %Q|<div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
-    html += %Q|<div id="feed_head_right"><p style="line-height: 25px;">| + link_to(t('more'), Okboard.okboard_link(category), :class => "button-link_#{color.to_s}") + " "
+    html += %Q|<div id="feed_head_right"><p>| + link_to(t('more'), Okboard.okboard_link(category), :class => "btn btn-small") + " "
     if [:p_job,:p_buy_and_sell,:p_well_being].include?(category)
-      html += link_to(t('write_new'), Okboard.okboard_link_write(category), :class => "button-link_#{color.to_s}")
+      html += link_to(t('write_new'), Okboard.okboard_link_write(category), :class => "btn btn-small")
     end
     html += %Q|</p></div></div><div id="feed_body_#{category}" class="feed_body">|
     if !top_page_ajaxable?
@@ -31,7 +24,7 @@ module HomesHelper
   
   def generateTopFeed(category, lists, image_list)
     color = Okvalue::FEED_COLORMAP[category]
-    html = %Q|<table class="" width=100%><tr></tr>|
+    html = %Q|<table class="table table-striped table-hover"><tr></tr>|
     if lists.nil? || (lists.empty? && image_list.nil?) || ((!lists.nil? && lists.empty?) && (!image_list.nil? && image_list.empty?))
       html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
     else
@@ -54,16 +47,15 @@ module HomesHelper
            else
              html += "<p></p>"
            end
-           html += %Q|<div class="feed_category_view">| + image_tag("#{I18n.locale}/common/feed_view.gif") + section_span_for(feed.feeded_to,category) + "</div>"
+           html += %Q|<div class="feed_category_view">| + link_to(t(:view),"#",:class => "btn btn-mini btn-info disabled") + section_span_for(feed.feeded_to,category) + "</div>"
         end
-        html += %Q|</table><table class="">|
+        html += %Q|</table><table class="table table-striped table-hover">|
       end      
       lists.each_with_index do |feed,index|
-        html += %Q|<tr height="20px">|
-        html += %Q|<td><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
-        html += %Q|<td nowrap class="feed_text" height="18" width=75%>#{_truncate(feed.feeded_to.subject)}</td>|
-        html += %Q|<td width="15%" class="feed_text">#{feed.feeded_to.feeded_date}</td>|
-        html += %Q|<td width="10%" align=right>| + link_to(t("view"), Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "button-link_#{color.to_s}") +  "</td></tr>"
+        html += %Q|<tr>|
+        html += %Q|<td style="height:20px;"><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
+        html += %Q|<td>#{link_to(_truncate(feed.feeded_to.subject),Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "btn-link")}</td>|
+        html += %Q|<td>#{feed.feeded_to.feeded_date}</td></tr>|
       end
     end
     html += "</table>"

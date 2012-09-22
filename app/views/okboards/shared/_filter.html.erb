@@ -1,84 +1,17 @@
-<div class="okboard_filter" id="okboard_filter">
-	<%= form_for(@post_search, :html => { :class => "form" }) do |f| %>
+<div class="" id="okboard_filter">
+	<%= form_for(@post_search, :html => {:class => "form-search"}) do |f| %>
 	<%= f.hidden_field :okpage %>
-	<div class="itemgroup">
-	<div class="item">
-		<%= f.label :category, t(:category), :class => "label left" %>&nbsp;
-		<%= f.select :category, options_for_select(@post.category_list, @post_search.category), :include_blank => true %>
-	</div>
-	<div class="item">
-		<%= f.label :keyword, "#{t(:search_keyword)}", :class => "label left" %>&nbsp;
-		<%= f.search_field :keyword %>
-	</div>
-	<div class="item">
-		<%= f.label :image, "#{t(:image)}", :class => "label left" %>&nbsp;
-		<%= f.select :image, options_for_select(@post.yesno_list, @post_search.image), :include_blank => true %>
-	</div>
-	<div class="item">
-		<%= f.label :attachment, "#{t(:attachment)}", :class => "label left" %>&nbsp;
-		<%= f.select :attachment, options_for_select(@post.yesno_list, @post_search.attachment), :include_blank => true %>
-	</div>
-	</div>
-	<br/>
-	<div class="itemgroup">
-	<div class="item">
-		<%= f.label :time_by, "#{t(:no_date)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, '' %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:today)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_0] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:one)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_1] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:two)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_2] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:three)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_3] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:four)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_4] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:five)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_5] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:six)}#{t(:day_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_6] %>
-	</div>
-	</div>
-	<br/>
-	<div class="itemgroup">
-	<div class="item">
-		<%= f.label :time_by, "#{t(:one)}#{t(:week_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_7] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:two)}#{t(:week_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_8] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:three)}#{t(:week_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_9] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:four)}#{t(:week_ago)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_10] %>
-	</div>
-	<div class="item">
-		<%= f.label :time_by, "#{t(:older_date)}", :class => "label left" %>&nbsp;
-		<%= f.radio_button :time_by, PostSearch::SearchCond[:post_search_by_time_11] %>
-	</div>
-	</div>
-	<div class="group search">
-	<%= image_submit_tag "#{I18n.locale}/common/search.png", :class => "po image_submit_ok" %>
-	</div>
+		<span class="label label-info"><%= f.label :category, t(:category)%></span>
+		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<span class="label label-info"><%= f.label :image, "#{t(:image)}"%></span>
+		<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<span class="label label-info"><%= f.label :attachment, "#{t(:attachment)}"%></span>
+		<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<br/>
+		<span class="label label-success"><%= f.label :time_by, "#{t(:select_date)}"%></span>
+		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => true}) %>
+		<span class="label label-inverse"><%= f.label :keyword, "#{t(:search_keyword)}"%></span>
+		<%= f.search_field :keyword, :class => "input-medium search-query" %>
+		<%= f.submit t("search"), :class => "btn btn-primary" %>
 	<% end %>
 </div>

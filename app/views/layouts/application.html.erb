@@ -37,9 +37,10 @@
 			<%= single_background_banner(6) %>
 			<div id="header">
 				<div id="header-left">
-					<div class="welcome">
-						<%= t("welcome_message")%>
-						<br/>
+					<div class="span3">
+						<strong><%= t("welcome_message")%></strong>
+					</div>
+					<div class="span4">
 						<% if current_user %>
 						<%= current_user.name %>&nbsp;<%= t(:sir)%>
 						<% else %>
@@ -49,10 +50,6 @@
 						<%= t("please") %>
 						<% end %>
 					</div>
-					<% if current_user %>
-					<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path, :class => "mypage image_submit_ok") %>
-					<% end %>
-
 					<div id="logo">
 						<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
 					</div>
@@ -71,25 +68,42 @@
 					</div>
 				</div>
 				<div id="header-right">
+				<div class="span2">
+				<span class="label label-info"><%=t(:admin_notice)%></span>
+				<div class="alert alert-info">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<%= t(:no_notice)%>
+				</div>
+				</div>
 					<%= single_header_banner(1) %>
 					<%= single_header_banner(2) %>
 				</div>
 				<div class="ok_information">
 					<div class="weather_information">
 						<%= image_tag("common/australia.gif", :size => "20x20") %>
-						<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "ok_information_link") %>
+						<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
 						<%= image_tag("common/korea.gif", :size => "20x20") %>
-						<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "ok_information_link") %>
+						<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
 					</div>
 					<div class="rate_information">
 						<%= image_tag("common/won.gif", :size => "20x20") %>
-						<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "ok_information_link") %>
+						<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
 					</div>
+					<div>
 					<%= render :partial => "homes/ok_information" %>
+				</div>
+				</div>
+				<div id="header-middle" class="span9" style="position:relative">
+				<div class="span1">
+					<% if current_user %>
+					<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path, :class => "mypage image_submit_ok") %>
+					<% end %>
+				</div>
+
 				</div>
 				<div id="header-bottom">
 					<%= navigation("#41A317","#f0f0f0") %>
-					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage)  %>
+					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage) %>
 					<div id="follows">
 						<% if socialable? %>
 						<ul class="wat-cf">
@@ -127,7 +141,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<div class="copyright">
+			<div class="span10 copyright">
 				<p class="copyright_text">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%></p>
 				<p class="copyright_text"><%= Okvalue::FOOTER_TEXT2 %></p>
 				<div class="developer">

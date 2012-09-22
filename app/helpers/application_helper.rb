@@ -147,7 +147,7 @@ module ApplicationHelper
     if request.host =~ /admin.okbrisbane/
       html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
     else
-      html = link_to(image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
+      html = link_to(image_tag(image.original_image, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
     end
     if !image.caption.nil? && !image.caption.empty?
        html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
@@ -194,7 +194,7 @@ module ApplicationHelper
         effect = Style.getEffect(p,s,a)
         logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
         script += %Q|$('\##{div_id}').slides({container:'#{container}',
-          preloadImage:'assets/common/ajax_loading_1.gif',|
+          preloadImage:'assets/common/ajax_loader_1.gif',|
           script += "randomize:true," if b.is_random
           script += %Q|play:#{effect_speed},#{effect}});
           $("a.prev").text('#{t("effect_prev")}');
@@ -220,9 +220,15 @@ module ApplicationHelper
     Style::NAVI.each do |key|
       value = Style.page(key)
       if key.eql?(:p_yellowpage)
-        script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{yellowpage_okboards_path}| + %Q|"});|
+        script += %Q|
+        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","yellow")});
+        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
+        $('\#navi_#{value}').click(function(){window.location.href ="#{yellowpage_okboards_path}| + %Q|"});|
       else
-        script += %Q|$('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
+        script += %Q|
+        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","#{Okvalue::COLORMAP[cycle("ok","naver","blue").to_sym]}")});
+        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
+        $('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
       end
     end
     html += _script_document_ready(script)
@@ -329,6 +335,26 @@ module ApplicationHelper
   
   def noattachment
     html = %Q|<img src="/assets/noattachment.jpg" width="50px" height="50px" />|
+    html.html_safe
+  end
+  
+  def widget(id,w,h,body,style=nil,title=nil)
+    if w.nil? && h.nil?
+      html = %Q|<div class="_widget" id="widget_#{id}" style="#{style}">|
+    elsif h.nil?
+      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
+    else
+      html = %Q|<div class="_widget" id="widget_#{id}" width:"#{w}px" height:"#{h}px;#{style}">|
+    end
+    html += %Q|<div class="_widget_head">#{title}<div class="_widget_head_window">|
+    html += link_to(image_tag("common/widget/211.png", :size => "17x17"),"#", :title => t(:minimize), :id => "widget_#{id}_min")
+    html += link_to(image_tag("common/widget/212.png", :size => "17x17"),"#", :title => t(:maximize), :id => "widget_#{id}_max")
+    html += "</div></div>"
+    html += %Q|<div class="_widget_body" id="widget_body_#{id}" >#{body}</div>|
+    html += "</div>"
+    script = %Q|$('\#widget_#{id}_min').click(function(){$('\#widget_body_#{id}').hide('slow');return false;});|
+    script += %Q|$('\#widget_#{id}_max').click(function(){$('\#widget_body_#{id}').show('slow');return false;});|
+    html += _script(script)
     html.html_safe
   end
   

@@ -31,6 +31,7 @@ class OkboardsController < OkController
 
   def yellowpage
     @okpage = :p_yellowpage
+    @business_categories = BusinessCategory.all
     respond_to do |format|
       format.html { render :template => "okboards/index" }
     end
@@ -64,7 +65,7 @@ class OkboardsController < OkController
       @board_lists = model.search(@post_search, Okvalue::OKBOARD_LIMIT)
     end
     @post = model.new
-    @lastid = find_lastid(@board_lists)
+    @lastid = find_lastid(@board_lists, @board_image_lists)
     logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
     logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
     logger.debug("SearchedBy #{@post_search}")
@@ -99,6 +100,11 @@ class OkboardsController < OkController
 
   def more
     @previd = params[:lastid]
+    if @@search_id.present?
+      @post_search = PostSearch.find(@@search_id)
+    else
+      @post_search = PostSearch.new(:okpage => @okpage)
+    end
     logger.debug("lastid: #{@previd}")
     @board_lists = _more_post
     @lastid = find_lastid(@board_lists)
@@ -238,7 +244,7 @@ class OkboardsController < OkController
   end
 
   def _more_post
-    _model.where("id < ?", @previd).limit(Okvalue::OKBOARD_MORE_SIZE)
+    _model.search_before(@post_search,@previd,Okvalue::OKBOARD_MORE_SIZE)
   end
 
   def _select_post

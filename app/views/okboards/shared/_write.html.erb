@@ -1,18 +1,13 @@
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
-	<p class="okboard_title">
-		<%= t(Style.page(@okpage))%> <%= t('write_new')%>
-	</p>
-			<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/write_bg.jpg", :size => "750x100") %>
-		</div>
-		<p class="okboard_notice">
-		<%= t(@okpage.to_s + "_notice")%>
-	</p>    
+	<div class="hero-unit">
+		<h1><%= t(Style.page(@okpage))%> <%= t('write_new')%></h1>
+		<p class=""><%= t(@okpage.to_s + "_notice")%></p>    
+	</div>
 	<div class="okboard_form_write_new_post">
 		<div class="author">
 		  <%= t('author') %> <%= current_user.name %>
 	    </div>
-		<%= form_for(@post, :html => { :multipart => true, :class => "form" }) do |f| %>
+		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
 		<%= f.hidden_field :write_at, :id => "write_at" %>
 		<% if @post.errors.any? %>
 		<div id="error_explanation">
@@ -25,40 +20,33 @@
 			</ul>
 		</div>
 		<% end %>
-		<div class="group">
-			<%= f.label :subject, t("subject"), :class => "label left" %>
-			<%= f.text_field :subject, :class => "text_field" %>
-		</div>
-		<div class="group">
-			<%= f.label :category, t("category"), :class => "label left" %>
+			<%= f.label :subject, t("subject") %>
+			<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("write_something") %>
+			<%= f.label :category, t("category")%>
 			<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
-		</div>
 		<% if @post.respond_to? :price %>
-		<div class="group">
-			<%= f.label :price, t("price"), :class => "label left" %>
-			<%= f.text_field :price, :class => "text_field" %>
-		</div>
+			<%= f.label :price, t("price")%>
+			<%= f.text_field :price, :class => "" %>
 		<% end %>
-		<div class="group">
-			<%= f.label :valid_until, t("valid_until"), :class => "label left" %>
-			<%= Common.date_format(@post.valid_until) %>
-		</div>
+			<%= f.label :valid_until, t("valid_until")%>
+			<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
 		<div class="group">
-			<%= content_form.label :body, t("content"), :class => "label left" %>
+			<%= content_form.label :body, t("content")%>
 			<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
 		</div>
 		<% end %>
 	    <div class="group">
 	    	<div class="image">
-	    	<%= f.label :add_image, t("image") + t("add"), :class => "label left" %>
+	    	<%= f.label :add_image, t("image") + t("add")%>
 	    	<div class="image_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 	    	<div class="flash"><div class="image_upload_progress"></div></div>
-	    	<span class="description"><%= t("post_image_upload_description") %></span>
+	    	<span class="help-block"><%= t("post_image_upload_description") %></span>
 	    	<%= file_field_tag :image, :id => "image" %>
+	    	<br>
 			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
 			<br/>
-			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "button-link_blue", :style => "margin:5px" %>
+			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn btn-info" %>
 			<% script = %Q|
 			    function upload_image() {
 				  if($('\#image').val() != "") {
@@ -125,10 +113,10 @@
 		<div class="clear"></div>
 		<div class="group">
 	    	<div class="attachment">
-	    	<%= f.label :add_attachment, t("attachment") + t("add"), :class => "label left" %>
+	    	<%= f.label :add_attachment, t("attachment") + t("add") %>
 			<div class="flash"><div class="attachment_upload_progress"></div></div>
 	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-	    	<span class="description"><%= t("post_attachment_upload_description") %></span>
+	    	<span class="help-block"><%= t("post_attachment_upload_description") %></span>
 			<% script = %Q|
                 function upload_attachment() {
 				  if($('\#attachment').val() != "") {
@@ -189,16 +177,12 @@
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
 			</div>
 		</div>
-		<div class="clear"></div>
-		<div class="group">
-			<%= f.label :comment_email, t(:comment_email), :class => "label left" %>
-			<%= f.check_box :comment_email %>
-		</div>
-		<div class="group">
-			<div class="left">
-				<%= f.submit t("create"), :class => "button-link_ok" %>
-			</div>
-		</div>
+
+			<label class="checkbox">
+				<%= f.check_box :comment_email %><%= t(:comment_email) %>
+			</label>
+			<%= f.submit t("create"), :class => "btn btn-primary" %>
+
 		<% end %>
 		<%= _script_document_ready(%Q|
 		  $('div.image_upload_status').css("display","block");

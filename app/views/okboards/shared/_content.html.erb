@@ -3,8 +3,8 @@
 		<p class="okboard_title">
 			<%= t(Style.page(@okpage))%>
 		</p>
-		<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x100") %>
+		<div class="">
+			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :style => "width:750px;height:100px", :class => "img-circle") %>
 		</div>
 	</div>
 	<div class="okboard_image_list">
@@ -44,44 +44,43 @@
 
 	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
 
-	<%= render :partial => "okboards/shared/filter" %>
+	<%= widget("okboards_filter", 400, 200,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
 	<% end %>
 
-	<div class="okboard_list_top" id="okboard_list_top">
-	<div class="list_total_num" style="float:left;">
+	<div class="span7" id="okboard_list_top">
+		<span class="label label-info">
 		<%= "#{t(:list_total_num)} #{@board_lists.size}" %>
-	</div>
-	<div class="more" style="float:right;">
-		<%= link_to(t(:down), "#_more", :class => 'button-link_blue')%>
-		<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
-		<%= link_to(t('write_new'), Okboard.okboard_link_write(@okpage), :class => 'button-link_naver')%>
-		<% end %>
-	</div>
+		</span>
+		<div class="pull-right">
+		<%= link_to(t(:down), "#_more", :class => 'btn btn-mini')%>
+		</div>
 	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
 			<%= build_board_list %>
 			<div id="okboard_list_body_more_loading">
-				<%= image_tag ("common/ajax_loading.gif")%>
-			</div>
-			<div class="more">
-				<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "button-link_ok") %>
-				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
-				<%= link_to(t('write_new'), Okboard.okboard_link_write(@okpage), :class => 'button-link_naver')%>
-				<% end %>
-				<%= link_to(t(:up), "#okboard_list_top", :class => 'button-link_blue')%>
-				<%= link_to(t(:search), "#okboard_filter", :class => 'button-link_blue')%>
-
+				<%= image_tag ("common/ajax_loader_1.gif")%>
 			</div>
 		</div>
 	</div>
+	<div class="span7" id="okboard_list_bottom">
+		<div class="pull-right">
+			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini") %>
+			<%= link_to(t(:up), "#okboard_list_top", :class => 'btn btn-mini')%>
+		</div>
+	</div>
 </div>
-<%= _script_document_ready(%Q|
+<% script = %Q|
 $('\#_lastid').val("#{@lastid}");
-$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");
-$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;
-})|) %>
+$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");|
+if !@post_search.present? || !@post_search.id.present?
+	script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;})|
+else
+	script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;})|
+end
+%>
+<%= _script_document_ready(script)%>
 <% if !@board_lists.empty? %>
 <%= _script_document_ready(%Q|
 $('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": true});

@@ -1,7 +1,7 @@
 #!/bin/bash
 rm -rf public/assets
 rake assets:precompile --trace RAILS_ENV=production
-DATE=`date +%Y%m%d`
+DATE=`date +%Y%m%d%H%M`
 tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  app/controllers\
  app/helpers\

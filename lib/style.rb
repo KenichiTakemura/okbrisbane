@@ -209,28 +209,28 @@ module Style
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:950px;left:-165px',
-      :is_disabled => is_disabled)
+      :is_disabled => false)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 4,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:950px;right:-165px',
-      :is_disabled => is_disabled)
+      :is_disabled => false)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 5,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:1800px;left:-165px',
-      :is_disabled => is_disabled)
+      :is_disabled => false)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 6,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:1800px;right:-165px',
-      :is_disabled => is_disabled)
+      :is_disabled => false)
     end
     # Home
     _page = :p_home
@@ -238,14 +238,14 @@ module Style
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
     :position_id =>1,
-    :div_width => 650, :div_height => 400,
+    :div_width => 650, :div_height => 410,
     :img_width => 650, :img_height => 380,
     :style => 'position:relative;float:left;top:0px',
     :effect => Banner::E_SLIDE);
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
     :position_id => 2,
-    :div_width => 320, :div_height => 200,
+    :div_width => 320, :div_height => 220,
     :img_width => 320, :img_height => 200,
     :style => 'position:relative;top:0px;right:0px;')
     Banner.create(:page_id => Style.pageid_key(_page),

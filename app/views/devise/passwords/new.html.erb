@@ -3,21 +3,15 @@
 <%= image_tag("#{I18n.locale}/Signup/tit_621.gif", :class => "title_text")%>
 <%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
 </div>
+<%= content_tag(:legend, t(:change_password_instructions_for), :class => "text-info")%>
 <div id="signin">
-	<p class="termofservice">
-		<%= t(:change_password_instructions_for)%>
-	</p>
 	<%= devise_error_messages! %>
-	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form"  }) do |f| %>
-	<div class="group">
-	<%= f.label :email, t(:signin_email), :class => "label left"   %>
-	<%= f.email_field :email, :class => "text_field" %>
-	</div>
-	<div class="group">
-		<%= f.submit t(:send_reset_password_instrcutions) , :class => "button-link_ok", :style => "margin-top:20px;float:left;margin-right:10px;" %>
-	    <%= image_tag("#{I18n.locale}/common/img_send_mailing.jpg", :size => "70x70")%>
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form-search"}) do |f| %>
+	<%= f.label :email, t(:signin_email)%>
+	<%= f.email_field :email, :class => "input-medium search-query"%>
 
-	</div>
+		<%= f.submit t(:send_reset_password_instrcutions) , :class => "btn btn-primary", :style => "margin-top:20px;float:left;margin-right:10px;" %>
+	    <%= image_tag("#{I18n.locale}/common/img_send_mailing.jpg", :size => "70x70")%>
 	<% end %>
 </div>
 <%= render :partial => "devise/shared/footer" %>

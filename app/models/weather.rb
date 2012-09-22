@@ -2,8 +2,8 @@ class Weather < ActiveRecord::Base
   attr_accessible :location, :issuedOn, :country, :max, :dateOn, :min, :forecast, :warning, :state
   
   default_scope :order => 'id DESC'
-  scope :weather_for, lambda { |date,country| 
-    if country.eql? Okvalue::AU
+  scope :weather_for, lambda { |date,country|
+    if country.to_i == Okvalue::AU
      where("dateOn <= ? AND country = ?", date, country).limit(WeatherConfig::AUSCityOrderList.size)
     else
      where("dateOn <= ? AND country = ?", date, country).limit(WeatherConfig::KORCityOrderList.size)

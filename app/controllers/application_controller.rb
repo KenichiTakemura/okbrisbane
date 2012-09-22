@@ -123,13 +123,20 @@ class ApplicationController < ActionController::Base
     SystemSetting.first.top_page_ajax    
   end
 
-  def find_lastid(board_list)
-    if !board_list.nil? && !board_list.empty?
-    lastid = board_list.last.id
-    else
+  def find_lastid(board_list, board_image_list=nil)
+    if board_list.present? && board_image_list.present?
+      l_lastid = board_list.last.id
+      i_lastid = board_image_list.last.id
+      logger.debug("l_lastid: #{l_lastid} i_lastid: #{i_lastid}")
+      lastid = (l_lastid > i_lastid) ? i_lastid : l_lastid
+    elsif board_list.present?
+      lastid = board_list.last.id
+    elsif board_image_list.present?
+      lastid = board_image_list.last.id
+    else    
       lastid = nil
     end
-    logger.debug("@lastid: #{@lastid}")
+    logger.debug("find_lastid: #{lastid}")
     lastid
   end
 

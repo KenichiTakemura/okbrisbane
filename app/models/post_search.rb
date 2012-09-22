@@ -13,6 +13,14 @@ class PostSearch < ActiveRecord::Base
   SearchCond[:post_search_by_time_9] = :time_by_week_3
   SearchCond[:post_search_by_time_10] = :time_by_week_4
   SearchCond[:post_search_by_time_11] = :time_by_older
+ 
+  def time_by_list
+    list = Array.new
+    SearchCond.each do |key,value|
+      list.push([I18n.t(value.to_sym),value])
+    end
+    list
+  end
   
   belongs_to :searchable, :polymorphic => true
   

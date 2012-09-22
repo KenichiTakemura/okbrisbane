@@ -1,6 +1,5 @@
 <% if @prev_post.present? %>
-<%= link_to(image_tag("#{I18n.locale}/common/btn_prev.gif", :size => "45x25"), Okboard.okboard_link_with_id(@okpage,@prev_post.id,@post_search.id), :class => "to_prev_link")%>
-<div class="to_prev_title"><%= @prev_post.subject %></div>
+<a href="<%=Okboard.okboard_link_with_id(@okpage,@prev_post.id,@post_search.id)%>", class="btn btn-info"><i class="icon-step-backward" style=""></i><%= @prev_post.subject %></a>
 <% else %>
 
 <% end %>

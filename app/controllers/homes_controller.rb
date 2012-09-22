@@ -57,7 +57,11 @@ class HomesController < OkController
   def top_feed
     @okpage = :p_home
     @category = params[:c].to_sym
-    @list,@image_list = collectFeed(@category)
+    if [:p_job,:p_buy_and_sell,:p_law,:p_study].include? @category
+      @list = collectFeed(@category)
+    else
+      @list,@image_list = collectFeed(@category)
+    end
     logger.debug("top_feed: #{@category} #{@list} #{@image_list}")
   end
   

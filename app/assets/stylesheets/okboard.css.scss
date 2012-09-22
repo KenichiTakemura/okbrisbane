@@ -15,24 +15,12 @@
   font-weight: bold;
 }
 
-#okboard_let_menu {
-  position:relative;
-  float:left;
-  width: 100%;
-  margin: 20px 0;
-  background:#e0e0e0;
-  box-shadow: 5px 5px 5px #888;
-  -moz-box-shadow: 5px 5px 5px #888;
-  -webkit-box-shadow: 5px 5px 5px #888;
-  //background: -moz-linear-gradient(top, white 20%, #8b0 80%);
-  //background: -webkit-gradient(linear, left top, left bottom, from(#990), to(#066));
-}
-
 ul.okboard_left_menu_items {
   list-style-type: none;
   font-size: 14px;
   font-weight: bold;
   float:left;
+  text-decoration: none;
 }
 
 li.okboard_left_menu_item {
@@ -51,7 +39,7 @@ a.okboard_left_menu_link:hover {
 }
 
 a.okboard_left_menu_link {
-  margin-left: 10px;  
+  margin-left: 10px;
 }
 
 a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
@@ -73,7 +61,7 @@ a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
 }
 
 .okboard_title {
-  position: relative;
+  position: absolute;
   float: left;
   top: 0px;
   font-family: 'NanumGothicExtraBold';   
@@ -165,7 +153,7 @@ a:link.okboard_left_menu_link, a:visited.okboard_left_menu_link {
 
 .okboard_list_top {
   position:relative;
-  height: 30px;
+  height: 35px;
   float:left;
   width:100%;
 }
@@ -340,7 +328,7 @@ tr.okboard_view_list_body {
   box-shadow: 2px 1px 2px #d1d1d1;
   border: 2px solid #e0e0e0;
   margin: 5px;
-  background: none repeat scroll 0% 0% rgb(61, 186, 186);
+  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.1);
 }
 
 
@@ -419,7 +407,7 @@ div.more {
   margin-left:auto;
   margin-right:20px;
   float: right;
-  margin-top: 10px;
+  margin-top:10px;
 }
 
 // Effect

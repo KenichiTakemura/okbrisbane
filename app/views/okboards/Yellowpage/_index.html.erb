@@ -7,5 +7,23 @@
 			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x130") %>
 		</div>
 	</div>
+	<div class="client_index">
+	<%= _script(%Q|$(function(){$("#accordion").accordion();});|)%>
+	<div id="accordion">
+		<% @business_categories.each do |bc| %>
+			<% next if !bc.business_client.present?%>
+    		<h3><a href="#"><First header><%= "#{bc.display_name} (#{bc.business_client.size})" %></a></h3>
+    		<div><% bc.business_client.each do |c| %>
+    			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/primium_box_top.gif", :class => "")%>
+    			<p class="business_name">
+    			<%= c.business_name %>
+    			</p>
+    			<%= image_tag(c.main_profile_image.original_image, :class => "profile_img")%>
+    			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/primium_box_bottom.gif", :class => "")%>
+ 				<% end %>
+    		</div>
+    	<% end %>
+	</div>
+	</div>
 </div>
 
