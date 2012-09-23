@@ -1,19 +1,23 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-<%= image_tag("#{I18n.locale}/Signup/tit_631.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+	<div class="page-header">
+		<h1> <%= t(:termsofservice)%> </h1>
+		<p>
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</p>
+	</div>
 </div>
-<div id="_main">
-        </br>
-        <p class="lead">
-          <%= t("termofservice")%>
-        </p>
-        <textarea rows="30" style="width:100%" readonly><%= UsersHelper.termsofservice%>
-      </textarea>                           
-  </div>
-  <br/>
-<%= link_to(image_tag("#{I18n.locale}/common/btn_top.gif"), "#_main")%>
+
+<div id="_main" class="span8">
+	<div class="alert alert-info">
+		<%= t(:termofservice)%>
+	</div>
+	<textarea rows="30" style="width:100%" readonly><%= UsersHelper.termsofservice%>
+  </textarea>
+<%= link_to_with_icon(t(:up), "#_main", "btn btn-info", "", "icon-arrow-up")%>
+
+</div>
 
 <%= render :partial => "devise/shared/footer" %>
 <%= active_menu("_termsofservice") %>

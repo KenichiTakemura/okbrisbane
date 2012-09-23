@@ -47,6 +47,11 @@ module Okboard
     link += "&s=" + param_enc(post_search_id) if post_search_id
     link
   end
+  
+  def self.okboard_url_with_id(url, okpage, id)
+    url += "/view?v=" + okpage_v(okpage) + "&d=" + param_enc(id)
+    url
+  end
 
   def self.okboard_link_with_search(okpage, post_search_id)
     %Q|/okboards?v=| + okpage_v(okpage) + "&s=" + param_enc(post_search_id)

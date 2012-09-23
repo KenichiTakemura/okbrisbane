@@ -18,6 +18,9 @@ class CommentsController < OkController
     ActiveRecord::Base.transaction do
       if comment.save
         comment.subscribe_to(@post, current_user)
+        if @post.comment_email
+          CommentMailer.send_comment_to_author(@okpage, @post, comment).deliver
+        end
         @comment = Comment.new
         respond_to do |format|
           format.html { redirect_to "#{Okboard.okboard_link_with_id(@okpage, @post.id)}" }

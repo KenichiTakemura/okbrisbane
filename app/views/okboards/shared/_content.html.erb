@@ -1,11 +1,10 @@
 <div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
 	<div class="okboard_top">
-		<p class="okboard_title">
+		<div class="page-header">
+		<h1>
 			<%= t(Style.page(@okpage))%>
-		</p>
-		<div class="">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :style => "width:750px;height:100px", :class => "img-circle") %>
-		</div>
+		</h1>
+		<p><%= t(:okpage_top_description) %></p>
 	</div>
 	<div class="okboard_image_list">
 		<% if !@board_image_lists.nil? %>
@@ -18,7 +17,7 @@
 				<%= image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
 				<% end %>
 				<p class="description">
-					<%= post.subject%>
+					<%= link_to_with_icon(post.subject, Okboard.okboard_link_with_id(@okpage, post.id), "", "", "icon-play")%>
 				</p>
 				<p class="description">
 					<%= post.postedDate%>
@@ -28,7 +27,6 @@
 					<%= post.price %>
 				</p>
 				<% end %>
-				<%= link_to(t("view"), Okboard.okboard_link_with_id(@okpage, post.id), :class => 'button-link_naver image_view') %>
 			</div>
 			<% end %>
 		</div>
@@ -47,12 +45,12 @@
 	<%= widget("okboards_filter", 400, 200,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
 	<% end %>
 
-	<div class="span7" id="okboard_list_top">
+	<div class="span7" id="okboard_list_top" style="margin-bottom:5px">
 		<span class="label label-info">
 		<%= "#{t(:list_total_num)} #{@board_lists.size}" %>
 		</span>
 		<div class="pull-right">
-		<%= link_to(t(:down), "#_more", :class => 'btn btn-mini')%>
+		<%= link_to_with_icon(t(:down), "#_more", "btn btn-mini", "", "icon-arrow-down") %>
 		</div>
 	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
@@ -64,10 +62,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="span7" id="okboard_list_bottom">
+	<div class="span7" id="okboard_list_bottom" style="margin-top:4px;">
 		<div class="pull-right">
-			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini") %>
-			<%= link_to(t(:up), "#okboard_list_top", :class => 'btn btn-mini')%>
+			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini btn-inverse") %>
+			<%= link_to_with_icon(t(:up), "#okboard_list_top", "btn btn-mini", "", "icon-arrow-up") %>
 		</div>
 	</div>
 </div>

@@ -9,8 +9,8 @@
 		<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 		<br/>
 		<span class="label label-success"><%= f.label :time_by, "#{t(:select_date)}"%></span>
-		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => true}) %>
-		<span class="label label-inverse"><%= f.label :keyword, "#{t(:search_keyword)}"%></span>
+		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<span class="label label-success"><%= f.label :keyword, "#{t(:search_keyword)}"%></span>
 		<%= f.search_field :keyword, :class => "input-medium search-query" %>
 		<%= f.submit t("search"), :class => "btn btn-primary" %>
 	<% end %>

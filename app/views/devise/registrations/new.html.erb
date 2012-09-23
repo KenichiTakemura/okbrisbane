@@ -1,19 +1,27 @@
 <%= render :partial => "devise/shared/header" %>
-
 <div id="_title">
-<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
-<%= image_tag("#{I18n.locale}/Signup/img_process02_on.gif")%>
+	<div class="page-header">
+		<h1> <%= t(Style.page(@okpage))%> </h1>
+		<h3 class="text-info">
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</h3>
+		<h4 class="text-info">
+			<%= t("#{Style.page(@okpage)}_okpage_top_description1".to_sym) %>
+		</h4>
+		<p class="text-info">
+			<%= t(:signup_instructions_for)%>
+			</p>
+	</div>
 </div>
-
+<%= image_tag("#{I18n.locale}/Signup/img_process02_on.gif")%>
 <div id="signup">
-	<span class="stitle"><%= t("stitle_head")%></span>
-	<span class="stitle_body"><%= t("stitle_body")%></span>
 	<div class="signup_form">
 	<%= devise_error_messages! %>
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 		<%= f.label :email, t(:signin_email)%>
-		<%= f.email_field :email, :class => "" %>
+			<div class="input-prepend">
+		<span class="add-on">@</span><%= f.email_field :email, :class => "input-large" %>
+	</div>
 		<%= f.label :user_name, t(:user_name)%>
 		<%= f.text_field :user_name, :class => "" %>
 		<%= f.label :password, t(:signin_password)%>

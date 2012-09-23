@@ -4,7 +4,7 @@ class ContactMailer < ActionMailer::Base
   def send_contact_to_admin(contact)
     to = SystemSetting.first.contact_email
     subject = ""
-    case contact.type
+    case contact.contact_type
     when Okvalue::CONTACT_BANNER
       subject += "[#{t(:contact_banner)}]"
     when Okvalue::CONTACT_GENERAL
@@ -18,7 +18,7 @@ class ContactMailer < ActionMailer::Base
     else
       raise "Bad Contact Type"
     end
-    logger.info("email  is besing sent to #{to}")
+    logger.info("email is besing sent to #{to}")
     @contact = contact
     @subject = subject
     mail(:to => to,
@@ -27,9 +27,9 @@ class ContactMailer < ActionMailer::Base
 
   def send_contact_to_user(contact)
     to = contact.email
-    logger.info("email  is besing sent to #{to}")
+    logger.info("email is besing sent to #{to}")
     subject = ""
-    case contact.type
+    case contact.contact_type
     when Okvalue::CONTACT_BANNER
       subject += "[#{t(:contact_banner)}]"
     when Okvalue::CONTACT_GENERAL

@@ -1,6 +1,7 @@
 <div class="ok_page" id="okboard_for_<%= @okpage %>">
-    <div class="ok_page_top">
-		<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/ok_logo.gif", :class => "img-circle") %>
+    <div class="hero-unit">
+    	<h1><%= t(:contact_center)%></h1>
+    	<p class=""><%= t(:contact_center_description)%></p>    
 	</div>
 	<div class="contact_form">
 		<%= form_for(@contact) do |f| %>
@@ -16,15 +17,17 @@
 		</div>
 		<% end %>
 			<%= f.label :user_name, t(:user_name), :class => "" %>
-			<%= f.text_field :user_name, :class => "text_field" %>
+			<%= f.text_field :user_name, :class => "input-large" %>
 			<%= f.label :email, t(:email), :class => "" %>
-			<%= f.email_field :email, :class => "text_field" %>
+			<div class="input-prepend">
+			<span class="add-on">@</span><%= f.email_field :email, :class => "input-large" %>
+			</div>
 			<%= f.label :phone, t(:phone), :class => "" %>
-			<%= f.telephone_field :phone, :class => "text_field" %>
-			<%= f.label :type, t(:subject), :class => "" %>
-			<%= f.select :type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.type) %>
+			<%= f.telephone_field :phone, :class => "input-medium" %>
+			<%= f.label :contact_type, t(:subject), :class => "" %>
+			<%= f.select :contact_type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.type) %>
 			<%= f.label :body, t(:content), :class => "" %>
-			<%= f.text_area :body, :rows => "10", :columns => "20" %>
+			<%= f.text_area :body, :rows => "10", :style => "width:400px" %>
 			<div class="left">
 			<%= f.submit t(:send), :class => "btn btn-primary" %>
 			</div>

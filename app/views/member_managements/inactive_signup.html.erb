@@ -1,11 +1,18 @@
 <%= render :partial => "devise/shared/header" %>
 
 <div id="_title">
-<%= image_tag("#{I18n.locale}/Signup/tit_611.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
-<%= image_tag("#{I18n.locale}/Signup/img_process02_on.gif")%>
+	<div class="page-header">
+		<h1> <%= t(Style.page(@okpage))%> </h1>
+		<h3 class="text-info">
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</h3>
+		<h4 class="text-info">
+			<%= t("#{Style.page(@okpage)}_okpage_top_description1".to_sym) %>
+		</h4>
+	</div>
 </div>
-
+<%= image_tag("#{I18n.locale}/Signup/img_process02_on.gif")%>
+<br>
 <div class="flash">
 	<% if notice %>
 	<p class="message notice">
@@ -19,7 +26,7 @@
 	<% end %>
 </div>
 <div id="_main">
-		<%= image_tag("#{I18n.locale}/common/img_sendmail_ok.gif")%>
+<%= image_tag("#{I18n.locale}/common/img_sendmail_ok.gif")%>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= active_menu("_signup") %>

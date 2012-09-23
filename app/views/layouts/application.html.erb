@@ -40,13 +40,13 @@
 					<div class="span3">
 						<strong><%= t("welcome_message")%></strong>
 					</div>
-					<div class="span4">
+					<div class="span4" style="margin-bottom:5px;">
 						<% if current_user %>
 						<%= current_user.name %>&nbsp;<%= t(:sir)%>
 						<% else %>
-						<%= link_to t("signin"), user_sign_in_path %>
+						<span class="label label-info"><%= t(:signin)%></span>
 						<%= t("or") %>
-						<%= link_to t("signup"), member_managements_sign_up_path %>
+						<span class="label label-inverse"><%= t(:signup)%></span>
 						<%= t("please") %>
 						<% end %>
 					</div>
@@ -89,17 +89,14 @@
 						<%= image_tag("common/won.gif", :size => "20x20") %>
 						<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
 					</div>
-					<div>
 					<%= render :partial => "homes/ok_information" %>
 				</div>
-				</div>
-				<div id="header-middle" class="span9" style="position:relative">
-				<div class="span1">
+				<div id="header-middle" class="span9">
+				<div class="span2">
 					<% if current_user %>
-					<%= link_to(image_tag("#{I18n.locale}/common/mypage.gif", :size => "70x30"), mypage_okboards_path, :class => "mypage image_submit_ok") %>
+					<%= link_to(t(:mypage), mypage_okboards_path, :class => "btn btn-info") %>
 					<% end %>
 				</div>
-
 				</div>
 				<div id="header-bottom">
 					<%= navigation("#41A317","#f0f0f0") %>

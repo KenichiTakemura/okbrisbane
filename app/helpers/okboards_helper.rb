@@ -68,7 +68,7 @@ module OkboardsHelper
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
         html += "#{post.price}" + " </td><td>"
       end
-      html += %Q|#{link_to(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)))}</td><td>
+      html += %Q|#{link_to_with_icon(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)),"","","icon-play")}</td><td>
        #{post.postedDate}</td><td>#{post.views}</td><td>|
        if post.comment.size > 0
          html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td><td>"

@@ -1,19 +1,8 @@
 <%= image_tag("#{I18n.locale}/common/btn_vote.gif") %>
-<% if Okbrisbane::Application.config.ok_debug %>
-<%= link_to(image_tag("common/sns/good.gif", :size => "20x20"), Okboard.okboard_link_like(@okpage, @post.id), :remote => true, :method => :post) %>
+<%= link_to_with_icon_remote(t(:good), Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
 <%= @post.likes.to_s %>
 <%= image_tag("common/rank/#{@post.rank}.png") %>
-<%= link_to(image_tag("common/sns/bad.gif", :size => "20x20"), Okboard.okboard_link_dislike(@okpage, @post.id), :remote => true, :method => :post) %>
+<%= link_to_with_icon_remote(t(:bad), Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white") %>
 <%= @post.dislikes.to_s %>
 <%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
 <%= @post.abuse.to_s %>
-<% else %>
-<%= image_tag("common/sns/good.gif", :size => "20x20") %>
-<%= @post.likes.to_s %>
-<%= image_tag("common/rank/#{@post.rank}.png") %>
-<%= image_tag("common/sns/bad.gif", :size => "20x20") %>
-<%= @post.dislikes.to_s %>
-<%= image_tag("common/sns/abuse.png", :size => "20x20") %>
-<%= t(:abuse) %>
-<%= @post.abuse.to_s %>
-<% end %>

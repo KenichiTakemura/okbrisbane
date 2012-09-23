@@ -346,9 +346,9 @@ module ApplicationHelper
     else
       html = %Q|<div class="_widget" id="widget_#{id}" width:"#{w}px" height:"#{h}px;#{style}">|
     end
-    html += %Q|<div class="_widget_head">#{title}<div class="_widget_head_window">|
-    html += link_to(image_tag("common/widget/211.png", :size => "17x17"),"#", :title => t(:minimize), :id => "widget_#{id}_min")
-    html += link_to(image_tag("common/widget/212.png", :size => "17x17"),"#", :title => t(:maximize), :id => "widget_#{id}_max")
+    html += %Q|<div class="_widget_head"><span class="label">#{title}</span><div class="_widget_head_window">|
+    html += %Q|<a href="#" title=#{t(:minimize)} id="widget_#{id}_min"><i class="icon-resize-small icon-white"></i></a>|
+    html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-resize-full icon-white"></i></a>|
     html += "</div></div>"
     html += %Q|<div class="_widget_body" id="widget_body_#{id}" >#{body}</div>|
     html += "</div>"
@@ -358,4 +358,18 @@ module ApplicationHelper
     html.html_safe
   end
   
+  def link_to_with_icon(t,h,c,s,i)
+    html = %Q|<a href="#{h}" class="#{c}" style="#{s}"><i class="#{i}"></i>#{t}</a>|
+    html.html_safe
+  end
+  
+  def link_to_with_icon_with_id(t,h,c,s,d,i)
+    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" id="#{d}"><i class="#{i}"></i>#{t}</a>|
+    html.html_safe
+  end
+  
+  def link_to_with_icon_remote(t,h,c,s,i)
+    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="post"><i class="#{i}"></i>#{t}</a>|
+    html.html_safe
+  end  
 end

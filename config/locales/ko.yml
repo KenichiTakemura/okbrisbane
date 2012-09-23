@@ -268,8 +268,7 @@ ko:
   new_password: '새로운 비밀번호'
   new_password_confirmation: '새로운 비밀번호 확인'
   current_password: '이전 비밀번호'
-  stitle_head: 'OKBRISBANE 회원가입을 환영합니다.'
-  stitle_body: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
+
   termofservice: '[이용약관] 아래의 이용약관을 모두 확인 후 가입하여 주시기 바랍니다.'
   termofpersonalinfomation: '[개인정보취급방침] 아래의 개인정보취급방침을 모두 확인 후 가입하여 주시기 바랍니다.'
   agree: '위 이용약관 및 개인정보취급방침에 동의합니다.'
@@ -739,7 +738,8 @@ ko:
   contact_issue: '문제 보고'
   contact_exit: '회원 탈퇴 신청'
   send: '송신'
-
+  contact: '문의'
+  contact_center: '고객센터'
   received_contact_message: '님으로부터 문의가 왔습니다'
   received_issue_message: '님으로부터 문제이메일가 왔습니다'
   
@@ -747,10 +747,11 @@ ko:
   confirmation: '확인'
   confirmation_email: 'OKBRISBANE 확인 이메일'
   
-  contact_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.   '
-  contact_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.  '
+  contact_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.'
+  contact_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.'
   contact_confirmation_email_content3: '문의해 주셔서 감사합니다.'
   contact_confirmation_email_content4: '가능한 빨리 해답을 드리도록 하겠습니다.'
+  
   # Widget
   minimize: '최소화'
   maximize: '최대화'
@@ -770,3 +771,20 @@ ko:
   time_by_week_3: '삼주전'
   time_by_week_4: '사주전'
   time_by_older: '그 이전'
+  
+  mypage: '마이페이지'
+  contact_center_description: 'OKBRISBANE is commited to think all feedback on hard and provide the best service to all.'
+  thank_you_for_your_contact: 'Thank you very much for your contact.'
+  visit_following_list_to_view_comment: ''
+  good: 'OK'
+  bad: 'NOK'
+  to_list: '묵록'
+  okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
+  Signin_okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
+  Signup_okpage_top_description: 'OKBRISBANE 회원가입을 환영합니다.'
+  Signup_okpage_top_description1: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
+  signup_instructions_for: '이메일 주소와 이름, 비밀번호를 입력하여 주시기 바랍니다.'
+  
+  comment_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.'
+  comment_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.'
+  comment_confirmation_email_content3: 'Fix me'

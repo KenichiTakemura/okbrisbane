@@ -1,9 +1,11 @@
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
 	<div class="okboard_top">
-		<h2 class="okboard_title">
+		<div class="page-header">
+		<h1>
 			<%= t(Style.page(@okpage))%>
-		</h2>
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/view_bg.gif", :style => "width:750px;height:100px", :class => "img-circle") %>
+		</h1>
+		<p><%= t(:okpage_top_description) %></p>
+		</div>
 	</div>
 
     <%= render :partial => "okboards/shared/gallery" %>
@@ -13,25 +15,23 @@
 		<div class="okboard_view_controll">
 			<div id="okboard_likes">
 				<%= image_tag("#{I18n.locale}/common/btn_vote.gif") %>
-				<%= link_to(image_tag("common/sns/good.gif", :size => "20x20"), Okboard.okboard_link_like(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= link_to_with_icon_remote(t(:good), Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
 				<%= @post.likes.to_s %>
 				<%= image_tag("common/rank/#{@post.rank}.png") %>
-				<%= link_to(image_tag("common/sns/bad.gif", :size => "20x20"), Okboard.okboard_link_dislike(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= link_to_with_icon_remote(t(:bad), Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white") %>
 				<%= @post.dislikes.to_s %>
 				<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
 				<%= @post.abuse.to_s %>
 			</div>
 			<div id="okboard_quick_links">
-				<%= link_to(image_tag("#{I18n.locale}/common/listing.gif"), Okboard.okboard_link(@okpage), :style => "margin:1px", :class => "") %>
+				<%= link_to_with_icon(t("to_list"), Okboard.okboard_link(@okpage), "btn btn-small", "margin:1px", "icon-th-list") %>
 				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
-				<%= link_to(image_tag("#{I18n.locale}/common/write.gif"), Okboard.okboard_link_write(@okpage), :style => "margin:1px") %>
+				<%= link_to_with_icon(t(:write_new), Okboard.okboard_link_write(@okpage), "btn btn-small", "margin:1px", "icon-pencil") %>
 				<% end %>
 				<% if current_user %>
-				<%= link_to(image_tag("#{I18n.locale}/common/mypage_1.gif", :size => "60x20"), mypage_okboards_path, :style => "margin:1px") %>
+				<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-small btn-info", "margin:1px", "icon-user") %>
 				<% end %>
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
-				<%= link_to(image_tag("#{I18n.locale}/common/home.gif"), root_path, :style => "margin:1px") %>
-
 			</div>
 		</div>
 		<div class="page_control">
@@ -67,9 +67,7 @@
 			<div class="to_next">
 			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
-
 		</div>
-
 		<br/>
 		<div class="comment_logo">
 		<%= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") %>
@@ -80,7 +78,7 @@
 		</div>
 		<div class="new_comment" id="new_comment">
 			<% if !current_user %>
-			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-warning"><i class="icon-pencil" style=""></i><%=t(:please_signin_to_comment)%></a>
+			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-info"><i class="icon-pencil" style=""></i><%=t(:please_signin_to_comment)%></a>
 			<% else %>
 			<div class="commnet_user">
 				<%= image_tag("common/sns/ico_people.gif", :size => "30x30") %>
@@ -99,30 +97,28 @@
 		</div>
 		<% if @post.comment.present?%>
 		<div class="comment_remark">
-		<%= image_tag("common/sns/likes.gif", :size => "20x20") %>&nbsp;<%= t(:agree_comment) %>
-		<%= image_tag("common/sns/dislikes.gif", :size => "20x20") %>&nbsp;<%= t(:disagree_comment) %>
 		<%= image_tag("common/sns/abuse.png", :size => "20x20")%>&nbsp;<%= t(:report_abuse_comment) %>
 		</div>
 		<% end %>
 		<div class="comment_list"></div>
-		<table id="okboard_comment" width=100% class="ui-widget" border="0">
+		<table id="okboard_comment" width=100% class="table" border="0">
 			<tbody>
 				<% index = 1 %>
 				<% @post.comment.reverse_each do |comment| %>
-				<tr class="#{cycle("odd", "even")}">
+				<tr id="comment_<%=comment.id%>" class="#{cycle("odd", "even")}">
 					<td>
 					<div class="comment_row">
 						<div class="commnet_user">
 							<%= image_tag("common/sns/ico_people_group.gif", :size => "30x30") %>
 						</div>
 						<div class="comment_attr">
-							<%= t(:comment) %>#<%= index.to_s %> <%= comment.postedDate %> <%= comment_author(comment) %>
+							<span class="badge"><%= t(:comment) %>#<%= index.to_s %></span> <%= comment.postedDate %> <%= comment_author(comment) %>
 						</div>
 
 						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
-							<%= link_to(image_tag("common/sns/likes.gif", :size => "20x20"), comment_like_path(comment), :remote => true, :method => :post) %>
+							<%= link_to_with_icon_remote(t(:agree_comment), comment_like_path(comment), "btn btn-mini btn-info", "", "icon-thumbs-up icon-white") %>
 							<%= comment.likes.to_s %>
-							<%= link_to(image_tag("common/sns/dislikes.gif", :size => "20x20"), comment_dislike_path(comment), :remote => true, :method => :post) %>
+							<%= link_to_with_icon_remote(t(:disagree_comment), comment_dislike_path(comment), "btn btn-mini btn-warning", "", "icon-thumbs-down icon-white") %>
 							<%= comment.dislikes.to_s %>
 							<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
 							<%= comment.abuse.to_s %>
@@ -135,7 +131,7 @@
 						</div>
 						<div class="comment_hidden_content">
 							<div id="comment_hidden_<%= comment.id %>" style="display:none">
-								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to(t("Show"), "#", :id => "comment_show_#{comment.id}") %>
+								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to_with_icon_with_id(t("Show"), "#", "btn btn-danger btn-small", "", "comment_show_#{comment.id}", "icon-eye-open") %>
 							</div>
 						</div>
 

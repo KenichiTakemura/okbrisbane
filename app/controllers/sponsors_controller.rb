@@ -24,12 +24,12 @@ class SponsorsController < ApplicationController
   
   def show_ok
     raise "Bad Request" if !params[:t].present?
-    type = params[:t]
+    contact_type = params[:t]
     @ok = BusinessClient.okbrisbane.first
     logger.debug("Sponsor_OK: #{@ok}")
     @okpage = :p_sponsor
     @contact = Contact.new
-    @contact.type = type
+    @contact.contact_type = contact_type
     if current_user
       @contact.user_name = current_user.user_name
       @contact.email = current_user.email

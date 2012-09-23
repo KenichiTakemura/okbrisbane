@@ -45,9 +45,9 @@ module DeviseHelper
   end
   
   def _left_menu_select(links, paths)
-    html = %Q|<div id="menu"><ul class="nav nav-tabs nav-stacked">|
+    html = %Q|<div id="menu"><ul class="nav nav-pills nav-stacked">|
     links.each_with_index do |link,i|
-      html += %Q|<li id="_#{link}">|
+      html += %Q|<li id="_#{link}"><i class="icon-circle-arrow-right" style="float:right;margin-right:5px;margin-top:5px;"></i>|
       html += link_to(t(link), paths[i])
       html += "</li>"
     end

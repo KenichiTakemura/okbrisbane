@@ -184,7 +184,7 @@ module Style
       :style => 'position:relative;float:right;right:0px',
       :effect => effect)
       if value.eql? Style.page(:p_home)
-        is_disabled = false
+        is_disabled = true
       else
         is_disabled = true
       end
@@ -209,28 +209,28 @@ module Style
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:950px;left:-165px',
-      :is_disabled => false)
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 4,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:950px;right:-165px',
-      :is_disabled => false)
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 5,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:1800px;left:-165px',
-      :is_disabled => false)
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_background),
       :position_id => 6,
       :div_width => 160, :div_height => 800,
       :img_width => 160, :img_height => 800,
       :style => 'position:absolute;top:1800px;right:-165px',
-      :is_disabled => false)
+      :is_disabled => is_disabled)
     end
     # Home
     _page = :p_home

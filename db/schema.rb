@@ -260,7 +260,7 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
   create_table "contacts", :force => true do |t|
     t.integer  "contacted_by_id"
     t.string   "contacted_by_type"
-    t.integer  "type"
+    t.integer  "contact_type"
     t.text     "body"
     t.string   "user_name"
     t.string   "email"

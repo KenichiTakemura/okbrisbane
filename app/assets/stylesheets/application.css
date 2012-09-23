@@ -43,7 +43,7 @@ a img { border: 0; }
 }
 
 #header {
-	height: 320px;
+	height: 330px;
 	width: 100%;
 	position: relative;
 	left: 0px;
@@ -268,7 +268,9 @@ textarea {
   position:relative;
   float:left;
   background-color:#fff;
-  width:100%;
+  margin:1px;
+  width:99.99%;
+  height:200px;
 }
   
 #page_section_left .items {

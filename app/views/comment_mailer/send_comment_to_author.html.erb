@@ -1,0 +1,12 @@
+<%= content_tag(:p, t(:comment_confirmation_email_content1))%>
+<%= content_tag(:p, t(:comment_confirmation_email_content2))%>
+<%= content_tag(:p, "#{@comment.commented_by.name} #{t(:comment_confirmation_email_content3)}")%>
+<br/>
+<%= content_tag(:p, t(:content)) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<%= raw(@comment.body) %>
+<%= content_tag(:p, "-------------------------------------") %>
+<br/>
+<%= content_tag(:p, t(:visit_following_list_to_view_comment))%>
+
+<%= link_to(t(:confirmation), Okboard.okboard_url_with_id(okboards_url, @okpage, @post.id) + "#comment_#{@comment.id}")%>

@@ -1,16 +1,11 @@
 <div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
 	<div class="okboard_top">
-		<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x130") %>
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/tit_811.gif", :class => "title_text", :style => "top:5px;left:20px;")%>
-		</div>
 	</div>
 	<div class="okboard_my_page_links">
-	<%= link_to image_tag("#{I18n.locale}/#{Style.page(@okpage)}/modify.gif"), edit_user_registration_path %>
 	</div>
 	<div id="mypage_mypost_list" style="position: relative; float: left; width: 100%">
-		<table id="mypost_table" width=100% class="ui-widget">
-			<thead class="ui-widget-header">
+		<table id="mypost_table" class="table table-hover table-striped">
+			<thead class="">
 				<tr>
 					<th><%= t(:page) %></th>
 					<th><%= t(:category) %></th>
@@ -21,10 +16,9 @@
 					<th><%= t(:attachment) %></th>
 					<th><%= t(:comment) %></th>
 					<th><%= t(:comment_email) %></th>
-					<th><%= t(:view) %></th>
 				</tr>
 			</thead>
-			<tbody class="ui-widget-content">
+			<tbody class="">
 				<% @user.job.each do |post|%>
 					<%= mypage_list(post) %>
 				<% end %>

@@ -2,13 +2,13 @@ class Contact < ActiveRecord::Base
   # belongs_to
   belongs_to :contacted_by, :polymorphic => true
 
-  attr_accessible :email, :user_name, :phone, :type, :body
+  attr_accessible :email, :user_name, :phone, :contact_type, :body
   
 
   validates_presence_of :email
   validates_presence_of :user_name
   validates_presence_of :phone
-  validates_presence_of :type
+  validates_presence_of :contact_type
   validates_presence_of :body
   validates_format_of :email, :with => Okvalue::EMAIL_REGEXP, :if => Proc.new { |email| email.present? }
   validates_format_of :phone, :with => /\A[\+\d\-\(\)\sx]+\z/, :if => Proc.new { |phone| phone.present? }
@@ -21,6 +21,13 @@ class Contact < ActiveRecord::Base
     list.push([I18n.t(:contact_issue),Okvalue::CONTACT_ISSUE])
     list.push([I18n.t(:contact_exit),Okvalue::CONTACT_EXIT])
     list
+  end
+  
+  def contact_type_name
+    case contact_type
+    when Okvalue::CONTACT_BANNER
+      return I18n.t(:contact_banner)
+    end
   end
   
   def set_user(user)

@@ -1,17 +1,23 @@
 <%= render :partial => "devise/shared/header" %>
 <div id="_title">
-<%= image_tag("#{I18n.locale}/Signup/tit_621.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+	<div class="page-header">
+		<h1> <%= t(:forgot_your_password)%> </h1>
+		<p>
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</p>
+	</div>
 </div>
-<%= content_tag(:legend, t(:change_password_instructions_for), :class => "text-info")%>
+<div class="alert alert-info">
+	<%= t(:change_password_instructions_for)%>
+</div>
 <div id="signin">
 	<%= devise_error_messages! %>
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "form-search"}) do |f| %>
 	<%= f.label :email, t(:signin_email)%>
-	<%= f.email_field :email, :class => "input-medium search-query"%>
-
+		<div class="input-prepend">
+		<span class="add-on">@</span><%= f.email_field :email, :class => "input-large search-query" %>
+	</div>
 		<%= f.submit t(:send_reset_password_instrcutions) , :class => "btn btn-primary", :style => "margin-top:20px;float:left;margin-right:10px;" %>
-	    <%= image_tag("#{I18n.locale}/common/img_send_mailing.jpg", :size => "70x70")%>
 	<% end %>
 </div>
 <%= render :partial => "devise/shared/footer" %>
