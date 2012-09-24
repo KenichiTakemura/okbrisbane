@@ -788,3 +788,5 @@ ko:
   comment_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.'
   comment_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.'
   comment_confirmation_email_content3: 'Fix me'
+
+  latest_information: '최신 정보'

@@ -11,8 +11,8 @@ module Okvalue
   #VERSION = "0.5-20120917"
   #VERSION = "0.6-20120919"
   #VERSION = "0.7-20120921"
-  VERSION = "0.8-20120923"
-  #VERSION = "0.9-20120926"
+  #VERSION = "0.8-20120923"
+  VERSION = "0.9-20120926"
   #VERSION = "1.0-20120929"
 
   
@@ -66,7 +66,7 @@ module Okvalue
 
   TOPFEED_IMAGE_SIZE = "120x100"
   OKBOARD_LIMIT = 50
-  OKBOARD_IMAGE_FEED_LIMIT = 5
+  OKBOARD_IMAGE_FEED_LIMIT = 6
   OKBOARD_IMAGE_SIZE = "138x118"
   OKBOARD_MORE_SIZE = 10
 
@@ -120,7 +120,6 @@ module Okvalue
   
   RATE = "http://community.fxkeb.com/fxportal/jsp/RS/DEPLOY_EXRATE/12776_0.html"
   
-
   AU = 1
   NZ = 2
   KR = 3

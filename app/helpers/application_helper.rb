@@ -344,13 +344,13 @@ module ApplicationHelper
     elsif h.nil?
       html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
     else
-      html = %Q|<div class="_widget" id="widget_#{id}" width:"#{w}px" height:"#{h}px;#{style}">|
+      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
     end
     html += %Q|<div class="_widget_head"><span class="label">#{title}</span><div class="_widget_head_window">|
     html += %Q|<a href="#" title=#{t(:minimize)} id="widget_#{id}_min"><i class="icon-resize-small icon-white"></i></a>|
     html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-resize-full icon-white"></i></a>|
     html += "</div></div>"
-    html += %Q|<div class="_widget_body" id="widget_body_#{id}" >#{body}</div>|
+    html += %Q|<div class="_widget_body" id="widget_body_#{id}" style="height:#{h}px">#{body}</div>|
     html += "</div>"
     script = %Q|$('\#widget_#{id}_min').click(function(){$('\#widget_body_#{id}').hide('slow');return false;});|
     script += %Q|$('\#widget_#{id}_max').click(function(){$('\#widget_body_#{id}').show('slow');return false;});|

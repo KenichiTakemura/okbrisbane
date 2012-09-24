@@ -1,9 +1,12 @@
 <div id="okboards">
-	<%= _left_side_menu %>
-	<div id="page_section_right" class="">
-		<div id="content_head">
-			<%= single_body_banner(5) %>
-		</div>
+	<div class="span3" style="width: 230px">
+    	<%= single_body_banner(1) %>
+    </div>
+    <div class="span7">
+		<%= single_body_banner(5) %>
+	</div>
+	<%= _left_side_menu_widget %>
+	<div class="span10">
 		<div id="content_body">
 			<div class="flash">
 				<% if notice %>
@@ -18,8 +21,13 @@
 				<% end %>
 			</div>
 			<%= render :partial => "okboards/#{Style.page(@okpage)}/index" %>
-		</div>
+		</div>			
 	</div>
+	
+	<div class="span3" style="float:right"><%= single_body_banner(2) %></div>
+	<div class="span3" style="float:right"><%= single_body_banner(3) %></div>
+	<div class="span3" style="float:right"><%= single_body_banner(4) %></div>
+</div>
 </div>
 <%= _script_document_ready(%Q|
 $("#_#{@okpage}").attr("style", "opacity:1;filter:alpha(opacity=100);");

@@ -24,6 +24,7 @@ class OkboardsController < OkController
       redirect_to user_sign_in_path
     end
     @user = User.find(current_user)
+    @job_post = Job.user_post(@user)
     respond_to do |format|
       format.html { render :template => "okboards/index" }
     end

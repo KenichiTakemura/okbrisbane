@@ -1,4 +1,4 @@
-<div class="ok_page" id="okboard_for_<%= @okpage %>">
+<div class="span10" id="okboard_for_<%= @okpage %>">
     <div class="hero-unit">
     	<h1><%= t(:contact_center)%></h1>
     	<p class=""><%= t(:contact_center_description)%></p>    
@@ -17,15 +17,15 @@
 		</div>
 		<% end %>
 			<%= f.label :user_name, t(:user_name), :class => "" %>
-			<%= f.text_field :user_name, :class => "input-large" %>
+			<%= f.text_field :user_name, :class => "input-xlarge" %>
 			<%= f.label :email, t(:email), :class => "" %>
 			<div class="input-prepend">
-			<span class="add-on">@</span><%= f.email_field :email, :class => "input-large" %>
+			<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge" %>
 			</div>
 			<%= f.label :phone, t(:phone), :class => "" %>
 			<%= f.telephone_field :phone, :class => "input-medium" %>
 			<%= f.label :contact_type, t(:subject), :class => "" %>
-			<%= f.select :contact_type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.type) %>
+			<%= f.select :contact_type, options_from_collection_for_select(@contact.category_list, :second, :first, @contact.contact_type) %>
 			<%= f.label :body, t(:content), :class => "" %>
 			<%= f.text_area :body, :rows => "10", :style => "width:400px" %>
 			<div class="left">

@@ -1,29 +1,33 @@
-<div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
-	<div class="okboard_top">
-		<p class="okboard_title">
-			<%= t(Style.page(@okpage))%>
-		</p>
-		<div class="okboard_title_image">
-			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", :size => "750x130") %>
-		</div>
-	</div>
-	<div class="client_index">
+<div class="page-header">
+	<h1> <%= t(Style.page(@okpage))%> </h1>
+	<p>
+		<%= t(:okpage_top_description) %>
+	</p>
+</div>
+<div class="span10">
 	<%= _script(%Q|$(function(){$("#accordion").accordion();});|)%>
 	<div id="accordion">
 		<% @business_categories.each do |bc| %>
-			<% next if !bc.business_client.present?%>
-    		<h3><a href="#"><First header><%= "#{bc.display_name} (#{bc.business_client.size})" %></a></h3>
-    		<div><% bc.business_client.each do |c| %>
-    			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/primium_box_top.gif", :class => "")%>
-    			<p class="business_name">
-    			<%= c.business_name %>
-    			</p>
-    			<%= image_tag(c.main_profile_image.original_image, :class => "profile_img")%>
-    			<%= image_tag("#{I18n.locale}/#{Style.page(@okpage)}/primium_box_bottom.gif", :class => "")%>
- 				<% end %>
-    		</div>
-    	<% end %>
-	</div>
+		<% next if !bc.business_client.present?%>
+		<h3><a href="#">
+		<First header>
+			<%= "#{bc.display_name} (#{bc.business_client.size})" %>
+		</a></h3>
+		<div>
+			<% bc.business_client.each do |c| %>
+			<ul class="thumbnails">
+    			<li class="span4">
+    				<a href="#" class="thumbnail">
+    					<%= image_tag(c.main_profile_image.original_image) %>
+    					<h3><%= c.business_name %></h3>
+    					<p><%= c.business_profile.head %></p>
+    				</a>
+    			</li>
+		    </ul>
+						
+			<% end %>
+		</div>
+		<% end %>
 	</div>
 </div>
 

@@ -14,21 +14,34 @@ module OkboardsHelper
   end
 
   def section_span_for(post, category)
-    logger.debug("section_span post: #{post.id}")
-    html = "<span>"
+    html = %Q|<span style="background-color: #e0e0e0;><ul class="thumbnails"><li><div class="thumbnail">|
     html += noimage?(post)
-    html += image_tag(post.image.first.medium_image, :size => post.image.first.medium_size) if !post.image.empty?
-    html += %Q|<p class="okboard_subject">| +  post.subject + "</p>"
+    if !post.image.empty?
+      html += %Q|<div id="post_Carousel_#{post.id}" class="carousel slide"><div class="carousel-inner">|
+      post.image.each_with_index do |image,index|
+        if index == 0
+          html += %Q|<div class="active item">| + image_tag(image.medium_image, :class => "img-polaroid") + "</div>"
+        else
+          html += %Q|<div class="item">| + image_tag(image.medium_image, :class => "img-polaroid") + "</div>"
+        end
+      end
+      if post.image.size > 1
+        html += %Q|<a class="carousel-control left" href="\#post_Carousel_#{post.id}" data-slide="prev">&lsaquo;</a>|
+        html += %Q|<a class="carousel-control right" href="\#post_Carousel_#{post.id}" data-slide="next">&rsaquo;</a>|
+      end
+      html += "</div></div>"
+      html += _script_document_ready(%Q|$('\#post_Carousel_#{post.id}').carousel();|)
+    end
+    html += %Q|<h3>| +  post.subject + "</h3>"
     if post.respond_to?(:price)
       html += %Q|<p class="price_tag">| + post.price
       html += "</p>"
     end
-    html += %Q|<p class="okboard_description">|
+    html += %Q|<p>|
     html += raw(post.content.body) if !post.content.nil?
     html += "</p>"
     html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), Okboard.okboard_link_with_id(category, post.id))
-    #html += mail_to(author_email(post), t("contact_person"), :encode => "hex")
-    html += "</span>"
+    html += "</div></li></ul></span>"
     html.html_safe
   end
 
@@ -83,11 +96,6 @@ module OkboardsHelper
         html += image_tag("common/IconData2.gif")
       end
       html += %Q|</td><td >| + author_name(post) + %Q|</td>|
-      #if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation].include?(@okpage)
-      #  html += t("view") + section_span(post) + "</td></tr>"
-      #else
-      #  html += link_to(image_tag("#{I18n.locale}/common/view_1.gif", :style => "margin-top:2px"), Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)))
-      #end
     end
     html.html_safe
   end
@@ -118,7 +126,7 @@ module OkboardsHelper
   end
 
   def _left_side_menu_widget()
-    html = %Q|<div class="dropdown"><ul class="nav nav-stacked affix" style="bottom:50px;left:100px;">|
+    html = %Q|<div class="dropdown"><ul class="nav nav-pills nav-stacked affix" style="bottom:150px;left:100px;">|
     case @okpage
     when :p_job
       links = [:p_job,:p_buy_and_sell,:p_well_being,
@@ -194,15 +202,14 @@ module OkboardsHelper
       raise "Not implemented"
     end
     links.each_with_index do |link,i|
-      html += %Q|<li class="">|
-      #html += link_to(t("menu_toggle_show"), "#", :id => "menu_#{link}", :style => "float:left; margin-right: 10px;")
-      html += %Q|<a href="#{paths[i]}" class="btn btn-inverse"><i class="icon-chevron-right" style="float:right"></i>#{t(Style.page(link))}</a>|
-      #html += %Q|<div id="sub_menu_#{link}" style="display:none">|
-      #html += _sub_menu(link)
-      html += "</li>"
+      html += %Q|<li style="position:relative">|
+      html += %Q|<a href="#{paths[i]}" class="btn dropdown-toggle" data-toggle="dropdown" data-target="#"></i>#{t(Style.page(link))}<b class="caret"></b></a>|
+      html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position:absolute;left:100px;">|
+      html += "<li><a href=\"#{paths[i]}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
+      html += _sub_menu(link)
+      html += "</ul></li>"
     end
     html += "</ul></div>"
-    #html += _script_document_ready(%Q|$('.dropdown-menu').dropdown();|)
     html.html_safe
   end
 
@@ -235,15 +242,14 @@ module OkboardsHelper
     return ""
     end
     logger.debug("categories: #{categories}")
-    html = "<ul>"
+    html = ""
     categories.each do |key,category|
-      html += "<li>" + link_to(t(category), Okboard.okboard_link_with_category(link,category)) + "</li>"
+      html += "<li><a href=\"#{Okboard.okboard_link_with_category(link,category)}\" tabindex=\"-1\">#{t(category)}</a></li>"
     end
     if [:p_job, :p_buy_and_sell,:p_well_being].include? link
-      html += "<li>" + link_to(t('write_new'), Okboard.okboard_link_write(link)) + "</li>"
+      html += "<li><a href=\"#{Okboard.okboard_link_write(link)}\" tabindex=\"-1\">#{t(:write_new)}</a></li>"
     end
-    html += "</ul>"
-    html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)
+    #html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)
     html.html_safe
   end
 

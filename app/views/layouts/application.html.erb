@@ -35,122 +35,123 @@
 			<%= single_background_banner(4) %>
 			<%= single_background_banner(5) %>
 			<%= single_background_banner(6) %>
-			<div id="header">
-				<div id="header-left">
-					<div class="span3">
-						<strong><%= t("welcome_message")%></strong>
-					</div>
-					<div class="span4" style="margin-bottom:5px;">
-						<% if current_user %>
-						<%= current_user.name %>&nbsp;<%= t(:sir)%>
+		</div>
+		<div id="header">
+			<div id="header-left">
+				<div class="span3">
+					<strong><%= t("welcome_message")%></strong>
+				</div>
+				<div class="span4" style="margin-bottom:5px;">
+					<% if current_user %>
+					<%= current_user.name %>&nbsp;<%= t(:sir)%>
+					<% else %>
+					<span class="label label-info"><%= t(:signin)%></span>
+					<%= t("or") %>
+					<span class="label label-inverse"><%= t(:signup)%></span>
+					<%= t("please") %>
+					<% end %>
+				</div>
+				<div id="logo">
+					<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
+				</div>
+				<div id="devise">
+					<div id="account">
+						<% if !user_signed_in? %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
+						<% end %>
+						<% if !user_signed_in? %>
+						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
+						<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
 						<% else %>
-						<span class="label label-info"><%= t(:signin)%></span>
-						<%= t("or") %>
-						<span class="label label-inverse"><%= t(:signup)%></span>
-						<%= t("please") %>
+						<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
 						<% end %>
 					</div>
-					<div id="logo">
-						<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
-					</div>
-					<div id="devise">
-						<div id="account">
-							<% if !user_signed_in? %>
-							<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
-							<% end %>
-							<% if !user_signed_in? %>
-							<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
-							<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
-							<% else %>
-							<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
-							<% end %>
-						</div>
-					</div>
 				</div>
-				<div id="header-right">
+			</div>
+			<div id="header-right">
 				<div class="span2">
-				<span class="label label-info"><%=t(:admin_notice)%></span>
-				<div class="alert alert-info">
-					<button type="button" class="close" data-dismiss="alert">×</button>
-					<%= t(:no_notice)%>
-				</div>
-				</div>
-					<%= single_header_banner(1) %>
-					<%= single_header_banner(2) %>
-				</div>
-				<div class="ok_information">
-					<div class="weather_information">
-						<%= image_tag("common/australia.gif", :size => "20x20") %>
-						<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
-						<%= image_tag("common/korea.gif", :size => "20x20") %>
-						<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
+					<span class="label label-info"><%= t(:admin_notice)%></span>
+					<div class="alert alert-info">
+						<button type="button" class="close" data-dismiss="alert">
+							×
+						</button>
+						<%= t(:no_notice)%>
 					</div>
-					<div class="rate_information">
-						<%= image_tag("common/won.gif", :size => "20x20") %>
-						<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
-					</div>
-					<%= render :partial => "homes/ok_information" %>
 				</div>
-				<div id="header-middle" class="span9">
+				<%= single_header_banner(1) %>
+				<%= single_header_banner(2) %>
+			</div>
+			<div class="ok_information">
+				<div class="weather_information">
+					<%= image_tag("common/australia.gif", :size => "20x20") %>
+					<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
+					<%= image_tag("common/korea.gif", :size => "20x20") %>
+					<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
+				</div>
+				<div class="rate_information">
+					<%= image_tag("common/won.gif", :size => "20x20") %>
+					<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
+				</div>
+				<%= render :partial => "homes/ok_information" %>
+			</div>
+			<div id="header-middle" class="span9">
 				<div class="span2">
 					<% if current_user %>
 					<%= link_to(t(:mypage), mypage_okboards_path, :class => "btn btn-info") %>
 					<% end %>
 				</div>
-				</div>
-				<div id="header-bottom">
-					<%= navigation("#41A317","#f0f0f0") %>
-					<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage) %>
-					<div id="follows">
-						<% if socialable? %>
-						<ul class="wat-cf">
-							<li>
-								<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
-							</li>
-							<li>
-								&nbsp;
-							</li>
-							<li>
-								<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
-								<script>
-									! function(d, s, id) {
-										var js, fjs = d.getElementsByTagName(s)[0];
-										if (!d.getElementById(id)) {
-											js = d.createElement(s);
-											js.id = id;
-											js.src = "//platform.twitter.com/widgets.js";
-											fjs.parentNode.insertBefore(js, fjs);
-										}
-									}(document, "script", "twitter-wjs");
-								</script>
-							</li>
-						</ul>
-						<% end %>
-					</div>
+			</div>
+			<div id="header-bottom">
+				<%= navigation("#41A317","#f0f0f0") %>
+				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage) %>
+				<div id="follows">
+					<% if socialable? %>
+					<ul class="wat-cf">
+						<li>
+							<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
+						</li>
+						<li>
+							&nbsp;
+						</li>
+						<li>
+							<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
+							<script>
+								! function(d, s, id) {
+									var js, fjs = d.getElementsByTagName(s)[0];
+									if (!d.getElementById(id)) {
+										js = d.createElement(s);
+										js.id = id;
+										js.src = "//platform.twitter.com/widgets.js";
+										fjs.parentNode.insertBefore(js, fjs);
+									}
+								}(document, "script", "twitter-wjs");
+							</script>
+						</li>
+					</ul>
 					<% end %>
 				</div>
-			</div>
-			<div id="main">
-				<%= yield %>
-			</div>
-			<div id="sidebar">
-				<%= yield :sidebar %>
+				<% end %>
 			</div>
 		</div>
-		<div id="footer">
-			<div class="span10 copyright">
-				<p class="copyright_text">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%></p>
-				<p class="copyright_text"><%= Okvalue::FOOTER_TEXT2 %></p>
-				<div class="developer">
-					Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %>
-				</div>
-			</div>
+		<div class="container" style="width:1000px; margin-bottom: 50px;">
+			<%= yield %>
 		</div>
+		<footer style="background-color: #e0e0e0">
+			<h6 class="">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%><br>
+			<%= Okvalue::FOOTER_TEXT2 %> </h6>
+			<p class="developer">
+				<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
+			</p>
+		</footer>
 		<div class="footer_links">
-			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
-			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%><br />
-			<%= link_to(t(:banner_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
-			<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%><br />
+			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
+			<br />
+			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
+			<br />
+			<%= link_to(t(:banner_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
+			<br />
+			<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
+			<br />
 		</div>
 	</body>
 </html>

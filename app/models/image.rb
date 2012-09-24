@@ -4,7 +4,7 @@ class Image < Attachable
   has_attached_file :avatar,
   :styles => lambda { |a|
    if a.instance.thumbnailable?
-     { :medium => "400x400>", :thumb => "120x120>" }
+     { :medium => "460x320>", :thumb => "120x120>" }
    else 
      { }
    end
@@ -31,18 +31,26 @@ class Image < Attachable
 
   def set_default
     self.thumb_size ||= "120x120"
-    self.medium_size ||= "400x300"
+    self.medium_size ||= "460x320"
     self.link_to_url ||= ""
     self.source_url ||= ""
     self.something ||= ""
   end
 
-  def width
+  def thumb_width
     "120"
   end
 
-  def height
+  def thumb_height
     "120"
+  end
+  
+  def medium_width
+    "460px"
+  end
+  
+  def medium_height
+    "320px"
   end
   
   def thumb_image

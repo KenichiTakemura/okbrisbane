@@ -43,21 +43,21 @@
 			</div>
 		</div>
 		<dl class="dl-horizontal">
-			<dt><%= t("author") %></dt>
+			<dt><span class="label"><%= t("author") %></span></dt>
 			<dd><%= author_name(@post) %></dd>
-			<dt><%= t("created_at") %></dt>
+			<dt><span class="label"><%= t("author") %><%= t("created_at") %></span></dt>
 			<dd><%= Common.date_format(@post.updated_at) %></dd>
-			<dt><%= t("category") %></dt>
+			<dt><span class="label"><%= t("author") %><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
-			<dt><%= t("subject") %></dt>
+			<dt><span class="label"><%= t("author") %><%= t("subject") %></span></dt>
 			<dd><%= @post.subject %></dd>
-			<dt><%= t("attachment") %></dt>
+			<dt><span class="label"><%= t("author") %><%= t("attachment") %></span></dt>
 			<dd> <% @post.attachment.each do |attachment| %>
 					<div style="position: relative; float: left;margin-left: 5px">
 						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :size => "50x50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
 						<%= attachment.filename %>
 					</div> <% end %></dd>
-			<dt><%= t("content") %></dt>
+			<dt><span class="label"><%= t("content") %></span></dt>
 			<dd><%= raw(@post.content.body) %></dd>
 		</dl>
 		<div class="page_control">
@@ -78,7 +78,7 @@
 		</div>
 		<div class="new_comment" id="new_comment">
 			<% if !current_user %>
-			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-info"><i class="icon-pencil" style=""></i><%=t(:please_signin_to_comment)%></a>
+			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-inverse"><i class="icon-pencil icon-white" style=""></i><%=t(:please_signin_to_comment)%></a>
 			<% else %>
 			<div class="commnet_user">
 				<%= image_tag("common/sns/ico_people.gif", :size => "30x30") %>

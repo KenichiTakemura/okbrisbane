@@ -1,29 +1,27 @@
-<div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
-	<div class="okboard_top">
-	</div>
-	<div class="okboard_my_page_links">
-	</div>
-	<div id="mypage_mypost_list" style="position: relative; float: left; width: 100%">
-		<table id="mypost_table" class="table table-hover table-striped">
-			<thead class="">
-				<tr>
-					<th><%= t(:page) %></th>
-					<th><%= t(:category) %></th>
-					<th><%= t(:subject) %></th>
-					<th><%= t(:created_at) %></th>
-					<th><%= t(:valid_until) %></th>
-					<th><%= t(:image) %></th>
-					<th><%= t(:attachment) %></th>
-					<th><%= t(:comment) %></th>
-					<th><%= t(:comment_email) %></th>
-				</tr>
-			</thead>
-			<tbody class="">
-				<% @user.job.each do |post|%>
-					<%= mypage_list(post) %>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
+<div class="page-header">
+	<h1> <%= t(Style.page(@okpage))%> </h1>
+	<p>
+		<%= t(:okpage_top_description) %>
+	</p>
 </div>
+<table id="mypost_table" class="table table-hover table-striped">
+	<thead class="">
+		<tr>
+			<th><%= t(:page) %></th>
+			<th><%= t(:category) %></th>
+			<th><%= t(:subject) %></th>
+			<th><%= t(:created_at) %></th>
+			<th><%= t(:valid_until) %></th>
+			<th><%= t(:image) %></th>
+			<th><%= t(:attachment) %></th>
+			<th><%= t(:comment) %></th>
+			<th><%= t(:comment_email) %></th>
+		</tr>
+	</thead>
+	<tbody class="">
+		<% @job_post.each do |post|%>
+		<%= mypage_list(post) %>
+		<% end %>
+	</tbody>
+</table>
 

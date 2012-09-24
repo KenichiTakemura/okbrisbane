@@ -138,6 +138,11 @@ class Post < ActiveRecord::Base
       where('id < ?', post_id)
     end
   }
+  scope :user_post, lambda { |user|
+    if user.present?
+      where('posted_by_id = ?', user.id).is_valid.desc
+    end
+  }
   
   scope :search_no_order, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).is_valid.limit(limit)}
   scope :search, lambda { |cond,limit| search_no_order(cond,limit).desc }

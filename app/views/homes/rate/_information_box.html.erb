@@ -5,15 +5,15 @@
 <p class="title">
 	<%= t(:rate_information_for) %> <%= @dateOn %>
 </p>
-<table class="ui-widget information_table" style="opacity:0.9;filter:alpha(opacity=90);">
-	<thead class="ui-widget-header">
+<table class="table table-hover table-striped">
+	<thead class="">
 		<tr>
 			<th class="small"></th>
 			<th class="small"><%= t(:rate_sell)%></th>
 			<th class="small"><%= t(:rate_buy)%></th>
 			</tr>
 	</thead>
-	<tbody class="ui-widget-content">
+	<tbody class="">
 		<% if !@rates.present? %>
 		<tr><td colspan="3"><%= t(:no_information) %>
 		</td></tr>
@@ -36,18 +36,18 @@
 		<% end %>
 	</tbody>
 </table>
-<p class="city">
+<p class="title">
 	<%= t(:send_information_for) %> <%= @dateOn %>
 </p>
-<table class="ui-widget information_table" style="opacity:0.9;filter:alpha(opacity=90);">
-	<thead class="ui-widget-header">
+<table class="table table-hover table-striped">
+	<thead class="">
 		<tr>
 			<th class="small"></th>
 			<th class="small"><%= t(:rate_send)%></th>
 			<th class="small"><%= t(:rate_recv)%></th>
 			</tr>
 	</thead>
-	<tbody class="ui-widget-content">
+	<tbody class="">
 		<% if !@rates.present? %>
 		<tr><td colspan="3"><%= t(:no_information) %>
 		</td></tr>

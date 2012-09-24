@@ -1,11 +1,12 @@
-<div style="position: relative; float: left; width: 750px;" id="okboard_for_<%= @okpage %>">
-	<div class="okboard_top">
-		<div class="page-header">
-		<h1>
-			<%= t(Style.page(@okpage))%>
-		</h1>
-		<p><%= t(:okpage_top_description) %></p>
+<div class="okboard_top">
+	<div class="page-header">
+		<h1> <%= t(Style.page(@okpage))%> </h1>
+		<p>
+			<%= t(:okpage_top_description) %>
+		</p>
 	</div>
+</div>
+<div class="span10">
 	<div class="okboard_image_list">
 		<% if !@board_image_lists.nil? %>
 		<div id="okboard_image_list_for_<%= @okpage %>">
@@ -21,7 +22,7 @@
 				</p>
 				<p class="description">
 					<%= post.postedDate%>
-				</p>				
+				</p>
 				<% if post.respond_to? :price%>
 				<p class="price_tag">
 					<%= post.price %>
@@ -34,26 +35,34 @@
 	</div>
 	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].include?(@okpage) %>
 	<div id="okboard_sponsor_links" style="position: relative; float: left; width: 100%">
-		<%= single_body_banner(6) %>
-		<%= single_body_banner(7) %>
-		<%= single_body_banner(8) %>
+		<div class="span3" style="float:left">
+			<%= single_body_banner(6) %>
+		</div>
+		<div class="span3" style="float:left">
+			<%= single_body_banner(7) %>
+		</div>
+		<div class="span3" style="float:left">
+			<%= single_body_banner(8) %>
+		</div>
 	</div>
 	<% end %>
 
 	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
-
-	<%= widget("okboards_filter", 400, 200,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
+	<div class="span10">
+		<%= widget("okboards_filter", 800, 100,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
+	</div>
 	<% end %>
 
-	<div class="span7" id="okboard_list_top" style="margin-bottom:5px">
-		<span class="label label-info">
-		<%= "#{t(:list_total_num)} #{@board_lists.size}" %>
-		</span>
-		<div class="pull-right">
-		<%= link_to_with_icon(t(:down), "#_more", "btn btn-mini", "", "icon-arrow-down") %>
-		</div>
-	</div>
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
+		<div id="okboard_list_top" >
+			<div id="list_total_num" class="pull-left">
+				<span class="label label-info"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
+			</div>
+
+			<div class="pull-right" style="margin-bottom:5px">
+				<%= link_to_with_icon(t(:down), "#_more", "btn btn-mini", "", "icon-arrow-down") %>
+			</div>
+		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<div id="okboard_list">
 			<%= build_board_list %>
@@ -62,25 +71,28 @@
 			</div>
 		</div>
 	</div>
-	<div class="span7" id="okboard_list_bottom" style="margin-top:4px;">
-		<div class="pull-right">
+	<div id="okboard_list_bottom" >
+		<div id="list_total_num" class="pull-left">
+			<span class="label label-info"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
+		</div>
+		<div class="pull-right" style="margin-top:5px;">
 			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini btn-inverse") %>
 			<%= link_to_with_icon(t(:up), "#okboard_list_top", "btn btn-mini", "", "icon-arrow-up") %>
 		</div>
 	</div>
 </div>
-<% script = %Q|
-$('\#_lastid').val("#{@lastid}");
-$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");|
-if !@post_search.present? || !@post_search.id.present?
-	script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;})|
-else
-	script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;})|
-end
-%>
-<%= _script_document_ready(script)%>
-<% if !@board_lists.empty? %>
-<%= _script_document_ready(%Q|
-$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": true});
-|) %>
-<% end %>
+	<% script = %Q|
+	$('\#_lastid').val("#{@lastid}");
+	$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");|
+    if !@post_search.present? || !@post_search.id.present?
+      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;})|
+    else
+      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;})|
+    end
+	%>
+	<%= _script_document_ready(script)%>
+	<% if !@board_lists.empty? %>
+	<%= _script_document_ready(%Q|
+	$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": true});
+	|) %>
+	<% end %>
