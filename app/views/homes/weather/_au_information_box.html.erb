@@ -4,8 +4,8 @@
 <p class="title">
 	<%= t(:weather_forecast_for) %> <%= @dateOn %>
 </p>
-<table class="ui-widget information_table" style="opacity:0.95;filter:alpha(opacity=95);">
-	<thead class="ui-widget-header">
+<table class="table table-hover table-striped">
+	<thead class="">
 		<tr>
 			<th class="small"><%= t(:location)%></th>
 			<th class="small"><%= t(:forecast)%></th>
@@ -13,7 +13,7 @@
 			<th class="small"><%= t(:maxTemp)%></th>
 			</tr>
 	</thead>
-	<tbody class="ui-widget-content">
+	<tbody class="">
 		<% if !@weather.present? %>
 		<tr><td colspan="4"><%= t(:no_information) %>
 		</td></tr>
@@ -39,7 +39,4 @@
 	$("#weather_au_information_box").hide("slow");
 	return false;
 	});
-|)%>
-<%= _script_document_ready(%Q|
-	$("div.ok_information").height("350px");
 |)%>
