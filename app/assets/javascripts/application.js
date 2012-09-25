@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery_ui
 //= require jquery_dataTables
 //= require jquery_slides
 //= require bootstrap

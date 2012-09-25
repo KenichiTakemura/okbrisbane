@@ -15,9 +15,6 @@ module Okvalue
   VERSION = "0.9-20120926"
   #VERSION = "1.0-20120929"
 
-  
-  ACCESS_KEY = "Showa"
-
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   
   FEED_COLORMAP = {

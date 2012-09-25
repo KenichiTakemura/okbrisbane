@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   #before_filter :authenticate_user!
   before_filter :set_locale
-  before_filter :opening_soon
-  #before_filter :hit
+  #before_filter :opening_soon
+  before_filter :hit
 
   require 'thread'
 
