@@ -57,5 +57,7 @@ class BusinessClient < ActiveRecord::Base
   def has_url?
     self.business_url.present?
   end
+  
+  scope :with_banner, joins(:client_image).find(:all, :select => 'distinct business_clients.id')
 
 end

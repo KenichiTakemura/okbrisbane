@@ -15,6 +15,12 @@ img {
 	max-height: 120px;
 }
 
+
+.image-resize200_150 {
+	max-width: 200px;
+	max-height: 150px;
+}
+
 * html body .image-resize20_20 {
 	width: expression(this.width >= this.height ? "20px" : "auto");
 	height: expression(this.width <= this.height ? "20px" : "auto");
@@ -23,4 +29,9 @@ img {
 * html body .image-resize140_120 {
 	width: expression(this.width >= this.height ? "140px" : "auto");
 	height: expression(this.width <= this.height ? "120px" : "auto");
+}
+
+* html body .image-resize300_200 {
+	width: expression(this.width >= this.height ? "200px" : "auto");
+	height: expression(this.width <= this.height ? "150px" : "auto");
 }

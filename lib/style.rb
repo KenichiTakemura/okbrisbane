@@ -184,7 +184,7 @@ module Style
       :style => 'position:relative;float:right;right:0px',
       :effect => effect)
       if value.eql? Style.page(:p_home)
-        is_disabled = true
+        is_disabled = false
       else
         is_disabled = true
       end
