@@ -22,7 +22,7 @@ class BusinessClient < ActiveRecord::Base
 
   # validator
   validates_presence_of :business_name
-  validates_presence_of :contact_name
+  #validates_presence_of :contact_name
   validates_uniqueness_of :business_name
   #validates_uniqueness_of :business_abn
   #validates_uniqueness_of :business_url
@@ -30,8 +30,8 @@ class BusinessClient < ActiveRecord::Base
   # callbacks
 
   # pagination
-  default_scope :order => 'created_at DESC'
-  paginates_per 10
+  default_scope :order => 'id DESC'
+  paginates_per 50
   
   scope :okbrisbane, where(:business_name => Okvalue::BUSINESS_CLIENT_OK)
   #scope :only_not_selected_image, lambda { ||

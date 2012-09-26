@@ -317,20 +317,13 @@ tr.okboard_view_list_body {
   border-width: 0px; 
 }
 
-.okboard_filter {
-  position: relative;
-  float: left;
-  margin-left: auto;
-  margin-right: auto;
-  width:730px;
-  -moz-box-shadow: 2px 1px 2px #d1d1d1;
-  -webkit-box-shadow: 2px 1px 2px #d1d1d1;
-  box-shadow: 2px 1px 2px #d1d1d1;
-  border: 2px solid #e0e0e0;
-  margin: 5px;
-  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.1);
+#okboards_filter_span {
+  position:fixed;
+  top:100px;
+  right:10px;
+  z-index:10;
+  background-color: #e5e5e5;
 }
-
 
 .okboard_filter .search {
   position:absolute;

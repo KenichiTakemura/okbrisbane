@@ -81,13 +81,13 @@
 			</div>
 			<div class="ok_information">
 				<div class="weather_information">
-					<%= image_tag("common/australia.gif", :size => "20x20") %>
+					<%= image_tag("common/australia.gif", :class => "image-resize20_20") %>
 					<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
-					<%= image_tag("common/korea.gif", :size => "20x20") %>
+					<%= image_tag("common/korea.gif", :class => "image-resize20_20") %>
 					<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
 				</div>
 				<div class="rate_information">
-					<%= image_tag("common/won.gif", :size => "20x20") %>
+					<%= image_tag("common/won.gif", :class => "image-resize20_20") %>
 					<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
 				</div>
 				<%= render :partial => "homes/ok_information" %>
@@ -141,7 +141,7 @@
 				<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
 			</p>
 		</footer>
-		<div class="footer_links">
+		<div class="footer_links" id="footer_links">
 			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
 			<br />
 			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
@@ -151,6 +151,16 @@
 			<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
 			<br />
 		</div>
+		<%= _script_document_ready(%Q|$(function() {
+				var topBtn = $('\#footer_links');	
+				topBtn.hide();
+				$(window).scroll(function () {
+				if ($(this).scrollTop() > #{Okvalue::FOOTER_LINKS_SHOW_SIZE}) {
+					topBtn.fadeIn();
+				} else {
+					topBtn.fadeOut();
+				}
+			});})|)%>
 	</body>
 </html>
 

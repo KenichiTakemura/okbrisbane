@@ -13,9 +13,9 @@
 			<% @board_image_lists.each do |post| %>
 			<div class="okboard_thumbnail">
 				<% if post.image.first.linkable? %>
-				<%= link_to(image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE),  post.image.first.link)%>
+				<%= link_to(image_tag(post.image.first.medium_image, :width => Okvalue::OKBOARD_IMAGE_SIZE_W, :height => Okvalue::OKBOARD_IMAGE_SIZE_H),  post.image.first.link)%>
 				<% else %>
-				<%= image_tag(post.image.first.medium_image, :size => Okvalue::OKBOARD_IMAGE_SIZE) %>
+				<%= image_tag(post.image.first.medium_image, :width => Okvalue::OKBOARD_IMAGE_SIZE_W, :height => Okvalue::OKBOARD_IMAGE_SIZE_H) %>
 				<% end %>
 				<p class="description">
 					<%= link_to_with_icon(post.subject, Okboard.okboard_link_with_id(@okpage, post.id), "", "", "icon-play")%>
@@ -48,8 +48,8 @@
 	<% end %>
 
 	<% if ![:p_mypage, :p_yellowpage].include?(@okpage) %>
-	<div class="span10">
-		<%= widget("okboards_filter", 800, 100,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
+	<div class="" id="okboards_filter_span">
+		<%= widget("okboards_filter", 200, 370,(render :partial => "okboards/shared/filter"), nil, t(:search)) %>
 	</div>
 	<% end %>
 

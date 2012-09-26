@@ -126,7 +126,7 @@ module OkboardsHelper
   end
 
   def _left_side_menu_widget()
-    html = %Q|<div class="dropdown"><ul class="nav nav-pills nav-stacked affix" style="bottom:150px;left:100px;">|
+    html = %Q|<div class="dropdown"><ul class="nav nav-pills nav-stacked affix" style="bottom:150px;left:50px;">|
     case @okpage
     when :p_job
       links = [:p_job,:p_buy_and_sell,:p_well_being,

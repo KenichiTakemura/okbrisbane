@@ -33,9 +33,9 @@ module HomesHelper
            html += %Q|<tr><td width=40%><div class="shadow">|
            image = feed.feeded_to.image_feed_for
            if image.linkable?
-             html += "#{link_to(image_tag(image.thumb_image, :size => Okvalue::TOPFEED_IMAGE_SIZE), image.link_to_url)}</div></td>"
+             html += "#{link_to(image_tag(image.thumb_image, :class => "image-resize140_120"), image.link_to_url)}</div></td>"
            else
-             html += "#{image_tag(image.thumb_image, :size => Okvalue::TOPFEED_IMAGE_SIZE)}</div></td>"
+             html += "#{image_tag(image.thumb_image, :class => "image-resize140_120")}</div></td>"
            end
            html += %Q|<td align=left valign=top>#{_truncate_with_length(feed.feeded_to.subject, 70)}|
            html += "<p>#{feed.feeded_to.postedDate}</p>"
@@ -55,7 +55,7 @@ module HomesHelper
         html += %Q|<tr>|
         html += %Q|<td style="height:20px;"><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
         html += %Q|<td>#{link_to(_truncate(feed.feeded_to.subject),Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "btn-link")}</td>|
-        html += %Q|<td>#{feed.feeded_to.feeded_date}</td></tr>|
+        html += %Q|<td nowrap>#{feed.feeded_to.feeded_date}</td></tr>|
       end
     end
     html += "</table>"

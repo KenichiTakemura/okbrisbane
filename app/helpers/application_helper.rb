@@ -59,14 +59,12 @@ module ApplicationHelper
     if images.empty?
       html += %Q|<style>div.banner_description {position:absolute;top:0px;left:0px;background-color:black;opacity: 0.6;filter: alpha(opacity=60);}|
       html += %Q| div.banner_description p.description_content {padding:10px;margin:0px;font-size:12px;font-weight:bold;color:white;}</style>|
-      okbrisbane = BusinessClient.okbrisbane.first
-      logger.debug("_banner okbrisbane: #{okbrisbane.nil?}")
-      if !okbrisbane.nil?
-        contact = "#{t('banner_contact')} #{okbrisbane.business_phone} #{okbrisbane.business_email}"
+      contact = "#{t('banner_contact')}"
+      if request.host =~ /admin.okbrisbane/
+        html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
       else
-        contact = "#{t('banner_contact')}"
-      end
-      html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
+        html += %Q|<div class="" id="banner_description_#{div_id}"><p class='description_content'>#{link_to_with_icon(contact,show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER),"btn btn-primary","","icon-info-sign icon-white")}#{}</p></div>|
+      end       
       script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
       html += _script_document_ready(script)
     elsif
@@ -344,11 +342,12 @@ module ApplicationHelper
     elsif h.nil?
       html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
     else
-      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
+      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;height:#{h};#{style}">|
     end
-    html += %Q|<div class="_widget_head"><span class="label">#{title}</span><div class="_widget_head_window">|
+    #html = %Q|<div class="_widget" id="widget_#{id}" style="#{style}">|
+    html += %Q|<div class="_widget_head" style="width:#{w}px;float:right"><span class="label">#{title}</span><div class="_widget_head_window">|
     html += %Q|<a href="#" title=#{t(:minimize)} id="widget_#{id}_min"><i class="icon-resize-small icon-white"></i></a>|
-    html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-resize-full icon-white"></i></a>|
+    html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-fullscreen icon-white"></i></a>|
     html += "</div></div>"
     html += %Q|<div class="_widget_body" id="widget_body_#{id}" style="height:#{h}px">#{body}</div>|
     html += "</div>"

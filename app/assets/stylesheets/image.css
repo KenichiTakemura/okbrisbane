@@ -1,0 +1,26 @@
+
+a img { border: 0; }
+
+img {
+	-ms-interpolation-mode: bicubic;
+}
+
+.image-resize20_20 {
+	max-width: 20px;
+	max-height: 20px;
+}
+
+.image-resize140_120 {
+	max-width: 140px;
+	max-height: 120px;
+}
+
+* html body .image-resize20_20 {
+	width: expression(this.width >= this.height ? "20px" : "auto");
+	height: expression(this.width <= this.height ? "20px" : "auto");
+}
+
+* html body .image-resize140_120 {
+	width: expression(this.width >= this.height ? "140px" : "auto");
+	height: expression(this.width <= this.height ? "120px" : "auto");
+}

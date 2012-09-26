@@ -14,10 +14,6 @@
  *= require bootstrap
  */
 
-
-
-a img { border: 0; }
-
 #page_body {
 	overflow: none;
 	width: 1000px;
@@ -37,7 +33,7 @@ a img { border: 0; }
 
 div.footer_links {
 	position: fixed;
-	bottom:0px;
+	bottom:20px;
 	right:0px;
 	width: 140px;
 	line-height: 30px;
@@ -247,127 +243,3 @@ textarea {
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-/* 
- * CSS3
- */
-.button-link_ok {
-    text-decoration: none;
-    padding: 1px 1px;
-    background: #642c78;
-    color: #FFF;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border: solid 1px #20538D;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-    behavior: url(ie-css3.htc);
-}
-
-.button-link_ok:hover {
-    background: #320046;
-    border: solid 1px #2A4E77;
-    text-decoration: none;
-}
-
-.button-link_ok:active, .button-link_ok:visited {
-    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    background: #642c78;
-    border: solid 1px #203E5F;
-}
-
-.button-link_naver {
-    text-decoration: none;
-    padding: 1px 1px;
-    background: #41A317;
-    color: #FFF;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border: solid 1px #20538D;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-    behavior: url(ie-css3.htc);
-}
-
-.button-link_naver:hover {
-    background: #0F7100;
-    border: solid 1px #2A4E77;
-    text-decoration: none;
-}
-
-.button-link_naver:active, .button-link_naver:visited {
-    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    background: #41A317;
-    border: solid 1px #203E5F;
-}
-
-.button-link_blue {
-    text-decoration: none;
-    padding: 1px 1px;
-    background: #4479BA;
-    color: #FFF;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border: solid 1px #20538D;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-    behavior: url(ie-css3.htc);
-}
-
-.button-link_blue:hover {
-    background: #356094;
-    border: solid 1px #2A4E77;
-    text-decoration: none;
-}
-
-.button-link_blue:active, .button-link_blue:visited {
-    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    background: #4479BA;
-    border: solid 1px #203E5F;
-}
-
-.image_submit_ok:hover {
-	opacity:0.7;filter:alpha(opacity=70);
-    border: solid 1px #2A4E77;
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-}
