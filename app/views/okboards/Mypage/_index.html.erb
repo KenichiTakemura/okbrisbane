@@ -4,6 +4,9 @@
 		<%= t(:okpage_top_description) %>
 	</p>
 </div>
+<p class="lead text-info">
+	<%= t(:mypost)%>
+<p>
 <table id="mypost_table" class="table table-hover table-striped">
 	<thead class="">
 		<tr>
@@ -20,6 +23,12 @@
 	</thead>
 	<tbody class="">
 		<% @job_post.each do |post|%>
+		<%= mypage_list(post) %>
+		<% end %>
+		<% @buy_and_sell_post.each do |post|%>
+		<%= mypage_list(post) %>
+		<% end %>
+		<% @well_being_post.each do |post|%>
 		<%= mypage_list(post) %>
 		<% end %>
 	</tbody>

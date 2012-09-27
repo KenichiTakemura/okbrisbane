@@ -370,5 +370,27 @@ module ApplicationHelper
   def link_to_with_icon_remote(t,h,c,s,i)
     html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="post"><i class="#{i}"></i>#{t}</a>|
     html.html_safe
-  end  
+  end
+  
+  def show_alert
+    html = ""
+    if alert
+      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{alert}</h4></div>|
+    end
+    html.html_safe
+  end
+  
+  def show_alert_message(message)
+    html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{message}</h4></div>|
+    html.html_safe
+  end
+  
+  def show_notice
+    html = ""
+    if notice
+      html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{notice}</h4></div>|
+    end
+    html.html_safe
+  end
+
 end

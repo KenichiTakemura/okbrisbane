@@ -25,6 +25,8 @@ class OkboardsController < OkController
     end
     @user = User.find(current_user)
     @job_post = Job.user_post(@user)
+    @buy_and_sell_post = BuyAndSell.user_post(@user)
+    @well_being_post = WellBeing.user_post(@user)
     respond_to do |format|
       format.html { render :template => "okboards/index" }
     end

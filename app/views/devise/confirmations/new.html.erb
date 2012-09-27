@@ -10,14 +10,15 @@
 <div class="alert alert-info">
 	<%= t(:sending_confirmation_instructions_for)%>
 </div>
-<div id="signin">
 	<%= devise_error_messages! %>
+<div id="signin">
+
 	<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => "form-search"  }) do |f| %>
 
-	<%= f.label :email, t(:signin_email)%>
+		<%= f.label :email, t(:signin_email)%>
 		<div class="input-prepend">
-		<span class="add-on">@</span><%= f.email_field :email, :class => "input-large search-query" %>
-	</div>
+		<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge search-query" %>
+		</div>
 
 		<%= f.submit t(:resend_confirmation_email) , :class => "btn btn-primary", :style => "margin-top:20px;float:left;margin-right:10px;" %>
 

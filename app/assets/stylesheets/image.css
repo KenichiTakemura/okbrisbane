@@ -10,6 +10,16 @@ img {
 	max-height: 20px;
 }
 
+.image-resize30_30 {
+	max-width: 30px;
+	max-height: 30px;
+}
+
+.image-resize50_50 {
+	max-width: 50px;
+	max-height: 50px;
+}
+
 .image-resize140_120 {
 	max-width: 140px;
 	max-height: 120px;
@@ -24,6 +34,16 @@ img {
 * html body .image-resize20_20 {
 	width: expression(this.width >= this.height ? "20px" : "auto");
 	height: expression(this.width <= this.height ? "20px" : "auto");
+}
+
+* html body .image-resize30_30 {
+	width: expression(this.width >= this.height ? "30px" : "auto");
+	height: expression(this.width <= this.height ? "30px" : "auto");
+}
+
+* html body .image-resize50_50 {
+	width: expression(this.width >= this.height ? "50px" : "auto");
+	height: expression(this.width <= this.height ? "50px" : "auto");
 }
 
 * html body .image-resize140_120 {

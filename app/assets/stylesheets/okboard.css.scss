@@ -322,7 +322,6 @@ tr.okboard_view_list_body {
   top:100px;
   right:10px;
   z-index:10;
-  background-color: #e5e5e5;
 }
 
 .okboard_filter .search {
@@ -514,22 +513,6 @@ a.delete_x:hover, a.delete_x:active { color: #fff; text-decoration: none }
 
 .delete_x:hover {
   font-size: 20px;
-}
-
-.okboard_form_write_new_post {
-   float: left;
-   padding: 5px;
-   width: 650px;
-   margin: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px; 
-  border-radius: 10px;
-  //background: -moz-linear-gradient(top, white 10%, #000 90%);
-  //background: -webkit-gradient(linear, left top, left bottom, from(#990), to(#066));
-  -webkit-box-shadow:0px 0 20px #ccc;
-  -moz-box-shadow:0px 0 20px #ccc; 
-  box-shadow:0px 0 20px #ccc; 
-  margin-left: 30px;
 }
 
 .form .group {

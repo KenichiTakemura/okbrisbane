@@ -34,6 +34,7 @@ module Okboard
   end
   
   def self.okpage_v(okpage)
+    raise "Bad Request okpage nil" if okpage.nil?
     raise "Bad Request #{okpage}" if Style.page(okpage).nil?
     enc("#{Common.current_time.to_i}#{SP}#{okpage}").chop
   end

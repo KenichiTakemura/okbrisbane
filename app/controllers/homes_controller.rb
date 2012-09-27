@@ -73,7 +73,7 @@ class HomesController < OkController
 
   def current_rate
     @rates = Rate.rate_for()
-    @dateOn = Common.date_format_ymdhm(@rates.first.issuedOn) if @dateOn.present?
+    @dateOn = Common.date_format_ymdhm(@rates.first.issuedOn) if @rates.present?
   end
 
   private

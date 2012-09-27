@@ -84,5 +84,12 @@ class CommentsController < OkController
     }
     @comment = Comment.find(params[:id])
   end
+  
+  def post_for
+    @board = Okboard.param_v(params[:v])
+    post_id = params[:d].present? ? Okboard.param_to_i(params[:d]) : nil
+    @okpage = @board.to_sym
+    @post = MODELS[@okpage].find(post_id)
+  end
 
 end

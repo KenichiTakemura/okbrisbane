@@ -76,8 +76,33 @@ module Common
     require 'encryptor'
     key = 'okbrisbane_rocks2012!'
     Base64.encode64(Encryptor.encrypt(data, :key => key)).tr('+/','-_')
-  rescue
+    rescue
     false
+  end
+
+  
+  def self.browser_detection(request)
+    result = request.env['HTTP_USER_AGENT']
+    browser_compatible = Okvalue::NOT_DETECTED
+    if result =~ /Safari/
+      unless result =~ /Chrome/
+        version = result.split('Version/')[1].split(' ').first.split('.').first
+        browser_compatible = Okvalue::Safari
+      else
+        version = result.split('Chrome/')[1].split(' ').first.split('.').first
+        browser_compatible = Okvalue::Chrome
+      end
+    elsif result =~ /Firefox/
+      version = result.split('Firefox/')[1].split('.').first
+      browser_compatible = Okvalue::Firefox
+    elsif result =~ /Opera/
+      version = result.split('Version/')[1].split('.').first
+      browser_compatible = Okvalue::Opera
+    elsif result =~ /MSIE/
+      version = result.split('MSIE')[1].split(' ').first
+      browser_compatible = Okvalue::MSIE
     end
+    browser_compatible
+  end
 
 end

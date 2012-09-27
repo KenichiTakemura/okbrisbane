@@ -100,14 +100,6 @@ div.footer_links .footer_text {
 }
 
 /* Global */
-
-.form div.field_with_errors label.label {
-  display: inline;
-  color: red;
-  border: 2px solid red;
-}
-
-
 .fl {
 	float: left;
 }
@@ -151,21 +143,6 @@ div.footer_links .footer_text {
     overflow: hidden;
     padding: 0 !important;
     width: 100%;
-}
-
-
-select {
-    font-size: 12px;
-    color: rgb(102, 102, 102);
-    line-height: 17px;
-    margin: 0px;
-}
-
-textarea {
-	border-color: black;
-	border-style: solid;
-	border-width: thin;
-	padding: 3px;
 }
 
 .textarea_content {

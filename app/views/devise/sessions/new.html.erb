@@ -7,18 +7,10 @@
 		</p>
 	</div>
 </div>
-<div class="flash">
-	<% if notice %>
-	<p class="message notice">
-		<%= notice %>
-	</p>
-	<% end %>
-	<% if alert %>
-	<p class="message alert">
-		<%= alert %>
-	</p>
-	<% end %>
-</div>
+
+<%= show_notice %>
+<%= show_alert %>
+
 <div class="alert alert-info">
 	<%= t(:signin_instructions_for)%>
 </div>

@@ -20,7 +20,7 @@
 				<%= image_tag("common/rank/#{@post.rank}.png") %>
 				<%= link_to_with_icon_remote(t(:bad), Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white") %>
 				<%= @post.dislikes.to_s %>
-				<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
+				<%= link_to(image_tag("common/sns/abuse.png", :class => "image-resize20_20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
 				<%= @post.abuse.to_s %>
 			</div>
 			<div id="okboard_quick_links">
@@ -54,7 +54,7 @@
 			<dt><span class="label"><%= t("author") %><%= t("attachment") %></span></dt>
 			<dd> <% @post.attachment.each do |attachment| %>
 					<div style="position: relative; float: left;margin-left: 5px">
-						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :size => "50x50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
+						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
 						<%= attachment.filename %>
 					</div> <% end %></dd>
 			<dt><span class="label"><%= t("content") %></span></dt>
@@ -80,10 +80,11 @@
 			<% if !current_user %>
 			<a href="<%=comment_new_path(@post, :category => @okpage)%>", class = "btn btn-inverse"><i class="icon-pencil icon-white" style=""></i><%=t(:please_signin_to_comment)%></a>
 			<% else %>
-			<div class="commnet_user">
-				<%= image_tag("common/sns/ico_people.gif", :size => "30x30") %>
+			<div class="span3">
+				<%= image_tag("common/sns/ico_people.gif", :class => "image-resize30_30") %>
+				<i class="icon-comment" style="position:absolute;left:50px;"></i>
 			</div>
-			<div class="new_comment_box">
+			<div class="span7">
 				<%= form_for(@comment, :method => :post) do |f| %>
 				<%= hidden_field_tag :commented_id, @post.id %>
 				<%= hidden_field_tag :commented_type, @okpage %>
@@ -97,7 +98,7 @@
 		</div>
 		<% if @post.comment.present?%>
 		<div class="comment_remark">
-		<%= image_tag("common/sns/abuse.png", :size => "20x20")%>&nbsp;<%= t(:report_abuse_comment) %>
+		<%= image_tag("common/sns/abuse.png", :class => "image-resize20_20")%>&nbsp;<%= t(:report_abuse_comment) %>
 		</div>
 		<% end %>
 		<div class="comment_list"></div>
@@ -109,10 +110,10 @@
 					<td>
 					<div class="comment_row">
 						<div class="commnet_user">
-							<%= image_tag("common/sns/ico_people_group.gif", :size => "30x30") %>
+							<%= image_tag("common/sns/ico_people_group.gif", :class => "image-resize30_30") %>
 						</div>
 						<div class="comment_attr">
-							<span class="badge"><%= t(:comment) %>#<%= index.to_s %></span> <%= comment.postedDate %> <%= comment_author(comment) %>
+							<span class="badge"><%= t(:comment) %>#<%= index.to_s %></span>&nbsp;<%= comment_author(comment) %>&nbsp;<%= comment.postedDate %> 
 						</div>
 
 						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
@@ -120,7 +121,7 @@
 							<%= comment.likes.to_s %>
 							<%= link_to_with_icon_remote(t(:disagree_comment), comment_dislike_path(comment), "btn btn-mini btn-warning", "", "icon-thumbs-down icon-white") %>
 							<%= comment.dislikes.to_s %>
-							<%= link_to(image_tag("common/sns/abuse.png", :size => "20x20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
+							<%= link_to(image_tag("common/sns/abuse.png", :class => "image-resize20_20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
 							<%= comment.abuse.to_s %>
 						</div>
 
@@ -149,7 +150,7 @@
 						<% else %>
 						<% if current_user %>
 						<div class="comment_reply">
-							<%= link_to(image_tag("common/sns/reply.gif", :size => "20x20"), "#", :id => "reply_comment_#{comment.id}") %>
+							<%= link_to(image_tag("common/sns/reply.gif", :class => "image-resize20_20"), "#", :id => "reply_comment_#{comment.id}") %>
 							<%= _script(%Q|
 							$("\#reply_comment_#{comment.id}").click(function() {
 								$("\#comment_body").val(" > #{comment_author(comment)} #{t(:sir)} #{comment.postedDate} #{t(:comment)}\##{index}\\n");

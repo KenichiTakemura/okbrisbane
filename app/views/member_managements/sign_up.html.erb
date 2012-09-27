@@ -24,17 +24,20 @@
 	</p>
 	<textarea name="" rows="13" style="width:100%" readonly><%= UsersHelper.termofpersonalinfomation%>
       </textarea>
-	<p class="agree">
-		<%= check_box_tag :_agree %><%= label_tag :_agree, t("agree")  %>
-	</p>
+    <label class="checkbox">
+    	<input type="checkbox" value="" id="_agree"><%= t(:agree) %>
+    </label>
+    <div class="unchecked" style="display:none">
+    	<div class="alert alert-info"><h4><%=t(:agree_is_required)%></h4></div>
+    </div>
 	<%= form_for(@member_management) do |f| %>
 	<div class="actions">
-		<%= image_submit_tag("#{I18n.locale}/Signup/agreement.jpg", :class => "image_submit_ok") %>
+		<%= image_submit_tag("#{I18n.locale}/Signup/agreement.jpg", :class => "", :id => "_next") %>
 	</div>
 	<% end %>
 	</div>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= active_menu("_signup") %>
-<%= _script_document_ready(%Q|$('#_next').click(function() {if ($('#_agree').attr('checked')) {} else {return false;}});|) %>
+<%= _script_document_ready(%Q|$('#_next').click(function() {if ($('#_agree').attr('checked')) {} else {$('div.unchecked').show('slow');return false;}});|) %>
 

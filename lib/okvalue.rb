@@ -12,8 +12,11 @@ module Okvalue
   #VERSION = "0.6-20120919"
   #VERSION = "0.7-20120921"
   #VERSION = "0.8-20120923"
-  VERSION = "0.9-20120926"
-  #VERSION = "1.0-20120929"
+  #VERSION = "0.9-20120926"
+  VERSION = "1.0-20120929"
+  #VERSION = "1.0.1-20120930"
+  #VERSION = "1.0.2-20121001"
+  #VERSION = "1.1-20121006"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   
@@ -136,5 +139,11 @@ module Okvalue
   FOOTER_TEXT1 = "okbrisbane.com  All Rights Reserved."
   FOOTER_TEXT2 = "OOK Pty Ltd ABN 98 152 354 768  Add.: Shop 3, 6 Zamia Street Sunnybank QLD 4109 T. 07) 3345-3256 F.07) 3343-8558"
 
+  NOT_DETECTED = 0
+  Safari = 1
+  Chrome = 2
+  Firefox = 3
+  Opera = 4
+  MSIE = 5
 
 end

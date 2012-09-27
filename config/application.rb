@@ -63,6 +63,11 @@ module Okbrisbane
     config.assets.paths << "#{Rails.root}/app/assets/javascripts/ckeditor"
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # http://stackoverflow.com/questions/5267998/rails-3-field-with-errors-wrapper-changes-the-page-appearance-how-to-avoid-t
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      "#{html_tag}".html_safe 
+    }
 
   end
 end

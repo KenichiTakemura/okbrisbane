@@ -1,18 +1,24 @@
 <%= render :partial => "devise/shared/header" %>
 <div id="_title">
-	<%= image_tag("#{I18n.locale}/Signup/tit_711.gif", :class => "title_text")%>
-	<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+	<div class="page-header">
+		<h1> <%= t(:forgot_your_password)%> </h1>
+		<p>
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</p>
+	</div>
 </div>
-<div id="signin">
 <%= devise_error_messages! %>
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "form-search" }) do |f| %>
-<%= f.hidden_field :reset_password_token %>
+<div id="signin">
+
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "" }) do |f| %>
+	<%= f.hidden_field :reset_password_token %>
 	<%= f.label :password, t(:new_password)%>
 	<%= f.password_field :password%>
 	<%= f.label :password_confirmation, t(:new_password_confirmation)%>
 	<%= f.password_field :password_confirmation%>
-		<%= f.submit t(:change_password) , :class => "btn btn-primary" %>
-<% end %>
+	<br>
+	<%= f.submit t(:change_password) , :class => "btn btn-primary" %>
+	<% end %>
 </div>
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>

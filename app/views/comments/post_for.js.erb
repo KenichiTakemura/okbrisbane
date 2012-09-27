@@ -1,0 +1,6 @@
+<% html = "" %>
+<% @post.comment.each_with_index do |comment,index| %>
+<% html += %Q|<span class="badge">#{t(:comment)}#{index}</span> #{comment_author(comment)} #{comment.postedDate}|
+html += %Q|<p>#{comment.body}</p>| %>
+<% end %>
+$('#modal-body_<%=@post.class%>_<%=@post.id%>').html("<%= escape_javascript(html.html_safe) %>")

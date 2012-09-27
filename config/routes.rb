@@ -74,6 +74,7 @@ Okbrisbane::Application.routes.draw do
   collection do
       post :dislike
       post :abuse
+      post :post_for
     end
   end
   

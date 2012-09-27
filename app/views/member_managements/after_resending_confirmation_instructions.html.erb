@@ -1,29 +1,16 @@
 <%= render :partial => "devise/shared/header" %>
-
 <div id="_title">
-<%= image_tag("#{I18n.locale}/Signup/tit_621.gif", :class => "title_text")%>
-<%= image_tag("#{I18n.locale}/Signup/title.jpg")%>
+	<div class="page-header">
+		<h1> <%= t(:findid)%> </h1>
+		<p>
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</p>
+	</div>
 </div>
-
-<div class="flash">
-	<% if notice %>
-	<p class="message notice">
-		<%= notice %>
-	</p>
-	<% end %>
-	<% if alert %>
-	<p class="message alert">
-		<%= alert %>
-	</p>
-	<% end %>
-</div>
+<%= show_notice %>
+<%= show_alert %>
 <div id="_main">
-<div class="after_confirmation_logo">	
-<%= link_to(image_tag("common/logo_w.gif"), root_path)%>
-</div>
-<div class="after_confirmation_banner">
-	<%= single_body_banner(6) %>
-</div>
+	<%= image_tag("#{I18n.locale}/common/img_sendmail_ok.gif")%>
 </div>
 <%= render :partial => "devise/shared/footer" %>
 <%= active_menu("_findid") %>

@@ -86,7 +86,7 @@ module OkboardsHelper
        if post.comment.size > 0
          html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td><td>"
        else
-         html += %Q|#{image_tag("#{I18n.locale}/common/say.png")}| + "#{post.comment.size}</td><td>"
+         html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td><td>|
        end
       if post.has_image?
         html += image_tag("common/IconData2.gif") + post.image.size.to_s

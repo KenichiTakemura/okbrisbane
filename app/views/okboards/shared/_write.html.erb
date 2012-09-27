@@ -1,13 +1,21 @@
+<% browser = Common.browser_detection(request) %>
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
 	<div class="hero-unit">
 		<h1><%= t(Style.page(@okpage))%> <%= t('write_new')%></h1>
 		<p class=""><%= t(@okpage.to_s + "_notice")%></p>    
 	</div>
-	<div class="okboard_form_write_new_post">
-		<div class="author">
-		  <span class="label label-info"><%= t('author') %></span>&nbsp;<%= current_user.name %>
-	    </div>
+	<div class="span7" style="margin: 5px;background-color:#FFFFFF">
+	    <% if browser == Okvalue::MSIE %>
+		    <p class="text-info"><strong>
+		    	<%= t(:please_use_other_browsers) %>
+			</strong>
+			</p>
+		<% end %>   	
 		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
+		<div class="pull-right">
+		  <span class="label label-info"><%= t('author') %></span>&nbsp;<i class="icon-user"></i><%= current_user.name %>
+	    </div>
+
 		<%= f.hidden_field :write_at, :id => "write_at" %>
 		<% if @post.errors.any? %>
 		<div id="error_explanation">
@@ -44,7 +52,9 @@
 	    	<br>
 			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
 			<br/>
+			<% if Common.browser_detection(request) != Okvalue::MSIE %>
 			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn btn-inverse" %>
+			<% end %>
 			<% script = %Q|
 			    function upload_image() {
 				  if($('\#image').val() != "") {
@@ -112,7 +122,9 @@
 	    	<%= f.label "#{t("attachment") + t("add")}" %>
 			<div class="flash"><div class="attachment_upload_progress"></div></div>
 	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+			<% if browser != Okvalue::MSIE %>
 	    	<span class="help-block"><%= t("post_attachment_upload_description") %></span>
+	    	<% end %>
 			<% script = %Q|
                 function upload_attachment() {
 				  if($('\#attachment').val() != "") {
@@ -164,10 +176,12 @@
                       $('div.display_attachment').html(html);
     			 }
     			| %>
+    		<% if browser != Okvalue::MSIE %>
 		    <%= _script(%Q|$('\#attachment').change(function() {upload_attachment();});
 		    $('\#attachment').click(function() {$('div.image_upload_progress').html('');});
 		    $('\#attachment').click(function() {$('div.attachment_upload_progress').html('');});
 		    | + script) %>
+		    <% end %>
 			</div>
 			<div class="group">
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
