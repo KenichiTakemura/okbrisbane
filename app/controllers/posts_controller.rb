@@ -50,6 +50,7 @@ class PostsController < OkController
         @post.errors.full_messages.each do |msg|
           logger.warn("@post.errors: #{msg}")
         end
+        @post.build_content if @post.content.nil?
         respond_to do |format|
           format.html { render :template => "okboards/write" }
           format.json { render :json => @post.errors, :status => :unprocessable_entity }

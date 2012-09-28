@@ -1,4 +1,4 @@
-class JobsController < PostsController
+class LawsController < PostsController
   
   before_filter :filter
   
@@ -7,7 +7,7 @@ class JobsController < PostsController
   end
   
   def create
-    logger.debug("create job post by #{current_user}")
+    logger.debug("create law post by #{current_user}")
     create_post(MODELS[@okpage], :law)
   end
     
