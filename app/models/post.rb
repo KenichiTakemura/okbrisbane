@@ -216,6 +216,9 @@ class Post < ActiveRecord::Base
     if abuse >= Okvalue::POST_ABUSE_LIMIT
       return 0
     end
+    if (likes - dislikes) < 0
+      return 0
+    end
     case (likes - dislikes)
     when Okvalue::POST_RANK_0
       return 0
