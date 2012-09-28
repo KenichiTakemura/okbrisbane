@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919021228) do
+ActiveRecord::Schema.define(:version => 20120928013641) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
     t.string   "room_type"
   end
 
+  create_table "admin_notices", :force => true do |t|
+    t.integer  "posted_by_id"
+    t.string   "posted_by_type"
+    t.string   "subject",        :null => false
+    t.string   "status",         :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
     t.string   "encrypted_password",     :default => "",    :null => false
@@ -60,10 +69,10 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
 
   create_table "attachments", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
@@ -126,10 +135,10 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
 
   create_table "business_profile_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
@@ -222,10 +231,10 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
 
   create_table "client_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
@@ -255,6 +264,7 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
     t.string   "commented_by_type"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.integer  "number"
   end
 
   create_table "contacts", :force => true do |t|
@@ -322,10 +332,10 @@ ActiveRecord::Schema.define(:version => 20120919021228) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
-    t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "avatar_file_name"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
+    t.string   "avatar_file_name"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"

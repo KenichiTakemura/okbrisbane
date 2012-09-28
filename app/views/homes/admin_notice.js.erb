@@ -1,0 +1,6 @@
+<% html = "" %>
+<% @admin_notices.each do |admin_notice| %>
+<% html += %Q|<span class="badge">#{t(:admin_notice)}</span> #{admin_notice.postedDate}|
+html += %Q|<p><span class="badge badge-info">#{t(admin_notice.status)}</span></p><p>#{admin_notice.subject}</p><p>#{raw(admin_notice.content.body)}</p>| %>
+<% end %>
+$('#modal-body_admin_notice').html("<%= escape_javascript(html.html_safe) %>")

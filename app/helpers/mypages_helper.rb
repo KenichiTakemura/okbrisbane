@@ -40,4 +40,5 @@ module MypagesHelper
           end
           html.html_safe
   end
+
 end

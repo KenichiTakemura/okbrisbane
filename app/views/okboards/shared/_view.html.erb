@@ -71,10 +71,7 @@
 		<br/>
 		<div class="comment_logo">
 		<%= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") %>
-
-		<div class="page-header">
-			<h1><%= t(:comment) %> <%= t(:write) %></h1>
-		</div>
+			<h3 class="text-success"><i class="icon-volume-up"></i><%= t(:comment) %> <%= t(:write) %></h3>
 		</div>
 		<div class="new_comment" id="new_comment">
 			<% if !current_user %>
@@ -104,7 +101,6 @@
 		<div class="comment_list"></div>
 		<table id="okboard_comment" width=100% class="table" border="0">
 			<tbody>
-				<% index = 1 %>
 				<% @post.comment.reverse_each do |comment| %>
 				<tr id="comment_<%=comment.id%>" class="#{cycle("odd", "even")}">
 					<td>
@@ -113,7 +109,7 @@
 							<%= image_tag("common/sns/ico_people_group.gif", :class => "image-resize30_30") %>
 						</div>
 						<div class="comment_attr">
-							<span class="badge"><%= t(:comment) %>#<%= index.to_s %></span>&nbsp;<%= comment_author(comment) %>&nbsp;<%= comment.postedDate %> 
+							<span class="badge"><%= t(:comment) %>#<%= comment.number %></span>&nbsp;<%= comment_author(comment) %>&nbsp;<%= comment.postedDate %> 
 						</div>
 
 						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
@@ -153,7 +149,7 @@
 							<%= link_to(image_tag("common/sns/reply.gif", :class => "image-resize20_20"), "#", :id => "reply_comment_#{comment.id}") %>
 							<%= _script(%Q|
 							$("\#reply_comment_#{comment.id}").click(function() {
-								$("\#comment_body").val(" > #{comment_author(comment)} #{t(:sir)} #{comment.postedDate} #{t(:comment)}\##{index}\\n");
+								$("\#comment_body").val(" > #{comment_author(comment)} #{t(:sir)} #{comment.postedDate} #{t(:comment)}\##{comment.number}");
 								$("\#comment_body").focus();
 								return false;
 							});
@@ -164,7 +160,6 @@
 						<% end %>
 					</div></td>
 				</tr>
-				<% index += 1 %>
 				<% end %>
 			</tbody>
 

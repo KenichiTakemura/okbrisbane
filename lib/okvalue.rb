@@ -87,7 +87,8 @@ module Okvalue
   POST_STATUS_PUBLIC = "public"
   POST_STATUS_HIDDEN = "hidden"
   POST_STATUS_EXPIRED = "expired"
-
+  POST_STATUS_COMPLETED = "completed"
+  
   POST_ABUSE_LIMIT = 2
   POST_RANK_0 = (0..4)
   POST_RANK_1 = (5..10)

@@ -34,6 +34,7 @@ Okbrisbane::Application.routes.draw do
       post :current_weather
       post :current_rate
       post :top_feed
+      post :admin_notice
     end
   end
   

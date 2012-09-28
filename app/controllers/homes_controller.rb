@@ -47,6 +47,7 @@ class HomesController < OkController
       pick_feed
     else
     end
+    @admin_notice = AdminNotice.current_notice.first
     @okpage = :p_home
     respond_to do |format|
       format.html # index.html.erb
@@ -74,6 +75,10 @@ class HomesController < OkController
   def current_rate
     @rates = Rate.rate_for()
     @dateOn = Common.date_format_ymdhm(@rates.first.issuedOn) if @rates.present?
+  end
+  
+  def admin_notice
+    @admin_notices = AdminNotice.notice_history
   end
 
   private

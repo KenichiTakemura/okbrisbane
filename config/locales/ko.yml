@@ -476,6 +476,7 @@ ko:
   listing_business_clients: '고객 일람'
   listing_banners: '광고란 일람'
   listing_business_categories: '비지니스 카테고리 일람'
+  listing_admin_notices: '관리자공지 일람'
   listing_issues: '문제 일람'
   listing_system_settings: '사이트 관리'
   system_settings: '사이트 관리'
@@ -512,7 +513,7 @@ ko:
   taxes: '세무/회계'
   
   draft: '초안'
-  public: '공개'
+  public: '공개중'
   hidden: '비공개'
   expired: '유효기한 지난'
   search_keyword: '검색 키워드'
@@ -629,6 +630,7 @@ ko:
   new_business_profile_image: '프로필 이미지를 추가하기'
   new_business_category: '비지니스 카테고리 추가하기'
   new_issue: '문제 추가하기'
+  new_admin_notice: '관리자공지 추가하기'
   report_issue: '문제를 보고하기'
   
   business_name:  '고객(회사) 이름'
@@ -796,3 +798,4 @@ ko:
   please_use_other_browsers: 'Fix me'
   mypost: '마이투고 일람'
   close: '닫기'
+  completed: '완료'

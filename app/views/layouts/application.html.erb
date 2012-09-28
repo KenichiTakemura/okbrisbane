@@ -69,11 +69,28 @@
 				</div>
 			</div>
 			<div id="header-right">
-				<div class="span2">
-					<span class="label label-info"><%= t(:admin_notice)%></span>
+				<div class="span3" style="margin-left:0px;width:210px">
+					<a href="#adminNoticeModal" role="button" class="btn btn-link" data-toggle="modal" id="a_adminNoticeModal"><span class="label label-info"><i class="icon-info-sign icon-white"></i><%= t(:admin_notice)%></span></a>
 					<div class="alert alert-info">
 						<button type="button" class="close" data-dismiss="alert">×</button>
+						<% if @admin_notice.present? %>
+						<%= @admin_notice.subject %>
+						<% else %>
 						<%= t(:no_notice)%>
+						<%end %>
+					</div>
+					<div class="modal hide fade" id="adminNoticeModal" tabindex="-1" role="dialog" aria-labelledby="adminNoticeLabel" aria-hidden="true">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="adminNoticeLabel"><%=t(:admin_notice)%></h3>
+						</div>
+						<div class="modal-body" id="modal-body_admin_notice">
+							<%= image_tag("common/ajax_loader_1.gif") %>
+						</div>
+						<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true"><%=t(:close)%></button>
+						</div>
+						<%= _script(%Q|$('\#a_adminNoticeModal').click(function(){$.post('| + admin_notice_homes_path + %Q|');})|) %>
 					</div>
 				</div>
 				<%= single_header_banner(1) %>
