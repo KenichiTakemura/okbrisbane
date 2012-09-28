@@ -10,30 +10,14 @@ img {
 	max-height: 20px;
 }
 
-.image-resize30_30 {
-	max-width: 30px;
-	max-height: 30px;
-}
-
-.image-resize50_50 {
-	max-width: 50px;
-	max-height: 50px;
-}
-
-.image-resize140_120 {
-	max-width: 140px;
-	max-height: 120px;
-}
-
-
-.image-resize200_150 {
-	max-width: 200px;
-	max-height: 150px;
-}
-
 * html body .image-resize20_20 {
 	width: expression(this.width >= this.height ? "20px" : "auto");
 	height: expression(this.width <= this.height ? "20px" : "auto");
+}
+
+.image-resize30_30 {
+	max-width: 30px;
+	max-height: 30px;
 }
 
 * html body .image-resize30_30 {
@@ -41,9 +25,20 @@ img {
 	height: expression(this.width <= this.height ? "30px" : "auto");
 }
 
+
+.image-resize50_50 {
+	max-width: 50px;
+	max-height: 50px;
+}
+
 * html body .image-resize50_50 {
 	width: expression(this.width >= this.height ? "50px" : "auto");
 	height: expression(this.width <= this.height ? "50px" : "auto");
+}
+
+.image-resize140_120 {
+	max-width: 140px;
+	max-height: 120px;
 }
 
 * html body .image-resize140_120 {
@@ -51,7 +46,36 @@ img {
 	height: expression(this.width <= this.height ? "120px" : "auto");
 }
 
+.image-resize300_200 {
+	max-width: 300px;
+	max-height: 200px;
+}
+
 * html body .image-resize300_200 {
+	width: expression(this.width >= this.height ? "300px" : "auto");
+	height: expression(this.width <= this.height ? "200px" : "auto");
+}
+
+.image-resize200_150 {
+	max-width: 200px;
+	max-height: 150px;
+}
+
+* html body .image-resize200_150 {
 	width: expression(this.width >= this.height ? "200px" : "auto");
 	height: expression(this.width <= this.height ? "150px" : "auto");
 }
+
+.image-resize115_100 {
+	max-width: 115px;
+	max-height: 100px;
+}
+
+* html body .image-resize115_100 {
+	width: expression(this.width >= this.height ? "115px" : "auto");
+	height: expression(this.width <= this.height ? "100px" : "auto");
+}
+
+
+
+

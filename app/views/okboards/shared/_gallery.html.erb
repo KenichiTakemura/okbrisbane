@@ -22,7 +22,7 @@
 				<div class="slide">
 					<% @post.image.each_with_index do |image,i| %>
 					<div class="fl thumb">
-						<%= image_tag(image.thumb_image, :class => "po", :size => "115x100",
+						<%= image_tag(image.thumb_image, :class => "po image-resize115_100",
 						 :onclick => "$('#proimg').attr('src',\"#{image.original_image}\");$('#something').text(\"#{image.something}\");$('#proimg_href').attr('href',\"#{image.link}\");") %>
 					</div>
 					<% if i%5==4 && i>0  %>
