@@ -1,5 +1,6 @@
 <% if @prev_post.present? %>
-<a href="<%=Okboard.okboard_link_with_id(@okpage,@prev_post.id,@post_search.id)%>", class="btn btn-mini btn-inverse"><i class="icon-step-backward icon-white" style=""></i><%= @prev_post.subject %></a>
+<a href="<%=Okboard.okboard_link_with_id(@okpage,@prev_post.id,@post_search.id)%>", class="btn btn-mini btn-inverse"><i class="icon-step-backward icon-white" style=""></i></a>
+<%= _truncate_with_length(@prev_post.subject, 35) %>
 <% else %>
 
 <% end %>

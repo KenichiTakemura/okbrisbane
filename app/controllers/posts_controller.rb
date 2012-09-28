@@ -11,14 +11,32 @@ class PostsController < OkController
     @post = _model.new(params[_param])
     @post.valid_until = post_expiry
     logger.debug("post: #{@post}")
+    # Check if attached from MSIE
+    if params[:attachment]
+      file_attached = params[:attachment]
+      attached_file = Attachment.new(:avatar => file_attached)
+    end
+    if params[:image]
+      image_attached = params[:image]
+      something = params[:something]
+      attached_image = Image.new(:avatar => image_attached, :something => something)
+    end
     ActiveRecord::Base.transaction do
       if @post.save
         @post.set_user(current_user)
-        get_image(@post.write_at).each do |image|
-          image.attached_to_by(@post, current_user)
+        if !params[:image]
+          get_image(@post.write_at).each do |image|
+            image.attached_to_by(@post, current_user)
+          end
+        else
+          attached_image.attached_to_by(@post, current_user)
         end
-        get_attachment(@post.write_at).each do |attachment|
-          attachment.attached_to_by(@post, current_user)
+        if !params[:attachment]
+          get_attachment(@post.write_at).each do |attachment|
+            attachment.attached_to_by(@post, current_user)
+          end
+        else
+          attached_file.attached_to_by(@post, current_user)
         end
         @board_lists = Job.latest
         @lastid = find_lastid(@board_lists)

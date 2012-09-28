@@ -67,6 +67,11 @@
 						<% end %>
 					</div>
 				</div>
+				<div class="span3" style="margin-left:0px;margin-top:5px">
+					<% if current_user %>
+					<%= link_to(t(:mypage), mypage_okboards_path, :class => "btn btn-info") %>
+					<% end %>
+				</div>
 			</div>
 			<div id="header-right">
 				<div class="span3" style="margin-left:0px;width:210px">
@@ -94,27 +99,10 @@
 					</div>
 				</div>
 				<%= single_header_banner(1) %>
-				<%= single_header_banner(2) %>
-			</div>
-			<div class="ok_information">
-				<div class="weather_information">
-					<%= image_tag("common/australia.gif", :class => "image-resize20_20") %>
-					<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
-					<%= image_tag("common/korea.gif", :class => "image-resize20_20") %>
-					<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
-				</div>
-				<div class="rate_information">
-					<%= image_tag("common/won.gif", :class => "image-resize20_20") %>
-					<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
-				</div>
+				<div class="span5" style="height:30px">
 				<%= render :partial => "homes/ok_information" %>
-			</div>
-			<div id="header-middle" class="span9">
-				<div class="span2">
-					<% if current_user %>
-					<%= link_to(t(:mypage), mypage_okboards_path, :class => "btn btn-info") %>
-					<% end %>
 				</div>
+				<%= single_header_banner(2) %>
 			</div>
 			<div id="header-bottom">
 				<%= navigation("#41A317","#f0f0f0") %>

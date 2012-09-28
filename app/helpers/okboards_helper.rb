@@ -52,13 +52,13 @@ module OkboardsHelper
       html += t("price") + "</th><th>"
     end
     html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th><th>#{t("comment")}</th>
-    <th>#{t("image")}</th><th>#{t("attachment")}</th><th>#{t("author")}</th></tr></thead>|
+    <th>#{t("attachment")}</th><th>#{t("author")}</th></tr></thead>|
     html += %Q|<tbody class="">|
     if @board_lists.empty?
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
-        html += %Q|<tr><td colspan="9">| + t("no_information")
-      else
         html += %Q|<tr><td colspan="8">| + t("no_information")
+      else
+        html += %Q|<tr><td colspan="7">| + t("no_information")
       end        
       html += "</td><tr>"
     else
@@ -73,9 +73,9 @@ module OkboardsHelper
     @board_lists.each do |post|
       html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}">|
       if post.category.eql?(Okvalue::ADMIN_POST_NOTICE)
-        html += %Q|<td width=15% style="color:red">#{t("#{post.category}")}</td>|
+        html += %Q|<td class="text-warning">#{t("#{post.category}")}</td>|
       else
-        html += %Q|<td width=15%>#{t("#{post.category}")}</td>|
+        html += %Q|<td>#{t("#{post.category}")}</td>|
       end
       html += "<td>"
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
@@ -84,16 +84,13 @@ module OkboardsHelper
       html += %Q|#{link_to_with_icon(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)),"","","icon-play")}</td><td>
        #{post.postedDate}</td><td>#{post.views}</td><td>|
        if post.comment.size > 0
-         html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td><td>"
+         html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td>"
        else
-         html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td><td>|
+         html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td>|
        end
-      if post.has_image?
-        html += image_tag("common/IconData2.gif") + post.image.size.to_s
-      end
-      html += "</td><td>"
+      html += "<td>"
       if post.has_attachment?
-        html += image_tag("common/IconData2.gif")
+        html += image_tag("common/IconData2.gif") + "#{post.attachment.size}"
       end
       html += %Q|</td><td >| + author_name(post) + %Q|</td>|
     end

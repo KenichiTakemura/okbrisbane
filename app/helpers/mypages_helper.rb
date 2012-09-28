@@ -9,9 +9,9 @@ module MypagesHelper
           <td>#{post.postedDate}</td>
           <td>#{post.validDate}</td>
           <td>|
-          if post.has_image?
-            html += image_tag("common/IconData2.gif") + "#{post.image.size}"
-          end
+          #if post.has_image?
+          #  html += image_tag("common/IconData2.gif") + "#{post.image.size}"
+          #end
           html += "</td><td>"
           if post.has_attachment?
             html += image_tag("common/IconData2.gif") + "#{post.attachment.size}"

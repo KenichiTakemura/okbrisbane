@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   #before_filter :authenticate_user!
   before_filter :set_locale
   #before_filter :opening_soon
-  before_filter :hit
+  before_filter :hit, :get_admin_notice
 
   require 'thread'
 
@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   def set_locale
     #I18n.locale = params[:locale] || I18n.default_locale
     I18n.locale = params[:locale] || "ko"
+  end
+  
+  def get_admin_notice
+    @admin_notice = AdminNotice.current_notice.first
   end
 
   def opening_soon

@@ -81,7 +81,7 @@ class OkboardsController < OkController
   def view
     raise if @@board_id.nil?
     @post = _select_post
-    if @post.status != Okvalue::POST_STATUS_PUBLIC
+    if @post.nil? || @post.status != Okvalue::POST_STATUS_PUBLIC
       respond_to do |format|
         format.html { render :template => "okboards/view_deleted" }
         format.json { render :json => @post }
@@ -251,8 +251,12 @@ class OkboardsController < OkController
   end
 
   def _select_post
-    post = _model.find(@@board_id)
-    post
+    begin
+      post = _model.find(@@board_id)
+      post
+    rescue
+      nil
+    end
   end
 
   def _write_post

@@ -4,7 +4,8 @@
 		<h1><%= t(Style.page(@okpage))%> <%= t('write_new')%></h1>
 		<p class=""><%= t(@okpage.to_s + "_notice")%></p>    
 	</div>
-	<div class="span7" style="margin: 5px;background-color:#FFFFFF">
+		<%= ok_error_messages!(@post) %>
+	<div class="span7" style="margin: 5px;">
 	    <% if browser == Okvalue::MSIE %>
 		    <p class="text-info"><strong>
 		    	<%= t(:please_use_other_browsers) %>
@@ -15,19 +16,9 @@
 		<div class="pull-right">
 		  <span class="label label-info"><%= t('author') %></span>&nbsp;<i class="icon-user"></i><%= current_user.name %>
 	    </div>
-
 		<%= f.hidden_field :write_at, :id => "write_at" %>
-		<% if @post.errors.any? %>
-		<div id="error_explanation">
-			<ul>
-				<% @post.errors.full_messages.each do |msg| %>
-				<li>
-					<%= msg %>
-				</li>
-				<% end %>
-			</ul>
-		</div>
-		<% end %>
+
+
 		<%= f.label t("subject") %>
 		<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("write_something") %>
 		<%= f.label t("category") %>
@@ -39,6 +30,7 @@
 		<% end %>
 		<%= f.label t("valid_until") %>
 		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
+		<span class="help-block"><%= t(:why_valid_until, :days => SystemSetting.first.post_expiry_length) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
 		<%= f.label t("content") %>
 		<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
@@ -53,7 +45,7 @@
 			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
 			<br/>
 			<% if Common.browser_detection(request) != Okvalue::MSIE %>
-			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn btn-inverse" %>
+			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn" %>
 			<% end %>
 			<% script = %Q|
 			    function upload_image() {
@@ -114,10 +106,8 @@
     			$('\#image').click(function() {$('div.attachment_upload_progress').html('');});
     			| + script) %>
 			</div>
-			<div class="group">
 			<div class="display_image" style="margin: 3px;float:left"></div>
-			</div>
-		<div class="clear"></div>
+			<div class="clear"></div>
 	    	<div class="attachment">
 	    	<%= f.label "#{t("attachment") + t("add")}" %>
 			<div class="flash"><div class="attachment_upload_progress"></div></div>
@@ -183,10 +173,8 @@
 		    | + script) %>
 		    <% end %>
 			</div>
-			<div class="group">
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
-			</div>
-
+			<div class="clear"></div>
 			<label class="checkbox">
 				<%= f.check_box :comment_email %><%= t(:comment_email) %>
 			</label>

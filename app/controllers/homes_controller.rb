@@ -47,7 +47,6 @@ class HomesController < OkController
       pick_feed
     else
     end
-    @admin_notice = AdminNotice.current_notice.first
     @okpage = :p_home
     respond_to do |format|
       format.html # index.html.erb

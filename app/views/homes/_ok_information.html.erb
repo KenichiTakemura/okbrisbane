@@ -1,3 +1,14 @@
+<div class="ok_information">
+<div class="weather_information">
+	<%= image_tag("common/australia.gif", :class => "image-resize20_20") %>
+	<%= link_to(t(:weather_information) , "#", :id => "weather_au", :class => "btn btn-mini ") %>
+	<%= image_tag("common/korea.gif", :class => "image-resize20_20") %>
+	<%= link_to(t(:weather_information) , "#", :id => "weather_kr", :class => "btn btn-mini btn-info") %>
+</div>
+<div class="rate_information">
+	<%= image_tag("common/won.gif", :class => "image-resize20_20") %>
+	<%= link_to(t(:rate_information) , "#", :id => "ex_rate", :class => "btn btn-mini btn-warning") %>
+</div>
 <div class="weather_au_information_box" id="weather_au_information_box" style="display:none">
 <div class="_weather_au_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 </div>
@@ -48,3 +59,4 @@ $("\#ex_rate").click(function() {
 	return false;
 });
 |)%> 
+</div>

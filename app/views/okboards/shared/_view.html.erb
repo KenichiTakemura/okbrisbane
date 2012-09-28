@@ -45,20 +45,27 @@
 		<dl class="dl-horizontal">
 			<dt><span class="label"><%= t("author") %></span></dt>
 			<dd><%= author_name(@post) %></dd>
-			<dt><span class="label"><%= t("author") %><%= t("created_at") %></span></dt>
+			<dt><span class="label"><%= t("created_at") %></span></dt>
 			<dd><%= Common.date_format(@post.updated_at) %></dd>
-			<dt><span class="label"><%= t("author") %><%= t("category") %></span></dt>
+			<dt><span class="label"><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
-			<dt><span class="label"><%= t("author") %><%= t("subject") %></span></dt>
+			<dt><span class="label"><%= t("subject") %></span></dt>
 			<dd><%= @post.subject %></dd>
-			<dt><span class="label"><%= t("author") %><%= t("attachment") %></span></dt>
-			<dd> <% @post.attachment.each do |attachment| %>
-					<div style="position: relative; float: left;margin-left: 5px">
-						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
-						<%= attachment.filename %>
-					</div> <% end %></dd>
+			<% if @post.respond_to? :price %>
+				<dt><span class="label"><%= t(:price) %></span></dt>
+				<dd><%= @post.price %></dd>
+			<% end %>
 			<dt><span class="label"><%= t("content") %></span></dt>
 			<dd><%= raw(@post.content.body) %></dd>
+			<dt><span class="label"><%= t("attachment") %></span></dt>
+			<dd><%if @post.has_attachment? %>
+				<% @post.attachment.each do |attachment| %>
+					<p style="position: relative; float: left;margin-left: 5px">
+						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
+						<%= attachment.filename %>
+					</p> <% end %>
+					<% else %>
+					<%= t(:attachable_no) %><% end %></dd>
 		</dl>
 		<div class="page_control">
 			<div class="to_prev">
@@ -154,7 +161,6 @@
 								return false;
 							});
 							|) %>
-
 						</div>
 						<% end %>
 						<% end %>

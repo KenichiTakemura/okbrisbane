@@ -795,7 +795,9 @@ ko:
   comment_confirmation_email_content3: 'Fix me'
 
   latest_information: '최신 정보'
-  please_use_other_browsers: 'Fix me'
+  please_use_other_browsers: '투고를 원하는분은 Firefox 또는 Chrome 을 사용하기를 권장합니다'
   mypost: '마이투고 일람'
   close: '닫기'
   completed: '완료'
+  why_valid_until: '현재 유효기한은 %{days}일 입니다'
+  this_post_has_been_deleted_by_admin: '이투고는 관리자가 삭제했습니다'

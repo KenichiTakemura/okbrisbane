@@ -4,9 +4,11 @@
 		<%= f.label :category, t(:category)%>
 		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 
+		<!--
 		<%= f.label :image, "#{t(:image)}"%>
 		<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
-
+		-->
+		
 		<%= f.label :attachment, "#{t(:attachment)}"%>
 		<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 
