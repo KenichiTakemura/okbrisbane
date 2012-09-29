@@ -16,5 +16,8 @@
 <%= content_tag(:p, @contact.phone) %>
 <br/>
 <%= content_tag(:p, t(:visit_following_list_to_view))%>
-
+<% if Okbrisbane::Application.config.ok_debug %>
 <%= link_to(t(:confirmation), "http://admin.okbrisbane-stage.com/contacts/#{@contact.id}")%>
+<% else  %>
+<%= link_to(t(:confirmation), "http://admin.okbrisbane.com/contacts/#{@contact.id}")%>
+<% end %>

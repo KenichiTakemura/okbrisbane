@@ -58,7 +58,7 @@ module Okbrisbane
     config.assets.enabled = true
 
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/fonts"
-    config.assets.paths << "#{Rails.root}/vendor/assets/stylesheets/images"
+    #config.assets.paths << "#{Rails.root}/vendor/assets/stylesheets/images"
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/messages"
     config.assets.paths << "#{Rails.root}/vendor/assets/javascripts/ckeditor"
     # Version of your assets, change this if you want to expire all your assets
