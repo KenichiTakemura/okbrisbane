@@ -580,6 +580,7 @@ ko:
   select_not_selected_size: '선택 안된 이미지'
   select_specific_size: '사이즈가 맞는 이미지'
   selected: '선택 됨'
+  all_client: '고객전부선택'
   
   add_business_banner_image: '광고 이미지를 추가'
   business_banner_image_all_delete: '광고 이미지를 전부 삭제'

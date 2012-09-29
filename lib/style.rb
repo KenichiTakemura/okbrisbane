@@ -267,6 +267,14 @@ module Style
     :div_width => 650, :div_height => 130,
     :img_width => 210, :img_height => 120,
     :style => 'position:relative;float:left;top:0px;left:0px;')
+    # New banner
+    Banner.create(:page_id => Style.pageid_key(_page),
+    :section_id => Style.sectionid(:s_body),
+    :position_id => 11,
+    :div_width => 650, :div_height => 130,
+    :img_width => 210, :img_height => 120,
+    :style => 'position:relative;float:left;top:0px;left:0px;')
+    #
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
     :position_id => 6,

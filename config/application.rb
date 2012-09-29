@@ -58,9 +58,9 @@ module Okbrisbane
     config.assets.enabled = true
 
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/fonts"
-    config.assets.paths << "#{Rails.root}/app/assets/stylesheets/images"
+    config.assets.paths << "#{Rails.root}/vendor/assets/stylesheets/images"
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/messages"
-    config.assets.paths << "#{Rails.root}/app/assets/javascripts/ckeditor"
+    config.assets.paths << "#{Rails.root}/vendor/assets/javascripts/ckeditor"
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
@@ -68,6 +68,6 @@ module Okbrisbane
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
       "#{html_tag}".html_safe 
     }
-
+    
   end
 end

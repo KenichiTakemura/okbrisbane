@@ -3,8 +3,9 @@
 		<div id="first_section_left">
 			<%= single_body_banner(1) %>
 			<%= multi_body_banner(3) %>
-			<%= multi_body_banner(4) %>
-			<%= multi_body_banner(5) %>	
+			<%= _scroll_banner_show("home_multi_body_scroll_banner_4", multi_body_banner(4), Okvalue::HOME_BODY_BANNER_4_SHOW_SIZE)%>
+			<%= _scroll_banner_show("home_multi_body_scroll_banner_5", multi_body_banner(5), Okvalue::HOME_BODY_BANNER_5_SHOW_SIZE)%>
+			<%= _scroll_banner_show("home_multi_body_scroll_banner_11", multi_body_banner(11), Okvalue::HOME_BODY_BANNER_11_SHOW_SIZE)%>
 		</div>
 			<div id="first_section_right">
 				<%= single_body_banner(2) %>

@@ -112,15 +112,53 @@ module OkboardsHelper
   def _left_side_menu
     html = %Q|<div id="page_section_left">|
     html += single_body_banner(1)
-    #html += widget("left_side_menu",220,nil,_left_side_menu_widget,"affix")
     html += _left_side_menu_widget
     html += %Q|<div class="okboard_left_fixed_banners">|
     html += single_body_banner(2)
     html += single_body_banner(3)
     html += single_body_banner(4)
+    # scroll effect
+    html += _scroll_banner_show("left_side_menu_banner_2", single_body_banner(2), Okvalue::LEFT_SIDE_MENU_BANNER_2_SHOW_SIZE)
+    html += _scroll_banner_show("left_side_menu_banner_3", single_body_banner(3), Okvalue::LEFT_SIDE_MENU_BANNER_3_SHOW_SIZE)
+    html += _scroll_banner_show("left_side_menu_banner_4", single_body_banner(4), Okvalue::LEFT_SIDE_MENU_BANNER_4_SHOW_SIZE)
+    # 
     html += "</div></div>"
     html.html_safe
   end
+
+  def _scroll_banner_show(id, banner, size)
+    html = %Q|<div id="#{id}">#{banner}</div>|
+    html += _script_document_ready(%Q|$(function() {
+        var scroll_banner_#{id} = $('\##{id}'); 
+        scroll_banner_#{id}.hide();
+        $(window).scroll(function () {
+        if ($(this).scrollTop() > #{size}) {
+          scroll_banner_#{id}.fadeIn("slow");
+        } else {
+          scroll_banner_#{id}.fadeOut("slow");
+        }
+      });})|)
+    html.html_safe
+  end
+
+  def _scroll_banner_hide_show(h_id, s_id, banner, size)
+    html = %Q|<div id="#{s_id}">#{banner}</div>|
+    html += _script_document_ready(%Q|$(function() {
+        var scroll_banner_#{s_id} = $('\##{s_id}'); 
+        var hide_banner_#{h_id} = $('\##{h_id}');
+        scroll_banner_#{s_id}.hide();
+        $(window).scroll(function () {
+        if ($(this).scrollTop() > #{size}) {
+          hide_banner_#{h_id}.fadeOut("slow");
+          scroll_banner_#{s_id}.fadeIn("slow");
+        } else {
+          hide_banner_#{h_id}.fadeIn("slow");
+          scroll_banner_#{s_id}.fadeOut("slow");
+        }
+      });})|)
+    html.html_safe
+  end
+
 
   def _left_side_menu_widget()
     html = %Q|<div class="dropdown"><ul class="nav nav-pills nav-stacked affix" style="bottom:150px;left:50px;">|
