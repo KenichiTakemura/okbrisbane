@@ -22,3 +22,6 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  public/javascripts\
  public/robots.txt
 rm -rf public/assets
+cd ../okbrisbane-stage
+./unpack.sh ../release/okbrisbane_$DATE.tar.bz2
+cd -

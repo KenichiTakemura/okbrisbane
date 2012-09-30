@@ -27,8 +27,6 @@ module ApplicationHelper
     messages.gsub!('Subject',I18n.t(:subject))
     messages.gsub!('Content body',I18n.t(:content))
 
-
-
     html = <<-HTML
       #{messages}
     HTML
@@ -179,31 +177,31 @@ module ApplicationHelper
   end
 
   def single_header_banner(a)
-    logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
+    #logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_header_banner a=#{a})" if !@okpage
     single_banner(Style.page(@okpage), :s_header, a)
   end
 
   def single_body_banner(a)
-    logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
+    #logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_body_banner a=#{a})" if !@okpage
     single_banner(Style.page(@okpage), :s_body, a)
   end
 
   def single_background_banner(a)
-    logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
+    #logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_background_banner a=#{a})" if !@okpage
     single_banner(Style.page(@okpage), :s_background, a)
   end
 
   def multi_body_banner(a)
-    logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
+    #logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(multi_body_banner a=#{a})" if !@okpage
     multi_banner(Style.page(@okpage), :s_body, a)
   end
 
   def single_banner(p, s, a)
-    logger.debug("requested single_banner #{p}, #{s}, #{a}")
+    #logger.debug("requested single_banner #{p}, #{s}, #{a}")
     div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
     return "" if b.is_disabled

@@ -92,7 +92,9 @@ module Style
   end
 
   def self.create_banner_div(page, section, position)
-    "banner_#{Style.page(page)}_#{Style.section(section)}_#{position}"
+    #"banner_#{Style.page(page)}_#{Style.section(section)}_#{position}"
+    suffix = Common.uniqe_token
+    "banner_#{page}_#{Style.section(section)}_#{position}_#{suffix}"
   end
 
   def self.pageid_value(value)

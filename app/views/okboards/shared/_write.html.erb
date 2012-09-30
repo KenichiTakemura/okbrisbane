@@ -32,8 +32,12 @@
 		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
 		<span class="help-block"><%= t(:why_valid_until, :days => SystemSetting.first.post_expiry_length) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
-		<%= f.label t("content") %>
-		<%= content_form.cktext_area :body, :width => 600, :height => 400, :toolbar => 'Easy' %>
+		<%= f.label :body, t("content") %>
+		<% if Common.browser_detection(request) != Okvalue::MSIE %>
+		<%= content_form.cktext_area :body, :style => "width:500px;height:400px", :toolbar => 'Easy' %>
+		<% else %>
+		<%= content_form.text_area :body, :style => "width:500px;height:400px" %>		
+		<% end %>
 		<% end %>
 	    	<div class="image">
 	    	<%= f.label "#{t("image") + t("add")}" %>
@@ -46,7 +50,6 @@
 			<br/>
 			<% if Common.browser_detection(request) != Okvalue::MSIE %>
 			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn" %>
-			<% end %>
 			<% script = %Q|
 			    function upload_image() {
 				  if($('\#image').val() != "") {
@@ -105,8 +108,11 @@
     			$('\#image').click(function() {$('div.image_upload_progress').html('');});
     			$('\#image').click(function() {$('div.attachment_upload_progress').html('');});
     			| + script) %>
+    			<% end %>
 			</div>
+			<% if Common.browser_detection(request) != Okvalue::MSIE %>
 			<div class="display_image" style="margin: 3px;float:left"></div>
+			<% end %>
 			<div class="clear"></div>
 	    	<div class="attachment">
 	    	<%= f.label "#{t("attachment") + t("add")}" %>
@@ -114,7 +120,6 @@
 	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
 			<% if browser != Okvalue::MSIE %>
 	    	<span class="help-block"><%= t("post_attachment_upload_description") %></span>
-	    	<% end %>
 			<% script = %Q|
                 function upload_attachment() {
 				  if($('\#attachment').val() != "") {
@@ -166,14 +171,16 @@
                       $('div.display_attachment').html(html);
     			 }
     			| %>
-    		<% if browser != Okvalue::MSIE %>
 		    <%= _script(%Q|$('\#attachment').change(function() {upload_attachment();});
 		    $('\#attachment').click(function() {$('div.image_upload_progress').html('');});
 		    $('\#attachment').click(function() {$('div.attachment_upload_progress').html('');});
 		    | + script) %>
 		    <% end %>
 			</div>
+			<% if Common.browser_detection(request) != Okvalue::MSIE %>
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
+		    <% end %>
+
 			<div class="clear"></div>
 			<label class="checkbox">
 				<%= f.check_box :comment_email %><%= t(:comment_email) %>
@@ -181,6 +188,7 @@
 			<%= f.submit t("create"), :class => "btn btn-primary" %>
 
 		<% end %>
+		<% if Common.browser_detection(request) != Okvalue::MSIE %>
 		<%= _script_document_ready(%Q|
 		  $('div.image_upload_status').css("display","block");
 		  $('div.attachment_upload_status').css("display","block");
@@ -191,5 +199,6 @@
 		  	$('div.attachment_upload_status').css("display","none");showAttachments(data);
 		  	});
 		|) %>
+		<% end %>
 	</div>
 </div>

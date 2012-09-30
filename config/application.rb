@@ -22,7 +22,7 @@ module Okbrisbane
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     config.autoload_paths += %W(#{Rails.root}/lib)
     config.autoload_paths += %W(#{Rails.root}/app/models/validator)
-
+    config.autoload_paths += %W(#{Rails.root}/app/models/ckeditor)
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
@@ -60,7 +60,7 @@ module Okbrisbane
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/fonts"
     #config.assets.paths << "#{Rails.root}/vendor/assets/stylesheets/images"
     config.assets.paths << "#{Rails.root}/app/assets/stylesheets/messages"
-    config.assets.paths << "#{Rails.root}/vendor/assets/javascripts/ckeditor"
+    #config.assets.paths << "#{Rails.root}/vendor/assets/javascripts/ckeditor"
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     

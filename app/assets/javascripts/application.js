@@ -16,5 +16,5 @@
 //= require jquery_slides
 //= require bootstrap
 //= require_tree .
-//= require_tree '../../../vendor/assets/javascripts/ckeditor'
+//= require ckeditor/init
 
