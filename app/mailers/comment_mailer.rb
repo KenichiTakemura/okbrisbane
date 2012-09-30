@@ -3,7 +3,7 @@ class CommentMailer < ActionMailer::Base
   
   def send_comment_to_author(okpage, post, comment)
     to = post.posted_by.email
-    subject = comment.commented_by.name + " has commente on your post"
+    subject = "[OKBRISBANE] " + comment.commented_by.name + " #{t(:has_commented_on_your_post)}"
     logger.info("email is besing sent to #{to}")
     @okpage = okpage
     @post = post

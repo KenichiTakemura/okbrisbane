@@ -3,24 +3,24 @@ class ContactMailer < ActionMailer::Base
   
   def send_contact_to_admin(contact)
     to = SystemSetting.first.contact_email
-    subject = ""
+    subject = "[OKBRISBANE] "
     case contact.contact_type
     when Okvalue::CONTACT_BANNER
-      subject += "[#{t(:contact_banner)}]"
+      @subject = "[#{t(:contact_banner)}]"
     when Okvalue::CONTACT_GENERAL
-      subject += "[#{t(:contact_general)}]"
+      @subject = "[#{t(:contact_general)}]"
     when Okvalue::CONTACT_FEEDBACK
-      subject += "[#{t(:contact_feedback)}]"
+      @subject = "[#{t(:contact_feedback)}]"
     when Okvalue::CONTACT_ISSUE
-      subject += "[#{t(:contact_issue)}]"
+      @subject = "[#{t(:contact_issue)}]"
     when Okvalue::CONTACT_EXIT
-      subject += "[#{t(:contact_exit)}]"
+      @subject = "[#{t(:contact_exit)}]"
     else
       raise "Bad Contact Type"
     end
+    subject += @subject
     logger.info("email is besing sent to #{to}")
     @contact = contact
-    @subject = subject
     mail(:to => to,
          :subject => subject)
   end
@@ -28,25 +28,26 @@ class ContactMailer < ActionMailer::Base
   def send_contact_to_user(contact)
     to = contact.email
     logger.info("email is besing sent to #{to}")
-    subject = ""
+    subject = "[OKBRISBANE] "
     case contact.contact_type
     when Okvalue::CONTACT_BANNER
-      subject += "[#{t(:contact_banner)}]"
+      @subject = "[#{t(:contact_banner)}]"
     when Okvalue::CONTACT_GENERAL
-      subject += "[#{t(:contact_general)}]"
+      @subject = "[#{t(:contact_general)}]"
     when Okvalue::CONTACT_FEEDBACK
-      subject += "[#{t(:contact_feedback)}]"
+      @subject = "[#{t(:contact_feedback)}]"
     when Okvalue::CONTACT_ISSUE
-      subject += "[#{t(:contact_issue)}]"
+      @subject = "[#{t(:contact_issue)}]"
     when Okvalue::CONTACT_EXIT
-      subject += "[#{t(:contact_exit)}]"
+      @subject = "[#{t(:contact_exit)}]"
     else
       raise "Bad Contact Type"
     end
+    subject += @subject
+    subject += t(:confirmation_email)
     @contact = contact
-    @subject = subject
     mail(:to => to,
-         :subject => t(:confirmation_email))
+         :subject => subject)
   end
 
 end

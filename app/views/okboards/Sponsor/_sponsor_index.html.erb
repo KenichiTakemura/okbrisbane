@@ -1,21 +1,55 @@
-<div class="sponsor_page" id="okboard_for_<%= @okpage %>">
-	<div class="sponsor_page_top">
-		<p class="business_name">
-			<%= @business_client.business_name %>
-		</p>
-		<% if @business_client.business_profile_image.present? %>
-		<div class="profile_image">
-			<div class="bigPicture">
-			<%= image_tag(@business_client.main_profile_image.original_image, :id => "proimg")%>
+<div class="page-header">
+	<h1> <%= t(Style.page(@okpage))%> </h1>
+	<p>
+		<%= t(:okpage_top_description) %>
+	</p>
+</div>
+<ul class="thumbnails">
+	<% c = @business_client %>
+	<li class="span4">
+		<div class="thumbnail" >
+			<% if c.main_profile_image.present? %>
+			<%= image_tag(c.main_profile_image.original_image, :class => "image-resize200_150") %>
+			<% elsif c.client_image.present? %>
+			<%= image_tag(c.client_image.first.original_image, :class => "image-resize200_150") %>
+			<% end %> <h3><%= c.business_name %></h3>
+			<p>
+				<%= c.business_profile.head %>
+			</p>
+			<p>
+				<%= c.business_phone %>
+			</p>
+			<address>
+				<%= c.business_address %>
+			</address>
+			<a href="#clientModal_<%= c.id%>" data-toggle="modal" class="btn btn-info"><%= t(:more)%></a>
+		</div>
+		<div class="modal hide fade" id="clientModal_<%= c.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h3 id="myModalLabel"><%= c.business_name %></h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					<%= c.business_profile.head %>
+				</p>
+				<p>
+					<%= c.business_phone %>
+				</p>
+				<address>
+					<%= c.business_address %>
+				</address>
+				<p>
+					<%= raw(c.business_profile.body)%>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">
+					<%= t(:close) %>
+				</button>
 			</div>
 		</div>
-		<% end %>
-	</div>
-	<div class="profile_head">
-		<%= @business_client.business_profile.head%>
-	</div>
-
-	<div class="profile_body">
-		<%= raw(@business_client.business_profile.body) %>
-	</div>
-</div>
+	</li>
+</ul>

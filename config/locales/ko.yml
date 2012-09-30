@@ -750,7 +750,7 @@ ko:
   
   visit_following_list_to_view: '아래의 링크로 문의사항이 확인 가능합니다'
   confirmation: '확인'
-  confirmation_email: 'OKBRISBANE 확인 이메일'
+  confirmation_email: ' 확인 이메일'
   
   contact_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.'
   contact_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.'
@@ -779,8 +779,8 @@ ko:
   
   mypage: '마이페이지'
   contact_center_description: 'OKBRISBANE is commited to think all feedback on hard and provide the best service to all.'
-  thank_you_for_your_contact: 'Thank you very much for your contact.'
-  visit_following_list_to_view_comment: ''
+  thank_you_for_your_contact: '문의 하여주셔서 감사하니다.'
+  visit_following_list_to_view_comment: '아래의 링크를 클릭하여 의견이 확인 가능합니다'
   good: 'OK'
   bad: 'NOK'
   to_list: '묵록'
@@ -791,9 +791,10 @@ ko:
   Signup_okpage_top_description1: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
   signup_instructions_for: '이메일 주소와 이름, 비밀번호를 입력하여 주시기 바랍니다.'
   
+  has_commented_on_your_post: '님으로부터 의견투고가 있습니다'
   comment_confirmation_email_content1: '이 메일은 시스템에 의해 자동적으로 발송된 메일입니다.'
   comment_confirmation_email_content2: '이 메일에 대한 반송은 하지 말아 주십시요.'
-  comment_confirmation_email_content3: 'Fix me'
+  comment_confirmation_email_content3: '님으로부터 의견투고가 있습니다.'
 
   latest_information: '최신 정보'
   please_use_other_browsers: '투고를 원하는분은 Firefox 또는 Chrome 을 사용하기를 권장합니다'
