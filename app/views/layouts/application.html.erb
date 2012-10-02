@@ -139,10 +139,10 @@
 		<div class="container" style="width:1000px; margin-bottom: 50px;">
 			<%= yield %>
 		</div>
-		<footer style="background-color: #e0e0e0">
-			<h6 class="">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%><br>
+		<footer style="background-color: #e0e0e0;text-align:center;">
+			<h5 class="" >Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%><br>
 			<%= Okvalue::FOOTER_TEXT2 %> </h6>
-			<p class="developer">
+			<p class="developer pull-right">
 				<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
 			</p>
 		</footer>

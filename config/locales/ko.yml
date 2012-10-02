@@ -368,7 +368,7 @@ ko:
   number_of_post: '투고 갯수'
   num_of_job_post: '구인구직 투고 갯수'
   num_of_buy_and_sell_post: '벼룩시장 투고 갯수'
-  num_of_wellbeing_post: '생활정보 투고 갯수'
+  num_of_wellbeing_post: '쉐어/숙소정보 투고 갯수'
   num_of_comment: '의견 투고 갯수'
   num_of_attachment: '첨부자료 투고 갯수'
   num_of_image: '이미지 투고 갯수'
@@ -396,7 +396,7 @@ ko:
 
   Job: "구인구직"
   BuyAndSell : "벼룩시장"
-  WellBeing: '생활정보'
+  WellBeing: '쉐어/숙소정보'
 
   Estate: '부동산매매'
   Business: '비즈니스매매'
@@ -452,7 +452,7 @@ ko:
   ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
-  issue_report_to: '문제 송신 이메일'
+  issue_report_to: '이사람에 문제이메일을 발송'
   admin_email: '관리자 이메일'
 
 
@@ -492,7 +492,7 @@ ko:
   
   jobs: "구인구직"
   buy_and_sells: "벼룩시장"
-  well_beings: '생활정보'
+  well_beings: '쉐어/숙소정보'
 
   title_estates: '부동산매매'
   title_businesses: '비즈니스매매'
@@ -618,7 +618,7 @@ ko:
   no_notice: '현재공지는 없읍니다'
   p_job_notice: '구인/구직 게시판은 일자리 관련 직업을 구하거나 직원을 구하는 게시판입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 구인/구직 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.'
   p_buy_and_sell_notice: '벼룩시장 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 벼룩시장 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
-  p_well_being_notice: '생활정보 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 생활정보 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
+  p_well_being_notice: '쉐어/숙소정보 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 쉐어/숙소정보 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
 
   # Upload
   max_size: '최대 사이즈'
@@ -742,7 +742,7 @@ ko:
   contact_feedback: '사이트 피드백(FeedBack)'
   contact_issue: '문제 보고'
   contact_exit: '회원 탈퇴 신청'
-  send: '송신'
+  send: '보내기'
   contact: '문의'
   contact_center: '고객센터'
   received_contact_message: '님으로부터 문의가 왔습니다'
@@ -778,13 +778,13 @@ ko:
   time_by_older: '그 이전'
   
   mypage: '마이페이지'
-  contact_center_description: 'OKBRISBANE is commited to think all feedback on hard and provide the best service to all.'
+  contact_center_description: 'OKBRISBANE is commited to reflect all feedbacks and provide the best service to all members.'
   thank_you_for_your_contact: '문의 하여주셔서 감사하니다.'
   visit_following_list_to_view_comment: '아래의 링크를 클릭하여 의견이 확인 가능합니다'
   good: 'OK'
   bad: 'NOK'
   to_list: '묵록'
-  okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
+  okpage_top_description: '퀸즈랜드 No.1 종합정보사이트 okbrisbane.com'
   Signin_okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
   Signout_okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
   Signup_okpage_top_description: 'OKBRISBANE 회원가입을 환영합니다.'

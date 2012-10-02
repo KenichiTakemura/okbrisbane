@@ -9,6 +9,6 @@ module UsersHelper
     t = File.open("#{Rails.root}/config/locales/termofpersonalinfomation." + "#{I18n.locale}", "r:utf-8")
     term = t.read
     t.close
-    term
+    term.html_safe
   end
 end
