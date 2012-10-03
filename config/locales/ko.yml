@@ -317,7 +317,7 @@ ko:
   image: '이미지'
   attachment: '첨부자료'
   author: '글쓴이'
-  no_information: '현재 정보가 없읍니다'
+  no_information: '현재 정보가 없습니다'
   price: '가격'
   valid_until: '정보 유효기한'
   until: '까지'
@@ -330,8 +330,8 @@ ko:
   Id: 'Id'
   created_at: '작성일'
   x: 'x'
-  "true": '무효'
-  "false": '유효'
+  "true": '가능'
+  "false": '불가능'
   hide: '유효/무효'
   style: '스타일'
   display_name: '표시 이름'
@@ -378,7 +378,7 @@ ko:
   number_of: '갯수'
 
   comment: '의견'
-  comment_email: '다른사람의 의견을 이매일로 수신'
+  comment_email: '다른사람의 의견을 이메일로 수신'
   add_comment: '의견 추가하기'
   please_signin_to_comment: '회원 가입하여 의견을 쓰세요 '
   comment_is_hidden: '이 의견은 비표지로 설정됨'
@@ -452,7 +452,7 @@ ko:
   ON_QA: 'ON_QA'
   CLOSED: 'CLOSED'
   REOPEN: 'REOPEN'
-  issue_report_to: '이사람에 문제이메일을 발송'
+  issue_report_to: '문제이메일 발송처'
   admin_email: '관리자 이메일'
 
 
@@ -522,8 +522,8 @@ ko:
     
   # System Setting
   post_expiry_length: '투고 유효기한 일수' 
-  socialable: 'SNS 유효/무효'
-  top_page_ajax: '톱(Top) 페이지 Ajax 유효/무효'
+  socialable: 'SNS 가능/불가능'
+  top_page_ajax: '톱(Top) 페이지 Ajax 가능/불가능'
   
   for_rent: '렌트'
   for_sale: '세일'
@@ -615,7 +615,7 @@ ko:
   
   # notice
   admin_notice: '관리자 공지'
-  no_notice: '현재공지는 없읍니다'
+  no_notice: '현재공지는 없습니다'
   p_job_notice: '구인/구직 게시판은 일자리 관련 직업을 구하거나 직원을 구하는 게시판입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 구인/구직 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.'
   p_buy_and_sell_notice: '벼룩시장 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 벼룩시장 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
   p_well_being_notice: '쉐어/숙소정보 게시판은 중고/새 물품을 사고 팔 수 있는 게시판 입니다. 특정 개인이나 사업체 광고/홍보에 관련된 글, 특정 개인이나 업체를 비방하는 글, 쉐어/숙소정보 게시판에 어울리지 않는 글들은 통보없이 삭제됩니다.' 
@@ -650,7 +650,7 @@ ko:
   banner_contact:  '광고 문의'
   general_contact: 'Contact US'
   
-  phone: '전화 번호'
+  phone: '전화번호'
   
   client_banner_image: '광고 이미지'
   link_to_url: '링크'
@@ -689,14 +689,14 @@ ko:
   change_my_password: '비밀번호를 변경'
   send_reset_password_instrcutions: '비밀번호 재등록 메일 발송'
   sending_reset_password_instructions_content1: '비밀번호를 변경하기 위해서는 아래의 링크를 클릭하여 주시기 바랍니다. '
-  sending_reset_password_instructions_content2: '비밀번호를 변경이 안된 상태에서 받은 이메일에 대해서는 폐기하여 주시기 바랍니다.'
+  sending_reset_password_instructions_content2: '비밀번호가 변경이 안된 상태에서 받은 이메일에 대해서는 폐기하여 주시기 바랍니다.'
   sending_reset_password_instructions_content3: '아래의 링크를 클릭하여 비밀번호를 변경할때까지 비밀번호는 안 바뀝니다.'
   
   resend_confirmation_email: '회원가입 확인메일을 다시반송'
   
   signin_instructions_for: '이메일 주소와 비밀번호를 입력하여 주시기 바랍니다.'
-  change_password_instructions_for: '이메일 주소를 입력하여 주시기 바랍니다. 비밀번호를 재설정하는 방법을 메일로 발송합니다.'
-  sending_confirmation_instructions_for: '회원등록 이메일 주소를 입력하여 주시기 바랍니다. 이메일 주소를 확인하는 메일을 다시발송합니다.'
+  change_password_instructions_for: '이메일 주소를 입력하시면 비밀번호를 재설정하는 방법을 메일로 발송합니다.'
+  sending_confirmation_instructions_for: '회원등록 이메일 주소를 입력하시면 이메일 주소를 확인하는 메일을 다시 발송합니다.'
   
   # Weather
   weather_information: '날씨정보'
@@ -785,8 +785,8 @@ ko:
   bad: 'NOK'
   to_list: '묵록'
   okpage_top_description: '퀸즈랜드 No.1 종합정보사이트 okbrisbane.com'
-  Signin_okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
-  Signout_okpage_top_description: '튄즈랜드 일등 중합정보사이트 오케이브리스번'
+  Signin_okpage_top_description: '퀸즈랜드 No.1 종합정보사이트 okbrisbane.com'
+  Signout_okpage_top_description: '퀸즈랜드 No.1 종합정보사이트 okbrisbane.com'
   Signup_okpage_top_description: 'OKBRISBANE 회원가입을 환영합니다.'
   Signup_okpage_top_description1: '홈페이지의 회원으로 가입하시면 사이트를 편리하게 이용하실 수 있으며 다양한 정보와 서비스를 제공 받으실 수 있습니다. 유익한 정보로 회원님들에게 한걸음 다가갈 수 있도록 노력하겠습니다'
   signup_instructions_for: '이메일 주소와 이름, 비밀번호를 입력하여 주시기 바랍니다.'
@@ -803,3 +803,4 @@ ko:
   completed: '완료'
   why_valid_until: '현재 유효기한은 %{days}일 입니다'
   this_post_has_been_deleted_by_admin: '이투고는 관리자가 삭제했습니다'
+  banner_clickable: '광고클릭 가능/불가능'

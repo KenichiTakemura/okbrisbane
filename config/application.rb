@@ -23,6 +23,7 @@ module Okbrisbane
     config.autoload_paths += %W(#{Rails.root}/lib)
     config.autoload_paths += %W(#{Rails.root}/app/models/validator)
     config.autoload_paths += %W(#{Rails.root}/app/models/ckeditor)
+    config.autoload_paths += %W(#{Rails.root}/app/models/singleton)
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 

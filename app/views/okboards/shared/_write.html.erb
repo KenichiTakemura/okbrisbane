@@ -30,7 +30,7 @@
 		<% end %>
 		<%= f.label t("valid_until") %>
 		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
-		<span class="help-block"><%= t(:why_valid_until, :days => SystemSetting.first.post_expiry_length) %></span>
+		<span class="help-block"><%= t(:why_valid_until, :days => SystemConfig.instance.post_expiry_length) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
 		<%= f.label :body, t("content") %>
 		<% if Common.browser_detection(request) != Okvalue::MSIE %>

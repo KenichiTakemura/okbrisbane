@@ -53,11 +53,15 @@ module ApplicationHelper
   end
   
   def socialable?
-    SystemSetting.first.socialable
+    SystemConfig.instance.socialable
   end
   
   def top_page_ajaxable?
-    SystemSetting.first.top_page_ajax
+    SystemConfig.instance.top_page_ajax
+  end
+
+  def banner_clickable?
+    SystemConfig.instance.banner_clickable
   end
 
  # Create banner
@@ -168,7 +172,11 @@ module ApplicationHelper
     if request.host =~ /admin.okbrisbane/
       html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
     else
-      html = link_to(image_tag(image.original_image, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
+      if banner_clickable?
+        html = link_to(image_tag(image.original_image, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
+      else
+        html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+      end
     end
     if !image.caption.nil? && !image.caption.empty?
        html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
@@ -232,7 +240,7 @@ module ApplicationHelper
   end
 
   def navigation(over, out)
-    html = %Q|<div id="navigation"><ul class="">|
+    html = %Q|<div id="navigation"><ul style="margin:0px">|
     Style::NAVI.each do |key|
       value = Style.page(key)
       html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|

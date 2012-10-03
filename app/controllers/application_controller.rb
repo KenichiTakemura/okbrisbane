@@ -119,12 +119,11 @@ class ApplicationController < ActionController::Base
   end
 
   def post_expiry
-    system_setting = SystemSetting.first
-    Common.current_time + system_setting.post_expiry_length.days
+    Common.current_time + SystemConfig.instance.post_expiry_length.days
   end
 
   def top_page_ajaxable?
-    SystemSetting.first.top_page_ajax    
+    SystemConfig.instance.top_page_ajax    
   end
 
   def find_lastid(board_list, board_image_list=nil)

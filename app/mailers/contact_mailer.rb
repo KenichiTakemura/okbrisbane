@@ -2,7 +2,7 @@ class ContactMailer < ActionMailer::Base
   default :from => "OKBRISBANE <do_no_reply@okbrisbane.com>"
   
   def send_contact_to_admin(contact)
-    to = SystemSetting.first.contact_email
+    to = SystemConfig.instance.contact_email
     subject = "[OKBRISBANE] "
     case contact.contact_type
     when Okvalue::CONTACT_BANNER

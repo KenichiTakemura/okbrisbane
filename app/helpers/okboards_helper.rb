@@ -3,7 +3,7 @@ module OkboardsHelper
     return "" if post.nil?
     logger.debug("posted_by: #{post.posted_by_type}")
     if post.posted_by_type.eql? "Admin"
-      return SystemSetting.first.admin_email
+      return SystemConfig.instance.admin_email
     else
     post.posted_by.email
     end
