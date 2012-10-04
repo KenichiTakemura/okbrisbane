@@ -1,1 +1,1 @@
-SystemConfig.instance.loadvalues
+SystemConfig.instance

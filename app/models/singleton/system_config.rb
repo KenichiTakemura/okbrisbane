@@ -5,15 +5,15 @@ class SystemConfig
   include Singleton 
 
   #SystemSetting
-  @post_expiry_length = 30
-  @socialable = false
-  @issue_report_to = "kenichi_takemura1976@yahoo.com"
-  @admin_email = "info@okbrisbane"
-  @contact_email = "info@okbrisbane"
-  @top_page_ajax = false
-  @banner_clickable = true
+  attr_reader :post_expiry_length
+  attr_reader :socialable
+  attr_reader :issue_report_to
+  attr_reader :admin_email
+  attr_reader :contact_email
+  attr_reader :top_page_ajax
+  attr_reader :banner_clickable
   
-  def loadvalues
+  def initialize
     ss = SystemSetting.first
     @post_expiry_length = ss.post_expiry_length
     @socialable = ss.socialable
@@ -29,7 +29,6 @@ class SystemConfig
     Rails.logger.debug("loadvalues: @contact_email: #{@contact_email}")
     Rails.logger.debug("loadvalues: @top_page_ajax: #{@top_page_ajax}")
     Rails.logger.debug("loadvalues: @banner_clickable: #{@banner_clickable}")
-
   end
 
   def post_expiry_length

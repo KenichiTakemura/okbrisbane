@@ -6,6 +6,26 @@ module HomesHelper
       image_tag("#{I18n.locale}/#{Style.page(:p_estate)}/icon_garage.gif") + " " + estate.garage.to_s 
   end
   
+  def _scroll_feed(category, var_flag)
+    html = %Q|if ($(this).scrollTop() > #{Okvalue::FEED_SHOW_SIZE[category]}) {
+      if(!#{var_flag}) {
+        #{_show_feed(category)}
+        #{var_flag} = true;
+      }
+    }|
+    html.html_safe
+  end
+  
+    #  
+  def _show_feed(category) 
+    #[:p_job,:p_buy_and_sell,:p_estate,:p_business,:p_motor_vehicle,:p_accommodation,:p_law,:p_study]
+    params = %Q|c: '#{category}'|
+    post_script = _post(top_feed_homes_path, params)
+    html = %Q|$('\#feed_body_#{category}').html("| + escape_javascript(image_tag("common/ajax_loading_1.gif")) + %Q|");|
+    html += post_script
+    html.html_safe
+  end
+  
   def top_feed_div(category, lists, image_list)
     color = Okvalue::FEED_COLORMAP[category]
     html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list">|

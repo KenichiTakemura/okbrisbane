@@ -424,4 +424,32 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def _post(url, params)
+    html = %Q|$.ajax({url:'| + url + %Q|',type:'POST',timeout:#{Okvalue::AJAX_TIMEOUT},tryCount:0,retryLimit:#{Okvalue::AJAX_RETRY},data:{| + params + %Q|}}).success(function() {|
+    if Okbrisbane::Application.config.ok_debug
+    html += %Q|console.log("ajax success");|
+    end
+    html += %Q|}).complete(function(){|
+    if Okbrisbane::Application.config.ok_debug
+    html += %Q|console.log("ajax complete");|
+    end
+    html += %Q|}).error(function(xhr, textStatus, errorThrown ) {
+        if (textStatus == 'timeout') {
+            this.tryCount++;
+            if (this.tryCount <= this.retryLimit) {
+                //try again
+                $.ajax(this);
+                return;
+            }            
+            return;
+        }
+        if (xhr.status == 500) {
+            //handle error
+        } else {
+            //handle error
+        }
+    });|
+    html.html_safe
+  end
+
 end

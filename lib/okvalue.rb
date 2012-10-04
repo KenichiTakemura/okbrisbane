@@ -30,6 +30,17 @@ module Okvalue
     :p_study => :blue
   }
   
+  FEED_SHOW_SIZE = {
+    :p_job => 10,
+    :p_buy_and_sell => 500,
+    :p_estate => 900,
+    :p_business => 900,
+    :p_motor_vehicle => 900,
+    :p_accommodation => 1400,
+    :p_law => 1600,
+    :p_study => 1800
+  }
+  
   POST_ADMIN = "post_admin@okbrisbane.com"
 
   # Global Variables
@@ -152,5 +163,8 @@ module Okvalue
   Firefox = 3
   Opera = 4
   MSIE = 5
+  
+  AJAX_TIMEOUT = 8000
+  AJAX_RETRY = 3
 
 end
