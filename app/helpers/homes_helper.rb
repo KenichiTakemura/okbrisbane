@@ -16,7 +16,6 @@ module HomesHelper
     html.html_safe
   end
   
-    #  
   def _show_feed(category) 
     #[:p_job,:p_buy_and_sell,:p_estate,:p_business,:p_motor_vehicle,:p_accommodation,:p_law,:p_study]
     params = %Q|c: '#{category}'|

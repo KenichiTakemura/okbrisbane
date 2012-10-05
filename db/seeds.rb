@@ -45,6 +45,7 @@ ss.admin_email = contact_mail_to
 ss.contact_email = contact_mail_to
 ss.top_page_ajax = false
 ss.banner_clickable = true
+ss.banner_ajaxable = true
 ss.save
 
 # Banner

@@ -47,7 +47,7 @@ module OkboardsHelper
 
   def build_board_list
     html = %Q|<table id="okboard_table" class="table table-striped table-hover">
-        <thead class=""><tr><th>#{t("category")}</th><th>|
+        <thead class=""><tr><th>#{t(:id)}</th><th>#{t("category")}</th><th>|
     if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
       html += t("price") + "</th><th>"
     end
@@ -56,9 +56,9 @@ module OkboardsHelper
     html += %Q|<tbody class="">|
     if @board_lists.empty?
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
-        html += %Q|<tr><td colspan="8">| + t("no_information")
+        html += %Q|<tr><td colspan="9">| + t("no_information")
       else
-        html += %Q|<tr><td colspan="7">| + t("no_information")
+        html += %Q|<tr><td colspan="8">| + t("no_information")
       end        
       html += "</td><tr>"
     else
@@ -72,6 +72,7 @@ module OkboardsHelper
     html = ""
     @board_lists.each do |post|
       html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}">|
+      html += %Q|<td>#{post.id}</td>|
       if post.category.eql?(Okvalue::ADMIN_POST_NOTICE)
         html += %Q|<td class="text-warning">#{t("#{post.category}")}</td>|
       else
@@ -284,7 +285,6 @@ module OkboardsHelper
     if [:p_job, :p_buy_and_sell,:p_well_being].include? link
       html += "<li><a href=\"#{Okboard.okboard_link_write(link)}\" tabindex=\"-1\">#{t(:write_new)}</a></li>"
     end
-    #html += _script(%Q|$('\#menu_#{link}').click(function(){$(this).text('#{t("menu_toggle_show")}');$('\#sub_menu_#{link}').toggle('slow');return false;})|)
     html.html_safe
   end
 

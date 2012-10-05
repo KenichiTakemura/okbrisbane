@@ -6,6 +6,7 @@ class SystemSetting < ActiveRecord::Base
   attr_accessible :contact_email
   attr_accessible :top_page_ajax
   attr_accessible :banner_clickable
+  attr_accessible :banner_ajaxable
   
   validates_numericality_of :post_expiry_length, :only_integer => true, :greater_than => 0
   validates_format_of :issue_report_to, :with => Okvalue::EMAIL_REGEXP

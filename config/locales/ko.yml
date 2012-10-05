@@ -802,5 +802,6 @@ ko:
   close: '닫기'
   completed: '완료'
   why_valid_until: '현재 유효기한은 %{days}일 입니다'
-  this_post_has_been_deleted_by_admin: '이투고는 관리자가 삭제했습니다'
-  banner_clickable: '광고클릭 가능/불가능'
+  this_post_has_been_deleted_by_admin: '이투고는 준재하지 않음 또는 관리자가 삭제했습니다'
+  banner_clickable: '광고이미지 클릭 가능/불가능'
+  banner_ajaxable: '광고이미지 Ajax 가능/불가능'

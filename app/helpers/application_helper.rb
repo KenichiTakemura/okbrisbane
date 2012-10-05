@@ -63,6 +63,10 @@ module ApplicationHelper
   def banner_clickable?
     SystemConfig.instance.banner_clickable
   end
+  
+  def banner_ajaxable?
+    SystemConfig.instance.banner_ajaxable    
+  end
 
  # Create banner
   def _collectImage(p, s, a)
@@ -77,32 +81,30 @@ module ApplicationHelper
     images = b.client_image
     return b, images
   end
+  
+  def _generate_empty_banner(style, div_id)
+    html = ""
+    html += %Q|<style>div.banner_description {position:absolute;top:0px;left:0px;background-color:black;opacity: 0.6;filter: alpha(opacity=60);}|
+    html += %Q| div.banner_description p.description_content {padding:10px;margin:0px;font-size:12px;font-weight:bold;color:white;}</style>|
+    contact = "#{t('banner_contact')}"
+    if request.host =~ /admin.okbrisbane/
+      html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
+    else
+      html += %Q|<div class="" id="banner_description_#{div_id}"><p class='description_content'>#{link_to_with_icon(contact,show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER),"btn btn-primary","","icon-info-sign icon-white")}#{}</p></div>|
+    end       
+    script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
+    html += _script_document_ready(script)
+    html.html_safe
+  end
 
-  def _banner(p, s, a, div_id)
-    b,images = _collectImage(p,s,a)
-    style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
-    logger.debug("div_id #{div_id} style: #{style}")
-    html = %Q|<div id="#{div_id}" style="#{style}">|
-    if images.empty?
-      html += %Q|<style>div.banner_description {position:absolute;top:0px;left:0px;background-color:black;opacity: 0.6;filter: alpha(opacity=60);}|
-      html += %Q| div.banner_description p.description_content {padding:10px;margin:0px;font-size:12px;font-weight:bold;color:white;}</style>|
-      contact = "#{t('banner_contact')}"
-      if request.host =~ /admin.okbrisbane/
-        html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
-      else
-        html += %Q|<div class="" id="banner_description_#{div_id}"><p class='description_content'>#{link_to_with_icon(contact,show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER),"btn btn-primary","","icon-info-sign icon-white")}#{}</p></div>|
-      end       
-      script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
-      html += _script_document_ready(script)
-    elsif
-    html += %Q|<div id="#{div_id}">|
-      # Flash banner
+  def _generate_banner(b, images, div_id)
+      html = ""
       if images.size == 1 && images.first.flash?
         html += %Q|<div style="margin: 0px 2px 0px;float:left">
           <object data="#{images.first.flash_url}" type="application/x-shockwave-flash" width="#{b.img_width}px" height="#{b.img_height}px">
           <param name="movie" value="#{images.first.flash_url}" />
           </object></div>|
-      elsif
+      else
         if b.div_width.to_i == b.img_width.to_i
           count = 0
         else
@@ -131,8 +133,9 @@ module ApplicationHelper
             html += "</div>"
           end
         elsif b.effect.eql?(Banner::E_MSLIDE) && count > 0
-          html += %Q|<a class="#{div_id}_prev" href="#" style="position:absolute;top:35px;left:-10px;">| + image_tag("common/bg_box_prev.gif") + "</a>"
-          html += %Q|<a class="#{div_id}_next" href="#" style="position:absolute;top:35px;right:-10px;">| + image_tag("common/bg_box_next.gif") + "</a>"
+          html += %Q|<div id="#{div_id}_#{Common.uniqe_token}">|
+          html += %Q|<a class="#{div_id}_prev btn btn-primary" href="#" style="position:absolute;top:35px;left:-40px;"><i class="icon-step-backward icon-white"></i></a>|
+          html += %Q|<a class="#{div_id}_next btn btn-primary" href="#" style="position:absolute;top:35px;right:-15px;"><i class="icon-step-forward icon-white"></i></a>|
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             if index == 0
@@ -147,6 +150,7 @@ module ApplicationHelper
             html += one_image(b,image,"margin:0 3px 0")
           end
           html += "</div></div></div>"
+          html += "</div>"
         else
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
@@ -161,10 +165,9 @@ module ApplicationHelper
           html += "</div>"
         end
       end
-      html += "</div>"
-    end
-    html += "</div>"
-    return html.html_safe
+      #html += "</div>"
+    #html += "</div>"
+    html.html_safe
   end
   
   def one_image(b, image, style=nil)
@@ -197,38 +200,58 @@ module ApplicationHelper
   end
 
   def single_background_banner(a)
-    #logger.debug("single_background_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(single_background_banner a=#{a})" if !@okpage
     single_banner(Style.page(@okpage), :s_background, a)
   end
 
   def multi_body_banner(a)
-    #logger.debug("multi_body_banner @okpage: #{@okpage} a: #{a}")
     raise "No Page found(multi_body_banner a=#{a})" if !@okpage
     multi_banner(Style.page(@okpage), :s_body, a)
   end
+  
+  def _banner_create(div_id, p, s, a, b, style, body)
+    logger.debug("div_id #{div_id} style: #{style}")
+    html = %Q|<div id="#{div_id}" style="#{style}">|
+    html += body
+    html += "</div>"
+    html.html_safe
+  end
 
   def single_banner(p, s, a)
-    #logger.debug("requested single_banner #{p}, #{s}, #{a}")
-    div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
     return "" if b.is_disabled
-    html = _banner(p, s, a, div_id)
+    div_id = Style.create_banner_div(p,s,a)
+    style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
+    if !images.present?
+      return _banner_create(div_id,p,s,a,b,style,_generate_empty_banner(style,div_id))
+    end
+    if !(request.host =~ /admin.okbrisbane/)
+      if banner_ajaxable?
+        script = _script_document_ready(_show_banner(b,div_id))
+        return _banner_create(div_id,p,s,a,b,style,script)
+      end
+    end
+    html = _banner_create(div_id,p,s,a,b,style,_generate_banner(b,images,div_id))
+    html = after_single_banner(b,images,div_id,html)
+    html.html_safe
+  end
+  
+  def after_single_banner(b,images,div_id,html)
     script = ""
     if images.size >= 2
       case b.effect
       when Banner::E_SLIDE
         container = div_id + "_slides_container"
         effect_speed = b.effect_speed * 1000
-        effect = Style.getEffect(p,s,a)
+        effect = Style.getEffect(Style.pagename(b.page_id),Style.sectionname(b.section_id),b.position_id)
         logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
         script += %Q|$('\##{div_id}').slides({container:'#{container}',
           preloadImage:'assets/common/ajax_loader_1.gif',|
-          script += "randomize:true," if b.is_random
-          script += %Q|play:#{effect_speed},#{effect}});
-          $("a.prev").text('#{t("effect_prev")}');
-          $("a.next").text('#{t("effect_next")}');|
-        logger.debug("script: #{script}")
+        script += "randomize:true," if b.is_random
+        script += %Q|play:#{effect_speed},#{effect}});|
+        #$("a.prev").text('#{t("effect_prev")}');
+        #$("a.next").text('#{t("effect_next")}');|
+        #logger.debug("script: #{script}")
         html += _script_document_ready(script)
       end
     end
@@ -276,19 +299,23 @@ module ApplicationHelper
 
   def multi_banner(p, s, a)
     logger.debug("requested multi_banner #{p}, #{s}, #{a}")
-    div_id = Style.create_banner_div(p,s,a)
     b,images = _collectImage(p,s,a)
-    html = _banner(p,s, a, div_id)
+    return "" if b.is_disabled
+    div_id = Style.create_banner_div(p,s,a)
+    style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
+    if !images.present?
+      return _banner_create(div_id,p,s,a,b,style,_generate_empty_banner(style,div_id))
+    end
+    html = _banner_create(div_id,p,s,a,b,style,_generate_banner(b,images,div_id))
     if images.size >= 2
       case b.effect
       when Banner::E_MSLIDE
         container = div_id + "_slides_container"
         effect_speed = b.effect_speed * 1000
-        effect = Style.getEffect(p,s,a)
+        effect = Style.getEffect(Style.pagename(b.page_id),Style.sectionname(b.section_id),b.position_id)
         logger.debug("BannerEffect: #{b.effect} s: #{effect_speed} effect: #{effect}")
         script = %Q|$('\##{div_id}').slides({container:'#{container}',
           preloadImage:'assets/common/ajax_loading_1.gif',|
-          #script += "randomize:true," if b.is_random
           script += %Q|play:#{effect_speed},next:'#{div_id}_next',prev:'#{div_id}_prev',#{effect}});|
         logger.debug("script: #{script}")
         html += _script_document_ready(script)
@@ -375,7 +402,6 @@ module ApplicationHelper
     else
       html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;height:#{h};#{style}">|
     end
-    #html = %Q|<div class="_widget" id="widget_#{id}" style="#{style}">|
     html += %Q|<div class="_widget_head" style="width:#{w}px;float:right"><span class="label">#{title}</span><div class="_widget_head_window">|
     html += %Q|<a href="#" title=#{t(:minimize)} id="widget_#{id}_min"><i class="icon-resize-small icon-white"></i></a>|
     html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-fullscreen icon-white"></i></a>|

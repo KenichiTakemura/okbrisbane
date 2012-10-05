@@ -6,12 +6,11 @@
 
 		<!--
 		<%= f.label :image, "#{t(:image)}"%>
-		<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
-		-->
-		
+		<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>		
 		<%= f.label :attachment, "#{t(:attachment)}"%>
 		<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
-
+		-->
+		
 		<%= f.label :time_by, "#{t(:select_date)}"%>
 		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 

@@ -8,10 +8,13 @@
 		</div>
 	</div>
 
+	<h3 class="text-info"><%= @post.subject %></h3>
+	<% if @post.respond_to? :price %>
+		<h4 class="muted"><%= @post.price %></h4>
+	<% end %>
     <%= render :partial => "okboards/shared/gallery" %>
-	<%= render :partial => "okboards/shared/sns" %>
-    <%= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") %>
-	<div class="okboard_view_content">
+    <!-- %= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") % -->
+    		<%= render :partial => "okboards/shared/sns" %>
 		<div class="okboard_view_controll">
 			<div id="okboard_likes">
 				<%= image_tag("#{I18n.locale}/common/btn_vote.gif") %>
@@ -34,6 +37,9 @@
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 			</div>
 		</div>
+		<br>
+	<div class="okboard_view_content">
+		<!--
 		<div class="page_control">
 			<div class="to_prev">
 			<div class="to_prev_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
@@ -42,19 +48,14 @@
 			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 		</div>
-		<dl class="dl-horizontal">
+		-->
+		<dl class="dl-horizontal" style="font-size:16px">
 			<dt><span class="label"><%= t("author") %></span></dt>
 			<dd><%= author_name(@post) %></dd>
 			<dt><span class="label"><%= t("created_at") %></span></dt>
 			<dd><%= Common.date_format(@post.updated_at) %></dd>
 			<dt><span class="label"><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
-			<dt><span class="label"><%= t("subject") %></span></dt>
-			<dd><%= @post.subject %></dd>
-			<% if @post.respond_to? :price %>
-				<dt><span class="label"><%= t(:price) %></span></dt>
-				<dd><%= @post.price %></dd>
-			<% end %>
 			<dt><span class="label"><%= t("content") %></span></dt>
 			<dd><%= raw(@post.content.body) %></dd>
 			<dt><span class="label"><%= t("attachment") %></span></dt>
@@ -75,9 +76,10 @@
 			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
 			</div>
 		</div>
-		<br/>
+		<br>
+
 		<div class="comment_logo">
-		<%= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") %>
+		<!-- %= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") % -->
 			<h3 class="text-success"><i class="icon-volume-up"></i><%= t(:comment) %> <%= t(:write) %></h3>
 		</div>
 		<div class="new_comment" id="new_comment">

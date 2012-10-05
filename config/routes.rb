@@ -27,6 +27,12 @@ Okbrisbane::Application.routes.draw do
     end
   end
   
+  resource :banners, :only => [] do
+    collection do
+      post :show_banner
+    end
+  end
+  
   resources :contacts, :only => ["index","create","new"]
 
   resources :homes, :only => ["index"] do

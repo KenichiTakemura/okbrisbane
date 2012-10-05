@@ -1,7 +1,11 @@
 module Okboard
 
   def self.dec(d)
-    Common.decrypt_data(d)  
+    begin
+      Common.decrypt_data(d)  
+    rescue
+      false
+    end
   end
   
   def self.enc(d)
@@ -9,23 +13,26 @@ module Okboard
   end
   
   def self.param_v(v)
-    Rails.logger.debug("param_v v: #{v}")
-    d = dec(v)
-    Rails.logger.debug("param_v d: #{d}")
-    p =  d.split(SP)[1]
-    Rails.logger.debug("param_v p: #{p}")
+    #Rails.logger.debug("param_v v: #{v}")
+    _d = dec(v)
+    return nil if !_d
+    #Rails.logger.debug("param_v d: #{d}")
+    p = _d.split(SP)[1]
+    #Rails.logger.debug("param_v p: #{p}")
     p
   end
 
   def self.param_to_s(p)
     d = dec(p)
-    Rails.logger.debug("okpage_p d: #{d}")
+    #Rails.logger.debug("okpage_p d: #{d}")
     d
   end
   
   def self.param_to_i(p)
-    d = dec(p).to_i
-    Rails.logger.debug("okpage_p d: #{d}")
+    _d = dec(p)
+    return nil if !_d
+    d = _d.to_i
+    #Rails.logger.debug("okpage_p d: #{d}")
     d
   end
   

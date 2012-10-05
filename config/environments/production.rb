@@ -87,4 +87,10 @@ Okbrisbane::Application.configure do
     #:port => 465
   }
 
+  # Exception Handling
+  config.middleware.use ExceptionNotifier,
+	:email_prefix => "[OKBRISBANE Exception] ",
+	:sender_address => %{"Kenichi Takemura" <kenichi_takemura1976@yahoo.com>}
+#	:exception_recipients => %w{you@me.com}
+
 end

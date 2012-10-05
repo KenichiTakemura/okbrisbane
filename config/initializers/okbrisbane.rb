@@ -1,1 +1,1 @@
-SystemConfig.instance
+SystemConfig.instance.load_data

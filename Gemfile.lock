@@ -49,6 +49,8 @@ GEM
       warden (~> 1.2.1)
     encryptor (1.1.3)
     erubis (2.7.0)
+    exception_notification (2.6.1)
+      actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     gretel (1.1.6)
@@ -135,6 +137,7 @@ DEPENDENCIES
   coffee-rails
   devise
   encryptor
+  exception_notification
   execjs
   gretel
   jquery-rails

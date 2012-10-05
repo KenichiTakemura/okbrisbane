@@ -10,6 +10,7 @@ class OkboardsController < OkController
     raise "Bad Request" if params[:v].nil?
     logger.debug("v: #{params[:v]} c: #{params[:c]} d: #{params[:d]} s: #{params[:s]}")
     @board = Okboard.param_v(params[:v])
+    redirect_to root_path and return if !@board.present?
     @@category = params[:c].present? ? Okboard.param_to_s(params[:c]) : nil
     @@board_id = params[:d].present? ? Okboard.param_to_i(params[:d]) : nil
     @@search_id = params[:s].present? ? Okboard.param_to_i(params[:s]) : nil
@@ -79,7 +80,6 @@ class OkboardsController < OkController
   end
 
   def view
-    raise if @@board_id.nil?
     @post = _select_post
     if @post.nil? || @post.status != Okvalue::POST_STATUS_PUBLIC
       respond_to do |format|
@@ -251,6 +251,7 @@ class OkboardsController < OkController
   end
 
   def _select_post
+    return nil if !@@board_id.present?
     begin
       post = _model.find(@@board_id)
       post
