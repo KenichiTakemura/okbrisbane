@@ -1,8 +1,8 @@
 <div id="home">
 	<div id="first_section">
 		<div id="first_section_left">
-			<%= single_body_banner(1) %>
-			<%= multi_body_banner(3) %>
+			<%= single_body_banner(1, -1) %>
+			<%= multi_body_banner(3, 300) %>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_4", multi_body_banner(4), Okvalue::HOME_BODY_BANNER_4_SHOW_SIZE)%>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_5", multi_body_banner(5), Okvalue::HOME_BODY_BANNER_5_SHOW_SIZE)%>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_11", multi_body_banner(11), Okvalue::HOME_BODY_BANNER_11_SHOW_SIZE)%>
@@ -34,7 +34,7 @@
 				<%= top_feed_div(:p_law, @legal_service_lists, nil) %>
 				<%= top_feed_div(:p_study, @study_lists, nil) %>
 			</div>
-		<div id="thrid_section_right"><%= multi_body_banner(6) %><%= multi_body_banner(7) %><%= multi_body_banner(8) %><%= multi_body_banner(9) %><%= multi_body_banner(10) %></div>
+		<div id="thrid_section_right"><%= multi_body_banner(6, 1700) %><%= multi_body_banner(7,1850) %><%= multi_body_banner(8, 2000) %><%= multi_body_banner(9, 2150) %><%= multi_body_banner(10, 2300) %></div>
 	</div>
 </div>
 <%= render :partial => "homes/scroll" %>

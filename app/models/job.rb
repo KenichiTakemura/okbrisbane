@@ -21,4 +21,6 @@ class Job < Post
     Categories[key]
   end
 
+  attr_accessible :requested_by
+
 end

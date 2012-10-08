@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		-->
-		<dl class="dl-horizontal" style="font-size:16px">
+		<dl class="dl-horizontal" style="font-size:16px;background-color:#fff;padding:5px">
 			<dt><span class="label"><%= t("author") %></span></dt>
 			<dd><%= author_name(@post) %></dd>
 			<dt><span class="label"><%= t("created_at") %></span></dt>
@@ -57,7 +57,11 @@
 			<dt><span class="label"><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
 			<dt><span class="label"><%= t("content") %></span></dt>
-			<dd><%= raw(@post.content.body) %></dd>
+			<% if @post.respond_to? :requested_by && Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
+				<dd><%= simple_format(@post.content.body) %></dd>
+			<% else %>
+				<dd><%= raw(@post.content.body) %></dd>
+			<% end %>
 			<dt><span class="label"><%= t("attachment") %></span></dt>
 			<dd><%if @post.has_attachment? %>
 				<% @post.attachment.each do |attachment| %>

@@ -1,13 +1,13 @@
 class PostSearch < ActiveRecord::Base
 
   SearchCond = Common.new_orderd_hash
-  SearchCond[:post_search_by_time_0] = :time_by_day_0
-  SearchCond[:post_search_by_time_1] = :time_by_day_1
-  SearchCond[:post_search_by_time_2] = :time_by_day_2
-  SearchCond[:post_search_by_time_3] = :time_by_day_3
-  SearchCond[:post_search_by_time_4] = :time_by_day_4
-  SearchCond[:post_search_by_time_5] = :time_by_day_5
-  SearchCond[:post_search_by_time_6] = :time_by_day_6
+  SearchCond[:post_search_by_time_0] = :time_by_day_1
+  SearchCond[:post_search_by_time_1] = :time_by_day_2
+  SearchCond[:post_search_by_time_2] = :time_by_day_3
+  SearchCond[:post_search_by_time_3] = :time_by_day_4
+  SearchCond[:post_search_by_time_4] = :time_by_day_5
+  SearchCond[:post_search_by_time_5] = :time_by_day_6
+  SearchCond[:post_search_by_time_6] = :time_by_day_7
   SearchCond[:post_search_by_time_7] = :time_by_week_1
   SearchCond[:post_search_by_time_8] = :time_by_week_2
   SearchCond[:post_search_by_time_9] = :time_by_week_3

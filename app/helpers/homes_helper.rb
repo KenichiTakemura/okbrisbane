@@ -56,7 +56,7 @@ module HomesHelper
            else
              html += "#{image_tag(image.thumb_image, :class => "image-resize140_120")}</div></td>"
            end
-           html += %Q|<td align=left valign=top>#{_truncate_with_length(feed.feeded_to.subject, 70)}|
+           html += %Q|<td align="left" valign="top">#{_truncate_with_length(feed.feeded_to.subject, 70)}|
            html += "<p>#{feed.feeded_to.postedDate}</p>"
            if feed.feeded_to.respond_to? :price
              html += %Q|<p class="price_tag">| + feed.feeded_to.price + "</p>"
@@ -73,8 +73,8 @@ module HomesHelper
       lists.each_with_index do |feed,index|
         html += %Q|<tr>|
         html += %Q|<td style="height:20px;"><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
-        html += %Q|<td>#{link_to(_truncate(feed.feeded_to.subject),Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "btn-link")}</td>|
-        html += %Q|<td nowrap>#{feed.feeded_to.feeded_date}</td></tr>|
+        html += %Q|<td>#{link_to(_truncate(feed.feeded_to.subject),Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "btn-link small")}</td>|
+        html += %Q|<td nowrap class="small">#{feed.feeded_to.feeded_date}</td></tr>|
       end
     end
     html += "</table>"

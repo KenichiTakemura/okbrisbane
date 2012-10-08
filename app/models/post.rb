@@ -89,36 +89,40 @@ class Post < ActiveRecord::Base
     if cond.has_time_by?
       case cond.time_by.to_sym
       when :time_by_day_0
-        post_search_by_time(0,1)
+        post_search_by_time(-1,-1)
       when :time_by_day_1
-        post_search_by_time(1,2)
+        post_search_by_time(0,1)
       when :time_by_day_2
-        post_search_by_time(2,3)
+        post_search_by_time(1,2)
       when :time_by_day_3
-        post_search_by_time(3,4)
+        post_search_by_time(2,3)
       when :time_by_day_4
-        post_search_by_time(4,5)
+        post_search_by_time(3,4)
       when :time_by_day_5
-        post_search_by_time(5,6)
+        post_search_by_time(4,5)
       when :time_by_day_6
+        post_search_by_time(5,6)
+      when :time_by_day_7
         post_search_by_time(6,7)
       when :time_by_week_1
-        post_search_by_time(7,8)
+        post_search_by_time(7,14)
       when :time_by_week_2
-        post_search_by_time(8,15)
+        post_search_by_time(14,21)
       when :time_by_week_3
-        post_search_by_time(15,22)
+        post_search_by_time(21,28)
       when :time_by_week_4
-        post_search_by_time(22,29)
+        post_search_by_time(28,36)
       when :time_by_older
-        post_search_by_time(29,-1)
+        post_search_by_time(36,-1)
       end
     end
   }
   scope :post_search_by_time, lambda { |x,y| 
-    if y.to_i > 0
+    if x.to_i < 0
+      where("created_at > ?", (Common.days_ago(y)))
+    elsif y.to_i > 0
       where("created_at <=? and created_at > ?", (Common.days_ago(x)), (Common.days_ago(y)))
-    else
+    elsif x.to_i > 0
       where("created_at <=?", (Common.days_ago(x)))
     end
   }

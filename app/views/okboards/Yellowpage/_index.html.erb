@@ -11,7 +11,7 @@
 		<% next if !bc.business_client.present? %>
 		<div class="accordion-group">
 			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_business_category" href="#collapse_<%= bc.id %>"> <%= "#{bc.display_name} (#{bc.business_client.size})" %> </a>
+				<a style="background-color: #fff" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_business_category" href="#collapse_<%= bc.id %>"> <%= "#{bc.display_name} (#{bc.business_client.size})" %> </a>
 			</div>
 			<% if !collapsed%>
 			<div id="collapse_<%= bc.id %>" class="accordion-body collapse in">

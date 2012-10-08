@@ -13,6 +13,7 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  config/application.rb\
  config/boot.rb\
  config/environment.rb\
+ config/initializers/okbrisbane.rb\
  db\
  lib\
  public/*html\

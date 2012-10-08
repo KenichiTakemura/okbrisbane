@@ -41,45 +41,36 @@ class SystemConfig
     rescue
     end
   end
-
+  
   def post_expiry_length
-    Rails.logger.debug("getSystemConfig @post_expiry_length: #{@post_expiry_length}")
-    @post_expiry_length
+    @post_expiry_length || SystemSetting.first.post_expiry_length
   end
 
   def socialable
-    Rails.logger.debug("getSystemConfig @socialable: #{@socialable}")
-    @socialable
+    @socialable || SystemSetting.first.socialable
   end
 
   def issue_report_to
-    Rails.logger.debug("getSystemConfig @issue_report_to: #{@issue_report_to}")
-    @issue_report_to
+    @issue_report_to || SystemSetting.first.issue_report_to
   end
 
   def admin_email
-    Rails.logger.debug("getSystemConfig @admin_email: #{@admin_email}")
-    @admin_email
+    @admin_email || SystemSetting.first.admin_email
   end
-
+  
   def contact_email
-    Rails.logger.debug("getSystemConfig @contact_email: #{@contact_email}")
-    @contact_email
+    @contact_email || SystemSetting.first.contact_email
   end
-
+  
   def top_page_ajax
-    Rails.logger.debug("getSystemConfig @top_page_ajax: #{@top_page_ajax}")
-    @top_page_ajax
+    @top_page_ajax || SystemSetting.first.top_page_ajax
   end
-
+  
   def banner_clickable
-    Rails.logger.debug("getSystemConfig @banner_clickable: #{@banner_clickable}")
-    @banner_clickable
+    @banner_clickable || SystemSetting.first.banner_clickable
   end
   
   def banner_ajaxable
-    Rails.logger.debug("getSystemConfig @banner_ajaxable: #{@banner_ajaxable}")
-    @banner_ajaxable
+    @banner_ajaxable || SystemSetting.first.banner_ajaxable
   end
-
 end

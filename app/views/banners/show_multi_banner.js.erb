@@ -1,0 +1,3 @@
+<% html = _generate_banner(@banner,@banner.client_image,@div_id) %>
+<% html = after_multi_banner(@banner,@banner.client_image,@div_id,html) %>
+$('#<%= @div_id %>').html("<%= escape_javascript(html.html_safe) %>")

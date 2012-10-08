@@ -23,5 +23,6 @@ class BuyAndSell < Post
   
   # attr_accessible
   attr_accessible :price 
-
+  attr_accessible :requested_by
+  
 end

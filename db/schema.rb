@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005084122) do
+ActiveRecord::Schema.define(:version => 20121008111044) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20121005084122) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
     t.string   "price"
+    t.string   "requested_by"
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -425,6 +426,7 @@ ActiveRecord::Schema.define(:version => 20121005084122) do
     t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.string   "requested_by"
   end
 
   create_table "laws", :force => true do |t|
@@ -678,6 +680,7 @@ ActiveRecord::Schema.define(:version => 20121005084122) do
     t.boolean  "has_attachment",       :default => false
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.string   "requested_by"
   end
 
 end

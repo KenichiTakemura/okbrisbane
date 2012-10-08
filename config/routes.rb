@@ -29,7 +29,8 @@ Okbrisbane::Application.routes.draw do
   
   resource :banners, :only => [] do
     collection do
-      post :show_banner
+      post :show_single_banner
+      post :show_multi_banner
     end
   end
   

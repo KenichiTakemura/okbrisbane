@@ -47,18 +47,18 @@ module OkboardsHelper
 
   def build_board_list
     html = %Q|<table id="okboard_table" class="table table-striped table-hover">
-        <thead class=""><tr><th>#{t(:id)}</th><th>#{t("category")}</th><th>|
+        <thead class=""><tr><th>#{t(:post_id)}</th><th>#{t("category")}</th><th>|
     if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
       html += t("price") + "</th><th>"
     end
     html += %Q|#{t("subject")}</th><th>#{t("created_at")}</th><th>#{t("viewed")}</th><th>#{t("comment")}</th>
-    <th>#{t("attachment")}</th><th>#{t("author")}</th></tr></thead>|
+    <th>#{t("author")}</th></tr></thead>|
     html += %Q|<tbody class="">|
     if @board_lists.empty?
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
-        html += %Q|<tr><td colspan="9">| + t("no_information")
-      else
         html += %Q|<tr><td colspan="8">| + t("no_information")
+      else
+        html += %Q|<tr><td colspan="7">| + t("no_information")
       end        
       html += "</td><tr>"
     else
@@ -82,18 +82,17 @@ module OkboardsHelper
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
         html += "#{post.price}" + " </td><td>"
       end
-      html += %Q|#{link_to_with_icon(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)),"","","icon-play")}</td><td>
+      html += %Q|#{link_to_with_icon(_truncate_with_length(post.subject, Okvalue::OKBOARD_TRUNCATE_SIZE),Okboard.okboard_link_with_id(@okpage, post.id, (@post_search.nil? ? nil : @post_search.id)),"","","icon-play")}</td><td>
        #{post.postedDate}</td><td>#{post.views}</td><td>|
        if post.comment.size > 0
          html += %Q|#{link_to(image_tag("#{I18n.locale}/common/say_1.jpg"),Okboard.okboard_link_with_id(@okpage, post.id, @post_search.id) + "#new_comment")}| + "#{post.comment.size}</td>"
        else
          html += %Q|<i class="icon-comment"></i>#{post.comment.size}</td>|
        end
-      html += "<td>"
-      if post.has_attachment?
-        html += image_tag("common/IconData2.gif") + "#{post.attachment.size}"
-      end
-      html += %Q|</td><td >| + author_name(post) + %Q|</td>|
+      #if post.has_attachment?
+      #  html += "<td>image_tag("common/IconData2.gif") + "#{post.attachment.size}" + </td>"
+      #end
+      html += %Q|<td >| + author_name(post) + %Q|</td>|
     end
     html.html_safe
   end

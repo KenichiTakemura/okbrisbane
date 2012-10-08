@@ -21,6 +21,9 @@ class PostsController < OkController
       something = params[:something]
       attached_image = Image.new(:avatar => image_attached, :something => something)
     end
+    if @post.respond_to? :requested_by
+      @post.requested_by = request.env['HTTP_USER_AGENT']
+    end
     ActiveRecord::Base.transaction do
       if @post.save
         @post.set_user(current_user)

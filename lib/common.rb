@@ -33,7 +33,8 @@ module Common
 
   # Time must be got from this method
   def self.current_time
-    Time.now.localtime
+    #Time.now.localtime
+    Time.now
   end
 
   def self.this_month
@@ -81,25 +82,26 @@ module Common
   end
 
   
-  def self.browser_detection(request)
-    result = request.env['HTTP_USER_AGENT']
+  def self.browser_detection(request, agent=nil)
+    return if !request.present? && !agent.present?
+    agent = agent.presence || request.env['HTTP_USER_AGENT']
     browser_compatible = Okvalue::NOT_DETECTED
-    if result =~ /Safari/
-      unless result =~ /Chrome/
-        version = result.split('Version/')[1].split(' ').first.split('.').first
+    if agent =~ /Safari/
+      unless agent =~ /Chrome/
+        version = agent.split('Version/')[1].split(' ').first.split('.').first
         browser_compatible = Okvalue::Safari
       else
-        version = result.split('Chrome/')[1].split(' ').first.split('.').first
+        version = agent.split('Chrome/')[1].split(' ').first.split('.').first
         browser_compatible = Okvalue::Chrome
       end
-    elsif result =~ /Firefox/
-      version = result.split('Firefox/')[1].split('.').first
+    elsif agent =~ /Firefox/
+      version = agent.split('Firefox/')[1].split('.').first
       browser_compatible = Okvalue::Firefox
-    elsif result =~ /Opera/
-      version = result.split('Version/')[1].split('.').first
+    elsif agent =~ /Opera/
+      version = agent.split('Version/')[1].split('.').first
       browser_compatible = Okvalue::Opera
-    elsif result =~ /MSIE/
-      version = result.split('MSIE')[1].split(' ').first
+    elsif agent =~ /MSIE/
+      version = agent.split('MSIE')[1].split(' ').first
       browser_compatible = Okvalue::MSIE
     end
     browser_compatible

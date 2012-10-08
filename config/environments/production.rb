@@ -89,8 +89,8 @@ Okbrisbane::Application.configure do
 
   # Exception Handling
   config.middleware.use ExceptionNotifier,
-	:email_prefix => "[OKBRISBANE Exception] ",
-	:sender_address => %{"Kenichi Takemura" <kenichi_takemura1976@yahoo.com>}
-#	:exception_recipients => %w{you@me.com}
+    :email_prefix => "[OKBRISBANE Exception] ",
+    :sender_address => %{"OKBRISBANE" <do_not_reply@okbrisbane.com>},
+    :exception_recipients => %w{kenichi_takemura1976@yahoo.com}
 
 end

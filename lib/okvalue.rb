@@ -15,7 +15,8 @@ module Okvalue
   #VERSION = "0.9-20120926"
   #VERSION = "1.0-20120929"
   #VERSION = "1.0.1-20121002"
-  VERSION = "1.0.2-20121005"
+  #VERSION = "1.0.2-20121005"
+  VERSION = "1.0.3-20121008"
 
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   
@@ -166,5 +167,7 @@ module Okvalue
   
   AJAX_TIMEOUT = 8000
   AJAX_RETRY = 3
+  
+  OKBOARD_TRUNCATE_SIZE = 60
 
 end

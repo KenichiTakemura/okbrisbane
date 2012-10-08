@@ -186,28 +186,6 @@ module ApplicationHelper
     end
     html.html_safe
   end
-
-  def single_header_banner(a)
-    #logger.debug("single_header_banner @okpage: #{@okpage} a: #{a}")
-    raise "No Page found(single_header_banner a=#{a})" if !@okpage
-    single_banner(Style.page(@okpage), :s_header, a)
-  end
-
-  def single_body_banner(a)
-    #logger.debug("single_body_banner @okpage: #{@okpage} a: #{a}")
-    raise "No Page found(single_body_banner a=#{a})" if !@okpage
-    single_banner(Style.page(@okpage), :s_body, a)
-  end
-
-  def single_background_banner(a)
-    raise "No Page found(single_background_banner a=#{a})" if !@okpage
-    single_banner(Style.page(@okpage), :s_background, a)
-  end
-
-  def multi_body_banner(a)
-    raise "No Page found(multi_body_banner a=#{a})" if !@okpage
-    multi_banner(Style.page(@okpage), :s_body, a)
-  end
   
   def _banner_create(div_id, p, s, a, b, style, body)
     logger.debug("div_id #{div_id} style: #{style}")
@@ -217,7 +195,7 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def single_banner(p, s, a)
+  def single_banner(p, s, a, scroll_size=nil)
     b,images = _collectImage(p,s,a)
     return "" if b.is_disabled
     div_id = Style.create_banner_div(p,s,a)
@@ -226,8 +204,8 @@ module ApplicationHelper
       return _banner_create(div_id,p,s,a,b,style,_generate_empty_banner(style,div_id))
     end
     if !(request.host =~ /admin.okbrisbane/)
-      if banner_ajaxable?
-        script = _script_document_ready(_show_banner(b,div_id))
+      if banner_ajaxable? && scroll_size.to_i >= 0
+        script = _script_document_ready(_show_single_banner(b,div_id,scroll_size))
         return _banner_create(div_id,p,s,a,b,style,script)
       end
     end
@@ -297,7 +275,7 @@ module ApplicationHelper
     %Q|<script type="text/javascript" charset="utf-8">#{script}</script>|.html_safe
   end
 
-  def multi_banner(p, s, a)
+  def multi_banner(p, s, a, scroll_size=nil)
     logger.debug("requested multi_banner #{p}, #{s}, #{a}")
     b,images = _collectImage(p,s,a)
     return "" if b.is_disabled
@@ -306,7 +284,18 @@ module ApplicationHelper
     if !images.present?
       return _banner_create(div_id,p,s,a,b,style,_generate_empty_banner(style,div_id))
     end
+    if !(request.host =~ /admin.okbrisbane/)
+      if banner_ajaxable?
+        script = _script_document_ready(_show_multi_banner(b,div_id,scroll_size))
+        return _banner_create(div_id,p,s,a,b,style,script)
+      end
+    end
     html = _banner_create(div_id,p,s,a,b,style,_generate_banner(b,images,div_id))
+    html = after_multi_banner(b, images, div_id, html)
+    html.html_safe
+  end
+  
+  def after_multi_banner(b, images, div_id, html)
     if images.size >= 2
       case b.effect
       when Banner::E_MSLIDE
@@ -321,7 +310,7 @@ module ApplicationHelper
         html += _script_document_ready(script)
       end
     end
-    html.html_safe
+    html.html_safe    
   end
 
   def version

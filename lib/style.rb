@@ -253,9 +253,9 @@ module Style
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
     :position_id => 3,
-    :div_width => 635, :div_height => 110,
+    :div_width => 530, :div_height => 110,
     :img_width => 120, :img_height => 100,
-    :style => 'position:relative;float:left;top:0px;left:10px;right:10px ',
+    :style => 'position:relative;float:left;top:0px;left:50px;padding:10px;',
     :effect => Banner::E_MSLIDE);
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
