@@ -8,6 +8,7 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  app/mailers\
  app/models\
  app/views\
+ app/script\
  config/locales\
  config/routes.rb\
  config/application.rb\

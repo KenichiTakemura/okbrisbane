@@ -7,25 +7,17 @@ class ApplicationController < ActionController::Base
   #before_filter :opening_soon
   before_filter :hit, :get_admin_notice
 
-  require 'thread'
-
   def initialize
     super
-    @lock = Mutex.new
   end
 
   def hit
     key = Common.today
-    logger.info("key: #{key} session[key]: #{session[key.to_sym]}")
     unless session[key.to_sym]
-      @lock.synchronize {
-        hit_day = DailyHit.find_by_day(key)
-        hit_day ||= DailyHit.new(:day => key)
-        hit_day.hitting
-        if current_user
-        hit_day.user_hitting
-        end
-      }
+      Counter.instance.hit
+      if current_user
+        Counter.instance.member_hit
+      end
       session[key.to_sym] = true
     end
   end

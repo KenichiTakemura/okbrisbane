@@ -57,20 +57,21 @@
 			<dt><span class="label"><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
 			<dt><span class="label"><%= t("content") %></span></dt>
-			<% if @post.respond_to? :requested_by && Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
+			<% if @post.respond_to?(:requested_by) && :Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
 				<dd><%= simple_format(@post.content.body) %></dd>
 			<% else %>
 				<dd><%= raw(@post.content.body) %></dd>
 			<% end %>
+			<%if @post.has_attachment? %>
 			<dt><span class="label"><%= t("attachment") %></span></dt>
-			<dd><%if @post.has_attachment? %>
+			<dd>
 				<% @post.attachment.each do |attachment| %>
 					<p style="position: relative; float: left;margin-left: 5px">
 						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
 						<%= attachment.filename %>
 					</p> <% end %>
-					<% else %>
-					<%= t(:attachable_no) %><% end %></dd>
+			</dd>
+			<% end %>
 		</dl>
 		<div class="page_control">
 			<div class="to_prev">

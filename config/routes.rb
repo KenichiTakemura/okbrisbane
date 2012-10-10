@@ -3,6 +3,8 @@ Okbrisbane::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   
   resources :mypages, :only => ['index','edit','update']
+  
+  match 'counters/batch', :via => :get
 
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
   match 'member_managements/sign_up', :via => :get

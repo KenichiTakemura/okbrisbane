@@ -61,7 +61,7 @@ class Banner < ActiveRecord::Base
   end
   
   def name_with_img_resolution
-    "#{name} #{img_resolution}"
+    "#{name} #{img_resolution} (#{client_image.size})"
   end
   
   def img_resolution
