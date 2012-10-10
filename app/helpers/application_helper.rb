@@ -139,9 +139,9 @@ module ApplicationHelper
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             if index == 0
-              html += %Q|<div><div style="margin: 0px 2px 0px">|
+              html += %Q|<div style="height:#{b.img_height}px"><div style="margin: 0px 2px 0px">|
             elsif index%count == 0
-              html += %Q|</div></div><div><div style="margin: 0px 2px 0px">|
+              html += %Q|</div></div><div style="height:#{b.img_height}px"><div style="margin: 0px 2px 0px">|
             end
             #html += %Q|<img src="#{image.original_image}" style="margin:0 3px 0" width="#{b.img_width}px" height="#{b.img_height}px"/>|
             #if !image.caption.nil? && !image.caption.empty?
@@ -156,10 +156,6 @@ module ApplicationHelper
           images.each_with_index do |image,index|
             html += %Q|<div style="margin: 0px 2px 0px;float:left">|
             html += one_image(b, image)
-            #<img src="#{image.original_image}" width="#{b.img_width}px" height="#{b.img_height}px"/>|
-            #if !image.caption.nil? && !image.caption.empty?
-            #  html += %Q|<div class="caption"><p>#{image.caption}</p></div>|
-            #end
             html += "</div>"
           end
           html += "</div>"

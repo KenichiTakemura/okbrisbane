@@ -57,7 +57,7 @@
 			<dt><span class="label"><%= t("category") %></span></dt>
 			<dd><%= t("#{@post.category}") %></dd>
 			<dt><span class="label"><%= t("content") %></span></dt>
-			<% if @post.respond_to?(:requested_by) && :Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
+			<% if @post.respond_to?(:requested_by) && Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
 				<dd><%= simple_format(@post.content.body) %></dd>
 			<% else %>
 				<dd><%= raw(@post.content.body) %></dd>

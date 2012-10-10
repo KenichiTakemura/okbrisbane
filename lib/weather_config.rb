@@ -29,7 +29,7 @@ module WeatherConfig
   AUSCityVisibleMap[:Perth] = false
   AUSCityVisibleMap[:Darwin] = true
 
-  # 서울·경기도  강원도 충청북도 충청남도 전라북도 전라남도 경상북도 경상남도 제주특별자치도
+  # 서울·경기도 강원도 충청북도 충청남도 전라북도 전라남도 경상북도 경상남도 제주특별자치도
   KORCityOrderList = [:seo,:gwn,:cbk,:cnm,:jbk,:jnm,:gbk,:gnm,:jju]
   #KORCityOrderList = [:seo]
 
@@ -44,6 +44,9 @@ module WeatherConfig
   KORCityXMLMap[:gbk] = "http://www.kma.go.kr/weather/forecast/mid-term-xml.jsp?stnId=143"
   KORCityXMLMap[:gnm] = "http://www.kma.go.kr/weather/forecast/mid-term-xml.jsp?stnId=159"
   KORCityXMLMap[:jju] = "http://www.kma.go.kr/weather/forecast/mid-term-xml.jsp?stnId=184"
+
+  #http://www.kma.go.kr/wid/queryDFS.jsp?gridx=61&gridy=125
+  
 
   KORCityMap = Common.new_orderd_hash
   KORCityMap[:seo] = "http://www.kma.go.kr/weather/forecast/mid-term_01.jsp"
