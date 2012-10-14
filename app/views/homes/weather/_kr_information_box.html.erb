@@ -9,7 +9,7 @@
 		<tr>
 			<th class="small"><%= t(:location)%></th>
 			<th class="small"><%= t(:forecast)%></th>
-			<th class="small"><%= t(:issuedOn)%></th>
+			<!-- th class="small"><%= t(:issuedOn)%></th -->
 			<th class="small"><%= t(:minTemp)%></th>
 			<th class="small"><%= t(:maxTemp)%></th>
 			</tr>
@@ -28,7 +28,7 @@
 			<% else %>
 			<td><%= image_tag("common/weather/haze.png") %></td>
 			<% end %>
-			<td nowrap><%= w.issued %></td>
+			<!-- td nowrap><%= w.issued %></td -->
 			<td><%= w.min %></td>
 			<td><%= w.max %></td>
 			</tr>

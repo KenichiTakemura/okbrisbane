@@ -21,7 +21,11 @@ class CommentsController < OkController
       if comment.save
         comment.subscribe_to(@post, current_user)
         if @post.comment_email
-          CommentMailer.send_comment_to_author(@okpage, @post, comment).deliver
+          if !@post.posted_by.email.eql?(comment.commented_by.email)
+            CommentMailer.send_comment_to_author(@okpage, @post, comment).deliver
+          else
+            Rails.logger.info("Self comment not send email. By #{comment.commented_by.email}")
+          end
         end
         @comment = Comment.new
         respond_to do |format|

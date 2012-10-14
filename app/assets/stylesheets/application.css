@@ -13,6 +13,17 @@
  *= require bootstrap
  */
 
+html {
+  height: 100%;
+  margin: 0 auto;
+}
+ 
+body {
+  overflow: auto;
+  padding: 5px;
+  height: 100%;
+}
+
 #page_body {
 	overflow: none;
 	width: 1000px;

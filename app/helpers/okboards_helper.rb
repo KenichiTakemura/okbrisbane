@@ -72,7 +72,7 @@ module OkboardsHelper
     html = ""
     @board_lists.each do |post|
       html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}">|
-      html += %Q|<td>#{post.id}</td>|
+      html += %Q|<td><span class="badge">#{post.id}</span></td>|
       if post.category.eql?(Okvalue::ADMIN_POST_NOTICE)
         html += %Q|<td class="text-warning">#{t("#{post.category}")}</td>|
       else
@@ -112,11 +112,12 @@ module OkboardsHelper
   def _left_side_menu
     html = %Q|<div id="page_section_left">|
     html += single_body_banner(1)
-    html += _left_side_menu_widget
+    #html += _left_side_menu_widget
     html += %Q|<div class="okboard_left_fixed_banners">|
     html += single_body_banner(2)
     html += single_body_banner(3)
     html += single_body_banner(4)
+    html += single_body_banner(9)
     # scroll effect
     html += _scroll_banner_show("left_side_menu_banner_2", single_body_banner(2), Okvalue::LEFT_SIDE_MENU_BANNER_2_SHOW_SIZE)
     html += _scroll_banner_show("left_side_menu_banner_3", single_body_banner(3), Okvalue::LEFT_SIDE_MENU_BANNER_3_SHOW_SIZE)
@@ -161,90 +162,18 @@ module OkboardsHelper
 
 
   def _left_side_menu_widget()
-    html = %Q|<div class="dropdown"><ul class="nav nav-pills nav-stacked affix" style="bottom:150px;left:50px;">|
-    case @okpage
-    when :p_job
-      links = [:p_job,:p_buy_and_sell,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_buy_and_sell
-      links = [:p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_well_being
-      links = [:p_well_being,:p_job,:p_buy_and_sell,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_estate
-      links = [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_motor_vehicle
-      links = [:p_motor_vehicle,:p_estate,:p_business,:p_accommodation,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_business
-      links = [:p_business,:p_estate,:p_motor_vehicle,:p_accommodation,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_accommodation
-      links = [:p_accommodation,:p_estate,:p_motor_vehicle,:p_business,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_law
-      links = [:p_law,:p_tax,:p_study,:p_immig,:p_mypage,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
-      paths = _path(links)
-    when :p_tax
-      links = [:p_tax,:p_law,:p_study,:p_immig,:p_mypage,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
-      paths = _path(links)
-    when :p_study
-      links = [:p_study,:p_law,:p_tax,:p_immig,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
-      paths = _path(links)
-    when :p_immig
-      links = [:p_immig,:p_law,:p_tax,:p_study,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
-      paths = _path(links)
-    when :p_yellowpage
-      links = [:p_yellowpage,:p_law,:p_tax,:p_study,:p_immig,
-        :p_buy_and_sell,:p_job,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
-      paths = _path(links)
-    when :p_mypage
-      links = [:p_job,:p_buy_and_sell,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    when :p_sponsor
-      links = [:p_job,:p_buy_and_sell,:p_well_being,
-        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
-        :p_law,:p_tax,:p_study,:p_immig]
-      paths = _path(links)
-    else
-      raise "Not implemented"
-    end
+    html = %Q|<ul class="nav">|
+    links = Okboard.get_links(@okpage)
+    paths = _path(links)
     links.each_with_index do |link,i|
-      html += %Q|<li style="position:relative">|
-      html += %Q|<a href="#{paths[i]}" class="btn dropdown-toggle" data-toggle="dropdown" data-target="#"></i>#{t(Style.page(link))}<b class="caret"></b></a>|
-      html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position:absolute;left:100px;">|
+      html += %Q|<li class="dropdown">|
+      html += %Q|<a href="#{paths[i]}" class="dropdown-toggle" data-toggle="dropdown" data-target="#"></i>#{t(Style.page(link))}<b class="caret"></b></a>|
+      html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">|
       html += "<li><a href=\"#{paths[i]}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
       html += _sub_menu(link)
       html += "</ul></li>"
     end
-    html += "</ul></div>"
+    html += "</ul>"
     html.html_safe
   end
 
@@ -283,6 +212,23 @@ module OkboardsHelper
     end
     if [:p_job, :p_buy_and_sell,:p_well_being].include? link
       html += "<li><a href=\"#{Okboard.okboard_link_write(link)}\" tabindex=\"-1\">#{t(:write_new)}</a></li>"
+    end
+    html.html_safe
+  end
+  
+  def show_filter
+    html = ""
+    if ![:p_mypage, :p_yellowpage].include?(@okpage)
+      html += %Q|
+      <div class="dropdown">
+      <a href="#" class="dropdown-toggle btn btn-small" data-toggle="dropdown">
+      <i class="icon-search icon-large"></i>#{t(:search)}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              #{render :partial => "okboards/shared/filter"}
+            </li>
+          </ul>
+        </div>|
     end
     html.html_safe
   end

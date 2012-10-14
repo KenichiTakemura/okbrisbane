@@ -20,9 +20,9 @@
 		<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge" %>
 	</div>
 		<%= f.label :user_name, t(:user_name)%>
-		<%= f.text_field :user_name, :class => "" %>
+		<%= f.text_field :user_name, :class => "input-xlarge" %>
 		<%= f.label :password, t(:signin_password)%>
-		<%= f.password_field :password, :class => "" %>
+		<%= f.password_field :password, :class => "" %><span class="help-inline text-info"><%=t(:password_morethan_x, :size => 6)%></span>
 		<%= f.label :password_confirmation, t(:password_confirmation)%>
 		<%= f.password_field :password_confirmation, :class => "" %>
 	<div class="group">

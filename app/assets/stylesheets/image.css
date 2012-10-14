@@ -36,6 +36,16 @@ img {
 	height: expression(this.width <= this.height ? "50px" : "auto");
 }
 
+.image-resize100_80 {
+	max-width: 100px;
+	max-height: 80px;
+}
+
+* html body .image-resize100_80 {
+	width: expression(this.width >= this.height ? "100px" : "auto");
+	height: expression(this.width <= this.height ? "80px" : "auto");
+}
+
 .image-resize140_120 {
 	max-width: 140px;
 	max-height: 120px;

@@ -1,4 +1,7 @@
 class OkboardsController < OkController
+  
+  layout "okboard", :except => [:yellowpage]
+
   def initialize
     super
     @sns_lock = Mutex.new
@@ -19,6 +22,7 @@ class OkboardsController < OkController
   end
 
   def mypage
+    #layout "application"
     @okpage = :p_mypage
     if !current_user
       session["user_return_to"] = request.original_url
@@ -81,7 +85,12 @@ class OkboardsController < OkController
 
   def view
     @post = _select_post
+    @post_search = PostSearch.new(:okpage => @okpage)
     if @post.nil? || @post.status != Okvalue::POST_STATUS_PUBLIC
+      if @post.nil?
+        model = MODELS[@okpage]
+        @post = model.new
+      end
       respond_to do |format|
         format.html { render :template => "okboards/view_deleted" }
         format.json { render :json => @post }

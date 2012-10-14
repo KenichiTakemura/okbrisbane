@@ -22,10 +22,10 @@ module MypagesHelper
           else
             html += %Q|<i class="icon-comment"></i>#{post.comment.size}|
           end
-          html += "</td><td>"
-          if post.comment_email
-            html += %Q|<i class="icon-check"></i>|
-          end
+          #html += "</td><td>"
+          #if post.comment_email
+          #  html += %Q|<i class="icon-check"></i>|
+          #end
           html += "</td></tr>"
           if post.comment.present? 
             html += %Q|<div class="modal hide fade" id="commentModal_#{post.class}_#{post.id}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel_#{post.class}_#{post.id}" aria-hidden="true">|

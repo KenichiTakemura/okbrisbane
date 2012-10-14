@@ -1,22 +1,26 @@
 <div id="okboards">
-	<div class="span3" style="width: 230px">
-    	<%= single_body_banner(1) %>
-    </div>
-    <div class="span7">
-		<%= single_body_banner(5) %>
+	<div class="row">
+		<div class="span3" style="width: 230px">
+	    	<%= single_body_banner(1) %>
+	    </div>
+	    <div class="span7" style="margin-bottom:10px">
+			<%= single_body_banner(5) %>
+		</div>
 	</div>
-	<%= _left_side_menu_widget %>
-	<div class="span10">
+	<div class="row span10">
 		<div id="content_body">
 			<%= show_notice %>
 			<%= show_alert %>
 			<%= render :partial => "okboards/#{Style.page(@okpage)}/index" %>
 		</div>			
 	</div>
-	
-	<div class="span3" style="float:right"><%= single_body_banner(2) %></div>
-	<div class="span3" style="float:right"><%= single_body_banner(3) %></div>
-	<div class="span3" style="float:right"><%= single_body_banner(4) %></div>
+	<div class="row" id="okboard_sponsor_links_bottom" style="position: relative; float: left; width: 100%">
+	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(2) %></div>
+	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(3) %></div>
+	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(4) %></div>
+	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(9) %></div>
+
+	</div>
 </div>
 </div>
 <%= _script_document_ready(%Q|

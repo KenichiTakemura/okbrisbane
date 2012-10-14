@@ -1,34 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<% if Okbrisbane::Application.config.ok_debug %>
-		<title>QUEENSLAND PORTAL OKBRISBANE DEBUG</title>
-		<% else %>
-		<title>QUEENSLAND PORTAL OKBRISBANE</title>
-		<% end %>
-		<script type="text/javascript">
-			var CKEDITOR_BASEPATH = '/assets/ckeditor/';
-		</script>
-		<%= stylesheet_link_tag "application" %>
-		<%= javascript_include_tag "application" %>
-		<%= csrf_meta_tag %>
+		<%= render :partial => "layouts/header" %>
 	</head>
 	<body>
 		<div id="page_body">
-			<% if socialable? %>
-			<div id="fb-root"></div>
-			<script>
-				( function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id))
-							return;
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-			</script>
-			<% end %>
+			<%= render :partial => "layouts/social" %>
 			<%= single_background_banner(1, 20) %>
 			<%= single_background_banner(2, 20) %>
 			<%= single_background_banner(3, 820) %>
@@ -45,31 +22,34 @@
 					<% if current_user %>
 					<%= current_user.name %>&nbsp;<%= t(:sir)%>
 					<% else %>
-					<span class="label label-info"><%= t(:signin)%></span>
+					<a href="<%=user_sign_in_path%>"><span class="label label-info"><%= t(:signin)%></span></a>
 					<%= t("or") %>
-					<span class="label label-inverse"><%= t(:signup)%></span>
+					<a href="<%=member_managements_sign_up_path%>"><span class="label label-inverse"><%= t(:signup)%></span></a>
 					<%= t("please") %>
 					<% end %>
 				</div>
 				<div id="logo">
-					<%= link_to image_tag("common/logo.gif", :size => "250x120"), root_path(:locale => 'ko' ) %>
+					<%= link_to image_tag("common/logo.gif", :size => "250x120", :class => "img-rounded"), root_path(:locale => 'ko' ) %>
 				</div>
+				<!--
 				<div id="devise">
-					<div id="account">
+					<div class="span3">
 						<% if !user_signed_in? %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_login.gif"), user_sign_in_path %>
+						<%= link_to t(:signin), user_sign_in_path, :class => "btn btn-link", :style => "color:#fff" %>
 						<% end %>
 						<% if !user_signed_in? %>
 						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
-						<%= link_to image_tag("#{I18n.locale}/Signup/btn_member.gif"), member_managements_sign_up_path %>
+						<%= link_to t(:signup), member_managements_sign_up_path, :class => "btn btn-link", :style => "color:#fff" %>
 						<% else %>
-						<%= link_to(image_tag("#{I18n.locale}/Signup/btn_logout.gif"), destroy_user_session_path, :method => :delete) %>
+						<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "pull-left btn btn-link", :style => "color:#fff;text-align:center" %>
 						<% end %>
 					</div>
 				</div>
+				-->
 				<div class="span3" style="margin-left:0px;margin-top:5px">
 					<% if current_user %>
-					<%= link_to(t(:mypage), mypage_okboards_path, :class => "btn btn-info") %>
+					<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "btn btn-small" %>
+					<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-small btn-info", "", "icon-user") %>
 					<% end %>
 				</div>
 			</div>
@@ -139,31 +119,7 @@
 		<div class="container ok_container">
 			<%= yield %>
 		</div>
-		<footer class="" style="background-color:#e0e0e0;height:65px;bottom:0px">
-			<h5 class="" style="text-align:center;">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%><br>
-			<%= Okvalue::FOOTER_TEXT2 %>
-			<br>
-			<div class="pull-right">
-			<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
-			<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
-			<%= link_to(t(:banner_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
-			<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
-			</div>
-			<p class="developer pull-left">
-				<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
-			</p>
-			</h5>
-		</footer>
-		<%= _script_document_ready(%Q|$(function() {
-				var topBtn = $('\#footer_links');	
-				topBtn.hide();
-				$(window).scroll(function () {
-				if ($(this).scrollTop() > #{Okvalue::FOOTER_LINKS_SHOW_SIZE}) {
-					topBtn.fadeIn();
-				} else {
-					topBtn.fadeOut();
-				}
-			});})|)%>
+		<%= render :partial => "layouts/footer" %>
 	</body>
 </html>
 

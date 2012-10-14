@@ -73,41 +73,6 @@
 
 }
 
-.signin_title {
-    background: none repeat scroll 0% 0% #642c78;
-    color: white;
-    text-shadow: none;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px; 
-  border-radius: 10px;
-    padding: 10px 15px;
-    margin-top: 30px;
-    font-size: 22px;
-    width: 260px;
-      -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    font-weight: normal;
-    font-family: "NanumGothic","Museo700",helvetica,arial,sans-serif;
-}
-
-
-.signout_view {
-  min-height: 100%;
-  left: 100px;
-  width: 100%;
-  position: relative;
-  float: right;
-}
-
-.signout_logo {
-  min-height: 100%;
-  left: 100px;
-  width: 100%;
-  position: relative;
-  align:center;
-  margin: 20px;
-}
 
 // Styles for feed box
 .top_feed_list {
@@ -126,9 +91,9 @@
 
 #feed_head_left {
   position: relative;
-  font-family: 'NanumGothicExtraBold';  
+  font-weight: bold;
   color: #ffffff;
-  width:  110px; 
+  width:  140px; 
   font-size: 18px;
   text-align: center;
 }
@@ -136,11 +101,11 @@
 #feed_head_right {
   position: absolute;
   background-color: #F2F2F2;
-  width:  210px; 
+  width:  180px; 
   height: 38px;
   top: 0px;
   right: 0px;
-  left: 110px;
+  left: 140px;
   text-align: right;
   color: #666666;
 }
@@ -149,15 +114,6 @@ p.feed_title:hover {
   padding-left: 5px;
   font-size: x-large;
   -webkit-transition: all 0.5s ease-in-out;
-}
-
-//#feed_body tr:hover {
-//  font-size: 15px;
-//  padding-left: 5px;
-//}
-
-.feed_text {
-  
 }
 
 p.price_tag {

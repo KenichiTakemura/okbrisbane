@@ -1,0 +1,29 @@
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<%= link_to(image_tag("common/logo_w.gif"), root_path, :class => "brand image-resize140_120") %>
+			<%= content_tag(:p, "OK", :class => "brand", :style => "margin-top:15px;font-size:40px;font-weight:bold;color:yellow") %>
+			<%= content_tag(:p, "BRISBANE.com", :class => "brand", :style => "margin-top:25px;margin-left:-30px;color:#fff") %>
+			<% if current_user %>
+			<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "btn btn-small" %>
+			<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-small btn-success", "", "icon-user") %>
+			<% else %>
+			<%= link_to(t(:signin), user_sign_in_path, :class => "btn btn-small btn-info") %>
+			<%= link_to(t(:signup), member_managements_sign_up_path, :class => "btn btn-small btn-success") %>
+			<% end %>
+			<a href="<%=yellowpage_okboards_path%>"><span class="label label-warning"><%=t(:Yellowpage)%></span></a>
+			<%= single_header_banner(1) %>
+			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<!-- Be sure to leave the brand out there if you want it shown -->
+
+			<!-- Everything you want hidden at 940px or less, place within here -->
+			<div class="nav-collapse">
+				
+				<%= _left_side_menu_widget %>
+				
+			</div>
+
+		</div>
+	</div>
+</div>

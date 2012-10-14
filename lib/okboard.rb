@@ -125,6 +125,74 @@ module Okboard
     %Q|/okboards/abuses?v=| + okpage_v(okpage) + "&d=" + param_enc(id)
   end
   
+  def self.get_links(okpage)
+    case okpage
+    when :p_job
+      links = [:p_job,:p_buy_and_sell,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_buy_and_sell
+      links = [:p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_well_being
+      links = [:p_well_being,:p_job,:p_buy_and_sell,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_estate
+      links = [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_motor_vehicle
+      links = [:p_motor_vehicle,:p_estate,:p_business,:p_accommodation,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_business
+      links = [:p_business,:p_estate,:p_motor_vehicle,:p_accommodation,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_accommodation
+      links = [:p_accommodation,:p_estate,:p_motor_vehicle,:p_business,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_law
+      links = [:p_law,:p_tax,:p_study,:p_immig,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
+    when :p_tax
+      links = [:p_tax,:p_law,:p_study,:p_immig,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
+    when :p_study
+      links = [:p_study,:p_law,:p_tax,:p_immig,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
+    when :p_immig
+      links = [:p_immig,:p_law,:p_tax,:p_study,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
+    when :p_yellowpage
+      links = [:p_yellowpage,:p_law,:p_tax,:p_study,:p_immig,
+        :p_buy_and_sell,:p_job,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation]
+    when :p_mypage
+      links = [:p_job,:p_buy_and_sell,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig]
+    when :p_sponsor
+      links = [:p_job,:p_buy_and_sell,:p_well_being,
+        :p_estate,:p_motor_vehicle,:p_business,:p_accommodation,
+        :p_law,:p_tax,:p_study,:p_immig]
+    else
+      raise "Not implemented"
+    end
+    links
+  end
+  
+  def self.get_links_i18n_list(okpage)
+    get_links(okpage).collect{ |l| [I18n.t(Style.page(l),l)]}
+  end
+  
   private
   
   SP = "+"

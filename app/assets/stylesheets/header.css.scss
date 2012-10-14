@@ -83,7 +83,8 @@
   padding: 0;
   list-style-type: none;
   font-size: 16px;
-  font-family: 'NanumGothicExtraBold'; 
+  font-weight: bold;
+  //font-family: 'NanumGothicExtraBold'; 
 }
 
 #header #header-bottom #navigation ul li {
@@ -106,7 +107,8 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  font-size: 18px;
+  //font-size: 18px;
+  //width: 130px;
 }
 
 #header #header-bottom #follows {

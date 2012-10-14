@@ -58,7 +58,6 @@ module Style
   
   PAGE_ID_MAX = 19
    
-   
   NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
   
   SECTIONS[:s_header] = "s_header"
@@ -341,6 +340,12 @@ module Style
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 4,
+      :div_width => 220, :div_height => 150,
+      :img_width => 220, :img_height => 150,
+      :style => 'position:relative;float:left;top:0px')
+      Banner.create(:page_id => Style.pageid_key(page),
+      :section_id => Style.sectionid(:s_body),
+      :position_id => 9,
       :div_width => 220, :div_height => 150,
       :img_width => 220, :img_height => 150,
       :style => 'position:relative;float:left;top:0px')

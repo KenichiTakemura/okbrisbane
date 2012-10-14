@@ -1,6 +1,7 @@
 <div class="" id="okboard_filter">
 	<%= form_for(@post_search, :html => {:class => "form-actions"}) do |f| %>
-	<%= f.hidden_field :okpage %>
+		<%= f.select(:okpage, options_for_select(Okboard.get_links_i18n_list(@okpage), @post_search.okpage), {:include_blank => false}, {:class => "span2", :multiple => false}) %>
+
 		<%= f.label :category, t(:category)%>
 		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 

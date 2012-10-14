@@ -31,7 +31,7 @@ module HomesHelper
     html += %Q|<div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p>| + link_to(t('more'), Okboard.okboard_link(category), :class => "btn btn-small") + " "
     if [:p_job,:p_buy_and_sell,:p_well_being].include?(category)
-      html += link_to(t('write_new'), Okboard.okboard_link_write(category), :class => "btn btn-small")
+      html += %Q|<a href="#{Okboard.okboard_link_write(category)}" class="btn btn-small"><i class="icon-pencil"></i>#{t(:write_new)}</a>|
     end
     html += %Q|</p></div></div><div id="feed_body_#{category}" class="feed_body">|
     if !top_page_ajaxable?

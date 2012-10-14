@@ -37,6 +37,7 @@ module DeviseHelper
     html += single_body_banner(2)
     html += single_body_banner(3)
     html += single_body_banner(4)
+    html += single_body_banner(9)
     html += "</div>"
     html.html_safe
   end

@@ -1,13 +1,5 @@
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
-	<div class="okboard_top">
-		<div class="page-header">
-		<h1>
-			<%= t(Style.page(@okpage))%>
-		</h1>
-		<p><%= t(:okpage_top_description) %></p>
-		</div>
-	</div>
-
+	<span class="label label-info"><%= t(:post_id) %>#<%= @post.id %></span>
 	<h3 class="text-info"><%= @post.subject %></h3>
 	<% if @post.respond_to? :price %>
 		<h4 class="muted"><%= @post.price %></h4>
@@ -31,24 +23,11 @@
 				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
 				<%= link_to_with_icon(t(:write_new), Okboard.okboard_link_write(@okpage), "btn btn-small", "margin:1px", "icon-pencil") %>
 				<% end %>
-				<% if current_user %>
-				<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-small btn-info", "margin:1px", "icon-user") %>
-				<% end %>
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 			</div>
 		</div>
 		<br>
 	<div class="okboard_view_content">
-		<!--
-		<div class="page_control">
-			<div class="to_prev">
-			<div class="to_prev_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
-			</div>
-			<div class="to_next">
-			<div class="to_next_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
-			</div>
-		</div>
-		-->
 		<dl class="dl-horizontal" style="font-size:16px;background-color:#fff;padding:5px">
 			<dt><span class="label"><%= t("author") %></span></dt>
 			<dd><%= author_name(@post) %></dd>
@@ -84,7 +63,6 @@
 		<br>
 
 		<div class="comment_logo">
-		<!-- %= image_tag("#{I18n.locale}/common/title_dt_user_comments.gif") % -->
 			<h3 class="text-success"><i class="icon-volume-up"></i><%= t(:comment) %> <%= t(:write) %></h3>
 		</div>
 		<div class="new_comment" id="new_comment">
