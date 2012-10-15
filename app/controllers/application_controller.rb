@@ -13,12 +13,19 @@ class ApplicationController < ActionController::Base
 
   def hit
     key = Common.today
+    return if request.remote_ip == Okvalue::MYHOST_IP
     unless session[key.to_sym]
-      Counter.instance.hit
+      #Counter.instance.hit
+      daily_hit = Rails.cache.read(:daily_hit).presence || 0
+      daily_member_hit = Rails.cache.read(:daily_member_hit).presence || 0
+      Rails.cache.write(:daily_hit, daily_hit + 1);
       if current_user
-        Counter.instance.member_hit
+        #Counter.instance.member_hit
+        Rails.cache.write(:daily_member_hit, daily_member_hit + 1);
       end
       session[key.to_sym] = true
+      Rails.logger.debug("daily_hit: #{Rails.cache.read(:daily_hit)}")
+      Rails.logger.debug("daily_member_hit: #{Rails.cache.read(:daily_member_hit)}")
     end
   end
 
@@ -85,7 +92,13 @@ class ApplicationController < ActionController::Base
     user_sign_out_path
   end
 
+  rescue_from Exceptions::NotFoundError, :with => :record_not_found
+  
   protected
+
+  def record_not_found
+    render :file => File.join("#{Rails.root}", 'public', '404.html'), :layout => false, :status => 404
+  end
 
   private
 

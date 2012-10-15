@@ -145,10 +145,10 @@ module Style
   # Rule page _ section _ postion
   # if _ section _ position => any page
   Effect[:any] = ""
-  Effect[:_s_header_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:true,generatePagination:false,hoverPause:true|
-  Effect[:_s_header_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:true,generatePagination:false,hoverPause:true|
-  Effect[:Home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:true,effect:'fade',crossfade:true,generateNextPrev:false|
-  Effect[:Home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:true,autoHeightSpeed:1000,generatePagination:false,effect:'fade',crossfade:true,generateNextPrev:false|
+  Effect[:_s_header_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:false,generatePagination:false,hoverPause:true|
+  Effect[:_s_header_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:false,generatePagination:false,hoverPause:true|
+  Effect[:Home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,effect:'fade',crossfade:true,generateNextPrev:false|
+  Effect[:Home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,autoHeightSpeed:1000,generatePagination:false,effect:'fade',crossfade:true,generateNextPrev:false|
 
   def self.getEffect(page, section, position)
     key = "#{page}_#{section}_#{position}"

@@ -172,5 +172,7 @@ module Okvalue
   AJAX_RETRY = 3
   
   OKBOARD_TRUNCATE_SIZE = 60
+  
+  MYHOST_IP = "127.0.0.1"
 
 end

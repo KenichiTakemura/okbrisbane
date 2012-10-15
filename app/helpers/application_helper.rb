@@ -136,6 +136,17 @@ module ApplicationHelper
           html += %Q|<div id="#{div_id}_#{Common.uniqe_token}">|
           html += %Q|<a class="#{div_id}_prev btn btn-primary" href="#" style="position:absolute;top:35px;left:-40px;"><i class="icon-step-backward icon-white"></i></a>|
           html += %Q|<a class="#{div_id}_next btn btn-primary" href="#" style="position:absolute;top:35px;right:-15px;"><i class="icon-step-forward icon-white"></i></a>|
+          html += %Q|<style type="text/css" media="screen">
+            .#{div_id}_slides_container {
+                width:#{b.div_width}px;
+                height:#{b.div_height}px;
+            }
+            .#{div_id}_slides_container div {
+                width:#{b.div_width}px;
+                height:#{b.div_height}px;
+                display:block;
+            }
+          </style>|
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             if index == 0
@@ -152,6 +163,10 @@ module ApplicationHelper
           html += "</div></div></div>"
           html += "</div>"
         else
+          html += %Q|<style type="text/css" media="screen">
+          .#{div_id}_slides_container {width:#{b.img_width}px;height:#{b.img_height}px;}
+          .#{div_id}_slides_container div {width:#{b.img_width}px;height:#{b.img_height}px;display:block;}
+          </style>|
           html += %Q|<div class="#{div_id}_slides_container">|
           images.each_with_index do |image,index|
             html += %Q|<div style="margin: 0px 2px 0px;float:left">|
@@ -159,6 +174,7 @@ module ApplicationHelper
             html += "</div>"
           end
           html += "</div>"
+          
         end
       end
       #html += "</div>"
@@ -174,7 +190,7 @@ module ApplicationHelper
       if banner_clickable?
         html = link_to(image_tag(image.original_image, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
       else
-        html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+        html = image_tag(image.original_image, :style => style, :alt => "Loading...", :size => "#{b.img_width}x#{b.img_height}")
       end
     end
     if !image.caption.nil? && !image.caption.empty?
