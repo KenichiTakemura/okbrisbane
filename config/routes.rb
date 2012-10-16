@@ -54,6 +54,7 @@ Okbrisbane::Application.routes.draw do
       get :mypage
       get :yellowpage
       post :more
+      post :post_admin_notice
       get :view
       get :write
       post :upload_image

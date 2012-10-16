@@ -21,6 +21,7 @@ class CreatePosts < ActiveRecord::Migration
       t.boolean :has_image, :default => false
       t.boolean :has_attachment, :default => false
       t.timestamps
-    end    
+    end
+    add_index table, :z_index
   end
 end

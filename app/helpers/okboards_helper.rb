@@ -47,7 +47,7 @@ module OkboardsHelper
 
   def build_board_list
     html = %Q|<table id="okboard_table" class="table table-striped table-hover">
-        <thead class=""><tr><th>#{t(:post_id)}</th><th>#{t("category")}</th><th>|
+        <thead class=""><tr><th style="width:0px;display:none"></th><th>#{t(:post_id)}</th><th>#{t("category")}</th><th>|
     if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
       html += t("price") + "</th><th>"
     end
@@ -56,9 +56,9 @@ module OkboardsHelper
     html += %Q|<tbody class="">|
     if @board_lists.empty?
       if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_buy_and_sell].include?(@okpage)
-        html += %Q|<tr><td colspan="8">| + t("no_information")
+        html += %Q|<tr><td colspan="9">| + t("no_information")
       else
-        html += %Q|<tr><td colspan="7">| + t("no_information")
+        html += %Q|<tr><td colspan="8">| + t("no_information")
       end        
       html += "</td><tr>"
     else
@@ -72,9 +72,10 @@ module OkboardsHelper
     html = ""
     @board_lists.each do |post|
       html += %Q|<tr class="okboard_list_body #{cycle("odd", "even")}">|
+      html += %Q|<td style="width:0px;display:none">#{post.id}</td>|
       html += %Q|<td><span class="badge">#{post.id}</span></td>|
-      if post.category.eql?(Okvalue::ADMIN_POST_NOTICE)
-        html += %Q|<td class="text-warning">#{t("#{post.category}")}</td>|
+      if post.is_admin_post_notice?
+        html += %Q|<td><span class="badge badge-warning">#{t("#{post.category}")}</span></td>|
       else
         html += %Q|<td>#{t("#{post.category}")}</td>|
       end

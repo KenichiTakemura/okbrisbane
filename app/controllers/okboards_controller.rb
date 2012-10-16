@@ -77,6 +77,7 @@ class OkboardsController < OkController
     logger.debug("@board_lists: #{@board_lists.size}  @lastid: #{@lastid}")
     logger.debug("@board_image_lists: #{@board_image_lists.size}") if @board_image_lists
     logger.debug("SearchedBy #{@post_search}")
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @post }
@@ -110,6 +111,7 @@ class OkboardsController < OkController
     @post = _write_post
   end
 
+  #ajax
   def more
     @previd = params[:lastid]
     if @@search_id.present?
@@ -122,6 +124,13 @@ class OkboardsController < OkController
     @lastid = find_lastid(@board_lists)
     @lastid ||= @previd
     logger.debug("@lastid: #{@lastid}")
+  end
+  
+  #ajax
+  def post_admin_notice
+    model = MODELS[@okpage]
+    @board_lists = model.priority_post
+    logger.debug("notice: #{@board_lists}")
   end
 
   #ajax

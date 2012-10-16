@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.string   "room_type"
   end
 
+  add_index "accommodations", ["z_index"], :name => "index_accommodations_on_z_index"
+
   create_table "admin_notices", :force => true do |t|
     t.integer  "posted_by_id"
     t.string   "posted_by_type"
@@ -187,6 +189,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.string   "address"
   end
 
+  add_index "businesses", ["z_index"], :name => "index_businesses_on_z_index"
+
   create_table "buy_and_sells", :force => true do |t|
     t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
@@ -213,6 +217,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.string   "price"
     t.string   "requested_by"
   end
+
+  add_index "buy_and_sells", ["z_index"], :name => "index_buy_and_sells_on_z_index"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -326,6 +332,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.integer  "garage",               :default => 0
   end
 
+  add_index "estates", ["z_index"], :name => "index_estates_on_z_index"
+
   create_table "homes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -377,6 +385,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "updated_at",                              :null => false
   end
 
+  add_index "immigrations", ["z_index"], :name => "index_immigrations_on_z_index"
+
   create_table "issues", :force => true do |t|
     t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
@@ -402,6 +412,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "updated_at",                              :null => false
     t.string   "version"
   end
+
+  add_index "issues", ["z_index"], :name => "index_issues_on_z_index"
 
   create_table "jobs", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -429,6 +441,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.string   "requested_by"
   end
 
+  add_index "jobs", ["z_index"], :name => "index_jobs_on_z_index"
+
   create_table "laws", :force => true do |t|
     t.string   "locale",                                  :null => false
     t.integer  "posted_by_id"
@@ -453,6 +467,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
+
+  add_index "laws", ["z_index"], :name => "index_laws_on_z_index"
 
   create_table "member_managements", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -493,6 +509,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.string   "price"
     t.boolean  "is_sold",              :default => false
   end
+
+  add_index "motor_vehicles", ["z_index"], :name => "index_motor_vehicles_on_z_index"
 
   create_table "mypages", :force => true do |t|
     t.integer  "mypagable_id"
@@ -567,6 +585,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "updated_at",                              :null => false
   end
 
+  add_index "studies", ["z_index"], :name => "index_studies_on_z_index"
+
   create_table "system_settings", :force => true do |t|
     t.integer  "post_expiry_length"
     t.boolean  "socialable",         :default => false
@@ -604,6 +624,8 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
+
+  add_index "taxes", ["z_index"], :name => "index_taxes_on_z_index"
 
   create_table "top_feed_lists", :force => true do |t|
     t.integer  "feeded_to_id"
@@ -682,5 +704,7 @@ ActiveRecord::Schema.define(:version => 20121008111044) do
     t.datetime "updated_at",                              :null => false
     t.string   "requested_by"
   end
+
+  add_index "well_beings", ["z_index"], :name => "index_well_beings_on_z_index"
 
 end

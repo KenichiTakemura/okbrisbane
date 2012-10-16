@@ -1,0 +1,2 @@
+$("tbody").prepend("<%= escape_javascript(render 'notice_post') %>")
+$('\#okboards').height($('\#okboards').height() + $('tr.okboard_list_body').height() * <%= @board_lists.size %>)

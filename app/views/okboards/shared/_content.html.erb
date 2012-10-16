@@ -38,7 +38,6 @@
 		</div>
 	</div>
 	<% end %>
-
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<div id="okboard_list_top" >
 			<% if Okbrisbane::Application.config.ok_debug %>
@@ -78,14 +77,16 @@
 	$('\#_lastid').val("#{@lastid}");
 	$('\#_more').click(function() {$('\#okboard_list_body_more_loading').css("display", "block");|
     if !@post_search.present? || !@post_search.id.present?
-      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;})|
+      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val()}); return false;});|
     else
-      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;})|
+      script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;});|
     end
 	%>
+	<% params = %Q|v: '#{Okboard.okpage_v(@okpage)}'| %>
+	<% script += _post(post_admin_notice_okboards_path, params) %>
 	<%= _script_document_ready(script)%>
 	<% if !@board_lists.empty? %>
 	<%= _script_document_ready(%Q|
-	$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": false,"aaSorting": [[ 0, "desc" ]]});
+		$('\#okboard_table').dataTable({"bFilter": false,"bInfo": false,"bPaginate": false,"bJQueryUI": false,"aaSorting": [[ 0, "desc" ]]});
 	|) %>
 	<% end %>

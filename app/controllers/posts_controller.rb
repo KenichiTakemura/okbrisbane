@@ -43,8 +43,9 @@ class PostsController < OkController
         else
           attached_file.attached_to_by(@post, current_user)
         end
-        @board_lists = Job.latest
-        @lastid = find_lastid(@board_lists)
+        #TODO
+        #@board_lists = Job.latest
+        #@lastid = find_lastid(@board_lists)
         flash[:notice] = I18n.t("successfully_created")
         respond_to do |format|
           format.html { redirect_to "#{Okboard.okboard_link(@okpage)}" }

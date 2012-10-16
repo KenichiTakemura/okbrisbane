@@ -190,7 +190,7 @@ module Okboard
   end
   
   def self.get_links_i18n_list(okpage)
-    get_links(okpage).collect{ |l| [I18n.t(Style.page(l),l)]}
+    get_links(okpage).collect{ |l| [I18n.t(Style.page(l)),l]}
   end
   
   private

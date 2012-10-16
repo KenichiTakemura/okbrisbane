@@ -60,10 +60,13 @@ class Post < ActiveRecord::Base
   # scope
   scope :asc, :order => 'id ASC'
   scope :desc, :order => 'id DESC'
+  scope :raw_post, where("z_index = ?", 0)
   scope :is_valid, where("status = ?", Okvalue::POST_STATUS_PUBLIC)
   scope :is_invalid, where("status = ? OR status = ?", Okvalue::POST_STATUS_HIDDEN, Okvalue::POST_STATUS_DRAFT)
   scope :expired, where("status = ?", Okvalue::POST_STATUS_EXPIRED)
-  scope :latest, is_valid.desc
+  scope :latest, is_valid.raw_post.desc
+  scope :valid_post, is_valid.raw_post
+  scope :priority_post, is_valid.where("z_index != ?", 0).desc
 
   scope :c_category, lambda { |cond|
     if cond.has_category?
@@ -148,7 +151,7 @@ class Post < ActiveRecord::Base
     end
   }
   
-  scope :search_no_order, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).is_valid.limit(limit)}
+  scope :search_no_order, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).valid_post.limit(limit)}
   scope :search, lambda { |cond,limit| search_no_order(cond,limit).desc }
   scope :search_except, lambda { |cond,ids,limit| search_no_order(cond,limit).except_ids(ids).desc }
   scope :search_after, lambda { |cond,post_id,limit| search_no_order(cond,limit).after_id(post_id).asc }
@@ -288,6 +291,10 @@ class Post < ActiveRecord::Base
     #list = Array.new
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
+  end
+  
+  def is_admin_post_notice?
+    self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
   end
   
   def status_list

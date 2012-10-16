@@ -432,7 +432,7 @@ module ApplicationHelper
   
   def show_alert
     html = ""
-    if alert
+    if alert.present?
       html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{alert}</h4></div>|
     end
     html.html_safe
@@ -445,7 +445,7 @@ module ApplicationHelper
   
   def show_notice
     html = ""
-    if notice
+    if notice.present?
       html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{notice}</h4></div>|
     end
     html.html_safe
