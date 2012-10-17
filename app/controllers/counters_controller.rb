@@ -2,7 +2,7 @@ class CountersController < ApplicationController
 
   before_filter :filter
   def filter
-    raise Exceptions::NotFoundError.new unless request.remote_ip == Okvalue::MYHOST_IP
+    raise Exceptions::NotFoundError.new unless request.remote_ip == Okbrisbane::Application.config.my_host
   end
 
   def batch

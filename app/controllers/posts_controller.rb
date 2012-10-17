@@ -10,7 +10,6 @@ class PostsController < OkController
   def create_post(_model, _param)
     @post = _model.new(params[_param])
     @post.valid_until = post_expiry
-    # TODO 
     @post.comment_email = true
     logger.debug("post: #{@post}")
     # Check if attached from MSIE

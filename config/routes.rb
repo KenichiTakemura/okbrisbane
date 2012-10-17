@@ -74,6 +74,7 @@ Okbrisbane::Application.routes.draw do
   resources :jobs, :only => ["new","create"]
   resources :buy_and_sells, :only => ["new","create"]
   resources :well_beings, :only => ["new","create"]
+  resources :accommodations, :only => ["new","create"]
   resources :laws, :only => ["new","create"]
 
   match 'comments/:id/likes' => "comments#likes", :via=>:post, :as => :comment_like

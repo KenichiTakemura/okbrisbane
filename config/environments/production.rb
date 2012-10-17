@@ -66,6 +66,8 @@ Okbrisbane::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.ok_debug = false
+  
+  config.my_host = "101.128.5.38"
 
   Paperclip.options[:command_path] = "/usr/bin/"
 

@@ -59,6 +59,11 @@ module Style
   PAGE_ID_MAX = 19
    
   NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
+  OPEN_PAGE = [:p_job, :p_buy_and_sell, :p_well_being, :p_accommodation]
+  
+  def self.open_page?(page)
+    OPEN_PAGE.include?(page)
+  end
   
   SECTIONS[:s_header] = "s_header"
   SECTIONS[:s_background] = "s_background"

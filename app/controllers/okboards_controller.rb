@@ -128,9 +128,11 @@ class OkboardsController < OkController
   
   #ajax
   def post_admin_notice
+    list_size = params[:num].to_i
     model = MODELS[@okpage]
     @board_lists = model.priority_post
-    logger.debug("notice: #{@board_lists}")
+    @board_list_size = list_size + @board_lists.size
+    logger.debug("notice: #{@board_lists} #{@board_list_size}")
   end
 
   #ajax

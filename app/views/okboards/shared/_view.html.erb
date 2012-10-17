@@ -4,12 +4,15 @@
 	<% if @post.respond_to? :price %>
 		<h4 class="muted"><%= @post.price %></h4>
 	<% end %>
+	<% if @post.respond_to?(:room_type) && @post.room_type.present? %>
+		<h5 class="muted"><%= t("#{@post.room_type}")%></h5>
+	<% end %>
     <%= render :partial => "okboards/shared/gallery" %>
     <!-- %= image_tag("#{I18n.locale}/common/title_dt_detail_info.gif") % -->
-    		<%= render :partial => "okboards/shared/sns" %>
+    	<%= render :partial => "okboards/shared/sns" %>
 		<div class="okboard_view_controll">
 			<div id="okboard_likes">
-				<%= image_tag("#{I18n.locale}/common/btn_vote.gif") %>
+				<!--%= image_tag("#{I18n.locale}/common/btn_vote.gif") %-->
 				<%= link_to_with_icon_remote(t(:good), Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
 				<%= @post.likes.to_s %>
 				<%= image_tag("common/rank/#{@post.rank}.png") %>
@@ -20,38 +23,47 @@
 			</div>
 			<div id="okboard_quick_links">
 				<%= link_to_with_icon(t("to_list"), Okboard.okboard_link(@okpage), "btn btn-small", "margin:1px", "icon-th-list") %>
-				<% if [:p_job,:p_buy_and_sell,:p_well_being].include?(@okpage) %>
-				<%= link_to_with_icon(t(:write_new), Okboard.okboard_link_write(@okpage), "btn btn-small", "margin:1px", "icon-pencil") %>
-				<% end %>
+				<%= write_new_btn %>
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 			</div>
 		</div>
 		<br>
-	<div class="okboard_view_content">
-		<dl class="dl-horizontal" style="font-size:16px;background-color:#fff;padding:5px">
-			<dt><span class="label"><%= t("author") %></span></dt>
-			<dd><%= author_name(@post) %></dd>
-			<dt><span class="label"><%= t("created_at") %></span></dt>
-			<dd><%= Common.date_format(@post.updated_at) %></dd>
-			<dt><span class="label"><%= t("category") %></span></dt>
-			<dd><%= t("#{@post.category}") %></dd>
-			<dt><span class="label"><%= t("content") %></span></dt>
-			<% if @post.respond_to?(:requested_by) && Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
-				<dd><%= simple_format(@post.content.body) %></dd>
-			<% else %>
-				<dd><%= raw(@post.content.body) %></dd>
-			<% end %>
+		<div class="okboard_view_content" style="margin-top:5px">
+		<table class="table table-bordered">
+			<tr>
+				<td><span class="label"><%= t("author") %></span></td>
+				<td><%= author_name(@post) %></td>
+				<td><span class="label"><%= t("created_at") %></span></td>
+				<td><%= Common.date_format(@post.created_at) %></td>
+				<td><span class="label"><%= t("category") %></span></td>
+				<td><%= t("#{@post.category}") %></td>
+			</tr>
+			<tr>
+				<td colspan="6">
+				<dl class="" style="font-size:14px;background-color:#fff;padding:5px">
+					<dt><span class="label"><%= t("content") %></span></dt>
+					<% if @post.respond_to?(:requested_by) && Common.browser_detection(nil, @post.requested_by) == Okvalue::MSIE %>
+						<dd><%= simple_format(@post.content.body) %></dd>
+					<% else %>
+						<dd><%= raw(@post.content.body) %></dd>
+					<% end %>
+				</dl>
+				</td>
+			</tr>
 			<%if @post.has_attachment? %>
-			<dt><span class="label"><%= t("attachment") %></span></dt>
-			<dd>
-				<% @post.attachment.each do |attachment| %>
+			<tr>
+				<td><span class="label"><%= t("attachment") %></span></td>
+				<td colspan="5">
+					<% @post.attachment.each do |attachment| %>
 					<p style="position: relative; float: left;margin-left: 5px">
 						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
-						<%= attachment.filename %>
+						<%= attachment.filename %><br>
+						<%= attachment.avatar_file_size %> (byte)
 					</p> <% end %>
-			</dd>
+				</td>
+			</tr>
 			<% end %>
-		</dl>
+		</table>
 		<div class="page_control">
 			<div class="to_prev">
 			<div class="to_prev_status" style="display:none"><%= image_tag("common/ajax_loading_1.gif")%></div>
@@ -61,7 +73,6 @@
 			</div>
 		</div>
 		<br>
-
 		<div class="comment_logo">
 			<h3 class="text-success"><i class="icon-volume-up"></i><%= t(:comment) %> <%= t(:write) %></h3>
 		</div>

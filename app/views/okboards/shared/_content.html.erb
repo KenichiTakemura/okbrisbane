@@ -41,7 +41,7 @@
 	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
 		<div id="okboard_list_top" >
 			<% if Okbrisbane::Application.config.ok_debug %>
-			<div id="list_total_num" class="pull-left">
+			<div id="list_total_num_top" class="pull-left">
 				<span class="label label-info"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
 			</div>
 			<% end %>
@@ -49,10 +49,12 @@
 				<%= show_filter %>
 			</div>
 			<div class="pull-right" style="margin-bottom:5px">
+				<%= write_new_btn %>
 				<%= link_to_with_icon(t(:down), "#_more", "btn btn-mini", "", "icon-arrow-down") %>
 			</div>
 		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
+		<%= hidden_field_tag :board_list_size, @board_lists.size, :id => "_board_list_size" %>
 		<div id="okboard_list">
 			<%= build_board_list %>
 			<div id="okboard_list_body_more_loading">
@@ -63,12 +65,13 @@
 	</div>
 	<div id="okboard_list_bottom" >
 		<% if Okbrisbane::Application.config.ok_debug %>
-		<div id="list_total_num" class="pull-left">
+		<div id="list_total_num_bottom" class="pull-left">
 			<span class="label label-info"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
 		</div>
 		<% end %>
 		<div class="pull-right" style="margin-top:5px;">
 			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini btn-inverse") %>
+			<%= write_new_btn %>
 			<%= link_to_with_icon(t(:up), "#okboard_list_top", "btn btn-mini", "", "icon-arrow-up") %>
 		</div>
 	</div>
@@ -82,7 +85,7 @@
       script += %Q|$.post("| + more_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', lastid: $('\#_lastid').val(), s:'| + Okboard.param_enc(@post_search.id) + %Q|'}); return false;});|
     end
 	%>
-	<% params = %Q|v: '#{Okboard.okpage_v(@okpage)}'| %>
+	<% params = %Q|v: '#{Okboard.okpage_v(@okpage)}', num: #{@board_lists.size}| %>
 	<% script += _post(post_admin_notice_okboards_path, params) %>
 	<%= _script_document_ready(script)%>
 	<% if !@board_lists.empty? %>

@@ -1,2 +1,5 @@
 $("tbody").prepend("<%= escape_javascript(render 'notice_post') %>")
-$('\#okboards').height($('\#okboards').height() + $('tr.okboard_list_body').height() * <%= @board_lists.size %>)
+$("#_board_list_size").val('<%=@board_list_size %>')
+$("#list_total_num_top").html("<%= escape_javascript(render 'update_list_size') %>")
+$("#list_total_num_bottom").html("<%= escape_javascript(render 'update_list_size') %>")
+$('#okboards').height($('\#okboards').height() + $('tr.okboard_list_body').height() * <%= @board_lists.size %>)

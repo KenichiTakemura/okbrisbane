@@ -211,7 +211,7 @@ module OkboardsHelper
     categories.each do |key,category|
       html += "<li><a href=\"#{Okboard.okboard_link_with_category(link,category)}\" tabindex=\"-1\">#{t(category)}</a></li>"
     end
-    if [:p_job, :p_buy_and_sell,:p_well_being].include? link
+    if Style.open_page?(link)
       html += "<li><a href=\"#{Okboard.okboard_link_write(link)}\" tabindex=\"-1\">#{t(:write_new)}</a></li>"
     end
     html.html_safe
@@ -232,6 +232,15 @@ module OkboardsHelper
         </div>|
     end
     html.html_safe
+  end
+  
+  def write_new_btn
+    html = ""
+    return html if !@okpage.present?
+    if Style.open_page?(@okpage)
+      html = link_to_with_icon(t(:write_new), Okboard.okboard_link_write(@okpage), "btn btn-small", "margin:1px", "icon-pencil")
+    end
+    html.html_safe    
   end
 
 end

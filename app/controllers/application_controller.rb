@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
 
   def hit
     key = Common.today
-    return if request.remote_ip == Okvalue::MYHOST_IP
+    Rails.logger.debug("hit from : #{request.remote_ip}")
+    return if request.remote_ip.eql?(Okbrisbane::Application.config.my_host)
     unless session[key.to_sym]
       #Counter.instance.hit
       daily_hit = Rails.cache.read(:daily_hit).presence || 0

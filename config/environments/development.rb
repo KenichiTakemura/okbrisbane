@@ -37,6 +37,8 @@ Okbrisbane::Application.configure do
   
   config.ok_debug = true
   
+  config.my_host = "127.0.0.1"
+  
   Paperclip.options[:command_path] = "/usr/bin/"
   
   # Mail
