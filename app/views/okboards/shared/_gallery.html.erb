@@ -1,5 +1,4 @@
-<% if !@post.image.empty? %>
-<!-- %= image_tag("#{I18n.locale}/common/title_dt_detail_photos.gif") % -->
+<% if @post.image.present? && @post.image.size > 1 %>
 <div class="okboard_image_gallery">
 	<div class="something" id="something">
 		<%= @post.image.first.something %>
@@ -104,4 +103,20 @@
 
 	}); 
 </script>
+<% end %>
+<% if @post.image.present? && @post.image.size == 1 %>
+<div class="okboard_image_gallery">
+	<div class="something" id="something">
+		<%= @post.image.first.something %>
+	</div>
+	
+	<ul class="thumbnails">
+    <li class="span4">
+    	<div class="thumbnail">
+    		<%= image_tag(@post.image.first.original_image, :alt => "", :class => "image-resize300_200 img-polaroid") %>
+		    <h3><%= @post.image.first.something %></h3>
+    		</div>
+    </li>
+    </ul>
+</div>
 <% end %>

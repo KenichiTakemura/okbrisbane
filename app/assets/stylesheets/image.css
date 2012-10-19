@@ -86,6 +86,14 @@ img {
 	height: expression(this.width <= this.height ? "100px" : "auto");
 }
 
+.image-resize360_270 {
+	max-width: 360px;
+	max-height: 270px;
+}
 
+* html body .image-resize360_270 {
+	width: expression(this.width >= this.height ? "360px" : "auto");
+	height: expression(this.width <= this.height ? "270px" : "auto");
+}
 
 

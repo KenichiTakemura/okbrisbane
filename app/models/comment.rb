@@ -24,6 +24,10 @@ class Comment < ActiveRecord::Base
 
   # Add a comment to a post
   def subscribe_to(post, user)
+    comment_size = post.comment.size
+    logger.debug("Current number of comment: #{comment_size}")
+    number = comment_size > 0 ? comment_size + 1 : 1
+    update_attribute(:number, number)
     self.update_attribute(:commented_by, user)
     self.update_attribute(:commented, post)
   end

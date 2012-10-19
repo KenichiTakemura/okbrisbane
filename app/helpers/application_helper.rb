@@ -461,8 +461,11 @@ module ApplicationHelper
     html += %Q|console.log("ajax complete");|
     end
     html += %Q|}).error(function(xhr, textStatus, errorThrown ) {
-        if (textStatus == 'timeout') {
-            this.tryCount++;
+        if (textStatus == 'timeout') {|
+    if Okbrisbane::Application.config.ok_debug
+    html += %Q|console.log("ajax timeout occurred.");|
+    end
+    html += %Q|this.tryCount++;
             if (this.tryCount <= this.retryLimit) {
                 //try again
                 $.ajax(this);

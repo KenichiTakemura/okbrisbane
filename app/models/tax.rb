@@ -8,7 +8,8 @@ class Tax < Post
   Categories = Common.new_orderd_hash
   Categories[:for_business] = "for_business"
   Categories[:for_tax_return] = "for_tax_return"
-  
+  Categories[:for_personal] = "for_personal"
+
   def category_list()
     list = Array.new
     Categories.each do |key,value|

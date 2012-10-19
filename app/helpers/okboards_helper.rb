@@ -33,7 +33,7 @@ module OkboardsHelper
       html += _script_document_ready(%Q|$('\#post_Carousel_#{post.id}').carousel();|)
     end
     html += %Q|<h3>| +  post.subject + "</h3>"
-    if post.respond_to?(:price)
+    if post.respond_to?(:price) && post.price.present?
       html += %Q|<p class="price_tag">| + post.price
       html += "</p>"
     end

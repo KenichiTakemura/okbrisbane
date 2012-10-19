@@ -58,7 +58,7 @@ module HomesHelper
            end
            html += %Q|<td align="left" valign="top">#{_truncate_with_length(feed.feeded_to.subject, 70)}|
            html += "<p>#{feed.feeded_to.postedDate}</p>"
-           if feed.feeded_to.respond_to? :price
+           if feed.feeded_to.respond_to?(:price) && feed.feeded_to.price.present?
              html += %Q|<p class="price_tag">| + feed.feeded_to.price + "</p>"
            end
            if category.eql?(:p_estate)

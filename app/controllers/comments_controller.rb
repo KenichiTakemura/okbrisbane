@@ -15,8 +15,6 @@ class CommentsController < OkController
     model = MODELS[@okpage]
     @post = model.find(params[:commented_id])
     # File the last number of comment for post
-    comment_size = @post.comment.size
-    comment.number = comment_size > 0 ? comment_size + 1 : 1
     ActiveRecord::Base.transaction do
       if comment.save
         comment.subscribe_to(@post, current_user)

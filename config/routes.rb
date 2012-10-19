@@ -76,6 +76,7 @@ Okbrisbane::Application.routes.draw do
   resources :well_beings, :only => ["new","create"]
   resources :accommodations, :only => ["new","create"]
   resources :laws, :only => ["new","create"]
+  resources :taxes, :only => ["new","create"]
 
   match 'comments/:id/likes' => "comments#likes", :via=>:post, :as => :comment_like
   match 'comments/:id/dislikes' => "comments#dislikes", :via=>:post, :as => :comment_dislike
