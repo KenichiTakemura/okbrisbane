@@ -14,7 +14,8 @@
 			<%= single_background_banner(6, 1620) %>
 		</div>
 		<%= render :partial => "okboards/shared/navigation" %>
-		<header style="position:relative;margin-top:120px;height:150px">
+		<div class="row-fluid">
+		<header style="position:relative;margin-top:180px;height:150px">
 			<div class="container">
 			<div class="span4">	
 			<h1><%= t(Style.page(@okpage))%></h1>
@@ -22,10 +23,11 @@
 				<%= t(:okpage_top_description) %>
 			</p>
 			</div>
-			<div class="span7">	
+			<div class="span8">	
 			<%= single_header_banner(2) %>
 			</div>
 		</header>
+		</div>
 		<div class="container ok_container">
 			<%= yield %>
 		</div>

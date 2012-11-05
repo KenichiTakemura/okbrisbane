@@ -1,6 +1,6 @@
 module Okiconv
   require 'iconv'
-  
+
   def self.euckr_to_utf8(from_word)
     File.open("#{Rails.root}/tmp/euckr", 'w:euc-kr') do |file|
       file << from_word

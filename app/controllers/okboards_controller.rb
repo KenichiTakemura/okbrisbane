@@ -10,7 +10,7 @@ class OkboardsController < OkController
   before_filter :_before_, :except => ["mypage","yellowpage"]
 
   def _before_
-    raise "Bad Request" if params[:v].nil?
+    redirect_to root_path and return if params[:v].nil?
     logger.debug("v: #{params[:v]} c: #{params[:c]} d: #{params[:d]} s: #{params[:s]}")
     @board = Okboard.param_v(params[:v])
     redirect_to root_path and return if !@board.present?

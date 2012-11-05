@@ -277,12 +277,10 @@ class Post < ActiveRecord::Base
   end
     
   def has_image?
-    #!self.image.empty?
     has_image
   end
       
   def has_attachment?
-    #!self.attachment.empty?
     has_attachment
   end
   
