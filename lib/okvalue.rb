@@ -7,7 +7,6 @@ module Okvalue
   #VERSION = "0.3-20120912"
   #VERSION = "0.3.1-20120913"
   #VERSION = "0.4-20120914"
-  #Plan
   #VERSION = "0.5-20120917"
   #VERSION = "0.6-20120919"
   #VERSION = "0.7-20120921"
@@ -19,7 +18,10 @@ module Okvalue
   #VERSION = "1.0.3-20121008"
   #VERSION = "1.0.4-20121014"
   #VERSION = "1.0.5-20121015"
-  VERSION = "1.0.6-20121016"
+  #VERSION = "1.0.6-20121016"
+  VERSION = "1.0.7-20121106"
+  
+  TERMS_DATE = Time.parse("2012-11-01 00:00:00")
   
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   

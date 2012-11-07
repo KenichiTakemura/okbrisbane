@@ -1,0 +1,37 @@
+<%= render :partial => "devise/shared/header" %>
+<div id="_title">
+	<div class="page-header">
+		<h1> <%= t(Style.page(@okpage))%> </h1>
+		<p>
+			<%= t("#{Style.page(@okpage)}_okpage_top_description".to_sym) %>
+		</p>
+	</div>
+</div>
+
+<div class="alert alert-info">
+	<%= t(:agreement_required)%>
+</div>
+<div id="_main">
+	<div class="signup_form">
+		<h4 class="text-info"> <%= t("termofservice")%> </h4>
+		<div style="width:100%;height:500px;overflow:auto;">
+			<blockquote>
+				<%= raw(UsersHelper.termsofservice) %>
+			</blockquote>
+		</div>
+		<br>
+		<h4 class="text-info"> <%= t("termofpersonalinfomation")%> </h4>
+		<div style="width:100%;height:500px;overflow:auto;">
+			<blockquote>
+				<%= raw(UsersHelper.termofpersonalinfomation) %>
+			</blockquote>
+		</div>
+		<br>
+		<div class="actions">
+			<%= link_to(image_tag("#{I18n.locale}/Signup/agreement.jpg"), agreed_path, :class => "") %>
+		</div>
+	</div>
+</div>
+<%= render :partial => "devise/shared/footer" %>
+<%= active_menu("_signin") %>
+

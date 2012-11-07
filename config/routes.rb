@@ -11,6 +11,8 @@ Okbrisbane::Application.routes.draw do
   match 'member_managements/sign_out', :via => :get, :as => :user_sign_out
   match 'member_managements/term', :via=>:get, :as => :termsofservice
   match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
+  match 'member_managements/agreememnt_required', :via=>:get, :as => :agreement
+  match 'member_managements/agreed', :via=>:get, :as => :agreed
   match 'member_managements/inactive_signup', :via=>:get, :as => :user_inactive_signup
   match 'member_managements/sending_reset_password_instructions', :via=>:get, :as => :user_sending_reset_password_instructions
   match 'member_managements/after_reset_password', :via=>:get, :as => :user_after_reset_passwod

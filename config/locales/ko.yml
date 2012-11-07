@@ -814,3 +814,4 @@ ko:
   password_morethan_x: 비밀번호는 %{size}자이상 입력하십시요 
   next_post: '다음글'
   prev_post: '이전글'
+  agreement_required: "Fix me"

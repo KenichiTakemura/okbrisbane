@@ -1,7 +1,7 @@
 class MemberManagementsController < OkController
 
   before_filter :page_p_signup, :only => ["sign_up","term","personal","create","inactive_signup"]
-  before_filter :page_p_signin, :only => ["sing_in","sending_reset_password_instructions","after_reset_password","after_confirmation","after_resending_confirmation_instructions"]
+  before_filter :page_p_signin, :only => ["sing_in","sending_reset_password_instructions","after_reset_password","after_confirmation","after_resending_confirmation_instructions","agreememnt_required"]
   def page_p_signup
     @okpage = :p_signup
   end
@@ -74,10 +74,23 @@ class MemberManagementsController < OkController
       format.html # personal.html.erb
     end
   end
+  
+  def agreememnt_required
+    @member_management = MemberManagement.new
+    respond_to do |format|
+      format.html # agreememnt_required.html.erb
+    end
+  end
 
   def create
     session[:agreed] = true
     redirect_to new_user_registration_path
+  end
+  
+  def agreed
+    redirect_to new_user_registration_path if !current_user
+    current_user.agree
+    redirect_to after_sign_in_path_for(current_user)
   end
 
 end

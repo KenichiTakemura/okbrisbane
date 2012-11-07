@@ -66,5 +66,14 @@ module RateConfig
     Rails.logger.debug("rate info: #{infobox}")
     infobox
   end
+  
+  def self.cleanup
+    rate_info = Rate.older(3)
+    if rate_info.present?
+      rate_info.each do |rate|
+        rate.destroy
+      end
+    end
+  end
 
 end

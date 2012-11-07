@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :user_name, :is_special, :confirmed_at
-  # attr_accessible :title, :body
+  attr_accessible :agreed_on, :provider, :uid
 
   has_one :mypage, :as => :mypagable, :class_name => "Mypage", :dependent => :destroy
   has_many :role, :as => :rolable, :class_name => "Role", :dependent => :destroy
@@ -22,11 +22,25 @@ class User < ActiveRecord::Base
   has_many :image, :as  => :attached_by, :class_name => 'Image', :dependent => :destroy
   has_many :contact, :as => :contacted_by
 
+  PROVIDERS = Hash.new
+  PROVIDERS[:facebook] = "facebook"
+  PROVIDERS[:google] = "google_oauth2"
+  PROVIDERS[:okbrisbane] = "okbrisbane"
+  
   validates_presence_of :user_name
   after_create :create_mypage, :init_role
   
   def name
     user_name
+  end
+
+  def agreed?
+    return false if !self.agreed_on.present?
+    self.agreed_on > Okvalue::TERMS_DATE
+  end
+
+  def agree
+    self.update_attribute(:agreed_on, Common.current_time)
   end
 
   def init_role
