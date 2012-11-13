@@ -1,53 +1,51 @@
 class HomesController < OkController
   
   def collectFeed(category)
-    case category
-    when :p_job
-      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT)
-    when :p_buy_and_sell
-      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT)
-    when :p_estate
+    limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
+    if Style.text_feed?(category)
+      return TopFeedList.feed_nomatter_image(category, limit)
+    elsif Style.image_feed?(category)
       image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
-      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
+      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), limit)
       return list,image_list
-    when :p_business
-      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
-      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
-      return list,image_list
-    when :p_motor_vehicle
-      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
-      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
-      return list,image_list
-    when :p_accommodation
-      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
-      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), TopFeedList::TOP_FEED_LIMIT)
-      return list,image_list
-    when :p_law
-      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT_LOWER)
-    when :p_study
-      return TopFeedList.feed_nomatter_image(category, TopFeedList::TOP_FEED_LIMIT_LOWER)
     else
-    raise "Bad Category"
+      raise "Bad Category"
     end
   end
   
   def pick_feed
-    @job_feed_lists = collectFeed(:p_job)
-    @buy_and_sell_feed_lists = collectFeed(:p_buy_and_sell)
-    @estate_lists,@estate_image_lists  = collectFeed(:p_estate)
-    @business_lists,@business_image_lists = collectFeed(:p_business)
-    @motor_vehicle_lists,@motor_vehicle_image_lists = collectFeed(:p_motor_vehicle)
-    @accommodation_lists,@accommodation_image_lists = collectFeed(:p_accommodation)
-    @legal_service_lists = collectFeed(:p_law)
-    @study_lists = collectFeed(:p_study)
+    Style::FEED_WITHOUT_IMAGE.each do |category|
+      @feed_lists[category] = collectFeed(category)
+    end
+    Style::FEED_WITH_IMAGE.each do |category|
+      @feed_lists[category],@image_feed_lists[category] = collectFeed(category)
+    end
   end
 
   def index
     if !top_page_ajaxable?
+      @feed_lists = Hash.new
+      @image_feed_lists = Hash.new
       pick_feed
     else
+      @feed_lists = Hash.new
+      @image_feed_lists = Hash.new
+      Style::FEED_WITHOUT_IMAGE.each do |category|
+        if Okvalue::FEED_SHOW_SIZE[category] < 1
+          @feed_lists[category] = collectFeed(category)
+        end
+      end
+      Style::FEED_WITH_IMAGE.each do |category|
+        if Okvalue::FEED_SHOW_SIZE[category] < 1
+          @feed_lists[category],@image_feed_lists[category] = collectFeed(category)
+        end
+      end
     end
     @okpage = :p_home
+    @user = User.new if !current_user
+    @weather_au = Weather.weather_for_location(Common.today, Okvalue::AU, :Brisbane).first
+    @weather_kr = Weather.weather_for_location(Common.today, Okvalue::KR, :seo).first
+    @rates = Rate.rate_for()
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -57,7 +55,7 @@ class HomesController < OkController
   def top_feed
     @okpage = :p_home
     @category = params[:c].to_sym
-    if [:p_job,:p_buy_and_sell,:p_law,:p_study].include? @category
+    if Style.text_feed?(@category)
       @list = collectFeed(@category)
     else
       @list,@image_list = collectFeed(@category)
@@ -67,8 +65,15 @@ class HomesController < OkController
   
   def current_weather
     @country = params[:c]
-    @weather = Weather.weather_for(Common.today, @country)
-    @dateOn = @weather.first.forecast_for if @weather.present?
+    weather = Weather.weather_for(Common.today, @country)
+    logger.debug("weather: #{weather.size}")
+    @weather_map = Common.new_orderd_hash
+    weather.each do |w|
+      logger.debug("weather: #{w.location}")
+      @weather_map[w.location.to_sym] = w
+    end
+    logger.debug("@weather_map: #{@weather_map}")
+    @dateOn = weather.first.forecast_for if weather.present?
   end
 
   def current_rate

@@ -14,7 +14,7 @@ module OkboardsHelper
   end
 
   def section_span_for(post, category)
-    html = %Q|<span style="background-color:#e0e0e0;width:470px"><ul class="thumbnails"><li><div class="thumbnail">|
+    html = %Q|<span ><ul class="thumbnails"><li><div class="thumbnail visible_span">|
     html += noimage?(post)
     if !post.image.empty?
       html += %Q|<div id="post_Carousel_#{post.id}" class="carousel slide"><div class="carousel-inner">|

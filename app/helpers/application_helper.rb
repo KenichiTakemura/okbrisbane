@@ -183,14 +183,15 @@ module ApplicationHelper
   end
   
   def one_image(b, image, style=nil)
-    Rails.logger.debug("one_image host : #{request.host}")
+    sc = Style.get_style_class(Style.pagename(b.page_id), Style.sectionname(b.section_id),b.position_id)
     if request.host =~ /admin.okbrisbane/
-      html = image_tag(image.original_image, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+      html = image_tag(image.original_image, :class => sc, :style => style, :size => "#{b.img_width}x#{b.img_height}")
+      Rails.logger.debug("one_image html : #{html}")
     else
       if banner_clickable?
-        html = link_to(image_tag(image.original_image, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
+        html = link_to(image_tag(image.original_image, :class => sc, :style => "width:#{b.img_width}px;height:#{b.img_height}px;#{style}"), Sponsor.sponsor_link_to(image.attached_id, image.id))
       else
-        html = image_tag(image.original_image, :style => style, :alt => "Loading...", :size => "#{b.img_width}x#{b.img_height}")
+        html = image_tag(image.original_image, :class => sc, :style => style, :alt => "Loading...", :size => "#{b.img_width}x#{b.img_height}")
       end
     end
     if !image.caption.nil? && !image.caption.empty?
@@ -209,7 +210,7 @@ module ApplicationHelper
 
   def single_banner(p, s, a, scroll_size=nil)
     b,images = _collectImage(p,s,a)
-    return "" if b.is_disabled
+    return "" if b.is_disabled && !(request.host =~ /admin.okbrisbane/)
     div_id = Style.create_banner_div(p,s,a)
     style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
     if !images.present?
@@ -250,32 +251,6 @@ module ApplicationHelper
 
   def _price(price)
     number_to_currency(price, :locale => 'en')
-  end
-
-  def navigation(over, out)
-    html = %Q|<div id="navigation"><ul style="margin:0px">|
-    Style::NAVI.each do |key|
-      value = Style.page(key)
-      html += %Q|<li class="navi" id="navi_#{value}">#{t(value)}</li>|
-    end
-    script = ""
-    Style::NAVI.each do |key|
-      value = Style.page(key)
-      if key.eql?(:p_yellowpage)
-        script += %Q|
-        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","yellow")});
-        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
-        $('\#navi_#{value}').click(function(){window.location.href ="#{yellowpage_okboards_path}| + %Q|"});|
-      else
-        script += %Q|
-        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","#{Okvalue::COLORMAP[cycle("ok","naver","blue").to_sym]}")});
-        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
-        $('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
-      end
-    end
-    html += _script_document_ready(script)
-    html += "</ul></div>"
-    html.strip.html_safe
   end
     
   def _script_document_ready(script)

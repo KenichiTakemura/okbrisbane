@@ -39,12 +39,12 @@ contact_mail_to = "info@okbrisbane.com"
 # SystemSetting
 ss = SystemSetting.new
 ss.post_expiry_length = 30
-ss.socialable = false
+ss.socialable = true
 ss.issue_report_to = "kenichi_takemura1976@yahoo.com"
 ss.admin_email = contact_mail_to
 ss.contact_email = contact_mail_to
-ss.top_page_ajax = false
-ss.banner_clickable = true
+ss.top_page_ajax = true
+ss.banner_clickable = false
 ss.banner_ajaxable = true
 ss.save
 

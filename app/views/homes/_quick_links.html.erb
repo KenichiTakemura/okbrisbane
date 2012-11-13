@@ -1,0 +1,14 @@
+<div class="row-fluid">
+<strong><p class="well well-small"><%=t(:quick_links)%></p></strong>
+<table class="table table-condensed table-hover white_box">
+	<% QuickLinks.links.each do |k,v| %>
+
+<tr class="info">
+	<td><%=image_tag("common/ico_arrow_01.gif")%></td>
+	<td><%=link_to(t(v[0]),v[1])%></td>
+
+</tr>
+	<% end %>
+
+</table>
+</div>

@@ -1,0 +1,50 @@
+<!-- NAVBAR
+================================================== -->
+<!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+<div class="container navbar-wrapper">
+
+	<div class="navbar">
+		<div class="navbar-inner">
+			<!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+			<a class="brand" href="#">
+				<%= t("welcome_message")%>
+				<% if current_user %>
+				<%= current_user.name %>&nbsp;<%= t(:sir)%>
+				<% end %>
+			</a>
+			<div class="nav-collapse collapse pull-right">
+				<ul class="nav">
+					<% if current_user %>
+					<li class="">
+						<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "btn-link" %>
+					</li>
+					<li class="">
+						<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "", "", "icon-user") %>
+					</li>
+					<% end %>
+					<% if !current_user %>
+					<li class="">			
+						<%= link_to_with_icon(t(:signup), member_managements_sign_up_path, "", "", "") %>
+					</li>
+					<% end %>
+					<li class="">
+						<%= link_to_with_icon_with_id(t("bookmarkme"),"#","btn-link","","bookmarkme","icon-star")%>
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+				<% if !current_user %>
+					<%= form_for("user", :url => user_session_path, :html => { :class => "navbar-form form-inline pull-right"}) do |f| %>
+					<div class="input-prepend">
+						<span class="add-on">@</span><%= f.email_field :email, :class => "input-large" %>
+					</div>
+					<%= f.password_field :password, :class => "input-small" %>
+					<label class="checkbox"> <%= f.check_box :remember_me %><%= t(:remember_me_short) %> </label>
+					<%= f.submit t(:signin), :class => "btn" %>
+					<% end %>
+				<% end %>
+		</div><!-- /.navbar-inner -->
+	</div><!-- /.navbar -->
+
+</div><!-- /.container -->
+

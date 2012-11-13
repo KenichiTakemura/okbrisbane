@@ -24,7 +24,6 @@
 	<%= f.password_field :password, :class => "" %>
 	<br>
 	<% if devise_mapping.rememberable? -%>
-
 	<label class="checkbox"> <%= f.check_box :remember_me%><%= t(:remember_me) %> </label>
 	<% end -%>
 	<%= f.submit t(:signin), :class => "btn btn-primary" %>

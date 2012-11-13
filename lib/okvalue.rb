@@ -19,9 +19,10 @@ module Okvalue
   #VERSION = "1.0.4-20121014"
   #VERSION = "1.0.5-20121015"
   #VERSION = "1.0.6-20121016"
-  VERSION = "1.0.7-20121106"
+  #VERSION = "1.0.7-20121106"
+  VERSION = "1.1-20121114"
   
-  TERMS_DATE = Time.parse("2012-11-01 00:00:00")
+  TERMS_DATE = Time.parse("2012-11-10 00:00:00")
   
   COLORMAP = {:ok => "#642c78", :naver => "#41A317", :blue => "#4479BA"}
   
@@ -32,17 +33,19 @@ module Okvalue
     :p_business => :naver,
     :p_motor_vehicle => :naver,
     :p_accommodation => :blue,
+    :p_well_being => :naver,
     :p_law => :blue,
     :p_study => :blue
   }
   
   FEED_SHOW_SIZE = {
-    :p_job => 10,
-    :p_buy_and_sell => 500,
-    :p_estate => 900,
-    :p_business => 900,
-    :p_motor_vehicle => 900,
-    :p_accommodation => 1600,
+    :p_job => 0,
+    :p_buy_and_sell => 0,
+    :p_estate => 200,
+    :p_business => 200,
+    :p_motor_vehicle => 200,
+    :p_accommodation => 200,
+    :p_well_being => 200,
     :p_law => 1800,
     :p_study => 2000
   }

@@ -1,38 +1,57 @@
-<div id="home">
-	<div id="first_section">
-		<div id="first_section_left">
+<div class="row" id="home">
+	<div class="span7">
+		<div class="row">
+			<div class="span3">
+			<%= render :partial => "homes/ok_information" %>
+			<%= render :partial => "homes/quick_links" %>
+			</div>
+			<div class="span4">
+			<%= top_feed_div(:p_buy_and_sell) %>
+		
+			<!--%= multi_body_banner(3, 300) %-->
+			
+		</div>
+		</div>
+		<div class="row">
 			<%= single_body_banner(1) %>
-			<%= multi_body_banner(3, 300) %>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_4", multi_body_banner(4), Okvalue::HOME_BODY_BANNER_4_SHOW_SIZE)%>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_5", multi_body_banner(5), Okvalue::HOME_BODY_BANNER_5_SHOW_SIZE)%>
 			<%= _scroll_banner_show("home_multi_body_scroll_banner_11", multi_body_banner(11), Okvalue::HOME_BODY_BANNER_11_SHOW_SIZE)%>
-		</div>
-			<div id="first_section_right">
-				<%= single_body_banner(2) %>
-				<%= top_feed_div(:p_job, @job_feed_lists, nil) %>
-				<%= top_feed_div(:p_buy_and_sell, @buy_and_sell_feed_lists, nil) %>
 			</div>
 	</div>
-	<div id="second_section">
-		<div id="section_left">
-			<div id="second_section_bar"></div>
-				<%= top_feed_div(:p_estate, @estate_lists, @estate_image_lists) %>
-		</div>
-		<div id="section_center">
-			<div id="second_section_bar"></div>
-				<%= top_feed_div(:p_business, @business_lists, @business_image_lists) %>
-			</div>
-		<div id="section_right">
-			<div id="second_section_bar"></div>
-				<%= top_feed_div(:p_motor_vehicle, @motor_vehicle_lists, @motor_vehicle_image_lists) %>
-			</div>
+	<div class="span3 ml-0">
+		<%= single_body_banner(2) %>
+		<%= top_feed_div(:p_job) %>
+		<%= top_feed_div(:p_accommodation) %>
+		<%= top_feed_div(:p_well_being) %>
 	</div>
+</div>
+<div class="row-fluid">
+	<div class="row-fluid">
+	<strong><p class="well"><%=t("buy_and_sell_page")%></p></strong>
+	</div>
+	<div class="row-fluid">
+	<div class="span4">
+			<div class="box_round box_gradient"></div>
+				<%= top_feed_div(:p_estate) %>
+		</div>
+	<div class="span4">
+			<div class="box_round box_gradient"></div>
+				<%= top_feed_div(:p_business) %>
+			</div>
+	<div class="span4">
+					<div class="box_round box_gradient"></div>
+				<%= top_feed_div(:p_motor_vehicle) %>
+			</div>
+</div>
+</div>
+<div class="row-fluid">
 	<div id="third_section">
 		<div id="third_section_bar"></div>
 		<div id="thrid_section_left">
-				<%= top_feed_div(:p_accommodation, @accommodation_lists, @accommodation_image_lists) %>
-				<%= top_feed_div(:p_law, @legal_service_lists, nil) %>
-				<%= top_feed_div(:p_study, @study_lists, nil) %>
+				
+				<%= top_feed_div(:p_law) %>
+				<%= top_feed_div(:p_study) %>
 			</div>
 		<div id="thrid_section_right"><%= multi_body_banner(6, 1700) %><%= multi_body_banner(7,1850) %><%= multi_body_banner(8, 2000) %><%= multi_body_banner(9, 2150) %><%= multi_body_banner(10, 2300) %></div>
 	</div>

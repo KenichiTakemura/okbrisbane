@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
   
   def get_admin_notice
     @admin_notice = AdminNotice.current_notice.first
+
   end
 
   def opening_soon
@@ -84,7 +85,7 @@ class ApplicationController < ActionController::Base
       logger.info("User has NOT agreed")
       agreement_path
     else
-      logger.info("User has agreed")      
+      logger.info("User has agreed request.referer: #{request.referer}")      
       sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
       agreement_url = url_for(:action => 'agreememnt_required', :controller => 'member_managements', :only_path => false, :protocol => 'http')
       if (request.referer == sign_in_url || request.referer == agreement_url)

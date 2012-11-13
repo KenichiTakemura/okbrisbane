@@ -2,13 +2,13 @@
 module WeatherConfig
 
   WEATHER_AUS = "ftp2.bom.gov.au"
-  WAETHER_AUS_FORECAST = "anon/gen/fwo/IDA00100.dat"
-  WAETHER_AUS_FORECAST_TMP = "#{Rails.root}/tmp/IDA00100.dat"
+  WAETHER_AUS_FORECAST = "anon/gen/fwo/IDA00001.dat"
+  WAETHER_AUS_FORECAST_TMP = "#{Rails.root}/tmp/IDA00001.dat"
   WEATHER_KOR = "http://www.kma.go.kr/wid/queryDFS.jsp?"
 
   WEATHER_RETRY = 1
 
-  AUSCityOrderList = [:Brisbane, :Sydney, :Melbourne, :Canberra, :Adelaide, :Perth, :Darwin, :Hobart, ]
+  AUSCityOrderList = [:Brisbane, :Cairns, :Sydney, :Melbourne, :Canberra, :Adelaide, :Perth, :Darwin, :Hobart]
   AUSCityMap = Common.new_orderd_hash
   AUSCityMap[:Brisbane] = "http://www.bom.gov.au/qld/forecasts/brisbane.shtml"
   AUSCityMap[:Sydney] = "http://www.bom.gov.au/nsw/forecasts/sydney.shtml"
@@ -18,16 +18,17 @@ module WeatherConfig
   AUSCityMap[:Perth] = "http://www.bom.gov.au/wa/forecasts/perth.shtml"
   AUSCityMap[:Darwin] = "http://www.bom.gov.au/nt/forecasts/darwin.shtml"
   AUSCityMap[:Hobart] = "http://www.bom.gov.au/tas/forecasts/hobart.shtml"
-
+  AUSCityMap[:Cairns] = "http://www.bom.gov.au/qld/forecasts/provincial.shtml"
   AUSCityVisibleMap = Common.new_orderd_hash
   AUSCityVisibleMap[:Brisbane] = true
   AUSCityVisibleMap[:Sydney] = true
   AUSCityVisibleMap[:Melbourne] = true
   AUSCityVisibleMap[:Canberra] = true
-  AUSCityVisibleMap[:Hobart] = true
+  AUSCityVisibleMap[:Hobart] = false
   AUSCityVisibleMap[:Adelaide] = true
   AUSCityVisibleMap[:Perth] = false
   AUSCityVisibleMap[:Darwin] = true
+  AUSCityVisibleMap[:Cairns] = true
 
   # 서울·경기도 강원도 충청북도 충청남도 전라북도 전라남도 경상북도 경상남도 제주특별자치도
   KORCityOrderList = [:seo,:gwn,:cbk,:cnm,:jbk,:jnm,:gbk,:gnm,:jju]
@@ -81,17 +82,15 @@ module WeatherConfig
   KORCityVisibleMap[:gbk] = true
   KORCityVisibleMap[:gnm] = true
   KORCityVisibleMap[:jju] = true
-
-  def self.ftp_weather_data
-    require 'net/ftp'
-    File.unlink(WAETHER_AUS_FORECAST_TMP) if File.exist?(WAETHER_AUS_FORECAST_TMP)
+  
+  def self.do_ftp(site,from,to)
     tries = 0
     begin
       tries += 1
-      Net::FTP.open(WEATHER_AUS) do |ftp|
+      Net::FTP.open(site) do |ftp|
         ftp.passive = true
         ftp.login
-        ftp.getbinaryfile(WAETHER_AUS_FORECAST, WAETHER_AUS_FORECAST_TMP)
+        ftp.getbinaryfile(from, to)
         ftp.close
       end
     rescue Exception => e
@@ -103,34 +102,30 @@ module WeatherConfig
     end
   end
 
-  def self.get_AU_data_html
-    require 'nokogiri'
-    require 'open-uri'
-
-    infobox = Array.new
-
-    doc = Nokogiri::HTML(open(WAETHER_AUS_FORECAST_TMP))
-
-    doc.search('td').each do |link|
-      infobox.push(link.content)
-    end
-
+  def self.ftp_weather_data
+    require 'net/ftp'
+    File.unlink(WAETHER_AUS_FORECAST_TMP) if File.exist?(WAETHER_AUS_FORECAST_TMP)
+    do_ftp(WEATHER_AUS,WAETHER_AUS_FORECAST,WAETHER_AUS_FORECAST_TMP)
   end
 
   def self.get_AU_data
-    f = File.open(WAETHER_AUS_FORECAST_TMP, "r")
-    lines = f.readlines
-    lines.slice!(0)
-    Rails.logger.info("AU_data: #{lines}")
-    # Sydney#NSW#20120916#155532#IDN10064#20120917000000#19#Showers developing. Chance afternoon storm.#
-    # Melbourne#VIC#20120916#155635#IDV10450#20120917000000#18#Shower or two clearing.#
-    # Brisbane#QLD#20120916#155506#IDQ10095#20120917000000#24#A shower or two, possible storm.#
-    # Perth#WA#20120916#111300#IDW12300#20120917000000#25#Few evening showers/storm risk.#
-    # Adelaide#SA#20120916#050131#IDS10034#20120917000000#16#Partly cloudy.#
-    # Hobart#TAS#20120916#144305#IDT65061#20120917000000#13#Chance of early drizzle.#
-    # Canberra#NSW#20120916#155532#IDN10035#20120917000000#15#Showers developing.#
-    # Darwin#NT#20120916#045840#IDD10150#20120917000000#34#Sunny.#
-    lines
+    ftp_weather_data
+    cities = Array.new
+    File.open(WAETHER_AUS_FORECAST_TMP, "r") do |f|
+      lines = f.readlines
+      lines.each do |line|
+        case line.chop
+        when /#Sydney#/,/#Melbourne#/,/#Brisbane#/,/#Cairns#/,/#Canberra#/,/#Adelaide#/,/#Darwin#/,/#Perth#/,/#Hobart#/
+          puts line
+          cities.push(line)
+        else
+          next
+        end
+      end
+    end
+    raise "Weather parse error insufficient data: #{cities.size}" if cities.size != AUSCityOrderList.size
+    Rails.logger.info("AU_data: #{cities}")
+    cities    
   end
 
   def self.saveWeather
@@ -139,23 +134,27 @@ module WeatherConfig
   end
   
   def self.save_au_weather
-    ftp_weather_data
     info = get_AU_data
+    #loc_id#location#state#forecast_date#issue_date#issue_time#min_0#max_0#min_1#max_1#min_2#max_2#min_3#max_3#min_4#max_4#min_5#max_5#min_6#max_6#min_7#max_7#forecast_0#forecast_1#forecast_2#forecast_3#forecast_4#forecast_5#forecast_6#forecast_7#
     return if !info.present?
-    issuedOn = Time.parse(info[0].split("#")[2])
-    Rails.logger.info("issuedOn: #{issuedOn}")
-    weather = Weather.find_by_issuedOn(issuedOn)
-    return if weather.present?
     ActiveRecord::Base.transaction do
     info.each do |i|
       e = i.split("#")
-      w = Weather.new(:country => Okvalue::AU)
-      w.location = e[0]
-      w.issuedOn = Time.parse(e[2])
-      w.dateOn = Common.date_format(Time.parse(e[5]))
-      w.max = e[6].to_i
-      w.forecast = e[7]
-      w.save
+      location = e[1]
+      forecast_date = e[3] + "000000"
+      issuedOn = Time.parse(e[4])
+      y = 0;
+      0.upto(2) { |x|
+        dateOn = Common.date_format(Time.parse(forecast_date) + x.days)
+        w = Weather.where('dateOn = ? and location = ?', dateOn, location).first
+        w ||= Weather.new(:country => Okvalue::AU, :location => location, :dateOn => dateOn)
+        w.issuedOn = issuedOn
+        w.max = e[7+(2*x)].to_i
+        w.min = e[6+(2*x)].to_i
+        w.forecast = e[22+y]
+        w.save
+        y += 1;
+      }
     end
     end
   end
@@ -193,7 +192,7 @@ module WeatherConfig
     return "cloudy" if letter =~ /구름많음/
     return "mostly_cloudy" if letter =~ /구름조금/
     return "chance_of_rain" if letter =~ /구름많고 비/
-    
+    return "sunny" if letter =~ /맑음/  
   end
 
   # icon list

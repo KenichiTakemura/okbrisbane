@@ -4,6 +4,7 @@
 		<%= render :partial => "layouts/header" %>
 	</head>
 	<body>
+		<%= render :partial => "layouts/header_nav" %>
 		<div id="page_body">
 			<%= render :partial => "layouts/social" %>
 			<%= single_background_banner(1, 20) %>
@@ -13,113 +14,14 @@
 			<%= single_background_banner(5, 1620) %>
 			<%= single_background_banner(6, 1620) %>
 		</div>
-		<div id="header">
-			<div id="header-left">
-				<div class="span3">
-					<strong><%= t("welcome_message")%></strong>
-				</div>
-				<div class="span4" style="margin-bottom:5px;">
-					<% if current_user %>
-					<%= current_user.name %>&nbsp;<%= t(:sir)%>
-					<% else %>
-					<a href="<%=user_sign_in_path%>"><span class="label label-info"><%= t(:signin)%></span></a>
-					<%= t("or") %>
-					<a href="<%=member_managements_sign_up_path%>"><span class="label label-inverse"><%= t(:signup)%></span></a>
-					<%= t("please") %>
-					<% end %>
-				</div>
-				<div id="logo">
-					<%= link_to image_tag("common/logo.gif", :size => "250x120", :class => "img-rounded"), root_path(:locale => 'ko' ) %>
-				</div>
-				<!--
-				<div id="devise">
-					<div class="span3">
-						<% if !user_signed_in? %>
-						<%= link_to t(:signin), user_sign_in_path, :class => "btn btn-link", :style => "color:#fff" %>
-						<% end %>
-						<% if !user_signed_in? %>
-						<%= image_tag("#{I18n.locale}/Signup/bar.gif") %>
-						<%= link_to t(:signup), member_managements_sign_up_path, :class => "btn btn-link", :style => "color:#fff" %>
-						<% else %>
-						<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "pull-left btn btn-link", :style => "color:#fff;text-align:center" %>
-						<% end %>
-					</div>
-				</div>
-				-->
-				<div class="span3" style="margin-left:0px;margin-top:5px">
-					<% if current_user %>
-					<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "btn btn-small" %>
-					<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-small btn-info", "", "icon-user") %>
-					<% end %>
-				</div>
-			</div>
-			<div id="header-right">
-				<div class="span3" style="margin-left:0px;width:210px">
-					<a href="#adminNoticeModal" role="button" class="btn btn-link" data-toggle="modal" id="a_adminNoticeModal"><span class="label label-info"><i class="icon-info-sign icon-white"></i><%= t(:admin_notice)%></span></a>
-					<div class="alert alert-info">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						<% if @admin_notice.present? %>
-						<%= @admin_notice.subject %>
-						<% else %>
-						<%= t(:no_notice)%>
-						<%end %>
-					</div>
-					<div class="modal hide fade" id="adminNoticeModal" tabindex="-1" role="dialog" aria-labelledby="adminNoticeLabel" aria-hidden="true">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3 id="adminNoticeLabel"><%=t(:admin_notice)%></h3>
-						</div>
-						<div class="modal-body" id="modal-body_admin_notice">
-							<%= image_tag("common/ajax_loader_1.gif") %>
-						</div>
-						<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true"><%=t(:close)%></button>
-						</div>
-						<%= _script(%Q|$('\#a_adminNoticeModal').click(function(){$.post('| + admin_notice_homes_path + %Q|');})|) %>
-					</div>
-				</div>
-				<%= single_header_banner(1) %>
-				<div class="span5" style="height:30px">
-				<%= render :partial => "homes/ok_information" %>
-				</div>
-				<%= single_header_banner(2) %>
-			</div>
-			<div id="header-bottom">
-				<%= navigation("#41A317","#f0f0f0") %>
-				<% if [:p_home,:p_signin,:p_signup,:p_signout,:p_mypage,:p_yellowpage].include?(@okpage) %>
-				<div id="follows">
-					<% if socialable? %>
-					<ul class="wat-cf">
-						<li>
-							<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="false" data-width="450" data-action="recommend" data-show-faces="true" data-font="trebuchet ms"></div>
-						</li>
-						<li>
-							&nbsp;
-						</li>
-						<li>
-							<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
-							<script>
-								! function(d, s, id) {
-									var js, fjs = d.getElementsByTagName(s)[0];
-									if (!d.getElementById(id)) {
-										js = d.createElement(s);
-										js.id = id;
-										js.src = "//platform.twitter.com/widgets.js";
-										fjs.parentNode.insertBefore(js, fjs);
-									}
-								}(document, "script", "twitter-wjs");
-							</script>
-						</li>
-					</ul>
-					<% end %>
-				</div>
-				<% end %>
-			</div>
+		<div class="container header_container">
+		<%= render :partial => "homes/header/header" %>
 		</div>
 		<div class="container ok_container">
 			<%= yield %>
 		</div>
 		<%= render :partial => "layouts/footer" %>
+		</div>
 	</body>
 </html>
 

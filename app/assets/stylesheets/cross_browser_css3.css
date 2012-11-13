@@ -1,0 +1,156 @@
+
+.box_round {
+  -webkit-border-radius: 6px; /* Safari 3-4, iOS 1-3.2, Android ≤1.6 */
+          border-radius: 6px; /* Opera 10.5, IE9+, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
+  /* useful if you don't want a bg color from leaking outside the border: */
+  -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+}
+
+.box_shadow {
+  -webkit-box-shadow: 0px 0px 4px 0px #ffffff; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+          box-shadow: 0px 0px 4px 0px #ffffff; /* Opera 10.5, IE9+, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.box_gradient {
+  background-color: #444444;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#444444), to(#999999)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #444444, #999999); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #444444, #999999); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #444444, #999999); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #444444, #999999); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.box_rgba {
+  background-color: transparent;
+  background-color: rgba(180, 180, 144, 0.6);  /* Firefox 3+, Safari 3+, Opera 10.10+, Chrome, IE9+ */
+}
+
+.box_rotate {
+  -webkit-transform: rotate(7.5deg);  /* Safari 3.1+, Chrome */
+     -moz-transform: rotate(7.5deg);  /* Firefox 3.5-15  */
+      -ms-transform: rotate(7.5deg);  /* IE9+  */
+       -o-transform: rotate(7.5deg);  /* Opera 10.5-12.00  */
+          transform: rotate(7.5deg);  /* Firefox 16+, Opera 12.50+  */
+}
+
+.box_scale {
+  -webkit-transform: scale(0.8);  /* Safari 3.1+, Chrome */
+     -moz-transform: scale(0.8);  /* Firefox 3.5+ */
+      -ms-transform: scale(0.8);  /* IE9+ */
+       -o-transform: scale(0.8);  /* Opera 10.50+ */
+          transform: scale(0.8);
+}
+
+.box_3dtransforms {
+  -webkit-perspective: 300;  /* Safari 4+, Chrome 12+ */
+     -moz-perspective: 300;  /* Firefox 10+ */
+      -ms-perspective: 300;  /* IE10+ */
+          perspective: 300;
+  -webkit-transform: rotateY(180deg);  -webkit-transform-style: preserve-3d;
+     -moz-transform: rotateY(180deg);     -moz-transform-style: preserve-3d;
+      -ms-transform: rotateY(180deg);      -ms-transform-style: preserve-3d;
+          transform: rotateY(180deg);          transform-style: preserve-3d;
+}
+
+.box_transition {
+  -webkit-transition: all 0.3s ease-out;  /* Safari 3.2+, Chrome */
+     -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+       -o-transition: all 0.3s ease-out;  /* Opera 10.5–12.00 */
+          transition: all 0.3s ease-out;  /* Firefox 16+, Opera 12.50+ */
+}
+
+.box_textshadow {
+     text-shadow: 1px 1px 3px #888; /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
+}
+
+.box_opacity {
+  opacity: 0.9; /* Chrome 4+, Firefox 2+, Safari 3.1+, Opera 9+, IE9+, iOS 3.2+, Android 2.1+ */
+}
+
+/*
+* {
+  -webkit-box-sizing: border-box; /* <=iOS4, <= Android  2.3 *
+     -moz-box-sizing: border-box; /* Firefox 1+ *
+          box-sizing: border-box; /* Chrome, IE8+, Opera, Safari 5.1*
+}
+*/
+
+.box_bgsize {
+  -webkit-background-size: 100% 100%; /* Safari 3-4 */
+          background-size: 100% 100%; /* Opera, IE9+, Safari 5, Chrome, Firefox 4+ */
+}
+
+.box_columns {
+  -webkit-column-count: 2;  -webkit-column-gap: 15px; /* Safari 3, Chrome*/
+     -moz-column-count: 2;     -moz-column-gap: 15px; /* Firefox 3.5+ */
+          column-count: 2;          column-gap: 15px; /* Opera 11+*/
+}
+
+.box_animation:hover {
+  -webkit-animation: myanim 3s infinite; /* Safari 5, Chrome */
+     -moz-animation: myanim 3s infinite; /* Firefox 5-15 */
+       -o-animation: myanim 3s infinite; /* Opera 12+ */
+          animation: myanim 3s infinite; /* Safari 5, Chrome, Firefox 16+ */
+}
+
+.box_animation_360:hover {
+  -webkit-animation: myanim 5s infinite; /* Safari 5, Chrome */
+     -moz-animation: myanim 5s infinite; /* Firefox 5-15 */
+       -o-animation: myanim 5s infinite; /* Opera 12+ */
+          animation: myanim360 5s infinite; /* Safari 5, Chrome, Firefox 16+ */
+
+}
+
+@keyframes myanim360 {
+  0%   { transform: rotateY(90deg);          transform-style: preserve-3d; }
+  50%  { transform: rotateY(180deg);          transform-style: preserve-3d; }
+  50%  { transform: rotateY(270deg);          transform-style: preserve-3d; }
+  100% { transform: rotateY(360deg);          transform-style: preserve-3d; }
+}
+
+@-webkit-keyframes myanim {
+  0%   { opacity: 0.0; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1.0; }
+}
+@-moz-keyframes myanim {
+  0%   { opacity: 0.0; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1.0; }
+}
+@-o-keyframes myanim {
+  0%   { opacity: 0.0; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1.0; }
+}
+@keyframes myanim {
+  0%   { opacity: 0.0; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1.0; }
+}
+
+.box_tabsize {
+  -moz-tab-size: 2; /* Firefox 4+ */
+    -o-tab-size: 2; /* Opera 10.60+ */
+       tab-size: 2;
+}
+
+/* Original */
+.bs-docs {
+    margin :2px;
+    padding: 1px 2px 1px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px 4px 4px 4px;
+}
+
+.bs {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px 3px 3px 3px;
+    background-color: #f2f2f2;
+    padding: 3px;
+}
+
+.white_box {
+    background-color: rgb(255, 255, 255);
+}

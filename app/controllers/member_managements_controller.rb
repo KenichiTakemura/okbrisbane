@@ -88,6 +88,7 @@ class MemberManagementsController < OkController
   end
   
   def agreed
+    logger.info("User agreed. current_user: #{current_user}")
     redirect_to new_user_registration_path if !current_user
     current_user.agree
     redirect_to after_sign_in_path_for(current_user)

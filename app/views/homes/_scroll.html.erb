@@ -6,18 +6,20 @@
 	var BUSINESS_FEEDED = false;
 	var MOTOR_VEHICLE_FEEDED = false;
 	var ACCOMMODATION_FEEDED = false;
+	var WELLBEING_FEEDED = false;
 	var LAW_FEEDED = false;
 	var STUDY_FEEDED = false;
 </script>
 <%= _script_document_ready(%Q|$(function() {
 	$(window).scroll(function () {
-		if ($(this).scrollTop() < 1) {
+		if ($(this).scrollTop() < 0) {
 			JOB_FEEDED = false;
 			BUY_AND_SELL_FEEDED = false;
 			ESTATE_FEEDED = false;
 			BUSINESS_FEEDED = false;
 			MOTOR_VEHICLE_FEEDED = false;
 			ACCOMMODATION_FEEDED = false;
+			WELLBEING_FEEDED = false;
 			LAW_FEEDED = false;
 			STUDY_FEEDED = false;
 		}
@@ -27,6 +29,7 @@
 		#{_scroll_feed(:p_business, "BUSINESS_FEEDED")}
 		#{_scroll_feed(:p_motor_vehicle, "MOTOR_VEHICLE_FEEDED")}
 		#{_scroll_feed(:p_accommodation, "ACCOMMODATION_FEEDED")}
+		#{_scroll_feed(:p_well_being, "WELLBEING_FEEDED")}
 		#{_scroll_feed(:p_law, "LAW_FEEDED")}
 		#{_scroll_feed(:p_study, "STUDY_FEEDED")}
 

@@ -61,8 +61,19 @@ module Style
   NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
   OPEN_PAGE = [:p_job, :p_buy_and_sell, :p_well_being, :p_accommodation, :p_tax]
   
+  FEED_WITHOUT_IMAGE = [:p_job,:p_buy_and_sell,:p_law,:p_study]
+  FEED_WITH_IMAGE = [:p_estate,:p_business,:p_motor_vehicle,:p_accommodation,:p_well_being]
+  
   def self.open_page?(page)
     OPEN_PAGE.include?(page)
+  end
+  
+  def self.text_feed?(page)
+    FEED_WITHOUT_IMAGE.include?(page)
+  end
+  
+  def self.image_feed?(page)
+    FEED_WITH_IMAGE.include?(page)
   end
   
   SECTIONS[:s_header] = "s_header"
@@ -146,6 +157,7 @@ module Style
   end
   
   Effect = Common.new_orderd_hash
+  StyleClass = Common.new_orderd_hash
   
   # Rule page _ section _ postion
   # if _ section _ position => any page
@@ -155,18 +167,33 @@ module Style
   Effect[:Home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,effect:'fade',crossfade:true,generateNextPrev:false|
   Effect[:Home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,autoHeightSpeed:1000,generatePagination:false,effect:'fade',crossfade:true,generateNextPrev:false|
 
+  StyleClass[:any] = ""
+  StyleClass[:Home_s_body_2] = "img-polaroid"
+
   def self.getEffect(page, section, position)
     key = "#{page}_#{section}_#{position}"
-    Rails.logger.debug("getEffect key: #{key}")
     effect = Effect[key.to_sym]
-    return effect if !effect.nil?
+    return effect if effect.present?
     key = "_#{section}_#{position}"
     effect = Effect[key.to_sym]
-    return effect if !effect.nil?
+    return effect if effect.present?
     key = "_#{position}"
     effect = Effect[key.to_sym]
-    return effect if !effect.nil?
+    return effect if effect.present?
     Effect[:any]
+  end
+  
+  def self.get_style_class(page, section, position)
+    key = "#{page}_#{section}_#{position}"
+    sc = StyleClass[key.to_sym]
+    return sc if sc.present?
+    key = "_#{section}_#{position}"
+    sc = StyleClass[key.to_sym]
+    return sc if sc.present?
+    key = "_#{position}"
+    sc = StyleClass[key.to_sym]
+    return sc if sc.present?
+    StyleClass[:any]
   end
   
   def self.create_banners
@@ -182,15 +209,17 @@ module Style
       :position_id => 1,
       :div_width => 500, :div_height => 60, :img_width => 500,
       :img_height => 60, :style => 'position:relative;float:right;top:0px;',
-      :effect => Banner::E_FIX)
+      :effect => Banner::E_FIX,
+      :is_disabled => false)
       Banner.create(:page_id => Style.pageid_key(key),
       :section_id => Style.sectionid(:s_header),
       :position_id => 2,
       :div_width => 710, :div_height => 120, :img_width => 710, :img_height => 120,
       :style => 'position:relative;float:right;right:0px',
-      :effect => effect)
+      :effect => effect,
+      :is_disabled => true)
       if value.eql? Style.page(:p_home)
-        is_disabled = false
+        is_disabled = true
       else
         is_disabled = true
       end
@@ -368,19 +397,22 @@ module Style
       :position_id => 6,
       :div_width => 240, :div_height => 150,
       :img_width => 240, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => true)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 7,
       :div_width => 240, :div_height => 150,
       :img_width => 240, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px;left:5px')
+      :style => 'position:relative;float:left;top:0px;left:5px',
+      :is_disabled => true)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 8,
       :div_width => 240, :div_height => 150,
       :img_width => 240, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px;left:10px')
+      :style => 'position:relative;float:left;top:0px;left:10px',
+      :is_disabled => true)
     end
     # Signin
     [:p_signin].each do |page|

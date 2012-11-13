@@ -4,6 +4,9 @@ class TopFeedList < ActiveRecord::Base
   TOP_FEED_LIMIT_LOWER = 5
   IMAGE_FEED_LIMIT = 2
   TOP_FEED_SAVED_LIMIT = 50
+  
+  TOP_FEED_LIMIT_CATE = Common.new_orderd_hash
+  TOP_FEED_LIMIT_CATE[:p_buy_and_sell] = 15
 
   belongs_to :feeded_to, :polymorphic => true
   
@@ -12,6 +15,7 @@ class TopFeedList < ActiveRecord::Base
   M2T[:p_business] = "businesses"
   M2T[:p_motor_vehicle] = "motor_vehicles"
   M2T[:p_accommodation] = "accommodations"
+  M2T[:p_well_being] = "well_beings"
      
   # public scope
   scope :find_a_feed, lambda { |cate,id| where('feeded_to_type = ? AND feeded_to_id = ?', cate, id)}

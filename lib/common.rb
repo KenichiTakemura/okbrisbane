@@ -1,8 +1,7 @@
 module Common
   def self.date_format(date)
     if date.present?
-      date_l = date.utc? ? date.localtime : date
-      date_l.strftime("%Y-%m-%d")
+      date.strftime("%Y-%m-%d")
     end
   end
 
