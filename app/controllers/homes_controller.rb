@@ -46,6 +46,7 @@ class HomesController < OkController
     @weather_au = Weather.weather_for_location(Common.today, Okvalue::AU, :Brisbane).first
     @weather_kr = Weather.weather_for_location(Common.today, Okvalue::KR, :seo).first
     @rates = Rate.rate_for()
+    @qlinks = QuickLink.links
     respond_to do |format|
       format.html # index.html.erb
     end

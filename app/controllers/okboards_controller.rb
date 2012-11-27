@@ -1,6 +1,6 @@
 class OkboardsController < OkController
   
-  layout "okboard", :except => [:yellowpage]
+  #layout "okboard", :except => [:yellowpage]
 
   def initialize
     super

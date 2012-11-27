@@ -7,8 +7,8 @@
 }
 
 .box_shadow {
-  -webkit-box-shadow: 0px 0px 4px 0px #ffffff; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-          box-shadow: 0px 0px 4px 0px #ffffff; /* Opera 10.5, IE9+, Firefox 4+, Chrome 6+, iOS 5 */
+  -webkit-box-shadow: 0px 0px 4px 0px #2E2E29; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+          box-shadow: 0px 0px 4px 0px #2E2E29; /* Opera 10.5, IE9+, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
 .box_gradient {
@@ -142,13 +142,6 @@
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(221, 221, 221);
     border-radius: 4px 4px 4px 4px;
-}
-
-.bs {
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 3px 3px 3px 3px;
-    background-color: #f2f2f2;
-    padding: 3px;
 }
 
 .white_box {

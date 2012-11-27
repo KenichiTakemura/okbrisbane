@@ -1,13 +1,13 @@
 #header .navbar-inner .brand {
   color: #FFFFFF;
-  font-size:14px;
+  font-size:12px;
   font-weight: bold;
 }
 
-//
-//body {
-//    background: url("bg_2.gif") repeat scroll 0% 0% rgb(239, 239, 239);
-//}
+
+body {
+  background: url("bg_2.gif") repeat scroll 0% 0% rgb(239, 239, 239);
+}
 
 .header_container {
   margin-top: 10px;
@@ -16,22 +16,40 @@
 div.header_container {
   margin-left:auto;
   margin-right:auto;
-  width:1100px;
+  //width:1000px;
 }
 
 div.ok_container {
   margin-left:auto;
   margin-right:auto;
-  width:1000px;
-  margin-bottom: 50px;
+  width:1050px;
+  padding: 9px;
+  background-color: #fffffe
 }
 
-div.mt-5 {
+div.top_feed_list {
+  padding:5px;
+}
+
+.bs {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 3px;
+}
+
+.mt-5 {
   margin-top:5px;
+}
+
+.m-0 {
+  margin:0px;
 }
 
 div.ml-0 {
   margin-left:0px;
+}
+
+div.ml-10 {
+  margin-left:10px;
 }
 
 .navbar-form label.checkbox {
@@ -39,17 +57,28 @@ div.ml-0 {
 }
 
 .navigation {
-  margin:0px;
+  margin:3px 5px;
+  background-color: #642c78;
+  color: white;
+  //background: url("bg_2.gif") repeat scroll 0% 0% #642c78;
+}
+
+.yellowpage {
+  background: 0% 0% yellow;   
+}
+
+.yellowpage-category {
+  background: url("bg_2.gif") repeat scroll 0% 0% rgb(239, 239, 239);
 }
 
 .navigation ul {
   list-style-type: none;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .navigation ul li {
-  width: 110px;
+  width: 100px;
   height: 40px;
   text-align: center;
   float: left;
@@ -61,8 +90,12 @@ div.ml-0 {
   background-color:#e0e0e0;
 }
 
+.nav-caret {
+  height: 1px;
+}
+
 .navigation ul li:hover {
-  background: #642c78;
+//  background: #642c78;
   color: white;
   cursor: hand;
   cursor: pointer;
@@ -70,14 +103,6 @@ div.ml-0 {
           border-radius: 12px; /* Opera 10.5, IE9+, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
   /* useful if you don't want a bg color from leaking outside the border: */
   -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
-  -webkit-perspective: 300;  /* Safari 4+, Chrome 12+ */
-     -moz-perspective: 300;  /* Firefox 10+ */
-      -ms-perspective: 300;  /* IE10+ */
-          perspective: 300;
-  -webkit-transform: rotateY(180deg);  -webkit-transform-style: preserve-3d;
-     -moz-transform: rotateY(180deg);     -moz-transform-style: preserve-3d;
-      -ms-transform: rotateY(180deg);      -ms-transform-style: preserve-3d;
-          transform: rotateY(180deg);          transform-style: preserve-3d;
 }
 
 .header-right {
@@ -87,4 +112,8 @@ div.ml-0 {
 
 .header-bottom {
   margin-top:10px;
+}
+
+.rate_table {
+  font-size:11px
 }

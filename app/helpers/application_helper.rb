@@ -11,6 +11,14 @@ module ApplicationHelper
     html.html_safe
   end
   
+  def facebook
+    image_tag("f_logo.png", :class => "image-resize30_30")
+  end
+  
+  def google
+    image_tag("google_logo_3D_online_small.png", :class => "")
+  end
+  
   def ok_error_messages!(resource)
     if resource.errors.empty?
       return ""
@@ -265,7 +273,7 @@ module ApplicationHelper
   def multi_banner(p, s, a, scroll_size=nil)
     logger.debug("requested multi_banner #{p}, #{s}, #{a}")
     b,images = _collectImage(p,s,a)
-    return "" if b.is_disabled
+    return "" if b.is_disabled && !(request.host =~ /admin.okbrisbane/)
     div_id = Style.create_banner_div(p,s,a)
     style = "#{b.style};width:#{b.div_width}px;height:#{b.div_height}px;margin: 5px 0px 5px;"
     if !images.present?

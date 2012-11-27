@@ -14,7 +14,7 @@
 			<%= render :partial => "okboards/#{Style.page(@okpage)}/index" %>
 		</div>			
 	</div>
-	<div class="row" id="okboard_sponsor_links_bottom" style="position: relative; float: left; width: 100%">
+	<div class="row-fluid" id="okboard_sponsor_links_bottom">
 	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(2) %></div>
 	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(3) %></div>
 	<div class="span3" style="width:210px;margin:left:0px;margin-right:10px"><%= single_body_banner(4) %></div>
@@ -24,6 +24,5 @@
 </div>
 </div>
 <%= _script_document_ready(%Q|
-$("#_#{@okpage}").attr("style", "opacity:1;filter:alpha(opacity=100);");
-$('\#sub_menu_#{@okpage}').show("slow");
+$("#navi_#{@okpage}").addClass("active");
 |) %>

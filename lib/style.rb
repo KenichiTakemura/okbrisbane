@@ -351,44 +351,60 @@ module Style
       :is_disabled => true)
     end
     [:p_job,:p_buy_and_sell,:p_well_being,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation,:p_sponsor,:p_mypage].each do |page|
-    Banner.create(:page_id => Style.pageid_key(page),
-    :section_id => Style.sectionid(:s_body),
-      :position_id => 1,
-      :div_width => 220, :div_height => 130,
-      :img_width => 220, :img_height => 130,
-      :style => 'position:relative;float:left;top:0px')
-    end
+      if [:p_sponsor,:p_mypage,:p_yellowpage].include?(page)
+        is_disabled = true
+      else
+        is_disabled = false
+      end
+      Banner.create(:page_id => Style.pageid_key(page),
+      :section_id => Style.sectionid(:s_body),
+        :position_id => 1,
+        :div_width => 220, :div_height => 130,
+        :img_width => 220, :img_height => 130,
+        :style => 'position:relative;float:left;top:0px',
+        :is_disabled => is_disabled)
+      end
     [:p_signin,:p_signup,:p_signout, :p_job,:p_buy_and_sell,:p_well_being,:p_study,:p_immig,:p_estate,:p_law,:p_tax,:p_yellowpage,:p_motor_vehicle,:p_business,:p_accommodation,:p_sponsor,:p_mypage].each do |page|
+      if [:p_sponsor,:p_mypage,:p_yellowpage].include?(page)
+        is_disabled = true
+      else
+        is_disabled = false
+      end
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 2,
       :div_width => 220, :div_height => 150,
       :img_width => 220, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 3,
       :div_width => 220, :div_height => 150,
       :img_width => 220, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 4,
       :div_width => 220, :div_height => 150,
       :img_width => 220, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 9,
       :div_width => 220, :div_height => 150,
       :img_width => 220, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => is_disabled)
       Banner.create(:page_id => Style.pageid_key(page),
       :section_id => Style.sectionid(:s_body),
       :position_id => 5,
       :div_width => 740, :div_height => 150,
       :img_width => 740, :img_height => 150,
-      :style => 'position:relative;float:left;top:0px')
+      :style => 'position:relative;float:left;top:0px',
+      :is_disabled => is_disabled)
     end
     # Buy and Sell Related
     [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].each do |page|

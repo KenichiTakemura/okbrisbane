@@ -1,9 +1,8 @@
 <div class="" id="okboard_filter">
 	<%= form_for(@post_search, :html => {:class => "form-actions"}) do |f| %>
-		<%= f.select(:okpage, options_for_select(Okboard.get_links_i18n_list(@okpage), @post_search.okpage), {:include_blank => false}, {:class => "span2", :multiple => false}) %>
-
+		<%= f.select(:okpage, options_for_select(Okboard.get_links_i18n_list(@okpage), @post_search.okpage), {:include_blank => false}, {:class => "", :multiple => false}) %>
 		<%= f.label :category, t(:category)%>
-		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "", :multiple => false}) %>
 
 		<!--
 		<%= f.label :image, "#{t(:image)}"%>
@@ -13,7 +12,7 @@
 		-->
 		
 		<%= f.label :time_by, "#{t(:select_date)}"%>
-		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "", :multiple => false}) %>
 
 		<%= f.label :keyword, "#{t(:search_keyword)}"%>
 		<%= f.search_field :keyword, :class => "input-medium search-query" %>

@@ -28,8 +28,8 @@ module HomesHelper
     color = Okvalue::FEED_COLORMAP[category]
     lists = @feed_lists[category]
     image_list = @image_feed_lists[category]
-    html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list box_round box_shadow white_box">|
-    html += %Q|<div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div class="box_round box_shadow box_textshadow" id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
+    html = %Q|<div id="top_feed_list_#{category}" class="top_feed_list box_round white_box bs-docs">|
+    html += %Q|<div id="feed_head" style="position:relative;width:100%;height:40px;background:#{Okvalue::COLORMAP[color]}"><div class="box_round" id="feed_head_left"><p class="" style="line-height: 40px;">#{t("#{Style.page(category)}")}</p></div>|
     html += %Q|<div id="feed_head_right"><p>| + link_to(t('more'), Okboard.okboard_link(category), :class => "btn btn-small") + " "
     if Style.open_page?(category)
       html += %Q|<a href="#{Okboard.okboard_link_write(category)}" class="btn btn-small"><i class="icon-pencil"></i>#{t(:write_new)}</a>|
@@ -100,8 +100,82 @@ module HomesHelper
     html.strip.html_safe
   end
   
-  def navigation(over, out)
-    html = %Q|<div class="row navigation box_bgsize"><ul class="">|
+  def navigation
+    script = ""
+    html = %Q|<div class="container-fluid navbar-wrapper"><div class="navbar"><div class="navbar-inner"><ul class="nav">|
+    Style::NAVI.each do |key|
+      value = Style.page(key)
+      if key.eql?(:p_yellowpage)
+        link = yellowpage_okboards_path
+        html += %Q|<li><a href="#{link}" id="navi_#{key}">#{t(value)}</a>|
+      else
+        link = Okboard.okboard_link(key)
+        html += %Q|<li class="dropdown"><a href="#{link}" class="dropdown-toggle" data-toggle="dropdown" data-target="#" id="navi_#{key}">#{t(value)}<b class="caret"></b></a>|
+        html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="popover_navi_#{key}">|
+        html += "<li><a href=\"#{link}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
+        html += _sub_menu(key)
+        html += %Q|</ul>|
+      end
+      html += %Q|</li><li class="divider-vertical"></li>|
+    end
+    html += "</ul></div></div></div>"
+    html.strip.html_safe
+  end
+  
+  def _sub_menu(link)
+    logger.debug("_sub_menu @okpage: #{@okpage} link: #{link}")
+    case link
+    when :p_job
+      categories = Job::Categories
+    when :p_buy_and_sell
+      categories = BuyAndSell::Categories
+    when :p_well_being
+      categories = WellBeing::Categories
+    when :p_motor_vehicle
+      categories = MotorVehicle::Categories
+    when :p_estate
+      categories = Estate::Categories
+    when :p_business
+      categories = Business::Categories
+    when :p_accommodation
+      categories = Accommodation::Categories
+    when :p_law
+      categories = Law::Categories
+    when :p_tax
+      categories = Tax::Categories
+    when :p_study
+      categories = Study::Categories
+    when :p_immig
+      categories = Immigration::Categories
+    else
+      raise Exceptions::BadRequestError
+    end
+    logger.debug("categories: #{categories}")
+    html = ""
+    categories.each do |key,category|
+      html += "<li><a href=\"#{Okboard.okboard_link_with_category(link,category)}\" tabindex=\"-1\">#{t(category)}</a></li>"
+    end
+    if Style.open_page?(link)
+      html += "<li><a href=\"#{Okboard.okboard_link_write(link)}\" tabindex=\"-1\">#{t(:write_new)}</a></li>"
+    end
+    html.html_safe
+  end
+  
+  
+  def _path(links)
+    path = Array.new
+    links.each do |link|
+      if link.eql?(:p_yellowpage)
+        path.push(yellowpage_okboards_path)
+      else
+        path.push(Okboard.okboard_link(link))
+      end
+    end
+    path
+  end
+  
+  def ___navigation(over, out)
+    html = %Q|<div class="row-fluid navigation box_shadow box_round"><ul class="">|
     script = ""
     Style::NAVI.each do |key|
       if key.eql?(:p_yellowpage)
@@ -111,6 +185,7 @@ module HomesHelper
       end
       value = Style.page(key)
       html += %Q|<li class="box_animation" id="navi_#{value}">#{t(value)}</li>|
+      
       script += %Q|
         $('\#navi_#{value}').click(function(){window.location.href ="#{link}| + %Q|"});|
     end

@@ -1,11 +1,11 @@
 <div class="row-fluid">
-<strong><p class="well well-small"><%=t(:quick_links)%></p></strong>
-<table class="table table-condensed table-hover white_box">
-	<% QuickLinks.links.each do |k,v| %>
+<strong><p class=""><%=t(:quick_links)%></p></strong>
+<table class="table table-condensed table-hover white_box rate_table bs-docs">
+	<% @qlinks.each do |l| %>
 
 <tr class="info">
 	<td><%=image_tag("common/ico_arrow_01.gif")%></td>
-	<td><%=link_to(t(v[0]),v[1])%></td>
+	<td><%=link_to(l.name,l.link_to)%></td>
 
 </tr>
 	<% end %>

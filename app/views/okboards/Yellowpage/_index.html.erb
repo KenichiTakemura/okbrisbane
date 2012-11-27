@@ -1,17 +1,20 @@
-<div class="page-header">
+<div class="row box_round box-shadow yellowpage">
+<div class="row-fluid">
 	<h1> <%= t(Style.page(@okpage))%> </h1>
 	<p>
 		<%= t(:okpage_top_description) %>
 	</p>
 </div>
-<div class="span10">
+<div class="row-fluid">
 	<div class="accordion" id="accordion_business_category">
 		<% collapsed = false%>
 		<% @business_categories.each_with_index do |bc,bc_index| %>
 		<% next if !bc.business_client.present? %>
 		<div class="accordion-group">
-			<div class="accordion-heading">
-				<a style="background-color: #fff" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_business_category" href="#collapse_<%= bc.id %>"> <%= "#{bc.display_name} (#{bc.business_client.size})" %> </a>
+			<div class="accordion-heading white_box">
+				<strong>
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_business_category" href="#collapse_<%= bc.id %>"> <%= "#{bc.display_name} (#{bc.business_client.size})" %> </a>
+				</strong>
 			</div>
 			<% if !collapsed%>
 			<div id="collapse_<%= bc.id %>" class="accordion-body collapse in">
@@ -20,23 +23,26 @@
 			<div id="collapse_<%= bc.id %>" class="accordion-body collapse">
 			<% end %>
 				<div class="accordion-inner">
-					<ul class="thumbnails">
+					<table class="table table-hover table-condensed">
 						<% bc.business_client.each_with_index do |c,i| %>
-						<li class="span4">
-							<div class="thumbnail" ><span class="badge badge-info"><%= i+1%></span> <% if c.main_profile_image.present? %>
+
+						<tr>
+							<td>
+							<% if c.main_profile_image.present? %>
 							<%= image_tag(c.main_profile_image.original_image, :class => "image-resize200_150") %>
 							<% elsif c.client_image.present? %>
 							<%= image_tag(c.client_image.first.original_image, :class => "image-resize200_150") %>
-							<% end %> <h3><%= c.business_name %></h3>
-							<p>
-								<%= c.business_profile.head %>
-							</p>
-							<p>
+							<% end %>
+							<%= c.business_name %></td>
+							<td>
 								<%= c.business_phone %>
-							</p>
+							</td>
+							<td>
 							<address>
 								<%= c.business_address %>
 							</address>
+							</td>
+							<!--
 							<a href="#clientModal_<%= c.id%>" data-toggle="modal" class="btn btn-info"><%=t(:more)%></a>
 							</div>
 							<div class="modal hide fade" id="clientModal_<%= c.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,12 +70,16 @@
 									</button>
 								</div>
 							</div>
-						</li>
+							-->
+							</tr>
+
 						<% end %>
-					</ul>
+							</table>
+
 				</div>
 			</div>
 		</div>
 		<% end %>
 	</div>
+</div>
 </div>

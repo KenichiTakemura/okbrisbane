@@ -4,7 +4,6 @@
 		<%= render :partial => "layouts/header" %>
 	</head>
 	<body>
-		<%= render :partial => "layouts/header_nav" %>
 		<div id="page_body">
 			<%= render :partial => "layouts/social" %>
 			<%= single_background_banner(1, 20) %>
@@ -17,7 +16,7 @@
 		<div class="container header_container">
 		<%= render :partial => "homes/header/header" %>
 		</div>
-		<div class="container ok_container">
+		<div class="container ok_container box_round">
 			<%= yield %>
 		</div>
 		<%= render :partial => "layouts/footer" %>

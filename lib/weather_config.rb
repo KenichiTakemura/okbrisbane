@@ -185,6 +185,8 @@ module WeatherConfig
     return "chance_of_rain" if letter =~ /([Dd])rizzle/
     return "mostly_cloudy" if letter =~ /([Cc])loudy/
     return "sunny" if letter =~ /([Ss])unny/
+    return "sunny" if letter =~ /([F])ine/
+
     nil
   end
   

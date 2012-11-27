@@ -1,0 +1,65 @@
+<div class="row-fluid">
+<strong><p class=""><%=t(:weather_information)%></p></strong>
+<table class="table white_box bs-docs">
+<tr>
+	<td><%=t(:au_weather_information)%></td>
+	<td><span class="label label-success">
+	<% if @weather_au.present? %>
+		<strong><%= t(@weather_au.location) %></strong>
+		<%= image_tag("common/weather/#{WeatherConfig.au_letter_to_icon(@weather_au.forecast)}.png") %>
+	<% end %>
+	</span>
+	</td>
+	<td><%= link_to(t(:more) , "#", :id => "weather_au", :class => "btn btn-mini") %></td>
+</tr>
+<tr>
+	<td><%=t(:ko_weather_information)%></td>
+	<td><span class="label label-info">
+	<% if @weather_kr.present? %>
+		<strong><%= t(@weather_kr.location) %></strong>
+		<%= image_tag("common/weather/#{WeatherConfig.kr_letter_to_icon(@weather_kr.forecast)}.png") %>
+	<% end %>
+	</span>
+	</td>
+	<td><%= link_to(t(:more) , "#", :id => "weather_kr", :class => "btn btn-mini") %></td>
+</tr>
+</table>
+<div class="row-fluid">
+<div class="span12" id="weather_au_information_box" style="display:none">
+<div class="_weather_au_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+</div>
+<div class="span12" id="weather_kr_information_box" style="display:none">
+<div class="_weather_kr_information_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
+</div>
+</div>
+
+<%= _script(%Q|
+$("\#weather_au").click(function() {
+	if ($("#weather_au_information_box").is(":hidden")) {
+		$("#weather_au_information_box").show("slow");
+		$("#weather_kr_information_box").hide("slow");
+		$("#rate_information_box").hide("slow");
+		$('div._weather_au_information_status').css("display","block");
+	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::AU}");
+	}
+	else {
+		$("#weather_au_information_box").hide("slow");
+	}
+	return false;
+});
+$("\#weather_kr").click(function() {
+	if ($("#weather_kr_information_box").is(":hidden")) {
+		$("#weather_kr_information_box").show("slow");
+		$("#weather_au_information_box").hide("slow");
+		$("#rate_information_box").hide("slow");
+		$('div._weather_kr_information_status').css("display","block");
+	    $.post("/homes/current_weather?locale=#{I18n.locale}&c=" + "#{Okvalue::KR}");
+	}
+	else {
+		$("#weather_kr_information_box").hide("slow");
+	}
+	return false;
+});
+
+|)%> 
+</div>

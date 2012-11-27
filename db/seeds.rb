@@ -49,5 +49,4 @@ ss.banner_ajaxable = true
 ss.save
 
 # Banner
-
 Style.create_banners

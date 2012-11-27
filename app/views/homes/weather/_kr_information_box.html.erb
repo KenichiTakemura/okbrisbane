@@ -15,11 +15,14 @@
 			</tr>
 	</thead>
 	<tbody class="">
-		<% if !@weather.present? %>
+		<% if !@weather_map.present? %>
 		<tr><td colspan="6"><%= t(:no_information) %>
 		</td></tr>
 		<% else %>
-			<% @weather.reverse_each do |w| %>
+			<% WeatherConfig::KORCityOrderList.each do |city| %>
+			<% w = @weather_map[city] %>
+			<% Rails.logger.debug("w:#{w}") %>
+			<% next if !w.present? %>
 			<% next if !WeatherConfig::KORCityVisibleMap[w.location.to_sym] %>
 			<tr>
 				<td class="city"><%= link_to(t(w.location), WeatherConfig::KORCityMap[w.location.to_sym], :target => "_blank") %></td>

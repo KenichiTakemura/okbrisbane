@@ -20,7 +20,9 @@ module Okvalue
   #VERSION = "1.0.5-20121015"
   #VERSION = "1.0.6-20121016"
   #VERSION = "1.0.7-20121106"
-  VERSION = "1.1-20121114"
+  #VERSION = "1.1-20121114"
+  VERSION = "1.1.1-20121127"
+  VERSION = "1.1.2-20121130"
   
   TERMS_DATE = Time.parse("2012-11-10 00:00:00")
   
@@ -29,13 +31,13 @@ module Okvalue
   FEED_COLORMAP = {
     :p_job => :ok,
     :p_buy_and_sell => :ok,
-    :p_estate => :naver,
-    :p_business => :naver,
-    :p_motor_vehicle => :naver,
+    :p_estate => :blue,
+    :p_business => :blue,
+    :p_motor_vehicle => :blue,
     :p_accommodation => :blue,
-    :p_well_being => :naver,
-    :p_law => :blue,
-    :p_study => :blue
+    :p_well_being => :ok,
+    :p_law => :ok,
+    :p_study => :ok
   }
   
   FEED_SHOW_SIZE = {
@@ -46,8 +48,8 @@ module Okvalue
     :p_motor_vehicle => 200,
     :p_accommodation => 200,
     :p_well_being => 200,
-    :p_law => 1800,
-    :p_study => 2000
+    :p_law => 200,
+    :p_study => 200
   }
   
   POST_ADMIN = "post_admin@okbrisbane.com"

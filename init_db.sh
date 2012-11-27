@@ -8,3 +8,4 @@ cd ../okbrisbane
 rake db:migrate --trace RAILS_ENV="production"
 rake db:migrate --trace RAILS_ENV="development"
 rake db:test:load
+rm -rf public/system/data

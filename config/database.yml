@@ -12,6 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
+#  database: okbrisbane_development
   database: okbrisbane_development
   pool: 5
   username: root

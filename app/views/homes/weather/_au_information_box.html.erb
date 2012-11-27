@@ -18,7 +18,6 @@
 		</td></tr>
 		<% else %>
 			<% WeatherConfig::AUSCityOrderList.each do |city| %>
-			<% Rails.logger.debug("city: #{city}")%>
 			<% w = @weather_map[city] %>
 			<% next if !w.present? %>
 			<% next if !WeatherConfig::AUSCityVisibleMap[w.location.to_sym] %>
