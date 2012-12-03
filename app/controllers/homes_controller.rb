@@ -1,24 +1,23 @@
 class HomesController < OkController
   
-  def collectFeed(category)
+  def collectImageFeed(category)
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
-    if Style.text_feed?(category)
-      return TopFeedList.feed_nomatter_image(category, limit)
-    elsif Style.image_feed?(category)
-      image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
-      list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), limit)
-      return list,image_list
-    else
-      raise "Bad Category"
-    end
+    image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
+    list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), limit)
+    return list,image_list
+  end
+  
+  def collectTextFeed(category)
+    limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
+    TopFeedList.feed_nomatter_image(category, limit)
   end
   
   def pick_feed
-    Style::FEED_WITHOUT_IMAGE.each do |category|
-      @feed_lists[category] = collectFeed(category)
+    Style.text_feed.each do |k,v|
+      @feed_lists[category] = collectTextFeed(k)
     end
-    Style::FEED_WITH_IMAGE.each do |category|
-      @feed_lists[category],@image_feed_lists[category] = collectFeed(category)
+    Style.image_feed.each do |k,v|
+      @feed_lists[category],@image_feed_lists[category] = collectImageFeed(k)
     end
   end
 
@@ -30,14 +29,14 @@ class HomesController < OkController
     else
       @feed_lists = Hash.new
       @image_feed_lists = Hash.new
-      Style::FEED_WITHOUT_IMAGE.each do |category|
-        if Okvalue::FEED_SHOW_SIZE[category] < 1
-          @feed_lists[category] = collectFeed(category)
+      Style.text_feed.each do |k,v|
+        if Okvalue::FEED_SHOW_SIZE[k] < 1
+          @feed_lists[k] = collectTextFeed(k)
         end
       end
-      Style::FEED_WITH_IMAGE.each do |category|
-        if Okvalue::FEED_SHOW_SIZE[category] < 1
-          @feed_lists[category],@image_feed_lists[category] = collectFeed(category)
+      Style.image_feed.each do |k,v|
+        if Okvalue::FEED_SHOW_SIZE[k] < 1
+          @feed_lists[k],@image_feed_lists[k] = collectImageFeed(k)
         end
       end
     end
@@ -57,9 +56,9 @@ class HomesController < OkController
     @okpage = :p_home
     @category = params[:c].to_sym
     if Style.text_feed?(@category)
-      @list = collectFeed(@category)
+      @list = collectTextFeed(@category)
     else
-      @list,@image_list = collectFeed(@category)
+      @list,@image_list = collectImageFeed(@category)
     end
     logger.debug("top_feed: #{@category} #{@list} #{@image_list}")
   end

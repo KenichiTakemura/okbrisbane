@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   #before_filter :authenticate_user!
-  before_filter :set_locale
+  #before_filter :set_locale
   #before_filter :opening_soon
   before_filter :hit, :get_admin_notice
 
@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
 
   def hit
     key = Common.today
-    Rails.logger.debug("hit from : #{request.remote_ip}")
+    #Rails.logger.debug("hit from : #{request.remote_ip}")
+    statistics(request)
     return if request.remote_ip.eql?(Okbrisbane::Application.config.my_host)
     unless session[key.to_sym]
       #Counter.instance.hit
@@ -25,56 +26,59 @@ class ApplicationController < ActionController::Base
         Rails.cache.write(:daily_member_hit, daily_member_hit + 1);
       end
       session[key.to_sym] = true
-      Rails.logger.debug("daily_hit: #{Rails.cache.read(:daily_hit)}")
-      Rails.logger.debug("daily_member_hit: #{Rails.cache.read(:daily_member_hit)}")
+      #Rails.logger.debug("daily_hit: #{Rails.cache.read(:daily_hit)}")
+      #Rails.logger.debug("daily_member_hit: #{Rails.cache.read(:daily_member_hit)}")
+    end
+  end
+  
+  def statistics(request)
+    b = Browser.browser_detection(request,nil)
+    begin
+      stat = Rails.cache.read(:browser_stat).presence || BrowserLog.new
+    rescue
+      stat = BrowserLog.find_by_day(Common.today.to_i) || BrowserLog.new
+    end
+    case b
+    when Browser::NOT_DETECTED
+      stat.pc_other += 1
+    when Browser::Safari
+      stat.pc_sf += 1
+    when Browser::Chrome
+      stat.pc_ch += 1
+    when Browser::Firefox
+      stat.pc_ff += 1
+    when Browser::Opera
+      stat.pc_op += 1
+    when Browser::MSIE
+      stat.pc_ie += 1
+    when Browser::MO_NOT_DETECTED
+      stat.mo_other += 1
+    when Browser::MO_Safari
+      stat.mo_sf += 1
+    when Browser::MO_Chrome
+      stat.mo_ch += 1
+    when Browser::MO_Firefox
+      stat.mo_ff += 1
+    when Browser::MO_Opera
+      stat.mo_op += 1
+    when Browser::MO_MSIE
+      stat.mo_ie += 1
+    end
+    begin
+      Rails.cache.write(:browser_stat, stat)
+      Rails.logger.debug("browser_stat: #{Rails.cache.read(:browser_stat)}")
+    rescue
+      stat.save
     end
   end
 
-  def set_locale
+  #def set_locale
     #I18n.locale = params[:locale] || I18n.default_locale
-    I18n.locale = params[:locale] || "ko"
-  end
+    #I18n.locale = params[:locale] || "ko"
+  #end
   
   def get_admin_notice
     @admin_notice = AdminNotice.current_notice.first
-
-  end
-
-  def opening_soon
-    hit
-    if !session[:granted]
-      if !params[:k] || !params[:k].eql?(Okvalue::ACCESS_KEY)
-        logger.info("BEFORE OPENNING ACCESS")
-        render  :layout => "opening_soon", :file => "homes/opening_soon.html.erb"
-      else
-        session[:granted] = true
-      end
-    end
-  end
-
-  #def default_url_options(options={})
-  #  logger.debug "default_url_options is passed options: #{options.inspect}\n"
-  #  { :locale => I18n.locale }
-  #end
-
-  # if user is logged in, return current_user, else return anonymous_user
-  def current_or_guest_user
-    if current_user
-      if session[:guest_user_id]
-        logging_in
-        guest_user.destroy
-        session[:guest_user_id] = nil
-      end
-      current_user
-    else
-      guest_user
-    end
-  end
-
-  # find anonymous_user object associated with the current session,
-  # creating one as needed
-  def guest_user
-    User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
   end
 
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
@@ -111,21 +115,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Overwriting the sign_out redirect path method
-  #def after_sign_out_path_for(resource_or_scope)
-  #  root_path
-  #end
-
-  # called (once) when the user logs in, insert any code your application needs
-  # to hand off from guest_user to current_user.
-  def logging_in
-    # For example:
-    # guest_comments = guest_user.comments.all
-    # guest_comments.each do |comment|
-    # comment.user_id = current_user.id
-    # comment.save
-    # end
-  end
 
   def create_guest_user
     u = User.find_by_email("okbrisbane_guest@okbrisbane.com")

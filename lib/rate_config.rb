@@ -17,6 +17,8 @@ module RateConfig
         rate.buy_or_sell = BUY
         rate.rate_a = rates[0+i]
         rate.rate_b = rates[3+i]
+        # Avg
+        rate.rate_c = ((rates[3+i].to_f + rates[9+i].to_f) / 2).to_s
         rate.save
         rate = Rate.new
         rate.issuedOn =  issuedOn

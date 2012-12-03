@@ -1,4 +1,8 @@
 cd ../admin.okbrisbane
+rake db:drop --trace RAILS_ENV="production"
+rake db:drop --trace
+rake db:create --trace RAILS_ENV="production"
+rake db:create
 rake db:reset --trace RAILS_ENV="production"
 rake db:migrate --trace RAILS_ENV="production"
 rake db:reset --trace

@@ -86,30 +86,4 @@ module Common
     false
   end
 
-  
-  def self.browser_detection(request, agent=nil)
-    return if !request.present? && !agent.present?
-    agent = agent.presence || request.env['HTTP_USER_AGENT']
-    browser_compatible = Okvalue::NOT_DETECTED
-    if agent =~ /Safari/
-      unless agent =~ /Chrome/
-        version = agent.split('Version/')[1].split(' ').first.split('.').first
-        browser_compatible = Okvalue::Safari
-      else
-        version = agent.split('Chrome/')[1].split(' ').first.split('.').first
-        browser_compatible = Okvalue::Chrome
-      end
-    elsif agent =~ /Firefox/
-      version = agent.split('Firefox/')[1].split('.').first
-      browser_compatible = Okvalue::Firefox
-    elsif agent =~ /Opera/
-      version = agent.split('Version/')[1].split('.').first
-      browser_compatible = Okvalue::Opera
-    elsif agent =~ /MSIE/
-      version = agent.split('MSIE')[1].split(' ').first
-      browser_compatible = Okvalue::MSIE
-    end
-    browser_compatible
-  end
-
 end

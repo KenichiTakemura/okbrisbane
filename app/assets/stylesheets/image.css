@@ -25,6 +25,16 @@ img {
 	height: expression(this.width <= this.height ? "30px" : "auto");
 }
 
+.image-resize50_30 {
+	max-width: 50px;
+	max-height: 30px;
+}
+
+* html body .image-resize50_30 {
+	width: expression(this.width >= this.height ? "50px" : "auto");
+	height: expression(this.width <= this.height ? "30px" : "auto");
+}
+
 
 .image-resize50_50 {
 	max-width: 50px;
@@ -33,6 +43,16 @@ img {
 
 * html body .image-resize50_50 {
 	width: expression(this.width >= this.height ? "50px" : "auto");
+	height: expression(this.width <= this.height ? "50px" : "auto");
+}
+
+.image-resize80_50 {
+	max-width: 80px;
+	max-height: 50px;
+}
+
+* html body .image-resize80_50 {
+	width: expression(this.width >= this.height ? "80px" : "auto");
 	height: expression(this.width <= this.height ? "50px" : "auto");
 }
 

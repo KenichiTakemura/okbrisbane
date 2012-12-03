@@ -6,10 +6,11 @@
 </div>
 <%= f.password_field :password, :class => "input-medium" %>
 <label class="checkbox"> <%= f.check_box :remember_me %><%= t(:remember_me_short) %> </label>
-<%= f.submit t(:signin), :class => "btn btn-primary btn-small" %>
+<%= image_submit_tag("#{I18n.locale}/Signin/bt_login.gif", :class => "image-resize80_50") %>
+<!-- %= f.submit t(:signin), :class => "btn btn-primary btn-small" % -->
 <% end %>
 <% else %>
-<%= link_to t(:signout), destroy_user_session_path, :method => :delete, :class => "btn btn-primary" %>
+<%= link_to(image_tag("#{I18n.locale}/Signout/bt_logout.gif"), destroy_user_session_path, :method => :delete, :class => "image-resize50_50 pull-right") %>
 <%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn btn-primary", "", "icon-user icon-white") %>
 <% end %>
 </div>

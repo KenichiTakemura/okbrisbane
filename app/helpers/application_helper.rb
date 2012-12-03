@@ -464,5 +464,9 @@ module ApplicationHelper
     });|
     html.html_safe
   end
+  
+  def i18n_currency(c)
+    return number_to_currency(c, :locale => I18n.locale, :precision => 2).html_safe
+  end
 
 end

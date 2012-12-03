@@ -1,9 +1,9 @@
 <div class="row-fluid">
 <strong><p class=""><%=t(:quick_links)%></p></strong>
-<table class="table table-condensed table-hover white_box rate_table bs-docs">
+<table class="table table-condensed table-hover table-striped rate_table bs">
 	<% @qlinks.each do |l| %>
 
-<tr class="info">
+<tr class="">
 	<td><%=image_tag("common/ico_arrow_01.gif")%></td>
 	<td><%=link_to(l.name,l.link_to)%></td>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126215448) do
+ActiveRecord::Schema.define(:version => 20121128120256) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20121126215448) do
 
   create_table "attachments", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
+    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
-    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -112,6 +112,24 @@ ActiveRecord::Schema.define(:version => 20121126215448) do
     t.datetime "updated_at",                      :null => false
   end
 
+  create_table "browser_logs", :force => true do |t|
+    t.integer  "day",                       :null => false
+    t.integer  "pc_other",   :default => 0
+    t.integer  "pc_sf",      :default => 0
+    t.integer  "pc_ch",      :default => 0
+    t.integer  "pc_ff",      :default => 0
+    t.integer  "pc_op",      :default => 0
+    t.integer  "pc_ie",      :default => 0
+    t.integer  "mo_other",   :default => 0
+    t.integer  "mo_sf",      :default => 0
+    t.integer  "mo_ch",      :default => 0
+    t.integer  "mo_ff",      :default => 0
+    t.integer  "mo_op",      :default => 0
+    t.integer  "mo_ie",      :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "business_categories", :force => true do |t|
     t.string   "en_name"
     t.string   "display_name"
@@ -137,9 +155,9 @@ ActiveRecord::Schema.define(:version => 20121126215448) do
 
   create_table "business_profile_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
+    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
-    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -238,9 +256,9 @@ ActiveRecord::Schema.define(:version => 20121126215448) do
 
   create_table "client_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
+    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
-    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -341,9 +359,9 @@ ActiveRecord::Schema.define(:version => 20121126215448) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
+    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
-    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"

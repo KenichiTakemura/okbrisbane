@@ -15,6 +15,15 @@ class BusinessCategory < ActiveRecord::Base
   default_scope :order => 'id ASC'
   paginates_per 100
   
+  scope :query_by_name, lambda { |name,limit|
+    select("display_name").search(name,limit)
+  }
+  
+  scope :search, lambda { |name,limit|
+    where("display_name like ?", "#{name}%").limit(limit)
+  }
+  
+  
   def to_s
     "#{display_name}"
   end

@@ -102,21 +102,25 @@ module HomesHelper
   
   def navigation
     script = ""
-    html = %Q|<div class="container-fluid navbar-wrapper"><div class="navbar"><div class="navbar-inner"><ul class="nav">|
-    Style::NAVI.each do |key|
+    html = %Q|<div class="navbar-wrapper"><div class="navbar"><div class="navbar-inner"><ul class="nav">|
+    Style.navi.each do |key|
       value = Style.page(key)
       if key.eql?(:p_yellowpage)
         link = yellowpage_okboards_path
-        html += %Q|<li><a href="#{link}" id="navi_#{key}">#{t(value)}</a>|
       else
         link = Okboard.okboard_link(key)
-        html += %Q|<li class="dropdown"><a href="#{link}" class="dropdown-toggle" data-toggle="dropdown" data-target="#" id="navi_#{key}">#{t(value)}<b class="caret"></b></a>|
-        html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="popover_navi_#{key}">|
-        html += "<li><a href=\"#{link}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
-        html += _sub_menu(key)
-        html += %Q|</ul>|
+        #html += %Q|<li class="dropdown" id="navi_#{key}"><a href="#{link}" class="dropdown-toggle" data-toggle="" data-target="#">#{t(value)}<b class="caret"></b></a>|
+        #html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="popover_navi_#{key}">|
+        #html += "<li><a href=\"#{link}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
+        #html += _sub_menu(key)
+        #html += %Q|</ul>|
       end
+      html += %Q|<li><a href="#{link}" id="navi_#{key}">#{t(value)}</a>|
       html += %Q|</li><li class="divider-vertical"></li>|
+      script += %Q|
+        $('\#navi_#{key}').mouseover(function(){$('\#popover_navi_#{key}').fadeIn()});
+        $('\#navi_#{key}').mouseout(function(){$('\#popover_navi_#{key}').fadeOut()});|
+      html += _script_document_ready(script)
     end
     html += "</ul></div></div></div>"
     html.strip.html_safe

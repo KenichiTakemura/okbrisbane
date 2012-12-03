@@ -38,7 +38,15 @@ class BusinessClient < ActiveRecord::Base
   #  joins("left outer join client_images on client_images.id = business_client.attached_to_id").where("client_images.banner = true") }
   scope :match_size, lambda { |size|
     joins("left outer join client_images on client_images.id = business_client.attached_to_id").where("client_images.original_size = ?", size) 
-    }
+  }
+    
+  scope :query_by_name, lambda { |name,limit|
+    select("business_name").search(name,limit)
+  }
+  
+  scope :search, lambda { |name,limit|
+    where("business_name like ?", "#{name}%").limit(limit)
+  }
   
   def to_s
     "id: #{id} name: #{business_name} abn: #{business_abn} contact_name: #{contact_name} profile: #{business_profile} client_image: #{client_image} profile_image: #{business_profile_image}"

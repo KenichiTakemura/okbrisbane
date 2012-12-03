@@ -85,5 +85,13 @@ class Image < Attachable
   def link
     self.link_to_url
   end
+  
+  def width
+    original_size.split("x")[0]
+  end
+
+  def height
+    original_size.split("x")[1]
+  end
 
 end

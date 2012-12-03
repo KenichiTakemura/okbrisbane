@@ -1,4 +1,4 @@
-<% browser = Common.browser_detection(request) %>
+<% ie = Browser.ie?(request) %>
 <div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
 	<div class="hero-unit">
 		<h1><%= t(Style.page(@okpage))%><br><%= t('write_new')%></h1>
@@ -6,7 +6,7 @@
 	</div>
 		<%= ok_error_messages!(@post) %>
 	<div class="span7" style="margin: 5px;">
-	    <% if browser == Okvalue::MSIE %>
+	    <% if ie %>
 		    <p class="text-info"><strong>
 		    	<%= t(:please_use_other_browsers) %>
 			</strong>
@@ -38,7 +38,7 @@
 		<span class="help-block"><%= t(:why_valid_until, :days => SystemConfig.instance.post_expiry_length) %></span>
 		<%= f.fields_for @post.content do |content_form| %>
 		<%= f.label :body, t("content") %>
-		<% if Common.browser_detection(request) != Okvalue::MSIE %>
+		<% if !ie %>
 		<%= content_form.cktext_area :body, :style => "width:500px;height:400px", :toolbar => 'Easy' %>
 		<% else %>
 		<%= content_form.text_area :body, :style => "width:500px;height:400px" %>		
@@ -53,7 +53,7 @@
 	    	<br>
 			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
 			<br/>
-			<% if Common.browser_detection(request) != Okvalue::MSIE %>
+			<% if !ie %>
 			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn" %>
 			<% script = %Q|
 			    function upload_image() {
@@ -115,7 +115,7 @@
     			| + script) %>
     			<% end %>
 			</div>
-			<% if Common.browser_detection(request) != Okvalue::MSIE %>
+			<% if !ie %>
 			<div class="display_image" style="margin: 3px;float:left"></div>
 			<% end %>
 			<div class="clear"></div>
@@ -123,7 +123,7 @@
 	    	<%= f.label "#{t("attachment") + t("add")}" %>
 			<div class="flash"><div class="attachment_upload_progress"></div></div>
 	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-			<% if browser != Okvalue::MSIE %>
+			<% if !ie %>
 	    	<span class="help-block"><%= t("post_attachment_upload_description") %></span>
 			<% script = %Q|
                 function upload_attachment() {
@@ -182,7 +182,7 @@
 		    | + script) %>
 		    <% end %>
 			</div>
-			<% if Common.browser_detection(request) != Okvalue::MSIE %>
+			<% if !ie %>
 			<div class="display_attachment" style="margin: 3px;float:left"></div>
 		    <% end %>
 
@@ -195,7 +195,7 @@
 			<%= f.submit t("create"), :class => "btn btn-primary" %>
 
 		<% end %>
-		<% if Common.browser_detection(request) != Okvalue::MSIE %>
+		<% if !ie %>
 		<%= _script_document_ready(%Q|
 		  $('div.image_upload_status').css("display","block");
 		  $('div.attachment_upload_status').css("display","block");

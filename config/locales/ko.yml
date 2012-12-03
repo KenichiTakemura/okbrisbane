@@ -597,7 +597,7 @@ ko:
   enter_url: 'URL를 입력하십시오...'
   optional: '옵션 입력'
   linked_from_banner: '광고 이미지 링크'
-  not_listed: '일람안에 없습니다'
+  not_listed: '일람안에 없습니다?'
   acceptable_extention: '업로드 가능 파일'
   if_checked_not_displayed: '체크하면 표시 안됨'
   write_something: '무엇인가 적어 주세요...'
@@ -826,3 +826,7 @@ ko:
   keb: "외환은행"
   data_from: "출처"
   buy_and_sell_page: "매매 페이지"
+  link_to: "링트"
+  sort_key: "표시 순서"
+  invalid_url: "입력한 글자가 틀립니다"
+  is_main_profile: "메인 프로필 이미지"

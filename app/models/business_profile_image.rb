@@ -36,4 +36,31 @@ class BusinessProfileImage < Attachable
     return self.avatar.url(:original)
   end
   
+  after_save :mark_main_on_save
+  after_destroy :mark_main_on_destroy
+  
+  def mark_main_on_save
+    business_client = BusinessClient.find_by_id(self.attached_id)
+    if business_client.business_profile_image.size <= 1 && !self.is_main
+      self.is_main = true
+      update_attribute(:is_main, true)
+    else
+      if self.is_main
+        business_client.business_profile_image.each do |p|
+          next if p.id == self.id
+          p.update_attribute(:is_main, false)
+        end
+      end
+    end
+  end
+  
+  def mark_main_on_destroy
+    business_client = BusinessClient.find_by_id(self.attached_id)
+    return if business_client.business_profile_image.size < 1
+    if self.is_main
+      business_client.business_profile_image.first.update_attribute(:is_main, true)
+    end
+  end
+  
+  
 end

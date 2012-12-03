@@ -1,9 +1,8 @@
-<div id="usermanagement">
+<div class="row-fluid">
+	<div class="span3">
 	<% links = ["signin","signup","findid","findpassword","termsofservice","termsofpersonalinfo"] %>
 	<% paths = [new_user_session_path,member_managements_sign_up_path,new_user_confirmation_path,new_user_password_path,termsofservice_path,termsofpersonal_path] %>
 	<%= _left_menu("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", links,paths) %>
-	<div id="page_section_right">
-		<div id="content_head">
-			<!-- %= single_body_banner(5) %-->
-		</div>
-		<div id="content_body">
+	</div>
+	<div class="span9">
+		<!-- %= single_body_banner(5) %-->

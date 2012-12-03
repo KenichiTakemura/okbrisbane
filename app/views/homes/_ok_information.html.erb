@@ -18,15 +18,15 @@
 		<% else %>
 		<tr>
 			<td><%= image_tag("common/aud.gif")%> 1AUD</td>
-			<td><%= number_to_currency(@rates[5].rate_a, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[4].rate_a, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[4].rate_c, :locale => :ko)%></td>
+			<td><%= i18n_currency(@rates[5].rate_a)%></td>
+			<td><%= i18n_currency(@rates[4].rate_a)%></td>
+			<td><%= i18n_currency(@rates[4].rate_c)%></td>
 		</tr>
 		<tr>
 			<td><%= image_tag("common/usd.gif")%> 1USD</td>
-			<td><%= number_to_currency(@rates[1].rate_a, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[0].rate_a, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[0].rate_c, :locale => :ko)%></td>
+			<td><%= i18n_currency(@rates[1].rate_a)%></td>
+			<td><%= i18n_currency(@rates[0].rate_a)%></td>
+			<td><%= i18n_currency(@rates[0].rate_c)%></td>
 		</tr>
 		<% end %>
 	</tbody>
@@ -48,15 +48,15 @@
 		<% else %>
 		<tr>
 			<td><%= image_tag("common/aud.gif")%> 1AUD</td>
-			<td><%= number_to_currency(@rates[5].rate_b, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[4].rate_b, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[4].rate_c, :locale => :ko)%></td>
+			<td><%= i18n_currency(@rates[5].rate_b)%></td>
+			<td><%= i18n_currency(@rates[4].rate_b)%></td>
+			<td><%= i18n_currency(@rates[5].rate_c)%></td>
 		</tr>
 		<tr>
 			<td><%= image_tag("common/usd.gif")%> 1USD</td>
-			<td><%= number_to_currency(@rates[1].rate_b, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[0].rate_b, :locale => :ko)%></td>
-			<td><%= number_to_currency(@rates[0].rate_c, :locale => :ko)%></td>
+			<td><%= i18n_currency(@rates[1].rate_b)%></td>
+			<td><%= i18n_currency(@rates[0].rate_b)%></td>
+			<td><%= i18n_currency(@rates[1].rate_c)%></td>
 		</tr>
 		<% end %>
 	</tbody>

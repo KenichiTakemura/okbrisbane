@@ -5,6 +5,7 @@ module Style
   PAGE_IDS = Common.new_orderd_hash
   SECTION_IDS = Common.new_orderd_hash
   ADMIN_ROLES = Common.new_orderd_hash
+  ALL_FEED = Common.new_orderd_hash
   
   # div id rule is banner_#{page}_#{section}_#{position}
   PAGES[:p_home] = "Home"
@@ -55,27 +56,58 @@ module Style
   PAGE_IDS[:p_mypage] = 17
   PAGE_IDS[:p_signout] = 18
   PAGE_IDS[:p_issue] = 19
-  
+
   PAGE_ID_MAX = 19
-   
-  NAVI = [:p_job, :p_buy_and_sell, :p_well_being, :p_study, :p_immig, :p_estate, :p_law, :p_tax, :p_yellowpage]
-  OPEN_PAGE = [:p_job, :p_buy_and_sell, :p_well_being, :p_accommodation, :p_tax]
+
+  ######  
+  ALL_FEED[:p_job] = {:nav => true, :open => true, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_buy_and_sell] = {:nav => true, :open => true, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_well_being] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
+  ALL_FEED[:p_estate] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_business] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_motor_vehicle] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_accommodation] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
+  ALL_FEED[:p_study] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_yellowpage] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
   
-  FEED_WITHOUT_IMAGE = [:p_job,:p_buy_and_sell,:p_law,:p_study]
-  FEED_WITH_IMAGE = [:p_estate,:p_business,:p_motor_vehicle,:p_accommodation,:p_well_being]
+  def self.navi
+    ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }
+  end  
   
   def self.open_page?(page)
-    OPEN_PAGE.include?(page)
+    ALL_FEED[page][:open]
   end
   
   def self.text_feed?(page)
-    FEED_WITHOUT_IMAGE.include?(page)
+    return false if !feedable?(page)
+    !image_feed?(page)
   end
   
   def self.image_feed?(page)
-    FEED_WITH_IMAGE.include?(page)
+    return false if !feedable?(page)
+    ALL_FEED[page][:feed][:image]
   end
   
+  def self.feedable?(page)
+    ALL_FEED[page][:feed][:enabled]
+  end
+  
+  def self.feedable
+    ALL_FEED.select { |k,v| v[:feed][:enabled]}
+  end
+  
+  def self.text_feed
+    feedable.select{ |k,v| !v[:feed][:image] }
+  end
+  
+  def self.image_feed
+    feedable.select{ |k,v| v[:feed][:image] }
+  end
+    
+    
   SECTIONS[:s_header] = "s_header"
   SECTIONS[:s_background] = "s_background"
   SECTIONS[:s_body] = "s_body"
@@ -165,10 +197,12 @@ module Style
   Effect[:_s_header_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:false,generatePagination:false,hoverPause:true|
   Effect[:_s_header_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:false,generatePagination:false,hoverPause:true|
   Effect[:Home_s_body_1] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,effect:'fade',crossfade:true,generateNextPrev:false|
+  Effect[:Home_s_body_2] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},pagination:false,fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},autoHeight:false,generatePagination:false,hoverPause:true|
   Effect[:Home_s_body_3] = %Q|preload:true,pause:#{Okvalue::BANNER_EFFECT_PAUSE},fadeSpeed:#{Okvalue::BANNER_FADE_SPEED},hoverPause:true,autoHeight:false,autoHeightSpeed:1000,generatePagination:false,effect:'fade',crossfade:true,generateNextPrev:false|
 
+
   StyleClass[:any] = ""
-  StyleClass[:Home_s_body_2] = "img-polaroid"
+  StyleClass[:Home_s_body_2] = ""
 
   def self.getEffect(page, section, position)
     key = "#{page}_#{section}_#{position}"
@@ -282,7 +316,8 @@ module Style
     :position_id => 2,
     :div_width => 320, :div_height => 220,
     :img_width => 320, :img_height => 200,
-    :style => 'position:relative;top:0px;right:0px;')
+    :style => 'position:relative;top:0px;right:0px;',
+    :effect => Banner::E_SLIDE);
     Banner.create(:page_id => Style.pageid_key(_page),
     :section_id => Style.sectionid(:s_body),
     :position_id => 3,

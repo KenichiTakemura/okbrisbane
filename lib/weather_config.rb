@@ -186,7 +186,7 @@ module WeatherConfig
     return "mostly_cloudy" if letter =~ /([Cc])loudy/
     return "sunny" if letter =~ /([Ss])unny/
     return "sunny" if letter =~ /([F])ine/
-
+    return "thunderstorm" if letter =~ /thundery/
     nil
   end
   
