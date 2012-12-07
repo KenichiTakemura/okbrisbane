@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   #before_filter :authenticate_user!
   #before_filter :set_locale
   #before_filter :opening_soon
-  before_filter :hit, :get_admin_notice
+  before_filter :hit
 
   def initialize
     super
@@ -77,10 +77,6 @@ class ApplicationController < ActionController::Base
     #I18n.locale = params[:locale] || "ko"
   #end
   
-  def get_admin_notice
-    @admin_notice = AdminNotice.current_notice.first
-  end
-
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
   # redirect back to current page without oauth signin
   def after_sign_in_path_for(resource)

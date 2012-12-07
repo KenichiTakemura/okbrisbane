@@ -15,28 +15,16 @@
 					<%= render :partial => "homes/signin" %>
 				</div>
 				<div class="row-fluid">
-					<% if @admin_notice.present? %>
-					<%= render :partial => "homes/header/admin_notice" %>
-					<% else %>
-					<!--%= single_header_banner(1) %-->
-					<% end %>
-				</div>
-				<div class="row-fluid">
 					<%= link_to(image_tag("#{I18n.locale}/Signup/mbtn_join.gif"), member_managements_sign_up_path) %>
 					<%= facebook %>
 					<%= google %>
 					<%= link_to_with_icon_with_id(t("bookmarkme"),"#","btn btn-link pull-right","","bookmarkme","icon-star icon-white")%>
-
-					<form class="form-search mt-5">
-						<input type="text" class="input-large search-query" placeholder="Search from contents">
-						<%= link_to(image_tag("#{I18n.locale}/common/org_search.gif"),"#",:remote => true, :class => "img-rounded")%>
-					</form>
 				</div>
 			</div>
 			</div>
 			<!-- <%= single_header_banner(1) %> -->
-			<div class="row-fluid header-bottom">
-				<%= navigation %>
+			<div class="row-fluid">
+				<%= render :partial => "homes/header/navigation" %>
 			</div>
 		</div>
 		<%= _script_document_ready(%Q|

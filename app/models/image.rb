@@ -93,5 +93,13 @@ class Image < Attachable
   def height
     original_size.split("x")[1]
   end
+    
+  def filename
+    avatar_file_name
+  end
+  
+  def filesize
+    avatar_file_size
+  end
 
 end

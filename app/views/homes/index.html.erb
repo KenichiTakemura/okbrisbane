@@ -1,22 +1,12 @@
 <div class="row-fluid">
+	<% if @admin_notice.present? %>
 	<div class="row-fluid">
-		<% if socialable? %>
-		<a href="https://twitter.com/twitter" class="twitter-follow-button" data-show-count="false" data-lang="ko">@twitter 팔로우하기</a>
-		<script>
-			! function(d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (!d.getElementById(id)) {
-					js = d.createElement(s);
-					js.id = id;
-					js.src = "//platform.twitter.com/widgets.js";
-					fjs.parentNode.insertBefore(js, fjs);
-				}
-			}(document, "script", "twitter-wjs");
-		</script>
-		<div class="fb-like" data-href="http://www.okbrisbane.com" data-send="true" data-width="450" data-show-faces="true" data-action="recommend"></div>
-		<% end %>
+		<%= render :partial => "homes/header/admin_notice" %>
 	</div>
-	<div class="row-fluid">
+	<% end %>
+
+
+<div class="row-fluid" id="content_top">
 	<div class="span8">
 		<div class="row-fluid">
 			<ul class="nav nav-tabs">
@@ -52,6 +42,9 @@
 		</div>
 	</div>
 	<div class="span4">
+		<div class="row-fluid">
+		<%= render :partial => "homes/social" %>
+		</div>
 		<%= single_body_banner(2) %>
 		<%= render :partial => "homes/ok_information" %>
 
@@ -62,7 +55,8 @@
 	</div>
 	</div>
 </div>
-<div class="row-fluid">
+<div class="row-fluid" id="content_middle">
+	<!--
 	<div class="row-fluid">
 		<div id="third_section_bar"></div>
 	</div>
@@ -80,7 +74,9 @@
 			<%= top_feed_div(:p_motor_vehicle) %>
 		</div>
 	</div>
+	-->
 </div>
+<br>
 <div class="row-fluid">
 	<div class="row-fluid">
 		<div id="third_section_bar"></div>
@@ -92,11 +88,11 @@
 			<%= top_feed_div(:p_study) %>
 		</div>
 		<div class="span8">
-			<%= multi_body_banner(6, 1700) %>
-			<%= multi_body_banner(7,1850) %>
-			<%= multi_body_banner(8, 2000) %>
-			<%= multi_body_banner(9, 2150) %>
-			<%= multi_body_banner(10, 2300) %>
+			<%= multi_body_banner(6, %Q|$('\#content_top').offset().top|) %>
+			<%= multi_body_banner(7, %Q|$('\#content_top').offset().top|) %>
+			<%= multi_body_banner(8, %Q|$('\#content_top').offset().top|) %>
+			<%= multi_body_banner(9, %Q|$('\#content_top').offset().top|) %>
+			<%= multi_body_banner(10,%Q|$('\#content_top').offset().top|) %>
 		</div>
 	</div>
 	<% if socialable? %>

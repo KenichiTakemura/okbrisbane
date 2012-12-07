@@ -1,0 +1,22 @@
+<div class="navbar-wrapper">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<ul class="nav">
+				<% Style.navi.each do |key| %>
+				<% value = Style.page(key) %>
+				<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
+		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#"><%= t(value)%><b class="caret"></b></a>
+        		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+         		<%=_sub_menu(key)%>
+        		</ul>			
+				<li class="divider-vertical"></li>
+				<% end %>
+				<li>					
+				<form class="navbar-form pull-right">
+						<input type="text" class="input-medium" id="search-query" placeholder="<%=t(:search)%>">
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

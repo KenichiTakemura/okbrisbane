@@ -25,6 +25,7 @@ module HomesHelper
   end
   
   def top_feed_div(category)
+    return if !Style.feedable?(category)
     color = Okvalue::FEED_COLORMAP[category]
     lists = @feed_lists[category]
     image_list = @image_feed_lists[category]
@@ -117,17 +118,16 @@ module HomesHelper
       end
       html += %Q|<li><a href="#{link}" id="navi_#{key}">#{t(value)}</a>|
       html += %Q|</li><li class="divider-vertical"></li>|
-      script += %Q|
-        $('\#navi_#{key}').mouseover(function(){$('\#popover_navi_#{key}').fadeIn()});
-        $('\#navi_#{key}').mouseout(function(){$('\#popover_navi_#{key}').fadeOut()});|
-      html += _script_document_ready(script)
+      #script += %Q|
+      #  $('\#navi_#{key}').mouseover(function(){$('\#popover_navi_#{key}').fadeIn()});
+      #  $('\#navi_#{key}').mouseout(function(){$('\#popover_navi_#{key}').fadeOut()});|
+      #html += _script_document_ready(script)
     end
     html += "</ul></div></div></div>"
     html.strip.html_safe
   end
   
   def _sub_menu(link)
-    logger.debug("_sub_menu @okpage: #{@okpage} link: #{link}")
     case link
     when :p_job
       categories = Job::Categories
@@ -154,7 +154,6 @@ module HomesHelper
     else
       raise Exceptions::BadRequestError
     end
-    logger.debug("categories: #{categories}")
     html = ""
     categories.each do |key,category|
       html += "<li><a href=\"#{Okboard.okboard_link_with_category(link,category)}\" tabindex=\"-1\">#{t(category)}</a></li>"

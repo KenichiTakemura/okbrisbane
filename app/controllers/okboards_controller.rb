@@ -136,49 +136,6 @@ class OkboardsController < OkController
   end
 
   #ajax
-  def get_image
-    timestamp = params[:timestamp]
-    images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
-    image_ids = images.collect{|i| i.id}
-    thumbnails = images.collect{|i| i.thumb_image}
-    somethingies = images.collect{|i| i.something}
-    render :json => {:result => 0, :images => image_ids, :thumbnails => thumbnails, :somethingies => somethingies }
-  end
-
-  # ajax
-  def upload_image
-    logger.debug("upload_image")
-    file = params[:file]
-    timestamp = params[:timestamp]
-    image = Image.new(:avatar => file)
-    if image.thumbnailable?
-      image.write_at = timestamp;
-      image.something = params[:something]
-      image.attached_by(current_user)
-      logger.debug("image saved. #{image}")
-      images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
-      image_ids = images.collect{|i| i.id}
-      thumbnails = images.collect{|i| i.thumb_image}
-      somethingies = images.collect{|i| i.something}
-      render :json => {:result => 0, :images => image_ids, :thumbnails => thumbnails, :somethingies => somethingies }
-    else
-      logger.debug("not thumbnailable? #{image}")
-      render :json => {:result => 1}
-    end
-  rescue
-    render :json => {:result => 1}
-    end
-
-  #ajax
-  def delete_image
-    logger.debug("delete_image")
-    image = Image.find(params[:id])
-    @timestamp = params[:t]
-    image.destroy
-    @images = Image.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)
-  end
-
-  #ajax
   def get_attachment
     timestamp = params[:timestamp]
     json_attachment(timestamp)
@@ -285,6 +242,8 @@ class OkboardsController < OkController
     post.write_at = Common.current_time.to_i
     post.build_content
     post.valid_until = post_expiry
+    @image = Image.new
+    @image.write_at = post.write_at
     post
   end
 

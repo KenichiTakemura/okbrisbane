@@ -71,7 +71,7 @@ module Style
   ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
   ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
   ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_yellowpage] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_yellowpage] = {:nav => false, :open => false, :feed => {:enabled => false, :image => false} }
   
   def self.navi
     ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }

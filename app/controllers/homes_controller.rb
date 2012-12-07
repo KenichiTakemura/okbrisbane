@@ -1,6 +1,7 @@
 class HomesController < OkController
   
   def collectImageFeed(category)
+    return nil if !Style.feedable?(category)
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
     image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), limit)
@@ -8,6 +9,7 @@ class HomesController < OkController
   end
   
   def collectTextFeed(category)
+    return nil if !Style.feedable?(category)
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
     TopFeedList.feed_nomatter_image(category, limit)
   end
@@ -46,6 +48,7 @@ class HomesController < OkController
     @weather_kr = Weather.weather_for_location(Common.today, Okvalue::KR, :seo).first
     @rates = Rate.rate_for()
     @qlinks = QuickLink.links
+    @admin_notice = AdminNotice.current_notice.first
     respond_to do |format|
       format.html # index.html.erb
     end

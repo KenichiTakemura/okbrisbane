@@ -627,7 +627,7 @@ ko:
 
   Share: '쉐어'
   # Upload
-  max_size: '최대 사이즈'
+  max_size: '최대 사이즈는 %{size} 입니다'
   
   please_select: '선택하십시오 '
   
@@ -668,9 +668,11 @@ ko:
   successfully_created: '성공적으로 추가 되었습니다'
   successfully_updated: '성공적으로 갱신 되었습니다'
   successfully_uploaded: '성공적으로 업로드 되었습니다'
+  successfully_deleted: '성공적으로 삭제 되었습니다'
   invalid_file_extention: '업로드가 안되는 파일 입니다.'
   failed_to_create: '실패 되었습니다'
   failed_to_upload: '업로드가 실패 되었습니다' 
+  failed_to_delete: '삭제가 실패 되었습니다' 
   failure: '실패 되었습니다'
   banner_attach_images: '광고에 이미지를 추가하기'
   banner_upload_images: '이미지를 추가하기'
@@ -830,3 +832,4 @@ ko:
   sort_key: "표시 순서"
   invalid_url: "입력한 글자가 틀립니다"
   is_main_profile: "메인 프로필 이미지"
+  twitter: "@twitter 팔로우하기"

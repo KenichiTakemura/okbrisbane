@@ -62,3 +62,4 @@ gem 'kaminari'
 gem 'encryptor'
 gem "ckeditor", "3.7.1"
 gem "exception_notification"
+gem 'remotipart'

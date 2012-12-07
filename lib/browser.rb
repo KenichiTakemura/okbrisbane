@@ -15,6 +15,7 @@ module Browser
   
   DEVISE_PHONE = 10
   DEVISE_PC = 1
+
   
   def self.ie?(request, agent)
     b = browser_detection(request, agent)

@@ -1,0 +1,8 @@
+<% if alert %>
+$('#upload_image_status').html("<%= escape_javascript(show_alert)%>");
+<% elsif notice %>
+$('#upload_image_status').html("<%= escape_javascript(show_notice)%>");
+<% else %>
+$('#upload_image_status').html("");
+<% end %>
+$('#upload_image_area').html("<%= escape_javascript(render 'okboards/shared/upload/image_box')%>");

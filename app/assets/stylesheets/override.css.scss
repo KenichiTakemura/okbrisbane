@@ -86,6 +86,13 @@ div.ml-10 {
   //background: #642c78;
 }
 
+.image-delete {
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+  opacity: 0.5;
+}
+
 .visible_span {
   background-color:#e0e0e0;
 }
@@ -116,4 +123,12 @@ div.ml-10 {
 
 .rate_table {
   font-size:11px
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu{
+  display: block;    
+}
+
+.ok-nav {
+  padding: 0px;
 }

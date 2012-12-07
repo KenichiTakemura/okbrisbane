@@ -1,211 +1,47 @@
-<% ie = Browser.ie?(request) %>
-<div style="position: relative; float: left; width: 750px;" id="board_for_<%= @okpage %>">
-	<div class="hero-unit">
-		<h1><%= t(Style.page(@okpage))%><br><%= t('write_new')%></h1>
-		<p class="text-warning"><%= t(@okpage.to_s + "_notice")%></p>    
+<% ie = Browser.ie?(request, nil) %>
+<div class="row-fluid" id="board_for_<%= @okpage %>">
+	<div class="page-head">
+		<h1><%= t(Style.page(@okpage))%>&nbsp;<%= t('write_new')%></h1>
+		<p class="text-warning">
+			<%= t(@okpage.to_s + "_notice")%>
+		</p>
 	</div>
-		<%= ok_error_messages!(@post) %>
-	<div class="span7" style="margin: 5px;">
-	    <% if ie %>
-		    <p class="text-info"><strong>
-		    	<%= t(:please_use_other_browsers) %>
-			</strong>
-			</p>
-		<% end %>   	
-		<%= form_for(@post, :html => { :multipart => true }) do |f| %>
-		<div class="pull-right">
-		  <span class="label label-info"><%= t('author') %></span>&nbsp;<i class="icon-user"></i><%= current_user.name %>
-	    </div>
-		<%= f.hidden_field :write_at, :id => "write_at" %>
+	<%= ok_error_messages!(@post) %>
+	<%= form_for(@post, :html => { :class => "" }) do |f| %>
+	<div class="pull-right">
+		<span class="label label-info"><%= t('author') %></span>&nbsp;<i class="icon-user"></i><%= current_user.name %>
+	</div>
+	<%= f.hidden_field :write_at, :id => "write_at" %>
 
-
-		<%= f.label t("subject") %>
-		<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("write_something") %>
-		<%= f.label t("category") %>
-		<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
-		<% if @post.respond_to? :room_type %>
-		<br>
-			<%= f.label t(:room_type) %>
-			<%= f.select :room_type, options_from_collection_for_select(@post.room_type_list, :second, :first), :include_blank => true %>
-		<% end %>
-		<% if @post.respond_to? :price %>
-		<br>
-			<%= f.label t("price") %>
-			<%= f.text_field :price, :class => "" %>
-		<% end %>
-		<%= f.label t("valid_until") %>
-		<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
-		<span class="help-block"><%= t(:why_valid_until, :days => SystemConfig.instance.post_expiry_length) %></span>
-		<%= f.fields_for @post.content do |content_form| %>
+	<%= f.label t("subject") %>
+	<%= f.text_field :subject, :class => "input-xxlarge", :placeholder => t("write_something") %>
+	<%= f.label t("category") %>
+	<%= f.select :category, options_from_collection_for_select(@post.category_list, :second, :first) %>
+	<% if @post.respond_to? :room_type %>
+	<%= f.label t(:room_type) %>
+	<%= f.select :room_type, options_from_collection_for_select(@post.room_type_list, :second, :first), :include_blank => true %>
+	<% end %>
+	<% if @post.respond_to? :price %>
+	<%= f.label t("price") %>
+	<%= f.text_field :price, :class => "" %>
+	<% end %>
+	<%= f.label t("valid_until") %>
+	<span class="label label-info"><%= Common.date_format(@post.valid_until) %></span>
+	<span class="help-block"><%= t(:why_valid_until, :days => SystemConfig.instance.post_expiry_length) %></span>
+	<%= f.fields_for @post.content do |content_form| %>
 		<%= f.label :body, t("content") %>
 		<% if !ie %>
 		<%= content_form.cktext_area :body, :style => "width:500px;height:400px", :toolbar => 'Easy' %>
 		<% else %>
-		<%= content_form.text_area :body, :style => "width:500px;height:400px" %>		
+		<%= content_form.text_area :body, :style => "width:500px;height:400px" %>
 		<% end %>
-		<% end %>
-	    	<div class="image">
-	    	<%= f.label "#{t("image") + t("add")}" %>
-	    	<div class="image_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-	    	<div class="flash"><div class="image_upload_progress"></div></div>
-	    	<span class="help-block"><%= t("post_image_upload_description") %></span>
-	    	<%= file_field_tag :image, :id => "image" %>
-	    	<br>
-			<%= text_area_tag :something, '', :placeholder => t("write_something"), :class => "text_area", :id => "something", :style => "resize:none;margin-top:5px;height:60px;text-align:top" %>
-			<br/>
-			<% if !ie %>
-			<%= link_to t("add"), "#", :id => "upload_image_submit", :class => "btn" %>
-			<% script = %Q|
-			    function upload_image() {
-				  if($('\#image').val() != "") {
-      				$('div.image_upload_status').css("display","block");
-     				var formData = new FormData();
-      				formData.append("file", document.getElementById('image').files[0]);
-      				formData.append("something",$("\#something").attr("value"));
-				    formData.append("authenticity_token", $("input[name='authenticity_token']").attr("value"));
-				    formData.append("timestamp", $("\#write_at").attr("value"));
-      				var xhr = new XMLHttpRequest();
-      				xhr.upload.addEventListener("progress", uploadImageProgress, false);
-         	        xhr.addEventListener("load", uploadImageComplete, false);
-      				xhr.open("POST", "#{Okboard.okboard_link_upload_image(@okpage)}", true);
-      				xhr.send(formData);
-      			  }
-    			};
-    			function uploadImageProgress(event) {
-      				var progress = Math.round((event.loaded / event.total) * 100);
-      				$('div.image_upload_progress').html(progress + "%");
-    			};
-    			function uploadImageComplete(event) {
-    			   $('div.image_upload_status').css("display","none");
-    			   $('\#image').val('');
-    			   $('\#something').val('');
-                   if (event.target.status != 200) {
-                     $('div.image_upload_progress').html("<div class=\\"message error\\">"
-                       + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                       return false;
-                    }
-                    data = JSON.parse(event.target.responseText);
-                    if(data.result != 0) {
-                    $('div.image_upload_progress').html("<div class=\\"message error\\">"
-                      + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                    } else {
-                      $('div.image_upload_progress').html("<div class=\\"message notice\\">"
-                      + "<p><strong>#{t("successfully_uploaded")}</strong></p></div>");
-                      showImages(data);
-                    }
-    			 };
-    			 function showImages(data) {
-    			 	 ids = data.images;
-                     thumbnails = data.thumbnails;
-                     somethingies = data.somethingies;
-                     var html = "";
-                     for (var i=0; i<ids.length; i++) {
-                       html += '<div style="position: relative; float: left;margin-left: 5px">';
-                       html += '<img src="' + thumbnails[i] + '" title="' + somethingies[i] + '" />';
-                        html += '<div style="position: absolute; top: 0px; left:95%;">';
-                        html += '<a href="#{Okboard.okboard_link_delete_image(@okpage)}' + ids[i] + '&t=' + $('\#write_at').val() + '" class="delete_x" rel="nofollow" data-remote="true" data-method="delete" data-confirm="#{t('confirm_delete')}" title="#{t('delete')}">' + "#{t('x')}" + "</a>"
-                        html += "</div></div>"
-                     }
-                     $('div.display_image').html(html);
-    			 };
-    			| %>
-    			<%= _script(%Q|$('\#upload_image_submit').click(function() {upload_image();return false});
-    			$('\#image').click(function() {$('div.image_upload_progress').html('');});
-    			$('\#image').click(function() {$('div.attachment_upload_progress').html('');});
-    			| + script) %>
-    			<% end %>
-			</div>
-			<% if !ie %>
-			<div class="display_image" style="margin: 3px;float:left"></div>
-			<% end %>
-			<div class="clear"></div>
-	    	<div class="attachment">
-	    	<%= f.label "#{t("attachment") + t("add")}" %>
-			<div class="flash"><div class="attachment_upload_progress"></div></div>
-	    	<%= file_field_tag :attachment, :id => "attachment" %><div class="attachment_upload_status" style="display:none"><%= image_tag("common/ajax_loading.gif")%></div>
-			<% if !ie %>
-	    	<span class="help-block"><%= t("post_attachment_upload_description") %></span>
-			<% script = %Q|
-                function upload_attachment() {
-				  if($('\#attachment').val() != "") {
-      				$('div.attachment_upload_status').css("display","block");
-     				var formData = new FormData();
-      				formData.append("file", document.getElementById('attachment').files[0]);
-				    formData.append("authenticity_token", $("input[name='authenticity_token']").attr("value"));
-				    formData.append("timestamp", $("\#write_at").attr("value"));
-      				var xhr = new XMLHttpRequest();
-      				xhr.upload.addEventListener("progress", uploadAttachmentProgress, false);
-         	        xhr.addEventListener("load", uploadAttachmentComplete, false);
-      				xhr.open("POST", "#{Okboard.okboard_link_upload_attachment(@okpage)}", true);
-      				xhr.send(formData);
-      			  }
-    			};
-    			function uploadAttachmentProgress(event) {
-      				var progress = Math.round((event.loaded / event.total) * 100);
-      				$('div.attachment_upload_progress').html(progress + "%");
-    			};
-    			 function uploadAttachmentComplete(event) {
-    			   $('div.attachment_upload_status').css("display","none");
-    			   $('\#attachment').val('');
-                   if (event.target.status != 200) {
-                     $('div.attachment_upload_progress').html("<div class=\\"message error\\">"
-                       + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                       return false;
-                    }
-                    data = JSON.parse(event.target.responseText);
-                    if(data.result != 0) {
-                    $('div.attachment_upload_progress').html("<div class=\\"message error\\">"
-                      + "<p><strong>#{t("failed_to_upload")}</strong></p></div>");
-                    } else {
-                      $('div.attachment_upload_progress').html("<div class=\\"message notice\\">"
-                      + "<p><strong>#{t("successfully_uploaded")}</strong></p></div>");
-                      showAttachments(data);
-                    }
-    			 };
-    			 function showAttachments(data) {
-                      ids = data.attachments;
-                      filesnames = data.filenames;
-                      var html = "";
-                      for (var i=0; i<ids.length; i++) {
-                        html += '<div style="position: relative; float: left;margin-left: 5px">';
-                        html += '<img src="/assets/common/Icon-Document03-Blue.png" width=50px height=50px title="' + filesnames[i] + '" />';
-                        html += '<div style="position: absolute; top: 0px; left:95%;">';
-                        html += '<a href="#{Okboard.okboard_link_delete_attachment(@okpage)}' + ids[i] + '&t=' + $('\#write_at').val() + '" class="delete_x" rel="nofollow" data-remote="true" data-method="delete" data-confirm="#{t('confirm_delete')}" title="#{t('delete')}">' + "#{t('x')}" + "</a>"
-                        html += "</div></div>"
-                      }
-                      $('div.display_attachment').html(html);
-    			 }
-    			| %>
-		    <%= _script(%Q|$('\#attachment').change(function() {upload_attachment();});
-		    $('\#attachment').click(function() {$('div.image_upload_progress').html('');});
-		    $('\#attachment').click(function() {$('div.attachment_upload_progress').html('');});
-		    | + script) %>
-		    <% end %>
-			</div>
-			<% if !ie %>
-			<div class="display_attachment" style="margin: 3px;float:left"></div>
-		    <% end %>
+		<br>
+	<% end %>
+	<%= f.submit t("create"), :class => "btn btn-primary" %>
+	<% end %>
+	<br>
+	<%= render :partial => "okboards/shared/upload/image" %>
 
-			<div class="clear"></div>
-			<!--
-			<label class="checkbox">
-				<%= f.check_box :comment_email %><%= t(:comment_email) %>
-			</label>
-			-->
-			<%= f.submit t("create"), :class => "btn btn-primary" %>
+	<div class="clear"></div>
 
-		<% end %>
-		<% if !ie %>
-		<%= _script_document_ready(%Q|
-		  $('div.image_upload_status').css("display","block");
-		  $('div.attachment_upload_status').css("display","block");
-		  $.post("| + get_image_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
-		  	$('div.image_upload_status').css("display","none");showImages(data);
-		  	});
-		  	$.post("| + get_attachment_okboards_path + %Q|", {v: '| + Okboard.okpage_v(@okpage) + %Q|', timestamp: $('\#write_at').val()}, function(data) {
-		  	$('div.attachment_upload_status').css("display","none");showAttachments(data);
-		  	});
-		|) %>
-		<% end %>
-	</div>
 </div>

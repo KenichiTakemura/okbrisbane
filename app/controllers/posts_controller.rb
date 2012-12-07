@@ -56,6 +56,8 @@ class PostsController < OkController
           logger.warn("@post.errors: #{msg}")
         end
         @post.build_content if @post.content.nil?
+        @image = Image.new
+        @image.write_at = @post.write_at
         respond_to do |format|
           format.html { render :template => "okboards/write" }
           format.json { render :json => @post.errors, :status => :unprocessable_entity }

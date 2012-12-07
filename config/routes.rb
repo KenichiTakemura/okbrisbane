@@ -22,7 +22,7 @@ Okbrisbane::Application.routes.draw do
   resources :member_managements, :only => ["index","new","create"]
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
-
+  resources :images, :only => ["create","destroy", "index"]
   resources :sponsors, :only => [] do
     collection do
       get :show

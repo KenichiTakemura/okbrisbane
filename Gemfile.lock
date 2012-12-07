@@ -105,6 +105,7 @@ GEM
     rb-readline (0.4.2)
     rdoc (3.12)
       json (~> 1.4)
+    remotipart (1.0.2)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -148,6 +149,7 @@ DEPENDENCIES
   paperclip (~> 2.7)
   rails (= 3.2.6)
   rb-readline
+  remotipart
   sass-rails
   therubyracer
   turbo-sprockets-rails3
