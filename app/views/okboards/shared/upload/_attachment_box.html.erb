@@ -1,0 +1,15 @@
+<% if @attachments.present? %>
+<ul class="thumbnails">
+<% @attachments.each do |attachment| %>
+	<li class="span3 pull-left">
+		<div class="thumbnail">
+		<%= image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}") %>
+		<%= link_to(t('x'), attachment_path(attachment), :class => "image-delete pull-right", :remote => true, :method => :delete, :data => { :confirm => t('confirm_delete') }) %> 
+		<p><%= attachment.filename%></p>
+		<p><%= attachment.filesize%>&nbsp;byte</p>
+	</div>
+	</li>
+<% end %>
+</ul>
+<% end %>
+

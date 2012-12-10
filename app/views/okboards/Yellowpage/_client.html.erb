@@ -1,0 +1,20 @@
+<ul class="thumbnails">
+	<% @business_clients.each do |c| %>
+	<li class="pull-left span3">
+		<div class="thumbnail">
+			<% if c.main_profile_image.present? %>
+			<%= image_tag(c.main_profile_image.medium_image, :class => "img-rounded")%>
+			<% else %>
+			<%= image_tag("http://placehold.it/120x100&text=Logo+Here", :class => "img-rounded") %>
+			<% end %>
+			<h3> <%= c.business_name%></h3>
+			<address>
+				<%= c.business_address%>
+				<br>
+				<abbr title="<%= t(:phone)%>"><%= c.business_phone%></abbr>
+			</address>
+		</div>
+	</li>
+
+	<% end %>
+</ul>

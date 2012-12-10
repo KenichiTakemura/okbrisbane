@@ -9,10 +9,10 @@
 	<br>
 	<%= image_form.text_area :something, :placeholder => t("write_something"), :class => "text_area", :id => "upload_something", :style => "margin-top:5px", :rows => "3" %>
 	<br>
-	<%= image_form.submit t("upload"), :class => "btn btn-info", :id => "upload_submit" %>
+	<%= image_form.submit t("upload"), :class => "btn btn-info", :id => "upload_image_submit" %>
 </fieldset>
 <% end %>
-<%= _script(%Q|$('\#upload_submit').click(function(){
+<%= _script(%Q|$('\#upload_image_submit').click(function(){
 	if($('\#upload_image').val() != "") {
 		$('\#upload_image_status').html("#{escape_javascript(image_tag("common/ajax_loading.gif"))}");
 	} else {

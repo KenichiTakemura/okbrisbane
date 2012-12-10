@@ -40,10 +40,10 @@ class SponsorsController < ApplicationController
   end
   
   def thank_you
-        @ok = BusinessClient.okbrisbane.first
-        @okpage = :p_sponsor
-        respond_to do |format|
-          format.html { render :template => "okboards/thank_you" }
-        end
+   @ok = BusinessClient.okbrisbane.first
+   @okpage = :p_sponsor
+   respond_to do |format|
+     format.html { render :template => "okboards/thank_you" }
+   end
   end
 end

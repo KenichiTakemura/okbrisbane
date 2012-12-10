@@ -833,3 +833,7 @@ ko:
   invalid_url: "입력한 글자가 틀립니다"
   is_main_profile: "메인 프로필 이미지"
   twitter: "@twitter 팔로우하기"
+  MostViewed: "핫 투고"
+  MostCommented: "핫 코멘트"
+  NewPosted: "신착 투고"
+  NewImages: "신착 이미지"

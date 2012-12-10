@@ -26,6 +26,13 @@ module Common
     end
   end
 
+  def self.date_format_hms(date)
+    if date.present?
+      date_l = date.utc? ? date.localtime : date
+      date_l.strftime("%H:%M")
+    end
+  end
+
   def self.today
     current_time.strftime("%Y-%m-%d")
   end

@@ -1,27 +1,12 @@
 <div class="row-fluid" id="okboards">
-	<div class="row-fluid">
-		<div class="span3" style="width: 230px">
-	    	<%= single_body_banner(1) %>
-	    </div>
-	    <div class="span9" style="margin-bottom:10px">
-			<%= single_body_banner(5) %>
-		</div>
+	<%= render :partial => "okboards/shared/top" %>	
+	<div class="row-fluid" id="content_body">
+		<%= show_notice %>
+		<%= show_alert %>
+		<%= render :partial => "okboards/#{Style.page(@okpage)}/index" %>
 	</div>
-	<div class="row-fluid">
-		<div id="content_body">
-			<%= show_notice %>
-			<%= show_alert %>
-			<%= render :partial => "okboards/#{Style.page(@okpage)}/index" %>
-		</div>			
-	</div>
-	<div class="row-fluid" id="okboard_sponsor_links_bottom">
-	<div class="span3"><%= single_body_banner(2) %></div>
-	<div class="span3"><%= single_body_banner(3) %></div>
-	<div class="span3"><%= single_body_banner(4) %></div>
-	<div class="span3"><%= single_body_banner(9) %></div>
-	</div>
+	<%= render :partial => "okboards/shared/bottom" %>
 </div>
+	
 </div>
-<%= _script_document_ready(%Q|
-$("#navi_#{@okpage}").addClass("active");
-|) %>
+<%= render :partial => "okboards/shared/footer" %>

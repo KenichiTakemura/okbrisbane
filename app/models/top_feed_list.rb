@@ -6,8 +6,12 @@ class TopFeedList < ActiveRecord::Base
   TOP_FEED_SAVED_LIMIT = 50
   
   TOP_FEED_LIMIT_CATE = Common.new_orderd_hash
+  TOP_FEED_LIMIT_CATE[:p_job] = 15
   TOP_FEED_LIMIT_CATE[:p_buy_and_sell] = 15
-
+  TOP_FEED_LIMIT_CATE[:p_new_posted] = 15
+  TOP_FEED_LIMIT_CATE[:p_new_images] = 30
+  TOP_FEED_LIMIT_CATE[:p_most_viewed] = 30
+  TOP_FEED_LIMIT_CATE[:p_most_commented] = 30
   belongs_to :feeded_to, :polymorphic => true
   
   M2T = Common.new_orderd_hash
@@ -33,6 +37,9 @@ class TopFeedList < ActiveRecord::Base
   }
   scope :feed_nomatter_image_except, lambda { |cate,ids,limit| category_feed(Style.page(cate)).except_ids(ids).feed_order.limit(limit) }
   scope :feed_nomatter_image, lambda { |cate,limit| category_feed(Style.page(cate)).feed_order.limit(limit) }
+  scope :feed_new, lambda { |limit| feed_order.limit(limit) }
+  scope :feed_image_new, lambda { |limit| feed_order.limit(limit) }
+  
   after_save :clean_oldest_feed
   
   def clean_oldest_feed

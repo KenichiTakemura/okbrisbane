@@ -1,9 +1,9 @@
 Okbrisbane::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-  
+
   resources :mypages, :only => ['index','edit','update']
-  
+
   match 'counters/batch', :via => :get
 
   match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
@@ -23,6 +23,8 @@ Okbrisbane::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords" }
   resources :images, :only => ["create","destroy", "index"]
+  resources :attachments, :only => ["create","destroy", "index"]
+
   resources :sponsors, :only => [] do
     collection do
       get :show
@@ -30,14 +32,14 @@ Okbrisbane::Application.routes.draw do
       get :thank_you
     end
   end
-  
+
   resource :banners, :only => [] do
     collection do
       post :show_single_banner
       post :show_multi_banner
     end
   end
-  
+
   resources :contacts, :only => ["index","create","new"]
 
   resources :homes, :only => ["index"] do
@@ -46,12 +48,21 @@ Okbrisbane::Application.routes.draw do
       post :current_rate
       post :top_feed
       post :admin_notice
+      get  :topic_feed
     end
   end
   
+  resources :business_clients do
+    collection do
+      post :select_category
+      get :query
+      post :search
+    end
+  end
+
   resources :post_searches, :only => ["index","create","edit","update"]
-  
-   resources :okboards, :only => ['index'] do
+
+  resources :okboards, :only => ['index'] do
     collection do
       get :mypage
       get :yellowpage
@@ -72,7 +83,7 @@ Okbrisbane::Application.routes.draw do
       post :prev_post
     end
   end
-  
+
   resources :jobs, :only => ["new","create"]
   resources :buy_and_sells, :only => ["new","create"]
   resources :well_beings, :only => ["new","create"]
@@ -86,13 +97,13 @@ Okbrisbane::Application.routes.draw do
   match 'comments/:id/new' => "comments#new", :via=>:get, :as => :comment_new
   match 'comments/:id/reply' => "comments#reply", :via=>:post, :as => :comment_reply
   resources :comments, :only => ['index',"create"] do
-  collection do
+    collection do
       post :dislike
       post :abuse
       post :post_for
     end
   end
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -144,9 +155,9 @@ Okbrisbane::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'homes#index'
 
-  # See how all your routes lay out with "rake routes"
+# See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+# This is a legacy wild controller route that's not recommended for RESTful applications.
+# Note: This route will make all actions in every controller accessible via GET requests.
+# match ':controller(/:action(/:id))(.:format)'
 end

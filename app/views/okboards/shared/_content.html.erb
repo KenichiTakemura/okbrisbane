@@ -86,7 +86,7 @@
     end
 	%>
 	<% params = %Q|v: '#{Okboard.okpage_v(@okpage)}', num: #{@board_lists.size}| %>
-	<% script += _post(post_admin_notice_okboards_path, params) %>
+	<% script += Ajax.post(post_admin_notice_okboards_path, params) %>
 	<%= _script_document_ready(script)%>
 	<% if !@board_lists.empty? %>
 	<%= _script_document_ready(%Q|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128120256) do
+ActiveRecord::Schema.define(:version => 20121209041618) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -355,6 +355,15 @@ ActiveRecord::Schema.define(:version => 20121128120256) do
   create_table "homes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "hot_feed_lists", :force => true do |t|
+    t.integer  "hot_feeded_to_id"
+    t.string   "hot_feeded_to_type"
+    t.integer  "hot_key"
+    t.integer  "hot_value"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "images", :force => true do |t|

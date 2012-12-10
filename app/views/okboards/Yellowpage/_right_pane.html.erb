@@ -1,0 +1,46 @@
+
+	<div class="tabbable tabs-right" id="r_business_category_tabs">
+		<ul class="nav nav-tabs">
+			<% @r_business_categories.each do |bc| %>
+			<li>
+				<a href="#business_category_<%= bc.id %>" data-toggle="tab"><%= bc.display_name %>&nbsp;(<%= bc.business_client.size%>)</a>
+			</li>
+			<% end %>
+		</ul>
+		<div class="tab-content">
+			<% @r_business_categories.each do |bc| %>
+			<div class="tab-pane" id="business_category_<%= bc.id%>">
+				<ul class="thumbnails">
+				<% bc.business_client.each do |c| %>
+				<li class="pull-right span9">
+					<div class="thumbnail yellowpage_gradient">
+						<% if c.main_profile_image.present? %>
+							<%= image_tag(c.main_profile_image.medium_image, :class => "img-rounded")%>
+						<% else %>
+							<%= image_tag("http://placehold.it/120x100&text=Logo+Here", :class => "img-rounded") %>
+						<% end %>
+				<h3>
+					<%= c.business_name%></h3>
+				<address>
+					<%= c.business_address%><br>
+					<abbr title="<%=t(:phone)%>"><%= c.business_phone%></abbr>
+				</address>
+					</div>
+				</li>
+
+				<% end %>
+				</ul>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<%= _script_document_ready(%Q|
+		$('#r_business_category_tab-tabs a').click(function (e) {
+		e.preventDefault();
+		$(this).tab('show');
+				});
+		$(function () {
+		$('#r_business_category_tabs a:first').tab('show');
+	});
+	|) %>
+

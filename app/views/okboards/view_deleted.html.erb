@@ -1,14 +1,12 @@
-<div id="okboards">
-	<%= _left_side_menu %>
-	<div id="page_section_right">
-		<div id="content_head">
-			<%= single_body_banner(5) %>
-		</div>
-		<div id="content_body">
-			<%= render :partial => "okboards/shared/view_deleted" %>
-		</div>
+<div class="row-fluid" id="okboards">
+	<%= render :partial => "okboards/shared/top" %>	
+	<div class="row-fluid" id="content_body">
+		<%= show_notice %>
+		<%= show_alert %>
+		<%= render :partial => "okboards/shared/view_deleted" %>
 	</div>
+	<%= render :partial => "okboards/shared/bottom" %>
 </div>
-<%= _script_document_ready(%Q|
-$("#_#{@okpage}").attr("style", "opacity:1;filter:alpha(opacity=100);");
-$('\#sub_menu_#{@okpage}').show("slow");|) %>
+	
+</div>
+<%= render :partial => "okboards/shared/footer" %>

@@ -15,13 +15,7 @@ module Ajax
   
   def self.ajax_call(url, params, type)
     html = %Q|$.ajax({url:'| + url + %Q|',type:'#{type}',timeout:#{AJAX_TIMEOUT},tryCount:0,retryLimit:#{AJAX_RETRY},data:{| + params + %Q|}}).success(function() {|
-    if DEBUG
-    html += %Q|console.log("ajax success");|
-    end
     html += %Q|}).complete(function(){|
-    if DEBUG
-    html += %Q|console.log("ajax complete");|
-    end
     html += %Q|}).error(function(xhr, textStatus, errorThrown ) {
         if (textStatus == 'timeout') {|
     if DEBUG

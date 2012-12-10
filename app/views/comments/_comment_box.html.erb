@@ -1,6 +1,6 @@
-<%= link_to_with_icon_remote(t(:agree_comment), comment_like_path(@comment), "btn btn-mini btn-info", "", "icon-thumbs-up icon-white") %>
+<%= link_to_with_icon_remote("", comment_like_path(@comment), "btn btn-mini btn-info", "", "icon-thumbs-up icon-white") %>
 <%= @comment.likes.to_s %>
-<%= link_to_with_icon_remote(t(:disagree_comment), comment_dislike_path(@comment), "btn btn-mini btn-warning", "", "icon-thumbs-down icon-white") %>
+<%= link_to_with_icon_remote("", comment_dislike_path(@comment), "btn btn-mini btn-warning", "", "icon-thumbs-down icon-white") %>
 <%= @comment.dislikes.to_s %>
 <%= link_to(image_tag("common/sns/abuse.png", :class => "image-resize20_20"), comment_abuse_path(@comment), :remote => true, :method => :post) %>
 <%= @comment.abuse.to_s %>

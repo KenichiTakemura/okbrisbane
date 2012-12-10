@@ -33,7 +33,11 @@ class BusinessProfileImage < Attachable
   end
 
   def original_image
-    return self.avatar.url(:original)
+    avatar.url(:original)
+  end
+
+  def medium_image
+    avatar.url(:medium)
   end
   
   after_save :mark_main_on_save

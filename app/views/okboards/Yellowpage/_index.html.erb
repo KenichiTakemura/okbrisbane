@@ -1,85 +1,26 @@
-<div class="row box_round box-shadow yellowpage">
+<h3 class="text-warning"><%= t(Style.page(@okpage))%></h3>
 <div class="row-fluid">
-	<h1> <%= t(Style.page(@okpage))%> </h1>
-	<p>
-		<%= t(:okpage_top_description) %>
-	</p>
+<form class="form-inline" method="post" action="/business_clients/search" id="search-form" data-remote="true" accept-chaset="UTF-8">
+<input name="key" type="text" class="ajax-typeahead" id="key" autocomplete="false">
+<input type="submit" class="btn btn-primary" value="<%=t('search')%>">
+<%= _script_document_ready(%Q|
+	$('.ajax-typeahead').typeahead({
+    source: function (query, process) {
+        return $.get('/business_clients/query', { query: query }, function (data) {
+            return process(data);
+        });
+    }});
+
+|)%>
+</form>
+</div>
+<div class="row-fluid" id="search_result">
 </div>
 <div class="row-fluid">
-	<div class="accordion" id="accordion_business_category">
-		<% collapsed = false%>
-		<% @business_categories.each_with_index do |bc,bc_index| %>
-		<% next if !bc.business_client.present? %>
-		<div class="accordion-group">
-			<div class="accordion-heading white_box">
-				<strong>
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_business_category" href="#collapse_<%= bc.id %>"> <%= "#{bc.display_name} (#{bc.business_client.size})" %> </a>
-				</strong>
-			</div>
-			<% if !collapsed%>
-			<div id="collapse_<%= bc.id %>" class="accordion-body collapse in">
-			<% collapsed = true %>
-			<% else %>
-			<div id="collapse_<%= bc.id %>" class="accordion-body collapse">
-			<% end %>
-				<div class="accordion-inner">
-					<table class="table table-hover table-condensed">
-						<% bc.business_client.each_with_index do |c,i| %>
-
-						<tr>
-							<td>
-							<% if c.main_profile_image.present? %>
-							<%= image_tag(c.main_profile_image.original_image, :class => "image-resize200_150") %>
-							<% elsif c.client_image.present? %>
-							<%= image_tag(c.client_image.first.original_image, :class => "image-resize200_150") %>
-							<% end %>
-							<%= c.business_name %></td>
-							<td>
-								<%= c.business_phone %>
-							</td>
-							<td>
-							<address>
-								<%= c.business_address %>
-							</address>
-							</td>
-							<!--
-							<a href="#clientModal_<%= c.id%>" data-toggle="modal" class="btn btn-info"><%=t(:more)%></a>
-							</div>
-							<div class="modal hide fade" id="clientModal_<%= c.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-									<h3 id="myModalLabel"><%= c.business_name %></h3>
-								</div>
-								<div class="modal-body">
-									<p>
-										<%= c.business_profile.head %>
-									</p>
-									<p>
-										<%= c.business_phone %>
-									</p>
-									<address>
-										<%= c.business_address %>
-									</address>
-									<p>
-										<%= raw(c.business_profile.body)%>
-									</p>
-								</div>
-								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">
-										<%= t(:close) %>
-									</button>
-								</div>
-							</div>
-							-->
-							</tr>
-
-						<% end %>
-							</table>
-
-				</div>
-			</div>
-		</div>
-		<% end %>
+	<div class="span6">
+	<%= render :partial => "okboards/#{Style.page(@okpage)}/left_pane" %>
 	</div>
-</div>
+	<div class="span6">
+	<%= render :partial => "okboards/#{Style.page(@okpage)}/right_pane" %>
+	</div>
 </div>

@@ -16,7 +16,7 @@ class Attachable < ActiveRecord::Base
     update_attribute(:attached_by, user)
   end
   
-  def attached_by(user)
+  def attached_by_user(user)
    update_attribute(:attached_by, user)
   end
   
@@ -76,5 +76,13 @@ class Attachable < ActiveRecord::Base
     logger.debug("geo: #{geo}")
     self.original_size = geo.to_s
   end
+
+  def filename
+    avatar_file_name
+  end
   
+  def filesize
+    avatar_file_size
+  end
+
 end

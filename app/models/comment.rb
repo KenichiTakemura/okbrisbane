@@ -30,10 +30,20 @@ class Comment < ActiveRecord::Base
     update_attribute(:number, number)
     self.update_attribute(:commented_by, user)
     self.update_attribute(:commented, post)
+    #call back
+    post.after_comment
   end
 
   def postedDate
     Common.date_format(created_at)
+  end
+  
+  def feeded_date
+    if created_at < Common.today
+      Common.date_format_md(created_at)
+    else
+      Common.date_format_hms(created_at)
+    end
   end
   
   def like

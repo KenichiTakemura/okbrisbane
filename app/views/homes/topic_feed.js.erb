@@ -1,0 +1,9 @@
+<% if @category.eql?(:p_most_viewed)%>
+$("#topic_tab_content_<%= escape_javascript(@category.to_s) %>").html("<%= escape_javascript(generateTopFeed(@category, @list, @image_list, 256, true, true)) %>");
+<% elsif @category.eql?(:p_most_commented)%>
+$("#topic_tab_content_<%= escape_javascript(@category.to_s) %>").html("<%= escape_javascript(generateTopFeed(@category, @list, @image_list, 256, true, false, true)) %>");
+<% elsif @category.eql?(:p_new_images)%>
+$("#topic_tab_content_<%= escape_javascript(@category.to_s) %>").html("<%= escape_javascript(render 'homes/new_images_box')%>");
+<% else %>
+$("#topic_tab_content_<%= escape_javascript(@category.to_s) %>").html("<%= escape_javascript(generateTopFeed(@category, @list, @image_list, 256, true)) %>");
+<% end %>

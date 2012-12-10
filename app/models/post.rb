@@ -5,11 +5,11 @@ class Post < ActiveRecord::Base
 
   # attr_accessible
   attr_accessible :locale, :category, :subject, :valid_until, :views, :likes, :dislikes, :rank, :abuse, :z_index, :write_at, :mode, :comment_email, :has_image, :has_attachment
-  
+
   # status
   # draft -> public -> hidden -> deleted
   attr_accessible :status
-  
+
   # belongs_to
   belongs_to :posted_by, :polymorphic => true
   belongs_to :post_updated_by, :polymorphic => true
@@ -22,6 +22,7 @@ class Post < ActiveRecord::Base
   # has_one
   has_one :content, :as => :contented, :dependent => :destroy
   has_one :top_feed_list, :as => :feeded_to, :dependent => :destroy
+  has_one :hot_feed_list, :as => :hot_feeded_to, :dependent => :destroy
 
   # content
   accepts_nested_attributes_for :content
@@ -29,7 +30,7 @@ class Post < ActiveRecord::Base
   alias_method :content=, :content_attributes=
 
   attr_accessible :attached
-  
+
   accepts_nested_attributes_for :attachment
   attr_accessible :attachment, :attachment_attributes
   alias_method :attachment=, :attachment_attributes=
@@ -52,11 +53,11 @@ class Post < ActiveRecord::Base
   def to_s
     "id: #{id} category: #{category} locale: #{locale} subject: #{subject} valid_until: #{valid_until} status #{status}"
   end
-  
+
   # pagination
   #default_scope :order => 'id DESC'
   paginates_per 10
-  
+
   # scope
   scope :asc, :order => 'id ASC'
   scope :desc, :order => 'id DESC'
@@ -120,7 +121,7 @@ class Post < ActiveRecord::Base
       end
     end
   }
-  scope :post_search_by_time, lambda { |x,y| 
+  scope :post_search_by_time, lambda { |x,y|
     if x.to_i < 0
       where("created_at > ?", (Common.days_ago(y)))
     elsif y.to_i > 0
@@ -129,19 +130,19 @@ class Post < ActiveRecord::Base
       where("created_at <=?", (Common.days_ago(x)))
     end
   }
-  
-  scope :except_ids, lambda { |ids| 
-    if !ids.nil? && !ids.empty?  
+
+  scope :except_ids, lambda { |ids|
+    if !ids.nil? && !ids.empty?
       where('id not in (?)', ids)
     end
   }
-  scope :after_id, lambda { |post_id| 
-    if post_id.present? 
+  scope :after_id, lambda { |post_id|
+    if post_id.present?
       where('id > ?', post_id)
     end
   }
-  scope :before_id, lambda { |post_id| 
-    if post_id.present? 
+  scope :before_id, lambda { |post_id|
+    if post_id.present?
       where('id < ?', post_id)
     end
   }
@@ -150,45 +151,50 @@ class Post < ActiveRecord::Base
       where('posted_by_id = ?', user.id).is_valid.desc
     end
   }
-  
+
   scope :search_no_order, lambda { |cond,limit| c_category(cond).c_keyword(cond).c_image(cond).c_attachment(cond).c_time(cond).valid_post.limit(limit)}
   scope :search, lambda { |cond,limit| search_no_order(cond,limit).desc }
   scope :search_except, lambda { |cond,ids,limit| search_no_order(cond,limit).except_ids(ids).desc }
   scope :search_after, lambda { |cond,post_id,limit| search_no_order(cond,limit).after_id(post_id).asc }
   scope :search_before, lambda { |cond,post_id,limit| search_no_order(cond,limit).before_id(post_id).desc }
-    
+
   # callbacks
   after_initialize :set_default
-  before_validation :logging_post
   after_save :add_top_feed_list, :delete_top_feed_list
 
   # public functions
   def add_top_feed_list
-    logger.debug("add_top_feed_list topfeedable: #{self.topfeedable?}")
     return unless topfeedable?
-    logger.debug("category: #{self}")
     return if self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
     feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
-    logger.debug("Feed: #{feed}")
     if feed
-      # Existing in feed
-      logger.debug("Feed exists #{feed}")
       feed.destroy
     end
     top_feed = TopFeedList.new
     top_feed.update_attribute(:feeded_to, self)
-    logger.debug("Feeded_to: #{top_feed.id}")
-   end
-   
-   # Delete post from top_feed when deleted
-   def delete_top_feed_list
+  end
+
+  # Delete post from top_feed when deleted
+  def delete_top_feed_list
     return unless topfeedable?
     if !self.status.eql?(Okvalue::POST_STATUS_PUBLIC)
-      logger.debug("delete_from_top_feed_list #{self}")
       feed = TopFeedList.find_a_feed(self.class.to_s, self.id).first
-      feed.destroy if feed
+      feed.destroy if feed.present?
+      feed = HotFeedList.find_a_feed(self.class.to_s, self.id).first
+      feed.destroy if feed.present?
     end
-   end
+  end
+  
+  def add_image_to_hot_feed_list
+    hot_key = HotFeedList.what_key?(:p_new_images)
+    self.image.each_with_index do |image,i|
+      logger.debug("Image is attached to hot feed #{image}")
+      feed = HotFeedList.new
+      feed.hot_key = hot_key
+      feed.update_attribute(:hot_feeded_to, image)
+      return if (i+1) >= HotFeedList::MAX_NEW_IMAGES_PER_POST
+    end
+  end
 
   def set_default
     self.locale ||= Okvalue::DEFAULT_LOCALE
@@ -199,32 +205,34 @@ class Post < ActiveRecord::Base
     self.comment_email ||= false
     self.write_at ||= Common.current_time.to_i
   end
-  
+
   def viewed
-    update_attribute(:views, views + 1)
+    v = views + 1
+    update_attribute(:views, v)
+    add_hot_feed_list(:p_most_viewed, v)
   end
 
   def like
     update_attribute(:likes, likes + 1)
     update_attribute(:rank, mark_rank)
   end
-  
+
   def dislike
     update_attribute(:dislikes, dislikes + 1)
     update_attribute(:rank, mark_rank)
   end
-    
+
   def report_abuse
     update_attribute(:abuse, abuse + 1)
     update_attribute(:rank, mark_rank)
   end
-  
+
   def mark_rank
     if abuse >= Okvalue::POST_ABUSE_LIMIT
-      return 0
+    return 0
     end
     if (likes - dislikes) < 0
-      return 0
+    return 0
     end
     case (likes - dislikes)
     when Okvalue::POST_RANK_0
@@ -238,21 +246,21 @@ class Post < ActiveRecord::Base
     when Okvalue::POST_RANK_4
       return 4
     else
-      return 5
+    return 5
     end
-  end
-
-  def logging_post
-    to_s
   end
 
   def postedDate
     Common.date_format(created_at)
   end
-  
+
   # This is used for smaller space
   def feeded_date
-    Common.date_format_md(created_at)
+    if created_at < Common.today
+      Common.date_format_md(created_at)
+    else
+      Common.date_format_hms(created_at)
+    end
   end
 
   def validDate
@@ -263,11 +271,11 @@ class Post < ActiveRecord::Base
     update_attribute(:posted_by, user)
     user.mypage.add_post
   end
-  
+
   def updated_by(user)
     update_attribute(:post_updated_by, user)
   end
-  
+
   def set_has_image(yesno)
     update_attribute(:has_image, yesno)
   end
@@ -275,26 +283,26 @@ class Post < ActiveRecord::Base
   def set_has_attachment(yesno)
     update_attribute(:has_attachment, yesno)
   end
-    
+
   def has_image?
     has_image
   end
-      
+
   def has_attachment?
     has_attachment
   end
-  
+
   def admin_category_list
     list = category_list.dup
     #list = Array.new
     list.push([I18n.t(Okvalue::ADMIN_POST_NOTICE),Okvalue::ADMIN_POST_NOTICE])
     list
   end
-  
+
   def is_admin_post_notice?
     self.category.eql?(Okvalue::ADMIN_POST_NOTICE)
   end
-  
+
   def status_list
     list = Array.new
     list.push([I18n.t(Okvalue::POST_STATUS_DRAFT),Okvalue::POST_STATUS_DRAFT])
@@ -302,13 +310,13 @@ class Post < ActiveRecord::Base
     list.push([I18n.t(Okvalue::POST_STATUS_HIDDEN),Okvalue::POST_STATUS_HIDDEN])
     list
   end
-  
+
   def yesno_list
     list = Array.new
     list.push([I18n.t(Okvalue::ATTACHABLE_YES),true])
     list.push([I18n.t(Okvalue::ATTACHABLE_NO),false])
   end
-  
+
   def image_feed_for
     return if image.empty?
     image.each do |i|
@@ -320,10 +328,23 @@ class Post < ActiveRecord::Base
     image.first
   end
   
+  def after_comment
+    logger.debug("post after_comment callback")
+    add_hot_feed_list(:p_most_commented, self.comment.size)
+  end
+
   protected
-  
+
   def topfeedable?
     false
+  end
+  
+  def add_hot_feed_list(key, value)
+    hot_key = HotFeedList.what_key?(key)
+    feed = HotFeedList.find_a_feed_with_key(self.class.to_s, self.id, hot_key).first.presence || HotFeedList.new
+    feed.hot_key = hot_key
+    feed.hot_value = value
+    feed.update_attribute(:hot_feeded_to, self)
   end
 
 end

@@ -1,7 +1,6 @@
 <% if @images.present? %>
 <ul class="thumbnails">
 <% @images.each do |image| %>
-
 	<li class="span3 pull-left">
 		<div class="thumbnail">
 		<%= image_tag(image.thumb_image, :title => "#{image.avatar_file_name}") %>
@@ -9,8 +8,8 @@
 			<p><%= image.something%></p>
 			<p><%= image.filename%></p>
 			<p><%= image.filesize%>&nbsp;byte</p>
-</div>
-
+	</div>
+	</li>
 <% end %>
 </ul>
 <% end %>

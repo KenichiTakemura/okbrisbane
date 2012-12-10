@@ -6,6 +6,7 @@ module Style
   SECTION_IDS = Common.new_orderd_hash
   ADMIN_ROLES = Common.new_orderd_hash
   ALL_FEED = Common.new_orderd_hash
+  TOPIC_FEED = Common.new_orderd_hash
   
   # div id rule is banner_#{page}_#{section}_#{position}
   PAGES[:p_home] = "Home"
@@ -58,55 +59,6 @@ module Style
   PAGE_IDS[:p_issue] = 19
 
   PAGE_ID_MAX = 19
-
-  ######  
-  ALL_FEED[:p_job] = {:nav => true, :open => true, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_buy_and_sell] = {:nav => true, :open => true, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_well_being] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
-  ALL_FEED[:p_estate] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
-  ALL_FEED[:p_business] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
-  ALL_FEED[:p_motor_vehicle] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
-  ALL_FEED[:p_accommodation] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
-  ALL_FEED[:p_study] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_yellowpage] = {:nav => false, :open => false, :feed => {:enabled => false, :image => false} }
-  
-  def self.navi
-    ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }
-  end  
-  
-  def self.open_page?(page)
-    ALL_FEED[page][:open]
-  end
-  
-  def self.text_feed?(page)
-    return false if !feedable?(page)
-    !image_feed?(page)
-  end
-  
-  def self.image_feed?(page)
-    return false if !feedable?(page)
-    ALL_FEED[page][:feed][:image]
-  end
-  
-  def self.feedable?(page)
-    ALL_FEED[page][:feed][:enabled]
-  end
-  
-  def self.feedable
-    ALL_FEED.select { |k,v| v[:feed][:enabled]}
-  end
-  
-  def self.text_feed
-    feedable.select{ |k,v| !v[:feed][:image] }
-  end
-  
-  def self.image_feed
-    feedable.select{ |k,v| v[:feed][:image] }
-  end
-    
     
   SECTIONS[:s_header] = "s_header"
   SECTIONS[:s_background] = "s_background"
@@ -188,6 +140,78 @@ module Style
     PAGES.index model
   end
   
+  ######  
+  ALL_FEED[:p_job] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_buy_and_sell] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_well_being] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
+  ALL_FEED[:p_estate] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_business] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_motor_vehicle] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
+  ALL_FEED[:p_accommodation] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
+  ALL_FEED[:p_study] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
+  ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_yellowpage] = {:nav => false, :open => false, :feed => {:enabled => false, :image => false} }
+  
+  TOPIC_FEED[:p_buy_and_sell] = {:feed => {:enabled => true, :link => true, :text => page(:p_buy_and_sell)}}
+  TOPIC_FEED[:p_job] = {:feed => {:enabled => true, :link => true, :text => page(:p_job)}}
+  TOPIC_FEED[:p_most_viewed] = {:feed => {:enabled => true, :link => false, :text => "MostViewed"}}
+  TOPIC_FEED[:p_most_commented] = {:feed => {:enabled => true, :link => false, :text => "MostCommented"}}
+  TOPIC_FEED[:p_new_posted] = {:feed => {:enabled => true, :link => false, :text => "NewPosted"}}
+  TOPIC_FEED[:p_new_images] = {:feed => {:enabled => true, :link => false, :text => "NewImages"}}
+  
+  def self.navi
+    ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }
+  end
+  
+  def self.topic_feed
+    TOPIC_FEED.select { |k,v| v[:feed][:enabled]}
+  end
+  
+  def self.topic_text?(page)
+    TOPIC_FEED[page][:feed][:text]
+  end
+  
+  def self.topic_linkable?(page)
+    TOPIC_FEED[page][:feed][:link]
+  end
+  
+  def self.open_page?(page)
+    ALL_FEED[page][:open]
+  end
+  
+  def self.text_feed?(page)
+    if ALL_FEED[page]
+      return !image_feed?(page)
+    end
+    false
+  end
+  
+  def self.image_feed?(page)
+    if ALL_FEED[page]
+      return ALL_FEED[page][:feed][:image]
+    end
+    false
+  end
+  
+  def self.feedable?(page)
+    ALL_FEED[page][:feed][:enabled]
+  end
+  
+  def self.feedable
+    ALL_FEED.select { |k,v| v[:feed][:enabled]}
+  end
+  
+  def self.text_feed
+    feedable.select{ |k,v| !v[:feed][:image] }
+  end
+  
+  def self.image_feed
+    feedable.select{ |k,v| v[:feed][:image] }
+  end
+    
+    
   Effect = Common.new_orderd_hash
   StyleClass = Common.new_orderd_hash
   

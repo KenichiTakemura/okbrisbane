@@ -43,18 +43,25 @@ module ApplicationHelper
   end
   
   def author_name(post)
-    return "" if post.nil?
-    logger.debug("posted_by: #{post.posted_by_type}")
-    if post.posted_by_type.eql? "Admin"
-      return t('admin')
-    else
-      return post.posted_by.name if !post.posted_by.nil?
+    if post.present?
+      if post.posted_by_type.eql? "Admin"
+        return t('admin')
+      else
+        return post.posted_by.name
+      end
+    end
+    t("unknown_user")
+  end
+  
+  def image_autor(image)
+    if image.present? && image.attached_by.present?
+      return image.attached_by.name
     end
     t("unknown_user")
   end
   
   def comment_author(comment)
-    if comment.commented_by
+    if comment.present? && comment.commented_by.present?
        return comment.commented_by.name
     end
     t("unknown_user")
@@ -328,8 +335,12 @@ module ApplicationHelper
   end
 
   def _truncate_with_length(expression, length)
-    html = %Q|<span title="#{expression}">#{truncate(expression, :length => length)}</span>|
-    html.html_safe
+    if length.present?
+      html = %Q|<span title="#{expression}">#{truncate(expression, :length => length)}</span>|
+      html.html_safe
+    else
+      _truncate(expression)
+    end
   end
 
   def _truncate_no_title(expression)
@@ -431,37 +442,6 @@ module ApplicationHelper
     if notice.present?
       html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{notice}</h4></div>|
     end
-    html.html_safe
-  end
-
-  def _post(url, params)
-    html = %Q|$.ajax({url:'| + url + %Q|',type:'POST',timeout:#{Okvalue::AJAX_TIMEOUT},tryCount:0,retryLimit:#{Okvalue::AJAX_RETRY},data:{| + params + %Q|}}).success(function() {|
-    if Okbrisbane::Application.config.ok_debug
-    html += %Q|console.log("ajax success");|
-    end
-    html += %Q|}).complete(function(){|
-    if Okbrisbane::Application.config.ok_debug
-    html += %Q|console.log("ajax complete");|
-    end
-    html += %Q|}).error(function(xhr, textStatus, errorThrown ) {
-        if (textStatus == 'timeout') {|
-    if Okbrisbane::Application.config.ok_debug
-    html += %Q|console.log("ajax timeout occurred.");|
-    end
-    html += %Q|this.tryCount++;
-            if (this.tryCount <= this.retryLimit) {
-                //try again
-                $.ajax(this);
-                return;
-            }            
-            return;
-        }
-        if (xhr.status == 500) {
-            //handle error
-        } else {
-            //handle error
-        }
-    });|
     html.html_safe
   end
   

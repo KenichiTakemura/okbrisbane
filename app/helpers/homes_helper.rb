@@ -7,6 +7,7 @@ module HomesHelper
   end
   
   def _scroll_feed(category, var_flag)
+    return "" if !Style.feedable?(category)
     html = %Q|if ($(this).scrollTop() > #{Okvalue::FEED_SHOW_SIZE[category]}) {
       if(!#{var_flag}) {
         #{_show_feed(category)}
@@ -15,12 +16,27 @@ module HomesHelper
     }|
     html.html_safe
   end
-  
+
   def _show_feed(category) 
     params = %Q|c: '#{category}'|
-    post_script = _post(top_feed_homes_path, params)
-    html = %Q|$('\#feed_body_#{category}').html("| + escape_javascript(image_tag("common/ajax_loading_1.gif")) + %Q|");|
+    post_script = Ajax.post(top_feed_homes_path, params)
+    html = %Q|$('\#feed_body_' + '#{category}').html("| + escape_javascript(image_tag("common/ajax_loading_1.gif")) + %Q|");|
     html += post_script
+    html.html_safe
+  end
+  
+  def topic_feed_div(category, id)
+    html = %Q|<div class="row-fluid"><div class="btn-toolbar">|
+    if Style.topic_linkable?(category)
+      html += %Q|<div class="btn-group">| + link_to(t('more'), Okboard.okboard_link(category), :class => "btn btn-small") + "</div>"
+      if Style.open_page?(category)
+        html += %Q|<div class="btn-group"><a href="#{Okboard.okboard_link_write(category)}" class="btn btn-small"><i class="icon-pencil"></i>#{t(:write_new)}</a></div>|
+      end
+      sub_categories(category).each do |key,sub_category|
+        html += %Q|<div class="btn-group"><a href="#{Okboard.okboard_link_with_category(category,sub_category)}" class="btn btn-link" >#{t(sub_category)}</a></div>|
+      end
+    end
+    html += %Q|</div><div class="row-fluid" id="#{id}"></div></div>|
     html.html_safe
   end
   
@@ -43,16 +59,19 @@ module HomesHelper
     html.html_safe
   end
   
-  def generateTopFeed(category, lists, image_list)
-    color = Okvalue::FEED_COLORMAP[category]
-    html = %Q|<table class="table table-striped table-hover"><tr></tr>|
+  def generateTopFeed(category, lists, image_list, length=nil, author=nil, views=nil, comment=nil)
+    html = ""
     if Style.text_feed?(category) && !lists.present?
-      html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
+      html += %Q|<p>#{t("no_information")}</p>|
     elsif Style.image_feed?(category) && !lists.present? && !image_list.present?
-      html += %Q|<tr><td colspan="4"><p>#{t("no_information")}</p></td></tr>|
+      html += %Q|<p>#{t("no_information")}</p>|
+    elsif !lists.present? && !image_list.present?
+      html += %Q|<p>#{t("no_information")}</p>|
     else
+      html = %Q|<table class="table table-hover table-condensed"><tr></tr>|
       if image_list.present?
          image_list.each do |feed|
+           category = Style.m2s(feed.feeded_to_type)
            html += %Q|<tr><td width=40%><div class="shadow">|
            image = feed.feeded_to.image_feed_for
            if image.linkable?
@@ -72,63 +91,37 @@ module HomesHelper
            end
            html += %Q|<div class="feed_category_view">| + link_to(t(:view),"#",:class => "btn btn-mini btn-info disabled") + section_span_for(feed.feeded_to,category) + "</div>"
         end
-        html += %Q|</table><table class="table table-striped table-hover">|
-      end      
+        html += %Q|</table><table class="table table-striped table-hover table-condensed">|
+      end
       lists.each_with_index do |feed,index|
+        post = feed.respond_to?(:feeded_to)? feed.feeded_to : feed.hot_feeded_to
+        Rails.logger.debug("feedpost: #{post}")
+        category = Style.m2s(post.class.to_s)
         html += %Q|<tr>|
         html += %Q|<td style="height:20px;"><img src="assets/#{I18n.locale}/#{Style.page(@okpage)}/ic_arrow.gif"></td>|
-        html += %Q|<td>#{link_to(_truncate(feed.feeded_to.subject),Okboard.okboard_link_with_id(category, feed.feeded_to.id), :class => "btn-link small")}</td>|
-        html += %Q|<td nowrap class="small">#{feed.feeded_to.feeded_date}</td></tr>|
+        html += %Q|<td>#{link_to(_truncate_with_length(post.subject,length), Okboard.okboard_link_with_id(category, post.id), :class => "btn-link")}</td>|
+        html += %Q|<td nowrap>#{t(post.category)}</td>|
+        if author.present? && author
+          html += %Q|<td><i class="icon-user"></i>&nbsp;#{author_name(post)}</td>|
+        end
+        html += %Q|<td nowrap>#{post.feeded_date}</td>|
+        if views.present? && views
+          html += %Q|<td>#{post.views}</td>|
+        end
+        if comment.present? && comment
+          html += %Q|<td><i class="icon-comment"></i>&nbsp;#{post.comment.size}</td></tr>|
+          html += %Q|<tr><td colspan="6"><blockquote><span class="topic-inline-comment">#{post.comment.last.body}</span><small><i class="icon-user"></i>&nbsp;#{comment_author(post.comment.last)}&nbsp;#{post.comment.last.feeded_date} </small></blockquote></td>|
+        end
+        html += "</tr>"
       end
+      html += "</table>"
     end
-    html += "</table>"
+   
     html.html_safe
   end
-
-  def _navigation(over, out)
-    html = ""
-    Style::NAVI.each do |key|
-      value = Style.page(key)
-      if key.eql?(:p_yellowpage)
-        link = yellowpage_okboards_path
-      else
-        link = Okboard.okboard_link(key)
-      end
-      html += %Q|<div class="btn-group"><button class="btn btn-primary">#{t(value)}</button>|
-      html += %Q|<button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button></div>|
-      #html += %Q|<ul class="nav"><li><a href="#{link}" class="brand box_animation" id="navi_#{value}">#{t(value)}</a></li><li class="divider-vertical"></li></ul>|
-    end
-    html.strip.html_safe
-  end
   
-  def navigation
-    script = ""
-    html = %Q|<div class="navbar-wrapper"><div class="navbar"><div class="navbar-inner"><ul class="nav">|
-    Style.navi.each do |key|
-      value = Style.page(key)
-      if key.eql?(:p_yellowpage)
-        link = yellowpage_okboards_path
-      else
-        link = Okboard.okboard_link(key)
-        #html += %Q|<li class="dropdown" id="navi_#{key}"><a href="#{link}" class="dropdown-toggle" data-toggle="" data-target="#">#{t(value)}<b class="caret"></b></a>|
-        #html += %Q|<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="popover_navi_#{key}">|
-        #html += "<li><a href=\"#{link}\" tabindex=\"-1\">#{t(:latest_information)}</a></li>"
-        #html += _sub_menu(key)
-        #html += %Q|</ul>|
-      end
-      html += %Q|<li><a href="#{link}" id="navi_#{key}">#{t(value)}</a>|
-      html += %Q|</li><li class="divider-vertical"></li>|
-      #script += %Q|
-      #  $('\#navi_#{key}').mouseover(function(){$('\#popover_navi_#{key}').fadeIn()});
-      #  $('\#navi_#{key}').mouseout(function(){$('\#popover_navi_#{key}').fadeOut()});|
-      #html += _script_document_ready(script)
-    end
-    html += "</ul></div></div></div>"
-    html.strip.html_safe
-  end
-  
-  def _sub_menu(link)
-    case link
+  def sub_categories(category)
+    case category
     when :p_job
       categories = Job::Categories
     when :p_buy_and_sell
@@ -154,6 +147,11 @@ module HomesHelper
     else
       raise Exceptions::BadRequestError
     end
+    categories
+  end
+  
+  def _sub_menu(link)
+    categories = sub_categories(link)
     html = ""
     categories.each do |key,category|
       html += "<li><a href=\"#{Okboard.okboard_link_with_category(link,category)}\" tabindex=\"-1\">#{t(category)}</a></li>"
@@ -175,57 +173,6 @@ module HomesHelper
       end
     end
     path
-  end
-  
-  def ___navigation(over, out)
-    html = %Q|<div class="row-fluid navigation box_shadow box_round"><ul class="">|
-    script = ""
-    Style::NAVI.each do |key|
-      if key.eql?(:p_yellowpage)
-        link = yellowpage_okboards_path
-      else
-        link = Okboard.okboard_link(key)
-      end
-      value = Style.page(key)
-      html += %Q|<li class="box_animation" id="navi_#{value}">#{t(value)}</li>|
-      
-      script += %Q|
-        $('\#navi_#{value}').click(function(){window.location.href ="#{link}| + %Q|"});|
-    end
-    html += _script_document_ready(script)
-    html += "</ul></div>"
-    html.strip.html_safe
-  end
-  
-  def __navigation(over, out)
-    html = %Q|<div id="navigation"><ul class="navigation">|
-    Style::NAVI.each do |key|
-      if key.eql?(:p_yellowpage)
-        link = yellowpage_okboards_path
-      else
-        link = Okboard.okboard_link(key)
-      end
-      value = Style.page(key)
-      html += %Q|<li class="navi" id="navi_#{value}"><a href="""#{t(value)}</li>|
-    end
-    script = ""
-    Style::NAVI.each do |key|
-      value = Style.page(key)
-      if key.eql?(:p_yellowpage)
-        script += %Q|
-        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","yellow")});
-        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
-        $('\#navi_#{value}').click(function(){window.location.href ="#{yellowpage_okboards_path}| + %Q|"});|
-      else
-        script += %Q|
-        $('\#navi_#{value}').mouseover(function(){$(this).css("background-color","#{Okvalue::COLORMAP[cycle("ok","naver","blue").to_sym]}"
-        $('\#navi_#{value}').mouseout(function(){$(this).css("background-color","")});
-        $('\#navi_#{value}').click(function() { window.location.href ="#{Okboard.okboard_link(key)}| + %Q|"});|
-      end
-    end
-    html += _script_document_ready(script)
-    html += "</ul></div>"
-    html.strip.html_safe
   end
 
 

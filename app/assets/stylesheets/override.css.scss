@@ -4,7 +4,6 @@
   font-weight: bold;
 }
 
-
 body {
   background: url("bg_2.gif") repeat scroll 0% 0% rgb(239, 239, 239);
 }
@@ -131,4 +130,50 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 
 .ok-nav {
   padding: 0px;
+}
+
+.nav-topic-tab {
+  background-color: #642c78;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+div.comment_content {
+  background-color: #f2f2f2;
+}
+
+span.topic-inline-comment p {
+  font-size: 11px;
+}
+
+.yellowpage_gradient {
+  background-color: #f2f2f2;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#ffffff)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #ffffff); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #f2f2f2, #ffffff); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #f2f2f2, #ffffff); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #f2f2f2, #ffffff); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+div.footer_links {
+  position: fixed;
+  bottom:24px;
+  right:0px;
+  width: 140px;
+  line-height: 30px;
+  height: 130px;
+  background-color: #ADD8E6;
+  padding:5px;
+    box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
+}
+
+div.footer_links .footer_text {
+  font-family: 'NanumGothicExtraBold';
+  font-size: 17px;
+  color: #4E4E4E;
+}
+
+.developer {
+  font-size:8px;
+  color: #4E4E4E;
 }

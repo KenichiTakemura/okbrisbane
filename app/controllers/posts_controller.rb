@@ -32,6 +32,8 @@ class PostsController < OkController
           get_image(@post.write_at).each do |image|
             image.attached_to_by(@post, current_user)
           end
+          # Post images to hot feed
+          @post.add_image_to_hot_feed_list
         else
           attached_image.attached_to_by(@post, current_user)
         end
@@ -58,6 +60,8 @@ class PostsController < OkController
         @post.build_content if @post.content.nil?
         @image = Image.new
         @image.write_at = @post.write_at
+        @attachment = Attachment.new
+        @attachment.write_at = @post.write_at
         respond_to do |format|
           format.html { render :template => "okboards/write" }
           format.json { render :json => @post.errors, :status => :unprocessable_entity }

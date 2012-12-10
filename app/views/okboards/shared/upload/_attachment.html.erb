@@ -1,0 +1,25 @@
+<div class="attachment">
+<%= form_for(@attachment, :html => { :multipart => true }, :remote => true) do |attachment_form| %>
+<fieldset>
+	<%= attachment_form.hidden_field :write_at, :id => "write_at" %>
+	<%= attachment_form.label "#{t("attachment") + t("add")}" %>
+	<%= attachment_form.file_field :attachment, :id => "upload_attachment" %>
+	<span class="help-inline"><%= t("max_size", :size => number_to_human_size(Okvalue::MAX_POST_IMAGE_SIZE))%></span>
+	<br>
+	<%= attachment_form.submit t("upload"), :class => "btn btn-info", :id => "upload_attachment_submit" %>
+</fieldset>
+<% end %>
+<%= _script(%Q|$('\#upload_attachment_submit').click(function(){
+	if($('\#upload_attachment').val() != "") {
+		$('\#upload_attachment_status').html("#{escape_javascript(image_tag("common/ajax_loading.gif"))}");
+	} else {
+		return false;
+	}
+})|)%>
+<div id="upload_attachment_status"></div>
+<div id="upload_attachment_area"></div>
+</div>
+<%= _script_document_ready(%Q|
+	$('\#upload_attachment_status').html("#{escape_javascript(image_tag("common/ajax_loading.gif"))}");
+	#{Ajax.get(attachments_path,%Q|write_at: $('\#write_at').val()|)}
+|) %>

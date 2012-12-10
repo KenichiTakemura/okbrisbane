@@ -1,0 +1,16 @@
+<div class="row-fluid">
+	<% if @images.present? %>	
+	<ul class="thumbnails">
+		<% @images.each do |feed| %>
+			<div class="span2 thumbnail">
+				<a data-original-title="<%=image_autor(feed.hot_feeded_to)%>" id="popover_<%=feed.hot_feeded_to.id%>" href="#" class="" data-placement="bottom"  rel="popover" data-content="<%=feed.hot_feeded_to.attached.subject%>"><%= image_tag(feed.hot_feeded_to.thumb_image)%></a>
+          		<%= _script_document_ready(%Q|
+          			$('\#popover_#{feed.hot_feeded_to.id}').popover({trigger:'hover'});
+          		|)%>
+			</div>
+		<% end %>
+	</ul>
+	<% else %>
+	<p><%=t("no_information")%></p>
+	<% end %>
+</div>

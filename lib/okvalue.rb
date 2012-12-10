@@ -22,7 +22,8 @@ module Okvalue
   #VERSION = "1.0.7-20121106"
   #VERSION = "1.1-20121114"
   #VERSION = "1.1.1-20121127"
-  VERSION = "1.1.2-20121130"
+  #VERSION = "1.1.2-20121130"
+  VERSION = "1.1.3-20121210"
   
   TERMS_DATE = Time.parse("2012-11-10 00:00:00")
   
@@ -185,5 +186,7 @@ module Okvalue
   MYHOST_IP = "127.0.0.1"
   
   DEFAULT_PASSWORD = "ook98152354768"
+  
+  YELLOW_PAGE_LEFT_MIN = 20
 
 end

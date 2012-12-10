@@ -39,7 +39,11 @@ class OkboardsController < OkController
 
   def yellowpage
     @okpage = :p_yellowpage
-    @business_categories = BusinessCategory.all
+    @business_categories = BusinessCategory.with_client
+    @l_business_categories = @business_categories[0, Okvalue::YELLOW_PAGE_LEFT_MIN-1] || []
+    @r_business_categories = @business_categories[Okvalue::YELLOW_PAGE_LEFT_MIN, @l_business_categories.length] || []
+    logger.debug("@l_business_categories: #{@l_business_categories.length}")
+    logger.debug("@r_business_categories: #{@r_business_categories.length}")
     respond_to do |format|
       format.html { render :template => "okboards/index" }
     end
@@ -135,38 +139,6 @@ class OkboardsController < OkController
     logger.debug("notice: #{@board_lists} #{@board_list_size}")
   end
 
-  #ajax
-  def get_attachment
-    timestamp = params[:timestamp]
-    json_attachment(timestamp)
-  end
-
-  #ajax
-  def upload_attachment
-    logger.debug("upload_attachment")
-    file = params[:file]
-    timestamp = params[:timestamp]
-    logger.debug("file: #{file}")
-    logger.debug("timestamp: #{timestamp}")
-    attach = Attachment.new(:avatar => file)
-    logger.debug("attachment: #{attach}")
-    attach.write_at = timestamp;
-    attach.attached_by(current_user)
-    logger.debug("attachment saved. #{attach}")
-    json_attachment(timestamp)
-  #rescue
-  #  render :json => {:result => 1}
-  end
-
-  # Ajax
-  def delete_attachment
-    logger.debug("delete_attachment")
-    attachment = Attachment.find(params[:id])
-    @timestamp = params[:t]
-    attachment.destroy
-    @attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, @timestamp)
-  end
-
   # Ajax
   def likes
     model = MODELS[@okpage]
@@ -216,13 +188,6 @@ class OkboardsController < OkController
 
   private
 
-  def json_attachment(timestamp)
-    attachments = Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at = ?", current_user, timestamp)
-    attachment_ids = attachments.collect{|i| i.id}
-    attachment_files = attachments.collect{|i| i.avatar_file_name}
-    render :json => {:result => 0, :attachments => attachment_ids, :filenames => attachment_files }
-  end
-
   def _more_post
     _model.search_before(@post_search,@previd,Okvalue::OKBOARD_MORE_SIZE)
   end
@@ -244,6 +209,8 @@ class OkboardsController < OkController
     post.valid_until = post_expiry
     @image = Image.new
     @image.write_at = post.write_at
+    @attachment = Attachment.new
+    @attachment.write_at = post.write_at
     post
   end
 

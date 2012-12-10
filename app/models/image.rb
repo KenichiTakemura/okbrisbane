@@ -1,5 +1,6 @@
 class Image < Attachable
   attr_accessible :write_at, :something, :link_to_url, :source_url
+  has_one :hot_feed_list, :as => :hot_feeded_to, :dependent => :destroy
 
   has_attached_file :avatar,
   :styles => lambda { |a|
@@ -92,14 +93,6 @@ class Image < Attachable
 
   def height
     original_size.split("x")[1]
-  end
-    
-  def filename
-    avatar_file_name
-  end
-  
-  def filesize
-    avatar_file_size
   end
 
 end

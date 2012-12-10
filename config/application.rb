@@ -21,6 +21,7 @@ module Okbrisbane
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     config.autoload_paths += %W(#{Rails.root}/lib)
+    config.autoload_paths += %W(#{Rails.root}/app/controllers/attachable)
     config.autoload_paths += %W(#{Rails.root}/app/models/validator)
     config.autoload_paths += %W(#{Rails.root}/app/models/ckeditor)
     config.autoload_paths += %W(#{Rails.root}/app/models/singleton)

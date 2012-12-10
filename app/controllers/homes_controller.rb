@@ -1,7 +1,6 @@
 class HomesController < OkController
   
   def collectImageFeed(category)
-    return nil if !Style.feedable?(category)
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
     image_list = TopFeedList.feed_with_image(category, TopFeedList::IMAGE_FEED_LIMIT) 
     list = TopFeedList.feed_nomatter_image_except(category, collect_image_id(image_list), limit)
@@ -9,7 +8,6 @@ class HomesController < OkController
   end
   
   def collectTextFeed(category)
-    return nil if !Style.feedable?(category)
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[category].presence || TopFeedList::TOP_FEED_LIMIT
     TopFeedList.feed_nomatter_image(category, limit)
   end
@@ -55,6 +53,29 @@ class HomesController < OkController
   end
   
   # Ajax
+  def topic_feed
+    @okpage = :p_home
+    @category = params[:c].to_sym
+    if Style.topic_linkable?(@category)
+      if Style.text_feed?(@category)
+        @list = collectTextFeed(@category)
+        return
+      end
+    end
+    limit = TopFeedList::TOP_FEED_LIMIT_CATE[@category].presence || TopFeedList::TOP_FEED_LIMIT
+    case @category
+    when :p_new_posted
+      @list = TopFeedList.feed_new(limit)
+    when :p_new_images
+      @images = HotFeedList.hot_feed_for(HotFeedList.what_key?(@category),limit)
+    when :p_most_viewed
+      @list = HotFeedList.hot_feed_for(HotFeedList.what_key?(@category),limit)
+    when :p_most_commented
+      @list = HotFeedList.hot_feed_for(HotFeedList.what_key?(@category),limit)
+    end
+  end
+  
+  # Ajax
   def top_feed
     @okpage = :p_home
     @category = params[:c].to_sym
@@ -63,7 +84,6 @@ class HomesController < OkController
     else
       @list,@image_list = collectImageFeed(@category)
     end
-    logger.debug("top_feed: #{@category} #{@list} #{@image_list}")
   end
   
   def current_weather
