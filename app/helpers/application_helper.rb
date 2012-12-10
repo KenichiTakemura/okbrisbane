@@ -12,11 +12,17 @@ module ApplicationHelper
   end
   
   def facebook
-    image_tag("f_logo.png", :class => "image-resize30_30")
+     html = %Q|<a data-original-title="#{t(:facebook_login)}" id="popover_facebook" href="#{root_path}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:facebook_login_exp)}">#{image_tag("f_logo.png", :class => "image-resize30_30")}</a>|
+     html += _script_document_ready(%Q|
+                $('\#popover_facebook').popover({trigger:'hover'});|)
+     html.html_safe
   end
   
   def google
-    image_tag("google_logo_3D_online_small.png", :class => "")
+     html = %Q|<a data-original-title="#{t(:google_login)}" id="popover_google" href="#{root_path}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:google_login_exp)}">#{image_tag("google_logo_3D_online_small.png", :class => "")}</a>|
+     html += _script_document_ready(%Q|
+                $('\#popover_google').popover({trigger:'hover'});|)
+     html.html_safe
   end
   
   def ok_error_messages!(resource)

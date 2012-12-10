@@ -837,3 +837,7 @@ ko:
   MostCommented: "핫 코멘트"
   NewPosted: "신착 투고"
   NewImages: "신착 이미지"
+  facebook_login: "Facebook ID로 로그인"
+  facebook_login_exp: "Facebook ID를 xxxx"
+  google_login: "Google ID로 로그인"
+  google_login_exp: "Google ID를 xxxx"
