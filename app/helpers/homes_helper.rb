@@ -33,7 +33,7 @@ module HomesHelper
         html += %Q|<div class="btn-group"><a href="#{Okboard.okboard_link_write(category)}" class="btn btn-small"><i class="icon-pencil"></i>#{t(:write_new)}</a></div>|
       end
       sub_categories(category).each do |key,sub_category|
-        html += %Q|<div class="btn-group"><a href="#{Okboard.okboard_link_with_category(category,sub_category)}" class="btn btn-link" >#{t(sub_category)}</a></div>|
+        html += %Q|<div class="btn-group"><a href="#{Okboard.okboard_link_with_category(category,sub_category)}" class="" ><span class="label label-info">#{t(sub_category)}</span></a></div>|
       end
     end
     html += %Q|</div><div class="row-fluid" id="#{id}"></div></div>|

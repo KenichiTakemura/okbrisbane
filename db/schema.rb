@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209041618) do
+ActiveRecord::Schema.define(:version => 20121216045001) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -550,6 +550,8 @@ ActiveRecord::Schema.define(:version => 20121209041618) do
     t.string   "locale"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.string   "user_image"
+    t.string   "user_url"
   end
 
   create_table "post_searches", :force => true do |t|
@@ -699,7 +701,7 @@ ActiveRecord::Schema.define(:version => 20121209041618) do
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["provider", "uid"], :name => "index_users_on_provider_and_uid"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 

@@ -1,5 +1,5 @@
 class Mypage < ActiveRecord::Base
-  attr_accessible :is_public, :public_url, :locale
+  attr_accessible :is_public, :public_url, :locale, :user_url, :user_image
   belongs_to :mypagable, :polymorphic => true
   
   scope :latest, lambda { |user| where('mypagable_id = ?', user).limit(1)}

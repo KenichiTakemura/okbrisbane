@@ -33,19 +33,18 @@ class Attachable < ActiveRecord::Base
   
   def save_attached_post
     @@post = self.attached
-    logger.debug("before_destroy save_attached_post #{@@post}")
   end
   
   after_destroy :post_has_attached
   
   def post_has_attached
-    logger.debug("after_destroy save_attached_post #{@@post}")
+    @@post = self.attached
     # This indicates attached is not saved yet.
     return if @@post.nil?
     if self.instance_of? Image
-      @@post.set_has_image(false) if @@post.image.empty?
+      @@post.set_has_image(false) if @@post.image.count == 0
     elsif self.instance_of? Attachment
-      @@post.set_has_attachment(false) if @@post.attachment.empty?
+      @@post.set_has_attachment(false) if @@post.attachment.count == 0
     end
   end
 
@@ -83,6 +82,13 @@ class Attachable < ActiveRecord::Base
   
   def filesize
     avatar_file_size
+  end
+  
+  def author
+    if attached_by.present?
+      return attached_by.name
+    end
+    t("unknown_user")
   end
 
 end

@@ -40,8 +40,14 @@ class BusinessProfileImage < Attachable
     avatar.url(:medium)
   end
   
-  after_save :mark_main_on_save
+  #after_save :mark_main_on_save
   after_destroy :mark_main_on_destroy
+  
+  #Overwrite
+  def attached_to(post)
+    update_attribute(:attached, post)
+    mark_main_on_save
+  end
   
   def mark_main_on_save
     business_client = BusinessClient.find_by_id(self.attached_id)

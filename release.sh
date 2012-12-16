@@ -1,6 +1,4 @@
 #!/bin/bash
-rm -rf public/assets
-rake assets:precompile --trace RAILS_ENV=production
 DATE=`date +%Y%m%d%H%M`
 tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  app/controllers\
@@ -19,11 +17,13 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  lib\
  public/*html\
  public/favicon.ico\
- public/assets\
+# public/assets\
  public/images\
  public/javascripts\
  public/robots.txt
-rm -rf public/assets
+mv tmp/release/manifest.yml tmp/release/manifest.yml.$DATE
+cp -p public/assets/manifest.yml tmp/release
+mv public/assets public/x_assets
 cd ../okbrisbane-stage
 ./unpack.sh ../release/okbrisbane_$DATE.tar.bz2
 cd -

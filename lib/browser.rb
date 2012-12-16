@@ -21,6 +21,11 @@ module Browser
     b = browser_detection(request, agent)
     b == MSIE || b == MO_MSIE
   end
+  
+  def self.phone?(request, agent)
+    b = browser_detection(request, agent)
+    b >= DEVISE_PHONE
+  end
 
   def self.browser_detection(request, agent=nil)
     return if !request.present? && !agent.present?

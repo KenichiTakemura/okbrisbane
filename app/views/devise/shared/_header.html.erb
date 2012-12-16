@@ -2,7 +2,20 @@
 	<div class="span3">
 	<% links = ["signin","signup","findid","findpassword","termsofservice","termsofpersonalinfo"] %>
 	<% paths = [new_user_session_path,member_managements_sign_up_path,new_user_confirmation_path,new_user_password_path,termsofservice_path,termsofpersonal_path] %>
-	<%= _left_menu("#{I18n.locale}/#{Style.page(@okpage)}/logo.gif", links,paths) %>
+	<div class="row-fluid">
+	<div class="page-header signin_box bs-docs">
+		 <h2><%=t("siginin_management")%><small>MEMBER MANAGEMENT</small></h2>
+	</div>
+	</div>
+	<div class="row-fluid">
+	<% links.each_with_index do |link,i| %>
+		<a href="<%=paths[i]%>" class="btn btn-block" style="" id="<%="_#{link}"%>"><i class="icon-circle-arrow-right pull-right" style="margin: 5px"></i><%=t(link)%></a>
+	<% end %>
+	</div>
+	<%= single_body_banner(2) %>
+	<%= single_body_banner(3) %>
+	<%= single_body_banner(4) %>
+	<%= single_body_banner(9) %>
 	</div>
 	<div class="span9">
 		<!-- %= single_body_banner(5) %-->

@@ -12,7 +12,7 @@ class BusinessClientsController < SearchablesController
     if @@key.present?
       @business_clients = BusinessClient.search(@@key, QUERY_LIMIT)
     else
-      @business_clients = BusinessClient.order
+      @business_clients = BusinessClient.order.limit(QUERY_LIMIT)
     end
     respond_to do |format|
       format.js

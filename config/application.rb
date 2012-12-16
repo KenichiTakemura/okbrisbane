@@ -22,7 +22,7 @@ module Okbrisbane
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     config.autoload_paths += %W(#{Rails.root}/lib)
     config.autoload_paths += %W(#{Rails.root}/app/controllers/attachable)
-    config.autoload_paths += %W(#{Rails.root}/app/models/validator)
+    config.autoload_paths += %W(#{Rails.root}/app/controllers/users)
     config.autoload_paths += %W(#{Rails.root}/app/models/ckeditor)
     config.autoload_paths += %W(#{Rails.root}/app/models/singleton)
     # Activate observers that should always be running.

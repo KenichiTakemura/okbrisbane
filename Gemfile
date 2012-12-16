@@ -63,3 +63,7 @@ gem 'encryptor'
 gem "ckeditor", "3.7.1"
 gem "exception_notification"
 gem 'remotipart'
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook', '1.4.0'
+

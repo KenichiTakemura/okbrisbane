@@ -395,6 +395,7 @@ ko:
   Signin: "회원로그인"
   Signup: "회원가입"
   Signout: '로그아웃'
+  
 
   Job: "구인구직"
   BuyAndSell : "벼룩시장"
@@ -467,6 +468,7 @@ ko:
   client_management: '고객 관리'
   banner_management: '광고란 관리'
   member_management: '멤버 관리'
+  siginin_management: '회원 관리'
   sales_management: '매매 관리'
   sales_management_title: '매매 관리'
   sales_management_description: '메뉴를  선택하십시오'
@@ -671,7 +673,8 @@ ko:
   successfully_deleted: '성공적으로 삭제 되었습니다'
   invalid_file_extention: '업로드가 안되는 파일 입니다.'
   failed_to_create: '실패 되었습니다'
-  failed_to_upload: '업로드가 실패 되었습니다' 
+  failed_to_upload: '업로드가 실패 되었습니다'
+  failed_to_upload_with_reason: "업로드가 실패 되었습니다. 이유: %{reason}"
   failed_to_delete: '삭제가 실패 되었습니다' 
   failure: '실패 되었습니다'
   banner_attach_images: '광고에 이미지를 추가하기'
@@ -837,7 +840,16 @@ ko:
   MostCommented: "핫 코멘트"
   NewPosted: "신착 투고"
   NewImages: "신착 이미지"
-  facebook_login: "Facebook ID로 로그인"
-  facebook_login_exp: "Facebook ID를 xxxx"
-  google_login: "Google ID로 로그인"
-  google_login_exp: "Google ID를 xxxx"
+  facebook_login: "Facebook 로그인"
+  facebook_login_exp: "Facebook 아이디로 로그인 합시다"
+  google_login: "Google 로그인"
+  google_login_exp: "Google 아이디로 로그인 합시다"
+  is_special: "관리자 멤버"
+  
+  facebook:
+    shout: "Facebook 에 투고"
+    wall: "퀸즈랜드 최고 종합 정보사이트 okbrisbane.com"
+    caption: ""
+    desc: ""
+    shouted: "투고했습니다"
+    failed: "투고실패 되었습니다"

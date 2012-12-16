@@ -28,7 +28,6 @@ class Role < ActiveRecord::Base
   end
   
   def has_role?(role_bit)
-    logger.debug("has_role? #{role_value} #{role_bit}")
     v = (role_value & role_bit) == role_bit
     v
   end

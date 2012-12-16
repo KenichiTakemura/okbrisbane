@@ -45,7 +45,7 @@ class BusinessClient < ActiveRecord::Base
   }
   
   scope :search, lambda { |name,limit|
-    where("business_name like ?", "#{name}%").limit(limit)
+    where("business_name like ?", "%#{name}%").limit(limit)
   }
   
   def to_s

@@ -46,6 +46,16 @@ img {
 	height: expression(this.width <= this.height ? "50px" : "auto");
 }
 
+.image-resize64_64 {
+	max-width: 64px;
+	max-height: 64px;
+}
+
+* html body .image-resize64_64 {
+	width: expression(this.width >= this.height ? "64px" : "auto");
+	height: expression(this.width <= this.height ? "64px" : "auto");
+}
+
 .image-resize80_50 {
 	max-width: 80px;
 	max-height: 50px;
@@ -66,6 +76,16 @@ img {
 	height: expression(this.width <= this.height ? "80px" : "auto");
 }
 
+.image-resize120_100 {
+	max-width: 120px;
+	max-height: 100px;
+}
+
+* html body .image-resize120_100 {
+	width: expression(this.width >= this.height ? "120px" : "auto");
+	height: expression(this.width <= this.height ? "100px" : "auto");
+}
+
 .image-resize140_120 {
 	max-width: 140px;
 	max-height: 120px;
@@ -74,6 +94,16 @@ img {
 * html body .image-resize140_120 {
 	width: expression(this.width >= this.height ? "140px" : "auto");
 	height: expression(this.width <= this.height ? "120px" : "auto");
+}
+
+.image-resize210_180 {
+	max-width: 210px;
+	max-height: 180px;
+}
+
+* html body .image-resize210_180 {
+	width: expression(this.width >= this.height ? "210px" : "auto");
+	height: expression(this.width <= this.height ? "180px" : "auto");
 }
 
 .image-resize300_200 {

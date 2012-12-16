@@ -1,4 +1,5 @@
 <div class="row-fluid" id="board_for_<%= @okpage %>">
+	<div class="row-fluid">
 	<span class="label label-info"><%= t(:post_id) %>#<%= @post.id %></span>
 	<h3 class="text-info"><%= @post.subject %></h3>
 	<% if @post.respond_to? :price %>
@@ -7,9 +8,14 @@
 	<% if @post.respond_to?(:room_type) && @post.room_type.present? %>
 		<h5 class="muted"><%= t("#{@post.room_type}")%></h5>
 	<% end %>
+	</div>
+	<div class="row-fluid">
     <%= render :partial => "okboards/shared/gallery" %>
+	</div>
+	<div class="row-fluid mt-5">
     <%= render :partial => "okboards/shared/sns" %>
-		<div class="row-fluid">
+    </div>
+		<div class="row-fluid bs-docs">
 				<div class="pull-left" id="okboard_likes">
 				<%= link_to_with_icon_remote("", Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
 				<%= @post.likes.to_s %>
@@ -25,42 +31,34 @@
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 				</div>
 		</div>
-		<div class="row-fluid">
-		<table class="table table-bordered">
-			<tr>
-				<td><span class="label"><%= t("author") %></span></td>
-				<td><%= author_name(@post) %></td>
-				<td><span class="label"><%= t("created_at") %></span></td>
-				<td><%= Common.date_format(@post.created_at) %></td>
-				<td><span class="label"><%= t("category") %></span></td>
-				<td><%= t("#{@post.category}") %></td>
-			</tr>
-			<tr>
-				<td colspan="6">
-				<dl class="" style="font-size:14px;background-color:#fff;padding:5px">
-					<dt><span class="label"><%= t("content") %></span></dt>
-					<% if @post.respond_to?(:requested_by) && Browser.ie?(nil, @post.requested_by) %>
-						<dd><%= simple_format(@post.content.body) %></dd>
-					<% else %>
-						<dd><%= raw(@post.content.body) %></dd>
-					<% end %>
-				</dl>
-				</td>
-			</tr>
-			<%if @post.has_attachment? %>
-			<tr>
-				<td><span class="label"><%= t("attachment") %></span></td>
-				<td colspan="5">
-					<% @post.attachment.each do |attachment| %>
+		<div class="row-fluid content-subject-box">
+			<dl class="dl-horizontal">
+				<dt><span class="label"><%= t("author") %></span></dt>
+				<dd><%= author_name(@post) %></dd>
+				<dt><span class="label"><%= t("created_at") %></dt>
+				<dd><%= @post.feeded_date %></dd>
+				<dt><span class="label"><%= t("category") %></dt>
+				<dd><%= t("#{@post.category}") %></dd>
+				<%if @post.has_attachment? %>
+				<dt><span class="label"><%= t("attachment") %></dt>
+				<dd>
+				<% @post.attachment.each do |attachment| %>
 					<p style="position: relative; float: left;margin-left: 5px">
 						<%= link_to(image_tag("common/Icon-Document03-Blue.png", :class => "image-resize50_50", :title => "#{attachment.avatar_file_name}"), attachment.url) %>
 						<%= attachment.filename %><br>
 						<%= attachment.avatar_file_size %> (byte)
 					</p> <% end %>
-				</td>
-			</tr>
+				<% end %>
+				</dd>
+			</dl>
+			<dl class="bs-docs" style="padding:5px">
+			<dt class="content-subject"><span class="label"><%= t("content") %></span></dt>
+			<% if @post.respond_to?(:requested_by) && Browser.ie?(nil, @post.requested_by) %>
+				<dd><%= simple_format(@post.content.body) %></dd>
+			<% else %>
+				<dd><%= raw(@post.content.body) %></dd>
 			<% end %>
-		</table>
+			</dl>
 		</div>
 		<div class="row-fluid">
 			<div class="to_prev pull-left">
@@ -81,7 +79,7 @@
 				<%= form_for(@comment, :method => :post) do |f| %>
 				<%= hidden_field_tag :commented_id, @post.id %>
 				<%= hidden_field_tag :commented_type, @okpage %>
-				<%= f.text_area :body, :id => "comment_body", :rows => 5, :style => "width:600px;"%>
+				<%= f.text_area :body, :id => "comment_body", :rows => 2, :style => "width:500px;"%>
 				<br/>
 				<%= f.submit t("add"), :class => "btn btn-primary", :id => "comment_submit" %>
 				<% end %>

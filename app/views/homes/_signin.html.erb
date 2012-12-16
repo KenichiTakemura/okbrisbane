@@ -6,16 +6,15 @@
 <div class="input-prepend">
 <%= f.password_field :password, :class => "input-medidum" %>
 </div>
-<!--
 <label class="checkbox"> <%= f.check_box :remember_me %><%= t(:remember_me_short) %> </label>
--->
 <%= f.submit t(:signin), :class => "btn" %>
 <%= link_to(t(:signup), member_managements_sign_up_path, :class => "btn") %>
-<%= facebook %>
-<%= google %>
+<br>
+<%= link_to(t("findid"),new_user_confirmation_path,:class=>"btn btn-link")%>
+<%= link_to(t("findpassword"),new_user_password_path,:class=>"btn btn-link")%>
 <% end %>
-
 <% else %>
 <%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn", "", "icon-user") %>
 <%= link_to(t(:signout), destroy_user_session_path, :class => "btn", :method => :delete) %>
+<%= link_to_with_icon_with_id(t("bookmarkme"),"#","btn","","bookmarkme","icon-star")%>
 <% end %>

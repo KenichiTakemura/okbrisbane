@@ -1,30 +1,34 @@
 <div class="row-fluid">
-	<div class="okboard_image_list">
-		<% if !@board_image_lists.nil? %>
-		<div id="okboard_image_list_for_<%= @okpage %>">
-			<% @board_image_lists.each do |post| %>
-			<div class="okboard_thumbnail">
+	<% if @board_image_lists.present? %>
+	<ul class="thumbnails">
+		<% @board_image_lists.each do |post| %>
+		<li class="span3">
+			<div class="thumbnail">	
+				<span class="badge"><%=post.id%></span>
+				<div class="image_thumbnail_view">
 				<% if post.image.first.linkable? %>
-				<%= link_to(image_tag(post.image.first.medium_image, :width => Okvalue::OKBOARD_IMAGE_SIZE_W, :height => Okvalue::OKBOARD_IMAGE_SIZE_H),  post.image.first.link)%>
+				<%= link_to(image_tag(post.image.first.medium_image, :class => "image-resize210_180"), post.image.first.link)%>
 				<% else %>
-				<%= image_tag(post.image.first.medium_image, :width => Okvalue::OKBOARD_IMAGE_SIZE_W, :height => Okvalue::OKBOARD_IMAGE_SIZE_H) %>
+				<%= link_to(image_tag(post.image.first.medium_image, :class => "image-resize210_180"), Okboard.okboard_link_with_id(@okpage, post.id))%>
 				<% end %>
-				<p class="description">
+				<%= section_span_for(post, @okpage, true) %>
+				</div>
+				<h6 class="description">
 					<%= link_to_with_icon(post.subject, Okboard.okboard_link_with_id(@okpage, post.id), "", "", "icon-play")%>
-				</p>
+				</h6>
 				<p class="description">
 					<%= post.postedDate%>
 				</p>
-				<% if post.respond_to? :price%>
+				<% if post.respond_to? :price %>
 				<p class="price_tag">
 					<%= post.price %>
 				</p>
 				<% end %>
 			</div>
-			<% end %>
-		</div>
+		</li>
 		<% end %>
-	</div>
+		</ul>
+	<% end %>
 	<% if [:p_estate,:p_motor_vehicle,:p_business,:p_accommodation,:p_law,:p_tax,:p_study,:p_immig].include?(@okpage) %>
 	<div id="okboard_sponsor_links_top" style="position: relative; float: left; width: 100%">
 		<div class="span3" style="float:left">

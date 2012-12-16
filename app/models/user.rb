@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable, :timeoutable
+         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable, :timeoutable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :user_name, :is_special, :confirmed_at
@@ -29,6 +29,15 @@ class User < ActiveRecord::Base
   
   validates_presence_of :user_name
   after_create :create_mypage, :init_role
+  
+  
+  def facebook_user?
+    self.provider.eql?(PROVIDERS[:facebook])
+  end
+  
+  def google_user?
+    self.provider.eql?(PROVIDERS[:google])
+  end
   
   def name
     user_name
@@ -74,4 +83,40 @@ class User < ActiveRecord::Base
   def unattached_attachment
     Attachment.where("attached_by_id = ? AND attached_id is NULL AND write_at is not NULL", self.id)
   end
+  
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    logger.info("find_for_facebook_oauth #{auth.provider} #{auth.uid}")
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    if !user.present?
+      user_name = auth.extra.raw_info.name
+      password = Devise.friendly_token[0,20]
+      logger.info("User is to be created. email: #{user_name} #{auth.info.email}")
+      user = User.new(:user_name => user_name,
+      :provider => auth.provider,
+      :uid => auth.uid,
+      :email => auth.info.email,
+      :password => password,
+      :password_confirmation => password,
+      #:_image => auth.info.image,
+      #:flyer_url => auth.extra.raw_info.link,
+      :confirmed_at => Common.current_time)
+      if !user.save
+        logger.error(user.errors.full_messages)
+      end
+    end
+    if user.present?
+      user.mypage.update_attribute(:user_image, auth.info.image) if auth.info.image.present?
+      user.mypage.update_attribute(:user_url, auth.extra.raw_info.link) if auth.extra.raw_info.link.present?
+    end
+    user
+  end
+  
+  def user_url
+    mypage.user_url
+  end
+  
+  def user_image
+    mypage.user_image
+  end
+  
 end

@@ -157,7 +157,6 @@ span.topic-inline-comment p {
 
 .yellowpage {
   background: url("bgd.jpg") repeat scroll 0% 0% rgb(239, 239, 239);
-
 }
 
 div.footer_links {
@@ -169,11 +168,11 @@ div.footer_links {
   height: 130px;
   background-color: #ADD8E6;
   padding:5px;
-    box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
+  box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
 }
 
 div.footer_links .footer_text {
-  font-family: 'NanumGothicExtraBold';
+  font-weight: bold;
   font-size: 17px;
   color: #4E4E4E;
 }
@@ -181,4 +180,59 @@ div.footer_links .footer_text {
 .developer {
   font-size:8px;
   color: #4E4E4E;
+}
+
+.image_thumbnail_view:hover span {
+  visibility: visible;
+}
+
+.image_thumbnail_view span {
+  position: absolute;
+  visibility: hidden;
+  z-index: 50;
+  left: -10%;
+}
+
+.signin_box {
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#fff)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #fff); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #f2f2f2, #fff); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #f2f2f2, #fff); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #f2f2f2, #fff); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.okboard_image_gallery_carousel {
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#fff)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #fff); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #f2f2f2, #fff); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #f2f2f2, #fff); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #f2f2f2, #fff); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.content-subject-box {
+  background-color: #f2f2f2;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f2f2f2)); /* Safari 4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #fff, #f2f2f2); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, #fff, #f2f2f2); /* Firefox 3.6-15 */
+  background-image:      -o-linear-gradient(top, #fff, #f2f2f2); /* Opera 11.10-12.00 */
+  background-image:         linear-gradient(to bottom, #fff, #f2f2f2); /* Firefox 16+, IE10, Opera 12.50+ */
+}
+
+.content-subject {
+  background-color: #f2f2f2;
+}
+
+.okboard_image_gallery_carousel .carousel-caption {
+  color: #ffffff;
+}
+
+.carousel_thumbnail:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+
+.hot-feed-image {
+  margin: 5px;
 }

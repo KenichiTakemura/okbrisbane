@@ -61,7 +61,7 @@ module Common
     ActiveSupport::OrderedHash.new
   end
 
-  def self.uniqe_token
+  def self.unique_token
     rand(36**8).to_s(36)
   end
 

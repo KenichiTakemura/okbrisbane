@@ -2,8 +2,10 @@
 	<% if @images.present? %>	
 	<ul class="thumbnails">
 		<% @images.each do |feed| %>
-			<div class="span2 thumbnail">
-				<a data-original-title="<%=image_autor(feed.hot_feeded_to)%>" id="popover_<%=feed.hot_feeded_to.id%>" href="#" class="" data-placement="bottom"  rel="popover" data-content="<%=feed.hot_feeded_to.attached.subject%>"><%= image_tag(feed.hot_feeded_to.thumb_image)%></a>
+			<div class="span2 thumbnail hot-feed-image">
+				<% image = feed.hot_feeded_to %>
+				<a data-original-title="<%=image.author%>" id="popover_<%=image.id%>" href="<%=Okboard.okboard_link_with_id(Style.m2s(image.attached_type), image.attached_id)%>" class="" data-placement="bottom"  rel="popover" data-content="<%=image.attached.subject%>">
+					<%= image_tag(image.thumb_image)%></a>
           		<%= _script_document_ready(%Q|
           			$('\#popover_#{feed.hot_feeded_to.id}').popover({trigger:'hover'});
           		|)%>

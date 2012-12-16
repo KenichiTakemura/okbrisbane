@@ -97,8 +97,8 @@ class TopFeedListTest < ActiveSupport::TestCase
   (TopFeedList::TOP_FEED_SAVED_LIMIT+1).times {
       add_a_post
     }
-    assert_equal(TopFeedList.job_feed.size, TopFeedList::TOP_FEED_LIMIT)
-    assert_equal(TopFeedList.category_feed("Job").size,TopFeedList::TOP_FEED_SAVED_LIMIT)
+    assert_equal(TopFeedList.feed_nomatter_image(:p_job, TopFeedList::TOP_FEED_LIMIT).length, TopFeedList::TOP_FEED_LIMIT)
+    assert_equal(TopFeedList.category_feed("Job").length,TopFeedList::TOP_FEED_SAVED_LIMIT)
   end
   
   test "pull feed by size" do
@@ -111,11 +111,11 @@ class TopFeedListTest < ActiveSupport::TestCase
   
   # Estate
   test "add_same_post" do
-    post = Estate.new(:category => Estate::FOR_SALE, :subject => 'new', :valid_until => Common.current_time, :price => "AUD 99.99")
+    post = Estate.new(:category => Estate::Categories[:for_sale], :subject => 'new', :valid_until => Common.current_time, :price => "AUD 99.99")
     assert post.save, "Not saved"
     post.build_content(:body => body)
     assert post.save, "Not updated"
-    assert_equal(TopFeedList.estate_feed.size, 1)
+    assert_equal(TopFeedList.category_feed("Estate").length, 1)
   end
 
   test "update_post" do
@@ -150,8 +150,7 @@ class TopFeedListTest < ActiveSupport::TestCase
     post = Accommodation.new(:category => Accommodation::Categories[:hotel], :room_type => Accommodation::ROOM_HOTEL, :subject => 'new', :valid_until => Common.current_time, :price => "AUD 99.99")
     post.build_content(:body => body)
     assert post.save, "Not saved"
-    assert_equal(TopFeedList.accommodation_feed.size, 1)
-    assert_equal(TopFeedList.accommodation_feed_with_limit(5).size, 1)
+    assert_equal(TopFeedList.feed_nomatter_image(:p_accommodation, 5).length, 1)
   end
   
   # Legal Service

@@ -11,20 +11,6 @@ module ApplicationHelper
     html.html_safe
   end
   
-  def facebook
-     html = %Q|<a data-original-title="#{t(:facebook_login)}" id="popover_facebook" href="#{root_path}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:facebook_login_exp)}">#{image_tag("f_logo.png", :class => "image-resize30_30")}</a>|
-     html += _script_document_ready(%Q|
-                $('\#popover_facebook').popover({trigger:'hover'});|)
-     html.html_safe
-  end
-  
-  def google
-     html = %Q|<a data-original-title="#{t(:google_login)}" id="popover_google" href="#{root_path}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:google_login_exp)}">#{image_tag("google_logo_3D_online_small.png", :class => "")}</a>|
-     html += _script_document_ready(%Q|
-                $('\#popover_google').popover({trigger:'hover'});|)
-     html.html_safe
-  end
-  
   def ok_error_messages!(resource)
     if resource.errors.empty?
       return ""
@@ -55,13 +41,6 @@ module ApplicationHelper
       else
         return post.posted_by.name
       end
-    end
-    t("unknown_user")
-  end
-  
-  def image_autor(image)
-    if image.present? && image.attached_by.present?
-      return image.attached_by.name
     end
     t("unknown_user")
   end
@@ -154,7 +133,7 @@ module ApplicationHelper
             html += "</div>"
           end
         elsif b.effect.eql?(Banner::E_MSLIDE) && count > 0
-          html += %Q|<div id="#{div_id}_#{Common.uniqe_token}">|
+          html += %Q|<div id="#{div_id}_#{Common.unique_token}">|
           html += %Q|<a class="#{div_id}_prev btn btn-primary" href="#" style="position:absolute;top:35px;left:-40px;"><i class="icon-step-backward icon-white"></i></a>|
           html += %Q|<a class="#{div_id}_next btn btn-primary" href="#" style="position:absolute;top:35px;right:-15px;"><i class="icon-step-forward icon-white"></i></a>|
           html += %Q|<style type="text/css" media="screen">
@@ -430,23 +409,20 @@ module ApplicationHelper
     html.html_safe
   end
   
-  def show_alert
+  def show_notice(message=nil)
     html = ""
-    if alert.present?
-      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{alert}</h4></div>|
+    msg = message.presence || notice.presence || nil
+    if msg
+      html = %Q|<div class="alert alert-info alert-block fade in"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
     end
     html.html_safe
   end
   
-  def show_alert_message(message)
-    html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{message}</h4></div>|
-    html.html_safe
-  end
-  
-  def show_notice
+  def show_alert(message=nil)
     html = ""
-    if notice.present?
-      html = %Q|<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{notice}</h4></div>|
+    msg = message.presence || alert.presence || nil
+    if msg  
+      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
     end
     html.html_safe
   end

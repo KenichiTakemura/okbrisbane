@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
     resource_params[:agreed_on] = Common.current_time
     resource_params[:provider] = User::PROVIDERS[:okbrisbane]
     # This is dummy
-    resource_params[:uid] = Common.uniqe_token
+    resource_params[:uid] = Common.unique_token
     super
   end
   

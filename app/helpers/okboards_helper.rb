@@ -13,7 +13,7 @@ module OkboardsHelper
     section_span_for(post, @okpage)
   end
 
-  def section_span_for(post, category)
+  def section_span_for(post, category, image_only=nil)
     html = %Q|<span ><ul class="thumbnails"><li><div class="thumbnail visible_span">|
     html += noimage?(post)
     if !post.image.empty?
@@ -32,15 +32,17 @@ module OkboardsHelper
       html += "</div></div>"
       html += _script_document_ready(%Q|$('\#post_Carousel_#{post.id}').carousel();|)
     end
-    html += %Q|<h3>| +  post.subject + "</h3>"
-    if post.respond_to?(:price) && post.price.present?
-      html += %Q|<p class="price_tag">| + post.price
+    if (image_only.present? && !image_only)
+      html += %Q|<h3>| +  post.subject + "</h3>"
+        if post.respond_to?(:price) && post.price.present?
+          html += %Q|<p class="price_tag">| + post.price
+          html += "</p>"
+        end
+      html += %Q|<p>|
+      html += raw(post.content.body) if !post.content.nil?
       html += "</p>"
+      html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), Okboard.okboard_link_with_id(category, post.id))
     end
-    html += %Q|<p>|
-    html += raw(post.content.body) if !post.content.nil?
-    html += "</p>"
-    html += link_to(image_tag("#{I18n.locale}/common/btn_info_view.gif"), Okboard.okboard_link_with_id(category, post.id))
     html += "</div></li></ul></span>"
     html.html_safe
   end
