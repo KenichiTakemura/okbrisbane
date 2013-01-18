@@ -168,7 +168,7 @@ module Okvalue
   SITE_STATISTICS_MONTHLY = "monthly"
 
   FOOTER_TEXT1 = "okbrisbane.com  All Rights Reserved."
-  FOOTER_TEXT2 = "OOK Pty Ltd ABN 98 152 354 768  Add.: Shop 3, 6 Zamia Street Sunnybank QLD 4109 T. 07) 3345 3256 F.07) 3172 3670"
+  FOOTER_TEXT2 = "OOK Pty Ltd ABN 98 152 354 768 Shop 3, 6 Zamia Street Sunnybank QLD 4109 T. 07) 3345 3256 F.07) 3172 3670"
 
   NOT_DETECTED = 0
   Safari = 1

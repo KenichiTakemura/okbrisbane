@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable, :timeoutable, :omniauthable
+         :recoverable, :rememberable, :trackable, :token_authenticatable, :confirmable, :timeoutable, :omniauthable
+  #:validatable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :user_name, :is_special, :confirmed_at
@@ -27,9 +28,25 @@ class User < ActiveRecord::Base
   PROVIDERS[:google] = "google_oauth2"
   PROVIDERS[:okbrisbane] = "okbrisbane"
   
-  validates_presence_of :user_name
-  after_create :create_mypage, :init_role
+  #https://github.com/plataformatec/devise/blob/master/lib/devise/models/validatable.rb
+  validates_presence_of :email
+  #validates_uniqueness_of :email, :allow_blank => true, :if => :email_changed?
+  validates_format_of :email, :with => Devise::email_regexp, :allow_blank => true
+
+  validates_presence_of :password
+  validates_confirmation_of :password
+  validates_length_of :password, :within => Devise::password_length, :allow_blank => true
   
+  #Custom
+  validates_presence_of :user_name
+  validates_presence_of :provider
+  
+  after_create :create_mypage, :init_role
+  after_initialize :provider_ok
+  
+  def provider_ok
+    self.provider ||= PROVIDERS[:okbrisbane]
+  end
   
   def facebook_user?
     self.provider.eql?(PROVIDERS[:facebook])
@@ -37,6 +54,10 @@ class User < ActiveRecord::Base
   
   def google_user?
     self.provider.eql?(PROVIDERS[:google])
+  end
+  
+  def okbrisbane_user?
+    self.provider.eql?(PROVIDERS[:okbrisbane])    
   end
   
   def name
@@ -104,12 +125,23 @@ class User < ActiveRecord::Base
         logger.error(user.errors.full_messages)
       end
     end
-    if user.present?
+    if user.present? && user.mypage.present?
       user.mypage.update_attribute(:user_image, auth.info.image) if auth.info.image.present?
       user.mypage.update_attribute(:user_url, auth.extra.raw_info.link) if auth.extra.raw_info.link.present?
     end
     user
   end
+  
+  # https://github.com/plataformatec/devise/wiki/How-To%3a-Allow-users-to-sign-in-using-their-username-or-email-address
+  def self.find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      Rails.logger.debug("find_first_by_auth_conditions: #{conditions}")
+      if email = conditions.delete(:email)
+        where(conditions).where(["provider = :provider AND lower(email) = :value", { :provider => User::PROVIDERS[:okbrisbane], :value => email.downcase }]).first
+      else
+        where(conditions).first
+      end
+    end
   
   def user_url
     mypage.user_url
@@ -118,5 +150,7 @@ class User < ActiveRecord::Base
   def user_image
     mypage.user_image
   end
+  
+  
   
 end

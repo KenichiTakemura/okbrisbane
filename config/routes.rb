@@ -6,22 +6,23 @@ Okbrisbane::Application.routes.draw do
 
   match 'counters/batch', :via => :get
 
-  match 'member_managements/sign_in', :via => :get, :as => :user_sign_in
-  match 'member_managements/sign_up', :via => :get
-  match 'member_managements/sign_out', :via => :get, :as => :user_sign_out
-  match 'member_managements/term', :via=>:get, :as => :termsofservice
-  match 'member_managements/personal', :via=>:get, :as => :termsofpersonal
-  match 'member_managements/agreememnt_required', :via=>:get, :as => :agreement
-  match 'member_managements/agreed', :via=>:get, :as => :agreed
-  match 'member_managements/inactive_signup', :via=>:get, :as => :user_inactive_signup
-  match 'member_managements/sending_reset_password_instructions', :via=>:get, :as => :user_sending_reset_password_instructions
-  match 'member_managements/after_reset_password', :via=>:get, :as => :user_after_reset_passwod
-  match 'member_managements/after_confirmation', :via=>:get, :as => :user_after_confirmation
-  match 'member_managements/after_resending_confirmation_instructions', :via=>:get, :as => :user_after_resending_confirmation_instructions
+  match 'users/member_managements/sign_in', :via => :get, :as => :user_sign_in
+  match 'users/member_managements/sign_up', :via => :get, :as => :user_sign_up
+  match 'users/member_managements/sign_out', :via => :get, :as => :user_sign_out
+  match 'users/member_managements/term', :via=>:get, :as => :termsofservice
+  match 'users/member_managements/personal', :via=>:get, :as => :termsofpersonal
+  match 'users/member_managements/agreememnt_required', :via=>:get, :as => :agreement
+  match 'users/member_managements/agreed', :via=>:get, :as => :agreed
+  match 'users/member_managements/inactive_signup', :via=>:get, :as => :user_inactive_signup
+  match 'users/member_managements/sending_reset_password_instructions', :via=>:get, :as => :user_sending_reset_password_instructions
+  match 'users/member_managements/after_reset_password', :via=>:get, :as => :user_after_reset_passwod
+  match 'users/member_managements/after_confirmation', :via=>:get, :as => :user_after_confirmation
+  match 'users/member_managements/after_resending_confirmation_instructions', :via=>:get, :as => :user_after_resending_confirmation_instructions
 
-  resources :member_managements, :only => ["index","new","create"]
-
-  devise_for :users, :controllers => { :registrations => "registrations", :sessions => "sessions", :confirmations => "confirmations", :passwords => "passwords", :omniauth_callbacks => "omniauth_callbacks" }
+  namespace :users do
+    resources :member_managements, :only => ["index","new","create"]
+  end
+  devise_for :users, :controllers => { :registrations => "users/registrations", :sessions => "users/sessions", :confirmations => "users/confirmations", :passwords => "users/passwords", :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :images, :only => ["create","destroy", "index"]
   resources :attachments, :only => ["create","destroy", "index"]
 

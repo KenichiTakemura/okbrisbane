@@ -1,9 +1,9 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="row-fluid">
-			<div class="row-fluid">
+			<div class="row-fluid" style="margin-bottom: 5px">
 				<div class="span3" style="width:250px;">
-					<%= link_to image_tag("common/logo.gif", :size => "250x120", :class => "img-rounded img-polaroid"), root_path(:locale => 'ko' ) %>
+					<%= link_to image_tag("common/logo2.png", :class => "img-rounded img-polaroid"), root_path(:locale => 'ko' ) %>
 				</div>
 				<div class="span4" style="padding:5px">
 					<%= render :partial => "homes/signin" %>
@@ -12,17 +12,17 @@
 					<div class="row-fluid">
 						<%= single_header_banner(1) %>
 					</div>
-					<div class="well well-small">
-							<strong><%= t("welcome_message")%>
-							<%= show_user %> </strong>
-							<%= fb_shout%>
+					<div class="row-fluid">
+							<p style="font-size: 16px"><strong><i class="icon-quote-left pull-left icon-large"></i><%= t("welcome_message")%>
+							<%= show_user %><i class="icon-quote-right icon-large"></i></strong></p>
 					</div>
 					<div class="pull-right">
 					<% if !current_user %>
-
+						
 						<%= facebook %>&nbsp;
 						<%= google %>&nbsp;
-						<%= link_to_with_icon_with_id(t("bookmarkme"),"#","btn btn-mini","","bookmarkme","icon-star")%>
+						<%= link_to_with_icon(t(:signup), user_sign_up_path, "btn btn-primary", "", "icon-ok") %>&nbsp;
+						<%= link_to_with_icon_with_id(t("bookmarkme"),"#","btn btn-mini","","bookmarkme","icon-bookmark")%>
 					<% end %>
 
 						
@@ -51,7 +51,6 @@
 		elem.setAttribute('rel','sidebar');
 		elem.click(); // this.title=document.title;
 		}
-		console.log("bookmarked.");
 		});
 		|)%>
 	</div>

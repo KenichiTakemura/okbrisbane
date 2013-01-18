@@ -13,12 +13,17 @@ class BusinessClient < ActiveRecord::Base
   has_many :client_image, :as => :attached, :dependent => :destroy, :class_name => 'ClientImage'
   has_many :business_profile_image, :as => :attached, :dependent => :destroy, :class_name => 'BusinessProfileImage'
   has_one :business_profile, :dependent => :destroy
+  has_one :logo, :as => :attached, :dependent => :destroy, :class_name => 'Logo'
   
   belongs_to :business_category
   
   accepts_nested_attributes_for :business_profile, :allow_destroy => true
   attr_accessible :business_profile, :business_profile_attributes
   alias_method :business_profile=, :business_profile_attributes=
+  
+  accepts_nested_attributes_for :logo
+  attr_accessible :logo, :logo_attributes
+  alias_method :logo=, :logo_attributes=
 
   # validator
   validates_presence_of :business_name
@@ -64,6 +69,10 @@ class BusinessClient < ActiveRecord::Base
   
   def has_url?
     self.business_url.present?
+  end
+  
+  def has_logo?
+    self.logo.present?
   end
   
   scope :with_banner, joins(:client_image).find(:all, :select => 'distinct business_clients.id')

@@ -42,21 +42,21 @@
 		</div>
 	</div>
 	<% end %>
-	<div id="okboard_list_for_<%= @okpage %>" style="position: relative; float: left; width: 100%">
-		<div id="okboard_list_top" >
+	<div class="row-fluid" id="okboard_list_for_<%= @okpage %>">
+			<div class="row-fluid">
+			<%= render :partial => "okboards/shared/filter" %>
+			</div>
+			<div class="row-fluid"> 
 			<% if Okbrisbane::Application.config.ok_debug %>
-			<div id="list_total_num_top" class="pull-left">
-				<span class="label label-info"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
+			<div id="list_total_num_top">
+				<span class="label label-info pull-left"> <%= "#{t(:list_total_num)} #{@board_lists.size}" %> </span>
 			</div>
 			<% end %>
-			<div class="pull-left" style="margin-left:5px;margin-bottom:5px">
-				<%= show_filter %>
+			<div class="pull-right">
+			<%= write_new_btn %>
+			<%= link_to_with_icon_with_id(t(:down), "#", "btn btn-mini", "", "okboard_down", "icon-arrow-down") %>
 			</div>
-			<div class="pull-right" style="margin-bottom:5px">
-				<%= write_new_btn %>
-				<%= link_to_with_icon(t(:down), "#_more", "btn btn-mini", "", "icon-arrow-down") %>
 			</div>
-		</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
 		<%= hidden_field_tag :board_list_size, @board_lists.size, :id => "_board_list_size" %>
 		<div id="okboard_list">
@@ -76,7 +76,7 @@
 		<div class="pull-right" style="margin-top:5px;">
 			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini btn-inverse") %>
 			<%= write_new_btn %>
-			<%= link_to_with_icon(t(:up), "#okboard_top", "btn btn-mini", "", "icon-arrow-up") %>
+			<%= link_to_with_icon_with_id(t(:up), "#", "btn btn-mini", "", "okboard_up", "icon-arrow-up") %>
 		</div>
 	</div>
 </div>

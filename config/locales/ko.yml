@@ -280,6 +280,7 @@ ko:
   delete: '삭제'
   add: '추가'
   findid: '아이디 찾기'
+  findid_short: '아이디 /'
   findpassword: '비밀번호 찾기'
   pages: '페이지'
   page: :pages
@@ -847,9 +848,11 @@ ko:
   is_special: "관리자 멤버"
   
   facebook:
-    shout: "Facebook 에 투고"
+    shout: "투고"
     wall: "퀸즈랜드 최고 종합 정보사이트 okbrisbane.com"
     caption: ""
     desc: ""
     shouted: "투고했습니다"
     failed: "투고실패 되었습니다"
+
+  logo: "로고"

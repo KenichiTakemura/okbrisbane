@@ -13,14 +13,5 @@
 		<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
 	</p></h5>
 </footer>
-<%= _script_document_ready(%Q|$(function() {
-var topBtn = $('\#footer_links');
-topBtn.hide();
-$(window).scroll(function () {
-if ($(this).scrollTop() > #{Okvalue::FOOTER_LINKS_SHOW_SIZE}) {
-topBtn.fadeIn();
-} else {
-topBtn.fadeOut();
-}
-});})|)%>
+
 

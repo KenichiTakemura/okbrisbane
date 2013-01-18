@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216045001) do
+ActiveRecord::Schema.define(:version => 20130113002831) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20121216045001) do
 
   create_table "attachments", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -155,9 +155,9 @@ ActiveRecord::Schema.define(:version => 20121216045001) do
 
   create_table "business_profile_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -256,9 +256,9 @@ ActiveRecord::Schema.define(:version => 20121216045001) do
 
   create_table "client_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -368,9 +368,9 @@ ActiveRecord::Schema.define(:version => 20121216045001) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
-    t.integer  "avatar_file_size"
     t.string   "avatar_file_name"
     t.datetime "avatar_updated_at"
+    t.integer  "avatar_file_size"
     t.string   "avatar_content_type"
     t.string   "medium_size"
     t.string   "thumb_size"
@@ -496,6 +496,20 @@ ActiveRecord::Schema.define(:version => 20121216045001) do
   end
 
   add_index "laws", ["z_index"], :name => "index_laws_on_z_index"
+
+  create_table "logos", :force => true do |t|
+    t.string   "avatar_file_name"
+    t.datetime "avatar_updated_at"
+    t.integer  "avatar_file_size"
+    t.string   "avatar_content_type"
+    t.string   "original_size"
+    t.integer  "attached_by_id"
+    t.string   "attached_by_type"
+    t.integer  "attached_id"
+    t.string   "attached_type"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "member_managements", :force => true do |t|
     t.datetime "created_at", :null => false

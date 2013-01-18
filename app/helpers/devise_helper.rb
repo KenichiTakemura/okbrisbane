@@ -6,7 +6,7 @@ module DeviseHelper
     end
 
     messages = resource.errors.full_messages.map { |msg|
-      show_alert_message(msg)
+      show_alert(msg)
     }.join
     sentence = I18n.t("errors.messages.not_saved",
                       :count => resource.errors.count,

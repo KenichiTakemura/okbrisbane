@@ -16,8 +16,12 @@ class ThumbnailableValidator < ActiveModel::EachValidator
       unless record.attachmentable?
         record.errors.add I18n.t("image"), I18n.t("has_invalid_content_type")
       end
+    elsif record.instance_of? Logo
+      unless record.thumbnailable?
+        record.errors.add I18n.t("logo"), I18n.t("has_invalid_content_type")
+      end
     else
-      raise "Instance error: #{record.name}" 
+      raise "Instance error: #{record}" 
     end
   end
 end

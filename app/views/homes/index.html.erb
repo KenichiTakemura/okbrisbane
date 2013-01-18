@@ -11,7 +11,7 @@
 			<ul class="nav nav-tabs" id="topic-tabs">
 				<% Style.topic_feed.each do |k,v| %>
 				<li>
-					<a href="#topic_tab_<%=k.to_s%>" class="nav-topic-tab" id="<%=k%>"><%=t(Style.topic_text?(k))%></a>
+					<a href="#topic_tab_<%=k.to_s%>" class="nav-topic-tab" id="<%=k%>"><%=t(Style.topic_text?(k))%><i class="<%=v[:feed][:icon]%> icon-large"></i></a>
 				</li>
 				<% end %>
 			</ul>
@@ -26,7 +26,7 @@
 				$('#topic-tabs a').click(function (e) {
 					e.preventDefault();
 					$(this).tab('show');
-					$("#topic_tab_content_" + $(this).attr("id")).html("#{escape_javascript(image_tag("common/ajax_loading_1.gif"))}");
+					$("#topic_tab_content_" + $(this).attr("id")).html("#{escape_javascript("<i class='icon-spinner'></i>")}");
 					show_topic_feed($(this).attr("id"))
 				});
 				function show_topic_feed(category) {
@@ -47,16 +47,13 @@
 	</div>
 	<div class="span4">
 		<%= render :partial => "homes/social" %>
-		<%=link_to t("Yellowpage"), yellowpage_okboards_path, :class => "btn btn-large btn-block btn-warning" %>
-		<a href="<%=Okboard.okboard_link_write(:p_buy_and_sell)%>" class="btn btn-large btn-block btn-info"><i class="icon-pencil"></i><%=t(Style.page(:p_buy_and_sell))%> <%=t(:write_new)%></a>
-		<a href="<%=Okboard.okboard_link_write(:p_job)%>" class="btn btn-large btn-block btn-primary"><i class="icon-pencil"></i><%=t(Style.page(:p_job))%> <%=t(:write_new)%></a>
-
+		<a href="<%=yellowpage_okboards_path%>", class="btn btn-large btn-block btn-warning"><i class="<%=Style.feed_icon(:p_yellowpage)%> icon-large"></i><%=t("Yellowpage")%></a>
+		<a href="<%=Okboard.okboard_link_write(:p_buy_and_sell)%>" class="btn btn-large btn-block btn-info"><i class="<%=Style.feed_icon(:p_buy_and_sell)%>  icon-large"></i><%=t(Style.page(:p_buy_and_sell))%> <%=t(:write_new)%></a>
+		<a href="<%=Okboard.okboard_link_write(:p_job)%>" class="btn btn-large btn-block btn-primary"><i class="<%=Style.feed_icon(:p_job)%>  icon-large"></i><%=t(Style.page(:p_job))%> <%=t(:write_new)%></a>
 		<%= single_body_banner(2) %>
 		<%= render :partial => "homes/ok_information" %>
-
 		<%= render :partial => "homes/quick_links" %>
 		<%= render :partial => "homes/weather_information" %>
-
 		<%= top_feed_div(:p_well_being) %>
 	</div>
 	</div>

@@ -141,25 +141,25 @@ module Style
   end
   
   ######  
-  ALL_FEED[:p_job] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_buy_and_sell] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_well_being] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
+  ALL_FEED[:p_job] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false}, :icon => "icon-group" }
+  ALL_FEED[:p_buy_and_sell] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false}, :icon => "icon-lemon" }
+  ALL_FEED[:p_well_being] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true}, :icon => "icon-info-sign" }
   ALL_FEED[:p_estate] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
   ALL_FEED[:p_business] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
   ALL_FEED[:p_motor_vehicle] = {:nav => false, :open => false, :feed => {:enabled => false, :image => true} }
-  ALL_FEED[:p_accommodation] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true} }
-  ALL_FEED[:p_study] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false} }
-  ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false} }
-  ALL_FEED[:p_yellowpage] = {:nav => false, :open => false, :feed => {:enabled => false, :image => false} }
+  ALL_FEED[:p_accommodation] = {:nav => true, :open => true, :feed => {:enabled => true, :image => true}, :icon => "icon-suitcase" }
+  ALL_FEED[:p_study] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false}, :icon => "icon-pencil" }
+  ALL_FEED[:p_immig] = {:nav => true, :open => false, :feed => {:enabled => false, :image => false}, :icon => "icon-plane" }
+  ALL_FEED[:p_law] = {:nav => true, :open => false, :feed => {:enabled => true, :image => false}, :icon => "icon-legal" }
+  ALL_FEED[:p_tax] = {:nav => true, :open => true, :feed => {:enabled => false, :image => false}, :icon => "icon-money" }
+  ALL_FEED[:p_yellowpage] = {:nav => false, :open => false, :feed => {:enabled => false, :image => false}, :icon => "icon-phone-sign" }
   
-  TOPIC_FEED[:p_buy_and_sell] = {:feed => {:enabled => true, :link => true, :text => page(:p_buy_and_sell)}}
-  TOPIC_FEED[:p_job] = {:feed => {:enabled => true, :link => true, :text => page(:p_job)}}
-  TOPIC_FEED[:p_most_viewed] = {:feed => {:enabled => true, :link => false, :text => "MostViewed"}}
-  TOPIC_FEED[:p_most_commented] = {:feed => {:enabled => true, :link => false, :text => "MostCommented"}}
-  TOPIC_FEED[:p_new_posted] = {:feed => {:enabled => true, :link => false, :text => "NewPosted"}}
-  TOPIC_FEED[:p_new_images] = {:feed => {:enabled => true, :link => false, :text => "NewImages"}}
+  TOPIC_FEED[:p_buy_and_sell] = {:feed => {:enabled => true, :link => true, :text => page(:p_buy_and_sell), :icon => "icon-lemon"}}
+  TOPIC_FEED[:p_job] = {:feed => {:enabled => true, :link => true, :text => page(:p_job), :icon => "icon-group"}}
+  TOPIC_FEED[:p_most_viewed] = {:feed => {:enabled => true, :link => false, :text => "MostViewed", :icon => "icon-eye-open"}}
+  TOPIC_FEED[:p_most_commented] = {:feed => {:enabled => true, :link => false, :text => "MostCommented", :icon => "icon-comments"}}
+  TOPIC_FEED[:p_new_posted] = {:feed => {:enabled => true, :link => false, :text => "NewPosted", :icon => "icon-star-empty"}}
+  TOPIC_FEED[:p_new_images] = {:feed => {:enabled => true, :link => false, :text => "NewImages", :icon => "icon-picture"}}
   
   def self.navi
     ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }
@@ -210,7 +210,10 @@ module Style
   def self.image_feed
     feedable.select{ |k,v| v[:feed][:image] }
   end
-    
+  
+  def self.feed_icon(page)
+    ALL_FEED[page][:icon]
+  end    
     
   Effect = Common.new_orderd_hash
   StyleClass = Common.new_orderd_hash

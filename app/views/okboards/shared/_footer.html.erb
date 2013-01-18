@@ -1,3 +1,6 @@
 <%= _script_document_ready(%Q|
 $("#navi_#{@okpage}").addClass("active");
+$('\#okboard_up').click(function(){$('html, body').animate({scrollTop: $("\#okboards").offset().top}, 2000);});
+$('\#okboard_down').click(function(){$('html, body').animate({scrollTop: $("\#okboard_up").offset().top}, 2000);});
+
 |) %>

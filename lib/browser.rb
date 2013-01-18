@@ -32,30 +32,34 @@ module Browser
     agent = agent.presence || request.env['HTTP_USER_AGENT']
     browser_compatible = NOT_DETECTED
     devise = NOT_DETECTED
-    if agent =~ /Safari/
-      unless agent =~ /Chrome/
-        version = agent.split('Version/')[1].split(' ').first.split('.').first
-        browser_compatible = Safari
-      else
-        version = agent.split('Chrome/')[1].split(' ').first.split('.').first
-        browser_compatible = Chrome
+    begin
+      if agent =~ /Safari/
+        unless agent =~ /Chrome/
+          version = agent.split('Version/')[1].split(' ').first.split('.').first
+          browser_compatible = Safari
+        else
+          version = agent.split('Chrome/')[1].split(' ').first.split('.').first
+          browser_compatible = Chrome
+        end
+      elsif agent =~ /Firefox/
+        version = agent.split('Firefox/')[1].split('.').first
+        browser_compatible = Firefox
+      elsif agent =~ /Opera/
+        version = agent.split('Version/')[1].split('.').first
+        browser_compatible = Opera
+      elsif agent =~ /MSIE/
+        version = agent.split('MSIE')[1].split(' ').first
+        browser_compatible = MSIE
       end
-    elsif agent =~ /Firefox/
-      version = agent.split('Firefox/')[1].split('.').first
-      browser_compatible = Firefox
-    elsif agent =~ /Opera/
-      version = agent.split('Version/')[1].split('.').first
-      browser_compatible = Opera
-    elsif agent =~ /MSIE/
-      version = agent.split('MSIE')[1].split(' ').first
-      browser_compatible = MSIE
-    end
-    if agent =~ /iPhone/
-      devise = DEVISE_PHONE
-    elsif agent =~ /Mobile/
-      devise = DEVISE_PHONE
-    else
-      devise = DEVISE_PC
+      if agent =~ /iPhone/
+        devise = DEVISE_PHONE
+      elsif agent =~ /Mobile/
+        devise = DEVISE_PHONE
+      else
+        devise = DEVISE_PC
+      end
+    rescue
+      Rails.logger.error("Cannot detect browser type. #{agent}")
     end
     browser_compatible * devise
   end

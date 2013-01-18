@@ -17,7 +17,7 @@ module ApplicationHelper
     end
 
     messages = resource.errors.full_messages.map { |msg|
-      show_alert_message(msg)
+      show_alert(msg)
     }.join
 
     messages.gsub!('Email',I18n.t(:email))
@@ -38,8 +38,8 @@ module ApplicationHelper
     if post.present?
       if post.posted_by_type.eql? "Admin"
         return t('admin')
-      else
-        return post.posted_by.name
+      elsif post.posted_by.present?
+        return post.posted_by.name 
       end
     end
     t("unknown_user")
@@ -394,8 +394,12 @@ module ApplicationHelper
     html.html_safe
   end
   
-  def link_to_with_icon(t,h,c,s,i)
-    html = %Q|<a href="#{h}" class="#{c}" style="#{s}"><i class="#{i}"></i>#{t}</a>|
+  def link_to_with_icon(t,h,c,s,i,method=nil)
+    if !method.present?
+      html = %Q|<a href="#{h}" class="#{c}" style="#{s}"><i class="#{i}"></i>#{t}</a>|
+    else
+      html = %Q|<a href="#{h}" class="#{c}" style="#{s}" data-method="#{method}"><i class="#{i}"></i>#{t}</a>|
+    end
     html.html_safe
   end
   

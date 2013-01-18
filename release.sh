@@ -17,12 +17,13 @@ tar jcvf ../release/okbrisbane_$DATE.tar.bz2\
  lib\
  public/*html\
  public/favicon.ico\
-# public/assets\
+ public/assets/manifest.yml\
+ public/assets/application*\
  public/images\
  public/javascripts\
  public/robots.txt
-mv tmp/release/manifest.yml tmp/release/manifest.yml.$DATE
-cp -p public/assets/manifest.yml tmp/release
+#mv tmp/release/manifest.yml tmp/release/manifest.yml.$DATE
+#cp -p public/assets/manifest.yml tmp/release
 mv public/assets public/x_assets
 cd ../okbrisbane-stage
 ./unpack.sh ../release/okbrisbane_$DATE.tar.bz2

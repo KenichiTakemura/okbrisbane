@@ -5,15 +5,15 @@
 				<% Style.navi.each do |key| %>
 				<% value = Style.page(key) %>
 				<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
-		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#"><%= t(value)%><b class="caret"></b></a>
+		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#" style="padding:15px 4px"><i class="<%=Style.feed_icon(key)%>"></i><%= t(value)%><b class="caret"></b></a>
         		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
          		<%=_sub_menu(key)%>
         		</ul>			
 				<li class="divider-vertical"></li>
 				<% end %>
-				<li>					
+				<li style="padding:5px 5px">
 				<form class="navbar-form pull-right">
-						<input type="text" class="input-medium" id="search-query" placeholder="<%=t(:search)%>">
+						<i class="icon-search"></i><input type="text" class="input-medium" id="search-query" placeholder="<%=t(:search)%>"/>
 					</form>
 				</li>
 			</ul>

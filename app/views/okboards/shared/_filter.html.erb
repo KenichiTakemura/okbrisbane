@@ -1,21 +1,21 @@
-<div class="" id="okboard_filter">
-	<%= form_for(@post_search, :html => {:class => "form-actions"}) do |f| %>
-		<%= f.select(:okpage, options_for_select(Okboard.get_links_i18n_list(@okpage), @post_search.okpage), {:include_blank => false}, {:class => "", :multiple => false}) %>
-		<%= f.label :category, t(:category)%>
-		<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "", :multiple => false}) %>
+<%= form_for(@post_search, :html => {:class => "form-inline"}) do |f| %> <!--
+<%= f.select(:okpage, options_for_select(Okboard.get_links_i18n_list(@okpage), @post_search.okpage), {:include_blank => false}, {:class => "", :multiple => false}) %>
+-->
+<%= f.hidden_field :okpage %>
+<%= f.label :category, t(:category)%>
+<%= f.select(:category, options_for_select(@post.category_list, @post_search.category), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
 
-		<!--
-		<%= f.label :image, "#{t(:image)}"%>
-		<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>		
-		<%= f.label :attachment, "#{t(:attachment)}"%>
-		<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
-		-->
-		
-		<%= f.label :time_by, "#{t(:select_date)}"%>
-		<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "", :multiple => false}) %>
+<!--
+<%= f.label :image, "#{t(:image)}"%>
+<%= f.select(:image, options_for_select(@post.yesno_list, @post_search.image), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+<%= f.label :attachment, "#{t(:attachment)}"%>
+<%= f.select(:attachment, options_for_select(@post.yesno_list, @post_search.attachment), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+-->
 
-		<%= f.label :keyword, "#{t(:search_keyword)}"%>
-		<%= f.search_field :keyword, :class => "input-medium search-query" %>
-		<%= f.submit t("search"), :class => "btn", :style => "margin-top:5px" %>
-	<% end %>
-</div>
+<%= f.label :time_by, "#{t(:select_date)}"%>
+<%= f.select(:time_by, options_for_select(@post_search.time_by_list, @post_search.time_by), {:include_blank => true}, {:class => "span2", :multiple => false}) %>
+
+<%= f.label :keyword, "#{t(:search_keyword)}"%>
+<%= f.search_field :keyword, :class => "input-medium search-query" %>
+<%= f.submit t("search"), :class => "btn" %>
+<% end %>

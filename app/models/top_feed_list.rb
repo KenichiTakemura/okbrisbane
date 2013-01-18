@@ -3,7 +3,7 @@ class TopFeedList < ActiveRecord::Base
   TOP_FEED_LIMIT = 10
   TOP_FEED_LIMIT_LOWER = 5
   IMAGE_FEED_LIMIT = 2
-  TOP_FEED_SAVED_LIMIT = 50
+  TOP_FEED_SAVED_LIMIT = 100
   
   TOP_FEED_LIMIT_CATE = Common.new_orderd_hash
   TOP_FEED_LIMIT_CATE[:p_job] = 15

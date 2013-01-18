@@ -1,7 +1,7 @@
 <% if @next_post.present? %>
 <a href="<%=Okboard.okboard_link_with_id(@okpage,@next_post.id,@post_search.id)%>"><span class="badge"><%=@next_post.id%></span>
-<%= _truncate_with_length(@next_post.subject, 35) %></a>
-<a href="<%=Okboard.okboard_link_with_id(@okpage,@next_post.id,@post_search.id)%>", class="btn btn-mini btn-primary"><i class="icon-step-forward icon-white" style="float:right"></i><%= t(:next_post)%></a>
+<%= _truncate_with_length(@next_post.subject, 35) %></a>&nbsp;
+<a href="<%=Okboard.okboard_link_with_id(@okpage,@next_post.id,@post_search.id)%>", class="btn btn-mini btn-primary pull-right"><i class="icon-step-forward icon-white icon-large"></i></a>
 <% else %>
 
 <% end %>
