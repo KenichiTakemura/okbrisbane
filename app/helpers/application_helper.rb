@@ -67,8 +67,28 @@ module ApplicationHelper
   def banner_ajaxable?
     SystemConfig.instance.banner_ajaxable    
   end
+  
+  def local_signin?
+    SystemConfig.instance.local_signin
+  end
+  
+  def facebook_signin?
+    SystemConfig.instance.facebook_signin
+  end
+  
+  def google_signin?
+    SystemConfig.instance.google_signin
+  end
+  
+  def naver_signin?
+    SystemConfig.instance.naver_signin
+  end
+  
+  def twitter_signin?
+    SystemConfig.instance.twitter_signin
+  end
 
- # Create banner
+  # Create banner
   def _collectImage(p, s, a)
     logger.debug("_collectImage: #{p} #{s} #{a}")
     page_id = Style.pageid_value(p)
@@ -412,6 +432,17 @@ module ApplicationHelper
     html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="post"><i class="#{i}"></i>#{t}</a>|
     html.html_safe
   end
+  
+  def link_to_with_icon_remote_method(t,h,c,s,i, method="post")
+    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="#{method}"><i class="#{i}"></i>#{t}</a>|
+    html.html_safe
+  end
+
+  def link_to_with_icon_remote_method_with_confirm(t,h,c,s,i, method, confirm)
+    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="#{method}" data-confirm="#{confirm}"><i class="#{i}"></i>#{t}</a>|
+    html.html_safe
+  end
+
   
   def show_notice(message=nil)
     html = ""

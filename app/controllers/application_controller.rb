@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
   # redirect back to current page without oauth signin
   def after_sign_in_path_for(resource)
-    logger.debug("after_sign_in_path_for #{resource}")
+    logger.info("after_sign_in_path_for #{resource}")
     if !resource.agreed?
       logger.info("User has NOT agreed")
       agreement_path

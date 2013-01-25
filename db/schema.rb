@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113002831) do
+ActiveRecord::Schema.define(:version => 20130124070740) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "locale",                                  :null => false
@@ -649,6 +649,11 @@ ActiveRecord::Schema.define(:version => 20130113002831) do
     t.datetime "updated_at",                            :null => false
     t.boolean  "banner_clickable",   :default => true
     t.boolean  "banner_ajaxable",    :default => true
+    t.boolean  "local_signin",       :default => true
+    t.boolean  "facebook_signin",    :default => true
+    t.boolean  "google_signin",      :default => true
+    t.boolean  "naver_signin",       :default => false
+    t.boolean  "twitter_signin",     :default => false
   end
 
   create_table "taxes", :force => true do |t|

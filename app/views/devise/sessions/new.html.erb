@@ -15,24 +15,34 @@
 	<%= t(:signin_instructions_for)%>
 </div>
 <div id="signin">
-	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "home-signin-form"}) do |f| %>
 	<%= hidden_field_tag :provider, resource.provider %>
 	<%= f.label :email, t(:signin_email), :class => "" %>
 	<div class="input-prepend">
-		<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge" %>
+		<span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :class => "input-xlarge" %>
 	</div>
 	<%= f.label :password, "#{t(:signin_password)}", :class => "" %>
-	<%= f.password_field :password, :class => "" %>
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-key"></i></span><%= f.password_field :password, :class => "" %>
+	</div>
 	<br>
-	<% if devise_mapping.rememberable? -%>
+	<% if devise_mapping.rememberable? %>
 	<label class="checkbox"> <%= f.check_box :remember_me%><%= t(:remember_me) %> </label>
-	<% end -%>
-	<%= f.submit t(:signin), :class => "btn btn-primary" %>
+	<% end %>
+	<%= link_to_with_icon_with_id(t(:signin), "#", "btn", "", "home-signin", "icon-signin") %>
+	<span class="home-signin-progress"></span>
 	<% end %>
 	<%= facebook %>
 	<%= google %>
+	<%= naver %>
 </div>
-
+<%= _script(%Q|
+	$("\#home-signin").click(function(){
+		$(".home-signin-progress").html("#{escape_javascript('<i class="icon-spinner icon-spin icon-large"></i>')}");
+		$(".home-signin-form").submit();
+		return false;
+	})
+|) %>
 <%= single_body_banner(6) %>
 <%= render :partial => "devise/shared/footer" %>
 <%= active_menu("_signin") %>

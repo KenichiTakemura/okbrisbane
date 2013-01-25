@@ -16,15 +16,19 @@
 	<%= devise_error_messages! %>
 	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 		<%= f.label :email, t(:signin_email)%>
-			<div class="input-prepend">
-		<span class="add-on">@</span><%= f.email_field :email, :class => "input-xlarge" %>
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :class => "input-xlarge" %>
 	</div>
 		<%= f.label :user_name, t(:user_name)%>
 		<%= f.text_field :user_name, :class => "input-xlarge" %>
-		<%= f.label :password, t(:signin_password)%>
-		<%= f.password_field :password, :class => "" %><span class="help-inline text-info"><%=t(:password_morethan_x, :size => 6)%></span>
+		<%= f.label :password, t(:signin_password)%><span class="help-inline text-info"><%=t(:password_morethan_x, :size => 6)%></span>
+			<div class="input-prepend">
+		<span class="add-on"><i class="icon-key"></i></span><%= f.password_field :password, :class => "" %>
+		</div>
 		<%= f.label :password_confirmation, t(:password_confirmation)%>
-		<%= f.password_field :password_confirmation, :class => "" %>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-key"></i></span><%= f.password_field :password_confirmation, :class => "" %>
+		</div>
 	<div class="group">
 		<%= image_submit_tag("#{I18n.locale}/Signup/registration.jpg") %>
 	</div>

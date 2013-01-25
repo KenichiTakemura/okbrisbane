@@ -1,20 +1,42 @@
 module SnsHelper
     
   def facebook
-     html = %Q|<a data-original-title="#{t(:facebook_login)}" id="popover_facebook" href="#{user_omniauth_authorize_path(:facebook)}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:facebook_login_exp)}">#{image_tag("f_logo.png", :class => "image-resize30_30")}</a>|
-     html += _script_document_ready(%Q|
-                $('\#popover_facebook').popover({trigger:'hover'});|)
-     html = %Q|<a href="#{user_omniauth_authorize_path(:facebook)}" class="">#{image_tag("f_logo.png", :class => "image-resize30_30")}&nbsp;#{t(:signin)}</a>|
-     html.html_safe
-
+    html = ""
+    token = Common.unique_token
+    if facebook_signin?
+      html = %Q|<a href="#{user_omniauth_authorize_path(:facebook)}" class="" id="facebook_signin_#{token}">#{image_tag("f_logo.png", :class => "image-resize30_30")}&nbsp;<span id="facebook_signin_text_#{token}">#{t(:signin)}</span></a>|
+      html += _script(%Q|$(function(){
+      $("\#facebook_signin_#{token}").click(function(){
+          $("\#facebook_signin_text_#{token}").html("#{escape_javascript('<i class="icon-spinner icon-spin icon-large"></i>')}");
+      });})|)
+    end
+    html.html_safe
   end
   
   def google
-     html = %Q|<a data-original-title="#{t(:google_login)}" id="popover_google" href="#{root_path}" class="" data-placement="bottom"  rel="popover" data-content="#{t(:google_login_exp)}">#{image_tag("google_logo_3D_online_small.png", :class => "")}</a>|
-     html += _script_document_ready(%Q|
-                $('\#popover_google').popover({trigger:'hover'});|)
-     html = %Q|<a href="#{user_omniauth_authorize_path(:facebook)}" class="">#{image_tag("google_logo_3D_online_small.png", :class => "")}&nbsp;#{t(:signin)}</a>|           
-     html.html_safe
+    html = ""
+    token = Common.unique_token
+    if google_signin?
+      html = %Q|<a href="#{user_omniauth_authorize_path(:google_oauth2)}" class="" id="google_signin_#{token}">#{image_tag("google_logo_3D_online_small.png", :class => "")}&nbsp;<span id="google_signin_text_#{token}">#{t(:signin)}</span></a>|
+      html += _script(%Q|$(function(){
+      $("\#google_signin_#{token}").click(function(){
+          $("\#google_signin_text_#{token}").html("#{escape_javascript('<i class="icon-spinner icon-spin icon-large"></i>')}");
+      });})|)
+    end
+    html.html_safe
+  end
+  
+  def naver
+    html = ""
+    token = Common.unique_token
+    if naver_signin?
+      html = %Q|<a href="#{user_omniauth_authorize_path(:naver)}" class="" id="naver_signin_#{token}">#{image_tag("img_naver.jpg", :class => "")}&nbsp;<span id="naver_signin_text_#{token}">#{t(:signin)}</span></a>|
+      html += _script(%Q|$(function(){
+      $("\#naver_signin_#{token}").click(function(){
+          $("\#naver_signin_text_#{token}").html("#{escape_javascript('<i class="icon-spinner icon-spin icon-large"></i>')}");
+      });})|)
+    end
+    html.html_safe
   end
   
   def show_user(user=nil)
@@ -38,7 +60,7 @@ module SnsHelper
     html = ""
     token = Common.unique_token
     if current_user && current_user.facebook_user? 
-      html = %Q|<a href="\#" onclick='facebook_shout_#{token}(); return false;' class="btn"><i class="icon-facebook-sign"></i>#{t("facebook.shout")}</a>|
+      html = %Q|<a href="\#" onclick='facebook_shout_#{token}(); return false;' class="btn btn-info"><i class="icon-facebook-sign"></i>#{t("facebook.shout")}</a>|
       html += %Q|<p id='msg_#{token}'></p>|
       html += _script(%Q|
         function facebook_shout_#{token}() {

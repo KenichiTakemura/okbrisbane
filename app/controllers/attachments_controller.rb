@@ -1,8 +1,10 @@
 class AttachmentsController < AttachablesController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :set_model
   
-  @@model = Attachment
+  def set_model
+    @model = Attachment
+  end
     
   def index
     @attachments = _index

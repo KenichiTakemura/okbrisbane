@@ -62,12 +62,14 @@ class HomesController < OkController
         return
       end
     end
+    logger.debug("category: #{@category}")
     limit = TopFeedList::TOP_FEED_LIMIT_CATE[@category].presence || TopFeedList::TOP_FEED_LIMIT
     case @category
     when :p_new_posted
       @list = TopFeedList.feed_new(limit)
     when :p_new_images
       @images = HotFeedList.hot_feed_for(HotFeedList.what_key?(@category),limit)
+      logger.debug("Images: #{@images.length}")
     when :p_most_viewed
       @list = HotFeedList.hot_feed_for(HotFeedList.what_key?(@category),limit)
     when :p_most_commented

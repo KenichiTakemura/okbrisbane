@@ -2,9 +2,9 @@
 <div class="row-fluid" id="board_for_<%= @okpage %>">
 	<div class="page-head">
 		<h1><%= t(Style.page(@okpage))%>&nbsp;<%= t('write_new')%></h1>
-		<p class="text-warning">
+		<strong><p class="text-warning">
 			<%= t(@okpage.to_s + "_notice")%>
-		</p>
+		</p></strong>
 	</div>
 	<%= ok_error_messages!(@post) %>
 	<%= form_for(@post, :html => { :class => "" }) do |f| %>
@@ -38,9 +38,28 @@
 		<br>
 	<% end %>
 	<%= f.submit t("create"), :class => "btn btn-primary" %>
-	<% end %>
-	<br>
-	<%= render :partial => "okboards/shared/upload/image" %>
-	<%= render :partial => "okboards/shared/upload/attachment" %>
+	<%= link_to_with_icon_with_id(t(:image) + t(:upload), "#", "btn btn-info btn-small", "", "upload_image_display_toggle", "icon-cloud-upload") %>
+	<%= link_to_with_icon_with_id(t(:attachment) + t(:upload), "#", "btn btn-info btn-small", "", "upload_attachment_display_toggle", "icon-cloud-upload") %>
 
+	<% end %>
+	<%= _script_document_ready(%Q|
+		$('\#upload_image_display_toggle').click(function(){
+			$('\#upload_image_display').show('slow');
+			$('\#upload_attachment_display').hide('slow');
+			return false;
+		});
+		$('\#upload_attachment_display_toggle').click(function(){
+			$('\#upload_attachment_display').show('slow');
+			$('\#upload_image_display').hide('slow');
+			return false;
+		});
+
+	|)%>
+	<hr>
+	<div id="upload_image_display" style="display:none">
+	<%= render :partial => "okboards/shared/upload/image" %>
+	</div>
+	<div id="upload_attachment_display" style="display:none">
+	<%= render :partial => "okboards/shared/upload/attachment" %>
+	</div>
 </div>

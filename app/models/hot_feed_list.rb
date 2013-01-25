@@ -9,8 +9,8 @@ class HotFeedList < ActiveRecord::Base
   FEED_TYPE[:p_most_commented] = {:key => 2, :name => "MostCommented"}
   FEED_TYPE[:p_new_images] = {:key => 3, :name => "NewImages"}
   
-  def self.what_key?(key)
-    FEED_TYPE[key][:key]
+  def self.what_key?(p_key)
+    FEED_TYPE[p_key][:key]
   end
   
   #after_save :clean_oldest_feed
@@ -28,5 +28,5 @@ class HotFeedList < ActiveRecord::Base
   scope :find_a_feed, lambda { |cate,id| where('hot_feeded_to_type = ? AND hot_feeded_to_id = ?', cate, id)}
   scope :find_a_feed_with_key, lambda { |cate,id,key| where('hot_feeded_to_type = ? AND hot_feeded_to_id = ? AND hot_key = ?', cate, id, key)}
   scope :hot_feed_for_all, lambda { |key| where('hot_key = ?', key).order("hot_value DESC") }
-  scope :hot_feed_for, lambda { |key,limit| hot_feed_for_all.limit(limit) }
+  scope :hot_feed_for, lambda { |key,limit| hot_feed_for_all(key).limit(limit) }
 end

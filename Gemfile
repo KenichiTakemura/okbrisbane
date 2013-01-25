@@ -28,7 +28,7 @@ group :production do
   gem 'turbo-sprockets-rails3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '2.1.2'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -62,8 +62,12 @@ gem 'kaminari'
 gem 'encryptor'
 gem "ckeditor", "3.7.1"
 gem "exception_notification"
-gem 'remotipart'
+gem 'remotipart', "1.0.2"
 gem 'omniauth'
 gem 'oauth2'
+gem 'omniauth-google'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook', '1.4.0'
 gem 'system_timer'
+#gem 'omniauth-naver', '0.0.1', :git => 'https://github.com/pctj101/omniauth-naver.git'
+gem 'omniauth-naver', '0.0.1', :path => '../../gems/omniauth-naver'

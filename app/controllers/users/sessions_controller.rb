@@ -6,4 +6,8 @@ class Users::SessionsController < Devise::SessionsController
     @okpage = :p_signin
   end
   
+  def self.force_sign_out(resource)
+    sign_out(resource)
+  end
+  
 end

@@ -1,24 +1,25 @@
 <div class="image">
-<%= form_for(@image, :html => { :multipart => true }, :remote => true) do |image_form| %>
+<%= form_for(@image, :html => { :multipart => true, :id => "image-form" }, :remote => true) do |image_form| %>
 <fieldset>
 	<%= image_form.hidden_field :write_at, :id => "write_at" %>
-	<%= image_form.label :image, "#{t("image") + t("add")}" %>
+	<%= image_form.label :image, "#{t("image") + t("upload")}" %>
 	<span class="help-block"><%= t("post_image_upload_description") %></span>
 	<%= image_form.file_field :image, :id => "upload_image" %>
 	<span class="help-inline"><%= t("max_size", :size => number_to_human_size(Okvalue::MAX_POST_IMAGE_SIZE))%></span>
 	<br>
 	<%= image_form.text_area :something, :placeholder => t("write_something"), :class => "text_area", :id => "upload_something", :style => "margin-top:5px", :rows => "3" %>
 	<br>
-	<%= image_form.submit t("upload"), :class => "btn btn-info", :id => "upload_image_submit" %>
+	<%= link_to_with_icon_with_id("", "#", "btn btn-info", "", "upload_image_submit", "icon-cloud-upload icon-2x") %>
 </fieldset>
 <% end %>
 <%= _script(%Q|$('\#upload_image_submit').click(function(){
 	if($('\#upload_image').val() != "") {
 		$('\#upload_image_status').html("#{escape_javascript(image_tag("common/ajax_loading.gif"))}");
-	} else {
-		return false;
+		$('\#image-form').submit();
 	}
-})|)%>
+	return false;
+}
+)|)%>
 <div id="upload_image_status"></div>
 <div id="upload_image_area"></div>
 </div>

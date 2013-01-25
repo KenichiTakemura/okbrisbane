@@ -194,7 +194,8 @@ module WeatherConfig
     return "cloudy" if letter =~ /구름많음/
     return "mostly_cloudy" if letter =~ /구름조금/
     return "chance_of_rain" if letter =~ /구름많고 비/
-    return "sunny" if letter =~ /맑음/  
+    return "sunny" if letter =~ /맑음/ 
+    nil
   end
 
   # icon list

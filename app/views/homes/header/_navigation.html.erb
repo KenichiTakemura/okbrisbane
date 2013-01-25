@@ -1,22 +1,38 @@
-<div class="navbar-wrapper">
+<div class="navbar-wrapper" style="margin:0px 20px">
 	<div class="navbar">
 		<div class="navbar-inner">
 			<ul class="nav">
 				<% Style.navi.each do |key| %>
 				<% value = Style.page(key) %>
 				<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
-		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#" style="padding:15px 4px"><i class="<%=Style.feed_icon(key)%>"></i><%= t(value)%><b class="caret"></b></a>
+		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#"><i class="<%=Style.feed_icon(key)%>"></i>&nbsp;<%= t(value)%><b class="caret"></b></a>
         		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
          		<%=_sub_menu(key)%>
         		</ul>			
 				<li class="divider-vertical"></li>
 				<% end %>
-				<li style="padding:5px 5px">
-				<form class="navbar-form pull-right">
-						<i class="icon-search"></i><input type="text" class="input-medium" id="search-query" placeholder="<%=t(:search)%>"/>
-					</form>
-				</li>
 			</ul>
 		</div>
 	</div>
 </div>
+<%=_script_document_ready(%Q|
+	$('\#bookmarkme').click(function() {
+		var url = "#{root_url}";
+		var title = "QUEENSLAND PORTAL OKBRISBANE";
+		if (document.all) {// ie
+			window.external.AddFavorite(url, title);
+		} else if (window.sidebar) {// firefox
+			console.log("firefox")
+			window.sidebar.addPanel(title, url, "");
+		} else if (window.opera && window.print) {// opera
+			var elem = document.createElement('a');
+			elem.setAttribute('href', url);
+			elem.setAttribute('title', title);
+			elem.setAttribute('rel', 'sidebar');
+			elem.click();
+			// this.title=document.title;
+		}
+	});
+
+|)
+%>

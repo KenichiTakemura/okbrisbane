@@ -1,8 +1,10 @@
 class ImagesController < AttachablesController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :set_model
   
-  @@model = Image
+  def set_model
+    @model = Image
+  end
     
   def index
     @images = _index

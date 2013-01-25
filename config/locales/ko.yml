@@ -821,6 +821,11 @@ ko:
   this_post_has_been_deleted_by_admin: '이 투고는 준재하지 않거나 또는 관리자가 삭제했습니다'
   banner_clickable: '광고이미지 클릭 가능/불가능'
   banner_ajaxable: '광고이미지 Ajax 가능/불가능'
+  facebook_signin: "Facebook 로그인 가능/불가능"
+  google_signin: "Google 로그인 가능/불가능"
+  naver_signin: "NAVER 로그인 가능/불가능"
+  twitter_signin: "Twitter 로그인 가능/불가능"
+  local_signin: "OKBRISBANE 로그인 가능/불가능"
 
   post_id: '번호'
   password_morethan_x: 비밀번호는 %{size}자이상 입력하십시요 
@@ -856,3 +861,5 @@ ko:
     failed: "투고실패 되었습니다"
 
   logo: "로고"
+  confirm_block: "Fix me하시겠습니까?'"
+  block_user: "Fix me"

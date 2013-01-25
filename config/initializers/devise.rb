@@ -207,7 +207,10 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   require "omniauth-facebook"
   config.omniauth :facebook, "216729515127558", "76b5e726cb98e73b170f0fc00fc36434", :strategy_class => OmniAuth::Strategies::Facebook
-
+  require "omniauth-google-oauth2"
+  config.omniauth :google_oauth2, "141763349073.apps.googleusercontent.com", "b8Ogm0WpLzBId8fTViXuxlhM", :strategy_class => OmniAuth::Strategies::Google
+  require "omniauth-naver"
+  config.omniauth :naver, "_BMNzVP2b9Hd", "510078FAFqe7_mdDB4cG", :strategy_class => OmniAuth::Strategies::Naver
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
