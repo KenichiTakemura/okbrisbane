@@ -2,9 +2,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  #before_filter :authenticate_user!
   #before_filter :set_locale
-  #before_filter :opening_soon
   before_filter :hit
 
   def initialize
@@ -12,56 +10,55 @@ class ApplicationController < ActionController::Base
   end
 
   def hit
-    key = Common.today
-    #Rails.logger.debug("hit from : #{request.remote_ip}")
-    statistics(request)
-    return if request.remote_ip.eql?(Okbrisbane::Application.config.my_host)
-    unless session[key.to_sym]
-      #Counter.instance.hit
-      daily_hit = Rails.cache.read(:daily_hit).presence || 0
-      daily_member_hit = Rails.cache.read(:daily_member_hit).presence || 0
-      Rails.cache.write(:daily_hit, daily_hit + 1);
-      if current_user
-        #Counter.instance.member_hit
-        Rails.cache.write(:daily_member_hit, daily_member_hit + 1);
+    key = Webcom::DateUtil.today
+    b = statistics(request)
+    if !request.remote_ip.eql?(Okbrisbane::Application.config.my_host)
+      unless session[key.to_sym]
+        daily_hit = Rails.cache.read(:daily_hit).presence || 0
+        daily_member_hit = Rails.cache.read(:daily_member_hit).presence || 0
+        Rails.cache.write(:daily_hit, daily_hit + 1);
+        if current_user
+          Rails.cache.write(:daily_member_hit, daily_member_hit + 1);
+        end
+        session[key.to_sym] = true
       end
-      session[key.to_sym] = true
-      #Rails.logger.debug("daily_hit: #{Rails.cache.read(:daily_hit)}")
-      #Rails.logger.debug("daily_member_hit: #{Rails.cache.read(:daily_member_hit)}")
+    end
+    if Webcom::Browser.from_phone?(b)
+      redirect_to smarts_path
     end
   end
   
   def statistics(request)
-    b = Browser.browser_detection(request,nil)
+    b = Webcom::Browser.browser_detection(request,nil)
     begin
       stat = Rails.cache.read(:browser_stat).presence || BrowserLog.new
     rescue
       stat = BrowserLog.find_by_day(Common.today.to_i) || BrowserLog.new
     end
     case b
-    when Browser::NOT_DETECTED
+    when Webcom::Browser::NOT_DETECTED
       stat.pc_other += 1
-    when Browser::Safari
+    when Webcom::Browser::Safari
       stat.pc_sf += 1
-    when Browser::Chrome
+    when Webcom::Browser::Chrome
       stat.pc_ch += 1
-    when Browser::Firefox
+    when Webcom::Browser::Firefox
       stat.pc_ff += 1
-    when Browser::Opera
+    when Webcom::Browser::Opera
       stat.pc_op += 1
-    when Browser::MSIE
+    when Webcom::Browser::MSIE
       stat.pc_ie += 1
-    when Browser::MO_NOT_DETECTED
+    when Webcom::Browser::MO_NOT_DETECTED
       stat.mo_other += 1
-    when Browser::MO_Safari
+    when Webcom::Browser::MO_Safari
       stat.mo_sf += 1
-    when Browser::MO_Chrome
+    when Webcom::Browser::MO_Chrome
       stat.mo_ch += 1
-    when Browser::MO_Firefox
+    when Webcom::Browser::MO_Firefox
       stat.mo_ff += 1
-    when Browser::MO_Opera
+    when Webcom::Browser::MO_Opera
       stat.mo_op += 1
-    when Browser::MO_MSIE
+    when Webcom::Browser::MO_MSIE
       stat.mo_ie += 1
     end
     begin
@@ -70,6 +67,7 @@ class ApplicationController < ActionController::Base
     rescue
       stat.save
     end
+    b
   end
 
   #def set_locale
@@ -101,7 +99,7 @@ class ApplicationController < ActionController::Base
     user_sign_out_path
   end
 
-  rescue_from Exceptions::NotFoundError, :with => :record_not_found
+  rescue_from Webcom::Exceptions::NotFoundError, :with => :record_not_found
   
   protected
 

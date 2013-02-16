@@ -1,7 +1,7 @@
-<%= link_to_with_icon_remote("", Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
+<%= link_to_with_icon_remote("", Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white","") %>
 <%= @post.likes.to_s %>
 <%= image_tag("common/rank/#{@post.rank}.png") %>
-<%= link_to_with_icon_remote("", Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white") %>
+<%= link_to_with_icon_remote("", Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white","") %>
 <%= @post.dislikes.to_s %>
 <%= link_to(image_tag("common/sns/abuse.png", :class => "image-resize20_20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
 <%= @post.abuse.to_s %>

@@ -3,7 +3,9 @@ class Logo < Attachable
   has_attached_file :avatar,
    :url  => "/system/data/:class/:attachment/:id_partition/:style/:basename.:extension",
    :path => ":rails_root/public/system/data/:class/:attachment/:id_partition/:style/:filename"
-   
+
+  attr_accessible :device
+     
   def to_s
     super.to_s
   end
@@ -18,7 +20,6 @@ class Logo < Attachable
   #Paperclip callbacks
   after_post_process :proc_geo
 
-  
   def original_image
     self.avatar.url(:original)
   end

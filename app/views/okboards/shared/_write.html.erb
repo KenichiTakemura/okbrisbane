@@ -38,8 +38,8 @@
 		<br>
 	<% end %>
 	<%= f.submit t("create"), :class => "btn btn-primary" %>
-	<%= link_to_with_icon_with_id(t(:image) + t(:upload), "#", "btn btn-info btn-small", "", "upload_image_display_toggle", "icon-cloud-upload") %>
-	<%= link_to_with_icon_with_id(t(:attachment) + t(:upload), "#", "btn btn-info btn-small", "", "upload_attachment_display_toggle", "icon-cloud-upload") %>
+	<%= link_to_with_icon(t(:image) + t(:upload), "#", "btn btn-info btn-small", "", "icon-cloud-upload", "upload_image_display_toggle") %>
+	<%= link_to_with_icon(t(:attachment) + t(:upload), "#", "btn btn-info btn-small", "", "icon-cloud-upload", "upload_attachment_display_toggle") %>
 
 	<% end %>
 	<%= _script_document_ready(%Q|

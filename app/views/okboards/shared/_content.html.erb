@@ -14,7 +14,7 @@
 				<%= section_span_for(post, @okpage, true) %>
 				</div>
 				<h6 class="description">
-					<%= link_to_with_icon(post.subject, Okboard.okboard_link_with_id(@okpage, post.id), "", "", "icon-play")%>
+					<%= link_to_with_icon(post.subject, Okboard.okboard_link_with_id(@okpage, post.id), "", "", "icon-play","")%>
 				</h6>
 				<p class="description">
 					<%= post.postedDate%>
@@ -54,7 +54,7 @@
 			<% end %>
 			<div class="pull-right">
 			<%= write_new_btn %>
-			<%= link_to_with_icon_with_id(t(:down), "#", "btn btn-mini", "", "okboard_down", "icon-arrow-down") %>
+			<%= link_to_with_icon(t(:down), "#", "btn btn-mini", "", "icon-arrow-down", "okboard_down") %>
 			</div>
 			</div>
 		<%= hidden_field_tag :lastid, @lastid, :id => "_lastid" %>
@@ -76,7 +76,7 @@
 		<div class="pull-right" style="margin-top:5px;">
 			<%= link_to(t("more"), "#", :remote => true, :method => :post, :id => "_more", :class => "btn btn-mini btn-inverse") %>
 			<%= write_new_btn %>
-			<%= link_to_with_icon_with_id(t(:up), "#", "btn btn-mini", "", "okboard_up", "icon-arrow-up") %>
+			<%= link_to_with_icon(t(:up), "#", "btn btn-mini", "", "icon-arrow-up", "okboard_up") %>
 		</div>
 	</div>
 </div>

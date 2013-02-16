@@ -24,7 +24,8 @@ module Okvalue
   #VERSION = "1.1.1-20121127"
   #VERSION = "1.1.2-20121130"
   #VERSION = "1.1.3-20121210"
-  VERSION = "1.1.3-20121216"
+  #VERSION = "1.1.3-20121216"
+  VERSION = "1.1.4-20130216"
   
   TERMS_DATE = Time.parse("2012-11-10 00:00:00")
   
@@ -169,20 +170,8 @@ module Okvalue
 
   FOOTER_TEXT1 = "okbrisbane.com  All Rights Reserved."
   FOOTER_TEXT2 = "OOK Pty Ltd ABN 98 152 354 768 Shop 3, 6 Zamia Street Sunnybank QLD 4109 T. 07) 3345 3256 F.07) 3172 3670"
-
-  NOT_DETECTED = 0
-  Safari = 1
-  Chrome = 2
-  Firefox = 3
-  Opera = 4
-  MSIE = 5
-  
-  AJAX_TIMEOUT = 8000
-  AJAX_RETRY = 3
   
   OKBOARD_TRUNCATE_SIZE = 60
-  
-  MYHOST_IP = "127.0.0.1"
   
   DEFAULT_PASSWORD = "ook98152354768"
   

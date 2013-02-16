@@ -266,3 +266,55 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8c6df', end
   margin: 5px;
 }
 
+// Ok
+.ok_page {
+  position: relative;
+  float: left;
+}
+
+.ok_page_top {
+  position: relative;
+  margin-left:auto;
+  margin-right:auto;
+  width: 670px;
+  height: 200px;
+}
+
+.ok_logo_right {
+  position:absolute;
+  top:1px;
+  right:1px;
+}
+
+.contact_form {
+  position: relative;
+  float:left;
+  left:150px;
+  right:auto;
+  width: 430px;
+  font-size: 16px;
+}
+
+.contact_notice {
+  position: relative;
+  float: left;
+  top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  color: #0055FF;
+  font-size: 14px;
+  border: 2px solid #666;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 5px 5px 5px #888;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  padding: 5px;
+}
+
+.contact_notice:hover {
+  background: #0055FF;
+  color: #fff;
+}

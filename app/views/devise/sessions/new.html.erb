@@ -29,7 +29,7 @@
 	<% if devise_mapping.rememberable? %>
 	<label class="checkbox"> <%= f.check_box :remember_me%><%= t(:remember_me) %> </label>
 	<% end %>
-	<%= link_to_with_icon_with_id(t(:signin), "#", "btn", "", "home-signin", "icon-signin") %>
+	<%= link_to_with_icon(t(:signin), "#", "btn", "", "icon-signin", "home-signin") %>
 	<span class="home-signin-progress"></span>
 	<% end %>
 	<%= facebook %>

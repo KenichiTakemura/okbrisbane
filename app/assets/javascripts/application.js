@@ -14,7 +14,5 @@
 //= require jquery_ujs
 //= require jquery_dataTables
 //= require jquery_slides
-//= require bootstrap
-//= require_tree .
 //= require ckeditor/init
 //= require jquery.remotipart

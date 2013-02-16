@@ -5,7 +5,7 @@ module MypagesHelper
           <tr class="okboard_list_body #{cycle("odd", "even")}">
           <td>#{t(post.class)}</td>
           <td>#{t(post.category)}</td>
-          <td>#{link_to_with_icon(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(Style.m2s(post.class.to_s), post.id),"","","icon-play")}</td>
+          <td>#{link_to_with_icon(_truncate_with_length(post.subject, 35),Okboard.okboard_link_with_id(Style.m2s(post.class.to_s), post.id),"","","icon-play","")}</td>
           <td>#{post.postedDate}</td>
           <td>#{post.validDate}</td>
           <td>|

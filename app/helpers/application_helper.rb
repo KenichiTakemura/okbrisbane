@@ -110,7 +110,7 @@ module ApplicationHelper
     if request.host =~ /admin.okbrisbane/
       html += %Q|<div class="banner_description" id="banner_description_#{div_id}"><p class='description_content'>#{contact}</p></div>|
     else
-      html += %Q|<div class="" id="banner_description_#{div_id}"><p class='description_content'>#{link_to_with_icon(contact,show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER),"btn btn-primary","","icon-info-sign icon-white")}#{}</p></div>|
+      html += %Q|<div class="" id="banner_description_#{div_id}"><p class='description_content'>#{link_to_with_icon(contact,show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER),"btn btn-primary","","icon-info-sign icon-white","")}#{}</p></div>|
     end       
     script = %Q|$('\##{div_id}').attr("style", "#{style};background:\#12345;border:1px solid #c0c0c0;");|
     html += _script_document_ready(script)
@@ -392,78 +392,6 @@ module ApplicationHelper
   def noattachment
     html = %Q|<img src="/assets/noattachment.jpg" width="50px" height="50px" />|
     html.html_safe
-  end
-  
-  def widget(id,w,h,body,style=nil,title=nil)
-    if w.nil? && h.nil?
-      html = %Q|<div class="_widget" id="widget_#{id}" style="#{style}">|
-    elsif h.nil?
-      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;#{style}">|
-    else
-      html = %Q|<div class="_widget" id="widget_#{id}" style="width:#{w}px;height:#{h};#{style}">|
-    end
-    html += %Q|<div class="_widget_head" style="width:#{w}px;float:right"><span class="label">#{title}</span><div class="_widget_head_window">|
-    html += %Q|<a href="#" title=#{t(:minimize)} id="widget_#{id}_min"><i class="icon-resize-small icon-white"></i></a>|
-    html += %Q|<a href="#" title=#{t(:maximize)} id="widget_#{id}_max"><i class="icon-fullscreen icon-white"></i></a>|
-    html += "</div></div>"
-    html += %Q|<div class="_widget_body" id="widget_body_#{id}" style="height:#{h}px">#{body}</div>|
-    html += "</div>"
-    script = %Q|$('\#widget_#{id}_min').click(function(){$('\#widget_body_#{id}').hide('slow');return false;});|
-    script += %Q|$('\#widget_#{id}_max').click(function(){$('\#widget_body_#{id}').show('slow');return false;});|
-    html += _script(script)
-    html.html_safe
-  end
-  
-  def link_to_with_icon(t,h,c,s,i,method=nil)
-    if !method.present?
-      html = %Q|<a href="#{h}" class="#{c}" style="#{s}"><i class="#{i}"></i>#{t}</a>|
-    else
-      html = %Q|<a href="#{h}" class="#{c}" style="#{s}" data-method="#{method}"><i class="#{i}"></i>#{t}</a>|
-    end
-    html.html_safe
-  end
-  
-  def link_to_with_icon_with_id(t,h,c,s,d,i)
-    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" id="#{d}"><i class="#{i}"></i>#{t}</a>|
-    html.html_safe
-  end
-  
-  def link_to_with_icon_remote(t,h,c,s,i)
-    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="post"><i class="#{i}"></i>#{t}</a>|
-    html.html_safe
-  end
-  
-  def link_to_with_icon_remote_method(t,h,c,s,i, method="post")
-    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="#{method}"><i class="#{i}"></i>#{t}</a>|
-    html.html_safe
-  end
-
-  def link_to_with_icon_remote_method_with_confirm(t,h,c,s,i, method, confirm)
-    html = %Q|<a href="#{h}" class="#{c}" style="#{s}" rel="noffollow" data-remote="true" data-method="#{method}" data-confirm="#{confirm}"><i class="#{i}"></i>#{t}</a>|
-    html.html_safe
-  end
-
-  
-  def show_notice(message=nil)
-    html = ""
-    msg = message.presence || notice.presence || nil
-    if msg
-      html = %Q|<div class="alert alert-info alert-block fade in"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
-    end
-    html.html_safe
-  end
-  
-  def show_alert(message=nil)
-    html = ""
-    msg = message.presence || alert.presence || nil
-    if msg  
-      html = %Q|<div class="alert alert-block"><button type="button" class="close" data-dismiss="alert">×</button><h4>#{msg}</h4></div>|
-    end
-    html.html_safe
-  end
-  
-  def i18n_currency(c)
-    return number_to_currency(c, :locale => I18n.locale, :precision => 2).html_safe
   end
 
 end

@@ -9,7 +9,7 @@
 	<br>
 	<%= image_form.text_area :something, :placeholder => t("write_something"), :class => "text_area", :id => "upload_something", :style => "margin-top:5px", :rows => "3" %>
 	<br>
-	<%= link_to_with_icon_with_id("", "#", "btn btn-info", "", "upload_image_submit", "icon-cloud-upload icon-2x") %>
+	<%= link_to_with_icon_with_id("", "#", "btn btn-info", "", "upload_image_submit", "icon-cloud-upload icon-2x","") %>
 </fieldset>
 <% end %>
 <%= _script(%Q|$('\#upload_image_submit').click(function(){

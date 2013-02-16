@@ -1,45 +1,67 @@
-<div class="row" style="margin-bottom: 5px">
-	<div class="span3">
-		<%= link_to image_tag("common/logo2.png", :class => "img-rounded img-polaroid"), root_path(:locale => 'ko' ) %>
+<ul class="thumbnails" style="padding:10px">
+<li class="span4">
+<div class="">
+<%= link_to image_tag("common/logo2.png", :class => "img-rounded img-polaroid media-object"), root_path(:locale => 'ko' ) %>
+</div>
+</li>
+<li class="span4">
+<div class="">
+<% if !current_user %>
+<%= form_for("user", :url => user_session_path, :html => { :class => "header-signin-form"}) do |f| %>
+<div class="control-group">
+	<div class="controls">
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :class => "test" %>
 	</div>
-	<div class="span3" style="">
-		<%= render :partial => "homes/signin" %>
-	</div>
-	<div class="span5">
-		<div class="row">
-			<span class="pull-right"><p style="font-size: 16px">
-				<strong><i class="icon-quote-left pull-left icon-large"></i><%= t("welcome_message")%>
-				<%= show_user %>&nbsp;<i class="icon-quote-right icon-large"></i></strong>
-				<span class="pull-right"><%= fb_shout %></span>
-			</p>
-			</span>
-		</div>
-		<div class="row" style="margin-top:10px;min-height:40px">
-			<div class="pull-right">
-				<% if !current_user %>
-				<%= facebook %>&nbsp;
-				<%= google %>&nbsp;
-				<%= naver %>
-				<% end %>
-			</div>
-		</div>
-		<div class="row">
-			<form class="pull-right">
-				<div class="input-append">
-					<span class="add-on"><i class="icon-search"></i></span>
-					<input type="text" class="input-large" id="search-query" placeholder="<%= t(:search_keyword)%>"/>
-					<button class="btn" type="button">
-						<%= t(:search)%>
-					</button>
-				</div>
-				<span class="pull-right">
-				<%= link_to_with_icon_with_id(t("bookmarkme"),"#","","","bookmarkme","icon-bookmark icon-border")%>
-			</span>
-			</form>
-			
-		</div>
 	</div>
 </div>
-<div class="row">
-	<%= render :partial => "homes/header/navigation" %>
+<div class="control-group">
+	<div class="controls">
+<div class="input-prepend">
+	<span class="add-on"><i class="icon-key"></i></span><%= f.password_field :password, :class => "" %>
+
 </div>
+</div>
+</div>
+<label class="checkbox"> <%= f.check_box :remember_me %><%= t(:remember_me_short) %> </label>
+<%= link_to_with_icon(t(:signin), "#", "btn btn-primary", "", "icon-signin", "header-signin") %>
+<span class="header-signin-progress"></span>
+<%= link_to(t("findid_short"),new_user_confirmation_path,:class=>"")%>
+<%= link_to(t("findpassword"),new_user_password_path,:class=>"")%>
+<%= link_to_with_icon(t(:signup), user_sign_up_path, "btn btn-primary", "", "icon-ok") %>&nbsp;
+<%= _document_on("click","\#header-signin",%Q|function(){
+	$.mobile.loading( 'show', {
+		text: '#{t("loading")}',
+		textVisible: true,
+		theme: 'c',
+		html: ""
+	});
+	$(".header-signin-form").submit();
+	return false;
+	}
+|)
+%>
+<% end %>
+<% else %>
+<%= link_to_with_icon(t(:mypage), mypage_okboards_path, "btn", "", "icon-user") %>
+<%= link_to_with_icon_with_method(t(:signout), destroy_user_session_path, "btn", "", "icon-signout", "", "delete") %>
+
+<% end %>
+
+</div>
+</li>
+<li class="span3">
+<div class="">
+	<% if !current_user %>
+
+<%= facebook %>&nbsp;
+<%= google %>&nbsp;
+<% else %>
+<%= show_user %>
+<%= fb_shout %>
+<% end %>
+
+</div>
+</li>
+</ul>
+

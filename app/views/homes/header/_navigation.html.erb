@@ -1,38 +1,49 @@
-<div class="navbar-wrapper" style="margin:0px 20px">
-	<div class="navbar">
-		<div class="navbar-inner">
-			<ul class="nav">
-				<% Style.navi.each do |key| %>
-				<% value = Style.page(key) %>
-				<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
-		        <li class="dropdown" id="navi_<%=key%>"><a href="<%=link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#"><i class="<%=Style.feed_icon(key)%>"></i>&nbsp;<%= t(value)%><b class="caret"></b></a>
-        		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-         		<%=_sub_menu(key)%>
-        		</ul>			
-				<li class="divider-vertical"></li>
-				<% end %>
-			</ul>
-		</div>
-	</div>
-</div>
-<%=_script_document_ready(%Q|
-	$('\#bookmarkme').click(function() {
-		var url = "#{root_url}";
-		var title = "QUEENSLAND PORTAL OKBRISBANE";
-		if (document.all) {// ie
-			window.external.AddFavorite(url, title);
-		} else if (window.sidebar) {// firefox
-			console.log("firefox")
-			window.sidebar.addPanel(title, url, "");
-		} else if (window.opera && window.print) {// opera
-			var elem = document.createElement('a');
-			elem.setAttribute('href', url);
-			elem.setAttribute('title', title);
-			elem.setAttribute('rel', 'sidebar');
-			elem.click();
-			// this.title=document.title;
-		}
-	});
+
+<ul class="nav nav-tabs">
+	<% Style.navi.each do |key| %>
+	<% value = Style.page(key) %>
+	<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
+	<li class="dropdown" id="navi_<%= key%>">
+		<a href="<%= link%>" class="dropdown-toggle ok-nav" data-toggle="" data-target="#"><i class="<%= Style.feed_icon(key)%>"></i>&nbsp;<%= t(value)%><b class="caret"></b></a>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<%= _sub_menu(key)%>
+		</ul>
+	</li>
+	<li class="divider-vertical"></li>
+	<% end %>
+	<li>
+	<form class="">
+				<div class="input-append">
+					<span class="add-on"><i class="icon-search"></i></span>
+					<input type="text" class="input-small" id="search-query" placeholder="<%= t(:search_keyword)%>"/>
+					<button class="btn" type="button">
+						<%= t(:search)%>
+					</button>
+				</div>
+	</form>
+	</li>
+	<li>
+	<%= link_to_with_icon(t("bookmarkme"),"#","","","icon-bookmark icon-border","bookmarkme")%>
+	</li>
+</ul>
+<%= _script_document_ready(%Q|
+$('\#bookmarkme').click(function() {
+var url = "#{root_url}";
+var title = "QUEENSLAND PORTAL OKBRISBANE";
+if (document.all) {// ie
+window.external.AddFavorite(url, title);
+} else if (window.sidebar) {// firefox
+console.log("firefox")
+window.sidebar.addPanel(title, url, "");
+} else if (window.opera && window.print) {// opera
+var elem = document.createElement('a');
+elem.setAttribute('href', url);
+elem.setAttribute('title', title);
+elem.setAttribute('rel', 'sidebar');
+elem.click();
+// this.title=document.title;
+}
+});
 
 |)
 %>

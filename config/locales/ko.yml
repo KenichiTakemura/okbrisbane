@@ -445,6 +445,8 @@ ko:
   image_size_list: '이미지 사이즈 일람'
   all_page_list: '페이지 전부 일람'
   list_total_num: '총 표시 건수'
+  
+  display_num: "표시  건수"
 
   issue: '문제'
   Bug: '문제'
@@ -861,5 +863,11 @@ ko:
     failed: "투고실패 되었습니다"
 
   logo: "로고"
-  confirm_block: "Fix me하시겠습니까?'"
-  block_user: "Fix me"
+  confirm_block: "사용자를 차단하시겠습니까?'"
+  block_user: "차단됨"
+  loading: "로딩..."
+
+  device: "디바이스"
+  pc: "컴퓨터"
+  phone: "폰"
+  tablet: "태블릿"

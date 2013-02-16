@@ -3,7 +3,12 @@ Okbrisbane::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :mypages, :only => ['index','edit','update']
-
+  
+  
+  namespace :s do
+    root :to => 'smarts#index'
+  end
+  
   match 'counters/batch', :via => :get
 
   match 'users/member_managements/sign_in', :via => :get, :as => :user_sign_in

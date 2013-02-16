@@ -4,7 +4,7 @@
 	<li class="span3 pull-left">
 		<div class="thumbnail">
 		<%= image_tag(image.thumb_image, :title => "#{image.avatar_file_name}") %>
-		<%= link_to_with_icon_remote_method_with_confirm("", image_path(image), "image-delete pull-right", "", "icon-remove-circle", "delete", t('confirm_delete')) %> 
+		<%= link_to_with_icon_remote_with_confirm("", image_path(image), "image-delete pull-right", "", "icon-remove-circle", "", "delete", t('confirm_delete')) %> 
 			<p><%= image.something%></p>
 			<p><%= image.filename%></p>
 			<p><%= image.filesize%>&nbsp;byte</p>

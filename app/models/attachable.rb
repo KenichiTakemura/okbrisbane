@@ -2,7 +2,7 @@ class Attachable < ActiveRecord::Base
   # Make it abstract
   self.abstract_class = true
   
-  attr_accessible :is_deleted, :medium_size, :thumb_size, :attached_id, :original_size
+  attr_accessible :is_deleted, :medium_size, :thumb_size, :attached_id, :original_size, :device
   
   attr_accessible :avatar
   
@@ -90,5 +90,13 @@ class Attachable < ActiveRecord::Base
     end
     t("unknown_user")
   end
+  
+  def device_list
+    [[Webcom::Browser::DEVISE_PC,I18n.t("pc")],
+      [Webcom::Browser::DEVISE_PHONE,I18n.t("phone")],
+      [Webcom::Browser::DEVISE_TABLET,I18n.t("tablet")]]
+  end
+  
+  THUMBNAILABLE = %w{jpeg, pjpeg, gif, png, x-png, jpg}
 
 end

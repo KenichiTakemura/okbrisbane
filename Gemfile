@@ -10,25 +10,23 @@ gem 'mysql2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'execjs'
-  gem 'uglifier'
+  gem 'uglifier', '>= 1.0.3'
   gem 'turbo-sprockets-rails3'
 end
-
 group :production do
-  gem 'sass-rails'
-  gem 'coffee-rails'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer'
   gem 'execjs'
-  gem 'uglifier'
+  gem 'uglifier', '>= 1.0.3'
   gem 'turbo-sprockets-rails3'
 end
 
-gem 'jquery-rails', '2.1.2'
+gem 'jquery-rails', '2.1.4'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -62,7 +60,7 @@ gem 'kaminari'
 gem 'encryptor'
 gem "ckeditor", "3.7.1"
 gem "exception_notification"
-gem 'remotipart', "1.0.2"
+gem 'remotipart'
 gem 'omniauth'
 gem 'oauth2'
 gem 'omniauth-google'
@@ -70,4 +68,5 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook', '1.4.0'
 gem 'system_timer'
 #gem 'omniauth-naver', '0.0.1', :git => 'https://github.com/pctj101/omniauth-naver.git'
-gem 'omniauth-naver', '0.0.1', :path => '../../gems/omniauth-naver'
+#gem 'omniauth-naver', '0.0.1', :path => '../../gems/omniauth-naver'
+gem 'webcom', '0.0.1', :path => 'vendor/gems/webcom'

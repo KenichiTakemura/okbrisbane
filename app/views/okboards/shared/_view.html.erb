@@ -17,16 +17,16 @@
     </div>
 		<div class="row-fluid content-box">
 				<div class="pull-left" id="okboard_likes">
-				<%= link_to_with_icon_remote("", Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "", "icon-thumbs-up icon-white") %>
+				<%= link_to_with_icon_remote("", Okboard.okboard_link_like(@okpage, @post.id), "btn btn-small btn-info", "icon-thumbs-up icon-white", "") %>
 				<%= @post.likes.to_s %>
 				<%= image_tag("common/rank/#{@post.rank}.png") %>
-				<%= link_to_with_icon_remote("", Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "", "icon-thumbs-down icon-white") %>
+				<%= link_to_with_icon_remote("", Okboard.okboard_link_dislike(@okpage, @post.id), "btn btn-small btn-warning", "icon-thumbs-down icon-white", "") %>
 				<%= @post.dislikes.to_s %>
 				<%= link_to(image_tag("common/sns/abuse.png", :class => "image-resize20_20"), Okboard.okboard_link_abuse(@okpage, @post.id), :remote => true, :method => :post) %>
 				<%= @post.abuse.to_s %>
 				</div>
 				<div class="pull-right">
-				<%= link_to_with_icon(t("to_list"), Okboard.okboard_link(@okpage), "btn btn-small", "margin:1px", "icon-th-list") %>
+				<%= link_to_with_icon(t("to_list"), Okboard.okboard_link(@okpage), "btn btn-small", "margin:1px", "icon-th-list", "") %>
 				<%= write_new_btn %>
 				<%= link_to(image_tag("#{I18n.locale}/common/say_1.jpg"), "#new_comment") %>
 				</div>
@@ -102,9 +102,9 @@
 						</div>
 
 						<div id='<%= "comment_likes_#{comment.id}" %>' class="comment_likes">
-							<%= link_to_with_icon_remote("", comment_like_path(comment), "btn btn-mini btn-info", "", "icon-thumbs-up icon-white") %>
+							<%= link_to_with_icon_remote("", comment_like_path(comment), "btn btn-mini btn-info", "icon-thumbs-up icon-white", "") %>
 							<%= comment.likes.to_s %>
-							<%= link_to_with_icon_remote("", comment_dislike_path(comment), "btn btn-mini btn-warning", "", "icon-thumbs-down icon-white") %>
+							<%= link_to_with_icon_remote("", comment_dislike_path(comment), "btn btn-mini btn-warning", "icon-thumbs-down icon-white", "") %>
 							<%= comment.dislikes.to_s %>
 							<%= link_to(image_tag("common/sns/abuse.png", :alt => "#{t(:report_abuse_comment)}", :class => "image-resize20_20"), comment_abuse_path(comment), :remote => true, :method => :post) %>
 							<%= comment.abuse.to_s %>
@@ -117,7 +117,7 @@
 						</div>
 						<div class="comment_hidden_content">
 							<div id="comment_hidden_<%= comment.id %>" style="display:none">
-								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to_with_icon_with_id(t("Show"), "#", "btn btn-danger btn-small", "", "comment_show_#{comment.id}", "icon-eye-open") %>
+								<%= t(:comment_is_hidden)%>&nbsp;<%= link_to_with_icon(t("Show"), "#", "btn btn-danger btn-small", "", "icon-eye-open", "comment_show_#{comment.id}") %>
 							</div>
 						</div>
 

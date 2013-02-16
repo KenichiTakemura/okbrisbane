@@ -1,7 +1,5 @@
 class OkboardsController < OkController
   
-  #layout "okboard", :except => [:yellowpage]
-
   def initialize
     super
     @sns_lock = Mutex.new
@@ -22,7 +20,6 @@ class OkboardsController < OkController
   end
 
   def mypage
-    #layout "application"
     @okpage = :p_mypage
     if !current_user
       session["user_return_to"] = request.original_url

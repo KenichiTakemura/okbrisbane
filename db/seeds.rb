@@ -11,19 +11,9 @@ Banner.destroy_all
 BusinessClient.destroy_all
 BusinessProfile.destroy_all
 BusinessProfileImage.destroy_all
-
 SystemSetting.destroy_all
 
-
-# OKBRISBANE 
-ok = BusinessClient.create(:business_name => Okvalue::BUSINESS_CLIENT_OK, :business_abn => "98 152 354 768", :business_address => 'Shop 3 6 Zamia Street Sunny Bank QLD 4109', :business_url => 'http://www.okbrisbane.com', :business_phone => '07-3345-3256', :business_fax => '07-3343-8558', :business_email => 'info@okbrisbane.com', :contact_name => 'Elliott Joo')
-ok.build_business_profile(:head => "OKBRISBANE", :body => 'OKBRISBANE rocks!')
-ok.save
-image = BusinessProfileImage.new(:avatar => File.new("public/images/logo.png"), :is_main => true)
-image.attached_to(ok)
-image.save
-
-contact_mail_to = "info@okbrisbane.com"
+contact_mail_to = "contact@okbrisbane.com"
 
 # SystemSetting
 ss = SystemSetting.new

@@ -71,13 +71,14 @@ ActiveRecord::Schema.define(:version => 20130124070740) do
 
   create_table "attachments", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.string   "avatar_file_name"
-    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_file_name"
     t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
+    t.integer  "device",              :default => 1
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -155,13 +156,14 @@ ActiveRecord::Schema.define(:version => 20130124070740) do
 
   create_table "business_profile_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.string   "avatar_file_name"
-    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_file_name"
     t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
+    t.integer  "device",              :default => 1
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -256,13 +258,14 @@ ActiveRecord::Schema.define(:version => 20130124070740) do
 
   create_table "client_images", :force => true do |t|
     t.boolean  "is_deleted",          :default => false
-    t.string   "avatar_file_name"
-    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_file_name"
     t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
+    t.integer  "device",              :default => 1
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -368,13 +371,14 @@ ActiveRecord::Schema.define(:version => 20130124070740) do
 
   create_table "images", :force => true do |t|
     t.boolean  "is_deleted",                              :default => false
-    t.string   "avatar_file_name"
-    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_file_name"
     t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.string   "medium_size"
     t.string   "thumb_size"
     t.string   "original_size"
+    t.integer  "device",                                  :default => 1
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
@@ -498,17 +502,18 @@ ActiveRecord::Schema.define(:version => 20130124070740) do
   add_index "laws", ["z_index"], :name => "index_laws_on_z_index"
 
   create_table "logos", :force => true do |t|
-    t.string   "avatar_file_name"
-    t.datetime "avatar_updated_at"
     t.integer  "avatar_file_size"
+    t.string   "avatar_file_name"
     t.string   "avatar_content_type"
+    t.datetime "avatar_updated_at"
     t.string   "original_size"
+    t.integer  "device",              :default => 1
     t.integer  "attached_by_id"
     t.string   "attached_by_type"
     t.integer  "attached_id"
     t.string   "attached_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "member_managements", :force => true do |t|

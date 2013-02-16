@@ -1,25 +1,61 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<%= render :partial => "layouts/header" %>
+		<% if Okbrisbane::Application.config.ok_debug %> <title>QUEENSLAND PORTAL OKBRISBANE DEBUG</title>
+		<% else %>
+		<title>QUEENSLAND PORTAL OKBRISBANE</title>
+		<% end %>
+		<script type="text/javascript">
+			var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+		</script>
+		<%= stylesheet_link_tag "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= javascript_include_tag "bootstrap" %>
+		<%= stylesheet_link_tag "bootstrap", :media => "all" %>
+		<%= csrf_meta_tag %>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript"></script>
 	</head>
 	<body>
-		<div id="page_body">
-			<%= render :partial => "layouts/social" %>
-			<%= single_background_banner(1, 20) %>
-			<%= single_background_banner(2, 20) %>
-			<%= single_background_banner(3, 820) %>
-			<%= single_background_banner(4, 820) %>
-			<%= single_background_banner(5, 1620) %>
-			<%= single_background_banner(6, 1620) %>
+		<div class="container box_round" data-role="page">
+			<div class="container box_round" data-role="header">
+				<% if socialable? %>
+				<div id="fb-root"></div>
+				<script>
+					( function(d, s, id) {
+							var js, fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id))
+								return;
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=216729515127558&locale=kr";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+				</script>
+				<% end %>
+
+				<%= render :partial => "homes/header/header" %>
+				<%= render :partial => "homes/header/navigation" %>
+			</div>
+			<div class="container box_round" data-role="content">
+				<%= yield %>
+			</div>
+			<footer class="" style="background-color:#e0e0e0;height:65px;bottom:0px">
+				<h5 class="" style="text-align:center;">Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%>
+				<br>
+				<%= Okvalue::FOOTER_TEXT2 %>
+				<br>
+				<div class="pull-right">
+					<%= link_to(t(:termsofservice), termsofservice_path, :class => "footer_text", :style => "margin-right:10px;")%>
+					<%= link_to(t(:termsofpersonalinfo), termsofpersonal_path, :class => "footer_text", :style => "margin-right:10px;")%>
+					<%= link_to(t(:banner_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_BANNER), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
+					<%= link_to(t(:general_contact), show_ok_sponsors_path(:t => Okvalue::CONTACT_GENERAL), :class => "footer_text", :style => "margin-right:10px;color:#00006E")%>
+				</div>
+				<p class="developer pull-left">
+					<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
+				</p></h5>
+			</footer>
 		</div>
-		<div class="container header_container">
-		<%= render :partial => "homes/header/header" %>
-		</div>
-		<div class="container ok_container box_round">
-			<%= yield %>
-		</div>
-		<%= render :partial => "layouts/footer" %>
 	</body>
 </html>
 

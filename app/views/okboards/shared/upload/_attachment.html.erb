@@ -6,7 +6,7 @@
 	<%= attachment_form.file_field :attachment, :id => "upload_attachment" %>
 	<span class="help-inline"><%= t("max_size", :size => number_to_human_size(Okvalue::MAX_POST_IMAGE_SIZE))%></span>
 	<br>
-	<%= link_to_with_icon_with_id("", "#", "btn btn-info", "", "upload_attachment_submit", "icon-cloud-upload icon-2x") %>
+	<%= link_to_with_icon("", "#", "btn btn-info", "", "icon-cloud-upload icon-2x","upload_attachment_submit") %>
 </fieldset>
 <% end %>
 <%= _script(%Q|$('\#upload_attachment_submit').click(function(){
