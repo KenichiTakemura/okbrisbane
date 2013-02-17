@@ -313,7 +313,7 @@ ko:
   delete: :Delete
   more: '더보기'
   role: '권리'
-  write_new: '새로 글쓰기'
+  write_new: '글쓰기'
   write: '쓰기'
   change_size: '사이즈 편집'
   subject: '제목'
@@ -871,3 +871,5 @@ ko:
   pc: "컴퓨터"
   phone: "폰"
   tablet: "태블릿"
+  
+  to_home: "훔"

@@ -25,7 +25,7 @@ module Okvalue
   #VERSION = "1.1.2-20121130"
   #VERSION = "1.1.3-20121210"
   #VERSION = "1.1.3-20121216"
-  VERSION = "1.1.4-20130216"
+  VERSION = "1.1.4-20130217"
   
   TERMS_DATE = Time.parse("2012-11-10 00:00:00")
   

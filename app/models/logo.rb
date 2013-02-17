@@ -19,6 +19,8 @@ class Logo < Attachable
   
   #Paperclip callbacks
   after_post_process :proc_geo
+  
+  default_scope :order => 'id DESC'
 
   def original_image
     self.avatar.url(:original)

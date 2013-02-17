@@ -97,6 +97,14 @@ class Attachable < ActiveRecord::Base
       [Webcom::Browser::DEVISE_TABLET,I18n.t("tablet")]]
   end
   
+  def device_name
+    case self.device
+    when Webcom::Browser::DEVISE_PC: I18n.t("pc")
+    when Webcom::Browser::DEVISE_PHONE: I18n.t("phone")
+    when Webcom::Browser::DEVISE_TABLET: I18n.t("tablet")
+    end
+    end
+  
   THUMBNAILABLE = %w{jpeg, pjpeg, gif, png, x-png, jpg}
 
 end

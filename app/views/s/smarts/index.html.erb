@@ -1,5 +1,81 @@
-<div class="" data-role="page">
-	
-	<div class="" data-role="header" data-theme="b">Test</div>
-	<div class="" data-role="content">Test</div>
+<div data-role="page" data-theme="c">
+
+	<div data-role="header">
+
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<% logo = BusinessClient.okbrisbane?.logo_for(Webcom::Browser::DEVISE_PHONE) %>
+				<% if logo.present? %>
+				<%= link_to image_tag(logo.original_image, :class => ""), s_root_path(:locale => 'ko' ) %>
+				<% else %>
+				<%= link_to image_tag("http://placehold.it/150x50", :class => ""), s_root_path(:locale => 'ko' ) %>
+				<% end %>
+			</div>
+			<div class="ui-block-b">
+				<h3><%= t("okpage_top_description")%></h3>
+				<% if current_user %>
+				<p><%=t("welcome_message")%>&nbsp;<%= show_user %></p>
+				<% end%>
+			</div>
+		</div>
+		<div data-role="navbar">
+			<ul>
+				<% if !current_user %>
+				<li>
+					<%= _mobile_link_to_with_icon(t(:signin), "#popupSignin", "button", "", "","icon-signin","",%Q|data-rel="popup" data-transition="slidedown"|) %>
+				</li>
+				<li>
+					<%= _mobile_link_to_with_icon(t(:signup), "#", "button", "", "","icon-ok","") %>
+				</li>
+				<li>
+					<%= _mobile_link_to_with_icon(t(:write_new), "#", "button", "", "","icon-pencil","") %>
+				</li>
+				<% else %>
+				<li>
+				<%= _mobile_link_to_with_icon(t(:mypage), "#", "button", "", "", "icon-user","") %>
+				</li>
+				<li>
+				<%= _mobile_link_to_with_icon(t(:signout), "#", "button", "", "", "icon-signout", "", %Q|data-merhod="delete"|) %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+		<%= mobile_header_banner(1)%>
+		<div data-role="popup" id="popupSignin" data-theme="c" class="ui-corner-all">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<%= render :partial => "s/smarts/signin"%>
+		</div>
+	</div>
+	<div data-role="content">
+		<div data-role="collapsible-set">
+			<% Style.mobile_feed.each do |k,v| %>
+			<div data-role="collapsible" class="content-menu-<%=k%>">
+				<h3 id="feed-<%=k%>"><i class="<%= v[:feed][:icon]%>"></i>&nbsp;<%= t(v[:feed][:text])%></h3>
+				<%= render :partial => "s/smarts/content", :locals => {:key => k}%>
+			</div>
+			<%= _document_pageinit(%Q|$(".content-menu-#{k}").bind("expand", function(event, ui) { console.log("hello"); }
+			);|)%>
+			<% end %>
+
+		</div>
+	</div>
+	<div data-role="footer" >
+		<footer>
+			<h5>Copyright &copy; <%= Common.current_time.year %> <%= Okvalue::FOOTER_TEXT1%>
+			<br>
+			<%= Okvalue::FOOTER_TEXT2 %>
+			<br>
+			<div class="">
+				<%= link_to(t(:termsofservice), term_s_member_managements_path, :class => "footer_text")%>
+				<%= link_to(t(:termsofpersonalinfo), personal_s_member_managements_path, :class => "footer_text")%>
+				<%= link_to(t(:banner_contact), "#", :class => "footer_text")%>
+				<%= link_to(t(:general_contact), "#", :class => "footer_text")%>
+			</div>
+			<p class="developer pull-left">
+				<small>Developed by <%= link_to("Kenichi Takemura", "http://www.facebook.com/kenichi.takemura") %></small>
+			</p></h5>
+		</footer>
+
+	</div>
 </div>
+

@@ -1,8 +1,9 @@
 module SnsHelper
     
-  def facebook
+      
+  def pc_facebook
     html = ""
-    token = Common.unique_token
+    token = Webcom::Utils.unique_token
     if facebook_signin?
       html = %Q|<a href="#{user_omniauth_authorize_path(:facebook)}" class="" id="facebook_signin_#{token}">#{image_tag("f_logo.png", :class => "image-resize30_30")}&nbsp;<span id="facebook_signin_text_#{token}">#{t(:signin)}</span></a>|
       html += _script(%Q|$(function(){
@@ -13,7 +14,20 @@ module SnsHelper
     html.html_safe
   end
   
-  def google
+  def mobile_facebook
+    html = ""
+    token = Webcom::Utils.unique_token
+    if facebook_signin?
+      html = %Q|<a href="#{user_omniauth_authorize_path(:facebook)}" class="" data-mini="true" data-role="button" id="facebook_signin_#{token}">#{image_tag("f_logo.png", :class => "image-resize30_30")}&nbsp;<span id="facebook_signin_text_#{token}">#{t(:signin)}</span></a>|
+      html += _script(%Q|$(function(){
+      $("\#facebook_signin_#{token}").click(function(){
+          $("\#facebook_signin_text_#{token}").html("#{escape_javascript('<i class="icon-spinner icon-spin icon-large"></i>')}");
+      });})|)
+    end
+    html.html_safe
+  end
+  
+  def pc_google
     html = ""
     token = Common.unique_token
     if google_signin?

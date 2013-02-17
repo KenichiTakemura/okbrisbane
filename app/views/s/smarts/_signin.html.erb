@@ -1,0 +1,25 @@
+<h3><%=t("Signin")%></h3>
+<div style="padding:10px 20px;">
+<%= form_for("user", :url => user_session_path, :html => { :class => "header-signin-form"}) do |f| %>
+		<span class="add-on"><i class="icon-envelope"></i>&nbsp;<%=t("email")%></span><%= f.email_field :email, :class => "" %>
+	<span class="add-on"><i class="icon-key"></i>&nbsp;<%=t("password")%></span><%= f.password_field :password, :class => "" %>
+<fieldset data-role="controlgroup" data-type="horizontal">
+<label class="checkbox" data-mini="true"> <%= f.check_box :remember_me %><%= t(:remember_me_short) %> </label>
+</fieldset>
+<%= _mobile_link_to_with_icon(t(:signin), "#", "button", "", "", "icon-signin", "header-signin", %|data-theme="b"| ) %>
+<%= link_to(t("findid_short"),"#",:class=>"")%>
+<%= link_to(t("findpassword"),"#",:class=>"")%>
+<%= _document_on("click","\#header-signin",%Q|function(){
+	$.mobile.loading( 'show', {
+		text: '#{t("loading")}',
+		textVisible: true,
+		theme: 'c',
+		html: ""
+	});
+	//$(".header-signin-form").submit();
+	return false;
+	}
+|)
+%>
+<% end %>
+</div>

@@ -11,7 +11,7 @@
 			<ul class="nav nav-tabs" id="topic-tabs">
 				<% Style.topic_feed.each do |k,v| %>
 				<li>
-					<a href="#topic_tab_<%=k.to_s%>" class="nav-topic-tab" id="<%=k%>"><%=t(Style.topic_text?(k))%>&nbsp;<i class="<%=v[:feed][:icon]%> icon-large"></i></a>
+					<a href="#topic_tab_<%=k.to_s%>" class="nav-topic-tab" id="<%=k%>"><%=t(v[:feed][:text])%>&nbsp;<i class="<%=v[:feed][:icon]%> icon-large"></i></a>
 				</li>
 				<% end %>
 			</ul>

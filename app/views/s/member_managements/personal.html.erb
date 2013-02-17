@@ -1,0 +1,21 @@
+<div data-role="page" data-theme="c">
+	
+	<div data-role="header">
+		<h1> <%= t(:termsofpersonalinfo)%> </h1>
+		<p>
+			<%= t("Signin_okpage_top_description") %>
+		</p>
+		<%=_mobile_link_to_with_icon(t("to_home"),s_root_path,"button","","","icon-home",[])%>
+	</div>
+	<div data-role="content">
+		<%= t(:termofpersonalinfomation)%>
+		<div style="width:100%;overflow:auto;">
+		<%= raw(UsersHelper.termofpersonalinfomation) %>
+	</div>
+		</div>
+		<div data-role="footer" >
+			<%=_mobile_link_to_with_icon(t("to_home"),s_root_path,"button","","","icon-home",[])%>
+			</div>
+</div>
+
+

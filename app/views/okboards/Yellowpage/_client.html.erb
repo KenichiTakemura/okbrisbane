@@ -1,9 +1,9 @@
 <% business_clients.each do |c| %>
 <div class="media">
-	<a class="pull-left" href="#"> <% if c.logo.present? %>
-	<%= image_tag(c.logo.original_image, :class => "img-rounded")%>
+	<a class="pull-left" href="#"> <% if c.logo_for(Webcom::Browser::DEVISE_PC) %>
+	<%= image_tag(c.logo_for(Webcom::Browser::DEVISE_PC).original_image, :class => "img-rounded")%>
 	<% else %>
-	<%= image_tag("http://placehold.it/120x100&text=Logo+Here", :class => "img-rounded") %>
+	<%= image_tag("http://placehold.it/120x100", :class => "img-rounded") %>
 	<% end %> </a>
 	<div class="media-body">
 		<h3><%= c.business_name%></h3>

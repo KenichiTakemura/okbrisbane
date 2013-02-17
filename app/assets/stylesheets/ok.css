@@ -55,10 +55,6 @@ div.ml-10 {
   color: white;
 }
 
-.yellowpage {
-  background: 0% 0% yellow;   
-}
-
 .yellowpage-category {
   background: url("bg_2.gif") repeat scroll 0% 0% rgb(239, 239, 239);
 }
@@ -317,4 +313,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8c6df', end
 .contact_notice:hover {
   background: #0055FF;
   color: #fff;
+}
+
+.nav-tabs {
+
+
 }

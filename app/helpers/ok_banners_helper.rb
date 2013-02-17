@@ -43,4 +43,8 @@ module OkBannersHelper
     multi_banner(Style.page(@okpage), :s_body, a, scroll_size)
   end
   
+   def mobile_header_banner(a)
+    image_tag("http://placehold.it/320x50&text=Banner", :class => "")
+  end
+  
 end

@@ -23,9 +23,6 @@ class ApplicationController < ActionController::Base
         session[key.to_sym] = true
       end
     end
-    if Webcom::Browser.from_phone?(b)
-      redirect_to smarts_path
-    end
   end
   
   def statistics(request)

@@ -1,4 +1,10 @@
 class OkController < ApplicationController
+  
+  before_filter :mobile_to
+  
+  def mobile_to
+    redirect_to s_root_path if Webcom::Browser.phone?(request, nil)
+  end
 
   protected
 

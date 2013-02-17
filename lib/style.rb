@@ -1,12 +1,13 @@
 module Style
   
-  PAGES = Common.new_orderd_hash
-  SECTIONS = Common.new_orderd_hash
-  PAGE_IDS = Common.new_orderd_hash
-  SECTION_IDS = Common.new_orderd_hash
-  ADMIN_ROLES = Common.new_orderd_hash
-  ALL_FEED = Common.new_orderd_hash
-  TOPIC_FEED = Common.new_orderd_hash
+  PAGES = Webcom::Utils.new_orderd_hash
+  SECTIONS = Webcom::Utils.new_orderd_hash
+  PAGE_IDS = Webcom::Utils.new_orderd_hash
+  SECTION_IDS = Webcom::Utils.new_orderd_hash
+  ADMIN_ROLES = Webcom::Utils.new_orderd_hash
+  ALL_FEED = Webcom::Utils.new_orderd_hash
+  TOPIC_FEED = Webcom::Utils.new_orderd_hash
+  MOBILE_FEED = Webcom::Utils.new_orderd_hash
   
   # div id rule is banner_#{page}_#{section}_#{position}
   PAGES[:p_home] = "Home"
@@ -156,10 +157,16 @@ module Style
   
   TOPIC_FEED[:p_buy_and_sell] = {:feed => {:enabled => true, :link => true, :text => page(:p_buy_and_sell), :icon => "icon-lemon"}}
   TOPIC_FEED[:p_job] = {:feed => {:enabled => true, :link => true, :text => page(:p_job), :icon => "icon-group"}}
+  TOPIC_FEED[:p_accommodation] = {:feed => {:enabled => true, :link => true, :text => page(:p_accommodation), :icon => "icon-h-sign"}}
   TOPIC_FEED[:p_most_viewed] = {:feed => {:enabled => true, :link => false, :text => "MostViewed", :icon => "icon-eye-open"}}
   TOPIC_FEED[:p_most_commented] = {:feed => {:enabled => true, :link => false, :text => "MostCommented", :icon => "icon-comments"}}
   TOPIC_FEED[:p_new_posted] = {:feed => {:enabled => true, :link => false, :text => "NewPosted", :icon => "icon-star-empty"}}
   TOPIC_FEED[:p_new_images] = {:feed => {:enabled => true, :link => false, :text => "NewImages", :icon => "icon-picture"}}
+  
+  MOBILE_FEED[:p_buy_and_sell] = {:feed => {:enabled => true, :link => true, :text => page(:p_buy_and_sell), :icon => "icon-lemon"}}
+  MOBILE_FEED[:p_job] = {:feed => {:enabled => true, :link => true, :text => page(:p_job), :icon => "icon-group"}}
+  MOBILE_FEED[:p_accommodation] = {:feed => {:enabled => true, :link => true, :text => page(:p_accommodation), :icon => "icon-h-sign"}}
+
   
   def self.navi
     ALL_FEED.select { |k,v| v[:nav] }.collect { |k,v| k }
@@ -168,9 +175,9 @@ module Style
   def self.topic_feed
     TOPIC_FEED.select { |k,v| v[:feed][:enabled]}
   end
-  
-  def self.topic_text?(page)
-    TOPIC_FEED[page][:feed][:text]
+
+  def self.mobile_feed
+    MOBILE_FEED.select { |k,v| v[:feed][:enabled]}
   end
   
   def self.topic_linkable?(page)

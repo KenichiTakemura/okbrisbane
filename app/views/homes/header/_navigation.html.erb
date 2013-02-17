@@ -1,5 +1,5 @@
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs box_round">
 	<% Style.navi.each do |key| %>
 	<% value = Style.page(key) %>
 	<% link = key.eql?(:p_yellowpage) ? yellowpage_okboards_path : Okboard.okboard_link(key) %>
@@ -22,10 +22,13 @@
 				</div>
 	</form>
 	</li>
+	<!--
 	<li>
 	<%= link_to_with_icon(t("bookmarkme"),"#","","","icon-bookmark icon-border","bookmarkme")%>
 	</li>
+	-->
 </ul>
+<!--
 <%= _script_document_ready(%Q|
 $('\#bookmarkme').click(function() {
 var url = "#{root_url}";
@@ -44,6 +47,6 @@ elem.click();
 // this.title=document.title;
 }
 });
-
 |)
 %>
+-->
